@@ -1,16 +1,12 @@
-## Hi there 👋
+# Poussemaths 🌱
+La plateforme qui fait pousser les élèves en maths.
 
-<!--
-**Poussemaths/Poussemaths** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+## Site web
+Bientôt disponible sur poussemaths.fr
 
-Here are some ideas to get you started:
-
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+## Description
+Plateforme de mathématiques interactive pour le collège et le lycée.
+- Exercices interactifs avec correction détaillée
+- Suivi de progression
+- Espace professeur, élève et parent
+- Générateur d'exercices par IA
