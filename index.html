@@ -1,0 +1,1507 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Poussemaths — Plateforme de Maths</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;600;700;800&family=Instrument+Sans:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body, {delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
+
+<style>
+/* ===== RESET & BASE ===== */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+:root {
+  --bg:       #F7F6F2;
+  --white:    #FFFFFF;
+  --ink:      #1A1A2E;
+  --ink2:     #3D3D5C;
+  --muted:    #8888AA;
+  --border:   #E4E2DA;
+  --primary:  #2D6BE4;
+  --primary-d:#1A4FC4;
+  --primary-l:#EEF3FD;
+  --green:    #12A770;
+  --green-l:  #EDFAF4;
+  --red:      #E84040;
+  --red-l:    #FEF0F0;
+  --amber:    #E09020;
+  --amber-l:  #FEF8EC;
+  --purple:   #7B4FE9;
+  --purple-l: #F3EFFE;
+  --r:        14px;
+  --shadow:   0 2px 12px rgba(26,26,46,0.08);
+  --shadow-lg:0 8px 40px rgba(26,26,46,0.13);
+}
+
+body {
+  font-family: 'Instrument Sans', sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ===== NAV ===== */
+nav {
+  position: sticky; top: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 40px;
+  height: 62px;
+  background: rgba(247,246,242,0.92);
+  backdrop-filter: blur(14px);
+  border-bottom: 1.5px solid var(--border);
+}
+
+.logo {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 800; font-size: 1.4rem;
+  color: var(--primary);
+  cursor: pointer;
+  letter-spacing: -0.02em;
+  display: flex; align-items: center; gap: 8px;
+}
+.logo-dot { width:8px;height:8px;border-radius:50%;background:var(--primary);display:inline-block; }
+
+.nav-center { display:flex; gap:4px; }
+.nav-tab {
+  padding: 7px 16px;
+  border-radius: 8px;
+  border: none; background: transparent;
+  color: var(--muted); font-size: 0.88rem; font-weight:500;
+  cursor: pointer; transition: all 0.18s;
+  font-family: 'Instrument Sans', sans-serif;
+}
+.nav-tab:hover { color: var(--ink); background: var(--border); }
+.nav-tab.active { color: var(--primary); background: var(--primary-l); font-weight: 600; }
+
+.nav-right { display:flex; gap:10px; align-items:center; }
+.btn-outline {
+  padding: 8px 18px; border-radius: 9px;
+  border: 1.5px solid var(--border); background: transparent;
+  color: var(--ink2); font-size:0.88rem; font-weight:500;
+  cursor:pointer; transition:all 0.18s;
+  font-family:'Instrument Sans',sans-serif;
+}
+.btn-outline:hover { border-color: var(--primary); color: var(--primary); }
+
+.btn-primary {
+  padding: 8px 20px; border-radius: 9px;
+  border: none; background: var(--primary);
+  color: white; font-size:0.88rem; font-weight:600;
+  cursor:pointer; transition:all 0.18s;
+  font-family:'Instrument Sans',sans-serif;
+  box-shadow: 0 2px 8px rgba(45,107,228,0.25);
+}
+.btn-primary:hover { background: var(--primary-d); transform:translateY(-1px); box-shadow:0 4px 16px rgba(45,107,228,0.35); }
+
+/* ===== PAGES ===== */
+.page { display:none; }
+.page.active { display:block; animation: fadeUp 0.38s ease; }
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(16px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+
+/* ===== PAGE : ACCUEIL ===== */
+.hero {
+  max-width: 1100px; margin: 0 auto;
+  padding: 70px 40px 40px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+}
+
+.hero-text {}
+.hero-label {
+  display: inline-flex; align-items:center; gap:8px;
+  background: var(--primary-l); color: var(--primary);
+  padding: 5px 14px; border-radius: 100px;
+  font-size: 0.78rem; font-weight: 600; margin-bottom: 20px;
+  letter-spacing: 0.04em; text-transform: uppercase;
+}
+.hero-label::before { content:''; width:6px;height:6px;border-radius:50%;background:var(--primary);display:inline-block; }
+
+.hero-title {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: clamp(2.1rem, 4vw, 3rem);
+  font-weight: 800; line-height: 1.08;
+  letter-spacing: -0.03em; margin-bottom: 18px; color: var(--ink);
+}
+.hero-title em {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic; color: var(--primary);
+}
+
+.hero-sub {
+  color: var(--ink2); font-size: 1.02rem; line-height: 1.7;
+  margin-bottom: 32px; max-width: 420px;
+}
+
+.hero-btns { display:flex; gap:12px; flex-wrap:wrap; margin-bottom: 40px; }
+
+.btn-lg {
+  padding: 13px 26px; border-radius: 11px;
+  font-size: 0.95rem; font-weight: 600;
+  cursor:pointer; transition: all 0.2s;
+  font-family:'Instrument Sans',sans-serif;
+}
+.btn-lg.primary {
+  background: var(--primary); color: white; border: none;
+  box-shadow: 0 3px 14px rgba(45,107,228,0.3);
+}
+.btn-lg.primary:hover { background: var(--primary-d); transform:translateY(-2px); box-shadow:0 6px 24px rgba(45,107,228,0.38); }
+.btn-lg.ghost {
+  background: white; color: var(--ink); border: 1.5px solid var(--border);
+}
+.btn-lg.ghost:hover { border-color: var(--primary); color: var(--primary); }
+
+.hero-proof {
+  display: flex; gap: 24px;
+}
+.proof-item { text-align:center; }
+.proof-num {
+  font-family:'Bricolage Grotesque',sans-serif;
+  font-size: 1.6rem; font-weight:800; color:var(--primary);
+}
+.proof-label { font-size:0.78rem; color:var(--muted); margin-top:2px; }
+
+/* Hero card preview */
+.hero-visual {
+  background: white;
+  border-radius: 20px;
+  border: 1.5px solid var(--border);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+}
+.hv-top {
+  background: var(--primary);
+  padding: 16px 20px;
+  display:flex; align-items:center; justify-content:space-between;
+}
+.hv-top-left { color:white; font-size:0.82rem; font-weight:600; opacity:0.9; }
+.hv-score { background:rgba(255,255,255,0.2); color:white; padding:3px 10px; border-radius:6px; font-size:0.8rem; font-weight:700; }
+.hv-body { padding: 24px; }
+.hv-q { font-size:0.82rem; color:var(--muted); margin-bottom:12px; }
+.hv-formula {
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  padding: 16px; text-align:center;
+  font-size: 1.1rem; margin-bottom:16px;
+}
+.hv-input-row { display:flex; gap:8px; margin-bottom: 14px; }
+.hv-fake-input {
+  flex:1; background:var(--bg); border:1.5px solid var(--border);
+  border-radius: 9px; padding: 10px 14px;
+  font-size:0.9rem; color:var(--muted);
+}
+.hv-check {
+  background:var(--primary); color:white; border:none;
+  border-radius:9px; padding:10px 18px; font-weight:600;
+  font-size:0.88rem; cursor:default;
+}
+.hv-feedback {
+  background:var(--green-l); border:1px solid rgba(18,167,112,0.25);
+  border-radius:10px; padding:12px 16px;
+}
+.hv-feedback-title { color:var(--green); font-weight:700; font-size:0.85rem; margin-bottom:4px; }
+.hv-feedback-text { color:#2D6A4F; font-size:0.8rem; line-height:1.5; }
+
+/* Sections */
+.section { max-width:1100px; margin:0 auto; padding: 50px 40px; }
+.section-tag {
+  font-size:0.75rem; font-weight:700; color:var(--primary);
+  text-transform:uppercase; letter-spacing:0.08em; margin-bottom:10px;
+}
+.section-title {
+  font-family:'Bricolage Grotesque',sans-serif;
+  font-size:clamp(1.6rem,3vw,2.2rem); font-weight:800;
+  letter-spacing:-0.02em; margin-bottom:12px;
+}
+.section-sub { color:var(--ink2); font-size:1rem; line-height:1.7; max-width:540px; margin-bottom:36px; }
+
+/* Feature grid */
+.feat-grid {
+  display:grid; grid-template-columns: repeat(3,1fr); gap:16px;
+}
+.feat-card {
+  background:white; border:1.5px solid var(--border);
+  border-radius: var(--r); padding:24px;
+  transition:all 0.2s;
+}
+.feat-card:hover { border-color:var(--primary); box-shadow:var(--shadow); transform:translateY(-3px); }
+.feat-icon {
+  width:44px;height:44px;border-radius:11px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.3rem; margin-bottom:14px;
+}
+.feat-card h3 { font-family:'Bricolage Grotesque',sans-serif; font-weight:700; font-size:0.98rem; margin-bottom:7px; }
+.feat-card p { color:var(--muted); font-size:0.85rem; line-height:1.6; }
+
+/* Roles tabs */
+.roles { background:white; border-top:1.5px solid var(--border); border-bottom:1.5px solid var(--border); }
+.roles-inner { max-width:1100px; margin:0 auto; padding:50px 40px; }
+.role-tabs { display:flex; gap:8px; margin-bottom:32px; flex-wrap:wrap; }
+.role-tab {
+  padding:9px 20px; border-radius:9px; border:1.5px solid var(--border);
+  background:transparent; color:var(--muted); font-size:0.9rem; font-weight:500;
+  cursor:pointer; transition:all 0.18s; font-family:'Instrument Sans',sans-serif;
+}
+.role-tab.active { background:var(--primary); color:white; border-color:var(--primary); font-weight:600; }
+.role-content { display:none; }
+.role-content.active {
+  display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:center;
+  animation:fadeUp 0.3s ease;
+}
+.role-info h3 {
+  font-family:'Bricolage Grotesque',sans-serif;
+  font-size:1.5rem; font-weight:800; margin-bottom:12px;
+}
+.role-info p { color:var(--ink2); line-height:1.7; margin-bottom:20px; }
+.role-features { display:flex; flex-direction:column; gap:10px; }
+.role-feat {
+  display:flex; align-items:flex-start; gap:12px;
+  background:var(--bg); border-radius:10px; padding:12px 16px;
+}
+.role-feat-icon { font-size:1.1rem; flex-shrink:0; margin-top:1px; }
+.role-feat-text { font-size:0.88rem; color:var(--ink2); line-height:1.5; }
+.role-feat-text strong { color:var(--ink); }
+
+/* ===== PAGE : EXERCICES ===== */
+.ex-page { max-width:1100px; margin:0 auto; padding:40px; }
+.ex-page-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:24px; }
+.ex-page-header h2 {
+  font-family:'Bricolage Grotesque',sans-serif;
+  font-size:1.7rem; font-weight:800; letter-spacing:-0.02em;
+}
+
+.filter-bar { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:28px; }
+.chip {
+  padding:6px 14px; border-radius:100px;
+  border:1.5px solid var(--border); background:white;
+  color:var(--muted); font-size:0.82rem; font-weight:500;
+  cursor:pointer; transition:all 0.18s;
+  font-family:'Instrument Sans',sans-serif;
+}
+.chip:hover { border-color:var(--primary); color:var(--primary); }
+.chip.active { background:var(--primary); color:white; border-color:var(--primary); }
+
+.ex-grid {
+  display:grid; grid-template-columns:repeat(auto-fill, minmax(300px,1fr)); gap:16px;
+}
+
+.ex-card {
+  background:white; border:1.5px solid var(--border);
+  border-radius:var(--r); padding:22px; cursor:pointer;
+  transition:all 0.22s; position:relative; overflow:hidden;
+}
+.ex-card::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:3px;
+  background:linear-gradient(90deg, var(--primary), var(--purple));
+  opacity:0; transition:opacity 0.2s;
+}
+.ex-card:hover { border-color:var(--primary); box-shadow:var(--shadow); transform:translateY(-3px); }
+.ex-card:hover::before { opacity:1; }
+
+.ex-card-meta { display:flex; gap:6px; margin-bottom:12px; }
+.badge {
+  padding:3px 9px; border-radius:6px;
+  font-size:0.72rem; font-weight:700; letter-spacing:0.02em;
+}
+.badge-level-easy { background:var(--green-l); color:var(--green); }
+.badge-level-med  { background:var(--amber-l); color:var(--amber); }
+.badge-level-hard { background:var(--red-l); color:var(--red); }
+.badge-subject    { background:var(--primary-l); color:var(--primary); }
+.badge-class      { background:var(--purple-l); color:var(--purple); }
+
+.ex-card h3 {
+  font-family:'Bricolage Grotesque',sans-serif;
+  font-weight:700; font-size:0.97rem; margin-bottom:7px;
+}
+.ex-card p { color:var(--muted); font-size:0.84rem; line-height:1.55; margin-bottom:16px; }
+.ex-card-footer { display:flex; align-items:center; justify-content:space-between; }
+.ex-card-stats { font-size:0.78rem; color:var(--muted); }
+.ex-card-stars { color:var(--amber); margin-bottom:2px; }
+.btn-start {
+  padding:7px 16px; border-radius:8px;
+  background:var(--primary); color:white;
+  border:none; font-size:0.83rem; font-weight:600;
+  cursor:pointer; transition:all 0.18s;
+  font-family:'Instrument Sans',sans-serif;
+}
+.btn-start:hover { background:var(--primary-d); }
+
+/* ===== EXERCISE MODAL ===== */
+.overlay {
+  display:none; position:fixed; inset:0;
+  background:rgba(26,26,46,0.55);
+  backdrop-filter:blur(8px);
+  z-index:500; align-items:center; justify-content:center; padding:20px;
+}
+.overlay.open { display:flex; }
+
+.modal {
+  background:white; border-radius:20px;
+  width:100%; max-width:640px;
+  box-shadow:0 24px 80px rgba(26,26,46,0.2);
+  overflow:hidden; animation:fadeUp 0.32s ease;
+}
+
+.modal-header {
+  background:var(--primary);
+  padding:18px 24px;
+  display:flex; align-items:center; justify-content:space-between;
+}
+.modal-header-left h3 { color:white; font-family:'Bricolage Grotesque',sans-serif; font-size:1rem; font-weight:700; }
+.modal-header-left p { color:rgba(255,255,255,0.7); font-size:0.8rem; margin-top:2px; }
+.modal-meta { display:flex; gap:8px; align-items:center; }
+.modal-badge {
+  background:rgba(255,255,255,0.2); color:white;
+  padding:3px 10px; border-radius:6px; font-size:0.76rem; font-weight:600;
+}
+.modal-close-btn {
+  background:rgba(255,255,255,0.15); border:none; color:white;
+  width:30px;height:30px; border-radius:7px; cursor:pointer; font-size:1rem;
+  display:flex;align-items:center;justify-content:center; transition:background 0.18s;
+}
+.modal-close-btn:hover { background:rgba(255,255,255,0.28); }
+
+.modal-body { padding:28px 28px 24px; }
+
+/* Progress */
+.progress-row { display:flex; align-items:center; gap:12px; margin-bottom:22px; }
+.progress-track { flex:1; height:6px; background:var(--bg); border-radius:100px; overflow:hidden; }
+.progress-fill {
+  height:100%; border-radius:100px;
+  background:linear-gradient(90deg,var(--primary),var(--purple));
+  transition:width 0.5s ease;
+}
+.progress-label { font-size:0.78rem; color:var(--muted); white-space:nowrap; }
+
+/* Question box */
+.q-box {
+  background:var(--bg); border:1.5px solid var(--border);
+  border-radius:12px; padding:20px; margin-bottom:18px; text-align:center;
+}
+.q-instruction { font-size:0.82rem; color:var(--muted); margin-bottom:10px; }
+.q-formula {
+  font-size:1.2rem; color:var(--ink); margin:8px 0;
+  min-height:40px; display:flex; align-items:center; justify-content:center;
+}
+.q-hint { font-size:0.78rem; color:var(--muted); margin-top:8px; font-style:italic; }
+
+/* Answer area */
+.answer-row { display:flex; gap:10px; margin-bottom:16px; }
+.answer-input {
+  flex:1; background:var(--bg); border:1.5px solid var(--border);
+  border-radius:10px; padding:12px 16px;
+  font-size:1rem; color:var(--ink); outline:none;
+  transition:border-color 0.2s, background 0.2s;
+  font-family:'Instrument Sans',sans-serif;
+}
+.answer-input:focus { border-color:var(--primary); background:white; }
+.answer-input.correct { border-color:var(--green); background:var(--green-l); }
+.answer-input.wrong   { border-color:var(--red);   background:var(--red-l); }
+
+.btn-verify {
+  padding:12px 22px; border-radius:10px;
+  background:var(--primary); color:white; border:none;
+  font-size:0.9rem; font-weight:700; cursor:pointer;
+  transition:all 0.2s; font-family:'Instrument Sans',sans-serif;
+  white-space:nowrap;
+}
+.btn-verify:hover { background:var(--primary-d); transform:scale(1.02); }
+.btn-verify:disabled { opacity:0.5; cursor:default; transform:none; }
+
+/* Feedback */
+.feedback {
+  border-radius:12px; padding:16px 18px;
+  display:none; margin-bottom:16px;
+}
+.feedback.correct { background:var(--green-l); border:1.5px solid rgba(18,167,112,0.2); }
+.feedback.wrong   { background:var(--red-l);   border:1.5px solid rgba(232,64,64,0.2); }
+
+.feedback-title { font-weight:700; font-size:0.88rem; margin-bottom:6px; }
+.feedback.correct .feedback-title { color:var(--green); }
+.feedback.wrong   .feedback-title { color:var(--red); }
+
+.feedback-steps { font-size:0.83rem; line-height:1.75; color:var(--ink2); }
+.feedback-steps strong { color:var(--ink); }
+
+.modal-footer {
+  display:flex; justify-content:space-between; align-items:center;
+  padding: 0 28px 24px;
+}
+.score-display { font-size:0.82rem; color:var(--muted); }
+.score-display span { font-weight:700; color:var(--primary); }
+.btn-next {
+  padding:10px 22px; border-radius:10px;
+  background:var(--green); color:white; border:none;
+  font-size:0.88rem; font-weight:700; cursor:pointer;
+  transition:all 0.2s; font-family:'Instrument Sans',sans-serif;
+  display:none;
+}
+.btn-next:hover { background:#0E9060; }
+
+/* Success screen */
+.success-screen {
+  display:none; text-align:center; padding:40px 28px;
+}
+.success-screen.show { display:block; animation:fadeUp 0.4s ease; }
+.success-emoji { font-size:3rem; margin-bottom:16px; }
+.success-title {
+  font-family:'Bricolage Grotesque',sans-serif;
+  font-size:1.5rem; font-weight:800; margin-bottom:8px;
+}
+.success-sub { color:var(--muted); margin-bottom:24px; }
+.score-circle {
+  width:80px;height:80px; border-radius:50%;
+  background:var(--primary-l); border:3px solid var(--primary);
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 24px;
+  font-family:'Bricolage Grotesque',sans-serif;
+  font-size:1.4rem; font-weight:800; color:var(--primary);
+}
+
+/* ===== DASHBOARD ===== */
+.dash { max-width:1100px; margin:0 auto; padding:40px; }
+.dash-header { margin-bottom:28px; }
+.dash-header h2 {
+  font-family:'Bricolage Grotesque',sans-serif;
+  font-size:1.7rem; font-weight:800; letter-spacing:-0.02em; margin-bottom:4px;
+}
+.dash-header p { color:var(--muted); font-size:0.9rem; }
+
+.kpi-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:28px; }
+.kpi {
+  background:white; border:1.5px solid var(--border);
+  border-radius:var(--r); padding:20px;
+}
+.kpi-label { font-size:0.75rem; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:10px; }
+.kpi-val {
+  font-family:'Bricolage Grotesque',sans-serif;
+  font-size:2rem; font-weight:800; margin-bottom:4px;
+}
+.kpi-change { font-size:0.78rem; }
+.kpi-change.up { color:var(--green); }
+.kpi-change.neutral { color:var(--muted); }
+
+.dash-grid2 { display:grid; grid-template-columns:2fr 1fr; gap:16px; margin-bottom:28px; }
+.card {
+  background:white; border:1.5px solid var(--border);
+  border-radius:var(--r); overflow:hidden;
+}
+.card-head {
+  padding:16px 20px; border-bottom:1.5px solid var(--border);
+  display:flex; align-items:center; justify-content:space-between;
+}
+.card-head h3 { font-family:'Bricolage Grotesque',sans-serif; font-weight:700; font-size:0.97rem; }
+.card-head-action { font-size:0.8rem; color:var(--primary); cursor:pointer; font-weight:500; }
+
+/* Table */
+.data-table { width:100%; border-collapse:collapse; }
+.data-table th {
+  padding:11px 18px; text-align:left;
+  font-size:0.73rem; font-weight:600; color:var(--muted);
+  text-transform:uppercase; letter-spacing:0.06em;
+  border-bottom:1.5px solid var(--border); background:var(--bg);
+}
+.data-table td {
+  padding:12px 18px; font-size:0.875rem;
+  border-bottom:1px solid var(--bg);
+}
+.data-table tr:last-child td { border-bottom:none; }
+.data-table tr:hover td { background:#FAFAF8; }
+
+.avatar {
+  width:28px;height:28px;border-radius:50%;
+  display:inline-flex;align-items:center;justify-content:center;
+  font-size:0.72rem; font-weight:700; color:white;
+  margin-right:8px; vertical-align:middle;
+}
+
+.pill {
+  padding:3px 9px; border-radius:5px;
+  font-size:0.74rem; font-weight:700; font-family:monospace;
+}
+.pill-green { background:var(--green-l); color:var(--green); }
+.pill-amber { background:var(--amber-l); color:var(--amber); }
+.pill-red   { background:var(--red-l);   color:var(--red); }
+
+.mini-bar-wrap { display:flex; align-items:center; gap:8px; }
+.mini-bar { flex:1; height:5px; background:var(--bg); border-radius:100px; overflow:hidden; }
+.mini-bar-fill { height:100%; border-radius:100px; background:linear-gradient(90deg,var(--primary),var(--purple)); }
+.mini-pct { font-size:0.75rem; color:var(--muted); font-family:monospace; }
+
+/* Alert cards */
+.alerts { display:flex; flex-direction:column; gap:10px; padding:16px; }
+.alert-item {
+  display:flex; gap:12px; padding:12px;
+  border-radius:10px; background:var(--bg); align-items:flex-start;
+}
+.alert-icon { font-size:1rem; flex-shrink:0; }
+.alert-text strong { display:block; font-size:0.83rem; color:var(--ink); }
+.alert-text span { font-size:0.78rem; color:var(--muted); }
+
+/* Activity */
+.activity-list { display:flex; flex-direction:column; }
+.activity-item {
+  display:flex; align-items:center; gap:14px;
+  padding:13px 20px; border-bottom:1px solid var(--bg);
+}
+.activity-item:last-child { border-bottom:none; }
+.activity-icon { font-size:1rem; flex-shrink:0; }
+.activity-main { flex:1; }
+.activity-name { font-size:0.87rem; font-weight:500; }
+.activity-sub  { font-size:0.78rem; color:var(--muted); }
+.activity-time { font-size:0.76rem; color:var(--muted); font-family:monospace; }
+
+/* ===== PROFIL PARENT ===== */
+.parent { max-width:900px; margin:0 auto; padding:40px; }
+.parent-hero {
+  background:white; border:1.5px solid var(--border);
+  border-radius:var(--r); padding:28px;
+  display:flex; gap:24px; align-items:center; margin-bottom:24px;
+}
+.avatar-xl {
+  width:64px;height:64px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Bricolage Grotesque',sans-serif;
+  font-size:1.5rem;font-weight:800;color:white;flex-shrink:0;
+  background:linear-gradient(135deg,var(--primary),var(--purple));
+}
+.parent-info h2 { font-family:'Bricolage Grotesque',sans-serif; font-size:1.3rem; font-weight:800; }
+.parent-info p  { color:var(--muted); font-size:0.88rem; margin-top:3px; }
+.parent-badge {
+  margin-left:auto;
+  background:var(--green-l); color:var(--green);
+  padding:6px 14px; border-radius:8px; font-size:0.82rem; font-weight:600;
+}
+
+.stats-row { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-bottom:24px; }
+.stat-card {
+  background:white; border:1.5px solid var(--border);
+  border-radius:var(--r); padding:18px;
+}
+.stat-card-label { font-size:0.75rem; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:8px; }
+.stat-card-val {
+  font-family:'Bricolage Grotesque',sans-serif;
+  font-size:1.8rem; font-weight:800;
+}
+.stat-card-change { font-size:0.78rem; margin-top:4px; }
+
+.topic-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:14px; }
+.topic-card {
+  background:white; border:1.5px solid var(--border);
+  border-radius:var(--r); padding:18px;
+}
+.topic-card-name { font-weight:600; font-size:0.9rem; margin-bottom:10px; }
+.topic-bar-wrap { background:var(--bg); height:8px; border-radius:100px; overflow:hidden; margin-bottom:6px; }
+.topic-bar-fill { height:100%; border-radius:100px; }
+.topic-pct { font-size:0.78rem; color:var(--muted); font-family:monospace; }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width:768px) {
+  nav { padding:0 16px; }
+  .nav-center { display:none; }
+  .hero { grid-template-columns:1fr; padding:40px 20px 30px; gap:30px; }
+  .hero-visual { display:none; }
+  .feat-grid { grid-template-columns:1fr; }
+  .role-content.active { grid-template-columns:1fr; }
+  .kpi-grid { grid-template-columns:repeat(2,1fr); }
+  .dash-grid2 { grid-template-columns:1fr; }
+  .section, .ex-page, .dash, .parent { padding:30px 20px; }
+  .stats-row { grid-template-columns:1fr; }
+  .topic-grid { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<nav>
+  <div class="logo" onclick="showPage('home')">
+    <span class="logo-dot"></span> Poussemaths
+  </div>
+  <div class="nav-center">
+    <button class="nav-tab active" id="tab-home"      onclick="showPage('home')">Accueil</button>
+    <button class="nav-tab"        id="tab-exercises" onclick="showPage('exercises')">Exercices</button>
+    <button class="nav-tab"        id="tab-dashboard" onclick="showPage('dashboard')">Espace Prof</button>
+    <button class="nav-tab"        id="tab-parent"    onclick="showPage('parent')">Espace Parent</button>
+  </div>
+  <div class="nav-right">
+    <button class="btn-outline">Se connecter</button>
+    <button class="btn-primary" onclick="showPage('exercises')">Commencer →</button>
+  </div>
+</nav>
+
+<!-- ===================== PAGE : ACCUEIL ===================== -->
+<div class="page active" id="page-home">
+
+  <div class="hero">
+    <div class="hero-text">
+      <div class="hero-label">Collège & Lycée · Programme français</div>
+      <h1 class="hero-title">Les maths,<br>enfin <em>comprises</em><br>par chaque élève.</h1>
+      <p class="hero-sub">Poussemaths combine exercices interactifs, correction détaillée, suivi de progression et intelligence artificielle — en une seule plateforme pensée pour les enseignants, les élèves et leurs parents.</p>
+      <div class="hero-btns">
+        <button class="btn-lg primary" onclick="showPage('exercises')">Essayer un exercice →</button>
+        <button class="btn-lg ghost"   onclick="showPage('dashboard')">Voir l'espace prof</button>
+      </div>
+      <div class="hero-proof">
+        <div class="proof-item"><div class="proof-num">500+</div><div class="proof-label">Exercices</div></div>
+        <div class="proof-item"><div class="proof-num">6 niveaux</div><div class="proof-label">6ème → Term.</div></div>
+        <div class="proof-item"><div class="proof-num">IA</div><div class="proof-label">Générateur inclus</div></div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="hv-top">
+        <div class="hv-top-left">📐 Équations du premier degré · 4ème</div>
+        <div class="hv-score">Score 2/3</div>
+      </div>
+      <div class="hv-body">
+        <div class="hv-q">Résous l'équation et donne la valeur de $x$ :</div>
+        <div class="hv-formula">$3x + 7 = 22$</div>
+        <div class="hv-input-row">
+          <div class="hv-fake-input">x = 5</div>
+          <div class="hv-check">Vérifier →</div>
+        </div>
+        <div class="hv-feedback">
+          <div class="hv-feedback-title">✅ Bravo ! Bonne réponse.</div>
+          <div class="hv-feedback-text">
+            $3x + 7 = 22$<br>
+            $3x = 22 - 7 = 15$<br>
+            $x = 15 \div 3 = \mathbf{5}$
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Features -->
+  <div class="section">
+    <div class="section-tag">Fonctionnalités</div>
+    <h2 class="section-title">Ce que les autres plateformes ne proposent pas.<br>Et bien plus encore.</h2>
+    <p class="section-sub">Une plateforme conçue par un professeur, pour des professeurs — avec les outils qu'on attendait vraiment.</p>
+    <div class="feat-grid">
+      <div class="feat-card">
+        <div class="feat-icon" style="background:var(--primary-l)">🧮</div>
+        <h3>Exercices interactifs</h3>
+        <p>Formules LaTeX, saisie libre, correction immédiate et explication pas à pas.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon" style="background:var(--green-l)">📋</div>
+        <h3>Devoirs en ligne</h3>
+        <p>Assignez des exercices à vos classes avec date limite. Les élèves rendent, vous corrigez en un clic.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon" style="background:var(--purple-l)">🤖</div>
+        <h3>Générateur IA</h3>
+        <p>Générez des exercices inédits en 10 secondes. Choisissez le thème, le niveau, la difficulté.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon" style="background:var(--amber-l)">🏆</div>
+        <h3>Concours & Gamification</h3>
+        <p>Classements hebdomadaires, badges, concours inter-classes. Les élèves s'investissent davantage.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon" style="background:var(--green-l)">📈</div>
+        <h3>Suivi de progression</h3>
+        <p>Chaque élève voit ses points faibles. Chaque prof voit sa classe. Les parents aussi.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon" style="background:var(--red-l)">👨‍👩‍👧</div>
+        <h3>Espace parent</h3>
+        <p>Les parents suivent les devoirs, les scores, les progrès. En temps réel, sans déranger le prof.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Roles -->
+  <div class="roles">
+    <div class="roles-inner">
+      <div class="section-tag">Pour qui ?</div>
+      <h2 class="section-title" style="margin-bottom:24px">Une plateforme, quatre espaces distincts.</h2>
+      <div class="role-tabs">
+        <button class="role-tab active" onclick="showRole('eleve')">👩‍🎓 L'Élève</button>
+        <button class="role-tab" onclick="showRole('prof')">👨‍🏫 Le Professeur</button>
+        <button class="role-tab" onclick="showRole('parent')">👨‍👩‍👧 Le Parent</button>
+        <button class="role-tab" onclick="showRole('direction')">🏫 La Direction</button>
+      </div>
+
+      <div class="role-content active" id="role-eleve">
+        <div class="role-info">
+          <h3>Un espace motivant et personnalisé</h3>
+          <p>L'élève se connecte avec son code de classe, accède à ses exercices assignés et peut s'entraîner librement sur tous les thèmes. Il voit sa progression en temps réel et gagne des badges.</p>
+          <button class="btn-lg primary" style="margin-top:8px" onclick="showPage('exercises')">Voir les exercices →</button>
+        </div>
+        <div class="role-features">
+          <div class="role-feat"><div class="role-feat-icon">📚</div><div class="role-feat-text"><strong>Bibliothèque d'exercices</strong> filtrée par niveau et thème</div></div>
+          <div class="role-feat"><div class="role-feat-icon">✅</div><div class="role-feat-text"><strong>Correction détaillée</strong> étape par étape après chaque réponse</div></div>
+          <div class="role-feat"><div class="role-feat-icon">📊</div><div class="role-feat-text"><strong>Progression visible</strong> par thème avec graphiques</div></div>
+          <div class="role-feat"><div class="role-feat-icon">🏅</div><div class="role-feat-text"><strong>Badges et classement</strong> pour rester motivé</div></div>
+        </div>
+      </div>
+
+      <div class="role-content" id="role-prof">
+        <div class="role-info">
+          <h3>Le contrôle total sur sa classe</h3>
+          <p>Le prof crée ses classes, assigne des devoirs, suit chaque élève individuellement et utilise le générateur IA pour créer des exercices personnalisés en quelques secondes.</p>
+          <button class="btn-lg primary" style="margin-top:8px" onclick="showPage('dashboard')">Voir le tableau de bord →</button>
+        </div>
+        <div class="role-features">
+          <div class="role-feat"><div class="role-feat-icon">📋</div><div class="role-feat-text"><strong>Assignation de devoirs</strong> avec deadline et suivi de rendu</div></div>
+          <div class="role-feat"><div class="role-feat-icon">🤖</div><div class="role-feat-text"><strong>Générateur IA</strong> : crée un exercice en 10 secondes</div></div>
+          <div class="role-feat"><div class="role-feat-icon">⚠️</div><div class="role-feat-text"><strong>Alertes automatiques</strong> quand un élève est en difficulté</div></div>
+          <div class="role-feat"><div class="role-feat-icon">📤</div><div class="role-feat-text"><strong>Export PDF/Excel</strong> des résultats pour les bulletins</div></div>
+        </div>
+      </div>
+
+      <div class="role-content" id="role-parent">
+        <div class="role-info">
+          <h3>Informé, sans déranger</h3>
+          <p>Le parent reçoit un accès en lecture seule sur le compte de son enfant. Il voit les devoirs, les scores, les progrès — et reçoit un résumé hebdomadaire par email.</p>
+          <button class="btn-lg primary" style="margin-top:8px" onclick="showPage('parent')">Voir l'espace parent →</button>
+        </div>
+        <div class="role-features">
+          <div class="role-feat"><div class="role-feat-icon">📬</div><div class="role-feat-text"><strong>Email hebdomadaire</strong> automatique avec le résumé de la semaine</div></div>
+          <div class="role-feat"><div class="role-feat-icon">📊</div><div class="role-feat-text"><strong>Progression par thème</strong> consultable à tout moment</div></div>
+          <div class="role-feat"><div class="role-feat-icon">📝</div><div class="role-feat-text"><strong>Devoirs rendus</strong> et scores visibles en temps réel</div></div>
+          <div class="role-feat"><div class="role-feat-icon">🔔</div><div class="role-feat-text"><strong>Alertes</strong> si l'enfant n'a pas rendu un devoir</div></div>
+        </div>
+      </div>
+
+      <div class="role-content" id="role-direction">
+        <div class="role-info">
+          <h3>Une vision globale de l'établissement</h3>
+          <p>La direction accède aux statistiques globales par classe et par matière, compare les performances, et pilote l'abonnement de l'établissement depuis un tableau de bord dédié.</p>
+        </div>
+        <div class="role-features">
+          <div class="role-feat"><div class="role-feat-icon">🏫</div><div class="role-feat-text"><strong>Vue établissement</strong> : toutes les classes, tous les profs</div></div>
+          <div class="role-feat"><div class="role-feat-icon">📊</div><div class="role-feat-text"><strong>Rapports périodiques</strong> exportables pour les conseils de classe</div></div>
+          <div class="role-feat"><div class="role-feat-icon">💰</div><div class="role-feat-text"><strong>Gestion de la licence</strong> annuelle depuis l'interface admin</div></div>
+          <div class="role-feat"><div class="role-feat-icon">📈</div><div class="role-feat-text"><strong>Comparaison</strong> des performances entre classes et trimestres</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ===================== PAGE : EXERCICES ===================== -->
+<div class="page" id="page-exercises">
+  <div class="ex-page">
+    <div class="ex-page-header">
+      <h2>Exercices — Algèbre & Équations</h2>
+      <button class="btn-primary">🤖 Générer un exercice IA</button>
+    </div>
+
+    <div class="filter-bar">
+      <button class="chip active">Tous</button>
+      <button class="chip">4ème</button>
+      <button class="chip">3ème</button>
+      <button class="chip">Équations 1er degré</button>
+      <button class="chip">Équations 2nd degré</button>
+      <button class="chip">Systèmes</button>
+      <button class="chip">Inéquations</button>
+      <button class="chip">Calcul littéral</button>
+      <button class="chip">Facile</button>
+      <button class="chip">Moyen</button>
+      <button class="chip">Difficile</button>
+    </div>
+
+    <div class="ex-grid">
+
+      <!-- Exercice 1 -->
+      <div class="ex-card" onclick="openExercise(0)">
+        <div class="ex-card-meta">
+          <span class="badge badge-subject">Algèbre</span>
+          <span class="badge badge-class">4ème</span>
+          <span class="badge badge-level-easy">Facile</span>
+        </div>
+        <h3>Équations du premier degré</h3>
+        <p>Résous des équations de la forme $ax + b = c$ en isolant l'inconnue étape par étape.</p>
+        <div class="ex-card-footer">
+          <div class="ex-card-stats">
+            <div class="ex-card-stars">★★★★☆</div>
+            <div>1 840 élèves</div>
+          </div>
+          <button class="btn-start">Commencer</button>
+        </div>
+      </div>
+
+      <!-- Exercice 2 -->
+      <div class="ex-card" onclick="openExercise(1)">
+        <div class="ex-card-meta">
+          <span class="badge badge-subject">Algèbre</span>
+          <span class="badge badge-class">4ème</span>
+          <span class="badge badge-level-med">Moyen</span>
+        </div>
+        <h3>Développer et réduire</h3>
+        <p>Développe des expressions algébriques avec les identités remarquables $(a+b)^2$, $(a-b)^2$, $(a+b)(a-b)$.</p>
+        <div class="ex-card-footer">
+          <div class="ex-card-stats">
+            <div class="ex-card-stars">★★★★★</div>
+            <div>1 230 élèves</div>
+          </div>
+          <button class="btn-start">Commencer</button>
+        </div>
+      </div>
+
+      <!-- Exercice 3 -->
+      <div class="ex-card" onclick="openExercise(2)">
+        <div class="ex-card-meta">
+          <span class="badge badge-subject">Algèbre</span>
+          <span class="badge badge-class">3ème</span>
+          <span class="badge badge-level-med">Moyen</span>
+        </div>
+        <h3>Systèmes d'équations</h3>
+        <p>Résous des systèmes à deux inconnues par substitution ou par combinaison linéaire.</p>
+        <div class="ex-card-footer">
+          <div class="ex-card-stats">
+            <div class="ex-card-stars">★★★☆☆</div>
+            <div>980 élèves</div>
+          </div>
+          <button class="btn-start">Commencer</button>
+        </div>
+      </div>
+
+      <!-- Exercice 4 -->
+      <div class="ex-card" onclick="openExercise(0)">
+        <div class="ex-card-meta">
+          <span class="badge badge-subject">Algèbre</span>
+          <span class="badge badge-class">3ème</span>
+          <span class="badge badge-level-hard">Difficile</span>
+        </div>
+        <h3>Factoriser une expression</h3>
+        <p>Factorise des expressions algébriques en utilisant les identités remarquables et la mise en facteur commun.</p>
+        <div class="ex-card-footer">
+          <div class="ex-card-stats">
+            <div class="ex-card-stars">★★★★☆</div>
+            <div>740 élèves</div>
+          </div>
+          <button class="btn-start">Commencer</button>
+        </div>
+      </div>
+
+      <!-- Exercice 5 -->
+      <div class="ex-card" onclick="openExercise(1)">
+        <div class="ex-card-meta">
+          <span class="badge badge-subject">Algèbre</span>
+          <span class="badge badge-class">4ème</span>
+          <span class="badge badge-level-easy">Facile</span>
+        </div>
+        <h3>Calcul littéral</h3>
+        <p>Simplifie et réorganise des expressions avec des variables, des coefficients et des parenthèses.</p>
+        <div class="ex-card-footer">
+          <div class="ex-card-stats">
+            <div class="ex-card-stars">★★★★☆</div>
+            <div>2 100 élèves</div>
+          </div>
+          <button class="btn-start">Commencer</button>
+        </div>
+      </div>
+
+      <!-- Exercice 6 -->
+      <div class="ex-card" onclick="openExercise(2)">
+        <div class="ex-card-meta">
+          <span class="badge badge-subject">Algèbre</span>
+          <span class="badge badge-class">3ème</span>
+          <span class="badge badge-level-hard">Difficile</span>
+        </div>
+        <h3>Inéquations du premier degré</h3>
+        <p>Résous des inéquations en prenant en compte l'inversion du signe lors de la division par un négatif.</p>
+        <div class="ex-card-footer">
+          <div class="ex-card-stats">
+            <div class="ex-card-stars">★★★☆☆</div>
+            <div>560 élèves</div>
+          </div>
+          <button class="btn-start">Commencer</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ===================== PAGE : DASHBOARD PROF ===================== -->
+<div class="page" id="page-dashboard">
+  <div class="dash">
+    <div class="dash-header">
+      <h2>Tableau de bord — Prof</h2>
+      <p>Classe 4ème B · 28 élèves · Année 2024–2025</p>
+    </div>
+
+    <div class="kpi-grid">
+      <div class="kpi">
+        <div class="kpi-label">Élèves actifs</div>
+        <div class="kpi-val" style="color:var(--primary)">26</div>
+        <div class="kpi-change up">↑ +3 cette semaine</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Exercices complétés</div>
+        <div class="kpi-val" style="color:var(--green)">347</div>
+        <div class="kpi-change up">↑ +48 aujourd'hui</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Moyenne de classe</div>
+        <div class="kpi-val" style="color:var(--amber)">74%</div>
+        <div class="kpi-change neutral">→ Stable</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Devoirs rendus</div>
+        <div class="kpi-val" style="color:var(--purple)">91%</div>
+        <div class="kpi-change up">↑ Excellent</div>
+      </div>
+    </div>
+
+    <div class="dash-grid2">
+      <div class="card">
+        <div class="card-head">
+          <h3>Résultats des élèves</h3>
+          <span class="card-head-action">Exporter PDF</span>
+        </div>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Élève</th>
+              <th>Exercices</th>
+              <th>Score</th>
+              <th>Progression</th>
+              <th>Dernière activité</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="cursor:pointer" onclick="showPage('parent')">
+              <td><span class="avatar" style="background:linear-gradient(135deg,#2D6BE4,#7B4FE9)">AL</span>Alice Laurent</td>
+              <td>28</td>
+              <td><span class="pill pill-green">91%</span></td>
+              <td><div class="mini-bar-wrap"><div class="mini-bar"><div class="mini-bar-fill" style="width:91%"></div></div><span class="mini-pct">91%</span></div></td>
+              <td style="color:var(--muted);font-size:.82rem">Il y a 1h</td>
+            </tr>
+            <tr>
+              <td><span class="avatar" style="background:linear-gradient(135deg,#12A770,#0891B2)">TM</span>Thomas Martin</td>
+              <td>19</td>
+              <td><span class="pill pill-amber">63%</span></td>
+              <td><div class="mini-bar-wrap"><div class="mini-bar"><div class="mini-bar-fill" style="width:63%"></div></div><span class="mini-pct">63%</span></div></td>
+              <td style="color:var(--muted);font-size:.82rem">Hier</td>
+            </tr>
+            <tr>
+              <td><span class="avatar" style="background:linear-gradient(135deg,#E09020,#E84040)">SB</span>Sophie Bernard</td>
+              <td>33</td>
+              <td><span class="pill pill-green">95%</span></td>
+              <td><div class="mini-bar-wrap"><div class="mini-bar"><div class="mini-bar-fill" style="width:95%"></div></div><span class="mini-pct">95%</span></div></td>
+              <td style="color:var(--muted);font-size:.82rem">Il y a 20min</td>
+            </tr>
+            <tr>
+              <td><span class="avatar" style="background:linear-gradient(135deg,#E84040,#E09020)">KD</span>Karim Dubois</td>
+              <td>11</td>
+              <td><span class="pill pill-red">38%</span></td>
+              <td><div class="mini-bar-wrap"><div class="mini-bar"><div class="mini-bar-fill" style="width:38%"></div></div><span class="mini-pct">38%</span></div></td>
+              <td style="color:var(--muted);font-size:.82rem">Il y a 4j</td>
+            </tr>
+            <tr>
+              <td><span class="avatar" style="background:linear-gradient(135deg,#7B4FE9,#2D6BE4)">LR</span>Léa Rousseau</td>
+              <td>24</td>
+              <td><span class="pill pill-amber">77%</span></td>
+              <td><div class="mini-bar-wrap"><div class="mini-bar"><div class="mini-bar-fill" style="width:77%"></div></div><span class="mini-pct">77%</span></div></td>
+              <td style="color:var(--muted);font-size:.82rem">Il y a 3h</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><h3>⚠️ Alertes</h3></div>
+        <div class="alerts">
+          <div class="alert-item">
+            <div class="alert-icon">🔴</div>
+            <div class="alert-text">
+              <strong>Karim Dubois</strong>
+              <span>En difficulté sur les équations. Score < 40%. Inactif depuis 4 jours.</span>
+            </div>
+          </div>
+          <div class="alert-item">
+            <div class="alert-icon">🟡</div>
+            <div class="alert-text">
+              <strong>Thomas Martin</strong>
+              <span>Devoir "Systèmes d'équations" non rendu — deadline dans 2 jours.</span>
+            </div>
+          </div>
+          <div class="alert-item">
+            <div class="alert-icon">🟢</div>
+            <div class="alert-text">
+              <strong>Sophie Bernard</strong>
+              <span>Top 1 de la classe cette semaine. 🏆 Badge "Série de 7" débloqué.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><h3>Activité récente de la classe</h3><span class="card-head-action">Tout voir</span></div>
+      <div class="activity-list">
+        <div class="activity-item">
+          <div class="activity-icon">✅</div>
+          <div class="activity-main">
+            <div class="activity-name">Sophie Bernard — Équations du premier degré</div>
+            <div class="activity-sub">Score : 100% · 3 questions réussies d'affilée</div>
+          </div>
+          <div class="activity-time">il y a 20min</div>
+        </div>
+        <div class="activity-item">
+          <div class="activity-icon">🔁</div>
+          <div class="activity-main">
+            <div class="activity-name">Léa Rousseau — Développer et réduire</div>
+            <div class="activity-sub">2ème tentative · Score : 80% · Progression +15%</div>
+          </div>
+          <div class="activity-time">il y a 3h</div>
+        </div>
+        <div class="activity-item">
+          <div class="activity-icon">📋</div>
+          <div class="activity-main">
+            <div class="activity-name">Devoir assigné : Systèmes d'équations</div>
+            <div class="activity-sub">Pour 4ème B · Deadline : vendredi 14 mars</div>
+          </div>
+          <div class="activity-time">hier</div>
+        </div>
+        <div class="activity-item">
+          <div class="activity-icon">🤖</div>
+          <div class="activity-main">
+            <div class="activity-name">Exercice généré par IA — Factorisation niveau 3ème</div>
+            <div class="activity-sub">Créé et ajouté à la bibliothèque · Validé par le prof</div>
+          </div>
+          <div class="activity-time">hier</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== PAGE : PARENT ===================== -->
+<div class="page" id="page-parent">
+  <div class="parent">
+    <div class="parent-hero">
+      <div class="avatar-xl">AL</div>
+      <div class="parent-info">
+        <h2>Alice Laurent</h2>
+        <p>4ème B · Collège français · 28 exercices complétés · Inscrite depuis sept. 2024</p>
+      </div>
+      <div class="parent-badge">✅ Devoirs à jour</div>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-card-label">Score global</div>
+        <div class="stat-card-val" style="color:var(--green)">91%</div>
+        <div class="stat-card-change up" style="color:var(--green)">↑ Top 3 de la classe</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-label">Série active 🔥</div>
+        <div class="stat-card-val" style="color:var(--amber)">9 jours</div>
+        <div class="stat-card-change up" style="color:var(--green)">Record personnel !</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-label">Points gagnés</div>
+        <div class="stat-card-val" style="color:var(--primary)">1 480</div>
+        <div class="stat-card-change neutral" style="color:var(--muted)">+180 cette semaine</div>
+      </div>
+    </div>
+
+    <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;margin-bottom:16px;">Progression par thème</h3>
+    <div class="topic-grid">
+      <div class="topic-card">
+        <div class="topic-card-name">📐 Équations 1er degré</div>
+        <div class="topic-bar-wrap"><div class="topic-bar-fill" style="width:95%;background:linear-gradient(90deg,var(--primary),var(--purple))"></div></div>
+        <div class="topic-pct">95% — Excellent ✨</div>
+      </div>
+      <div class="topic-card">
+        <div class="topic-card-name">🔢 Calcul littéral</div>
+        <div class="topic-bar-wrap"><div class="topic-bar-fill" style="width:88%;background:linear-gradient(90deg,var(--green),#38BDF8)"></div></div>
+        <div class="topic-pct">88% — Très bien</div>
+      </div>
+      <div class="topic-card">
+        <div class="topic-card-name">📊 Identités remarquables</div>
+        <div class="topic-bar-wrap"><div class="topic-bar-fill" style="width:82%;background:linear-gradient(90deg,var(--amber),var(--red))"></div></div>
+        <div class="topic-pct">82% — Bien</div>
+      </div>
+      <div class="topic-card">
+        <div class="topic-card-name">⚡ Systèmes d'équations</div>
+        <div class="topic-bar-wrap"><div class="topic-bar-fill" style="width:64%;background:linear-gradient(90deg,#E84040,#E09020)"></div></div>
+        <div class="topic-pct">64% — À renforcer 💪</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== EXERCISE MODAL ===================== -->
+<div class="overlay" id="overlay">
+  <div class="modal" id="modal">
+
+    <!-- Écran succès -->
+    <div class="success-screen" id="success-screen">
+      <div class="success-emoji">🎉</div>
+      <div class="score-circle" id="final-score">--</div>
+      <div class="success-title">Série terminée !</div>
+      <div class="success-sub" id="success-msg">Tu as répondu à toutes les questions.</div>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+        <button class="btn-lg primary" onclick="restartExercise()">🔁 Recommencer</button>
+        <button class="btn-lg ghost" onclick="closeModal()">Retour aux exercices</button>
+      </div>
+    </div>
+
+    <!-- Écran questions -->
+    <div id="exercise-screen">
+      <div class="modal-header">
+        <div class="modal-header-left">
+          <h3 id="modal-title">Équations du premier degré</h3>
+          <p id="modal-sub">4ème · Algèbre</p>
+        </div>
+        <div class="modal-meta">
+          <span class="modal-badge" id="modal-badge">Facile</span>
+          <button class="modal-close-btn" onclick="closeModal()">✕</button>
+        </div>
+      </div>
+
+      <div class="modal-body">
+        <div class="progress-row">
+          <div class="progress-track">
+            <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+          </div>
+          <span class="progress-label" id="progress-label">Question 1/4</span>
+        </div>
+
+        <div class="q-box">
+          <div class="q-instruction" id="q-instruction">Résous l'équation et donne la valeur de $x$ :</div>
+          <div class="q-formula" id="q-formula"></div>
+          <div class="q-hint" id="q-hint"></div>
+        </div>
+
+        <div class="answer-row">
+          <input class="answer-input" id="answer-input" type="text" placeholder="Ta réponse (ex: x = 5)"
+            onkeydown="if(event.key==='Enter') checkAnswer()"/>
+          <button class="btn-verify" id="btn-verify" onclick="checkAnswer()">Vérifier →</button>
+        </div>
+
+        <div class="feedback" id="feedback">
+          <div class="feedback-title" id="feedback-title"></div>
+          <div class="feedback-steps" id="feedback-steps"></div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <div class="score-display">Score : <span id="score-display">0</span> / <span id="total-display">0</span></div>
+        <button class="btn-next" id="btn-next" onclick="nextQuestion()">Question suivante →</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// ===== NAVIGATION =====
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  const tab = document.getElementById('tab-' + id);
+  if (tab) tab.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function showRole(role) {
+  document.querySelectorAll('.role-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.role-content').forEach(c => c.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById('role-' + role).classList.add('active');
+}
+
+document.querySelectorAll('.chip').forEach(c => {
+  c.addEventListener('click', function() {
+    document.querySelectorAll('.chip').forEach(x => x.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+
+// ===== EXERCISES DATA =====
+const exerciseSets = [
+  {
+    title: "Équations du premier degré",
+    sub: "4ème · Algèbre",
+    badge: "Facile",
+    questions: [
+      {
+        instruction: "Résous l'équation — donne la valeur de $x$ (entier) :",
+        formula: "$3x + 7 = 22$",
+        hint: "Isole $x$ en soustrayant d'abord 7 des deux membres.",
+        answer: "5",
+        accepts: ["5","x=5","x = 5"],
+        steps: `<strong>Étape 1 :</strong> On soustrait 7 des deux membres :<br>
+$3x + 7 - 7 = 22 - 7$<br>
+$3x = 15$<br><br>
+<strong>Étape 2 :</strong> On divise par 3 :<br>
+$x = 15 ÷ 3 = \\mathbf{5}$`
+      },
+      {
+        instruction: "Résous l'équation — donne la valeur de $x$ :",
+        formula: "$5x - 3 = 2x + 9$",
+        hint: "Regroupe les termes en $x$ d'un côté et les constantes de l'autre.",
+        answer: "4",
+        accepts: ["4","x=4","x = 4"],
+        steps: `<strong>Étape 1 :</strong> On soustrait $2x$ des deux membres :<br>
+$5x - 2x - 3 = 9$<br>
+$3x - 3 = 9$<br><br>
+<strong>Étape 2 :</strong> On ajoute 3 :<br>
+$3x = 12$<br><br>
+<strong>Étape 3 :</strong> On divise par 3 :<br>
+$x = \\mathbf{4}$`
+      },
+      {
+        instruction: "Résous l'équation — donne la valeur de $x$ :",
+        formula: "$\\dfrac{x + 4}{2} = 7$",
+        hint: "Commence par multiplier les deux membres par 2.",
+        answer: "10",
+        accepts: ["10","x=10","x = 10"],
+        steps: `<strong>Étape 1 :</strong> On multiplie par 2 :<br>
+$x + 4 = 14$<br><br>
+<strong>Étape 2 :</strong> On soustrait 4 :<br>
+$x = 14 - 4 = \\mathbf{10}$`
+      },
+      {
+        instruction: "Résous l'équation — donne la valeur de $x$ :",
+        formula: "$2(3x - 1) = 4x + 10$",
+        hint: "Développe d'abord la parenthèse.",
+        answer: "6",
+        accepts: ["6","x=6","x = 6"],
+        steps: `<strong>Étape 1 :</strong> On développe :<br>
+$6x - 2 = 4x + 10$<br><br>
+<strong>Étape 2 :</strong> On soustrait $4x$ :<br>
+$2x - 2 = 10$<br><br>
+<strong>Étape 3 :</strong> On ajoute 2, puis on divise par 2 :<br>
+$2x = 12 \\Rightarrow x = \\mathbf{6}$`
+      }
+    ]
+  },
+  {
+    title: "Développer et réduire",
+    sub: "4ème · Identités remarquables",
+    badge: "Moyen",
+    questions: [
+      {
+        instruction: "Développe et réduis — donne le résultat sous la forme $ax^2 + bx + c$ :",
+        formula: "$(x + 3)^2$",
+        hint: "Utilise la formule $(a+b)^2 = a^2 + 2ab + b^2$",
+        answer: "x²+6x+9",
+        accepts: ["x²+6x+9","x^2+6x+9","x²+6x+9"],
+        steps: `<strong>Formule :</strong> $(a+b)^2 = a^2 + 2ab + b^2$<br><br>
+Avec $a = x$ et $b = 3$ :<br>
+$(x+3)^2 = x^2 + 2 \\times x \\times 3 + 3^2$<br>
+$= \\mathbf{x^2 + 6x + 9}$`
+      },
+      {
+        instruction: "Développe et réduis :",
+        formula: "$(x - 4)(x + 4)$",
+        hint: "Utilise la formule $(a-b)(a+b) = a^2 - b^2$",
+        answer: "x²-16",
+        accepts: ["x²-16","x^2-16"],
+        steps: `<strong>Formule :</strong> $(a-b)(a+b) = a^2 - b^2$<br><br>
+Avec $a = x$ et $b = 4$ :<br>
+$(x-4)(x+4) = x^2 - 4^2 = \\mathbf{x^2 - 16}$`
+      },
+      {
+        instruction: "Développe et réduis :",
+        formula: "$(2x - 5)^2$",
+        hint: "Utilise $(a-b)^2 = a^2 - 2ab + b^2$ avec $a=2x$, $b=5$",
+        answer: "4x²-20x+25",
+        accepts: ["4x²-20x+25","4x^2-20x+25"],
+        steps: `<strong>Formule :</strong> $(a-b)^2 = a^2 - 2ab + b^2$<br><br>
+Avec $a = 2x$ et $b = 5$ :<br>
+$(2x)^2 - 2 \\times 2x \\times 5 + 5^2$<br>
+$= \\mathbf{4x^2 - 20x + 25}$`
+      }
+    ]
+  },
+  {
+    title: "Systèmes d'équations",
+    sub: "3ème · Algèbre",
+    badge: "Moyen",
+    questions: [
+      {
+        instruction: "Résous le système — donne la valeur de $x$ :",
+        formula: "$\\begin{cases} x + y = 10 \\\\ x - y = 4 \\end{cases}$",
+        hint: "Additionne les deux équations pour éliminer $y$.",
+        answer: "7",
+        accepts: ["7","x=7","x = 7"],
+        steps: `<strong>Étape 1 :</strong> On additionne les deux équations :<br>
+$(x+y) + (x-y) = 10 + 4$<br>
+$2x = 14 \\Rightarrow x = \\mathbf{7}$<br><br>
+<strong>Vérification :</strong> $y = 10 - 7 = 3$`
+      },
+      {
+        instruction: "Résous le système — donne la valeur de $y$ :",
+        formula: "$\\begin{cases} 2x + y = 11 \\\\ x = 3 \\end{cases}$",
+        hint: "Substitue $x = 3$ dans la première équation.",
+        answer: "5",
+        accepts: ["5","y=5","y = 5"],
+        steps: `<strong>Étape 1 :</strong> On substitue $x = 3$ :<br>
+$2 \\times 3 + y = 11$<br>
+$6 + y = 11$<br>
+$y = \\mathbf{5}$`
+      },
+      {
+        instruction: "Résous le système — donne la valeur de $x$ :",
+        formula: "$\\begin{cases} 3x + 2y = 16 \\\\ x + 2y = 8 \\end{cases}$",
+        hint: "Soustrait la 2ème équation de la 1ère pour éliminer $y$.",
+        answer: "4",
+        accepts: ["4","x=4","x = 4"],
+        steps: `<strong>Étape 1 :</strong> On soustrait la 2ème de la 1ère :<br>
+$(3x+2y) - (x+2y) = 16 - 8$<br>
+$2x = 8 \\Rightarrow x = \\mathbf{4}$`
+      }
+    ]
+  }
+];
+
+// ===== EXERCISE ENGINE =====
+let currentSet = 0, currentQ = 0, score = 0, answered = false;
+
+function openExercise(setIndex) {
+  currentSet = setIndex;
+  currentQ = 0; score = 0; answered = false;
+  document.getElementById('success-screen').classList.remove('show');
+  document.getElementById('exercise-screen').style.display = 'block';
+  loadQuestion();
+  document.getElementById('overlay').classList.add('open');
+}
+
+function loadQuestion() {
+  const set = exerciseSets[currentSet];
+  const q   = set.questions[currentQ];
+  const total = set.questions.length;
+
+  document.getElementById('modal-title').textContent = set.title;
+  document.getElementById('modal-sub').textContent   = set.sub;
+  document.getElementById('modal-badge').textContent = set.badge;
+  document.getElementById('progress-fill').style.width = `${(currentQ / total) * 100}%`;
+  document.getElementById('progress-label').textContent = `Question ${currentQ + 1}/${total}`;
+  document.getElementById('q-instruction').textContent = q.instruction;
+  document.getElementById('q-hint').textContent = q.hint;
+  document.getElementById('score-display').textContent = score;
+  document.getElementById('total-display').textContent  = total;
+
+  // Render formula
+  const formulaEl = document.getElementById('q-formula');
+  formulaEl.textContent = q.formula;
+  if (window.katex) {
+    try {
+      formulaEl.innerHTML = '';
+      katex.render(q.formula, formulaEl, { throwOnError: false, displayMode: true });
+    } catch(e) { formulaEl.textContent = q.formula; }
+  }
+
+  // Reset UI
+  const inp = document.getElementById('answer-input');
+  inp.value = ''; inp.className = 'answer-input'; inp.disabled = false;
+  const fb = document.getElementById('feedback');
+  fb.style.display = 'none'; fb.className = 'feedback';
+  document.getElementById('btn-next').style.display = 'none';
+  document.getElementById('btn-verify').disabled = false;
+  answered = false;
+  inp.focus();
+
+  // Render KaTeX in instructions
+  if (window.katex) {
+    setTimeout(() => {
+      renderMathInElement(document.getElementById('modal'), {
+        delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]
+      });
+    }, 100);
+  }
+}
+
+function checkAnswer() {
+  if (answered) return;
+  const set = exerciseSets[currentSet];
+  const q   = set.questions[currentQ];
+  const inp  = document.getElementById('answer-input');
+  const raw  = inp.value.trim().replace(/\s/g,'');
+  const isOk = q.accepts.some(a => a.replace(/\s/g,'') === raw);
+
+  answered = true;
+  inp.disabled = true;
+  document.getElementById('btn-verify').disabled = true;
+
+  const fb   = document.getElementById('feedback');
+  const ftit = document.getElementById('feedback-title');
+  const fsteps = document.getElementById('feedback-steps');
+
+  if (isOk) {
+    score++;
+    inp.classList.add('correct');
+    fb.className = 'feedback correct';
+    ftit.textContent = '✅ Bravo ! Bonne réponse.';
+  } else {
+    inp.classList.add('wrong');
+    fb.className = 'feedback wrong';
+    ftit.textContent = `❌ La bonne réponse était : ${q.answer}`;
+  }
+
+  fsteps.innerHTML = q.steps;
+  fb.style.display = 'block';
+  document.getElementById('score-display').textContent = score;
+
+  if (currentQ < set.questions.length - 1) {
+    document.getElementById('btn-next').style.display = 'block';
+  } else {
+    setTimeout(showSuccess, 900);
+  }
+
+  if (window.katex) {
+    setTimeout(() => {
+      renderMathInElement(document.getElementById('feedback'), {
+        delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]
+      });
+    }, 100);
+  }
+}
+
+function nextQuestion() {
+  currentQ++;
+  loadQuestion();
+}
+
+function showSuccess() {
+  const total = exerciseSets[currentSet].questions.length;
+  const pct   = Math.round((score / total) * 100);
+  document.getElementById('final-score').textContent = `${pct}%`;
+  document.getElementById('success-msg').textContent =
+    score === total ? `Parfait ! ${score}/${total} — Série complète réussie ! 🌟` :
+    `Tu as réussi ${score} question${score>1?'s':''} sur ${total}. Continue comme ça !`;
+  document.getElementById('exercise-screen').style.display = 'none';
+  document.getElementById('success-screen').classList.add('show');
+}
+
+function restartExercise() {
+  currentQ = 0; score = 0; answered = false;
+  document.getElementById('success-screen').classList.remove('show');
+  document.getElementById('exercise-screen').style.display = 'block';
+  loadQuestion();
+}
+
+function closeModal() {
+  document.getElementById('overlay').classList.remove('open');
+}
+
+document.getElementById('overlay').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeModal();
+});
+</script>
+</body>
+</html>
