@@ -2632,7 +2632,7 @@ const GENERATEURS = {
       const x = rand(-3,5);
       const fx = a*x + b;
       return {
-        enonce: `$f(x) = ${a===1?'':a===−1?'-':a}x${b>=0?'+'+b:b}$. Calcule $f(${x})$.`,
+        enonce: `$f(x) = ${a===1?'':a===-1?'-':a}x${b>=0?'+'+b:b}$. Calcule $f(${x})$.`,
         reponse: fx,
         correction: `$f(${x}) = ${a==-1?'-':a===1?'':a}\\times ${x} ${b>=0?'+ '+b:'- '+Math.abs(b)} = ${fx}$`,
         type: 'nombre'
