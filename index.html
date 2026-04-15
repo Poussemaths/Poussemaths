@@ -794,14 +794,63 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
   .badges-grid { grid-template-columns:repeat(2,1fr); }
   .train-grid { grid-template-columns:repeat(2,1fr); }
   .footer-inner { grid-template-columns:1fr 1fr; }
+  .nav-right .btn-nav-outline { display:none; }
   nav .nav-tabs { display:none; }
+  .nav-hamburger { display:flex; }
 }
+
+/* Menu mobile */
+.nav-hamburger {
+  display:none;
+  flex-direction:column;
+  gap:5px;
+  background:none;
+  border:none;
+  cursor:pointer;
+  padding:6px;
+}
+.nav-hamburger span {
+  display:block;
+  width:22px; height:2px;
+  background:var(--texte);
+  border-radius:2px;
+  transition:all 0.2s;
+}
+
+.mobile-menu {
+  display:none;
+  position:fixed;
+  top:64px; left:0; right:0;
+  background:white;
+  border-bottom:1px solid var(--bordure);
+  z-index:99;
+  padding:1rem;
+  box-shadow:0 8px 24px rgba(0,0,0,0.08);
+}
+.mobile-menu.open { display:block; }
+.mobile-menu button {
+  display:block;
+  width:100%;
+  text-align:left;
+  padding:12px 16px;
+  border:none;
+  background:none;
+  font-size:15px;
+  font-weight:500;
+  color:var(--texte);
+  font-family:'DM Sans',sans-serif;
+  cursor:pointer;
+  border-radius:var(--r);
+  transition:background 0.15s;
+}
+.mobile-menu button:hover { background:var(--bg); }
 
 /* ══════════════════════════════════
    SCROLL REVEAL
 ══════════════════════════════════ */
-.reveal { opacity:0; transform:translateY(16px); transition:opacity 0.5s ease,transform 0.5s ease; }
-.reveal.visible { opacity:1; transform:none; }
+.reveal { opacity:1; transform:none; }
+.reveal.animate { opacity:0; transform:translateY(16px); transition:opacity 0.5s ease,transform 0.5s ease; }
+.reveal.animate.visible { opacity:1; transform:none; }
 </style>
 </head>
 <body>
@@ -822,8 +871,20 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
   <div class="nav-right">
     <button class="btn-nav-outline" onclick="showPage('eleve')">Se connecter</button>
     <button class="btn-nav-primary" onclick="showPage('exercices')">Commencer →</button>
+    <button class="nav-hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
+
+<!-- MENU MOBILE -->
+<div class="mobile-menu" id="mobile-menu">
+  <button onclick="showPage('accueil');toggleMenu()">🏠 Accueil</button>
+  <button onclick="showPage('exercices');toggleMenu()">📝 Exercices</button>
+  <button onclick="showPage('parcours');toggleMenu()">🎯 Parcours noté</button>
+  <button onclick="showPage('eleve');toggleMenu()">🏆 Espace Élève</button>
+  <button onclick="showPage('prof');toggleMenu()">👨‍🏫 Espace Prof</button>
+</div>
 
 <!-- ═══ BANDEAU BO ═══ -->
 <div class="bo-banner">
@@ -2155,6 +2216,11 @@ let exFaits = 12;
 // ═══════════════════════════════════════
 //  NAVIGATION
 // ═══════════════════════════════════════
+function toggleMenu() {
+  const menu = document.getElementById('mobile-menu');
+  menu.classList.toggle('open');
+}
+
 function showPage(page, filter) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
@@ -3031,9 +3097,15 @@ const observer = new IntersectionObserver((entries) => {
       observer.unobserve(entry.target);
     }
   });
-}, {threshold:0.1});
+}, {threshold:0.05, rootMargin:'0px 0px -20px 0px'});
 
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+// On ajoute animate APRES un court délai pour que le contenu soit visible d'abord
+setTimeout(() => {
+  document.querySelectorAll('.reveal').forEach(el => {
+    el.classList.add('animate');
+    observer.observe(el);
+  });
+}, 300);
 
 // Init
 updateEleveStats();
