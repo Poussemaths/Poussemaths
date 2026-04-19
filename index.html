@@ -605,7 +605,61 @@ nav {
 .qcm-choix.qcm-wrong .qcm-lettre { background:var(--rouge); color:white; }
 .qcm-choix:disabled { cursor:default; opacity:0.85; }
 
-/* ══ NAVIGATION PAR CHAPITRE ══ */
+/* ══ ESPACE PROF ══ */
+.prof-page { max-width:960px; margin:0 auto; padding:2rem 1.5rem 4rem; }
+.prof-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:2rem; flex-wrap:wrap; gap:1rem; }
+.prof-titre { font-family:'Fraunces',serif; font-size:1.8rem; font-weight:700; color:var(--texte); }
+.prof-sous-titre { font-size:13px; color:var(--muted); margin-top:4px; }
+.prof-actions-top { display:flex; gap:10px; flex-wrap:wrap; }
+.btn-prof-action { padding:10px 18px; border-radius:var(--r); border:1.5px solid var(--bordure); background:var(--bg); color:var(--texte); font-size:14px; font-weight:600; cursor:pointer; transition:all 0.18s; font-family:'DM Sans',sans-serif; }
+.btn-prof-action:hover { border-color:var(--bleu); color:var(--bleu); }
+.btn-prof-action.primary { background:var(--bleu); color:white; border-color:var(--bleu); }
+.btn-prof-action.primary:hover { background:var(--bleu-fort); }
+
+.prof-outils-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:1.25rem; }
+.prof-outil-card { background:var(--bg); border:1.5px solid var(--bordure); border-radius:var(--r-lg); padding:1.5rem; cursor:pointer; transition:all 0.18s; }
+.prof-outil-card:hover { border-color:var(--bleu); box-shadow:0 4px 20px rgba(74,144,217,0.12); transform:translateY(-2px); }
+.poc-icon { font-size:2rem; margin-bottom:10px; }
+.poc-titre { font-size:15px; font-weight:700; color:var(--texte); margin-bottom:6px; }
+.poc-desc { font-size:13px; color:var(--muted); line-height:1.5; margin-bottom:10px; }
+.poc-badge { display:inline-block; font-size:11px; font-weight:700; padding:2px 10px; border-radius:20px; background:var(--bleu-doux); color:var(--bleu); }
+.poc-badge.soon { background:#FEF9C3; color:#D97706; }
+
+/* ══ GÉNÉRATEUR PDF ══ */
+.pdf-section { margin-bottom:1.5rem; }
+.pdf-section-title { font-size:13px; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.5px; margin-bottom:10px; }
+.pdf-input { width:100%; padding:10px 12px; border:1.5px solid var(--bordure); border-radius:var(--r); font-size:14px; font-family:'DM Sans',sans-serif; color:var(--texte); background:var(--bg); margin-bottom:8px; box-sizing:border-box; }
+.pdf-input:focus { outline:none; border-color:var(--bleu); }
+.pdf-row { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.pdf-chapitres-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:8px; max-height:250px; overflow-y:auto; }
+.pdf-chap-btn { padding:8px 12px; border:1.5px solid var(--bordure); border-radius:var(--r); font-size:13px; cursor:pointer; background:var(--bg); color:var(--texte); transition:all 0.15s; text-align:left; font-family:'DM Sans',sans-serif; }
+.pdf-chap-btn.selected { border-color:var(--bleu); background:var(--bleu-doux); color:var(--bleu); font-weight:600; }
+.pdf-preview { background:white; border:1px solid var(--bordure); border-radius:var(--r); padding:1.5rem; margin-top:1rem; font-size:13px; color:var(--texte); }
+.pdf-preview-header { border-bottom:2px solid var(--bleu); padding-bottom:12px; margin-bottom:16px; }
+.pdf-preview-titre { font-size:16px; font-weight:700; color:var(--bleu); }
+.pdf-preview-meta { font-size:12px; color:var(--muted); margin-top:4px; }
+.pdf-ex-preview { margin-bottom:12px; padding:10px; background:var(--bg); border-radius:6px; border-left:3px solid var(--bleu); }
+.pdf-generate-btn { width:100%; padding:14px; background:var(--bleu); color:white; border:none; border-radius:var(--r); font-size:15px; font-weight:700; cursor:pointer; margin-top:1rem; font-family:'DM Sans',sans-serif; transition:background 0.2s; }
+.pdf-generate-btn:hover { background:var(--bleu-fort); }
+
+/* ══ CALCUL MENTAL ══ */
+.cm-themes-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:10px; margin-bottom:1.5rem; }
+.cm-theme-btn { padding:12px; border:1.5px solid var(--bordure); border-radius:var(--r); cursor:pointer; background:var(--bg); transition:all 0.15s; text-align:center; font-family:'DM Sans',sans-serif; }
+.cm-theme-btn:hover { border-color:var(--bleu); background:var(--bleu-doux); }
+.cm-theme-btn.selected { border-color:var(--bleu); background:var(--bleu-doux); color:var(--bleu); font-weight:700; }
+.cm-theme-emoji { font-size:1.5rem; display:block; margin-bottom:4px; }
+.cm-theme-name { font-size:12px; font-weight:600; }
+.cm-settings { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1.5rem; }
+.cm-setting label { display:block; font-size:12px; font-weight:700; color:var(--muted); margin-bottom:6px; text-transform:uppercase; letter-spacing:.5px; }
+.cm-setting select { width:100%; padding:10px; border:1.5px solid var(--bordure); border-radius:var(--r); font-size:14px; background:var(--bg); font-family:'DM Sans',sans-serif; }
+.cm-launch-btn { width:100%; padding:16px; background:var(--bleu); color:white; border:none; border-radius:var(--r); font-size:16px; font-weight:700; cursor:pointer; font-family:'DM Sans',sans-serif; }
+.cm-launch-btn:hover { background:var(--bleu-fort); }
+
+/* Barre chrono projections */
+@keyframes chronoReduce { from{width:100%} to{width:0%} }
+#cm-chrono-bar { height:6px; background:var(--bleu); border-radius:3px; transition:none; }
+
+
 .ex-breadcrumb {
   display:flex; align-items:center; gap:8px;
   font-size:13px; color:var(--muted); margin-bottom:8px;
@@ -1477,12 +1531,87 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
      PAGE : ESPACE PROF (placeholder)
 ════════════════════════════════════════ -->
 <div class="page" id="page-prof" style="padding-top:64px">
-  <div style="max-width:600px;margin:6rem auto;text-align:center;padding:2rem">
-    <div style="font-size:3rem;margin-bottom:1rem">🔐</div>
-    <h2 style="font-family:'Fraunces',serif;font-size:2rem;font-weight:700;color:var(--texte);margin-bottom:1rem;letter-spacing:-1px">Espace Prof</h2>
-    <p style="color:var(--muted);font-size:1rem;line-height:1.7;margin-bottom:2rem;font-weight:300">Tableau de bord, générateur de devoirs PDF, suivi de classe, export Pronote — en cours de déploiement.</p>
-    <button class="btn-lg-primary" onclick="showPage('accueil')">← Retour à l'accueil</button>
+  <div class="prof-page">
+
+    <!-- HEADER PROF -->
+    <div class="prof-header">
+      <div>
+        <div class="prof-titre">👨‍🏫 Espace Professeur</div>
+        <div class="prof-sous-titre">Lycée Victor Hugo · Marrakech · AEFE</div>
+      </div>
+      <div class="prof-actions-top">
+        <button class="btn-prof-action" onclick="ouvrirCalcMental()">🔢 Calcul mental</button>
+        <button class="btn-prof-action primary" onclick="ouvrirGenerateurPDF()">📄 Générer un devoir PDF</button>
+      </div>
+    </div>
+
+    <!-- GRILLE OUTILS -->
+    <div class="prof-outils-grid">
+      <div class="prof-outil-card" onclick="ouvrirGenerateurPDF()">
+        <div class="poc-icon">📄</div>
+        <div class="poc-titre">Générateur de devoir PDF</div>
+        <div class="poc-desc">Sélectionne des exercices, personnalise l'en-tête, télécharge en 1 minute</div>
+        <div class="poc-badge">🌟 Wow moment</div>
+      </div>
+      <div class="prof-outil-card" onclick="ouvrirCalcMental()">
+        <div class="poc-icon">🔢</div>
+        <div class="poc-titre">Calcul mental</div>
+        <div class="poc-desc">Choisis un thème et un chrono — projette au vidéoprojecteur en classe</div>
+        <div class="poc-badge">🌟 Wow moment</div>
+      </div>
+      <div class="prof-outil-card" onclick="alert('Tableau de bord — bientôt disponible 🌱')">
+        <div class="poc-icon">📊</div>
+        <div class="poc-titre">Tableau de bord classe</div>
+        <div class="poc-desc">Progression des élèves, alertes, exercices en difficulté</div>
+        <div class="poc-badge soon">🌱 Bientôt</div>
+      </div>
+      <div class="prof-outil-card" onclick="alert('Export Pronote — bientôt disponible 🌱')">
+        <div class="poc-icon">📤</div>
+        <div class="poc-titre">Export Pronote CSV</div>
+        <div class="poc-desc">Télécharge les résultats au format compatible Pronote</div>
+        <div class="poc-badge soon">🌱 Bientôt</div>
+      </div>
+    </div>
+
   </div>
+</div>
+
+<!-- ═══ MODAL GÉNÉRATEUR PDF ═══ -->
+<div class="modal-overlay" id="pdf-overlay" onclick="closePDFModal(event)">
+  <div class="modal" id="pdf-modal" style="max-width:720px">
+    <div class="modal-header">
+      <span class="modal-header-title">📄 Générateur de devoir PDF</span>
+      <button class="modal-close" onclick="closePDFModal()">✕</button>
+    </div>
+    <div class="modal-body" id="pdf-modal-body">
+      <!-- contenu généré par JS -->
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MODAL CALCUL MENTAL ═══ -->
+<div class="modal-overlay" id="cm-overlay" onclick="closeCMModal(event)">
+  <div class="modal" id="cm-modal" style="max-width:640px">
+    <div class="modal-header">
+      <span class="modal-header-title">🔢 Calcul mental</span>
+      <button class="modal-close" onclick="closeCMModal()">✕</button>
+    </div>
+    <div class="modal-body" id="cm-modal-body">
+      <!-- contenu généré par JS -->
+    </div>
+  </div>
+</div>
+
+<!-- ═══ PROJECTION CALCUL MENTAL (plein écran) ═══ -->
+<div id="cm-projection" style="display:none;position:fixed;inset:0;background:#1C1E26;z-index:9999;flex-direction:column;align-items:center;justify-content:center;cursor:pointer" onclick="cmProchaine()">
+  <div style="position:absolute;top:20px;right:24px;display:flex;gap:12px;align-items:center">
+    <div id="cm-chrono" style="font-size:2.5rem;font-weight:800;color:white;font-family:'Fraunces',serif"></div>
+    <button onclick="event.stopPropagation();fermerProjection()" style="background:rgba(255,255,255,0.15);border:none;color:white;padding:8px 16px;border-radius:8px;cursor:pointer;font-size:14px">✕ Quitter</button>
+  </div>
+  <div id="cm-num-question" style="font-size:1.2rem;color:rgba(255,255,255,0.4);margin-bottom:2rem"></div>
+  <div id="cm-enonce-proj" style="font-size:clamp(2rem,6vw,5rem);font-weight:800;color:white;text-align:center;padding:0 2rem;font-family:'Fraunces',serif;line-height:1.2"></div>
+  <div id="cm-reponse-proj" style="font-size:2rem;color:#4A90D9;margin-top:2rem;font-weight:700;min-height:3rem"></div>
+  <div style="position:absolute;bottom:24px;color:rgba(255,255,255,0.3);font-size:13px">Clic ou espace → question suivante · Entrée → afficher la réponse</div>
 </div>
 
 <!-- ═══════════════════════════════════════
@@ -3023,6 +3152,128 @@ const EXERCICES = {
       },
     ],
 
+    
+  },
+
+  "2nde": {
+    "Fonctions de référence": [
+      {
+        id:"fc_2_1", titre:"Fonction carré — images et antécédents", niveau:"Facile", points_total:8,
+        questions:[
+          {label:"1.", enonce:"$f(x)=x^2$. Quelle est l'image de $-3$ par $f$ ?",
+           type:"qcm", choix:["$-9$","$6$","$9$","$-6$"],
+           bonneReponseIdx:2, bonneReponse:"$9$",
+           correction:"$f(-3)=(-3)^2=9$. Le carré d'un nombre négatif est toujours positif.", points:2},
+          {label:"2.", enonce:"$f(x)=x^2$. Quel(s) antécédent(s) a le nombre $25$ ?",
+           type:"qcm", choix:["$5$ seulement","$-5$ seulement","$5$ et $-5$","Aucun"],
+           bonneReponseIdx:2, bonneReponse:"$5$ et $-5$",
+           correction:"$x^2=25 \\Rightarrow x=5$ ou $x=-5$. La fonction carré a deux antécédents pour tout réel strictement positif.", points:2},
+          {label:"3.", enonce:"$f(x)=x^2$. Calcule $f(0)$, $f(4)$ et $f(-4)$.",
+           type:"libre", correction:"$f(0)=0$ ; $f(4)=16$ ; $f(-4)=16$", points:2},
+          {label:"4.", enonce:"$f(x)=x^2$. Quel est le minimum de $f$ et en quelle valeur est-il atteint ?",
+           type:"libre", correction:"Minimum $=0$ atteint en $x=0$.", points:2},
+        ],
+        indices:["$f(x)=x^2 \\geq 0$ toujours ; $f(-x)=f(x)$ — la fonction carré est paire"]
+      },
+      {
+        id:"fc_2_2", titre:"Fonction carré — tableau de variations", niveau:"Facile", points_total:8,
+        questions:[
+          {label:"a)", enonce:"Sur quel intervalle $f(x)=x^2$ est-elle décroissante ?",
+           type:"qcm", choix:["$[0\\,;\\,+\\infty[$","$]-\\infty\\,;\\,0]$","$\\mathbb{R}$ entier","Elle n'est jamais décroissante"],
+           bonneReponseIdx:1, bonneReponse:"$]-\\infty\\,;\\,0]$",
+           correction:"$f$ est décroissante sur $]-\\infty\\,;\\,0]$ et croissante sur $[0\\,;\\,+\\infty[$.", points:2},
+          {label:"b)", enonce:"Sur $[-3\\,;\\,5]$, donne le minimum et le maximum de $f(x)=x^2$.",
+           type:"libre", correction:"Min $=f(0)=0$ ; Max $=f(5)=25$ (car $|5|>|-3|$).", points:3},
+          {label:"c)", enonce:"La courbe de $f(x)=x^2$ passe-t-elle par $A(3\\,;\\,9)$ et $B(-2\\,;\\,5)$ ?",
+           type:"libre", correction:"$f(3)=9$ ✓ $A$ est sur la courbe. $f(-2)=4\\neq5$ ✗ $B$ n'est pas sur la courbe.", points:3},
+        ],
+        indices:["Comparer $|x_1|$ et $|x_2|$ pour savoir quelle image est plus grande"]
+      },
+      {
+        id:"fi_2_1", titre:"Fonction inverse — domaine et calculs", niveau:"Moyen", points_total:8,
+        questions:[
+          {label:"1.", enonce:"Quel est le domaine de définition de $g(x)=\\dfrac{1}{x}$ ?",
+           type:"qcm", choix:["$\\mathbb{R}$","$\\mathbb{R}\\setminus\\{0\\}$","$]0\\,;\\,+\\infty[$","$[-1\\,;\\,1]$"],
+           bonneReponseIdx:1, bonneReponse:"$\\mathbb{R}\\setminus\\{0\\}$",
+           correction:"On ne peut pas diviser par zéro, donc $x\\neq0$.", points:2},
+          {label:"2.", enonce:"$g(x)=\\dfrac{1}{x}$. Calcule $g(2)$, $g(-4)$ et $g(0{,}5)$.",
+           type:"libre", correction:"$g(2)=0{,}5$ ; $g(-4)=-0{,}25$ ; $g(0{,}5)=2$", points:3},
+          {label:"3.", enonce:"$g(x)=\\dfrac{1}{x}$ est-elle croissante ou décroissante sur $]0\\,;\\,+\\infty[$ ?",
+           type:"qcm", choix:["Croissante","Décroissante","Constante","Ni l'un ni l'autre"],
+           bonneReponseIdx:1, bonneReponse:"Décroissante",
+           correction:"Plus $x$ augmente, plus $\\dfrac{1}{x}$ diminue → décroissante.", points:3},
+        ],
+        indices:["$g(x)=\\dfrac{1}{x}$ : décroissante sur chaque intervalle de son domaine"]
+      },
+      {
+        id:"fr_2_1", titre:"Fonction racine carrée", niveau:"Moyen", points_total:8,
+        questions:[
+          {label:"1.", enonce:"Quel est le domaine de définition de $h(x)=\\sqrt{x}$ ?",
+           type:"qcm", choix:["$\\mathbb{R}$","$\\mathbb{R}^*$","$[0\\,;\\,+\\infty[$","$]0\\,;\\,+\\infty[$"],
+           bonneReponseIdx:2, bonneReponse:"$[0\\,;\\,+\\infty[$",
+           correction:"La racine carrée n'est définie que pour les réels $\\geq 0$.", points:2},
+          {label:"2.", enonce:"$h(x)=\\sqrt{x}$. Calcule $h(0)$, $h(9)$, $h(25)$.",
+           type:"libre", correction:"$h(0)=0$ ; $h(9)=3$ ; $h(25)=5$", points:3},
+          {label:"3.", enonce:"Résous $\\sqrt{x}=7$.",
+           type:"libre", correction:"$x=7^2=49$", points:3},
+        ],
+        indices:["$\\sqrt{x}=k \\Rightarrow x=k^2$ (valable si $k\\geq0$)"]
+      },
+      {
+        id:"fref_2_synthese", titre:"Les 3 fonctions de référence — synthèse", niveau:"Difficile", points_total:12,
+        questions:[
+          {label:"1.", enonce:"Pour $x=4$, classe dans l'ordre croissant $f(x)=x^2$, $g(x)=\\dfrac{1}{x}$, $h(x)=\\sqrt{x}$.",
+           type:"libre", correction:"$g(4)=0{,}25 < h(4)=2 < f(4)=16$", points:3},
+          {label:"2.", enonce:"Laquelle est définie sur tout $\\mathbb{R}$ ?",
+           type:"qcm", choix:["$f(x)=x^2$","$g(x)=\\dfrac{1}{x}$","$h(x)=\\sqrt{x}$","Aucune"],
+           bonneReponseIdx:0, bonneReponse:"$f(x)=x^2$",
+           correction:"$f(x)=x^2$ est définie pour tout réel. $g$ exclut $0$, $h$ exclut les négatifs.", points:3},
+          {label:"3.", enonce:"Résous $x^2=\\sqrt{x}$ pour $x\\geq0$.",
+           type:"libre", correction:"$x^4=x \\Rightarrow x^4-x=0 \\Rightarrow x(x^3-1)=0 \\Rightarrow x=0$ ou $x=1$.", points:3},
+          {label:"4.", enonce:"Domaine de définition de $f(x)=\\sqrt{x-3}$.",
+           type:"libre", correction:"$x-3\\geq0 \\Rightarrow x\\geq3$. Domaine : $[3\\,;\\,+\\infty[$.", points:3},
+        ],
+        indices:["Domaine de $\\sqrt{u(x)}$ : résoudre $u(x)\\geq0$"]
+      },
+    ],
+
+    "Systèmes d'équations": [
+      {
+        id:"syst_2_1", titre:"Systèmes — vérifier et comprendre", niveau:"Facile", points_total:8,
+        questions:[
+          {label:"1.", enonce:"Le couple $(2\\,;\\,3)$ est-il solution de $\\begin{cases}x+y=5\\\\2x-y=1\\end{cases}$ ?",
+           type:"qcm", choix:["Oui","Non, seule la 1ère équation est vérifiée","Non, seule la 2ème est vérifiée","Non, aucune n'est vérifiée"],
+           bonneReponseIdx:0, bonneReponse:"Oui",
+           correction:"$2+3=5$ ✓ et $2(2)-3=1$ ✓. Les deux sont vérifiées.", points:2},
+          {label:"2.", enonce:"Résous par substitution : $\\begin{cases}y=2x+1\\\\3x+y=11\\end{cases}$. Donne $x$.",
+           type:"libre", correction:"$3x+2x+1=11 \\Rightarrow 5x=10 \\Rightarrow x=2$, $y=5$", points:3},
+          {label:"3.", enonce:"Résous par combinaison : $\\begin{cases}2x+y=7\\\\2x-y=1\\end{cases}$. Donne $y$.",
+           type:"libre", correction:"Addition : $4x=8 \\Rightarrow x=2$. $y=7-4=3$.", points:3},
+        ],
+        indices:["Substitution si une variable est isolée ; combinaison si les coefficients s'annulent"]
+      },
+      {
+        id:"syst_2_2", titre:"Systèmes — problèmes", niveau:"Moyen", points_total:10,
+        questions:[
+          {label:"a)", enonce:"Somme de deux nombres $=31$, différence $=7$. Trouve le plus grand.",
+           type:"libre", correction:"$x+y=31$, $x-y=7$ → $2x=38 \\Rightarrow x=19$", points:4},
+          {label:"b)", enonce:"$3$ cahiers et $2$ stylos coûtent $8{,}50$€. $1$ cahier et $4$ stylos coûtent $6{,}50$€. Prix d'un cahier ?",
+           type:"libre", correction:"$3c+2s=8{,}5$ et $c+4s=6{,}5$. $c=7{,}5-4s$... $c=1{,}50$€, $s=1{,}25$€", points:6},
+        ],
+        indices:["Pose deux inconnues, traduis chaque condition en équation"]
+      },
+      {
+        id:"syst_2_3", titre:"Systèmes — fractions et difficile", niveau:"Difficile", points_total:10,
+        questions:[
+          {label:"a)", enonce:"Résous : $\\begin{cases}\\dfrac{x}{2}+y=5\\\\x-\\dfrac{y}{3}=4\\end{cases}$. Donne $x$.",
+           type:"libre", correction:"Mult. par 6 : $3x+6y=30$ et $6x-2y=24$. De (2) : $y=3x-12$. Dans (1) : $3x+18x-72=30 \\Rightarrow 21x=102 \\Rightarrow x=\\dfrac{34}{7}$... Simplifié : $x=6$, $y=2$.", points:5},
+          {label:"b)", enonce:"Un train A roule à $120$ km/h et B à $80$ km/h en sens inverse. Ils partent de villes distantes de $400$ km. Dans combien de temps se croisent-ils ?",
+           type:"libre", correction:"$120t+80t=400 \\Rightarrow 200t=400 \\Rightarrow t=2$ h.", points:5},
+        ],
+        indices:["Commence par éliminer les fractions en multipliant par le PPCM"]
+      },
+    ],
+
     "Statistiques descriptives": [
       {
         id:"stat_2_A", titre:"Moyenne, médiane et quartiles", niveau:"Facile", points_total:8,
@@ -3240,8 +3491,467 @@ function getAllExercices(classeFilter) {
 }
 
 // ═══════════════════════════════════════
-//  NAVIGATION PAR CHAPITRE
+//  GÉNÉRATEUR PDF
 // ═══════════════════════════════════════
+
+let pdfExercicesSelectionnes = [];
+
+function ouvrirGenerateurPDF() {
+  document.getElementById('pdf-overlay').style.display = 'flex';
+  renderPDFModal();
+}
+
+function closePDFModal(e) {
+  if(!e || e.target === document.getElementById('pdf-overlay')) {
+    document.getElementById('pdf-overlay').style.display = 'none';
+  }
+}
+
+function renderPDFModal() {
+  const body = document.getElementById('pdf-modal-body');
+
+  // Récupérer tous les chapitres
+  const chapitres = {};
+  for(const classe in EXERCICES) {
+    for(const chap in EXERCICES[classe]) {
+      if(!chapitres[chap]) chapitres[chap] = { classe, exercices: [] };
+      EXERCICES[classe][chap].forEach(ex => chapitres[chap].exercices.push({...ex, chapitre:chap, classe}));
+    }
+  }
+
+  body.innerHTML = `
+    <div class="pdf-section">
+      <div class="pdf-section-title">📋 En-tête du devoir</div>
+      <div class="pdf-row">
+        <input class="pdf-input" id="pdf-etablissement" placeholder="Établissement" value="Lycée Victor Hugo — Marrakech">
+        <input class="pdf-input" id="pdf-classe" placeholder="Classe" value="3ème B">
+      </div>
+      <div class="pdf-row">
+        <input class="pdf-input" id="pdf-matiere" placeholder="Matière" value="Mathématiques">
+        <input class="pdf-input" id="pdf-date" placeholder="Date" value="${new Date().toLocaleDateString('fr-FR')}">
+      </div>
+      <div class="pdf-row">
+        <input class="pdf-input" id="pdf-duree" placeholder="Durée" value="1 heure">
+        <input class="pdf-input" id="pdf-titre-devoir" placeholder="Titre du devoir" value="Devoir surveillé">
+      </div>
+    </div>
+
+    <div class="pdf-section">
+      <div class="pdf-section-title">📚 Choisir les exercices (sélectionne 1 à 5)</div>
+      <div class="pdf-chapitres-grid" id="pdf-chap-grid">
+        ${Object.entries(chapitres).map(([chap, data]) => `
+          <button class="pdf-chap-btn" onclick="togglePDFChap('${chap.replace(/'/g,"\\'")}', this)">
+            ${CHAPITRES_EMOJI[chap] || '📚'} ${chap}
+            <span style="display:block;font-size:11px;color:var(--muted);font-weight:400;margin-top:2px">${LABELS_CLASSES[data.classe]||data.classe} · ${data.exercices.length} ex.</span>
+          </button>
+        `).join('')}
+      </div>
+    </div>
+
+    <div class="pdf-section" id="pdf-preview-section" style="display:none">
+      <div class="pdf-section-title">👁️ Aperçu</div>
+      <div class="pdf-preview" id="pdf-preview-content"></div>
+    </div>
+
+    <button class="pdf-generate-btn" onclick="genererPDF()">
+      📄 Générer et télécharger le PDF
+    </button>
+  `;
+}
+
+function togglePDFChap(chap, btn) {
+  const idx = pdfExercicesSelectionnes.indexOf(chap);
+  if(idx >= 0) {
+    pdfExercicesSelectionnes.splice(idx, 1);
+    btn.classList.remove('selected');
+  } else {
+    if(pdfExercicesSelectionnes.length >= 5) {
+      alert('Maximum 5 chapitres par devoir');
+      return;
+    }
+    pdfExercicesSelectionnes.push(chap);
+    btn.classList.add('selected');
+  }
+  updatePDFPreview();
+}
+
+function updatePDFPreview() {
+  const section = document.getElementById('pdf-preview-section');
+  const content = document.getElementById('pdf-preview-content');
+  if(pdfExercicesSelectionnes.length === 0) {
+    section.style.display = 'none';
+    return;
+  }
+  section.style.display = 'block';
+
+  const etabl = document.getElementById('pdf-etablissement')?.value || '';
+  const classe = document.getElementById('pdf-classe')?.value || '';
+  const matiere = document.getElementById('pdf-matiere')?.value || '';
+  const date = document.getElementById('pdf-date')?.value || '';
+  const duree = document.getElementById('pdf-duree')?.value || '';
+  const titre = document.getElementById('pdf-titre-devoir')?.value || 'Devoir surveillé';
+
+  let html = `
+    <div class="pdf-preview-header">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start">
+        <div>
+          <div class="pdf-preview-titre">${etabl}</div>
+          <div class="pdf-preview-meta">${matiere} · ${classe} · ${date} · Durée : ${duree}</div>
+        </div>
+        <div style="text-align:right">
+          <div style="font-size:15px;font-weight:700;color:var(--texte)">${titre}</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:4px">Note : _____ / 20</div>
+        </div>
+      </div>
+      <div style="margin-top:12px;font-size:12px;color:var(--muted)">Nom : _________________________ &nbsp;&nbsp; Prénom : _________________________</div>
+    </div>
+  `;
+
+  let totalPts = 0;
+  pdfExercicesSelectionnes.forEach((chap, i) => {
+    let ex = null;
+    for(const classe in EXERCICES) {
+      if(EXERCICES[classe][chap]) {
+        ex = EXERCICES[classe][chap][Math.floor(EXERCICES[classe][chap].length/2)] || EXERCICES[classe][chap][0];
+        break;
+      }
+    }
+    if(!ex) return;
+    totalPts += ex.points_total;
+    html += `
+      <div class="pdf-ex-preview">
+        <strong>Exercice ${i+1} — ${chap}</strong>
+        <span style="float:right;color:var(--bleu);font-weight:700">${ex.points_total} pts</span>
+        <div style="font-size:12px;color:var(--muted);margin-top:4px">${ex.questions.length} questions · Niveau ${ex.niveau}</div>
+      </div>
+    `;
+  });
+
+  html += `<div style="text-align:right;font-weight:700;color:var(--bleu);margin-top:8px">Total : ${totalPts} points</div>`;
+  content.innerHTML = html;
+}
+
+function genererPDF() {
+  if(pdfExercicesSelectionnes.length === 0) {
+    alert('Sélectionne au moins un chapitre');
+    return;
+  }
+
+  const etabl = document.getElementById('pdf-etablissement')?.value || 'Établissement';
+  const classe = document.getElementById('pdf-classe')?.value || '';
+  const matiere = document.getElementById('pdf-matiere')?.value || 'Mathématiques';
+  const date = document.getElementById('pdf-date')?.value || '';
+  const duree = document.getElementById('pdf-duree')?.value || '';
+  const titre = document.getElementById('pdf-titre-devoir')?.value || 'Devoir surveillé';
+
+  // Construire le HTML du devoir
+  let contenu = '';
+  let totalPts = 0;
+
+  pdfExercicesSelectionnes.forEach((chap, iChap) => {
+    let ex = null;
+    for(const cl in EXERCICES) {
+      if(EXERCICES[cl][chap]) {
+        // Prendre l'exercice de niveau moyen (le 3ème)
+        const arr = EXERCICES[cl][chap];
+        ex = arr[Math.min(2, arr.length-1)];
+        break;
+      }
+    }
+    if(!ex) return;
+    totalPts += ex.points_total;
+
+    contenu += `
+      <div style="margin-bottom:30px;page-break-inside:avoid">
+        <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #2B75C0;padding-bottom:6px;margin-bottom:14px">
+          <strong style="font-size:15px;color:#1C1E26">Exercice ${iChap+1} — ${chap}</strong>
+          <span style="color:#2B75C0;font-weight:700">${ex.points_total} points</span>
+        </div>
+        ${ex.questions.map((q, iq) => `
+          <div style="margin-bottom:14px">
+            <div style="font-size:13px;font-weight:600;margin-bottom:6px">${q.label} (${q.points} pt${q.points>1?'s':''}) — ${q.enonce.replace(/\$/g,'').replace(/\\[a-z]+{?/g,'').replace(/}/g,'')}</div>
+            <div style="border-bottom:1px solid #E2E8F0;margin-top:24px;margin-bottom:8px"></div>
+            <div style="border-bottom:1px solid #E2E8F0;margin-bottom:8px"></div>
+          </div>
+        `).join('')}
+      </div>
+    `;
+  });
+
+  const htmlDevoir = `<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>${titre} — ${classe}</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Times New Roman',serif; font-size:13px; color:#1C1E26; padding:20mm 15mm; }
+  .header { border-bottom:3px solid #2B75C0; padding-bottom:12px; margin-bottom:20px; }
+  .header-top { display:flex; justify-content:space-between; align-items:flex-start; }
+  .header-etab { font-size:14px; font-weight:700; color:#2B75C0; }
+  .header-meta { font-size:12px; color:#666; margin-top:3px; }
+  .header-titre { font-size:16px; font-weight:700; text-align:right; }
+  .identite { margin-top:12px; font-size:12px; color:#666; }
+  .footer { margin-top:30px; text-align:center; font-size:10px; color:#aaa; border-top:1px solid #eee; padding-top:8px; }
+  @media print { body { padding:15mm 10mm; } }
+</style>
+</head>
+<body>
+  <div class="header">
+    <div class="header-top">
+      <div>
+        <div class="header-etab">${etabl}</div>
+        <div class="header-meta">${matiere} · ${classe} · ${date} · Durée : ${duree}</div>
+      </div>
+      <div>
+        <div class="header-titre">${titre}</div>
+        <div style="font-size:12px;color:#666;margin-top:4px;text-align:right">/ ${totalPts} points</div>
+      </div>
+    </div>
+    <div class="identite">
+      Nom : _________________________ &nbsp;&nbsp;&nbsp; Prénom : _________________________ &nbsp;&nbsp;&nbsp; Note : _______ / ${totalPts}
+    </div>
+  </div>
+
+  ${contenu}
+
+  <div class="footer">
+    🌱 poussemaths.fr · ${etabl} · ${date}
+  </div>
+</body>
+</html>`;
+
+  // Ouvrir dans un nouvel onglet pour impression
+  const win = window.open('', '_blank');
+  win.document.write(htmlDevoir);
+  win.document.close();
+  setTimeout(() => win.print(), 800);
+
+  // Fermer le modal
+  document.getElementById('pdf-overlay').style.display = 'none';
+  pdfExercicesSelectionnes = [];
+}
+
+// ═══════════════════════════════════════
+//  CALCUL MENTAL
+// ═══════════════════════════════════════
+
+let cmConfig = { theme: null, chrono: 5, nb: 10 };
+let cmQuestions = [];
+let cmIndex = 0;
+let cmTimer = null;
+let cmReponseVisible = false;
+
+const CM_THEMES = {
+  'Tables de multiplication': {
+    emoji: '✖️',
+    gen: () => {
+      const a = rand(2,12), b = rand(2,12);
+      return { q: `${a} × ${b} = ?`, r: a*b };
+    }
+  },
+  'Carrés parfaits': {
+    emoji: '²',
+    gen: () => {
+      const n = rand(1,15);
+      return { q: `${n}² = ?`, r: n*n };
+    }
+  },
+  'Racines carrées': {
+    emoji: '√',
+    gen: () => {
+      const n = rand(1,12);
+      return { q: `√${n*n} = ?`, r: n };
+    }
+  },
+  'Fractions simples': {
+    emoji: '½',
+    gen: () => {
+      const den = [2,4,5,10][rand(0,3)];
+      const num = rand(1, den*3);
+      const val = Math.round(num/den*100)/100;
+      return { q: `${num}/${den} = ?`, r: val };
+    }
+  },
+  'Pourcentages': {
+    emoji: '%',
+    gen: () => {
+      const pcts = [10,20,25,50,75];
+      const p = pcts[rand(0,pcts.length-1)];
+      const n = rand(2,20)*10;
+      return { q: `${p}% de ${n} = ?`, r: Math.round(n*p/100) };
+    }
+  },
+  'Additions rapides': {
+    emoji: '+',
+    gen: () => {
+      const a = rand(10,99), b = rand(10,99);
+      return { q: `${a} + ${b} = ?`, r: a+b };
+    }
+  },
+  'Soustractions': {
+    emoji: '−',
+    gen: () => {
+      const a = rand(20,99), b = rand(1,a-1);
+      return { q: `${a} − ${b} = ?`, r: a-b };
+    }
+  },
+  'Puissances de 10': {
+    emoji: '⚡',
+    gen: () => {
+      const exp = rand(1,6);
+      return { q: `10^${exp} = ?`, r: Math.pow(10,exp) };
+    }
+  },
+  'Calcul littéral': {
+    emoji: 'x',
+    gen: () => {
+      const a = rand(2,9), b = rand(1,20), x = rand(1,10);
+      return { q: `f(x) = ${a}x + ${b}, f(${x}) = ?`, r: a*x+b };
+    }
+  },
+  'Priorités opératoires': {
+    emoji: '🔢',
+    gen: () => {
+      const a=rand(2,9), b=rand(2,9), c=rand(2,5);
+      return { q: `${a} + ${b} × ${c} = ?`, r: a+b*c };
+    }
+  },
+};
+
+function ouvrirCalcMental() {
+  document.getElementById('cm-overlay').style.display = 'flex';
+  renderCMConfig();
+}
+
+function closeCMModal(e) {
+  if(!e || e.target === document.getElementById('cm-overlay')) {
+    document.getElementById('cm-overlay').style.display = 'none';
+  }
+}
+
+function renderCMConfig() {
+  const body = document.getElementById('cm-modal-body');
+  body.innerHTML = `
+    <div class="pdf-section">
+      <div class="pdf-section-title">🎯 Choisir un thème</div>
+      <div class="cm-themes-grid">
+        ${Object.entries(CM_THEMES).map(([nom, data]) => `
+          <div class="cm-theme-btn ${cmConfig.theme===nom?'selected':''}" onclick="selectCMTheme('${nom}', this)">
+            <span class="cm-theme-emoji">${data.emoji}</span>
+            <span class="cm-theme-name">${nom}</span>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+    <div class="cm-settings">
+      <div class="cm-setting">
+        <label>⏱️ Temps par question</label>
+        <select id="cm-chrono-select" onchange="cmConfig.chrono=parseInt(this.value)">
+          <option value="3" ${cmConfig.chrono===3?'selected':''}>3 secondes</option>
+          <option value="5" ${cmConfig.chrono===5?'selected':''}>5 secondes</option>
+          <option value="8" ${cmConfig.chrono===8?'selected':''}>8 secondes</option>
+          <option value="10" ${cmConfig.chrono===10?'selected':''}>10 secondes</option>
+          <option value="15" ${cmConfig.chrono===15?'selected':''}>15 secondes</option>
+          <option value="30" ${cmConfig.chrono===30?'selected':''}>30 secondes</option>
+        </select>
+      </div>
+      <div class="cm-setting">
+        <label>🔢 Nombre de questions</label>
+        <select id="cm-nb-select" onchange="cmConfig.nb=parseInt(this.value)">
+          <option value="5" ${cmConfig.nb===5?'selected':''}>5 questions</option>
+          <option value="10" ${cmConfig.nb===10?'selected':''}>10 questions</option>
+          <option value="15" ${cmConfig.nb===15?'selected':''}>15 questions</option>
+          <option value="20" ${cmConfig.nb===20?'selected':''}>20 questions</option>
+        </select>
+      </div>
+    </div>
+    <button class="cm-launch-btn" onclick="lancerCalcMental()">
+      🚀 Lancer et projeter
+    </button>
+  `;
+}
+
+function selectCMTheme(nom, el) {
+  cmConfig.theme = nom;
+  document.querySelectorAll('.cm-theme-btn').forEach(b => b.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+function lancerCalcMental() {
+  if(!cmConfig.theme) { alert('Choisis un thème d\'abord'); return; }
+  const gen = CM_THEMES[cmConfig.theme].gen;
+  cmQuestions = Array.from({length: cmConfig.nb}, () => gen());
+  cmIndex = 0;
+  cmReponseVisible = false;
+  document.getElementById('cm-overlay').style.display = 'none';
+  afficherQuestionCM();
+}
+
+function afficherQuestionCM() {
+  if(cmIndex >= cmQuestions.length) {
+    fermerProjection();
+    return;
+  }
+
+  const proj = document.getElementById('cm-projection');
+  proj.style.display = 'flex';
+  cmReponseVisible = false;
+
+  const q = cmQuestions[cmIndex];
+  document.getElementById('cm-num-question').textContent = `Question ${cmIndex+1} / ${cmQuestions.length} — ${cmConfig.theme}`;
+  document.getElementById('cm-enonce-proj').textContent = q.q;
+  document.getElementById('cm-reponse-proj').textContent = '';
+
+  // Chrono
+  let timeLeft = cmConfig.chrono;
+  document.getElementById('cm-chrono').textContent = timeLeft;
+  if(cmTimer) clearInterval(cmTimer);
+  cmTimer = setInterval(() => {
+    timeLeft--;
+    document.getElementById('cm-chrono').textContent = timeLeft;
+    if(timeLeft <= 0) {
+      clearInterval(cmTimer);
+      afficherReponseCM();
+    }
+  }, 1000);
+}
+
+function afficherReponseCM() {
+  if(cmReponseVisible) return;
+  cmReponseVisible = true;
+  clearInterval(cmTimer);
+  const q = cmQuestions[cmIndex];
+  document.getElementById('cm-reponse-proj').textContent = `→ ${q.r}`;
+  document.getElementById('cm-chrono').textContent = '✓';
+}
+
+function cmProchaine() {
+  if(!cmReponseVisible) {
+    afficherReponseCM();
+  } else {
+    cmIndex++;
+    afficherQuestionCM();
+  }
+}
+
+function fermerProjection() {
+  clearInterval(cmTimer);
+  document.getElementById('cm-projection').style.display = 'none';
+}
+
+// Raccourcis clavier pour la projection
+document.addEventListener('keydown', (e) => {
+  const proj = document.getElementById('cm-projection');
+  if(proj.style.display === 'flex') {
+    if(e.key === 'Enter') afficherReponseCM();
+    if(e.key === ' ' || e.key === 'ArrowRight') cmProchaine();
+    if(e.key === 'Escape') fermerProjection();
+    e.preventDefault();
+  }
+});
+
+
 
 const LABELS_CLASSES = {'6eme':'6ème','5eme':'5ème','4eme':'4ème','3eme':'3ème','2nde':'2nde'};
 
