@@ -605,8 +605,98 @@ nav {
 .qcm-choix.qcm-wrong .qcm-lettre { background:var(--rouge); color:white; }
 .qcm-choix:disabled { cursor:default; opacity:0.85; }
 
+/* ══ NAVIGATION PAR CHAPITRE ══ */
+.ex-breadcrumb {
+  display:flex; align-items:center; gap:8px;
+  font-size:13px; color:var(--muted); margin-bottom:8px;
+  flex-wrap:wrap;
+}
+.ex-breadcrumb span { cursor:pointer; color:var(--bleu); }
+.ex-breadcrumb span:hover { text-decoration:underline; }
+.ex-breadcrumb .sep { color:var(--muted); }
+
+/* Grille des niveaux */
+.niveaux-nav-grid {
+  display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+  gap:1rem; margin-top:1rem;
+}
+.niveau-nav-card {
+  background:var(--bg); border:1.5px solid var(--bordure);
+  border-radius:var(--r-lg); padding:1.5rem 1.25rem;
+  cursor:pointer; transition:all 0.18s; text-align:center;
+}
+.niveau-nav-card:hover { border-color:var(--bleu); transform:translateY(-2px); box-shadow:0 4px 16px rgba(74,144,217,0.12); }
+.niveau-nav-card .nnc-badge { font-size:11px; font-weight:700; color:var(--bleu); background:var(--bleu-doux); padding:2px 8px; border-radius:20px; display:inline-block; margin-bottom:8px; }
+.niveau-nav-card .nnc-label { font-size:22px; font-weight:800; color:var(--texte); display:block; margin-bottom:4px; }
+.niveau-nav-card .nnc-name { font-size:14px; color:var(--muted); }
+.niveau-nav-card .nnc-count { font-size:12px; color:var(--bleu); margin-top:6px; font-weight:600; }
+
+/* Grille des chapitres */
+.chapitres-grid {
+  display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+  gap:1rem; margin-top:1rem;
+}
+.chapitre-card {
+  background:var(--bg); border:1.5px solid var(--bordure);
+  border-radius:var(--r-lg); padding:1.25rem;
+  cursor:pointer; transition:all 0.18s;
+}
+.chapitre-card:hover { border-color:var(--bleu); box-shadow:0 4px 16px rgba(74,144,217,0.1); }
+.chapitre-card .chap-num { font-size:11px; font-weight:700; color:var(--muted); margin-bottom:6px; }
+.chapitre-card .chap-titre { font-size:15px; font-weight:700; color:var(--texte); margin-bottom:8px; }
+.chapitre-card .chap-stats { display:flex; gap:8px; align-items:center; }
+.chap-ex-count { font-size:12px; font-weight:600; color:var(--bleu); background:var(--bleu-doux); padding:2px 8px; border-radius:20px; }
+.chap-niveaux { display:flex; gap:4px; }
+.chap-niv-dot { width:8px; height:8px; border-radius:50%; }
+.chap-niv-dot.facile { background:#22C55E; }
+.chap-niv-dot.moyen { background:var(--amber); }
+.chap-niv-dot.difficile { background:var(--rouge); }
+
+/* Vue exercices d'un chapitre */
+.exercices-chapitre-grid {
+  display:flex; flex-direction:column; gap:0.75rem; margin-top:1rem;
+}
+.ex-ligne {
+  display:flex; align-items:center; gap:1rem;
+  background:var(--bg); border:1.5px solid var(--bordure);
+  border-radius:var(--r); padding:1rem 1.25rem;
+  cursor:pointer; transition:all 0.18s;
+}
+.ex-ligne:hover { border-color:var(--bleu); box-shadow:0 2px 12px rgba(74,144,217,0.08); }
+.ex-ligne-num {
+  width:36px; height:36px; border-radius:50%; flex-shrink:0;
+  display:flex; align-items:center; justify-content:center;
+  font-weight:800; font-size:15px; color:white;
+}
+.ex-ligne-num.n1 { background:#22C55E; }
+.ex-ligne-num.n2 { background:#4A90D9; }
+.ex-ligne-num.n3 { background:var(--amber); }
+.ex-ligne-num.n4 { background:#EF4444; }
+.ex-ligne-num.n5 { background:#7C3AED; }
+.ex-ligne-info { flex:1; }
+.ex-ligne-titre { font-size:14px; font-weight:700; color:var(--texte); margin-bottom:2px; }
+.ex-ligne-meta { font-size:12px; color:var(--muted); }
+.ex-ligne-badge { font-size:11px; font-weight:700; padding:2px 10px; border-radius:20px; }
+.ex-ligne-badge.niv-facile { background:#F0FDF4; color:#16A34A; }
+.ex-ligne-badge.niv-moyen { background:#FFFBEB; color:#D97706; }
+.ex-ligne-badge.niv-difficile { background:#FEF2F2; color:#EF4444; }
+.ex-ligne-arrow { color:var(--muted); font-size:18px; }
+
+.ex-etiquette {
+  font-size:11px; font-weight:700; color:var(--bleu);
+  background:var(--bleu-doux); padding:1px 8px; border-radius:20px;
+  margin-right:6px;
+}
+
+.ex-fil-header {
+  display:flex; align-items:center; gap:12px; margin-bottom:1.5rem;
+}
+.ex-fil-emoji { font-size:28px; }
+.ex-fil-chap { font-size:18px; font-weight:800; color:var(--texte); }
+.ex-fil-desc { font-size:13px; color:var(--muted); margin-top:2px; }
+
+/* ══ INPUT LIBRE ══ */
 .q-input {
-  flex:1; padding:11px 14px; border-radius:var(--r);
   border:1.5px solid var(--bordure); background:var(--bg);
   font-size:15px; font-family:'DM Sans',sans-serif; color:var(--texte);
   transition:border-color 0.18s; outline:none;
@@ -1261,11 +1351,11 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
   <div class="bo-banner"><p><span class="bo-pill">BO 2026</span>Exercices alignés sur les nouveaux programmes officiels</p></div>
   <div class="exercices-page">
     <div class="ex-header">
-      <h2>Exercices de mathématiques</h2>
-      <p>Sélectionne un chapitre et commence à t'entraîner</p>
+      <div class="ex-breadcrumb" id="ex-breadcrumb"></div>
+      <h2 id="ex-titre">Choisir un niveau</h2>
+      <p id="ex-sous-titre">Sélectionne ton niveau puis un chapitre</p>
     </div>
-    <div class="ex-filters" id="ex-filters"></div>
-    <div class="ex-grid" id="ex-grid"></div>
+    <div id="ex-content"></div>
   </div>
 </div>
 
@@ -3149,58 +3239,154 @@ function getAllExercices(classeFilter) {
   return all;
 }
 
+// ═══════════════════════════════════════
+//  NAVIGATION PAR CHAPITRE
+// ═══════════════════════════════════════
+
+const LABELS_CLASSES = {'6eme':'6ème','5eme':'5ème','4eme':'4ème','3eme':'3ème','2nde':'2nde'};
+
+const CHAPITRES_EMOJI = {
+  'Puissances & Notation scientifique':'⚡','Racines carrées':'√','Calcul littéral':'✏️',
+  'Équations du premier degré':'⚖️','Inéquations':'📊',"Systèmes d'équations":'🔗',
+  'Fonctions — généralités':'📈','Fonctions linéaires et affines':'📉',
+  'Probabilités':'🎲','Statistiques descriptives':'📋',
+  'Théorème de Pythagore':'📐','Théorème de Thalès':'🔺','Trigonométrie':'📡',
+  'Transformations géométriques':'🔄','Volumes de solides':'🧊',
+  'Proportionnalité & Pourcentages':'💯','Divisibilité & Nombres premiers':'🔢',
+  'Fonctions de référence':'🌀','Second degré':'²','Géométrie repérée':'📍',
+  'Intervalles & Valeur absolue':'↔️','Nombres & Calculs':'🔢',
+  'Géométrie plane':'📐','Proportionnalité':'💯','Statistiques & Données':'📊',
+  'Nombres relatifs':'±','Fractions & Proportionnalité':'½','Géométrie':'📐',
+  'Statistiques':'📋','Calcul littéral & Équations':'✏️','Puissances':'⚡',
+};
+
+let navEtat = { niveau: null, chapitre: null };
+
 function renderExercices() {
-  const niveaux = ['Facile','Moyen','Difficile'];
-  const classes = Object.keys(EXERCICES);
-  const labelsClasses = {'6eme':'6ème','5eme':'5ème','4eme':'4ème','3eme':'3ème','2nde':'2nde'};
-
-  // Filtres classes
-  const filtersEl = document.getElementById('ex-filters');
-  filtersEl.innerHTML = `
-    <button class="filter-btn ${currentFilter==='all'?'active':''}" onclick="setFilter('all')">Tous</button>
-    ${classes.map(c => `<button class="filter-btn ${currentFilter===c?'active':''}" onclick="setFilter('${c}')">${labelsClasses[c]||c}</button>`).join('')}
-    <button class="filter-btn ${currentFilter==='Facile'?'active':''}" onclick="setFilter('Facile')" style="border-color:#BBF7D0;color:var(--vert)">Facile</button>
-    <button class="filter-btn ${currentFilter==='Moyen'?'active':''}" onclick="setFilter('Moyen')" style="border-color:#FDE68A;color:var(--amber)">Moyen</button>
-    <button class="filter-btn ${currentFilter==='Difficile'?'active':''}" onclick="setFilter('Difficile')" style="border-color:#FECACA;color:var(--rouge)">Difficile</button>
-  `;
-
-  // Filtrage
-  let all = getAllExercices();
-  let filtered = all;
-
-  if(currentFilter === '3eme') filtered = all.filter(e => e.classe === '3eme');
-  else if(currentFilter === '2nde') filtered = all.filter(e => e.classe === '2nde');
-  else if(niveaux.includes(currentFilter)) filtered = all.filter(e => e.niveau === currentFilter);
-  else if(currentFilter !== 'all') filtered = all.filter(e => e.chapitre === currentFilter);
-
-  // Grille
-  const grid = document.getElementById('ex-grid');
-  grid.innerHTML = filtered.map(ex => `
-    <div class="ex-card" onclick="ouvrirExercice('${ex.id}')">
-      <div class="ex-card-top">
-        <div class="ex-card-meta">
-          <span class="ex-chapter">${labelsClasses[ex.classe]||ex.classe} · ${ex.chapitre}</span>
-          <span class="ex-niveau-badge niv-${ex.niveau.toLowerCase()}">${ex.niveau}</span>
-        </div>
-        <div class="ex-card-title">${ex.titre}</div>
-        <div class="ex-card-pts">${ex.points_total} points · ${ex.questions.length} questions</div>
-      </div>
-      <div class="ex-card-bot">
-        <span class="ex-card-q-count">${ex.questions.length} question${ex.questions.length>1?'s':''}</span>
-        <button class="btn-start">Commencer →</button>
-      </div>
-    </div>
-  `).join('');
-
-  if(window.renderMathInElement) {
-    renderMathInElement(grid, {delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});
-  }
+  if(navEtat.niveau) renderChapitres(navEtat.niveau);
+  else renderNiveaux();
 }
 
 function setFilter(f) {
-  currentFilter = f;
-  renderExercices();
+  if(['6eme','5eme','4eme','3eme','2nde'].includes(f)) allerChapitres(f);
+  else renderNiveaux();
 }
+
+function renderNiveaux() {
+  navEtat = { niveau: null, chapitre: null };
+  document.getElementById('ex-titre').textContent = 'Choisir un niveau';
+  document.getElementById('ex-sous-titre').textContent = 'Sélectionne ton niveau pour voir les chapitres';
+  document.getElementById('ex-breadcrumb').innerHTML = '';
+  const niveauxInfos = [
+    {id:'6eme',label:'6ème',desc:'Fondamentaux du collège'},
+    {id:'5eme',label:'5ème',desc:'Nouveau programme BO 2026',badge:'BO 2026'},
+    {id:'4eme',label:'4ème',desc:'Algèbre et géométrie'},
+    {id:'3eme',label:'3ème',desc:'Préparation brevet'},
+    {id:'2nde',label:'2nde',desc:'Nouveau programme BO 2026',badge:'BO 2026'},
+  ];
+  const content = document.getElementById('ex-content');
+  content.innerHTML = `<div class="niveaux-nav-grid">
+    ${niveauxInfos.map(n => {
+      const exs = getAllExercices(n.id);
+      const chaps = [...new Set(exs.map(e => e.chapitre))];
+      return `<div class="niveau-nav-card" onclick="allerChapitres('${n.id}')">
+        ${n.badge ? `<div class="nnc-badge">${n.badge}</div>` : ''}
+        <span class="nnc-label">${n.label}</span>
+        <div class="nnc-name">${n.desc}</div>
+        <div class="nnc-count">${chaps.length} chapitres · ${exs.length} exercices</div>
+      </div>`;
+    }).join('')}
+  </div>`;
+  renderMathSafe(content);
+}
+
+function allerChapitres(niveauId) {
+  navEtat = { niveau: niveauId, chapitre: null };
+  renderChapitres(niveauId);
+}
+
+function renderChapitres(niveauId) {
+  const label = LABELS_CLASSES[niveauId] || niveauId;
+  document.getElementById('ex-titre').textContent = `Chapitres — ${label}`;
+  document.getElementById('ex-sous-titre').textContent = 'Choisis un chapitre pour voir les exercices';
+  document.getElementById('ex-breadcrumb').innerHTML = `
+    <span onclick="renderNiveaux()">Niveaux</span>
+    <span class="sep">›</span><strong>${label}</strong>`;
+  const exs = getAllExercices(niveauId);
+  const chapMap = {};
+  exs.forEach(ex => { if(!chapMap[ex.chapitre]) chapMap[ex.chapitre]=[]; chapMap[ex.chapitre].push(ex); });
+  const content = document.getElementById('ex-content');
+  let num = 1;
+  content.innerHTML = `<div class="chapitres-grid">
+    ${Object.entries(chapMap).map(([chap, list]) => {
+      const niveaux = [...new Set(list.map(e => e.niveau))];
+      const em = CHAPITRES_EMOJI[chap] || '📚';
+      const n = num++;
+      const chapSafe = chap.replace(/'/g,"\\'");
+      return `<div class="chapitre-card" onclick="allerExercices('${niveauId}','${chapSafe}')">
+        <div class="chap-num">Chapitre ${n}</div>
+        <div class="chap-titre">${em} ${chap}</div>
+        <div class="chap-stats">
+          <span class="chap-ex-count">${list.length} exercice${list.length>1?'s':''}</span>
+          <div class="chap-niveaux">
+            ${niveaux.includes('Facile') ? '<div class="chap-niv-dot facile"></div>' : ''}
+            ${niveaux.includes('Moyen') ? '<div class="chap-niv-dot moyen"></div>' : ''}
+            ${niveaux.includes('Difficile') ? '<div class="chap-niv-dot difficile"></div>' : ''}
+          </div>
+        </div>
+      </div>`;
+    }).join('')}
+  </div>`;
+  renderMathSafe(content);
+}
+
+function allerExercices(niveauId, chapitre) {
+  navEtat = { niveau: niveauId, chapitre: chapitre };
+  const label = LABELS_CLASSES[niveauId] || niveauId;
+  const em = CHAPITRES_EMOJI[chapitre] || '📚';
+  document.getElementById('ex-titre').textContent = chapitre;
+  document.getElementById('ex-sous-titre').textContent = '';
+  const chapSafe = chapitre.replace(/'/g,"\'");
+  document.getElementById('ex-breadcrumb').innerHTML = `
+    <span onclick="renderNiveaux()">Niveaux</span>
+    <span class="sep">›</span>
+    <span onclick="allerChapitres('${niveauId}')">${label}</span>
+    <span class="sep">›</span><strong>${chapitre}</strong>`;
+  const exs = getAllExercices(niveauId).filter(e => e.chapitre === chapitre);
+  const ETIQ = ['Découverte','Application','Méthode','Approfondissement','Brevet'];
+  const CLR = ['n1','n2','n3','n4','n5'];
+  const content = document.getElementById('ex-content');
+  content.innerHTML = `
+    <div class="ex-fil-header">
+      <div class="ex-fil-emoji">${em}</div>
+      <div>
+        <div class="ex-fil-chap">${chapitre}</div>
+        <div class="ex-fil-desc">${label} · ${exs.length} exercice${exs.length>1?'s':''} · du plus facile au plus difficile</div>
+      </div>
+    </div>
+    <div class="exercices-chapitre-grid">
+      ${exs.map((ex,i) => `
+        <div class="ex-ligne" onclick="ouvrirExercice('${ex.id}')">
+          <div class="ex-ligne-num ${CLR[i]||'n5'}">${i+1}</div>
+          <div class="ex-ligne-info">
+            <div class="ex-ligne-titre">
+              <span class="ex-etiquette">${ETIQ[i]||'Exercice '+(i+1)}</span>${ex.titre}
+            </div>
+            <div class="ex-ligne-meta">${ex.points_total} pts · ${ex.questions.length} questions</div>
+          </div>
+          <span class="ex-ligne-badge niv-${ex.niveau.toLowerCase()}">${ex.niveau}</span>
+          <span class="ex-ligne-arrow">›</span>
+        </div>`).join('')}
+    </div>`;
+  renderMathSafe(content);
+}
+
+function renderMathSafe(el) {
+  if(window.renderMathInElement) {
+    try { renderMathInElement(el,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],throwOnError:false}); } catch(e){}
+  }
+}
+
 
 // ═══════════════════════════════════════
 //  MODAL EXERCICE
