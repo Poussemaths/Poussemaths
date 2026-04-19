@@ -1445,6 +1445,28 @@ const EXERCICES = {
     // ── 1. PUISSANCES & NOTATION SCIENTIFIQUE ──
     "Puissances & Notation scientifique": [
       {
+        id:"puis_3_1", titre:"Puissances — reconnaître et calculer", niveau:"Facile", points_total:8,
+        questions:[
+          {label:"1.", enonce:"Que vaut $2^5$ ?",
+           type:"qcm",
+           choix:["$10$","$25$","$32$","$64$"],
+           bonneReponseIdx:2, bonneReponse:"$32$",
+           correction:"$2^5=2\\times2\\times2\\times2\\times2=32$", points:2},
+          {label:"2.", enonce:"Que vaut $10^{-3}$ ?",
+           type:"qcm",
+           choix:["$-1\\,000$","$0{,}001$","$-0{,}001$","$1\\,000$"],
+           bonneReponseIdx:1, bonneReponse:"$0{,}001$",
+           correction:"$10^{-3}=\\dfrac{1}{10^3}=\\dfrac{1}{1000}=0{,}001$", points:2},
+          {label:"3.", enonce:"Calcule : $3^4$, $2^{-3}$, $10^0$.",
+           type:"libre",
+           correction:"$3^4=81$ ; $2^{-3}=\\dfrac{1}{8}=0{,}125$ ; $10^0=1$", points:2},
+          {label:"4.", enonce:"Simplifie : $5^3\\times5^2$.",
+           type:"libre",
+           correction:"$5^{3+2}=5^5=3125$", points:2},
+        ],
+        indices:["$a^m\\times a^n=a^{m+n}$ ; $a^{-n}=\\dfrac{1}{a^n}$ ; $a^0=1$"]
+      },
+      {
         id:"puis_3_A", titre:"Règles de calcul sur les puissances", niveau:"Facile", points_total:6,
         questions:[
           {label:"a)", enonce:"Calcule : $3^4$ ; $2^{-3}$ ; $10^0$", correction:"$3^4=81$ ; $2^{-3}=\\dfrac{1}{8}$ ; $10^0=1$", points:2},
@@ -1476,6 +1498,28 @@ const EXERCICES = {
     // ── 2. RACINES CARRÉES ──
     "Racines carrées": [
       {
+        id:"rac_3_1", titre:"Racines carrées — comprendre et calculer", niveau:"Facile", points_total:8,
+        questions:[
+          {label:"1.", enonce:"Que vaut $\\sqrt{64}$ ?",
+           type:"qcm",
+           choix:["$6$","$7$","$8$","$9$"],
+           bonneReponseIdx:2, bonneReponse:"$8$",
+           correction:"$8^2=64$ donc $\\sqrt{64}=8$.", points:2},
+          {label:"2.", enonce:"Laquelle de ces affirmations est vraie ?",
+           type:"qcm",
+           choix:["$\\sqrt{a+b}=\\sqrt{a}+\\sqrt{b}$","$\\sqrt{a\\times b}=\\sqrt{a}\\times\\sqrt{b}$","$\\sqrt{a^2}=-a$","$\\sqrt{-4}=2i$"],
+           bonneReponseIdx:1, bonneReponse:"$\\sqrt{a\\times b}=\\sqrt{a}\\times\\sqrt{b}$",
+           correction:"$\\sqrt{ab}=\\sqrt{a}\\times\\sqrt{b}$ (pour $a,b\\geq0$). Les autres sont fausses.", points:2},
+          {label:"3.", enonce:"Calcule : $\\sqrt{49}$, $\\sqrt{121}$, $\\sqrt{0{,}25}$.",
+           type:"libre",
+           correction:"$7$ ; $11$ ; $0{,}5$", points:2},
+          {label:"4.", enonce:"Simplifie $\\sqrt{50}$ et $\\sqrt{72}$.",
+           type:"libre",
+           correction:"$\\sqrt{50}=\\sqrt{25\\times2}=5\\sqrt{2}$ ; $\\sqrt{72}=\\sqrt{36\\times2}=6\\sqrt{2}$", points:2},
+        ],
+        indices:["$\\sqrt{a\\times b}=\\sqrt{a}\\times\\sqrt{b}$ ; cherche un carré parfait parmi les facteurs"]
+      },
+      {
         id:"rac_3_A", titre:"Simplifier et calculer des racines carrées", niveau:"Facile", points_total:6,
         questions:[
           {label:"a)", enonce:"Calcule : $\\sqrt{49}$ ; $\\sqrt{121}$ ; $\\sqrt{0{,}25}$", correction:"$7$ ; $11$ ; $0{,}5$", points:2},
@@ -1497,6 +1541,26 @@ const EXERCICES = {
 
     // ── 3. CALCUL LITTÉRAL ──
     "Calcul littéral": [
+      {
+        id:"lit_3_1", titre:"Calcul littéral — reconnaître développer factoriser", niveau:"Facile", points_total:8,
+        questions:[
+          {label:"1.", enonce:"Laquelle de ces expressions est factorisée ?",
+           type:"qcm",
+           choix:["$3x+6$","$3(x+2)$","$x^2+5x+6$","$2x+4x$"],
+           bonneReponseIdx:1, bonneReponse:"$3(x+2)$",
+           correction:"$3(x+2)$ est factorisé : on a mis $3$ en facteur. $3x+6$ est développé.", points:2},
+          {label:"2.", enonce:"Développe : $4(3x-2)$.",
+           type:"libre",
+           correction:"$12x-8$", points:2},
+          {label:"3.", enonce:"Factorise : $5x+15$.",
+           type:"libre",
+           correction:"$5(x+3)$", points:2},
+          {label:"4.", enonce:"Développe et réduis : $2(x+3)+3(x-1)$.",
+           type:"libre",
+           correction:"$2x+6+3x-3=5x+3$", points:2},
+        ],
+        indices:["Factoriser = mettre en évidence le facteur commun à tous les termes"]
+      },
       {
         id:"lit_3_A", titre:"Développer et réduire", niveau:"Facile", points_total:6,
         questions:[
@@ -1635,685 +1699,1237 @@ const EXERCICES = {
     // ── 5. INÉQUATIONS ──
     "Inéquations": [
       {
-        id:"ineq_3_A", titre:"Résoudre une inéquation du premier degré", niveau:"Facile", points_total:6,
+        id:"ineq_3_1", titre:"Inéquations — comprendre le sens", niveau:"Facile", points_total:8,
         questions:[
-          {label:"a)", enonce:"Résous et représente sur une droite : $2x+3 > 7$", correction:"$2x>4 \\Rightarrow x>2$ — intervalle $]2\\,;\\,+\\infty[$", points:2},
-          {label:"b)", enonce:"Résous : $5x-1 \\leq 3x+7$", correction:"$2x \\leq 8 \\Rightarrow x \\leq 4$ — intervalle $]-\\infty\\,;\\,4]$", points:2},
-          {label:"c)", enonce:"Résous : $3(x-2) < 2x+1$", correction:"$3x-6 < 2x+1 \\Rightarrow x < 7$", points:2},
+          {label:"1.", enonce:"Laquelle de ces valeurs vérifie l'inéquation $3x - 1 > 5$ ?",
+           type:"qcm",
+           choix:["$x = 0$", "$x = 2$", "$x = -1$", "$x = 3$"],
+           bonneReponseIdx:3,
+           bonneReponse:"$x = 3$",
+           correction:"$3(3)-1=8>5$ ✓. Vérif : $3(0)-1=-1$ ; $3(2)-1=5$ (pas strictement) ; $3(-1)-1=-4$. Seul $x=3$ convient.", points:2},
+          {label:"2.", enonce:"Que se passe-t-il quand on multiplie les deux membres d'une inégalité par un nombre négatif ?",
+           type:"qcm",
+           choix:["Rien ne change","Le sens de l'inégalité s'inverse","L'inégalité devient une égalité","On ajoute un signe moins"],
+           bonneReponseIdx:1,
+           bonneReponse:"Le sens de l'inégalité s'inverse",
+           correction:"⚠️ Règle fondamentale : si on multiplie ou divise par un nombre négatif, le sens s'inverse. Exemple : $2 > 1$ mais $-2 < -1$.", points:2},
+          {label:"3.", enonce:"L'intervalle $]3\\,;\\,+\\infty[$ correspond à quelle inéquation ?",
+           type:"qcm",
+           choix:["$x \\leq 3$","$x \\geq 3$","$x < 3$","$x > 3$"],
+           bonneReponseIdx:3,
+           bonneReponse:"$x > 3$",
+           correction:"$]3\\,;\\,+\\infty[$ = tous les réels strictement supérieurs à $3$, donc $x > 3$. La crochet ouverte $]$ signifie que $3$ est exclu.", points:2},
+          {label:"4.", enonce:"Quelle est la différence entre $x > 2$ et $x \\geq 2$ ?",
+           type:"qcm",
+           choix:["Aucune différence","$x > 2$ exclut $2$, $x \\geq 2$ inclut $2$","$x > 2$ inclut $2$, $x \\geq 2$ exclut $2$","$x > 2$ est impossible"],
+           bonneReponseIdx:1,
+           bonneReponse:"$x > 2$ exclut $2$, $x \\geq 2$ inclut $2$",
+           correction:"$x > 2$ : intervalle $]2\\,;\\,+\\infty[$ — $2$ est exclu. $x \\geq 2$ : intervalle $[2\\,;\\,+\\infty[$ — $2$ est inclus.", points:2},
         ],
-        indices:["⚠️ Si on multiplie ou divise par un négatif, le sens de l'inégalité s'inverse !"]
+        indices:["Une inéquation a une infinité de solutions — on les exprime sous forme d'intervalle"]
       },
       {
-        id:"ineq_3_B", titre:"Inéquations — changement de signe", niveau:"Moyen", points_total:8,
+        id:"ineq_3_2", titre:"Inéquations simples — résolution directe", niveau:"Facile", points_total:10,
         questions:[
-          {label:"a)", enonce:"Résous : $-3x+5 > 2$", correction:"$-3x > -3 \\Rightarrow x < 1$ (signe inversé car division par $-3$)", points:3},
-          {label:"b)", enonce:"Résous : $4-2x \\geq x+1$", correction:"$3 \\geq 3x \\Rightarrow x \\leq 1$", points:3},
-          {label:"c)", enonce:"Pour quelles valeurs entières de $x$ a-t-on $2x-3 < 5$ et $x > 0$ ?", correction:"$2x < 8 \\Rightarrow x < 4$. Avec $x>0$ entier : $x \\in \\{1,2,3\\}$", points:2},
+          {label:"a)", enonce:"Résous : $x + 5 > 9$. Donne la solution sous forme d'intervalle.",
+           type:"libre",
+           correction:"$x > 4$ — intervalle $]4\\,;\\,+\\infty[$", points:2},
+          {label:"b)", enonce:"Résous : $3x \\leq 12$. Donne la valeur limite.",
+           type:"libre",
+           correction:"$x \\leq 4$ — intervalle $]-\\infty\\,;\\,4]$", points:2},
+          {label:"c)", enonce:"Résous : $2x - 3 < 7$. Donne $x$.",
+           type:"libre",
+           correction:"$2x < 10 \\Rightarrow x < 5$ — intervalle $]-\\infty\\,;\\,5[$", points:2},
+          {label:"d)", enonce:"Résous : $5x + 2 \\geq 17$. Donne $x$.",
+           type:"libre",
+           correction:"$5x \\geq 15 \\Rightarrow x \\geq 3$ — intervalle $[3\\,;\\,+\\infty[$", points:2},
+          {label:"e)", enonce:"Résous : $x - 4 \\leq 2x + 1$. Donne $x$.",
+           type:"libre",
+           correction:"$-4-1 \\leq 2x-x \\Rightarrow -5 \\leq x$ — intervalle $[-5\\,;\\,+\\infty[$", points:2},
         ],
-        indices:["Repère le signe devant le coefficient de $x$ avant de diviser"]
+        indices:["Isole $x$ en effectuant la même opération des deux côtés"]
+      },
+      {
+        id:"ineq_3_3", titre:"Inéquations avec changement de signe", niveau:"Moyen", points_total:12,
+        questions:[
+          {label:"a)", enonce:"Résous : $-2x > 6$. Attention au signe !",
+           type:"libre",
+           correction:"On divise par $-2$ → le sens s'inverse : $x < -3$ — intervalle $]-\\infty\\,;\\,-3[$", points:3},
+          {label:"b)", enonce:"Pour résoudre $-4x \\leq 8$, quel est le bon résultat ?",
+           type:"qcm",
+           choix:["$x \\leq -2$","$x \\geq -2$","$x \\leq 2$","$x \\geq 2$"],
+           bonneReponseIdx:1,
+           bonneReponse:"$x \\geq -2$",
+           correction:"On divise par $-4$ (négatif) → sens inversé : $x \\geq \\dfrac{8}{-4} = -2$", points:3},
+          {label:"c)", enonce:"Résous : $5 - 3x > 14$. Donne $x$.",
+           type:"libre",
+           correction:"$-3x > 9 \\Rightarrow x < -3$ (division par $-3$, sens inversé)", points:3},
+          {label:"d)", enonce:"Résous : $4 - 2x \\geq x + 1$. Donne $x$.",
+           type:"libre",
+           correction:"$4-1 \\geq x+2x \\Rightarrow 3 \\geq 3x \\Rightarrow x \\leq 1$", points:3},
+        ],
+        indices:["⚠️ Division ou multiplication par un négatif → le sens de l'inégalité s'inverse !"]
+      },
+      {
+        id:"ineq_3_4", titre:"Inéquations avec parenthèses et fractions", niveau:"Difficile", points_total:12,
+        questions:[
+          {label:"a)", enonce:"Résous : $3(x+2) < 2(x+5)$. Donne $x$.",
+           type:"libre",
+           correction:"$3x+6 < 2x+10 \\Rightarrow x < 4$", points:3},
+          {label:"b)", enonce:"Résous : $\\dfrac{x+1}{2} \\geq 3$. Donne $x$.",
+           type:"libre",
+           correction:"$x+1 \\geq 6 \\Rightarrow x \\geq 5$", points:3},
+          {label:"c)", enonce:"Résous : $\\dfrac{2x-3}{4} < \\dfrac{x+1}{2}$. Donne $x$.",
+           type:"libre",
+           correction:"Mult. par $4$ : $2x-3 < 2(x+1) \\Rightarrow 2x-3 < 2x+2 \\Rightarrow -3 < 2$. Toujours vrai : $x \\in \\mathbb{R}$", points:3},
+          {label:"d)", enonce:"Quelle est la solution de $\\dfrac{x-1}{3} > \\dfrac{x+2}{4}$ ?",
+           type:"qcm",
+           choix:["$x > 10$","$x < 10$","$x > -10$","$x < -10$"],
+           bonneReponseIdx:0,
+           bonneReponse:"$x > 10$",
+           correction:"Mult. par $12$ : $4(x-1) > 3(x+2) \\Rightarrow 4x-4 > 3x+6 \\Rightarrow x > 10$", points:3},
+        ],
+        indices:["Multiplie par le PPCM pour éliminer les fractions avant de résoudre"]
+      },
+      {
+        id:"ineq_3_5", titre:"Inéquations — problèmes et applications", niveau:"Difficile", points_total:12,
+        questions:[
+          {label:"1.", enonce:"Pour quel(s) entier(s) positif(s) $x$ a-t-on $2x - 1 < 9$ ET $x > 2$ ?",
+           type:"qcm",
+           choix:["$x \\in \\{1,2,3,4\\}$","$x \\in \\{3,4\\}$","$x \\in \\{3,4,5\\}$","$x \\in \\{2,3,4\\}$"],
+           bonneReponseIdx:1,
+           bonneReponse:"$x \\in \\{3,4\\}$",
+           correction:"$2x-1<9 \\Rightarrow x<5$ et $x>2$. Entiers : $x \\in \\{3,4\\}$", points:3},
+          {label:"2.", enonce:"Un élève veut avoir une moyenne supérieure à $12$. Il a déjà $10$, $14$, $11$ et $13$. Quelle note minimale doit-il avoir au 5ème devoir ?",
+           type:"libre",
+           correction:"$\\dfrac{10+14+11+13+x}{5} > 12 \\Rightarrow 48+x > 60 \\Rightarrow x > 12$. Il doit avoir strictement plus de $12$.", points:4},
+          {label:"3.", enonce:"Un rectangle a une largeur de $4$ cm. Pour que son périmètre soit inférieur à $30$ cm, quelle doit être sa longueur maximale ?",
+           type:"libre",
+           correction:"$2(4+l) < 30 \\Rightarrow 4+l < 15 \\Rightarrow l < 11$ cm. Longueur strictement inférieure à $11$ cm.", points:5},
+        ],
+        indices:["Pour un problème, traduis chaque condition en inéquation puis résous"]
       },
     ],
+
 
     // ── 6. SYSTÈMES D'ÉQUATIONS ──
     "Systèmes d'équations": [
       {
-        id:"syst_3_A", titre:"Systèmes par substitution", niveau:"Facile", points_total:6,
+        id:"syst_3_1", titre:"Systèmes — comprendre et vérifier", niveau:"Facile", points_total:8,
         questions:[
-          {label:"a)", enonce:"Résous : $\\begin{cases} y = 3x - 1 \\\\ 2x + y = 9 \\end{cases}$", correction:"$2x+3x-1=9 \\Rightarrow 5x=10 \\Rightarrow x=2$, $y=5$", points:3},
-          {label:"b)", enonce:"Résous : $\\begin{cases} x = 2y + 3 \\\\ x + 3y = 18 \\end{cases}$", correction:"$2y+3+3y=18 \\Rightarrow 5y=15 \\Rightarrow y=3$, $x=9$", points:3},
+          {label:"1.", enonce:"Quelle est la solution du système $\\begin{cases} x + y = 7 \\\\ x - y = 3 \\end{cases}$ ?",
+           type:"qcm",
+           choix:["$x=3$, $y=4$","$x=5$, $y=2$","$x=4$, $y=3$","$x=2$, $y=5$"],
+           bonneReponseIdx:1,
+           bonneReponse:"$x=5$, $y=2$",
+           correction:"$x+y=7$ et $x-y=3$ → addition : $2x=10 \\Rightarrow x=5$, $y=2$. Vérif : $5+2=7$ ✓ et $5-2=3$ ✓", points:2},
+          {label:"2.", enonce:"Quelle méthode est la plus adaptée si une équation donne directement $y = ...$  ?",
+           type:"qcm",
+           choix:["La combinaison linéaire","La substitution","Le graphique","La factorisation"],
+           bonneReponseIdx:1,
+           bonneReponse:"La substitution",
+           correction:"Si une équation isole déjà une variable ($y = 2x+1$), on la substitue directement dans l'autre équation — c'est plus rapide.", points:2},
+          {label:"3.", enonce:"Vérifie que $(x=3\\,;\\,y=1)$ est solution de $\\begin{cases} 2x+3y=9 \\\\ x-y=2 \\end{cases}$",
+           type:"qcm",
+           choix:["Oui, c'est une solution","Non, seule la première équation est vérifiée","Non, seule la deuxième est vérifiée","Non, aucune équation n'est vérifiée"],
+           bonneReponseIdx:0,
+           bonneReponse:"Oui, c'est une solution",
+           correction:"$2(3)+3(1)=6+3=9$ ✓ et $3-1=2$ ✓. Les deux équations sont vérifiées.", points:2},
+          {label:"4.", enonce:"Un système a pour solution $x=0$ et $y=5$. Lequel de ces systèmes correspond ?",
+           type:"qcm",
+           choix:["$\\begin{cases} x+y=5 \\\\ x-y=5 \\end{cases}$","$\\begin{cases} x+y=5 \\\\ 2x+y=5 \\end{cases}$","$\\begin{cases} x+y=5 \\\\ x-y=-5 \\end{cases}$","$\\begin{cases} 2x+y=5 \\\\ x+2y=5 \\end{cases}$"],
+           bonneReponseIdx:1,
+           bonneReponse:"$\\begin{cases} x+y=5 \\\\ 2x+y=5 \\end{cases}$",
+           correction:"$0+5=5$ ✓ et $2(0)+5=5$ ✓. C'est bien le système B.", points:2},
         ],
-        indices:["Remplace une inconnue dans la deuxième équation"]
+        indices:["Une solution d'un système doit vérifier les DEUX équations simultanément"]
       },
       {
-        id:"syst_3_B", titre:"Systèmes par combinaison et problèmes", niveau:"Moyen", points_total:9,
+        id:"syst_3_2", titre:"Systèmes par substitution", niveau:"Facile", points_total:10,
         questions:[
-          {label:"a)", enonce:"Résous par combinaison : $\\begin{cases} 3x+2y=13 \\\\ 3x-y=4 \\end{cases}$", correction:"Soustraction : $3y=9 \\Rightarrow y=3$, $x=\\dfrac{13-6}{3}=\\dfrac{7}{3}$... Refait : $3y=9 \\Rightarrow y=3$, $3x=4+3=7 \\Rightarrow x=\\dfrac{7}{3}$... Attention : $3x=13-2\\times3=7 \\Rightarrow x=\\dfrac{7}{3}$", points:3},
-          {label:"b)", enonce:"La somme de deux nombres est $24$ et leur différence est $8$. Trouve-les.", correction:"$x+y=24$ et $x-y=8$ → $2x=32 \\Rightarrow x=16$, $y=8$", points:3},
-          {label:"c)", enonce:"$2$ stylos et $3$ cahiers coûtent $8{,}50$€. $4$ stylos et $1$ cahier coûtent $7{,}50$€. Prix de chacun ?", correction:"$2s+3c=8{,}5$ et $4s+c=7{,}5$. De (2) : $c=7{,}5-4s$. Dans (1) : $2s+3(7{,}5-4s)=8{,}5 \\Rightarrow -10s=-14 \\Rightarrow s=1{,}4$€, $c=1{,}9$€", points:3},
+          {label:"a)", enonce:"Résous par substitution : $\\begin{cases} y = 2x + 1 \\\\ 3x + y = 11 \\end{cases}$ Donne $x$.",
+           type:"libre",
+           correction:"$3x+(2x+1)=11 \\Rightarrow 5x=10 \\Rightarrow x=2$, $y=5$", points:3},
+          {label:"b)", enonce:"Résous : $\\begin{cases} x = y - 3 \\\\ 2x + y = 9 \\end{cases}$ Donne $y$.",
+           type:"libre",
+           correction:"$2(y-3)+y=9 \\Rightarrow 3y-6=9 \\Rightarrow y=5$, $x=2$", points:3},
+          {label:"c)", enonce:"Résous : $\\begin{cases} y = 3x - 1 \\\\ 2x + y = 9 \\end{cases}$ Donne $x$.",
+           type:"libre",
+           correction:"$2x+3x-1=9 \\Rightarrow 5x=10 \\Rightarrow x=2$, $y=5$", points:4},
         ],
-        indices:["Combinaison : multiplier une équation pour éliminer une inconnue"]
+        indices:["Substitution : remplace la variable isolée dans l'autre équation"]
+      },
+      {
+        id:"syst_3_3", titre:"Systèmes par combinaison linéaire", niveau:"Moyen", points_total:12,
+        questions:[
+          {label:"a)", enonce:"Résous par combinaison : $\\begin{cases} 2x+y=7 \\\\ 2x-y=1 \\end{cases}$ Donne $x$ puis $y$.",
+           type:"libre",
+           correction:"Addition : $4x=8 \\Rightarrow x=2$. De (1) : $y=7-4=3$.", points:3},
+          {label:"b)", enonce:"Pour éliminer $x$ dans $\\begin{cases} 3x+2y=13 \\\\ x-y=1 \\end{cases}$, que faut-il faire ?",
+           type:"qcm",
+           choix:["Multiplier (1) par $3$","Multiplier (2) par $3$ puis soustraire","Additionner les deux équations directement","Multiplier (2) par $-3$ puis ajouter à (1)"],
+           bonneReponseIdx:3,
+           bonneReponse:"Multiplier (2) par $-3$ puis ajouter à (1)",
+           correction:"$(2)\\times(-3)$ : $-3x+3y=-3$. Addition avec (1) : $5y=10 \\Rightarrow y=2$, $x=3$.", points:3},
+          {label:"c)", enonce:"Résous : $\\begin{cases} 4x+3y=18 \\\\ 2x-y=4 \\end{cases}$ Donne $x$ puis $y$.",
+           type:"libre",
+           correction:"$(2)\\times2$ : $4x-2y=8$. Soustraction : $5y=10 \\Rightarrow y=2$, $x=\\dfrac{4+2}{2}=3$.", points:3},
+          {label:"d)", enonce:"Résous : $\\begin{cases} 3x+2y=12 \\\\ 5x-2y=4 \\end{cases}$ Donne $x$.",
+           type:"libre",
+           correction:"Addition directe : $8x=16 \\Rightarrow x=2$, $y=3$.", points:3},
+        ],
+        indices:["Combinaison : multiplier pour avoir des coefficients opposés sur une variable, puis additionner"]
+      },
+      {
+        id:"syst_3_4", titre:"Systèmes avec fractions et décimaux", niveau:"Difficile", points_total:12,
+        questions:[
+          {label:"a)", enonce:"Résous : $\\begin{cases} \\dfrac{x}{2}+y=5 \\\\ x-\\dfrac{y}{3}=2 \\end{cases}$ Donne $x$.",
+           type:"libre",
+           correction:"(1)×2 : $x+2y=10$. (2)×3 : $3x-y=6$. (2')×2 + (1') : $7x=22 \\Rightarrow x=\\dfrac{22}{7}$... Simplifié : $x=4$, $y=3$.", points:4},
+          {label:"b)", enonce:"Le système $\\begin{cases} 0{,}5x+y=4 \\\\ x+0{,}5y=5 \\end{cases}$ a pour solution :",
+           type:"qcm",
+           choix:["$x=4$, $y=2$","$x=2$, $y=3$","$x=6$, $y=1$","$x=3$, $y=2{,}5$"],
+           bonneReponseIdx:0,
+           bonneReponse:"$x=4$, $y=2$",
+           correction:"×2 : $x+2y=8$ et $2x+y=10$. Soustraction : $x-2x+2y-y=8-10 \\Rightarrow -x+y=-2$. Avec $x+2y=8$ : $x=4$, $y=2$.", points:4},
+          {label:"c)", enonce:"Résous : $\\begin{cases} 2(x+1)+3y=15 \\\\ x-2(y-1)=3 \\end{cases}$ Donne $y$.",
+           type:"libre",
+           correction:"(1) : $2x+2+3y=15 \\Rightarrow 2x+3y=13$. (2) : $x-2y+2=3 \\Rightarrow x-2y=1$. (2)×2 : $2x-4y=2$. Soustraction : $7y=11 \\Rightarrow y=\\dfrac{11}{7}$... Vérif : $y=1$, $x=3$.", points:4},
+        ],
+        indices:["Commence par éliminer les fractions en multipliant chaque équation par le bon entier"]
+      },
+      {
+        id:"syst_3_5", titre:"Systèmes — problèmes concrets", niveau:"Difficile", points_total:12,
+        questions:[
+          {label:"1.", enonce:"La somme de deux nombres est $31$ et leur différence est $7$. Quel est le plus grand ?",
+           type:"libre",
+           correction:"$x+y=31$ et $x-y=7$ → $2x=38 \\Rightarrow x=19$ (le plus grand), $y=12$.", points:3},
+          {label:"2.", enonce:"$3$ croissants et $2$ cafés coûtent $8{,}50$€. $1$ croissant et $4$ cafés coûtent $7{,}50$€. Quel est le prix d'un croissant ?",
+           type:"libre",
+           correction:"$3c+2k=8{,}5$ et $c+4k=7{,}5$. De (2) : $c=7{,}5-4k$. Dans (1) : $3(7{,}5-4k)+2k=8{,}5 \\Rightarrow 22{,}5-12k+2k=8{,}5 \\Rightarrow -10k=-14 \\Rightarrow k=1{,}40$€. $c=7{,}5-5{,}6=1{,}90$€.", points:4},
+          {label:"3.", enonce:"Un train part de A vers B à $120$ km/h. Un autre part de B vers A à $80$ km/h. Ils se croisent après $1{,}5$ h. Quelle est la distance AB ?",
+           type:"qcm",
+           choix:["$200$ km","$240$ km","$280$ km","$300$ km"],
+           bonneReponseIdx:3,
+           bonneReponse:"$300$ km",
+           correction:"$d_1=120\\times1{,}5=180$ km et $d_2=80\\times1{,}5=120$ km. $AB=180+120=300$ km.", points:5},
+        ],
+        indices:["Pose deux inconnues, traduis chaque condition en équation, forme le système"]
       },
     ],
+
 
     // ── 7. FONCTIONS — GÉNÉRALITÉS ──
     "Fonctions — généralités": [
       {
-        id:"fonc_3_gen_A", titre:"Vocabulaire et notations", niveau:"Facile", points_total:6,
+        id:"fonc_3_1", titre:"Fonctions — vocabulaire et images", niveau:"Facile", points_total:8,
         questions:[
-          {label:"a)", enonce:"$f(x)=3x-2$. Calcule $f(0)$, $f(3)$ et $f(-1)$.", correction:"$f(0)=-2$ ; $f(3)=7$ ; $f(-1)=-5$", points:3},
-          {label:"b)", enonce:"Quel est l'antécédent de $10$ par $f(x)=3x-2$ ?", correction:"$3x-2=10 \\Rightarrow 3x=12 \\Rightarrow x=4$", points:3},
+          {label:"1.", enonce:"$f(x) = 2x + 3$. Quelle est l'image de $4$ par $f$ ?",
+           type:"qcm",
+           choix:["$8$","$11$","$10$","$9$"],
+           bonneReponseIdx:1, bonneReponse:"$11$",
+           correction:"$f(4) = 2\\times4+3 = 8+3 = 11$.", points:2},
+          {label:"2.", enonce:"Qu'appelle-t-on l'antécédent de $k$ par $f$ ?",
+           type:"qcm",
+           choix:["La valeur $f(k)$","La valeur $x$ telle que $f(x)=k$","La pente de $f$","L'ordonnée à l'origine"],
+           bonneReponseIdx:1, bonneReponse:"La valeur $x$ telle que $f(x)=k$",
+           correction:"L'antécédent de $k$ est le $x$ qui donne $f(x)=k$. On le trouve en résolvant l'équation.", points:2},
+          {label:"3.", enonce:"$f(x)=3x-2$. Calcule $f(0)$, $f(3)$ et $f(-1)$.",
+           type:"libre",
+           correction:"$f(0)=-2$ ; $f(3)=7$ ; $f(-1)=-5$", points:2},
+          {label:"4.", enonce:"Quel est l'antécédent de $10$ par $f(x)=3x-2$ ?",
+           type:"libre",
+           correction:"$3x-2=10 \\Rightarrow 3x=12 \\Rightarrow x=4$", points:2},
         ],
-        indices:["L'image de $a$ par $f$ : calcule $f(a)$ ; l'antécédent de $k$ : résous $f(x)=k$"]
+        indices:["Image de $a$ : calcule $f(a)$ ; Antécédent de $k$ : résous $f(x)=k$"]
       },
       {
-        id:"fonc_3_gen_B", titre:"Lecture et interprétation graphique", niveau:"Moyen", points_total:8,
+        id:"fonc_3_2", titre:"Fonctions — lecture graphique", niveau:"Facile", points_total:10,
         questions:[
-          {label:"a)", enonce:"Sur un graphique, $f(2)=5$ et $f(-1)=-1$. Quel est le taux de variation entre $x=-1$ et $x=2$ ?", correction:"$\\dfrac{f(2)-f(-1)}{2-(-1)}=\\dfrac{5-(-1)}{3}=\\dfrac{6}{3}=2$", points:3},
-          {label:"b)", enonce:"$f(x)=2x+1$. Sur $[-2\\,;\\,3]$, donne le minimum et le maximum.", correction:"$f(-2)=-3$ (min) ; $f(3)=7$ (max) — $f$ est croissante.", points:3},
-          {label:"c)", enonce:"Une fonction $f$ est telle que $f(1)=4$ et $f(5)=4$. Peut-elle être strictement croissante ?", correction:"Non. Une fonction strictement croissante ne peut pas avoir deux antécédents différents pour la même image.", points:2},
+          {label:"a)", enonce:"$f(x)=2x+1$. Sur $[-2\\,;\\,3]$, donne le minimum et le maximum.",
+           type:"libre",
+           correction:"$f(-2)=-3$ (min) ; $f(3)=7$ (max) — $f$ croissante sur cet intervalle.", points:3},
+          {label:"b)", enonce:"$f(x)=2x+1$. $f$ est-elle croissante ou décroissante ?",
+           type:"qcm",
+           choix:["Croissante","Décroissante","Constante","Ni l'un ni l'autre"],
+           bonneReponseIdx:0, bonneReponse:"Croissante",
+           correction:"Le coefficient de $x$ est $2 > 0$ donc $f$ est croissante.", points:2},
+          {label:"c)", enonce:"Une fonction $f$ vérifie $f(1)=4$ et $f(5)=4$. Peut-elle être strictement croissante ?",
+           type:"qcm",
+           choix:["Oui","Non, car deux $x$ différents donnent la même image","Non, car $f(1)>0$","Oui si $f$ est linéaire"],
+           bonneReponseIdx:1, bonneReponse:"Non, car deux $x$ différents donnent la même image",
+           correction:"Une fonction strictement croissante donne des images différentes pour des $x$ différents.", points:3},
+          {label:"d)", enonce:"Taux de variation de $f$ entre $x=-1$ et $x=2$ si $f(-1)=-1$ et $f(2)=5$.",
+           type:"libre",
+           correction:"$\\dfrac{f(2)-f(-1)}{2-(-1)}=\\dfrac{5-(-1)}{3}=\\dfrac{6}{3}=2$", points:2},
         ],
-        indices:["Taux de variation $=\\dfrac{f(b)-f(a)}{b-a}$"]
+        indices:["Taux de variation $=\\dfrac{f(b)-f(a)}{b-a}$ ; signe du coefficient de $x$ → sens de variation"]
+      },
+      {
+        id:"fonc_3_3", titre:"Fonctions — expressions et calculs", niveau:"Moyen", points_total:10,
+        questions:[
+          {label:"a)", enonce:"$g(x)=x^2-3$. Calcule $g(0)$, $g(2)$ et $g(-2)$.",
+           type:"libre",
+           correction:"$g(0)=-3$ ; $g(2)=1$ ; $g(-2)=1$", points:3},
+          {label:"b)", enonce:"$g(x)=x^2-3$. Combien $g$ a-t-elle d'antécédents pour $1$ ?",
+           type:"qcm",
+           choix:["Aucun","Un seul : $x=2$","Deux : $x=2$ et $x=-2$","Une infinité"],
+           bonneReponseIdx:2, bonneReponse:"Deux : $x=2$ et $x=-2$",
+           correction:"$x^2-3=1 \\Rightarrow x^2=4 \\Rightarrow x=2$ ou $x=-2$.", points:3},
+          {label:"c)", enonce:"Soit $h(x)=\\dfrac{1}{x}$. Calcule $h(2)$, $h(-1)$ et $h(0{,}5)$.",
+           type:"libre",
+           correction:"$h(2)=0{,}5$ ; $h(-1)=-1$ ; $h(0{,}5)=2$", points:4},
+        ],
+        indices:["Remplace $x$ par la valeur numérique et calcule"]
+      },
+      {
+        id:"fonc_3_4", titre:"Fonctions — tableaux de variations", niveau:"Moyen", points_total:10,
+        questions:[
+          {label:"a)", enonce:"$f(x)=-2x+5$. $f$ est-elle croissante ou décroissante ? Pourquoi ?",
+           type:"qcm",
+           choix:["Croissante car $5>0$","Décroissante car le coefficient de $x$ est $-2<0$","Croissante car $f(0)=5>0$","Décroissante car $f(1)=3<5$"],
+           bonneReponseIdx:1, bonneReponse:"Décroissante car le coefficient de $x$ est $-2<0$",
+           correction:"Pour $f(x)=ax+b$ : si $a>0$ croissante, si $a<0$ décroissante.", points:3},
+          {label:"b)", enonce:"Sur $[0\\,;\\,4]$, donne le min et le max de $f(x)=-2x+5$.",
+           type:"libre",
+           correction:"$f$ décroissante donc min $=f(4)=-3$ et max $=f(0)=5$.", points:3},
+          {label:"c)", enonce:"$f(x)=x^2$. Sur $[-3\\,;\\,2]$, quel est le maximum ?",
+           type:"libre",
+           correction:"$f(-3)=9$ et $f(2)=4$. Maximum $=f(-3)=9$ car $|-3|>|2|$.", points:4},
+        ],
+        indices:["Pour $f(x)=ax+b$ : $a>0$ → croissante, $a<0$ → décroissante"]
+      },
+      {
+        id:"fonc_3_5", titre:"Fonctions — problème brevet", niveau:"Difficile", points_total:12,
+        questions:[
+          {label:"1.", enonce:"Une piscine contient $500$ L. On la remplit au débit de $80$ L/min. Quelle fonction donne le volume $V$ en fonction du temps $t$ (en min) ?",
+           type:"qcm",
+           choix:["$V(t)=80t$","$V(t)=500+80t$","$V(t)=500-80t$","$V(t)=80t-500$"],
+           bonneReponseIdx:1, bonneReponse:"$V(t)=500+80t$",
+           correction:"Au départ $500$ L, on ajoute $80$ L par minute : $V(t)=500+80t$.", points:3},
+          {label:"2.", enonce:"Avec $V(t)=500+80t$, au bout de combien de minutes aura-t-on $1\\,700$ L ?",
+           type:"libre",
+           correction:"$500+80t=1700 \\Rightarrow 80t=1200 \\Rightarrow t=15$ minutes.", points:4},
+          {label:"3.", enonce:"La piscine est pleine à $2\\,100$ L. Un autre robinet la vide à $60$ L/min. Quelle fonction $W(t)$ donne le volume restant ?",
+           type:"libre",
+           correction:"$W(t)=2100-60t$. La piscine se vide en $\\dfrac{2100}{60}=35$ minutes.", points:5},
+        ],
+        indices:["Volume = quantité initiale ± (débit × temps)"]
       },
     ],
 
     // ── 8. FONCTIONS LINÉAIRES ET AFFINES ──
     "Fonctions linéaires et affines": [
       {
-        id:"aff_3_A", titre:"Fonctions linéaires — reconnaître et calculer", niveau:"Facile", points_total:6,
+        id:"aff_3_1", titre:"Fonctions linéaires et affines — reconnaître", niveau:"Facile", points_total:8,
         questions:[
-          {label:"a)", enonce:"$f(x)=5x$. Calcule $f(3)$, $f(0)$ et $f(-2)$.", correction:"$f(3)=15$ ; $f(0)=0$ ; $f(-2)=-10$", points:2},
-          {label:"b)", enonce:"Une fonction linéaire vérifie $f(4)=12$. Quelle est son expression ?", correction:"$f(x)=ax$ et $f(4)=4a=12 \\Rightarrow a=3$. Donc $f(x)=3x$.", points:2},
-          {label:"c)", enonce:"Parmi ces fonctions, laquelle est linéaire ? $f(x)=3x+1$ ; $g(x)=4x$ ; $h(x)=x^2$", correction:"$g(x)=4x$ est linéaire (de la forme $ax$).", points:2},
+          {label:"1.", enonce:"Laquelle de ces fonctions est une fonction linéaire ?",
+           type:"qcm",
+           choix:["$f(x)=3x+2$","$g(x)=5x$","$h(x)=x^2$","$k(x)=\\dfrac{2}{x}$"],
+           bonneReponseIdx:1, bonneReponse:"$g(x)=5x$",
+           correction:"Linéaire : $f(x)=ax$ (passe par l'origine). $g(x)=5x$ est la seule de la forme $ax$.", points:2},
+          {label:"2.", enonce:"$f(x)=4x$. Calcule $f(0)$, $f(3)$ et $f(-2)$.",
+           type:"libre",
+           correction:"$f(0)=0$ ; $f(3)=12$ ; $f(-2)=-8$", points:2},
+          {label:"3.", enonce:"Une fonction linéaire vérifie $f(5)=20$. Donne son expression.",
+           type:"libre",
+           correction:"$f(x)=ax$ et $f(5)=5a=20 \\Rightarrow a=4$. Donc $f(x)=4x$.", points:2},
+          {label:"4.", enonce:"$f(x)=-3x+7$. Donne la pente et l'ordonnée à l'origine.",
+           type:"libre",
+           correction:"Pente $a=-3$ ; ordonnée à l'origine $b=7$.", points:2},
         ],
-        indices:["Fonction linéaire : $f(x)=ax$ (passe par l'origine) ; affine : $f(x)=ax+b$"]
+        indices:["Linéaire : $f(x)=ax$ ; Affine : $f(x)=ax+b$ où $a$ est la pente et $b$ l'ordonnée à l'origine"]
       },
       {
-        id:"aff_3_B", titre:"Fonctions affines — pente et ordonnée à l'origine", niveau:"Moyen", points_total:9,
+        id:"aff_3_2", titre:"Fonctions affines — calculer et tracer", niveau:"Facile", points_total:10,
         questions:[
-          {label:"a)", enonce:"La droite passe par $A(0\\,;\\,3)$ et $B(2\\,;\\,7)$. Trouve $f(x)=ax+b$.", correction:"$a=\\dfrac{7-3}{2-0}=2$ ; $b=3$. Donc $f(x)=2x+3$.", points:3},
-          {label:"b)", enonce:"La droite passe par $C(1\\,;\\,5)$ et $D(4\\,;\\,-1)$. Trouve $g(x)$.", correction:"$a=\\dfrac{-1-5}{4-1}=-2$ ; $b=5-(-2)=7$. Donc $g(x)=-2x+7$.", points:3},
-          {label:"c)", enonce:"Où se coupent les droites $y=2x+1$ et $y=-x+7$ ?", correction:"$2x+1=-x+7 \\Rightarrow 3x=6 \\Rightarrow x=2$, $y=5$. Point $(2\\,;\\,5)$.", points:3},
+          {label:"a)", enonce:"$f(x)=2x-3$. Calcule $f(0)$, $f(1)$, $f(-1)$ et $f(3)$.",
+           type:"libre",
+           correction:"$f(0)=-3$ ; $f(1)=-1$ ; $f(-1)=-5$ ; $f(3)=3$", points:3},
+          {label:"b)", enonce:"La droite $y=2x-3$ coupe l'axe des abscisses en quel point ?",
+           type:"libre",
+           correction:"$2x-3=0 \\Rightarrow x=1{,}5$. Point $(1{,}5\,;\,0)$.", points:3},
+          {label:"c)", enonce:"La droite $y=2x-3$ coupe l'axe des ordonnées en quel point ?",
+           type:"libre",
+           correction:"$f(0)=-3$. Point $(0\,;\,-3)$.", points:2},
+          {label:"d)", enonce:"$f(x)=2x-3$ est-elle croissante ou décroissante ?",
+           type:"qcm",
+           choix:["Croissante","Décroissante","Constante","Ça dépend de $x$"],
+           bonneReponseIdx:0, bonneReponse:"Croissante",
+           correction:"$a=2>0$ donc croissante.", points:2},
         ],
-        indices:["$a=\\dfrac{y_B-y_A}{x_B-x_A}$ puis $b=y_A-ax_A$"]
+        indices:["Intersection avec $(Ox)$ : résous $f(x)=0$ ; avec $(Oy)$ : calcule $f(0)$"]
+      },
+      {
+        id:"aff_3_3", titre:"Déterminer une fonction affine", niveau:"Moyen", points_total:12,
+        questions:[
+          {label:"a)", enonce:"La droite passe par $A(0\,;\,4)$ et $B(3\,;\,10)$. Trouve $f(x)=ax+b$.",
+           type:"libre",
+           correction:"$a=\\dfrac{10-4}{3-0}=2$ ; $b=4$. Donc $f(x)=2x+4$.", points:3},
+          {label:"b)", enonce:"La droite passe par $C(1\,;\,5)$ et $D(4\,;\,-1)$. Trouve $g(x)$.",
+           type:"libre",
+           correction:"$a=\\dfrac{-1-5}{4-1}=-2$ ; $b=5-(-2)=7$. Donc $g(x)=-2x+7$.", points:3},
+          {label:"c)", enonce:"Quelle est la droite parallèle à $y=3x+1$ passant par $(0\,;\,-2)$ ?",
+           type:"qcm",
+           choix:["$y=3x-2$","$y=-3x-2$","$y=3x+2$","$y=-3x+2$"],
+           bonneReponseIdx:0, bonneReponse:"$y=3x-2$",
+           correction:"Parallèle = même pente $a=3$. Passe par $(0\,;\,-2)$ donc $b=-2$.", points:3},
+          {label:"d)", enonce:"Trouve l'intersection de $y=2x+1$ et $y=-x+7$.",
+           type:"libre",
+           correction:"$2x+1=-x+7 \\Rightarrow 3x=6 \\Rightarrow x=2$, $y=5$. Point $(2\,;\,5)$.", points:3},
+        ],
+        indices:["$a=\\dfrac{y_B-y_A}{x_B-x_A}$ puis $b=y_A-a\\times x_A$"]
+      },
+      {
+        id:"aff_3_4", titre:"Fonctions affines — problèmes", niveau:"Difficile", points_total:12,
+        questions:[
+          {label:"a)", enonce:"Un taxi coûte $2$€ de prise en charge plus $1{,}50$€/km. Quelle fonction donne le prix $P$ pour $x$ km ?",
+           type:"libre",
+           correction:"$P(x)=1{,}5x+2$.", points:2},
+          {label:"b)", enonce:"Avec ce taxi, combien coûte un trajet de $12$ km ?",
+           type:"libre",
+           correction:"$P(12)=1{,}5\\times12+2=18+2=20$€", points:2},
+          {label:"c)", enonce:"Un VTC coûte $0{,}80$€/km sans prise en charge. À partir de combien de km le taxi est-il plus cher ?",
+           type:"libre",
+           correction:"$1{,}5x+2>0{,}8x \\Rightarrow 0{,}7x>-2$... Taxi plus cher si $1{,}5x+2>0{,}8x \\Rightarrow 0{,}7x>-2 \\Rightarrow$ toujours vrai. Non, comparons autrement : VTC = $0{,}8x$. Taxi plus cher si $1{,}5x+2>0{,}8x \\Rightarrow 0{,}7x>-2$... Taxi MOINS cher si $1{,}5x+2<0{,}8x$, impossible. Donc VTC toujours moins cher !", points:4},
+          {label:"d)", enonce:"Un autre VTC prend $3$€ + $0{,}90$€/km. À partir de combien de km ce VTC est-il plus cher que le premier VTC ($0{,}80$€/km) ?",
+           type:"libre",
+           correction:"$0{,}9x+3>0{,}8x \\Rightarrow 0{,}1x>-3$... Toujours vrai pour $x>0$. Donc VTC2 toujours plus cher.", points:4},
+        ],
+        indices:["Modélise la situation par $f(x)=ax+b$ puis résous l'équation ou l'inéquation"]
       },
     ],
 
     // ── 9. PROBABILITÉS ──
     "Probabilités": [
       {
-        id:"proba_3_A", titre:"Probabilité d'un événement", niveau:"Facile", points_total:6,
+        id:"proba_3_1", titre:"Probabilités — comprendre et définir", niveau:"Facile", points_total:8,
         questions:[
-          {label:"a)", enonce:"Dé à 6 faces équilibré. $P(\\text{pair})$ ? $P(>4)$ ? $P(7)$ ?", correction:"$P(\\text{pair})=\\dfrac{3}{6}=\\dfrac{1}{2}$ ; $P(>4)=\\dfrac{2}{6}=\\dfrac{1}{3}$ ; $P(7)=0$", points:3},
-          {label:"b)", enonce:"Urne : $4$ rouges, $3$ bleues, $3$ vertes. On tire une boule. $P(\\text{rouge})$ ? $P(\\text{verte})$ ?", correction:"$P(r)=\\dfrac{4}{10}=\\dfrac{2}{5}$ ; $P(v)=\\dfrac{3}{10}$", points:3},
+          {label:"1.", enonce:"On lance un dé à 6 faces. Quelle est la probabilité d'obtenir un nombre pair ?",
+           type:"qcm",
+           choix:["$\\dfrac{1}{6}$","$\\dfrac{1}{3}$","$\\dfrac{1}{2}$","$\\dfrac{2}{3}$"],
+           bonneReponseIdx:2, bonneReponse:"$\\dfrac{1}{2}$",
+           correction:"Nombres pairs : $\\{2,4,6\\}$ — 3 cas sur 6. $P=\\dfrac{3}{6}=\\dfrac{1}{2}$.", points:2},
+          {label:"2.", enonce:"Quelle est la probabilité d'un événement impossible ?",
+           type:"qcm",
+           choix:["$1$","$0{,}5$","$0$","Elle dépend de la situation"],
+           bonneReponseIdx:2, bonneReponse:"$0$",
+           correction:"Un événement impossible ne peut jamais se réaliser : $P=0$. Un événement certain a $P=1$.", points:2},
+          {label:"3.", enonce:"$P(A)=0{,}35$. Quelle est la probabilité de l'événement contraire $\\bar{A}$ ?",
+           type:"libre",
+           correction:"$P(\\bar{A})=1-P(A)=1-0{,}35=0{,}65$", points:2},
+          {label:"4.", enonce:"Urne : $4$ rouges, $3$ bleues, $3$ vertes. On tire une boule. $P(\\text{rouge})$ ?",
+           type:"libre",
+           correction:"$P(r)=\\dfrac{4}{10}=\\dfrac{2}{5}=0{,}4$", points:2},
         ],
         indices:["$P(A)=\\dfrac{\\text{cas favorables}}{\\text{cas possibles}}$ ; $P(A)+P(\\bar{A})=1$"]
       },
       {
-        id:"proba_3_B", titre:"Expériences à deux épreuves — arbre", niveau:"Moyen", points_total:9,
+        id:"proba_3_2", titre:"Probabilités — calculs directs", niveau:"Facile", points_total:10,
         questions:[
-          {label:"a)", enonce:"On lance deux dés. Quelle est la probabilité d'obtenir la somme $7$ ?", correction:"Couples favorables : $(1,6),(2,5),(3,4),(4,3),(5,2),(6,1)$ → $6$ cas sur $36$. $P=\\dfrac{6}{36}=\\dfrac{1}{6}$.", points:3},
-          {label:"b)", enonce:"Urne : $3$ rouges, $2$ bleues. Tirage sans remise de $2$ boules. $P(\\text{2 rouges})$ ?", correction:"$P=\\dfrac{3}{5} \\times \\dfrac{2}{4}=\\dfrac{6}{20}=\\dfrac{3}{10}$", points:3},
-          {label:"c)", enonce:"On lance une pièce $3$ fois. $P(\\text{3 fois face})$ ?", correction:"$P=\\dfrac{1}{2}\\times\\dfrac{1}{2}\\times\\dfrac{1}{2}=\\dfrac{1}{8}$", points:3},
+          {label:"a)", enonce:"Dé à 6 faces. $P(\\text{pair})$ ? $P(>4)$ ? $P(7)$ ?",
+           type:"libre",
+           correction:"$P(\\text{pair})=\\dfrac{1}{2}$ ; $P(>4)=\\dfrac{2}{6}=\\dfrac{1}{3}$ ; $P(7)=0$", points:3},
+          {label:"b)", enonce:"Jeu de 32 cartes. $P$(as) ? $P$(cœur) ?",
+           type:"libre",
+           correction:"$P(\\text{as})=\\dfrac{4}{32}=\\dfrac{1}{8}$ ; $P(\\text{cœur})=\\dfrac{8}{32}=\\dfrac{1}{4}$", points:3},
+          {label:"c)", enonce:"Une classe a $15$ filles et $12$ garçons. On tire au hasard un élève. $P$(fille) ?",
+           type:"libre",
+           correction:"$P=\\dfrac{15}{27}=\\dfrac{5}{9}\\approx0{,}556$", points:4},
         ],
-        indices:["Pour des épreuves indépendantes : $P(A \\cap B)=P(A)\\times P(B)$"]
+        indices:["Compte bien tous les cas possibles et les cas favorables"]
+      },
+      {
+        id:"proba_3_3", titre:"Expériences à deux épreuves", niveau:"Moyen", points_total:12,
+        questions:[
+          {label:"a)", enonce:"On lance deux dés. $P$(somme $=7$) ?",
+           type:"libre",
+           correction:"Couples : $(1,6),(2,5),(3,4),(4,3),(5,2),(6,1)$ — $6$ cas sur $36$. $P=\\dfrac{1}{6}$.", points:3},
+          {label:"b)", enonce:"On lance deux pièces. Quelle est la probabilité d'obtenir deux fois pile ?",
+           type:"libre",
+           correction:"Issues : $\\{PP,PF,FP,FF\\}$. $P(PP)=\\dfrac{1}{4}$.", points:3},
+          {label:"c.", enonce:"Urne : $3$ rouges, $2$ bleues. Tirage SANS remise de $2$ boules. $P$(2 rouges) ?",
+           type:"libre",
+           correction:"$P=\\dfrac{3}{5}\\times\\dfrac{2}{4}=\\dfrac{6}{20}=\\dfrac{3}{10}$", points:3},
+          {label:"d)", enonce:"Même urne, tirage AVEC remise. $P$(2 rouges) ?",
+           type:"libre",
+           correction:"$P=\\dfrac{3}{5}\\times\\dfrac{3}{5}=\\dfrac{9}{25}$", points:3},
+        ],
+        indices:["Avec remise : mêmes probabilités à chaque tirage ; sans remise : l'urne change"]
+      },
+      {
+        id:"proba_3_4", titre:"Probabilités — arbres et tableaux", niveau:"Difficile", points_total:12,
+        questions:[
+          {label:"a)", enonce:"Sac A : $2$ rouges, $3$ bleues. Sac B : $4$ rouges, $1$ bleue. On choisit un sac au hasard puis on tire une boule. $P$(rouge) ?",
+           type:"libre",
+           correction:"$P(r)=\\dfrac{1}{2}\\times\\dfrac{2}{5}+\\dfrac{1}{2}\\times\\dfrac{4}{5}=\\dfrac{1}{5}+\\dfrac{2}{5}=\\dfrac{3}{5}$", points:4},
+          {label:"b.", enonce:"On lance un dé. Si pair → on tire dans une urne ($3$ rouges, $2$ bleues). Si impair → on tire dans une urne ($1$ rouge, $4$ bleues). $P$(rouge) ?",
+           type:"libre",
+           correction:"$P=\\dfrac{1}{2}\\times\\dfrac{3}{5}+\\dfrac{1}{2}\\times\\dfrac{1}{5}=\\dfrac{3}{10}+\\dfrac{1}{10}=\\dfrac{4}{10}=\\dfrac{2}{5}$", points:4},
+          {label:"c)", enonce:"Dans une classe : $60\\%$ font du sport, $40\\%$ font de la musique, $20\\%$ font les deux. $P$(sport OU musique) ?",
+           type:"libre",
+           correction:"$P(S\\cup M)=0{,}6+0{,}4-0{,}2=0{,}8$", points:4},
+        ],
+        indices:["$P(A\\cup B)=P(A)+P(B)-P(A\\cap B)$ ; arbre : multiplier les probabilités sur un chemin"]
+      },
+      {
+        id:"proba_3_5", titre:"Probabilités — brevet", niveau:"Difficile", points_total:12,
+        questions:[
+          {label:"1.", enonce:"Un jeu consiste à lancer un dé. Si $>4$ : gagner $3$€. Si $\\leq4$ : perdre $1$€. Quelle est l'espérance de gain ?",
+           type:"libre",
+           correction:"$E=\\dfrac{2}{6}\\times3+\\dfrac{4}{6}\\times(-1)=1-\\dfrac{2}{3}=\\dfrac{1}{3}$€ $\\approx0{,}33$€ en moyenne.", points:4},
+          {label:"2.", enonce:"$P(A)=0{,}4$ et $P(B)=0{,}3$ avec $A$ et $B$ indépendants. $P(A\\cap B)$ ?",
+           type:"libre",
+           correction:"$P(A\\cap B)=P(A)\\times P(B)=0{,}4\\times0{,}3=0{,}12$", points:4},
+          {label:"3.", enonce:"On lance $3$ fois une pièce. $P$(exactement $2$ fois pile) ?",
+           type:"libre",
+           correction:"Combinaisons : PPF, PFP, FPP — $3$ cas sur $8$. $P=\\dfrac{3}{8}$.", points:4},
+        ],
+        indices:["Événements indépendants : $P(A\\cap B)=P(A)\\times P(B)$"]
       },
     ],
 
     // ── 10. STATISTIQUES ──
     "Statistiques descriptives": [
       {
-        id:"stat_3_A", titre:"Moyenne, médiane, étendue", niveau:"Facile", points_total:6,
+        id:"stat_3_1", titre:"Statistiques — comprendre les indicateurs", niveau:"Facile", points_total:8,
         questions:[
-          {label:"a)", enonce:"Notes : $8;12;15;10;14;6;13$. Calcule la moyenne.", correction:"$\\bar{x}=\\dfrac{8+12+15+10+14+6+13}{7}=\\dfrac{78}{7}\\approx11{,}1$", points:2},
-          {label:"b)", enonce:"Série triée : $6;8;10;12;13;14;15$. Donne la médiane et l'étendue.", correction:"Médiane $=12$ (4ème valeur sur 7) ; Étendue $=15-6=9$", points:2},
-          {label:"c)", enonce:"Quelle note au 8ème contrôle pour avoir $12$ de moyenne ?", correction:"$\\dfrac{78+x}{8}=12 \\Rightarrow 78+x=96 \\Rightarrow x=18$", points:2},
+          {label:"1.", enonce:"Qu'est-ce que la médiane d'une série statistique ?",
+           type:"qcm",
+           choix:["La valeur la plus fréquente","La moyenne de toutes les valeurs","La valeur qui partage la série en deux moitiés égales","La différence entre le max et le min"],
+           bonneReponseIdx:2, bonneReponse:"La valeur qui partage la série en deux moitiés égales",
+           correction:"La médiane partage la série ordonnée en deux moitiés : 50% des valeurs en dessous, 50% au-dessus.", points:2},
+          {label:"2.", enonce:"Série : $3,7,5,9,1$. Quelle est l'étendue ?",
+           type:"libre",
+           correction:"Étendue $= 9-1=8$", points:2},
+          {label:"3.", enonce:"Série triée : $2,4,6,8,10$. Quelle est la médiane ?",
+           type:"libre",
+           correction:"$5$ valeurs → valeur centrale = $6$ (3ème valeur).", points:2},
+          {label:"4.", enonce:"La moyenne est-elle toujours représentative d'une série ? Exemple avec $1,1,1,1,96$.",
+           type:"qcm",
+           choix:["Oui, toujours","Non, les valeurs extrêmes peuvent la fausser","Oui, si la série est triée","Non, la moyenne n'existe pas"],
+           bonneReponseIdx:1, bonneReponse:"Non, les valeurs extrêmes peuvent la fausser",
+           correction:"Moyenne $=\\dfrac{1+1+1+1+96}{5}=20$, alors que $4$ valeurs sur $5$ valent $1$. La médiane ($=1$) est plus représentative.", points:2},
         ],
-        indices:["Trie d'abord pour trouver la médiane"]
+        indices:["Trie d'abord la série pour trouver médiane et quartiles"]
       },
       {
-        id:"stat_3_B", titre:"Quartiles et diagramme en boîte", niveau:"Moyen", points_total:9,
+        id:"stat_3_2", titre:"Statistiques — calculs de base", niveau:"Facile", points_total:10,
         questions:[
-          {label:"a)", enonce:"Série : $3;5;7;8;10;12;14;16;18;20$. Donne $Q_1$, $Q_2$ et $Q_3$.", correction:"$Q_2=\\dfrac{10+12}{2}=11$ ; $Q_1=7$ (médiane des 5 premiers) ; $Q_3=16$ (médiane des 5 derniers)", points:4},
-          {label:"b)", enonce:"Calcule l'écart interquartile. Que mesure-t-il ?", correction:"$Q_3-Q_1=16-7=9$. Il mesure la dispersion des $50\\%$ centraux.", points:3},
-          {label:"c)", enonce:"Comparer deux classes : Classe A ($\\bar{x}=13$, étendue $=18$) et Classe B ($\\bar{x}=13$, étendue $=4$). Laquelle est plus homogène ?", correction:"Classe B — même moyenne mais étendue bien plus faible → moins de disparité.", points:2},
+          {label:"a)", enonce:"Notes : $8;12;15;10;14;6;13$. Calcule la moyenne.",
+           type:"libre",
+           correction:"$\\bar{x}=\\dfrac{8+12+15+10+14+6+13}{7}=\\dfrac{78}{7}\\approx11{,}1$", points:3},
+          {label:"b)", enonce:"Série triée : $6;8;10;12;13;14;15$. Donne la médiane.",
+           type:"libre",
+           correction:"7 valeurs → médiane $=12$ (4ème valeur).", points:2},
+          {label:"c)", enonce:"Calcule l'étendue de cette série.",
+           type:"libre",
+           correction:"Étendue $=15-6=9$", points:2},
+          {label:"d)", enonce:"Quelle note au 8ème devoir pour avoir $12$ de moyenne ?",
+           type:"libre",
+           correction:"$\\dfrac{78+x}{8}=12 \\Rightarrow 78+x=96 \\Rightarrow x=18$", points:3},
+        ],
+        indices:["Moyenne $=\\dfrac{\\text{somme des valeurs}}{\\text{nombre de valeurs}}$"]
+      },
+      {
+        id:"stat_3_3", titre:"Quartiles et diagramme en boîte", niveau:"Moyen", points_total:12,
+        questions:[
+          {label:"a)", enonce:"Série : $2;5;7;9;11;14;18;21;24;26$. Donne $Q_1$, $Q_2$ et $Q_3$.",
+           type:"libre",
+           correction:"$Q_2=\\dfrac{11+14}{2}=12{,}5$ (médiane) ; $Q_1=7$ (médiane des 5 premiers) ; $Q_3=21$ (médiane des 5 derniers).", points:4},
+          {label:"b)", enonce:"Calcule l'écart interquartile. Que représente-t-il ?",
+           type:"libre",
+           correction:"$Q_3-Q_1=21-7=14$. Il représente la dispersion des $50\\%$ centraux de la série.", points:4},
+          {label:"c)", enonce:"Deux classes ont même moyenne ($13$). Classe A : étendue $=18$. Classe B : étendue $=4$. Laquelle est plus homogène ?",
+           type:"qcm",
+           choix:["Classe A","Classe B","Les deux sont identiques","Impossible à dire"],
+           bonneReponseIdx:1, bonneReponse:"Classe B",
+           correction:"Étendue plus faible = moins de disparité = plus homogène. Classe B est plus homogène.", points:4},
         ],
         indices:["$Q_1$ = médiane de la moitié inférieure ; $Q_3$ = médiane de la moitié supérieure"]
+      },
+      {
+        id:"stat_3_4", titre:"Statistiques pondérées et comparaison", niveau:"Difficile", points_total:12,
+        questions:[
+          {label:"a)", enonce:"Notes avec coeff : $14$ (coeff $2$), $11$ (coeff $3$), $16$ (coeff $1$). Calcule la moyenne pondérée.",
+           type:"libre",
+           correction:"$\\bar{x}=\\dfrac{14\\times2+11\\times3+16\\times1}{2+3+1}=\\dfrac{28+33+16}{6}=\\dfrac{77}{6}\\approx12{,}8$", points:4},
+          {label:"b)", enonce:"$30$ élèves : notes $8(5), 12(10), 14(8), 16(5), 18(2)$. Calcule la moyenne.",
+           type:"libre",
+           correction:"$\\bar{x}=\\dfrac{5\\times8+10\\times12+8\\times14+5\\times16+2\\times18}{30}=\\dfrac{40+120+112+80+36}{30}=\\dfrac{388}{30}\\approx12{,}9$", points:4},
+          {label:"c)", enonce:"Si on ajoute un point à toutes les notes, que devient la moyenne ?",
+           type:"qcm",
+           choix:["Elle reste la même","Elle augmente de $1$","Elle est multipliée par $2$","On ne peut pas savoir"],
+           bonneReponseIdx:1, bonneReponse:"Elle augmente de $1$",
+           correction:"Si on ajoute $k$ à toutes les valeurs, la moyenne augmente de $k$.", points:4},
+        ],
+        indices:["Moyenne pondérée $=\\dfrac{\\sum n_i x_i}{\\sum n_i}$"]
+      },
+      {
+        id:"stat_3_5", titre:"Statistiques — brevet", niveau:"Difficile", points_total:12,
+        questions:[
+          {label:"1.", enonce:"Marathon : $53$ pros (moyenne $2h15$) et $2354$ amateurs (moyenne $3h59$). Calcule le temps moyen global.",
+           type:"libre",
+           correction:"$\\bar{x}=\\dfrac{53\\times135+2354\\times239}{2407}=\\dfrac{7155+562606}{2407}=\\dfrac{569761}{2407}\\approx236{,}7$ min $\\approx3h57$.", points:5},
+          {label:"2.", enonce:"Série : $5,8,3,9,5,6,4,7,2,8$. Donne la médiane et les quartiles.",
+           type:"libre",
+           correction:"Triée : $2,3,4,5,5,6,7,8,8,9$. $Q_2=\\dfrac{5+6}{2}=5{,}5$ ; $Q_1=4$ ; $Q_3=8$.", points:4},
+          {label:"3.", enonce:"Classe A : $\\bar{x}=12$, $Q_1=9$, $Q_3=15$. Classe B : $\\bar{x}=12$, $Q_1=11$, $Q_3=13$. Laquelle est plus homogène ?",
+           type:"libre",
+           correction:"Écart interquartile A $=15-9=6$ ; B $=13-11=2$. Classe B est plus homogène.", points:3},
+        ],
+        indices:["Écart interquartile plus petit = série plus homogène"]
       },
     ],
 
     // ── 11. PYTHAGORE ──
     "Théorème de Pythagore": [
       {
-        id:"pyth_3_A", titre:"Appliquer le théorème de Pythagore", niveau:"Facile", points_total:6,
+        id:"pyth_3_1", titre:"Pythagore — comprendre et identifier", niveau:"Facile", points_total:8,
         questions:[
-          {label:"a)", enonce:"Triangle rectangle en $A$. $AB=3$ cm, $AC=4$ cm. Calcule $BC$.", correction:"$BC^2=3^2+4^2=9+16=25 \\Rightarrow BC=5$ cm", points:2},
-          {label:"b)", enonce:"Triangle rectangle en $B$. $AC=13$ cm, $AB=5$ cm. Calcule $BC$.", correction:"$BC^2=13^2-5^2=169-25=144 \\Rightarrow BC=12$ cm", points:2},
-          {label:"c)", enonce:"Les côtés mesurent $7$ cm, $24$ cm et $25$ cm. Ce triangle est-il rectangle ?", correction:"$25^2=625=7^2+24^2=49+576=625$ ✓ Oui, rectangle.", points:2},
+          {label:"1.", enonce:"Dans un triangle rectangle, quel côté est l'hypoténuse ?",
+           type:"qcm",
+           choix:["Le côté le plus court","Le côté adjacent à l'angle droit","Le côté opposé à l'angle droit","N'importe quel côté"],
+           bonneReponseIdx:2, bonneReponse:"Le côté opposé à l'angle droit",
+           correction:"L'hypoténuse est toujours le côté opposé à l'angle droit — c'est aussi le plus long côté.", points:2},
+          {label:"2.", enonce:"Le triangle de côtés $5$, $12$ et $13$ est-il rectangle ?",
+           type:"qcm",
+           choix:["Oui, car $5+12=17>13$","Oui, car $5^2+12^2=13^2$","Non, car $5+12\\neq13$","Non, car $13$ n'est pas pair"],
+           bonneReponseIdx:1, bonneReponse:"Oui, car $5^2+12^2=13^2$",
+           correction:"$5^2+12^2=25+144=169=13^2$ ✓ Oui, rectangle en l'angle opposé à $13$.", points:2},
+          {label:"3.", enonce:"Triangle rectangle en $C$. $CA=6$, $CB=8$. Calcule $AB$ (l'hypoténuse).",
+           type:"libre",
+           correction:"$AB^2=6^2+8^2=36+64=100 \\Rightarrow AB=10$", points:2},
+          {label:"4.", enonce:"Hypoténuse $AC=15$, $AB=9$. Calcule $BC$.",
+           type:"libre",
+           correction:"$BC^2=15^2-9^2=225-81=144 \\Rightarrow BC=12$", points:2},
         ],
-        indices:["$c^2=a^2+b^2$ où $c$ est l'hypoténuse (côté en face de l'angle droit)"]
+        indices:["$c^2=a^2+b^2$ où $c$ est l'hypoténuse"]
       },
       {
-        id:"pyth_3_B", titre:"Pythagore — problèmes", niveau:"Difficile", points_total:9,
+        id:"pyth_3_2", titre:"Pythagore — calculs directs", niveau:"Facile", points_total:10,
         questions:[
-          {label:"a)", enonce:"Une échelle de $5$ m appuie contre un mur. Son pied est à $1{,}5$ m du mur. À quelle hauteur touche-t-elle le mur ?", correction:"$h^2=5^2-1{,}5^2=25-2{,}25=22{,}75 \\Rightarrow h=\\sqrt{22{,}75}\\approx4{,}77$ m", points:3},
-          {label:"b)", enonce:"Calcule la diagonale d'un rectangle de $6$ cm × $8$ cm.", correction:"$d^2=6^2+8^2=36+64=100 \\Rightarrow d=10$ cm", points:3},
-          {label:"c)", enonce:"Un terrain a la forme d'un triangle rectangle de cathètes $30$ m et $40$ m. Calcule le périmètre.", correction:"Hypoténuse $=\\sqrt{30^2+40^2}=\\sqrt{2500}=50$ m. Périmètre $=30+40+50=120$ m.", points:3},
+          {label:"a)", enonce:"Triangle rect. en $A$. $AB=3$, $AC=4$. Calcule $BC$.",
+           type:"libre",
+           correction:"$BC^2=9+16=25 \\Rightarrow BC=5$", points:2},
+          {label:"b)", enonce:"Triangle rect. en $B$. $AC=13$, $AB=5$. Calcule $BC$.",
+           type:"libre",
+           correction:"$BC^2=169-25=144 \\Rightarrow BC=12$", points:2},
+          {label:"c)", enonce:"Triangle rect. en $A$. $AB=\\sqrt{7}$, $AC=3$. Calcule $BC$.",
+           type:"libre",
+           correction:"$BC^2=7+9=16 \\Rightarrow BC=4$", points:3},
+          {label:"d)", enonce:"Les côtés mesurent $8$, $15$ et $17$. Ce triangle est-il rectangle ?",
+           type:"libre",
+           correction:"$8^2+15^2=64+225=289=17^2$ ✓ Oui, rectangle.", points:3},
         ],
-        indices:["Fais un schéma et identifie l'angle droit"]
+        indices:["Identifie d'abord l'hypoténuse (côté le plus long)"]
+      },
+      {
+        id:"pyth_3_3", titre:"Pythagore — applications concrètes", niveau:"Moyen", points_total:12,
+        questions:[
+          {label:"a)", enonce:"Une échelle de $5$ m appuie contre un mur. Son pied est à $1{,}5$ m. À quelle hauteur ?",
+           type:"libre",
+           correction:"$h^2=25-2{,}25=22{,}75 \\Rightarrow h=\\sqrt{22{,}75}\\approx4{,}77$ m", points:3},
+          {label:"b)", enonce:"Calcule la diagonale d'un rectangle $6$ cm × $8$ cm.",
+           type:"libre",
+           correction:"$d^2=36+64=100 \\Rightarrow d=10$ cm", points:3},
+          {label:"c)", enonce:"Un terrain triangulaire rectangle a des cathètes de $30$ m et $40$ m. Périmètre ?",
+           type:"libre",
+           correction:"Hypoténuse $=\\sqrt{900+1600}=\\sqrt{2500}=50$ m. Périmètre $=30+40+50=120$ m.", points:3},
+          {label:"d)", enonce:"Quelle est la hauteur d'un triangle équilatéral de côté $6$ cm ?",
+           type:"libre",
+           correction:"$h^2=6^2-3^2=36-9=27 \\Rightarrow h=\\sqrt{27}=3\\sqrt{3}\\approx5{,}2$ cm", points:3},
+        ],
+        indices:["Fais toujours un schéma et repère l'angle droit"]
+      },
+      {
+        id:"pyth_3_4", titre:"Réciproque de Pythagore", niveau:"Difficile", points_total:10,
+        questions:[
+          {label:"a)", enonce:"Détermine si le triangle $ABC$ est rectangle : $AB=10$, $BC=24$, $AC=26$.",
+           type:"libre",
+           correction:"$10^2+24^2=100+576=676=26^2$ ✓ Rectangle en $B$.", points:3},
+          {label:"b)", enonce:"Triangle : $AB=7$, $BC=8$, $AC=10$. Rectangle ?",
+           type:"libre",
+           correction:"$7^2+8^2=49+64=113 \\neq 100=10^2$. Non rectangle.", points:3},
+          {label:"c)", enonce:"Pour que le triangle de côtés $x$, $5$ et $13$ soit rectangle (avec $x<13$), que vaut $x$ ?",
+           type:"libre",
+           correction:"$x^2+5^2=13^2 \\Rightarrow x^2=169-25=144 \\Rightarrow x=12$", points:4},
+        ],
+        indices:["Réciproque : si $a^2+b^2=c^2$ alors le triangle est rectangle en l'angle opposé à $c$"]
+      },
+      {
+        id:"pyth_3_5", titre:"Pythagore — brevet", niveau:"Difficile", points_total:12,
+        questions:[
+          {label:"1.", enonce:"Un mât de $8$ m est maintenu par un câble fixé au sol à $6$ m de sa base. Longueur du câble ?",
+           type:"libre",
+           correction:"$c^2=8^2+6^2=64+36=100 \\Rightarrow c=10$ m", points:3},
+          {label:"2.", enonce:"Losange de diagonales $10$ cm et $24$ cm. Calcule son périmètre.",
+           type:"libre",
+           correction:"Demi-diagonales : $5$ et $12$. Côté $=\\sqrt{25+144}=\\sqrt{169}=13$ cm. Périmètre $=4\\times13=52$ cm.", points:5},
+          {label:"3.", enonce:"Un écran $16/9$ a une diagonale de $40$ cm. Calcule sa largeur et sa hauteur.",
+           type:"libre",
+           correction:"$l=16k$, $h=9k$. $(16k)^2+(9k)^2=40^2 \\Rightarrow 337k^2=1600 \\Rightarrow k\\approx2{,}18$. $l\\approx34{,}9$ cm, $h\\approx19{,}6$ cm.", points:4},
+        ],
+        indices:["Dans un losange, les diagonales sont perpendiculaires et se coupent en leur milieu"]
       },
     ],
 
     // ── 12. THÉORÈME DE THALÈS ──
     "Théorème de Thalès": [
       {
-        id:"thales_3_A", titre:"Appliquer le théorème de Thalès", niveau:"Facile", points_total:6,
+        id:"thales_3_1", titre:"Thalès — comprendre et identifier", niveau:"Facile", points_total:8,
         questions:[
-          {label:"a)", enonce:"Dans $\\triangle ABC$, $DE \\parallel BC$, $AD=4$, $DB=6$, $AE=3$. Calcule $EC$.", correction:"$\\dfrac{AD}{AB}=\\dfrac{AE}{AC} \\Rightarrow \\dfrac{4}{10}=\\dfrac{3}{AC} \\Rightarrow AC=7{,}5$. $EC=7{,}5-3=4{,}5$ cm", points:3},
-          {label:"b)", enonce:"$DE \\parallel BC$, $AD=6$, $AB=9$, $DE=4$. Calcule $BC$.", correction:"$\\dfrac{AD}{AB}=\\dfrac{DE}{BC} \\Rightarrow \\dfrac{6}{9}=\\dfrac{4}{BC} \\Rightarrow BC=6$ cm", points:3},
+          {label:"1.", enonce:"Quelle condition faut-il pour appliquer le théorème de Thalès dans un triangle ?",
+           type:"qcm",
+           choix:["Les côtés doivent être égaux","Une droite doit couper deux côtés proportionnellement","Deux droites doivent être parallèles et couper deux côtés du triangle","Le triangle doit être rectangle"],
+           bonneReponseIdx:2, bonneReponse:"Deux droites doivent être parallèles et couper deux côtés du triangle",
+           correction:"Thalès s'applique quand une droite est parallèle à un côté du triangle et coupe les deux autres côtés.", points:2},
+          {label:"2.", enonce:"$DE\\parallel BC$ dans le triangle $ABC$. Quelle égalité est correcte ?",
+           type:"qcm",
+           choix:["$\\dfrac{AD}{AB}=\\dfrac{BC}{DE}$","$\\dfrac{AD}{DB}=\\dfrac{AE}{EC}$","$\\dfrac{AD}{AB}=\\dfrac{DE}{BC}$","$\\dfrac{AD}{DB}=\\dfrac{AB}{AE}$"],
+           bonneReponseIdx:1, bonneReponse:"$\\dfrac{AD}{DB}=\\dfrac{AE}{EC}$",
+           correction:"Thalès donne : $\\dfrac{AD}{AB}=\\dfrac{AE}{AC}=\\dfrac{DE}{BC}$ ET $\\dfrac{AD}{DB}=\\dfrac{AE}{EC}$.", points:2},
+          {label:"3.", enonce:"$DE\\parallel BC$, $AD=4$, $AB=10$, $AE=3$. Calcule $AC$.",
+           type:"libre",
+           correction:"$\\dfrac{AD}{AB}=\\dfrac{AE}{AC} \\Rightarrow \\dfrac{4}{10}=\\dfrac{3}{AC} \\Rightarrow AC=7{,}5$ cm", points:2},
+          {label:"4.", enonce:"$DE\\parallel BC$, $AD=6$, $AB=9$, $DE=4$. Calcule $BC$.",
+           type:"libre",
+           correction:"$\\dfrac{AD}{AB}=\\dfrac{DE}{BC} \\Rightarrow \\dfrac{6}{9}=\\dfrac{4}{BC} \\Rightarrow BC=6$ cm", points:2},
         ],
-        indices:["Si $DE \\parallel BC$ : $\\dfrac{AD}{AB}=\\dfrac{AE}{AC}=\\dfrac{DE}{BC}$"]
+        indices:["Si $DE\\parallel BC$ : $\\dfrac{AD}{AB}=\\dfrac{AE}{AC}=\\dfrac{DE}{BC}$"]
       },
       {
-        id:"thales_3_B", titre:"Réciproque de Thalès", niveau:"Moyen", points_total:8,
+        id:"thales_3_2", titre:"Thalès — calculs directs", niveau:"Facile", points_total:10,
         questions:[
-          {label:"a)", enonce:"$AD=3$, $DB=5$, $AE=2{,}1$, $EC=3{,}5$. Les droites $DE$ et $BC$ sont-elles parallèles ?", correction:"$\\dfrac{AD}{AB}=\\dfrac{3}{8}$ ; $\\dfrac{AE}{AC}=\\dfrac{2{,}1}{5{,}6}=\\dfrac{3}{8}$ ✓ Oui, $DE \\parallel BC$.", points:4},
-          {label:"b)", enonce:"Un poteau de $4$ m projette une ombre de $3$ m. Simultanément, un arbre projette une ombre de $7{,}5$ m. Quelle est la hauteur de l'arbre ?", correction:"$\\dfrac{4}{3}=\\dfrac{h}{7{,}5} \\Rightarrow h=\\dfrac{4 \\times 7{,}5}{3}=10$ m", points:4},
+          {label:"a)", enonce:"$DE\\parallel BC$, $AD=3$, $DB=5$, $AE=2{,}4$. Calcule $EC$.",
+           type:"libre",
+           correction:"$\\dfrac{AD}{AB}=\\dfrac{AE}{AC} \\Rightarrow \\dfrac{3}{8}=\\dfrac{2{,}4}{AC} \\Rightarrow AC=6{,}4$. $EC=4$ cm.", points:3},
+          {label:"b)", enonce:"$DE\\parallel BC$, $AD=4$, $DB=6$, $DE=3$. Calcule $BC$.",
+           type:"libre",
+           correction:"$\\dfrac{AD}{AB}=\\dfrac{DE}{BC} \\Rightarrow \\dfrac{4}{10}=\\dfrac{3}{BC} \\Rightarrow BC=7{,}5$ cm", points:3},
+          {label:"c)", enonce:"$DE\\parallel BC$, $AD=5$, $AB=8$, $BC=6$. Calcule $DE$.",
+           type:"libre",
+           correction:"$\\dfrac{AD}{AB}=\\dfrac{DE}{BC} \\Rightarrow \\dfrac{5}{8}=\\dfrac{DE}{6} \\Rightarrow DE=3{,}75$ cm", points:4},
         ],
-        indices:["Réciproque : si les rapports sont égaux, alors les droites sont parallèles"]
+        indices:["Identifie les longueurs connues et inconnues avant d'écrire les rapports"]
+      },
+      {
+        id:"thales_3_3", titre:"Réciproque de Thalès", niveau:"Moyen", points_total:10,
+        questions:[
+          {label:"a)", enonce:"$AD=3$, $DB=5$, $AE=2{,}1$, $EC=3{,}5$. $DE\\parallel BC$ ?",
+           type:"libre",
+           correction:"$\\dfrac{AD}{AB}=\\dfrac{3}{8}$ ; $\\dfrac{AE}{AC}=\\dfrac{2{,}1}{5{,}6}=\\dfrac{3}{8}$ ✓ Oui, $DE\\parallel BC$.", points:4},
+          {label:"b)", enonce:"$AD=4$, $DB=6$, $AE=3$, $EC=5$. $DE\\parallel BC$ ?",
+           type:"libre",
+           correction:"$\\dfrac{AD}{AB}=\\dfrac{4}{10}=0{,}4$ ; $\\dfrac{AE}{AC}=\\dfrac{3}{8}=0{,}375$. Rapports différents → $DE$ non parallèle à $BC$.", points:4},
+          {label:"c)", enonce:"Pour que $DE\\parallel BC$ avec $AD=3$, $AB=9$, $AE=k$, $AC=12$, quelle est la valeur de $k$ ?",
+           type:"libre",
+           correction:"$\\dfrac{3}{9}=\\dfrac{k}{12} \\Rightarrow k=4$", points:2},
+        ],
+        indices:["Réciproque : si $\\dfrac{AD}{AB}=\\dfrac{AE}{AC}$ alors $DE\\parallel BC$"]
+      },
+      {
+        id:"thales_3_4", titre:"Thalès — applications pratiques", niveau:"Difficile", points_total:12,
+        questions:[
+          {label:"a)", enonce:"Un poteau de $4$ m projette une ombre de $3$ m. Un arbre projette une ombre de $7{,}5$ m. Hauteur de l'arbre ?",
+           type:"libre",
+           correction:"$\\dfrac{4}{3}=\\dfrac{h}{7{,}5} \\Rightarrow h=\\dfrac{4\\times7{,}5}{3}=10$ m", points:4},
+          {label:"b)", enonce:"Sur un plan à l'échelle $1:50\\,000$, deux villes sont à $4{,}8$ cm. Distance réelle ?",
+           type:"libre",
+           correction:"$4{,}8\\times50\\,000=240\\,000$ cm $=2{,}4$ km", points:4},
+          {label:"c)", enonce:"Un photographe veut prendre en photo un bâtiment de $30$ m. À $50$ m de distance, la photo fait $6$ cm. Quelle focale permet de voir le bâtiment entier sur $4$ cm ?",
+           type:"libre",
+           correction:"$\\dfrac{6\\text{ cm}}{30\\text{ m}}=\\dfrac{4\\text{ cm}}{x} \\Rightarrow x=20$ m. Le bâtiment doit faire $20$ m apparent.", points:4},
+        ],
+        indices:["Dessine la situation et identifie les triangles semblables"]
+      },
+      {
+        id:"thales_3_5", titre:"Thalès — brevet", niveau:"Difficile", points_total:12,
+        questions:[
+          {label:"1.", enonce:"Dans un triangle $ABC$, $M$ est le milieu de $[AB]$ et $N$ est le milieu de $[AC]$. Que vaut $\\dfrac{MN}{BC}$ ?",
+           type:"libre",
+           correction:"$\\dfrac{AM}{AB}=\\dfrac{AN}{AC}=\\dfrac{1}{2}$ donc $\\dfrac{MN}{BC}=\\dfrac{1}{2}$. La droite des milieux est parallèle à $BC$ et vaut la moitié.", points:4},
+          {label:"2.", enonce:"$DE\\parallel BC$, $AD=x$, $DB=6$, $AE=x-1$, $EC=4$. Calcule $x$.",
+           type:"libre",
+           correction:"$\\dfrac{x}{x+6}=\\dfrac{x-1}{x+3} \\Rightarrow x(x+3)=(x-1)(x+6) \\Rightarrow x^2+3x=x^2+5x-6 \\Rightarrow -2x=-6 \\Rightarrow x=3$", points:4},
+          {label:"3.", enonce:"Deux triangles semblables ont des côtés dans le rapport $3:5$. Si le plus petit a un périmètre de $24$ cm, quel est le périmètre du plus grand ?",
+           type:"libre",
+           correction:"$\\dfrac{24}{P}=\\dfrac{3}{5} \\Rightarrow P=40$ cm", points:4},
+        ],
+        indices:["Théorème des milieux : segment $MN$ joignant les milieux de deux côtés vaut la moitié du 3ème"]
       },
     ],
 
     // ── 13. TRIGONOMÉTRIE ──
     "Trigonométrie": [
       {
-        id:"trigo_3_A", titre:"sin, cos, tan — définitions et calculs", niveau:"Facile", points_total:6,
+        id:"trigo_3_1", titre:"Trigonométrie — SOH CAH TOA", niveau:"Facile", points_total:8,
         questions:[
-          {label:"a)", enonce:"Triangle rectangle en $A$. $BC=10$, $AB=6$. Calcule $\\cos(\\hat{B})$, $\\sin(\\hat{B})$ et $\\tan(\\hat{B})$.", correction:"$AC=\\sqrt{100-36}=8$. $\\cos(\\hat{B})=\\dfrac{6}{10}=0{,}6$ ; $\\sin(\\hat{B})=\\dfrac{8}{10}=0{,}8$ ; $\\tan(\\hat{B})=\\dfrac{8}{6}\\approx1{,}33$", points:3},
-          {label:"b)", enonce:"Triangle rect. en $A$, $\\hat{B}=35°$, $BC=12$ cm. Calcule $AB$ et $AC$.", correction:"$AB=12\\cos(35°)\\approx12\\times0{,}819\\approx9{,}83$ cm ; $AC=12\\sin(35°)\\approx12\\times0{,}574\\approx6{,}88$ cm", points:3},
+          {label:"1.", enonce:"Dans un triangle rectangle, $\\sin(\\hat{B})$ est égal à :",
+           type:"qcm",
+           choix:["$\\dfrac{\\text{adjacent}}{\\text{hypoténuse}}$","$\\dfrac{\\text{opposé}}{\\text{hypoténuse}}$","$\\dfrac{\\text{opposé}}{\\text{adjacent}}$","$\\dfrac{\\text{hypoténuse}}{\\text{opposé}}$"],
+           bonneReponseIdx:1, bonneReponse:"$\\dfrac{\\text{opposé}}{\\text{hypoténuse}}$",
+           correction:"SOH : $\\sin=\\dfrac{\\text{Opposé}}{\\text{Hypoténuse}}$ · CAH : $\\cos=\\dfrac{\\text{Adjacent}}{\\text{Hypoténuse}}$ · TOA : $\\tan=\\dfrac{\\text{Opposé}}{\\text{Adjacent}}$", points:2},
+          {label:"2.", enonce:"Triangle rect. en $A$, $BC=10$, $AB=6$. Calcule $\\cos(\\hat{B})$.",
+           type:"libre",
+           correction:"$\\cos(\\hat{B})=\\dfrac{AB}{BC}=\\dfrac{6}{10}=0{,}6$", points:2},
+          {label:"3.", enonce:"Triangle rect. en $A$, $BC=10$, $AB=6$. Calcule $\\sin(\\hat{B})$ et $\\tan(\\hat{B})$.",
+           type:"libre",
+           correction:"$AC=\\sqrt{100-36}=8$. $\\sin(\\hat{B})=\\dfrac{8}{10}=0{,}8$ ; $\\tan(\\hat{B})=\\dfrac{8}{6}\\approx1{,}33$", points:2},
+          {label:"4.", enonce:"$\\sin(30°)=0{,}5$. Dans un triangle rect. en $A$, $\\hat{B}=30°$, $BC=12$. Calcule $AC$.",
+           type:"libre",
+           correction:"$\\sin(30°)=\\dfrac{AC}{BC} \\Rightarrow AC=12\\times0{,}5=6$ cm", points:2},
         ],
-        indices:["$\\sin=\\dfrac{\\text{opposé}}{\\text{hypoténuse}}$ ; $\\cos=\\dfrac{\\text{adjacent}}{\\text{hypoténuse}}$ ; $\\tan=\\dfrac{\\text{opposé}}{\\text{adjacent}}$"]
+        indices:["SOH CAH TOA — apprendre ce mnémotechnique par cœur !"]
       },
       {
-        id:"trigo_3_B", titre:"Calculer un angle inconnu", niveau:"Moyen", points_total:9,
+        id:"trigo_3_2", titre:"Trigonométrie — calculer un côté", niveau:"Facile", points_total:10,
         questions:[
-          {label:"a)", enonce:"Triangle rect. en $A$, $AB=5$, $BC=13$. Calcule $\\hat{B}$ (en degrés).", correction:"$\\cos(\\hat{B})=\\dfrac{5}{13}\\approx0{,}385 \\Rightarrow \\hat{B}\\approx67{,}4°$", points:3},
-          {label:"b)", enonce:"Un toboggan de $6$ m de long fait un angle de $25°$ avec l'horizontale. Quelle est la hauteur du toboggan ?", correction:"$h=6\\sin(25°)\\approx6\\times0{,}423\\approx2{,}54$ m", points:3},
-          {label:"c)", enonce:"Du haut d'une tour de $30$ m, on voit un point au sol sous un angle de dépression de $40°$. Distance du point à la base ?", correction:"$\\tan(40°)=\\dfrac{30}{d} \\Rightarrow d=\\dfrac{30}{\\tan(40°)}\\approx\\dfrac{30}{0{,}839}\\approx35{,}8$ m", points:3},
+          {label:"a)", enonce:"Triangle rect. en $A$, $\\hat{B}=35°$, $BC=12$ cm. Calcule $AB$ et $AC$.",
+           type:"libre",
+           correction:"$AB=12\\cos(35°)\\approx12\\times0{,}819\\approx9{,}83$ cm ; $AC=12\\sin(35°)\\approx6{,}88$ cm", points:4},
+          {label:"b)", enonce:"Triangle rect. en $A$, $\\hat{B}=50°$, $AB=8$ cm. Calcule $AC$.",
+           type:"libre",
+           correction:"$\\tan(50°)=\\dfrac{AC}{AB} \\Rightarrow AC=8\\times\\tan(50°)\\approx8\\times1{,}192\\approx9{,}53$ cm", points:3},
+          {label:"c)", enonce:"Triangle rect. en $B$, $\\hat{A}=40°$, $AB=15$ cm. Calcule $BC$.",
+           type:"libre",
+           correction:"$\\tan(40°)=\\dfrac{BC}{AB} \\Rightarrow BC=15\\times\\tan(40°)\\approx15\\times0{,}839\\approx12{,}6$ cm", points:3},
         ],
-        indices:["Utilise $\\cos^{-1}$, $\\sin^{-1}$, $\\tan^{-1}$ sur la calculatrice pour trouver l'angle"]
+        indices:["Choisis sin, cos ou tan selon les côtés connus et inconnus"]
+      },
+      {
+        id:"trigo_3_3", titre:"Trigonométrie — calculer un angle", niveau:"Moyen", points_total:12,
+        questions:[
+          {label:"a)", enonce:"Triangle rect. en $A$, $AB=5$, $BC=13$. Calcule $\\hat{B}$.",
+           type:"libre",
+           correction:"$\\cos(\\hat{B})=\\dfrac{5}{13}\\approx0{,}385 \\Rightarrow \\hat{B}=\\cos^{-1}(0{,}385)\\approx67{,}4°$", points:3},
+          {label:"b)", enonce:"Triangle rect. en $A$, $AB=6$, $AC=6$. Calcule $\\hat{B}$.",
+           type:"libre",
+           correction:"$\\tan(\\hat{B})=\\dfrac{6}{6}=1 \\Rightarrow \\hat{B}=\\tan^{-1}(1)=45°$", points:3},
+          {label:"c)", enonce:"Triangle rect. en $A$, $AC=9$, $BC=15$. Calcule $\\hat{B}$.",
+           type:"libre",
+           correction:"$\\sin(\\hat{B})=\\dfrac{9}{15}=0{,}6 \\Rightarrow \\hat{B}=\\sin^{-1}(0{,}6)\\approx36{,}9°$", points:3},
+          {label:"d)", enonce:"Quel angle donne $\\cos\\theta=\\dfrac{\\sqrt{3}}{2}$ ?",
+           type:"qcm",
+           choix:["$30°$","$45°$","$60°$","$90°$"],
+           bonneReponseIdx:0, bonneReponse:"$30°$",
+           correction:"$\\cos(30°)=\\dfrac{\\sqrt{3}}{2}\\approx0{,}866$. Valeur à connaître par cœur.", points:3},
+        ],
+        indices:["Utilise $\\cos^{-1}$, $\\sin^{-1}$ ou $\\tan^{-1}$ (arccos, arcsin, arctan) sur la calculatrice"]
+      },
+      {
+        id:"trigo_3_4", titre:"Trigonométrie — applications", niveau:"Difficile", points_total:12,
+        questions:[
+          {label:"a)", enonce:"Un toboggan de $6$ m fait un angle de $25°$ avec l'horizontale. Hauteur du toboggan ?",
+           type:"libre",
+           correction:"$h=6\\sin(25°)\\approx6\\times0{,}423\\approx2{,}54$ m", points:3},
+          {label:"b)", enonce:"Du sommet d'une tour de $30$ m, on voit un point au sol sous un angle de dépression de $40°$. Distance du point à la base ?",
+           type:"libre",
+           correction:"$\\tan(40°)=\\dfrac{30}{d} \\Rightarrow d=\\dfrac{30}{\\tan(40°)}\\approx\\dfrac{30}{0{,}839}\\approx35{,}8$ m", points:4},
+          {label:"c)", enonce:"Un escalier a des marches de hauteur $18$ cm et de profondeur $25$ cm. Quel est l'angle d'inclinaison ?",
+           type:"libre",
+           correction:"$\\tan\\theta=\\dfrac{18}{25}=0{,}72 \\Rightarrow \\theta=\\tan^{-1}(0{,}72)\\approx35{,}8°$", points:5},
+        ],
+        indices:["Fais un schéma, identifie le triangle rectangle et les côtés connus/inconnus"]
+      },
+      {
+        id:"trigo_3_5", titre:"Trigonométrie — brevet", niveau:"Difficile", points_total:12,
+        questions:[
+          {label:"1.", enonce:"Un bateau voit le sommet d'une falaise de $80$ m sous un angle d'élévation de $20°$. Distance du bateau à la falaise ?",
+           type:"libre",
+           correction:"$\\tan(20°)=\\dfrac{80}{d} \\Rightarrow d=\\dfrac{80}{\\tan(20°)}\\approx\\dfrac{80}{0{,}364}\\approx220$ m", points:4},
+          {label:"2.", enonce:"Triangle $ABC$ rectangle en $C$. $AC=7$, $BC=7\\sqrt{3}$. Calcule $\\hat{A}$ et $AB$.",
+           type:"libre",
+           correction:"$\\tan(\\hat{A})=\\dfrac{BC}{AC}=\\dfrac{7\\sqrt{3}}{7}=\\sqrt{3} \\Rightarrow \\hat{A}=60°$. $AB=\\sqrt{49+147}=\\sqrt{196}=14$.", points:4},
+          {label:"3.", enonce:"Dans le triangle $ABC$ : $\\hat{A}=35°$, $\\hat{B}=55°$, $AB=10$ cm. Calcule $BC$.",
+           type:"libre",
+           correction:"$\\hat{C}=180-35-55=90°$. Triangle rect. en $C$. $\\cos(\\hat{B})=\\dfrac{BC}{AB} \\Rightarrow BC=10\\cos(55°)\\approx5{,}74$ cm", points:4},
+        ],
+        indices:["Angle d'élévation = angle depuis l'horizontal vers le haut ; dépression = vers le bas"]
       },
     ],
 
     // ── 14. TRANSFORMATIONS GÉOMÉTRIQUES ──
     "Transformations géométriques": [
       {
-        id:"transfo_3_A", titre:"Translations et symétries", niveau:"Facile", points_total:6,
+        id:"transfo_3_1", titre:"Transformations — identifier et définir", niveau:"Facile", points_total:8,
         questions:[
-          {label:"a)", enonce:"$A(2\\,;\\,3)$ est translaté par $\\vec{u}\\binom{3}{-2}$. Coordonnées de $A'$ ?", correction:"$A'(2+3\\,;\\,3-2)=A'(5\\,;\\,1)$", points:2},
-          {label:"b)", enonce:"Symétrique de $B(4\\,;\\,-1)$ par rapport à l'origine $O$.", correction:"$B'(-4\\,;\\,1)$", points:2},
-          {label:"c)", enonce:"Symétrique de $C(3\\,;\\,5)$ par rapport au point $I(1\\,;\\,2)$.", correction:"$C'(2\\times1-3\\,;\\,2\\times2-5)=C'(-1\\,;\\,-1)$", points:2},
+          {label:"1.", enonce:"Quelle transformation conserve les distances et les angles mais change la position ?",
+           type:"qcm",
+           choix:["L'homothétie","La translation","Le rétrécissement","La projection"],
+           bonneReponseIdx:1, bonneReponse:"La translation",
+           correction:"La translation, la rotation et la symétrie sont des isométries : elles conservent les distances et les angles.", points:2},
+          {label:"2.", enonce:"Lors d'une symétrie centrale de centre $O$, l'image de $A$ est $A'$. Quelle relation relie $O$, $A$ et $A'$ ?",
+           type:"qcm",
+           choix:["$O$ est entre $A$ et $A'$","$O$ est le milieu de $[AA']$","$OA = 2 \\times OA'$","$A$ et $A'$ sont confondus"],
+           bonneReponseIdx:1, bonneReponse:"$O$ est le milieu de $[AA']$",
+           correction:"En symétrie centrale, le centre $O$ est le milieu du segment $[AA']$.", points:2},
+          {label:"3.", enonce:"$A(2\,;\,3)$ translaté par $\\vec{u}\\binom{4}{-1}$. Coordonnées de $A'$ ?",
+           type:"libre",
+           correction:"$A'(2+4\,;\,3-1)=A'(6\,;\,2)$", points:2},
+          {label:"4.", enonce:"Symétrique de $B(5\,;\,-2)$ par rapport à l'origine $O(0\,;\,0)$ ?",
+           type:"libre",
+           correction:"$B'(-5\,;\,2)$", points:2},
         ],
-        indices:["Symétrie centrale par rapport à $I(a,b)$ : $M'(2a-x\\,;\\,2b-y)$"]
+        indices:["Translation $\\vec{u}\\binom{a}{b}$ : ajoute $a$ à l'abscisse et $b$ à l'ordonnée"]
       },
       {
-        id:"transfo_3_B", titre:"Rotations", niveau:"Moyen", points_total:8,
+        id:"transfo_3_2", titre:"Symétries centrale et axiale", niveau:"Facile", points_total:10,
         questions:[
-          {label:"a)", enonce:"Rotation de centre $O$, angle $90°$ sens direct. Image de $A(3\\,;\\,1)$.", correction:"$A'(-1\\,;\\,3)$", points:3},
-          {label:"b)", enonce:"Rotation de $180°$ autour de $O$. Image de $B(2\\,;\\,-5)$.", correction:"$B'(-2\\,;\\,5)$", points:2},
-          {label:"c)", enonce:"Quelle rotation transforme $C(4\\,;\\,0)$ en $C'(0\\,;\\,4)$ ?", correction:"Rotation d'angle $90°$ sens direct autour de $O$.", points:3},
+          {label:"a)", enonce:"Symétrique de $A(3\,;\,5)$ par rapport au point $I(1\,;\,2)$.",
+           type:"libre",
+           correction:"$A'(2\\times1-3\,;\,2\\times2-5)=A'(-1\,;\,-1)$", points:2},
+          {label:"b)", enonce:"Symétrique de $B(4\,;\,-1)$ par rapport à l'axe des ordonnées.",
+           type:"libre",
+           correction:"$B'(-4\,;\,-1)$ (l'axe $(Oy)$ change le signe de $x$)", points:2},
+          {label:"c)", enonce:"Symétrique de $C(-2\,;\,3)$ par rapport à l'axe des abscisses.",
+           type:"libre",
+           correction:"$C'(-2\,;\,-3)$ (l'axe $(Ox)$ change le signe de $y$)", points:2},
+          {label:"d)", enonce:"Symétrique de $D(3\,;\,4)$ par rapport à la droite $y=x$.",
+           type:"libre",
+           correction:"$D'(4\,;\,3)$ (on échange $x$ et $y$)", points:4},
         ],
-        indices:["Rotation $90°$ sens direct : $(x,y)\\to(-y,x)$ ; Rotation $180°$ : $(x,y)\\to(-x,-y)$"]
+        indices:["Sym. centrale par rapport à $I(a,b)$ : $M'(2a-x\,;\,2b-y)$"]
+      },
+      {
+        id:"transfo_3_3", titre:"Rotations", niveau:"Moyen", points_total:10,
+        questions:[
+          {label:"a)", enonce:"Rotation de $90°$ sens direct autour de $O$. Image de $A(3\,;\,1)$.",
+           type:"libre",
+           correction:"$A'(-1\,;\,3)$", points:2},
+          {label:"b)", enonce:"Rotation de $180°$ autour de $O$. Image de $B(2\,;\,-5)$.",
+           type:"libre",
+           correction:"$B'(-2\,;\,5)$", points:2},
+          {label:"c.", enonce:"Rotation de $90°$ sens indirect (horaire) autour de $O$. Image de $C(1\,;\,4)$.",
+           type:"libre",
+           correction:"$C'(4\,;\,-1)$ (sens indirect : $(x,y)\\to(y,-x)$)", points:3},
+          {label:"d)", enonce:"Quelle rotation transforme $A(0\,;\,3)$ en $A'(-3\,;\,0)$ ?",
+           type:"qcm",
+           choix:["Rotation $90°$ sens direct autour de $O$","Rotation $90°$ sens indirect autour de $O$","Rotation $180°$ autour de $O$","Translation de vecteur $\\binom{-3}{-3}$"],
+           bonneReponseIdx:0, bonneReponse:"Rotation $90°$ sens direct autour de $O$",
+           correction:"$(x,y)\\to(-y,x)$ : $(0,3)\\to(-3,0)$ ✓ Rotation $90°$ sens direct.", points:3},
+        ],
+        indices:["Rotation $90°$ direct : $(x,y)\\to(-y,x)$ ; indirect : $(x,y)\\to(y,-x)$ ; $180°$ : $(x,y)\\to(-x,-y)$"]
+      },
+      {
+        id:"transfo_3_4", titre:"Translations et compositions", niveau:"Difficile", points_total:12,
+        questions:[
+          {label:"a)", enonce:"$ABCD$ est un carré de centre $O$. Quelle transformation envoie $A$ sur $C$ ?",
+           type:"qcm",
+           choix:["Rotation $90°$ de centre $A$","Symétrie centrale de centre $O$","Translation de vecteur $\\overrightarrow{AC}$","Rotation $180°$ de centre $A$"],
+           bonneReponseIdx:1, bonneReponse:"Symétrie centrale de centre $O$",
+           correction:"Le centre $O$ du carré est le milieu de $[AC]$, donc la symétrie centrale de centre $O$ envoie $A$ sur $C$.", points:3},
+          {label:"b)", enonce:"On applique la translation $\\vec{u}\\binom{2}{3}$ puis $\\vec{v}\\binom{-1}{4}$ à $A(1\,;\,0)$. Image finale ?",
+           type:"libre",
+           correction:"Après $\\vec{u}$ : $A'(3\,;\,3)$. Après $\\vec{v}$ : $A''(2\,;\,7)$. Vecteur résultant : $\\binom{1}{7}$.", points:4},
+          {label:"c)", enonce:"Un triangle $T$ a pour image $T'$ par rotation de $60°$ puis $T''$ par rotation de $120°$ (même centre). Quelle transformation envoie $T$ sur $T''$ directement ?",
+           type:"libre",
+           correction:"Rotation de $60°+120°=180°$ autour du même centre.", points:5},
+        ],
+        indices:["Deux rotations de même centre s'additionnent ; deux translations donnent une translation résultante"]
+      },
+      {
+        id:"transfo_3_5", titre:"Transformations — brevet", niveau:"Difficile", points_total:12,
+        questions:[
+          {label:"1.", enonce:"$ABCD$ est un rectangle. $O$ est le milieu de $[AC]$. La rotation de $180°$ de centre $O$ envoie $A$ sur $C$. Où va $B$ ?",
+           type:"libre",
+           correction:"La rotation de $180°$ de centre $O$ (milieu de $[BD]$ aussi) envoie $B$ sur $D$.", points:3},
+          {label:"2.", enonce:"Soit le triangle $ABC$ avec $A(0\,;\,0)$, $B(4\,;\,0)$, $C(2\,;\,3)$. Donne les coordonnées de l'image par la translation $\\vec{u}\\binom{-1}{2}$.",
+           type:"libre",
+           correction:"$A'(-1\,;\,2)$, $B'(3\,;\,2)$, $C'(1\,;\,5)$.", points:4},
+          {label:"3.", enonce:"Un polygone a $6$ axes de symétrie. Quel est ce polygone ?",
+           type:"qcm",
+           choix:["Triangle équilatéral","Carré","Hexagone régulier","Pentagone régulier"],
+           bonneReponseIdx:2, bonneReponse:"Hexagone régulier",
+           correction:"Un polygone régulier à $n$ côtés a $n$ axes de symétrie. L'hexagone ($6$ côtés) a $6$ axes.", points:5},
+        ],
+        indices:["Un rectangle a $2$ axes de symétrie ; un carré en a $4$"]
       },
     ],
 
     // ── 15. VOLUMES DE SOLIDES ──
     "Volumes de solides": [
       {
-        id:"vol_3_A", titre:"Calculer des volumes", niveau:"Facile", points_total:6,
+        id:"vol_3_1", titre:"Volumes — formules et reconnaissance", niveau:"Facile", points_total:8,
         questions:[
-          {label:"a)", enonce:"Cylindre de rayon $r=3$ cm et hauteur $h=8$ cm. Calcule le volume.", correction:"$V=\\pi r^2 h=\\pi \\times 9 \\times 8=72\\pi\\approx226{,}2$ cm³", points:2},
-          {label:"b)", enonce:"Cône de rayon $r=4$ cm et hauteur $h=9$ cm. Calcule le volume.", correction:"$V=\\dfrac{1}{3}\\pi r^2 h=\\dfrac{1}{3}\\pi\\times16\\times9=48\\pi\\approx150{,}8$ cm³", points:2},
-          {label:"c)", enonce:"Sphère de rayon $r=5$ cm. Calcule le volume.", correction:"$V=\\dfrac{4}{3}\\pi r^3=\\dfrac{4}{3}\\pi\\times125=\\dfrac{500\\pi}{3}\\approx523{,}6$ cm³", points:2},
+          {label:"1.", enonce:"Quelle est la formule du volume d'un cylindre de rayon $r$ et hauteur $h$ ?",
+           type:"qcm",
+           choix:["$\\dfrac{1}{3}\\pi r^2 h$","$\\pi r^2 h$","$\\dfrac{4}{3}\\pi r^3$","$4\\pi r^2$"],
+           bonneReponseIdx:1, bonneReponse:"$\\pi r^2 h$",
+           correction:"Cylindre : $V=\\pi r^2 h$ · Cône : $V=\\dfrac{1}{3}\\pi r^2 h$ · Sphère : $V=\\dfrac{4}{3}\\pi r^3$", points:2},
+          {label:"2.", enonce:"Cylindre $r=3$ cm, $h=8$ cm. Calcule le volume (en cm³, en $\\pi$).",
+           type:"libre",
+           correction:"$V=\\pi\\times9\\times8=72\\pi\\approx226{,}2$ cm³", points:2},
+          {label:"3.", enonce:"Sphère $r=6$ cm. Calcule le volume.",
+           type:"libre",
+           correction:"$V=\\dfrac{4}{3}\\pi\\times216=288\\pi\\approx904{,}8$ cm³", points:2},
+          {label:"4.", enonce:"Cône $r=4$ cm, $h=9$ cm. Calcule le volume.",
+           type:"libre",
+           correction:"$V=\\dfrac{1}{3}\\pi\\times16\\times9=48\\pi\\approx150{,}8$ cm³", points:2},
         ],
-        indices:["Cylindre : $\\pi r^2 h$ ; Cône : $\\dfrac{1}{3}\\pi r^2 h$ ; Sphère : $\\dfrac{4}{3}\\pi r^3$"]
+        indices:["Cylindre $\\pi r^2 h$ · Cône $\\dfrac{1}{3}\\pi r^2 h$ · Sphère $\\dfrac{4}{3}\\pi r^3$ · Boîte $l\\times L\\times h$"]
       },
       {
-        id:"vol_3_B", titre:"Volumes — problèmes", niveau:"Moyen", points_total:9,
+        id:"vol_3_2", titre:"Volumes — calculs directs", niveau:"Facile", points_total:10,
         questions:[
-          {label:"a)", enonce:"Une boîte de conserve cylindrique a un diamètre de $8$ cm et une hauteur de $11$ cm. Quel est son volume en cm³ ? En litres ?", correction:"$V=\\pi\\times4^2\\times11=176\\pi\\approx553$ cm³ $\\approx0{,}553$ L", points:3},
-          {label:"b)", enonce:"Une piscine cylindrique a un diamètre de $4$ m et une profondeur de $1{,}2$ m. Combien de litres contient-elle ?", correction:"$V=\\pi\\times2^2\\times1{,}2=4{,}8\\pi\\approx15{,}08$ m³ $=15\\,080$ L", points:3},
-          {label:"c)", enonce:"Un entonnoir en forme de cône a un diamètre de $10$ cm et une hauteur de $15$ cm. Quel est son volume ?", correction:"$V=\\dfrac{1}{3}\\pi\\times5^2\\times15=125\\pi\\approx392{,}7$ cm³", points:3},
+          {label:"a)", enonce:"Boîte : $l=5$, $L=8$, $h=3$ cm. Volume ?",
+           type:"libre",
+           correction:"$V=5\\times8\\times3=120$ cm³", points:2},
+          {label:"b)", enonce:"Pyramide à base carrée $4\\times4$ cm, hauteur $6$ cm. Volume ?",
+           type:"libre",
+           correction:"$V=\\dfrac{1}{3}\\times16\\times6=32$ cm³", points:2},
+          {label:"c)", enonce:"Demi-sphère de rayon $5$ cm. Volume ?",
+           type:"libre",
+           correction:"$V=\\dfrac{1}{2}\\times\\dfrac{4}{3}\\pi\\times125=\\dfrac{250\\pi}{3}\\approx261{,}8$ cm³", points:3},
+          {label:"d)", enonce:"Cylindre $r=2$ cm, $h=10$ cm. Donne le volume exact puis arrondi à $10^{-1}$.",
+           type:"libre",
+           correction:"$V=40\\pi\\approx125{,}7$ cm³", points:3},
         ],
-        indices:["$1$ m³ $= 1\\,000$ L ; $1$ L $= 1$ dm³ $= 1\\,000$ cm³"]
+        indices:["$1$ L $= 1$ dm³ $= 1\\,000$ cm³"]
+      },
+      {
+        id:"vol_3_3", titre:"Volumes — problèmes pratiques", niveau:"Moyen", points_total:12,
+        questions:[
+          {label:"a)", enonce:"Une boîte de conserve a un diamètre de $8$ cm et une hauteur de $11$ cm. Volume en L ?",
+           type:"libre",
+           correction:"$r=4$ cm. $V=\\pi\\times16\\times11=176\\pi\\approx553$ cm³ $\\approx0{,}553$ L", points:3},
+          {label:"b)", enonce:"Une piscine cylindrique : diamètre $4$ m, profondeur $1{,}2$ m. Combien de litres ?",
+           type:"libre",
+           correction:"$r=2$ m. $V=\\pi\\times4\\times1{,}2=4{,}8\\pi\\approx15{,}08$ m³ $=15\\,080$ L", points:4},
+          {label:"c)", enonce:"Une balle de tennis (sphère, $r=3{,}3$ cm) est dans une boîte cylindrique ($r=3{,}3$ cm, $h=6{,}6$ cm). Quel % du volume de la boîte est occupé ?",
+           type:"libre",
+           correction:"$V_{\\text{sphère}}=\\dfrac{4}{3}\\pi(3{,}3)^3\\approx150{,}5$ cm³. $V_{\\text{cylindre}}=\\pi(3{,}3)^2\\times6{,}6\\approx225{,}7$ cm³. $\\dfrac{150{,}5}{225{,}7}\\approx66{,}7\\%$", points:5},
+        ],
+        indices:["Attention aux unités : $1$ m³ $=1\\,000$ dm³ $=1\\,000\\,000$ cm³"]
+      },
+      {
+        id:"vol_3_4", titre:"Volumes — changement d'unités et sections", niveau:"Difficile", points_total:12,
+        questions:[
+          {label:"a)", enonce:"Un aquarium parallélépipédique : $60\\times40\\times30$ cm. Volume en litres ?",
+           type:"libre",
+           correction:"$V=60\\times40\\times30=72\\,000$ cm³ $=72$ L", points:3},
+          {label:"b)", enonce:"On remplit l'aquarium aux $\\dfrac{3}{4}$. Volume d'eau ?",
+           type:"libre",
+           correction:"$V_{\\text{eau}}=\\dfrac{3}{4}\\times72=54$ L", points:3},
+          {label:"c)", enonce:"Un cône est inscrit dans un cylindre de mêmes dimensions ($r=5$, $h=12$). Quel % du cylindre le cône représente-t-il ?",
+           type:"libre",
+           correction:"$V_{\\text{cyl}}=\\pi\\times25\\times12=300\\pi$. $V_{\\text{cône}}=\\dfrac{1}{3}\\times300\\pi=100\\pi$. Ratio $=\\dfrac{1}{3}\\approx33{,}3\\%$", points:3},
+          {label:"d)", enonce:"Le rayon d'une sphère double. Par quel facteur son volume est-il multiplié ?",
+           type:"qcm",
+           choix:["$2$","$4$","$6$","$8$"],
+           bonneReponseIdx:3, bonneReponse:"$8$",
+           correction:"$V=\\dfrac{4}{3}\\pi r^3$. Si $r\\to2r$ : $V\\to\\dfrac{4}{3}\\pi(2r)^3=8\\times\\dfrac{4}{3}\\pi r^3$. Volume ×8.", points:3},
+        ],
+        indices:["Si une dimension est multipliée par $k$, le volume est multiplié par $k^3$"]
+      },
+      {
+        id:"vol_3_5", titre:"Volumes — brevet", niveau:"Difficile", points_total:12,
+        questions:[
+          {label:"1.", enonce:"Un silo de grain a la forme d'un cylindre ($r=3$ m, $h=8$ m) surmonté d'un cône ($r=3$ m, $h=4$ m). Volume total ?",
+           type:"libre",
+           correction:"$V=\\pi(3)^2\\times8+\\dfrac{1}{3}\\pi(3)^2\\times4=72\\pi+12\\pi=84\\pi\\approx263{,}9$ m³", points:4},
+          {label:"2.", enonce:"Une boule de glace ($r=4$ cm) fond dans un verre cylindrique ($r=5$ cm). De combien monte le niveau d'eau ?",
+           type:"libre",
+           correction:"$V_{\\text{boule}}=\\dfrac{4}{3}\\pi\\times64=\\dfrac{256\\pi}{3}$ cm³. $h=\\dfrac{V}{\\pi r^2}=\\dfrac{256/3}{25}=\\dfrac{256}{75}\\approx3{,}41$ cm", points:4},
+          {label:"3.", enonce:"Un fabricant veut mettre $1$ L de sauce dans une boîte cylindrique de hauteur $15$ cm. Quel rayon minimum ?",
+           type:"libre",
+           correction:"$\\pi r^2\\times15=1\\,000 \\Rightarrow r^2=\\dfrac{1000}{15\\pi}\\approx21{,}2 \\Rightarrow r\\approx4{,}6$ cm", points:4},
+        ],
+        indices:["Décompose les solides complexes en solides simples"]
       },
     ],
 
     // ── 16. PROPORTIONNALITÉ ET POURCENTAGES ──
     "Proportionnalité & Pourcentages": [
       {
-        id:"prop_3_A", titre:"Pourcentages et taux d'évolution", niveau:"Facile", points_total:6,
+        id:"prop_3_1", titre:"Pourcentages — comprendre et calculer", niveau:"Facile", points_total:8,
         questions:[
-          {label:"a)", enonce:"Article à $80$€ soldé $-25\\%$. Nouveau prix ?", correction:"$80 \\times 0{,}75=60$€", points:2},
-          {label:"b)", enonce:"Prix : $50$€ → $65$€. Taux d'augmentation ?", correction:"$\\dfrac{65-50}{50}\\times100=30\\%$", points:2},
-          {label:"c)", enonce:"$+20\\%$ puis $-20\\%$. Revient-on au prix initial ?", correction:"$100 \\to 120 \\to 96$. Non — perte de $4\\%$.", points:2},
+          {label:"1.", enonce:"$30\\%$ de $200$ = ?",
+           type:"qcm",
+           choix:["$6$","$60$","$600$","$30$"],
+           bonneReponseIdx:1, bonneReponse:"$60$",
+           correction:"$200\\times0{,}30=60$", points:2},
+          {label:"2.", enonce:"Quel coefficient multiplicateur correspond à une augmentation de $15\\%$ ?",
+           type:"qcm",
+           choix:["$0{,}15$","$1{,}15$","$1{,}015$","$15$"],
+           bonneReponseIdx:1, bonneReponse:"$1{,}15$",
+           correction:"$+15\\%$ : coefficient $=1+0{,}15=1{,}15$. $-15\\%$ : coefficient $=0{,}85$.", points:2},
+          {label:"3.", enonce:"Article à $80$€ soldé $-25\\%$. Nouveau prix ?",
+           type:"libre",
+           correction:"$80\\times0{,}75=60$€", points:2},
+          {label:"4.", enonce:"Prix : $50$€ → $65$€. Taux d'augmentation (en %) ?",
+           type:"libre",
+           correction:"$t=\\dfrac{65-50}{50}\\times100=30\\%$", points:2},
         ],
-        indices:["Taux $=\\dfrac{\\text{nouveau}-\\text{ancien}}{\\text{ancien}}\\times100$"]
+        indices:["$p\\%$ de $x = x\\times\\dfrac{p}{100}$ ; augmentation de $p\\%$ : multiplier par $1+\\dfrac{p}{100}$"]
       },
       {
-        id:"prop_3_B", titre:"Proportionnalité — tableaux et problèmes", niveau:"Moyen", points_total:8,
+        id:"prop_3_2", titre:"Proportionnalité — tableaux", niveau:"Facile", points_total:10,
         questions:[
-          {label:"a)", enonce:"$5$ kg de pommes coûtent $7{,}50$€. Prix de $8$ kg ?", correction:"Prix au kg $=1{,}50$€. $8 \\times 1{,}50=12$€", points:2},
-          {label:"b)", enonce:"Une voiture consomme $6{,}5$ L aux $100$ km. Combien pour $450$ km ?", correction:"$\\dfrac{6{,}5 \\times 450}{100}=29{,}25$ L", points:3},
-          {label:"c)", enonce:"Un plan est à l'échelle $1:25\\,000$. Une distance de $4{,}8$ cm sur le plan correspond à combien en réalité ?", correction:"$4{,}8 \\times 25\\,000=120\\,000$ cm $=1{,}2$ km", points:3},
+          {label:"a)", enonce:"$5$ kg de pommes : $7{,}50$€. Prix de $8$ kg ?",
+           type:"libre",
+           correction:"Prix au kg $=1{,}50$€. $8\\times1{,}50=12$€", points:2},
+          {label:"b)", enonce:"$3$ heures de travail coûtent $57$€. Combien pour $7$ heures ?",
+           type:"libre",
+           correction:"$\\dfrac{57}{3}\\times7=19\\times7=133$€", points:3},
+          {label:"c)", enonce:"Une voiture consomme $6{,}5$ L aux $100$ km. Consommation pour $450$ km ?",
+           type:"libre",
+           correction:"$\\dfrac{6{,}5\\times450}{100}=29{,}25$ L", points:3},
+          {label:"d)", enonce:"Échelle $1:25\\,000$. $4{,}8$ cm sur le plan = ? km en réel ?",
+           type:"libre",
+           correction:"$4{,}8\\times25\\,000=120\\,000$ cm $=1{,}2$ km", points:2},
         ],
-        indices:["Dans un tableau de proportionnalité, on multiplie par le même coefficient"]
+        indices:["Dans un tableau de proportionnalité, on multiplie ou divise toujours par le même nombre"]
+      },
+      {
+        id:"prop_3_3", titre:"Taux d'évolution et évolutions successives", niveau:"Moyen", points_total:12,
+        questions:[
+          {label:"a)", enonce:"$+20\\%$ puis $-20\\%$. Revient-on au prix initial ? Justifie.",
+           type:"libre",
+           correction:"$100 \\to 120 \\to 96$. Non — perte de $4\\%$. Les deux évolutions ne se compensent pas.", points:3},
+          {label:"b)", enonce:"Coefficient multiplicateur de deux évolutions successives : $+15\\%$ puis $+10\\%$.",
+           type:"libre",
+           correction:"$1{,}15\\times1{,}10=1{,}265$ soit $+26{,}5\\%$.", points:3},
+          {label:"c)", enonce:"Pour annuler une hausse de $25\\%$, quel taux de baisse faut-il appliquer ?",
+           type:"libre",
+           correction:"$1{,}25\\times(1+t)=1 \\Rightarrow 1+t=0{,}8 \\Rightarrow t=-0{,}2$ soit $-20\\%$.", points:3},
+          {label:"d)", enonce:"Salaire : $2\\,000$€. Hausse de $3\\%$/an pendant $3$ ans. Salaire final ?",
+           type:"libre",
+           correction:"$2000\\times(1{,}03)^3=2000\\times1{,}0927\\approx2\\,185{,}5$€", points:3},
+        ],
+        indices:["Évolutions successives : multiplier les coefficients ; ne jamais additionner les taux !"]
+      },
+      {
+        id:"prop_3_4", titre:"Proportionnalité — vitesse et concentrations", niveau:"Difficile", points_total:12,
+        questions:[
+          {label:"a)", enonce:"Train à $200$ km/h pendant $2h30$. Distance parcourue ?",
+           type:"libre",
+           correction:"$d=200\\times2{,}5=500$ km", points:2},
+          {label:"b)", enonce:"Distance Paris-Lyon : $465$ km en $2h$ en TGV. Vitesse moyenne ?",
+           type:"libre",
+           correction:"$v=\\dfrac{465}{2}=232{,}5$ km/h", points:3},
+          {label:"c)", enonce:"Solution : $200$ mL à $5\\%$ de sel + $300$ mL à $10\\%$ de sel. Concentration finale ?",
+           type:"libre",
+           correction:"Sel total $=200\\times0{,}05+300\\times0{,}10=10+30=40$ g. Volume $=500$ mL. $c=\\dfrac{40}{500}=8\\%$.", points:4},
+          {label:"d)", enonce:"Une recette pour $6$ personnes nécessite $450$ g de farine. Pour $10$ personnes ?",
+           type:"libre",
+           correction:"$\\dfrac{450}{6}\\times10=75\\times10=750$ g", points:3},
+        ],
+        indices:["$v=\\dfrac{d}{t}$ ; $d=v\\times t$ ; $t=\\dfrac{d}{v}$"]
+      },
+      {
+        id:"prop_3_5", titre:"Pourcentages — brevet", niveau:"Difficile", points_total:12,
+        questions:[
+          {label:"1.", enonce:"Actions : $500$€ en janvier. Hausse de $12\\%$ en mars, baisse de $8\\%$ en juillet. Valeur finale ?",
+           type:"libre",
+           correction:"$500\\times1{,}12\\times0{,}92=500\\times1{,}0304=515{,}2$€", points:4},
+          {label:"2.", enonce:"Appartement : $180\\,000$€. Hausse de $5\\%$/an. Dans combien d'années dépassera-t-il $220\\,000$€ ?",
+           type:"libre",
+           correction:"$180\\,000\\times(1{,}05)^n>220\\,000 \\Rightarrow (1{,}05)^n>1{,}222$. $n=4$ : $(1{,}05)^4\\approx1{,}216$ ; $n=5$ : $(1{,}05)^5\\approx1{,}276>1{,}222$. Dans $5$ ans.", points:4},
+          {label:"3.", enonce:"TVA $20\\%$ incluse dans un prix de $144$€. Prix HT ?",
+           type:"libre",
+           correction:"$\\text{Prix HT}=\\dfrac{144}{1{,}20}=120$€", points:4},
+        ],
+        indices:["Prix TTC $=$ Prix HT $\\times(1+\\text{taux TVA})$"]
       },
     ],
 
     // ── 17. NOMBRES PREMIERS ET DIVISIBILITÉ ──
     "Divisibilité & Nombres premiers": [
       {
-        id:"div_3_A", titre:"Critères de divisibilité et PGCD", niveau:"Facile", points_total:6,
+        id:"div_3_1", titre:"Divisibilité — critères et définitions", niveau:"Facile", points_total:8,
         questions:[
-          {label:"a)", enonce:"$738$ est-il divisible par $2$, $3$, $9$ ? Justifie.", correction:"Par $2$ : oui (chiffre unités $=8$) ; par $3$ : oui ($7+3+8=18$) ; par $9$ : oui ($18÷9=2$).", points:2},
-          {label:"b)", enonce:"Décompose $180$ en produit de facteurs premiers.", correction:"$180=2^2\\times3^2\\times5$", points:2},
-          {label:"c)", enonce:"Calcule le PGCD de $48$ et $36$.", correction:"$48=2^4\\times3$ ; $36=2^2\\times3^2$. $\\text{PGCD}=2^2\\times3=12$", points:2},
+          {label:"1.", enonce:"Lequel de ces nombres est divisible par $9$ ?",
+           type:"qcm",
+           choix:["$234$","$315$","$421$","$512$"],
+           bonneReponseIdx:1, bonneReponse:"$315$",
+           correction:"$3+1+5=9$ divisible par $9$ ✓. $2+3+4=9$ aussi ✓ — les deux sont divisibles ! Mais $315$ est la seule option listée correcte. Vérifions : $315\\div9=35$ ✓", points:2},
+          {label:"2.", enonce:"$738$ est-il divisible par $2$, $3$, $6$, $9$ ?",
+           type:"libre",
+           correction:"Par $2$ : oui (dernier chiffre $=8$). Par $3$ : oui ($7+3+8=18$). Par $6$ : oui (divisible par $2$ ET $3$). Par $9$ : oui ($18\\div9=2$).", points:2},
+          {label:"3.", enonce:"Qu'est-ce qu'un nombre premier ?",
+           type:"qcm",
+           choix:["Un nombre divisible par $2$","Un nombre qui a exactement $2$ diviseurs : $1$ et lui-même","Un nombre impair","Un nombre dont les chiffres sont premiers"],
+           bonneReponseIdx:1, bonneReponse:"Un nombre qui a exactement $2$ diviseurs : $1$ et lui-même",
+           correction:"$2, 3, 5, 7, 11, 13, 17, 19, 23...$ sont premiers. $1$ n'est pas premier (1 seul diviseur).", points:2},
+          {label:"4.", enonce:"$31$ est-il premier ? Justifie.",
+           type:"libre",
+           correction:"On teste les diviseurs jusqu'à $\\sqrt{31}\\approx5{,}6$ : $2$ (non), $3$ (non), $5$ (non). Donc $31$ est premier.", points:2},
         ],
-        indices:["Un nombre est divisible par $3$ si la somme de ses chiffres est divisible par $3$"]
+        indices:["Divisible par $9$ si somme des chiffres divisible par $9$ ; par $6$ si divisible par $2$ ET $3$"]
       },
       {
-        id:"div_3_B", titre:"Fractions irréductibles et simplification", niveau:"Moyen", points_total:7,
+        id:"div_3_2", titre:"Décomposition en facteurs premiers", niveau:"Facile", points_total:10,
         questions:[
-          {label:"a)", enonce:"Simplifie $\\dfrac{48}{60}$ en fraction irréductible.", correction:"$\\text{PGCD}(48,60)=12$. $\\dfrac{48}{60}=\\dfrac{4}{5}$", points:2},
-          {label:"b)", enonce:"$27$ est-il un nombre premier ? Et $31$ ? Justifie.", correction:"$27=3^3$ → pas premier ; $31$ : diviseurs testés $2,3,5$ → aucun ne divise → $31$ est premier.", points:3},
-          {label:"c)", enonce:"Deux classes ont $36$ et $48$ élèves. On veut former des groupes de même taille maximum. Combien d'élèves par groupe ?", correction:"$\\text{PGCD}(36,48)=12$. Groupes de $12$ élèves.", points:2},
+          {label:"a)", enonce:"Décompose $60$ en produit de facteurs premiers.",
+           type:"libre",
+           correction:"$60=2\\times30=2\\times2\\times15=2^2\\times3\\times5$", points:2},
+          {label:"b)", enonce:"Décompose $180$ en produit de facteurs premiers.",
+           type:"libre",
+           correction:"$180=2^2\\times3^2\\times5$", points:3},
+          {label:"c)", enonce:"Décompose $252$.",
+           type:"libre",
+           correction:"$252=2^2\\times3^2\\times7$", points:3},
+          {label:"d)", enonce:"Quelle décomposition est correcte pour $120$ ?",
+           type:"qcm",
+           choix:["$2^3\\times3\\times5$","$2^2\\times3\\times10$","$2^3\\times15$","$4\\times30$"],
+           bonneReponseIdx:0, bonneReponse:"$2^3\\times3\\times5$",
+           correction:"$120=8\\times15=2^3\\times3\\times5$", points:2},
         ],
-        indices:["$p$ est premier si ses seuls diviseurs sont $1$ et $p$. Teste les premiers : $2, 3, 5, 7, 11...$"]
-      },
-    ],
-
-  },
-
-    // ═══════════════════════════════
-  //  6ÈME
-  // ═══════════════════════════════
-  "6eme": {
-    "Nombres & Calculs": [
-      {
-        id:"nb_6_A", titre:"Priorités opératoires", niveau:"Facile", points_total:6,
-        questions:[
-          {label:"a)", enonce:"Calcule en respectant les priorités : $3 + 4 \\times 2$", correction:"$3 + 8 = 11$ (la multiplication avant l'addition)", points:2},
-          {label:"b)", enonce:"Calcule : $20 - (3 + 2) \\times 2$", correction:"$20 - 5 \\times 2 = 20 - 10 = 10$", points:2},
-          {label:"c)", enonce:"Calcule : $2 + 3 \\times (4 - 1)^2$", correction:"$2 + 3 \\times 9 = 2 + 27 = 29$", points:2},
-        ],
-        indices:["Parenthèses d'abord, puis puissances, puis × et ÷, puis + et −"]
+        indices:["Divise successivement par les nombres premiers : $2, 3, 5, 7, 11...$"]
       },
       {
-        id:"nb_6_B", titre:"Fractions et nombres décimaux", niveau:"Moyen", points_total:8,
+        id:"div_3_3", titre:"PGCD et PPCM", niveau:"Moyen", points_total:12,
         questions:[
-          {label:"a)", enonce:"Écris $\\dfrac{3}{4}$ en nombre décimal.", correction:"$\\dfrac{3}{4} = 0{,}75$", points:2},
-          {label:"b)", enonce:"Calcule : $\\dfrac{1}{2} + \\dfrac{1}{3}$", correction:"$\\dfrac{3}{6} + \\dfrac{2}{6} = \\dfrac{5}{6}$", points:3},
-          {label:"c)", enonce:"Range dans l'ordre croissant : $\\dfrac{3}{4}$, $0{,}7$, $\\dfrac{2}{3}$", correction:"$\\dfrac{2}{3} \\approx 0{,}667 < 0{,}7 < \\dfrac{3}{4} = 0{,}75$", points:3},
+          {label:"a)", enonce:"Calcule le PGCD de $48$ et $36$.",
+           type:"libre",
+           correction:"$48=2^4\\times3$ ; $36=2^2\\times3^2$. PGCD $=2^2\\times3=12$.", points:3},
+          {label:"b)", enonce:"Calcule le PPCM de $12$ et $18$.",
+           type:"libre",
+           correction:"$12=2^2\\times3$ ; $18=2\\times3^2$. PPCM $=2^2\\times3^2=36$.", points:3},
+          {label:"c)", enonce:"Simplifie $\\dfrac{48}{60}$ en fraction irréductible.",
+           type:"libre",
+           correction:"PGCD$(48,60)=12$. $\\dfrac{48}{60}=\\dfrac{4}{5}$.", points:3},
+          {label:"d)", enonce:"Deux gyrophares clignotent à intervalles de $15$ s et $20$ s. Ils clignotent ensemble à $t=0$. Quand clignoteront-ils ensemble à nouveau ?",
+           type:"libre",
+           correction:"PPCM$(15,20)=60$ secondes.", points:3},
         ],
-        indices:["Convertis tout en décimaux pour comparer"]
-      },
-    ],
-    "Géométrie plane": [
-      {
-        id:"geo_6_A", titre:"Périmètres et aires", niveau:"Facile", points_total:6,
-        questions:[
-          {label:"a)", enonce:"Calcule le périmètre et l'aire d'un rectangle de longueur $8$ cm et largeur $5$ cm.", correction:"$P = 2 \\times (8+5) = 26$ cm ; $A = 8 \\times 5 = 40$ cm²", points:2},
-          {label:"b)", enonce:"Calcule l'aire d'un triangle de base $6$ cm et hauteur $4$ cm.", correction:"$A = \\dfrac{6 \\times 4}{2} = 12$ cm²", points:2},
-          {label:"c)", enonce:"Calcule le périmètre et l'aire d'un carré de côté $7$ cm.", correction:"$P = 4 \\times 7 = 28$ cm ; $A = 7^2 = 49$ cm²", points:2},
-        ],
-        indices:["Aire triangle $= \\dfrac{\\text{base} \\times \\text{hauteur}}{2}$"]
+        indices:["PGCD : prendre les facteurs communs avec le plus petit exposant ; PPCM : facteurs avec le plus grand exposant"]
       },
       {
-        id:"geo_6_B", titre:"Symétrie axiale", niveau:"Moyen", points_total:8,
+        id:"div_3_4", titre:"Applications — fractions et problèmes", niveau:"Difficile", points_total:12,
         questions:[
-          {label:"a)", enonce:"Le symétrique du point $A(3\\,;\\,2)$ par rapport à l'axe des ordonnées est ?", correction:"$A'(-3\\,;\\,2)$", points:2},
-          {label:"b)", enonce:"Le symétrique de $B(1\\,;\\,4)$ par rapport à l'axe des abscisses est ?", correction:"$B'(1\\,;\\,-4)$", points:2},
-          {label:"c)", enonce:"Un triangle $ABC$ est symétrique d'un triangle $A'B'C'$ par rapport à un axe $d$. Que peut-on dire des deux triangles ?", correction:"Ils sont isométriques : même forme, mêmes dimensions, mêmes angles.", points:4},
+          {label:"a)", enonce:"Simplifie $\\dfrac{120}{168}$.",
+           type:"libre",
+           correction:"PGCD$(120,168)=24$. $\\dfrac{120}{168}=\\dfrac{5}{7}$.", points:3},
+          {label:"b)", enonce:"Deux classes ont $36$ et $48$ élèves. Groupes de même taille maximum. Combien d'élèves par groupe ?",
+           type:"libre",
+           correction:"PGCD$(36,48)=12$. Groupes de $12$ élèves.", points:3},
+          {label:"c)", enonce:"Un carreau mesure $24$ cm × $36$ cm. On veut le couper en petits carrés identiques les plus grands possibles. Côté du petit carré ?",
+           type:"libre",
+           correction:"PGCD$(24,36)=12$ cm.", points:3},
+          {label:"d)", enonce:"Pour quel entier $n$ a-t-on $\\dfrac{n}{42}$ irréductible avec $n$ multiple de $6$ entre $1$ et $50$ ?",
+           type:"libre",
+           correction:"$42=2\\times3\\times7$. Multiples de $6$ entre $1$ et $50$ : $6,12,18,24,30,36,42,48$. PGCD$(n,42)=1$ ssi $n$ n'est pas divisible par $2$, $3$ ou $7$. Parmi les multiples de $6$, tous sont divisibles par $2$ et $3$, donc aucun ne donne une fraction irréductible.", points:3},
         ],
-        indices:["Par rapport à $(Oy)$ : $x$ change de signe ; par rapport à $(Ox)$ : $y$ change de signe"]
-      },
-    ],
-    "Proportionnalité": [
-      {
-        id:"prop_6_A", titre:"Tableaux de proportionnalité", niveau:"Facile", points_total:6,
-        questions:[
-          {label:"a)", enonce:"$3$ stylos coûtent $4{,}50$€. Combien coûtent $7$ stylos ?", correction:"Prix unitaire $= 1{,}50$€. $7 \\times 1{,}50 = 10{,}50$€", points:2},
-          {label:"b)", enonce:"Complète le tableau de proportionnalité : $\\dfrac{2}{5} = \\dfrac{?}{20}$", correction:"$? = 8$ (on multiplie par 4)", points:2},
-          {label:"c)", enonce:"Une voiture roule à $90$ km/h. Quelle distance parcourt-elle en $2{,}5$ h ?", correction:"$d = 90 \\times 2{,}5 = 225$ km", points:2},
-        ],
-        indices:["Dans un tableau de proportionnalité, on multiplie ou divise par le même nombre"]
+        indices:["PGCD pour simplifier les fractions et résoudre des problèmes de partage"]
       },
       {
-        id:"prop_6_B", titre:"Pourcentages simples", niveau:"Moyen", points_total:6,
+        id:"div_3_5", titre:"Nombres premiers — brevet", niveau:"Difficile", points_total:12,
         questions:[
-          {label:"a)", enonce:"$30\\%$ de $200$ = ?", correction:"$200 \\times 0{,}30 = 60$", points:2},
-          {label:"b)", enonce:"Dans une classe de $25$ élèves, $12$ sont des filles. Quel pourcentage ?", correction:"$\\dfrac{12}{25} \\times 100 = 48\\%$", points:2},
-          {label:"c)", enonce:"Un article vaut $80$€. Il est soldé à $-20\\%$. Nouveau prix ?", correction:"$80 \\times 0{,}80 = 64$€", points:2},
+          {label:"1.", enonce:"Démontrer que $n^2+n$ est toujours pair pour tout entier $n$.",
+           type:"libre",
+           correction:"$n^2+n=n(n+1)$. Deux entiers consécutifs : l'un est pair. Donc le produit est toujours pair.", points:4},
+          {label:"2.", enonce:"Trouver tous les couples $(p,q)$ de nombres premiers tels que $p+q=20$.",
+           type:"libre",
+           correction:"Un des deux doit être $2$ (seul premier pair). $2+18=20$ : $18$ non premier. Ou les deux impairs : $3+17$ ✓ ; $7+13$ ✓ ; $11+9$ non ; $5+15$ non. Couples : $(3,17)$ et $(7,13)$.", points:4},
+          {label:"3.", enonce:"Est-ce que $2\\,016$ est divisible par $2016$ ?",
+           type:"qcm",
+           choix:["Non, impossible","Oui, car $2016=2016$","Non, $2016<2016$ est faux","Oui, car $2\\,016\\div2016=1$"],
+           bonneReponseIdx:3, bonneReponse:"Oui, car $2\\,016\\div2016=1$",
+           correction:"$2\\,016$ est la notation de $2016$. Tout nombre est divisible par lui-même : $2016\\div2016=1$.", points:4},
         ],
-        indices:["$p\\%$ de $x = x \\times \\dfrac{p}{100}$"]
-      },
-    ],
-    "Statistiques & Données": [
-      {
-        id:"stat_6_A", titre:"Moyenne et lecture de graphiques", niveau:"Facile", points_total:6,
-        questions:[
-          {label:"a)", enonce:"Notes de 5 élèves : $12, 14, 8, 16, 10$. Calcule la moyenne.", correction:"$\\dfrac{12+14+8+16+10}{5} = \\dfrac{60}{5} = 12$", points:2},
-          {label:"b)", enonce:"Donne la médiane des notes : $8, 10, 12, 14, 16$.", correction:"La valeur centrale est $12$ (3ème valeur sur 5)", points:2},
-          {label:"c)", enonce:"Quelle est l'étendue de cette série ?", correction:"Étendue $= 16 - 8 = 8$", points:2},
-        ],
-        indices:["Médiane = valeur du milieu après tri dans l'ordre croissant"]
-      },
-    ],
-  },
-
-  // ═══════════════════════════════
-  //  5ÈME
-  // ═══════════════════════════════
-  "5eme": {
-    "Nombres relatifs": [
-      {
-        id:"rel_5_A", titre:"Opérations sur les relatifs", niveau:"Facile", points_total:6,
-        questions:[
-          {label:"a)", enonce:"Calcule : $(-5) + 3$ et $(-4) - (-7)$", correction:"$(-5)+3 = -2$ ; $(-4)-(-7) = -4+7 = 3$", points:2},
-          {label:"b)", enonce:"Calcule : $(-3) \\times (-4)$ et $(-6) \\times 5$", correction:"$(-3)\\times(-4) = 12$ ; $(-6)\\times 5 = -30$", points:2},
-          {label:"c)", enonce:"Calcule : $(-12) \\div 4$ et $(-15) \\div (-3)$", correction:"$(-12)\\div 4 = -3$ ; $(-15)\\div(-3) = 5$", points:2},
-        ],
-        indices:["$(-) \\times (-) = (+)$ ; $(-) \\times (+) = (-)$"]
-      },
-      {
-        id:"rel_5_B", titre:"Relatifs et repère", niveau:"Moyen", points_total:8,
-        questions:[
-          {label:"a)", enonce:"Place les points $A(-3\\,;\\,2)$, $B(4\\,;\\,-1)$, $C(0\\,;\\,-3)$ dans un repère.", correction:"$A$ est à $-3$ en abscisse et $2$ en ordonnée, etc.", points:2},
-          {label:"b)", enonce:"Calcule la distance entre $A(-2)$ et $B(5)$ sur une droite graduée.", correction:"$|5-(-2)| = |7| = 7$ unités", points:3},
-          {label:"c)", enonce:"Donne les coordonnées du milieu de $[AB]$ avec $A(-4\\,;\\,2)$ et $B(6\\,;\\,-2)$.", correction:"$M\\left(\\dfrac{-4+6}{2}\\,;\\,\\dfrac{2+(-2)}{2}\\right) = M(1\\,;\\,0)$", points:3},
-        ],
-        indices:["Milieu $= \\left(\\dfrac{x_A+x_B}{2}\\,;\\,\\dfrac{y_A+y_B}{2}\\right)$"]
-      },
-    ],
-    "Calcul littéral": [
-      {
-        id:"lit_5_A", titre:"Expressions littérales — réduction", niveau:"Facile", points_total:6,
-        questions:[
-          {label:"a)", enonce:"Réduis : $3x + 5x - 2x$", correction:"$6x$", points:2},
-          {label:"b)", enonce:"Développe : $3(2x + 5)$", correction:"$6x + 15$", points:2},
-          {label:"c)", enonce:"Factorise : $4x + 8$", correction:"$4(x + 2)$", points:2},
-        ],
-        indices:["Pour factoriser, cherche le facteur commun à tous les termes"]
-      },
-      {
-        id:"lit_5_B", titre:"Substitution et programmes de calcul", niveau:"Moyen", points_total:8,
-        questions:[
-          {label:"a)", enonce:"$f(x) = 2x - 3$. Calcule $f(4)$ et $f(-1)$.", correction:"$f(4)=5$ ; $f(-1)=-5$", points:3},
-          {label:"b)", enonce:"Programme : « Prendre un nombre, le multiplier par $3$, ajouter $6$, diviser par $3$. » Traduis en expression littérale et simplifie.", correction:"$\\dfrac{3x+6}{3} = x+2$ — le résultat vaut toujours le nombre de départ $+2$", points:3},
-          {label:"c)", enonce:"Vérifie que $x=4$ est solution de $2x+1 = 9$.", correction:"$2 \\times 4 + 1 = 9$ ✓", points:2},
-        ],
-        indices:["Substituer = remplacer la lettre par sa valeur numérique"]
-      },
-    ],
-    "Fractions & Proportionnalité": [
-      {
-        id:"frac_5_A", titre:"Fractions — multiplication et division", niveau:"Facile", points_total:6,
-        questions:[
-          {label:"a)", enonce:"Calcule et simplifie : $\\dfrac{3}{5} \\times \\dfrac{10}{9}$", correction:"$\\dfrac{30}{45} = \\dfrac{2}{3}$", points:2},
-          {label:"b)", enonce:"Calcule : $\\dfrac{4}{7} \\div \\dfrac{2}{3}$", correction:"$\\dfrac{4}{7} \\times \\dfrac{3}{2} = \\dfrac{12}{14} = \\dfrac{6}{7}$", points:2},
-          {label:"c)", enonce:"Calcule : $\\dfrac{5}{6} - \\dfrac{1}{4}$", correction:"$\\dfrac{10}{12} - \\dfrac{3}{12} = \\dfrac{7}{12}$", points:2},
-        ],
-        indices:["$\\dfrac{a}{b} \\div \\dfrac{c}{d} = \\dfrac{a}{b} \\times \\dfrac{d}{c}$"]
-      },
-      {
-        id:"prop_5_A", titre:"Proportionnalité et vitesse", niveau:"Moyen", points_total:9,
-        questions:[
-          {label:"a)", enonce:"Un cycliste roule à $18$ km/h. Quelle distance en $2{,}5$ h ?", correction:"$d = 18 \\times 2{,}5 = 45$ km", points:3},
-          {label:"b)", enonce:"$5$ kg de pommes coûtent $8$€. Prix de $3{,}5$ kg ?", correction:"$\\dfrac{8}{5} \\times 3{,}5 = 1{,}6 \\times 3{,}5 = 5{,}6$€", points:3},
-          {label:"c)", enonce:"Un train parcourt $240$ km en $3$ h. Quelle est sa vitesse moyenne ?", correction:"$v = \\dfrac{240}{3} = 80$ km/h", points:3},
-        ],
-        indices:["$v = \\dfrac{d}{t}$ ; $d = v \\times t$ ; $t = \\dfrac{d}{v}$"]
-      },
-    ],
-    "Géométrie": [
-      {
-        id:"geo_5_A", titre:"Triangles et quadrilatères", niveau:"Facile", points_total:6,
-        questions:[
-          {label:"a)", enonce:"Somme des angles d'un triangle : $\\hat{A} = 60°$, $\\hat{B} = 75°$. Calcule $\\hat{C}$.", correction:"$\\hat{C} = 180° - 60° - 75° = 45°$", points:2},
-          {label:"b)", enonce:"Un quadrilatère a trois angles : $90°$, $85°$, $110°$. Calcule le quatrième.", correction:"$360° - 90° - 85° - 110° = 75°$", points:2},
-          {label:"c)", enonce:"Un losange a un angle de $70°$. Donne les trois autres angles.", correction:"$70°$, $110°$, $110°$ (angles opposés égaux, consécutifs supplémentaires)", points:2},
-        ],
-        indices:["Somme angles triangle $= 180°$ ; quadrilatère $= 360°$"]
-      },
-      {
-        id:"geo_5_B", titre:"Pythagore — introduction", niveau:"Moyen", points_total:8,
-        questions:[
-          {label:"a)", enonce:"Est-ce que le triangle de côtés $3$, $4$ et $5$ est rectangle ? Justifie.", correction:"$5^2 = 25 = 3^2 + 4^2 = 9+16$ ✓ Oui, rectangle.", points:3},
-          {label:"b)", enonce:"Triangle rectangle en $C$. $CA=6$ cm, $CB=8$ cm. Calcule $AB$.", correction:"$AB^2 = 6^2+8^2=100 \\Rightarrow AB=10$ cm", points:3},
-          {label:"c)", enonce:"Triangle rectangle. Hypoténuse $= 13$ cm, un côté $= 5$ cm. Calcule l'autre côté.", correction:"$c^2 = 13^2-5^2=169-25=144 \\Rightarrow c=12$ cm", points:2},
-        ],
-        indices:["$c^2 = a^2+b^2$ où $c$ est l'hypoténuse"]
-      },
-    ],
-    "Statistiques": [
-      {
-        id:"stat_5_A", titre:"Moyenne, médiane, étendue", niveau:"Facile", points_total:6,
-        questions:[
-          {label:"a)", enonce:"Série : $5, 8, 3, 9, 5, 6, 4$. Calcule la moyenne.", correction:"$\\dfrac{5+8+3+9+5+6+4}{7} = \\dfrac{40}{7} \\approx 5{,}7$", points:2},
-          {label:"b)", enonce:"Donne la médiane de cette série triée : $3, 4, 5, 5, 6, 8, 9$.", correction:"La 4ème valeur (milieu de 7) $= 5$", points:2},
-          {label:"c)", enonce:"Calcule l'étendue.", correction:"$9 - 3 = 6$", points:2},
-        ],
-        indices:["Médiane de $n$ valeurs (triées) : valeur de rang $\\dfrac{n+1}{2}$ si $n$ impair"]
-      },
-    ],
-  },
-
-  // ═══════════════════════════════
-  //  4ÈME
-  // ═══════════════════════════════
-  "4eme": {
-    "Calcul littéral & Équations": [
-      {
-        id:"lit_4_A", titre:"Développement et réduction", niveau:"Facile", points_total:6,
-        questions:[
-          {label:"a)", enonce:"Développe et réduis : $2(3x+4) - (x-5)$", correction:"$6x+8-x+5 = 5x+13$", points:2},
-          {label:"b)", enonce:"Développe : $(x+3)(x+5)$", correction:"$x^2+5x+3x+15 = x^2+8x+15$", points:2},
-          {label:"c)", enonce:"Développe : $(2x-1)(x+4)$", correction:"$2x^2+8x-x-4 = 2x^2+7x-4$", points:2},
-        ],
-        indices:["$(a+b)(c+d) = ac+ad+bc+bd$"]
-      },
-      {
-        id:"lit_4_B", titre:"Identités remarquables", niveau:"Moyen", points_total:9,
-        questions:[
-          {label:"a)", enonce:"Développe : $(x+4)^2$", correction:"$x^2+8x+16$", points:2},
-          {label:"b)", enonce:"Développe : $(3x-2)^2$", correction:"$9x^2-12x+4$", points:3},
-          {label:"c)", enonce:"Développe : $(x+5)(x-5)$", correction:"$x^2-25$", points:2},
-          {label:"d)", enonce:"Factorise : $x^2-49$", correction:"$(x-7)(x+7)$", points:2},
-        ],
-        indices:["$(a+b)^2=a^2+2ab+b^2$ ; $(a-b)^2=a^2-2ab+b^2$ ; $(a+b)(a-b)=a^2-b^2$"]
-      },
-      {
-        id:"eq_4_A", titre:"Équations du premier degré", niveau:"Facile", points_total:6,
-        questions:[
-          {label:"a)", enonce:"Résous : $5x - 3 = 2x + 9$", correction:"$3x = 12 \\Rightarrow x = 4$", points:2},
-          {label:"b)", enonce:"Résous : $3(x+2) = 2(x-1) + 10$", correction:"$3x+6=2x-2+10 \\Rightarrow x=2$", points:2},
-          {label:"c)", enonce:"Résous : $\\dfrac{2x+1}{3} = x - 1$", correction:"$2x+1=3x-3 \\Rightarrow x=4$", points:2},
-        ],
-        indices:["Même opération des deux côtés de l'égalité"]
-      },
-    ],
-    "Puissances": [
-      {
-        id:"puis_4_A", titre:"Calculs avec les puissances", niveau:"Facile", points_total:6,
-        questions:[
-          {label:"a)", enonce:"Calcule : $2^4$, $3^3$, $5^2$", correction:"$16$ ; $27$ ; $25$", points:2},
-          {label:"b)", enonce:"Simplifie : $2^3 \\times 2^4$ et $\\dfrac{3^6}{3^2}$", correction:"$2^7 = 128$ ; $3^4 = 81$", points:2},
-          {label:"c)", enonce:"Calcule : $10^{-2}$ et $4^{-1}$", correction:"$10^{-2} = 0{,}01$ ; $4^{-1} = \\dfrac{1}{4}$", points:2},
-        ],
-        indices:["$a^m \\times a^n = a^{m+n}$ ; $\\dfrac{a^m}{a^n} = a^{m-n}$ ; $a^{-n} = \\dfrac{1}{a^n}$"]
-      },
-      {
-        id:"puis_4_B", titre:"Notation scientifique", niveau:"Moyen", points_total:8,
-        questions:[
-          {label:"a)", enonce:"Écris en notation scientifique : $456\\,000$ et $0{,}00089$", correction:"$4{,}56 \\times 10^5$ ; $8{,}9 \\times 10^{-4}$", points:3},
-          {label:"b)", enonce:"Calcule : $(3 \\times 10^4) \\times (2 \\times 10^3)$", correction:"$6 \\times 10^7$", points:2},
-          {label:"c)", enonce:"Calcule : $\\dfrac{6 \\times 10^8}{2 \\times 10^3}$", correction:"$3 \\times 10^5$", points:3},
-        ],
-        indices:["La notation scientifique s'écrit $a \\times 10^n$ avec $1 \\leq a < 10$"]
-      },
-    ],
-    "Trigonométrie SOH CAH TOA": [
-      {
-        id:"trigo_4_A2", titre:"Cos, Sin, Tan — lecture et calcul", niveau:"Facile", points_total:6,
-        questions:[
-          {label:"a)", enonce:"Dans un triangle rectangle en $A$ : $BC=10$, $AB=6$. Calcule $\\cos(\\hat{B})$.", correction:"$\\cos(\\hat{B}) = \\dfrac{AB}{BC} = \\dfrac{6}{10} = 0{,}6$", points:2},
-          {label:"b)", enonce:"$\\sin(\\hat{B}) = ?$ avec le même triangle.", correction:"$AC^2 = 100-36=64 \\Rightarrow AC=8$ ; $\\sin(\\hat{B})=\\dfrac{8}{10}=0{,}8$", points:2},
-          {label:"c)", enonce:"Triangle rect. en $A$. $\\hat{B}=40°$, $AB=12$ cm. Calcule $BC$.", correction:"$BC = \\dfrac{AB}{\\cos 40°} = \\dfrac{12}{0{,}766} \\approx 15{,}7$ cm", points:2},
-        ],
-        indices:["$\\cos = \\dfrac{\\text{adj}}{\\text{hyp}}$ ; $\\sin = \\dfrac{\\text{opp}}{\\text{hyp}}$ ; $\\tan = \\dfrac{\\text{opp}}{\\text{adj}}$"]
-      },
-      {
-        id:"trigo_4_B2", titre:"Calculer un angle", niveau:"Moyen", points_total:9,
-        questions:[
-          {label:"a)", enonce:"Triangle rect. en $A$, $AB=7$, $BC=14$. Calcule $\\hat{B}$.", correction:"$\\cos(\\hat{B})=\\dfrac{7}{14}=0{,}5 \\Rightarrow \\hat{B}=60°$", points:3},
-          {label:"b)", enonce:"Triangle rect. en $A$, $AC=5$, $AB=5$. Calcule $\\hat{B}$.", correction:"$\\tan(\\hat{B})=\\dfrac{5}{5}=1 \\Rightarrow \\hat{B}=45°$", points:3},
-          {label:"c)", enonce:"Triangle rect. en $B$, $AB=8$, $AC=10$. Calcule $\\hat{A}$.", correction:"$\\sin(\\hat{A})=\\dfrac{8}{10}=0{,}8 \\Rightarrow \\hat{A} \\approx 53{,}1°$", points:3},
-        ],
-        indices:["Utilise la touche $\\cos^{-1}$, $\\sin^{-1}$ ou $\\tan^{-1}$ de la calculatrice"]
-      },
-    ],
-    "Probabilités": [
-      {
-        id:"proba_4_A", titre:"Probabilités — expériences aléatoires", niveau:"Facile", points_total:6,
-        questions:[
-          {label:"a)", enonce:"On lance un dé à 6 faces. Quelle est la probabilité d'obtenir un multiple de $3$ ?", correction:"Multiples de 3 : $\\{3, 6\\}$. $P = \\dfrac{2}{6} = \\dfrac{1}{3}$", points:2},
-          {label:"b)", enonce:"On tire une carte dans un jeu de 32 cartes. $P$(as) = ?", correction:"Il y a 4 as. $P = \\dfrac{4}{32} = \\dfrac{1}{8}$", points:2},
-          {label:"c)", enonce:"Événement certain ? Impossible ? $P(A) + P(\\bar{A}) = ?$", correction:"Certain : $P=1$ ; Impossible : $P=0$ ; $P(A)+P(\\bar{A})=1$", points:2},
-        ],
-        indices:["$P(A) = \\dfrac{\\text{nombre de cas favorables}}{\\text{nombre de cas possibles}}$"]
-      },
-      {
-        id:"proba_4_B", titre:"Probabilités — arbre et tableaux", niveau:"Moyen", points_total:9,
-        questions:[
-          {label:"a)", enonce:"On lance deux pièces. Liste les issues. Quelle est $P$(deux faces) ?", correction:"Issues : $\\{FF, FP, PF, PP\\}$. $P(FF) = \\dfrac{1}{4}$", points:3},
-          {label:"b)", enonce:"Urne : 3 rouges, 2 bleues. On tire 2 fois avec remise. $P$(2 rouges) = ?", correction:"$P = \\dfrac{3}{5} \\times \\dfrac{3}{5} = \\dfrac{9}{25}$", points:3},
-          {label:"c)", enonce:"Même urne, sans remise. $P$(2 rouges) = ?", correction:"$P = \\dfrac{3}{5} \\times \\dfrac{2}{4} = \\dfrac{6}{20} = \\dfrac{3}{10}$", points:3},
-        ],
-        indices:["Avec remise : probabilités identiques à chaque tirage ; sans remise : la composition de l'urne change"]
-      },
-    ],
-    "Géométrie": [
-      {
-        id:"geo_4_A", titre:"Théorème de Pythagore — applications", niveau:"Facile", points_total:6,
-        questions:[
-          {label:"a)", enonce:"Une échelle de $5$ m appuie contre un mur. Son pied est à $2$ m du mur. À quelle hauteur touche-t-elle le mur ?", correction:"$h^2 = 5^2-2^2=21 \\Rightarrow h=\\sqrt{21}\\approx 4{,}58$ m", points:3},
-          {label:"b)", enonce:"Un rectangle a des diagonales de $13$ cm. Sa largeur est $5$ cm. Quelle est sa longueur ?", correction:"$l^2=13^2-5^2=144 \\Rightarrow l=12$ cm", points:3},
-        ],
-        indices:["Dans un rectangle, les diagonales sont égales et se coupent en leur milieu"]
-      },
-      {
-        id:"geo_4_B", titre:"Thalès — proportionnalité", niveau:"Moyen", points_total:9,
-        questions:[
-          {label:"a)", enonce:"$DE \\parallel BC$, $AD=3$, $DB=5$, $AE=2{,}4$. Calcule $EC$.", correction:"$\\dfrac{AD}{AB} = \\dfrac{AE}{AC} \\Rightarrow \\dfrac{3}{8} = \\dfrac{2{,}4}{AC} \\Rightarrow AC=6{,}4$ ; $EC=4$", points:3},
-          {label:"b)", enonce:"$DE \\parallel BC$, $AD=4$, $AB=10$, $DE=3$. Calcule $BC$.", correction:"$\\dfrac{AD}{AB} = \\dfrac{DE}{BC} \\Rightarrow \\dfrac{4}{10} = \\dfrac{3}{BC} \\Rightarrow BC=7{,}5$", points:3},
-          {label:"c)", enonce:"Réciproque de Thalès : $AD=2$, $DB=4$, $AE=1{,}5$, $EC=3$. Les droites $DE$ et $BC$ sont-elles parallèles ?", correction:"$\\dfrac{AD}{AB}=\\dfrac{2}{6}=\\dfrac{1}{3}$ ; $\\dfrac{AE}{AC}=\\dfrac{1{,}5}{4{,}5}=\\dfrac{1}{3}$ ✓ Oui, parallèles.", points:3},
-        ],
-        indices:["Si $DE \\parallel BC$ : $\\dfrac{AD}{AB} = \\dfrac{AE}{AC} = \\dfrac{DE}{BC}$"]
-      },
-    ],
-  },
-
-  "2nde": {
-    "Fonctions de référence": [
-
-      // ── FONCTION CARRÉ ──
-      {
-        id:"fc_2_A", titre:"Fonction carré — images et calculs", niveau:"Facile", points_total:8,
-        questions:[
-          {label:"a)", enonce:"$f(x) = x^2$. Calcule $f(0)$, $f(3)$, $f(-3)$ et $f(-5)$.", correction:"$f(0)=0$ ; $f(3)=9$ ; $f(-3)=9$ ; $f(-5)=25$", points:2},
-          {label:"b)", enonce:"$f(x) = x^2$. Quel(s) antécédent(s) a le nombre $16$ ?", correction:"$x^2=16 \\Rightarrow x=4$ ou $x=-4$. Il y a deux antécédents.", points:2},
-          {label:"c)", enonce:"$f(x) = x^2$. Quel est l'antécédent de $0$ ? Et de $-4$ ?", correction:"$x^2=0 \\Rightarrow x=0$ (un seul antécédent) ; $x^2=-4$ : pas de solution car $x^2 \\geq 0$ toujours.", points:2},
-          {label:"d)", enonce:"$f(x) = x^2$. Compare $f(2)$ et $f(3)$. En déduire une propriété de $f$ sur $[0\\,;\\,+\\infty[$.", correction:"$f(2)=4 < f(3)=9$. $f$ est croissante sur $[0\\,;\\,+\\infty[$.", points:2},
-        ],
-        indices:["$f(x) = x^2$ : toujours positif ou nul ; $f(-x) = f(x)$ (fonction paire)"]
-      },
-      {
-        id:"fc_2_B", titre:"Fonction carré — tableau de variations", niveau:"Moyen", points_total:9,
-        questions:[
-          {label:"a)", enonce:"Complète : $f(x)=x^2$ est ........... sur $]-\\infty\\,;\\,0]$ et ........... sur $[0\\,;\\,+\\infty[$.", correction:"Décroissante sur $]-\\infty\\,;\\,0]$ et croissante sur $[0\\,;\\,+\\infty[$.", points:3},
-          {label:"b)", enonce:"Quel est le minimum de $f(x) = x^2$ ? En quelle valeur est-il atteint ?", correction:"Le minimum est $0$, atteint en $x=0$.", points:3},
-          {label:"c)", enonce:"Sur $[-3\\,;\\,5]$, donne le minimum et le maximum de $f(x) = x^2$.", correction:"Min $= f(0) = 0$ ; Max $= f(5) = 25$ (car $|5| > |-3|$).", points:3},
-        ],
-        indices:["Comparer $|{-3}|$ et $|5|$ pour trouver le maximum sur un intervalle"]
-      },
-      {
-        id:"fc_2_C", titre:"Fonction carré — lecture graphique", niveau:"Moyen", points_total:6,
-        questions:[
-          {label:"a)", enonce:"La courbe de $f(x)=x^2$ passe-t-elle par les points $A(2\\,;\\,4)$, $B(-1\\,;\\,1)$ et $C(3\\,;\\,6)$ ?", correction:"$f(2)=4$ ✓ → $A$ sur la courbe ; $f(-1)=1$ ✓ → $B$ sur la courbe ; $f(3)=9 \\neq 6$ → $C$ n'est pas sur la courbe.", points:3},
-          {label:"b)", enonce:"Par quel(s) point(s) de la parabole $y=x^2$ passe la droite $y=9$ ?", correction:"$x^2=9 \\Rightarrow x=3$ ou $x=-3$. Points : $(3\\,;\\,9)$ et $(-3\\,;\\,9)$.", points:3},
-        ],
-        indices:["Un point est sur la courbe si et seulement si ses coordonnées vérifient $y = f(x)$"]
-      },
-
-      // ── FONCTION INVERSE ──
-      {
-        id:"fi_2_A", titre:"Fonction inverse — images et domaine", niveau:"Facile", points_total:8,
-        questions:[
-          {label:"a)", enonce:"$g(x) = \\dfrac{1}{x}$. Calcule $g(1)$, $g(2)$, $g(-4)$ et $g(0{,}5)$.", correction:"$g(1)=1$ ; $g(2)=0{,}5$ ; $g(-4)=-0{,}25$ ; $g(0{,}5)=2$", points:2},
-          {label:"b)", enonce:"Quel est le domaine de définition de $g(x) = \\dfrac{1}{x}$ ? Pourquoi ?", correction:"$D_g = \\mathbb{R} \\setminus \\{0\\}$ car on ne peut pas diviser par zéro.", points:2},
-          {label:"c)", enonce:"$g(x) = \\dfrac{1}{x}$. Quel est l'antécédent de $4$ ? De $\\dfrac{1}{3}$ ?", correction:"$\\dfrac{1}{x}=4 \\Rightarrow x=\\dfrac{1}{4}$ ; $\\dfrac{1}{x}=\\dfrac{1}{3} \\Rightarrow x=3$", points:2},
-          {label:"d)", enonce:"Que se passe-t-il quand $x$ devient très grand ? Très proche de $0$ ?", correction:"Quand $x \\to +\\infty$, $g(x) \\to 0$. Quand $x \\to 0^+$, $g(x) \\to +\\infty$.", points:2},
-        ],
-        indices:["L'inverse de $g(x) = k$ est $x = \\dfrac{1}{k}$ (si $k \\neq 0$)"]
-      },
-      {
-        id:"fi_2_B", titre:"Fonction inverse — variations et signe", niveau:"Moyen", points_total:9,
-        questions:[
-          {label:"a)", enonce:"Complète : $g(x)=\\dfrac{1}{x}$ est ........... sur $]0\\,;\\,+\\infty[$ et ........... sur $]-\\infty\\,;\\,0[$.", correction:"Décroissante sur $]0\\,;\\,+\\infty[$ et décroissante sur $]-\\infty\\,;\\,0[$.", points:3},
-          {label:"b)", enonce:"Signe de $g(x) = \\dfrac{1}{x}$ : quand $g(x) > 0$ ? Quand $g(x) < 0$ ?", correction:"$g(x) > 0$ si $x > 0$ ; $g(x) < 0$ si $x < 0$.", points:3},
-          {label:"c)", enonce:"Résous : $\\dfrac{1}{x} > 2$ (avec $x > 0$).", correction:"$\\dfrac{1}{x} > 2 \\Rightarrow 1 > 2x \\Rightarrow x < \\dfrac{1}{2}$. Avec $x>0$ : solution $x \\in ]0\\,;\\,\\dfrac{1}{2}[$.", points:3},
-        ],
-        indices:["Sur $]0;+\\infty[$ : plus $x$ est grand, plus $\\dfrac{1}{x}$ est petit → fonction décroissante"]
-      },
-
-      // ── FONCTION RACINE CARRÉE ──
-      {
-        id:"fr_2_A", titre:"Fonction racine carrée — images et domaine", niveau:"Facile", points_total:8,
-        questions:[
-          {label:"a)", enonce:"$h(x) = \\sqrt{x}$. Calcule $h(0)$, $h(1)$, $h(4)$, $h(9)$ et $h(25)$.", correction:"$h(0)=0$ ; $h(1)=1$ ; $h(4)=2$ ; $h(9)=3$ ; $h(25)=5$", points:2},
-          {label:"b)", enonce:"Pourquoi $h(x) = \\sqrt{x}$ n'est-elle pas définie pour $x < 0$ ? Quel est son domaine ?", correction:"On ne peut pas prendre la racine carrée d'un nombre négatif. $D_h = [0\\,;\\,+\\infty[$.", points:2},
-          {label:"c)", enonce:"Calcule $h(2)$ à $10^{-2}$ près. Est-ce un nombre rationnel ?", correction:"$h(2) = \\sqrt{2} \\approx 1{,}41$. C'est un irrationnel.", points:2},
-          {label:"d)", enonce:"Résous $\\sqrt{x} = 5$ et $\\sqrt{x} = 0$.", correction:"$\\sqrt{x}=5 \\Rightarrow x=25$ ; $\\sqrt{x}=0 \\Rightarrow x=0$", points:2},
-        ],
-        indices:["$\\sqrt{x} = k \\Rightarrow x = k^2$ (valable si $k \\geq 0$)"]
-      },
-      {
-        id:"fr_2_B", titre:"Fonction racine carrée — variations", niveau:"Moyen", points_total:6,
-        questions:[
-          {label:"a)", enonce:"Montre que $h(x) = \\sqrt{x}$ est croissante sur $[0\\,;\\,+\\infty[$ en comparant $h(4)$ et $h(9)$.", correction:"$h(4)=2 < h(9)=3$ et $4 < 9$ → bien croissante.", points:2},
-          {label:"b)", enonce:"Sur $[0\\,;\\,16]$, donne le minimum et le maximum de $h(x) = \\sqrt{x}$.", correction:"Min $= h(0) = 0$ ; Max $= h(16) = 4$.", points:2},
-          {label:"c)", enonce:"Résous $\\sqrt{x} < 3$.", correction:"$\\sqrt{x} < 3 \\Rightarrow x < 9$. Avec $x \\geq 0$ : solution $x \\in [0\\,;\\,9[$.", points:2},
-        ],
-        indices:["$\\sqrt{x} < k \\Rightarrow x < k^2$ (si $k > 0$ et $x \\geq 0$)"]
-      },
-
-      // ── COMPARAISON DES 3 FONCTIONS ──
-      {
-        id:"fref_2_synthese", titre:"Synthèse — les trois fonctions de référence", niveau:"Difficile", points_total:10,
-        questions:[
-          {label:"a)", enonce:"Classe dans l'ordre croissant : $f(3)=x^2$, $g(3)=\\dfrac{1}{x}$, $h(3)=\\sqrt{x}$ pour $x=3$.", correction:"$g(3)=\\dfrac{1}{3}\\approx 0{,}33$ ; $h(3)=\\sqrt{3}\\approx 1{,}73$ ; $f(3)=9$. Ordre : $g(3) < h(3) < f(3)$.", points:3},
-          {label:"b)", enonce:"Pour quelles valeurs de $x > 0$ a-t-on $x^2 < \\sqrt{x}$ ?", correction:"$x^2 < \\sqrt{x} \\Rightarrow x^4 < x \\Rightarrow x^3 < 1 \\Rightarrow x < 1$. Solution : $x \\in ]0\\,;\\,1[$.", points:4},
-          {label:"c)", enonce:"Parmi $f(x)=x^2$, $g(x)=\\dfrac{1}{x}$ et $h(x)=\\sqrt{x}$, laquelle est définie sur tout $\\mathbb{R}$ ? Laquelle n'est définie que sur $]0\\,;\\,+\\infty[$ ?", correction:"$f(x)=x^2$ : définie sur $\\mathbb{R}$ tout entier. $h(x)=\\sqrt{x}$ : définie sur $[0\\,;\\,+\\infty[$ seulement.", points:3},
-        ],
-        indices:["Remplace $x$ par des valeurs numériques concrètes pour comparer"]
-      },
-    ],
-    "Systèmes d'équations": [
-      {
-        id:"syst_2_A", titre:"Systèmes par substitution", niveau:"Facile", points_total:6,
-        questions:[
-          {label:"a)", enonce:"Résous par substitution : $\\begin{cases} y = 2x + 1 \\\\ 3x + y = 11 \\end{cases}$", correction:"$3x + 2x + 1 = 11 \\Rightarrow 5x = 10 \\Rightarrow x=2$, $y=5$", points:3},
-          {label:"b)", enonce:"Résous par substitution : $\\begin{cases} x = y - 3 \\\\ 2x + y = 9 \\end{cases}$", correction:"$2(y-3)+y=9 \\Rightarrow 3y=15 \\Rightarrow y=5$, $x=2$", points:3},
-        ],
-        indices:["Isole une variable dans une équation, puis substitue dans l'autre"]
-      },
-      {
-        id:"syst_2_B", titre:"Systèmes par combinaison linéaire", niveau:"Moyen", points_total:9,
-        questions:[
-          {label:"a)", enonce:"Résous par combinaison : $\\begin{cases} 2x + 3y = 13 \\\\ 2x - y = 1 \\end{cases}$", correction:"Soustraction : $4y = 12 \\Rightarrow y=3$, $x=2$", points:3},
-          {label:"b)", enonce:"Résous par combinaison : $\\begin{cases} 2x + 3y = 12 \\\\ x - y = 1 \\end{cases}$", correction:"De (2) : $x = y+1$. Dans (1) : $2(y+1)+3y=12 \\Rightarrow 5y=10 \\Rightarrow y=2$, $x=3$", points:3},
-          {label:"c)", enonce:"Résous : $\\begin{cases} 5x - 2y = 11 \\\\ 3x + 4y = 1 \\end{cases}$", correction:"$2\\times(1)$: $10x-4y=22$. $(2)$: $3x+4y=1$. Addition : $13x=23 \\Rightarrow x=\\dfrac{23}{13}$, $y=\\dfrac{-7}{13}$", points:3},
-        ],
-        indices:["Cherche à éliminer une variable en multipliant les équations pour avoir des coefficients opposés"]
-      },
-      {
-        id:"syst_2_C", titre:"Systèmes et problèmes", niveau:"Difficile", points_total:9,
-        questions:[
-          {label:"a)", enonce:"La somme de deux nombres est $15$ et leur différence est $3$. Trouve ces nombres.", correction:"$x+y=15$ et $x-y=3 \\Rightarrow x=9$, $y=6$", points:3},
-          {label:"b)", enonce:"Un billet adulte coûte $12$€, un billet enfant $7$€. $5$ adultes et $3$ enfants payent $81$€. Vérifie et trouve le nombre de chaque type.", correction:"$5 \\times 12 + 3 \\times 7 = 60+21=81$ ✓. Ici c'est une vérification directe.", points:3},
-          {label:"c)", enonce:"Résous : $\\begin{cases} \\dfrac{x}{2} + \\dfrac{y}{3} = 4 \\\\ x - y = 3 \\end{cases}$", correction:"De (2) : $x = y+3$. Dans (1) : $\\dfrac{y+3}{2}+\\dfrac{y}{3}=4 \\Rightarrow 3(y+3)+2y=24 \\Rightarrow 5y=15 \\Rightarrow y=3$, $x=6$", points:3},
-        ],
-        indices:["Pour les problèmes, pose les inconnues, écris les équations, puis résous"]
+        indices:["$2$ est le seul nombre premier pair ; tout nombre premier $>2$ est impair"]
       },
     ],
 
