@@ -605,6 +605,30 @@ nav {
 .qcm-choix.qcm-wrong .qcm-lettre { background:var(--rouge); color:white; }
 .qcm-choix:disabled { cursor:default; opacity:0.85; }
 
+/* ══ WOW STRIP ══ */
+.wow-strip {
+  display:flex; align-items:stretch;
+  background:var(--bleu); border-radius:var(--r-lg);
+  margin-top:2.5rem; overflow:hidden;
+}
+.wow-item {
+  flex:1; display:flex; align-items:center; gap:14px;
+  padding:1.25rem 1.5rem; cursor:pointer;
+  transition:background 0.18s;
+}
+.wow-item:hover { background:rgba(255,255,255,0.08); }
+.wow-icon { font-size:1.8rem; flex-shrink:0; }
+.wow-info { flex:1; }
+.wow-titre { font-size:14px; font-weight:700; color:white; }
+.wow-desc { font-size:12px; color:rgba(255,255,255,0.6); margin-top:2px; }
+.wow-arrow { font-size:18px; color:rgba(255,255,255,0.4); }
+.wow-sep { width:1px; background:rgba(255,255,255,0.15); margin:12px 0; }
+
+@media(max-width:700px) {
+  .wow-strip { flex-direction:column; }
+  .wow-sep { width:100%; height:1px; margin:0 12px; }
+}
+
 /* ══ ESPACE PROF ══ */
 .prof-page { max-width:960px; margin:0 auto; padding:2rem 1.5rem 4rem; }
 .prof-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:2rem; flex-wrap:wrap; gap:1rem; }
@@ -1063,6 +1087,236 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
      PAGE : ACCUEIL
 ════════════════════════════════════════ -->
 <div class="page active" id="page-accueil">
+
+  <!-- ── SECTION 1 : HERO ── -->
+  <section class="hero">
+    <div class="hero-deco-1"></div>
+    <div class="hero-deco-2"></div>
+    <div class="hero-inner">
+      <div>
+        <div class="hero-badge">
+          <div class="hero-badge-dot"></div>
+          Plateforme AEFE · Né le 14 mars 2026 — π Day
+        </div>
+        <h1>Les maths,<br><em>enfin</em> à ta portée.</h1>
+        <p class="hero-sub">Exercices interactifs, corrections détaillées, générateur de devoirs PDF, calcul mental — une plateforme construite par un enseignant AEFE, pour les enseignants AEFE.</p>
+        <div class="hero-btns">
+          <button class="btn-lg-primary" onclick="showPage('exercices')">Commencer les exercices →</button>
+          <button class="btn-lg-ghost" onclick="document.getElementById('tarifs').scrollIntoView({behavior:'smooth'})">Pour les établissements</button>
+        </div>
+        <div class="hero-stats">
+          <div><span class="hero-stat-num">150+</span><div class="hero-stat-label">Exercices</div></div>
+          <div class="hero-stat-sep"></div>
+          <div><span class="hero-stat-num">6</span><div class="hero-stat-label">Niveaux</div></div>
+          <div class="hero-stat-sep"></div>
+          <div><span class="hero-stat-num">BO 2026</span><div class="hero-stat-label">À jour</div></div>
+        </div>
+      </div>
+      <!-- Carte démo interactive -->
+      <div class="hero-card-wrap">
+        <div class="hero-card">
+          <div class="hero-card-header">
+            <span class="hc-title">⚖️ Équations · 3ème</span>
+            <span class="hc-score">Score 3 / 4</span>
+          </div>
+          <div class="hero-card-body">
+            <div class="hc-question">Résous l'équation :<br><span class="hc-eq">$5x - 3 = 2x + 9$</span></div>
+            <div class="hc-choices">
+              <div class="hc-choice">A.&nbsp;&nbsp; $x = 2$</div>
+              <div class="hc-choice correct">B.&nbsp;&nbsp; $x = 4$ &nbsp; ✓</div>
+              <div class="hc-choice">C.&nbsp;&nbsp; $x = 6$</div>
+              <div class="hc-choice wrong">D.&nbsp;&nbsp; $x = -4$ &nbsp; ✗</div>
+            </div>
+            <div class="hc-progress">
+              <div class="hc-bar"><div class="hc-bar-fill"></div></div>
+              <span class="hc-prog-text">3 / 5</span>
+            </div>
+          </div>
+        </div>
+        <div class="floating-badge">
+          <div class="fb-icon">🏆</div>
+          <div><div class="fb-top">Badge débloqué !</div><div class="fb-bot">Série de 5 bonnes réponses</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SECTION 2 : NIVEAUX ── -->
+  <section class="section" style="background:var(--bg)" id="niveaux">
+    <div class="container">
+      <div class="section-center reveal">
+        <div class="s-label">Contenus</div>
+        <h2 class="s-title">Exercices par <em>niveau</em></h2>
+        <p class="s-sub center">Du collège au lycée, progressivité pédagogique et correction étape par étape — aligné sur les nouveaux programmes BO 2026.</p>
+      </div>
+      <div class="niveaux-grid">
+        <div class="niveau-card reveal" onclick="showPage('exercices','6eme')">
+          <div class="nc-icon">6ème</div>
+          <div class="nc-name">Sixième</div>
+          <p class="nc-desc">Nombres, fractions, géométrie plane, proportionnalité.</p>
+          <div class="nc-tags"><span class="nc-tag">Fractions</span><span class="nc-tag">Périmètres</span></div>
+        </div>
+        <div class="niveau-card reveal" onclick="showPage('exercices','5eme')">
+          <span class="nc-badge-new">BO 2026</span>
+          <div class="nc-icon">5ème</div>
+          <div class="nc-name">Cinquième</div>
+          <p class="nc-desc">Nombres relatifs, calcul littéral, Pythagore.</p>
+          <div class="nc-tags"><span class="nc-tag">Relatifs</span><span class="nc-tag">Pythagore</span></div>
+        </div>
+        <div class="niveau-card reveal" onclick="showPage('exercices','4eme')">
+          <div class="nc-icon">4ème</div>
+          <div class="nc-name">Quatrième</div>
+          <p class="nc-desc">Identités remarquables, trigonométrie, probabilités, Thalès.</p>
+          <div class="nc-tags"><span class="nc-tag">Identités</span><span class="nc-tag">Thalès</span></div>
+        </div>
+        <div class="niveau-card reveal" onclick="showPage('exercices','3eme')">
+          <span class="nc-count">86 exercices</span>
+          <div class="nc-icon">3ème</div>
+          <div class="nc-name">Troisième</div>
+          <p class="nc-desc">17 chapitres complets — préparation brevet et transition lycée.</p>
+          <div class="nc-tags"><span class="nc-tag">Équations</span><span class="nc-tag">Pythagore</span><span class="nc-tag">Fonctions</span></div>
+        </div>
+        <div class="niveau-card reveal" onclick="showPage('exercices','2nde')">
+          <span class="nc-badge-new">BO 2026</span>
+          <div class="nc-icon">2nde</div>
+          <div class="nc-name">Seconde</div>
+          <p class="nc-desc">Nouveau programme — fonctions de référence, second degré, stats.</p>
+          <div class="nc-tags"><span class="nc-tag">Fonctions</span><span class="nc-tag">Second degré</span></div>
+        </div>
+        <div class="niveau-card soon reveal">
+          <span class="nc-badge-soon">Bientôt</span>
+          <div class="nc-icon">1ère</div>
+          <div class="nc-name">Première</div>
+          <p class="nc-desc">Spécialité maths — en cours d'intégration.</p>
+          <div class="nc-tags"><span class="nc-tag">Dérivation</span><span class="nc-tag">Suites</span></div>
+        </div>
+      </div>
+
+      <!-- Wow moments prof -->
+      <div class="wow-strip reveal">
+        <div class="wow-item" onclick="showPage('prof');setTimeout(ouvrirGenerateurPDF,300)">
+          <div class="wow-icon">📄</div>
+          <div class="wow-info">
+            <div class="wow-titre">Générateur de devoir PDF</div>
+            <div class="wow-desc">Prépare une évaluation en 1 minute</div>
+          </div>
+          <div class="wow-arrow">→</div>
+        </div>
+        <div class="wow-sep"></div>
+        <div class="wow-item" onclick="showPage('prof');setTimeout(ouvrirCalcMental,300)">
+          <div class="wow-icon">🔢</div>
+          <div class="wow-info">
+            <div class="wow-titre">Calcul mental</div>
+            <div class="wow-desc">Projette en classe en 10 secondes</div>
+          </div>
+          <div class="wow-arrow">→</div>
+        </div>
+        <div class="wow-sep"></div>
+        <div class="wow-item" onclick="showPage('prof')">
+          <div class="wow-icon">📊</div>
+          <div class="wow-info">
+            <div class="wow-titre">Tableau de bord</div>
+            <div class="wow-desc">Détecte les élèves en difficulté</div>
+          </div>
+          <div class="wow-arrow">→</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SECTION 3 : TARIFS ── -->
+  <section class="section" style="background:white" id="tarifs">
+    <div class="container">
+      <div class="section-center reveal">
+        <div class="s-label">Licences établissements</div>
+        <h2 class="s-title">Un tarif <em>juste</em> pour le réseau AEFE</h2>
+        <p class="s-sub center">Licence annuelle. Accès complet pour tous les enseignants et tous les élèves de l'établissement. Sans surprise.</p>
+      </div>
+      <div class="tarifs-grid">
+        <div class="tarif-card reveal">
+          <div class="tarif-name">Starter</div>
+          <div class="tarif-desc">Petit établissement</div>
+          <div class="tarif-price"><span class="tarif-cur">€</span><span class="tarif-num">800</span></div>
+          <div class="tarif-period">/ an HT</div>
+          <div class="tarif-eleves">≤ 300 élèves</div>
+          <ul class="tarif-feats">
+            <li>Tous les exercices 6ème → Terminale</li>
+            <li>Espace élève — badges et diplôme</li>
+            <li>Générateur de devoir PDF</li>
+            <li>Calcul mental</li>
+            <li>Mises à jour BO incluses</li>
+          </ul>
+          <a href="mailto:contact@poussemaths.fr" class="btn-tarif btn-tarif-outline">Nous contacter</a>
+        </div>
+        <div class="tarif-card featured reveal">
+          <div class="tarif-top-badge">Recommandé AEFE</div>
+          <div class="tarif-name">Établissement</div>
+          <div class="tarif-desc">Lycée standard AEFE</div>
+          <div class="tarif-price"><span class="tarif-cur">€</span><span class="tarif-num">1 500</span></div>
+          <div class="tarif-period">/ an HT</div>
+          <div class="tarif-eleves">≤ 800 élèves</div>
+          <ul class="tarif-feats">
+            <li>Tout le plan Starter</li>
+            <li>Export Pronote CSV 1 clic</li>
+            <li>Tableau de bord classe</li>
+            <li>Alertes élèves en difficulté</li>
+            <li>Espace parent</li>
+            <li>Support prioritaire</li>
+          </ul>
+          <a href="mailto:contact@poussemaths.fr" class="btn-tarif btn-tarif-white">Demander une démo</a>
+        </div>
+        <div class="tarif-card reveal">
+          <div class="tarif-name">Premium AEFE</div>
+          <div class="tarif-desc">Grand établissement</div>
+          <div class="tarif-price"><span class="tarif-cur">€</span><span class="tarif-num">2 200</span></div>
+          <div class="tarif-period">/ an HT</div>
+          <div class="tarif-eleves">Élèves illimités</div>
+          <ul class="tarif-feats">
+            <li>Tout le plan Établissement</li>
+            <li>Espace administration</li>
+            <li>Formation enseignants incluse</li>
+            <li>Personnalisation logo</li>
+            <li>Compte dédié</li>
+            <li>Accès anticipé nouveautés</li>
+          </ul>
+          <a href="mailto:contact@poussemaths.fr" class="btn-tarif btn-tarif-outline">Nous contacter</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand">Pousse<span>maths</span></div>
+        <div class="footer-tagline">"Travailler avec méthode, réussir avec confiance"</div>
+        <div class="footer-pi">Né le 14 mars 2026 — π Day 🥧 · Lycée Victor Hugo, Marrakech · AEFE</div>
+      </div>
+      <div>
+        <div class="footer-col-title">Plateforme</div>
+        <ul class="footer-links">
+          <li><a onclick="showPage('exercices')">Exercices 3ème</a></li>
+          <li><a onclick="showPage('exercices','2nde')">Exercices 2nde</a></li>
+          <li><a onclick="showPage('eleve')">Espace élève</a></li>
+          <li><a onclick="showPage('prof')">Espace prof</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Contact</div>
+        <ul class="footer-links">
+          <li><a href="mailto:contact@poussemaths.fr">contact@poussemaths.fr</a></li>
+          <li><a onclick="document.getElementById('tarifs').scrollIntoView({behavior:'smooth'})">Pour les établissements</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 Poussemaths — Tous droits réservés</span>
+      <span class="footer-aefe">Réseau AEFE · poussemaths.fr</span>
+    </div>
+  </footer>
+
+</div>
 
   <!-- HERO -->
   <section class="hero">
