@@ -1531,12 +1531,12 @@ const EXERCICES = {
       {
         id:"eq_3_1", titre:"Équations — lecture et sens", niveau:"Facile", points_total:8,
         questions:[
-          {label:"1.", enonce:"Parmi ces équations, laquelle a pour solution $x = 3$ ?",
+          {label:"1.", enonce:"Parmi ces équations, laquelle a pour solution $x = 5$ ?",
            type:"qcm",
-           choix:["$2x + 1 = 5$", "$3x - 2 = 7$", "$x + 4 = 7$", "$4x = 8$"],
+           choix:["$2x + 1 = 9$", "$3x - 2 = 7$", "$x + 4 = 9$", "$4x = 15$"],
            bonneReponseIdx: 2,
-           bonneReponse:"$x + 4 = 7$",
-           correction:"$x + 4 = 7 \\Rightarrow x = 3$ ✓. Vérif des autres : $2(3)+1=7\\neq5$ ; $3(3)-2=7$ ✓ aussi ! Les deux b) et c) sont correctes.", points:2},
+           bonneReponse:"$x + 4 = 9$",
+           correction:"$x + 4 = 9 \\Rightarrow x = 5$ ✓. Vérif des autres : $2(5)+1=11\\neq9$ ; $3(5)-2=13\\neq7$ ; $4(5)=20\\neq15$.", points:2},
           {label:"2.", enonce:"Que signifie 'résoudre une équation' ?",
            type:"qcm",
            choix:["Calculer les deux membres", "Trouver toutes les valeurs de $x$ qui vérifient l'égalité", "Simplifier l'expression", "Développer les parenthèses"],
@@ -2623,7 +2623,7 @@ function renderQuestion() {
   // ── MODE QCM ──
   if(q.type === 'qcm' && q.choix) {
     const choixHtml = q.choix.map((c, i) => `
-      <button class="qcm-choix" id="qcm-${i}" onclick="verifierQCM(${i}, '${c.replace(/'/g,"\\'")}')">
+      <button class="qcm-choix" id="qcm-${i}" onclick="verifierQCM(${i})">
         <span class="qcm-lettre">${String.fromCharCode(65+i)}</span>
         <span class="qcm-texte">${c}</span>
       </button>
@@ -2667,23 +2667,19 @@ function renderQuestion() {
 }
 
 // ── VÉRIFICATION QCM ──
-function verifierQCM(idx, valeur) {
+function verifierQCM(idx) {
   if(reponseDonnee) return;
   reponseDonnee = true;
 
   const q = currentExercice.questions[currentQuestion];
-  const correct = valeur.trim() === q.bonneReponse.trim() ||
-                  idx === q.bonneReponseIdx;
+  const bonIdx = q.bonneReponseIdx !== undefined ? q.bonneReponseIdx : q.choix.indexOf(q.bonneReponse);
+  const correct = idx === bonIdx;
 
   // Colorer tous les boutons
   document.querySelectorAll('.qcm-choix').forEach((btn, i) => {
-    if(i === (q.bonneReponseIdx !== undefined ? q.bonneReponseIdx :
-              q.choix.indexOf(q.bonneReponse))) {
-      btn.classList.add('qcm-correct');
-    } else if(i === idx && !correct) {
-      btn.classList.add('qcm-wrong');
-    }
     btn.disabled = true;
+    if(i === bonIdx) btn.classList.add('qcm-correct');
+    else if(i === idx && !correct) btn.classList.add('qcm-wrong');
   });
 
   afficherCorrection(correct, q);
