@@ -2288,7 +2288,7 @@ const EXERCICES = {
         questions:[
           {label:"1.", enonce:"Une élève veut une moyenne $>13$. Elle a $11$, $14$, $12$, $15$. Note minimale au $5$ème devoir ?",
            type:"libre", correction:"$\\dfrac{52+x}{5}>13 \\Rightarrow 52+x>65 \\Rightarrow x>13$.", points:4},
-          {label:"2.", enonce:"Résous le système d'inéquations : $\\begin{cases}2x-3>1\\\\x<5\\end{cases}$ et représente sur une droite.",
+          {label:"2.", enonce:"Résous le système d'inéquations : $\\begin{cases}2x-3>1\\\\x<5\\end{cases}$. Quelle est l'ensemble solution ?",
            type:"libre", correction:"$2x>4 \\Rightarrow x>2$ ET $x<5$. Solution : $]2\\,;\\,5[$.", points:3},
           {label:"3.", enonce:"$f(x)=2x-3$. Pour quelles valeurs de $x$ a-t-on $f(x)>0$ ET $f(x)<7$ ?",
            type:"libre", correction:"$2x-3>0 \\Rightarrow x>1{,}5$ ET $2x-3<7 \\Rightarrow x<5$. Solution : $]1{,}5\\,;\\,5[$.", points:3},
@@ -3886,8 +3886,14 @@ const EXERCICES = {
       {
         id:"fc_2_3", titre:"Fonction carré — approfondissement", niveau:"Moyen", points_total:10,
         questions:[
-          {label:"1.", enonce:"$f(x)=x^2$. Sur $[-3\\,;\\,2]$, dresse le tableau de variations et donne le max et le min.",
-           type:"libre", correction:"Décroissante sur $[-3\\,;\\,0]$, croissante sur $[0\\,;\\,2]$. Min $=f(0)=0$ ; Max $=f(-3)=9$.", points:4},
+          {label:"1.", enonce:"$f(x)=x^2$. Sur $[-3\\,;\\,2]$, quelle est la valeur du minimum ?",
+           type:"libre", correction:"Min $=f(0)=0$ (en $x=0$, point le plus bas)", points:1},
+          {label:"2.", enonce:"$f(x)=x^2$. Sur $[-3\\,;\\,2]$, quelle est la valeur du maximum ?",
+           type:"libre", correction:"Max $=f(-3)=9$ (car $|-3|>|2|$)", points:1},
+          {label:"3.", enonce:"$f(x)=x^2$ est-elle croissante ou décroissante sur $[0\\,;\\,2]$ ?",
+           type:"qcm", choix:["Croissante","Décroissante","Constante","Ni l'un ni l'autre"],
+           bonneReponseIdx:0, bonneReponse:"Croissante",
+           correction:"Sur $[0\\,;\\,+\\infty[$, $f(x)=x^2$ est croissante : plus $x$ augmente, plus $x^2$ augmente.", points:2},
           {label:"2.", enonce:"$f(x)=x^2$. Combien d'antécédents pour $4$ ? Pour $0$ ? Pour $-1$ ?",
            type:"libre", correction:"$4$ : deux ($x=2$ et $x=-2$). $0$ : un ($x=0$). $-1$ : aucun ($f\\geq0$).", points:3},
           {label:"3.", enonce:"$f(x)=(x-2)^2$. Minimum ? En quelle valeur est-il atteint ?",
@@ -3910,10 +3916,10 @@ const EXERCICES = {
       {
         id:"fref_2_2", titre:"Les 3 fonctions — tableaux de variations", niveau:"Difficile", points_total:12,
         questions:[
-          {label:"1.", enonce:"Dresse le tableau de variations de $h(x)=\\\\sqrt{x}$ sur $[0\\\\,;\\\\,+\\\\infty[$.",
+          {label:"1.", enonce:"Sur $[0\\,;\\,+\\infty[$, $h(x)=\\sqrt{x}$ est-elle croissante ou décroissante ?",
            type:"qcm", choix:["Croissante","Décroissante","Constante","Non définie"],
            bonneReponseIdx:0, bonneReponse:"Croissante",
-           correction:"$h$ est croissante sur $[0\\\\,;\\\\,+\\\\infty[$ : $\\\\sqrt{4}=2 > \\\\sqrt{1}=1$.", points:3},
+           correction:"$h$ est croissante sur $[0\\,;\\,+\\infty[$ : $\\sqrt{4}=2 > \\sqrt{1}=1$.", points:3},
           {label:"2.", enonce:"Pour $x\\\\in[-2\\\\,;\\\\,3]$, compare $f(x)=x^2$ et $h(x)=\\\\sqrt{x}$ (définie sur $[0\\\\,;\\\\,3]$). Lequel est le plus grand en $x=0{,}25$ ?",
            type:"libre", correction:"$f(0{,}25)=0{,}0625$ ; $h(0{,}25)=0{,}5$. Donc $h>f$ pour $x=0{,}25$.", points:4},
           {label:"3.", enonce:"Site vidéo : Tarif A $=4x$€, Tarif B $=2{,}5x+18$€. À partir de combien de films B est-il plus avantageux ?",
