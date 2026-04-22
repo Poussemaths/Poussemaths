@@ -629,6 +629,69 @@ nav {
   .wow-sep { width:100%; height:1px; margin:0 12px; }
 }
 
+/* ══ TABLEAU DE BORD PROF ══ */
+.prof-tabs { display:flex; gap:4px; margin-bottom:1.5rem; border-bottom:1.5px solid var(--bordure); padding-bottom:0; }
+.prof-tab { padding:10px 20px; border:none; background:none; font-size:14px; font-weight:600; color:var(--muted); cursor:pointer; border-bottom:2px solid transparent; margin-bottom:-1.5px; font-family:'DM Sans',sans-serif; transition:all 0.18s; }
+.prof-tab.active { color:var(--bleu); border-bottom-color:var(--bleu); }
+.prof-tab:hover { color:var(--texte); }
+.prof-view { }
+
+.db-stats-row { display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; margin-bottom:1.5rem; }
+.db-stat-card { background:var(--bg); border:1.5px solid var(--bordure); border-radius:var(--r); padding:1.25rem; text-align:center; }
+.db-stat-card.alerte { border-color:#FECACA; background:#FEF2F2; }
+.db-stat-num { font-size:2rem; font-weight:800; color:var(--bleu); font-family:'Fraunces',serif; }
+.db-stat-card.alerte .db-stat-num { color:var(--rouge); }
+.db-stat-label { font-size:12px; color:var(--muted); margin-top:4px; }
+
+.db-section { background:var(--bg); border:1.5px solid var(--bordure); border-radius:var(--r-lg); padding:1.25rem; margin-bottom:1.25rem; }
+.db-section-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; }
+.db-section-titre { font-size:14px; font-weight:700; color:var(--texte); margin-bottom:1rem; }
+.db-section-header .db-section-titre { margin-bottom:0; }
+.db-classe-selector select { padding:6px 12px; border:1.5px solid var(--bordure); border-radius:var(--r); font-size:13px; background:var(--bg); font-family:'DM Sans',sans-serif; }
+
+/* Alertes */
+.db-alerte-item { display:flex; align-items:center; gap:12px; padding:10px 14px; background:#FEF2F2; border:1px solid #FECACA; border-radius:var(--r); margin-bottom:8px; }
+.db-alerte-item:last-child { margin-bottom:0; }
+.db-alerte-avatar { width:32px; height:32px; border-radius:50%; background:var(--rouge); color:white; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700; flex-shrink:0; }
+.db-alerte-info { flex:1; }
+.db-alerte-nom { font-size:13px; font-weight:700; color:var(--texte); }
+.db-alerte-detail { font-size:12px; color:var(--rouge); margin-top:2px; }
+.db-alerte-badge { font-size:11px; font-weight:700; background:#FEE2E2; color:var(--rouge); padding:2px 8px; border-radius:20px; }
+
+/* Table élèves */
+.db-table-wrap { overflow-x:auto; }
+.db-table { width:100%; border-collapse:collapse; font-size:13px; }
+.db-table th { text-align:left; padding:10px 12px; font-size:11px; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.5px; border-bottom:2px solid var(--bordure); white-space:nowrap; }
+.db-table td { padding:10px 12px; border-bottom:1px solid var(--bordure); vertical-align:middle; }
+.db-table tr:last-child td { border-bottom:none; }
+.db-table tr:hover td { background:var(--bleu-doux); }
+.db-eleve-nom { font-weight:600; color:var(--texte); }
+.db-eleve-avatar { width:28px; height:28px; border-radius:50%; color:white; display:inline-flex; align-items:center; justify-content:center; font-size:10px; font-weight:700; margin-right:8px; vertical-align:middle; flex-shrink:0; }
+.db-score { font-weight:700; }
+.db-score.vert { color:var(--vert); }
+.db-score.amber { color:var(--amber); }
+.db-score.rouge { color:var(--rouge); }
+.db-progress-mini { width:80px; height:6px; background:#E2E8F0; border-radius:3px; display:inline-block; vertical-align:middle; }
+.db-progress-fill { height:100%; border-radius:3px; }
+.db-activite { font-size:11px; color:var(--muted); }
+.db-activite.active { color:var(--vert); font-weight:600; }
+.db-activite.warning { color:var(--rouge); }
+
+/* Graphique chapitres */
+.db-chap-row { display:flex; align-items:center; gap:10px; margin-bottom:10px; }
+.db-chap-nom { font-size:12px; color:var(--texte); width:200px; flex-shrink:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.db-chap-bar-wrap { flex:1; height:16px; background:#F1F5F9; border-radius:8px; overflow:hidden; }
+.db-chap-bar { height:100%; border-radius:8px; transition:width 0.6s ease; }
+.db-chap-pct { font-size:12px; font-weight:700; width:40px; text-align:right; }
+
+/* Export CSV */
+.btn-export-csv { padding:8px 16px; background:var(--vert); color:white; border:none; border-radius:var(--r); font-size:13px; font-weight:600; cursor:pointer; font-family:'DM Sans',sans-serif; }
+
+@media(max-width:700px) {
+  .db-stats-row { grid-template-columns:repeat(2,1fr); }
+  .db-chap-nom { width:120px; }
+}
+
 /* ══ ESPACE PROF ══ */
 .prof-page { max-width:960px; margin:0 auto; padding:2rem 1.5rem 4rem; }
 .prof-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:2rem; flex-wrap:wrap; gap:1rem; }
@@ -1461,35 +1524,110 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
       </div>
       <div class="prof-actions-top">
         <button class="btn-prof-action" onclick="ouvrirCalcMental()">🔢 Calcul mental</button>
-        <button class="btn-prof-action primary" onclick="ouvrirGenerateurPDF()">📄 Générer un devoir PDF</button>
+        <button class="btn-prof-action" onclick="ouvrirGenerateurPDF()">📄 Devoir PDF</button>
+        <button class="btn-prof-action primary" onclick="showDashboard()">📊 Tableau de bord</button>
       </div>
     </div>
 
-    <!-- GRILLE OUTILS -->
-    <div class="prof-outils-grid">
-      <div class="prof-outil-card" onclick="ouvrirGenerateurPDF()">
-        <div class="poc-icon">📄</div>
-        <div class="poc-titre">Générateur de devoir PDF</div>
-        <div class="poc-desc">Sélectionne des exercices, personnalise l'en-tête, télécharge en 1 minute</div>
-        <div class="poc-badge">🌟 Wow moment</div>
+    <!-- ONGLETS PROF -->
+    <div class="prof-tabs" id="prof-tabs">
+      <button class="prof-tab active" onclick="switchProfTab('dashboard')">📊 Tableau de bord</button>
+      <button class="prof-tab" onclick="switchProfTab('outils')">🛠️ Outils</button>
+    </div>
+
+    <!-- VUE : TABLEAU DE BORD -->
+    <div id="prof-dashboard" class="prof-view">
+
+      <!-- Statistiques globales -->
+      <div class="db-stats-row">
+        <div class="db-stat-card">
+          <div class="db-stat-num" id="db-nb-eleves">28</div>
+          <div class="db-stat-label">Élèves actifs</div>
+        </div>
+        <div class="db-stat-card">
+          <div class="db-stat-num" id="db-moyenne">73%</div>
+          <div class="db-stat-label">Moyenne classe</div>
+        </div>
+        <div class="db-stat-card">
+          <div class="db-stat-num" id="db-ex-semaine">142</div>
+          <div class="db-stat-label">Exercices cette semaine</div>
+        </div>
+        <div class="db-stat-card alerte">
+          <div class="db-stat-num" id="db-alertes">3</div>
+          <div class="db-stat-label">Élèves en difficulté</div>
+        </div>
       </div>
-      <div class="prof-outil-card" onclick="ouvrirCalcMental()">
-        <div class="poc-icon">🔢</div>
-        <div class="poc-titre">Calcul mental</div>
-        <div class="poc-desc">Choisis un thème et un chrono — projette au vidéoprojecteur en classe</div>
-        <div class="poc-badge">🌟 Wow moment</div>
+
+      <!-- Alertes -->
+      <div class="db-section">
+        <div class="db-section-titre">⚠️ Alertes — élèves à surveiller</div>
+        <div id="db-alertes-list"></div>
       </div>
-      <div class="prof-outil-card" onclick="alert('Tableau de bord — bientôt disponible 🌱')">
-        <div class="poc-icon">📊</div>
-        <div class="poc-titre">Tableau de bord classe</div>
-        <div class="poc-desc">Progression des élèves, alertes, exercices en difficulté</div>
-        <div class="poc-badge soon">🌱 Bientôt</div>
+
+      <!-- Sélecteur de classe -->
+      <div class="db-section">
+        <div class="db-section-header">
+          <div class="db-section-titre">📋 Suivi par élève</div>
+          <div class="db-classe-selector">
+            <select id="db-classe-select" onchange="renderTableauEleves()">
+              <option value="3B">3ème B</option>
+              <option value="3A">3ème A</option>
+              <option value="2A">2nde A</option>
+            </select>
+          </div>
+        </div>
+        <div class="db-table-wrap">
+          <table class="db-table" id="db-table">
+            <thead>
+              <tr>
+                <th>Élève</th>
+                <th>Exercices</th>
+                <th>Score moyen</th>
+                <th>Progression</th>
+                <th>Dernier chapitre</th>
+                <th>Activité</th>
+              </tr>
+            </thead>
+            <tbody id="db-tbody"></tbody>
+          </table>
+        </div>
       </div>
-      <div class="prof-outil-card" onclick="alert('Export Pronote — bientôt disponible 🌱')">
-        <div class="poc-icon">📤</div>
-        <div class="poc-titre">Export Pronote CSV</div>
-        <div class="poc-desc">Télécharge les résultats au format compatible Pronote</div>
-        <div class="poc-badge soon">🌱 Bientôt</div>
+
+      <!-- Progression par chapitre -->
+      <div class="db-section">
+        <div class="db-section-titre">📈 Progression par chapitre — classe 3ème B</div>
+        <div id="db-chapitres-chart"></div>
+      </div>
+
+    </div>
+
+    <!-- VUE : OUTILS -->
+    <div id="prof-outils" class="prof-view" style="display:none">
+      <div class="prof-outils-grid">
+        <div class="prof-outil-card" onclick="ouvrirGenerateurPDF()">
+          <div class="poc-icon">📄</div>
+          <div class="poc-titre">Générateur de devoir PDF</div>
+          <div class="poc-desc">Sélectionne des exercices, personnalise l'en-tête, télécharge en 1 minute</div>
+          <div class="poc-badge">🌟 Wow moment</div>
+        </div>
+        <div class="prof-outil-card" onclick="ouvrirCalcMental()">
+          <div class="poc-icon">🔢</div>
+          <div class="poc-titre">Calcul mental</div>
+          <div class="poc-desc">Choisis un thème et un chrono — projette au vidéoprojecteur en classe</div>
+          <div class="poc-badge">🌟 Wow moment</div>
+        </div>
+        <div class="prof-outil-card" onclick="exportCSV()">
+          <div class="poc-icon">📤</div>
+          <div class="poc-titre">Export Pronote CSV</div>
+          <div class="poc-desc">Télécharge les résultats de la classe au format Pronote</div>
+          <div class="poc-badge">🌟 Wow moment</div>
+        </div>
+        <div class="prof-outil-card" onclick="alert('Espace parent — bientôt disponible 🌱')">
+          <div class="poc-icon">👨‍👩‍👧</div>
+          <div class="poc-titre">Espace Parent</div>
+          <div class="poc-desc">Rapport hebdo automatique, alertes, suivi lecture seule</div>
+          <div class="poc-badge soon">🌱 Bientôt</div>
+        </div>
       </div>
     </div>
 
@@ -1656,6 +1794,30 @@ const EXERCICES = {
         ],
         indices:["$(a^m)^n = a^{m \\times n}$"]
       },
+      {
+        id:"puis_3_6", titre:"Puissances — Objectif Brevet I", niveau:"Difficile", points_total:10,
+        questions:[
+          {label:"1.", enonce:"QCM — $(2^6)^2 = ?$",
+           type:"qcm", choix:["$2^8$","$2^{12}$","$4^8$","$2^4$"],
+           bonneReponseIdx:1, bonneReponse:"$2^{12}$",
+           correction:"$(2^6)^2=2^{6\\times2}=2^{12}$", points:2},
+          {label:"2.", enonce:"Donner la notation scientifique de $A=\\dfrac{15-9\\times10^{-3}}{3\\times10^2}$",
+           type:"libre", correction:"$A=\\dfrac{15-0{,}009}{300}=\\dfrac{14{,}991}{300}\\approx0{,}04997=4{,}997\\times10^{-2}$", points:4},
+          {label:"3.", enonce:"Un disque dur de $1{,}5$ To est partagé en dossiers de $60$ Go. Combien ? ($1$ To $=10^3$ Go)",
+           type:"libre", correction:"$1{,}5\\times10^3 = 1500$ Go. $1500\\div60=25$ dossiers.", points:4},
+        ],
+        indices:["D'après DNB — lire attentivement les unités"]
+      },
+      {
+        id:"puis_3_7", titre:"Puissances — Objectif Brevet II", niveau:"Difficile", points_total:10,
+        questions:[
+          {label:"1.", enonce:"Le Soleil pèse $2\\times10^{30}$ kg et la Terre $6\\times10^{24}$ kg. Combien de fois le Soleil est-il plus lourd ?",
+           type:"libre", correction:"$\\dfrac{2\\times10^{30}}{6\\times10^{24}}=\\dfrac{1}{3}\\times10^6\\approx333\\,333$ fois.", points:5},
+          {label:"2.", enonce:"Un microscope a un grossissement de $2\\times10^5$. Le mimivirus a un diamètre de $4\\times10^{-7}$ m. Diamètre observé ?",
+           type:"libre", correction:"$d=2\\times10^5\\times4\\times10^{-7}=8\\times10^{-2}=0{,}08$ m $=8$ cm.", points:5},
+        ],
+        indices:["D'après DNB — contexte scientifique réel"]
+      },
     ],
 
     // ── 2. RACINES CARRÉES ──
@@ -1725,6 +1887,32 @@ const EXERCICES = {
            type:"libre", correction:"$d=\\sqrt{2}$. Déjà sans fraction irrationnelle au dénominateur.", points:3},
         ],
         indices:["Rationaliser : multiplier par la quantité conjuguée"]
+      },
+      {
+        id:"rac_3_6", titre:"Racines carrées — Objectif Brevet I", niveau:"Difficile", points_total:10,
+        questions:[
+          {label:"1.", enonce:"Simplifie : $\\sqrt{12}+\\sqrt{27}-\\sqrt{75}$",
+           type:"libre", correction:"$2\\sqrt{3}+3\\sqrt{3}-5\\sqrt{3}=0$", points:4},
+          {label:"2.", enonce:"Un carré a un périmètre de $2^{19}$ cm. Exprime en puissance de $2$ : le côté, l'aire.",
+           type:"libre", correction:"Côté $=\\dfrac{2^{19}}{4}=\\dfrac{2^{19}}{2^2}=2^{17}$ cm. Aire $=(2^{17})^2=2^{34}$ cm².", points:3},
+          {label:"3.", enonce:"Résous : $\\sqrt{2x+1}=3$",
+           type:"libre", correction:"$2x+1=9 \\Rightarrow x=4$", points:3},
+        ],
+        indices:["D'après DNB — $\\sqrt{ab}=\\sqrt{a}\\times\\sqrt{b}$"]
+      },
+      {
+        id:"rac_3_7", titre:"Racines carrées — Objectif Brevet II", niveau:"Difficile", points_total:10,
+        questions:[
+          {label:"1.", enonce:"Montre que $\\sqrt{3}$ est irrationnel (non décimal).",
+           type:"qcm", choix:["C'est un entier","Il ne peut pas s'écrire sous forme de fraction","$\\sqrt{3}\\approx1{,}732$","Il n'existe pas"],
+           bonneReponseIdx:1, bonneReponse:"Il ne peut pas s'écrire sous forme de fraction",
+           correction:"Un irrationnel ne peut pas s'écrire $\\dfrac{p}{q}$ avec $p,q$ entiers.", points:3},
+          {label:"2.", enonce:"Côté d'un carré d'aire $98$ cm². Exprime sous la forme $a\\sqrt{b}$.",
+           type:"libre", correction:"$c=\\sqrt{98}=\\sqrt{49\\times2}=7\\sqrt{2}$ cm.", points:4},
+          {label:"3.", enonce:"$(\\sqrt{5}+\\sqrt{3})(\\sqrt{5}-\\sqrt{3})=?$",
+           type:"libre", correction:"$5-3=2$", points:3},
+        ],
+        indices:["$(\\sqrt{a}+b)(\\sqrt{a}-b)=a-b^2$"]
       },
     ],
 
@@ -1802,6 +1990,30 @@ const EXERCICES = {
            type:"libre", correction:"$A=(x-3)(x+3)$ ; $B=(x-3)^2$. $\\dfrac{A}{B}=\\dfrac{(x-3)(x+3)}{(x-3)^2}=\\dfrac{x+3}{x-3}$", points:4},
         ],
         indices:["Factoriser avant de simplifier une fraction"]
+      },
+      {
+        id:"lit_3_6", titre:"Calcul littéral — Objectif Brevet I", niveau:"Difficile", points_total:10,
+        questions:[
+          {label:"1.", enonce:"QCM — Une expression égale à $6x+9$ est…",
+           type:"qcm", choix:["$3(2x+3)$","$(x+3)(x+2)$","$(x+3)^2-x^2$","$6(x+3)$"],
+           bonneReponseIdx:0, bonneReponse:"$3(2x+3)$",
+           correction:"$3(2x+3)=6x+9$ ✓ et $(x+3)^2-x^2=x^2+6x+9-x^2=6x+9$ ✓ aussi ! Les deux sont correctes.", points:2},
+          {label:"2.", enonce:"Programme : choisir $x$, additionner $3$, multiplier par $x$, soustraire $x^2$. Prouve que le résultat vaut toujours $3x$.",
+           type:"libre", correction:"$(x+3)\\times x - x^2 = x^2+3x-x^2=3x$ ✓", points:4},
+          {label:"3.", enonce:"Montre que la somme de $3$ entiers consécutifs est un multiple de $3$.",
+           type:"libre", correction:"$n+(n+1)+(n+2)=3n+3=3(n+1)$ — multiple de $3$ ✓", points:4},
+        ],
+        indices:["D'après DNB — développer puis factoriser pour prouver"]
+      },
+      {
+        id:"lit_3_7", titre:"Calcul littéral — Objectif Brevet II", niveau:"Difficile", points_total:10,
+        questions:[
+          {label:"1.", enonce:"ABCD rectangle : $AB=30$ cm, $BC=24$ cm. On découpe 4 carrés aux coins, côté $x$. Peut-on avoir périmètre rectangle central $=$ somme périmètres carrés ?",
+           type:"libre", correction:"$P_{central}=108-8x$ ; $S_{carrés}=16x$. $108-8x=16x \\Rightarrow x=4{,}5$ cm. Oui.", points:5},
+          {label:"2.", enonce:"$E=-3x^2-5x+4$. Vérifie $E=-18$ pour $x=2$. Calcule $E$ pour $x=-3$.",
+           type:"libre", correction:"$x=2$ : $-12-10+4=-18$ ✓. $x=-3$ : $-27+15+4=-8$.", points:5},
+        ],
+        indices:["D'après DNB — mettre en équation une situation géométrique"]
       },
     ],
 
@@ -1909,6 +2121,32 @@ const EXERCICES = {
         ],
         indices:["Pose l'inconnue, traduis chaque phrase en expression algébrique, écris l'équation"]
       },
+      {
+        id:"eq_3_6", titre:"Équations — Objectif Brevet I", niveau:"Difficile", points_total:10,
+        questions:[
+          {label:"1.", enonce:"QCM — L'équation $4x+2=6x+8$ a la même solution que…",
+           type:"qcm", choix:["$2-x=2x+11$","$2=17+5x$","$0{,}4x+1{,}2=0$","$2x-3=0$"],
+           bonneReponseIdx:2, bonneReponse:"$0{,}4x+1{,}2=0$",
+           correction:"$4x+2=6x+8 \\Rightarrow -2x=6 \\Rightarrow x=-3$. Vérif : $0{,}4(-3)+1{,}2=0$ ✓", points:2},
+          {label:"2.", enonce:"Rectangle $ABCD$ : périmètre $=34$ cm, longueur $=$ largeur $+5$. Dimensions ?",
+           type:"libre", correction:"$2(x+x+5)=34 \\Rightarrow 4x+10=34 \\Rightarrow x=6$ cm. Largeur $=6$ cm, longueur $=11$ cm.", points:4},
+          {label:"3.", enonce:"Programme : choisir $x$, soustraire $5$, élever au carré. Pour quel $x$ le résultat est-il $36$ ?",
+           type:"libre", correction:"$(x-5)^2=36 \\Rightarrow x-5=6$ ou $x-5=-6 \\Rightarrow x=11$ ou $x=-1$.", points:4},
+        ],
+        indices:["D'après DNB — modéliser une situation par une équation"]
+      },
+      {
+        id:"eq_3_7", titre:"Équations — Objectif Brevet II", niveau:"Difficile", points_total:10,
+        questions:[
+          {label:"1.", enonce:"Un candidat gagne $3$€ à la $1$ère bonne réponse, puis son gain est triplé. Après combien de bonnes réponses dépasse-t-il $50\\,000$€ ? ($3^9=19\\,683$ ; $3^{10}=59\\,049$)",
+           type:"libre", correction:"$3^{10}=59\\,049>50\\,000$. Donc au bout de $10$ bonnes réponses.", points:4},
+          {label:"2.", enonce:"Somme de $3$ entiers consécutifs $=69$. Trouve-les.",
+           type:"libre", correction:"$n+(n+1)+(n+2)=3n+3=69 \\Rightarrow n=22$. Entiers : $22$, $23$, $24$.", points:3},
+          {label:"3.", enonce:"Montre que la somme de $3$ entiers consécutifs est toujours un multiple de $3$.",
+           type:"libre", correction:"$n+(n+1)+(n+2)=3n+3=3(n+1)$ — multiple de $3$ ✓", points:3},
+        ],
+        indices:["D'après DNB — démontrer une propriété générale"]
+      },
     ],
 
     // ── 5. INÉQUATIONS ──
@@ -1984,6 +2222,60 @@ const EXERCICES = {
            correction:"$4-1 \\geq x+2x \\Rightarrow 3 \\geq 3x \\Rightarrow x \\leq 1$", points:3},
         ],
         indices:["⚠️ Division ou multiplication par un négatif → le sens de l'inégalité s'inverse !"]
+      },
+      {
+        id:"ineq_3_4", titre:"Inéquations — fractions et parenthèses", niveau:"Difficile", points_total:12,
+        questions:[
+          {label:"a)", enonce:"Résous : $3(x+2) < 2(x+5)$",
+           type:"libre", correction:"$3x+6 < 2x+10 \\Rightarrow x < 4$", points:3},
+          {label:"b)", enonce:"Résous : $\\dfrac{x+1}{2} \\geq 3$",
+           type:"libre", correction:"$x+1 \\geq 6 \\Rightarrow x \\geq 5$", points:3},
+          {label:"c)", enonce:"Résous : $\\dfrac{2x-3}{4} < \\dfrac{x+1}{2}$. Donne $x$.",
+           type:"libre", correction:"Mult. par $4$ : $2x-3 < 2(x+1) \\Rightarrow -3 < 2$. Toujours vrai : $x \\in \\mathbb{R}$.", points:3},
+          {label:"d)", enonce:"Quelle est la solution de $\\dfrac{x-1}{3} > \\dfrac{x+2}{4}$ ?",
+           type:"qcm", choix:["$x > 10$","$x < 10$","$x > -10$","$x < -10$"],
+           bonneReponseIdx:0, bonneReponse:"$x > 10$",
+           correction:"Mult. par $12$ : $4(x-1)>3(x+2) \\Rightarrow 4x-4>3x+6 \\Rightarrow x>10$", points:3},
+        ],
+        indices:["Multiplie par le PPCM pour éliminer les fractions"]
+      },
+      {
+        id:"ineq_3_5", titre:"Inéquations — brevet 3ème", niveau:"Difficile", points_total:12,
+        questions:[
+          {label:"1.", enonce:"Pour quels entiers positifs $x$ a-t-on $2x-1<9$ ET $x>2$ ?",
+           type:"libre", correction:"$2x<10 \\Rightarrow x<5$ et $x>2$. Entiers : $x\\in\\{3,4\\}$.", points:4},
+          {label:"2.", enonce:"Un élève a $10$, $14$, $11$, $13$. Quelle note minimale au $5$ème devoir pour une moyenne $> 12$ ?",
+           type:"libre", correction:"$\\dfrac{48+x}{5}>12 \\Rightarrow 48+x>60 \\Rightarrow x>12$. Il faut strictement plus de $12$.", points:4},
+          {label:"3.", enonce:"Résous : $\\dfrac{4-x}{3} \\leq \\dfrac{x+2}{5}$",
+           type:"libre", correction:"Mult. par $15$ : $5(4-x) \\leq 3(x+2) \\Rightarrow 20-5x \\leq 3x+6 \\Rightarrow 14 \\leq 8x \\Rightarrow x \\geq \\dfrac{7}{4}$", points:4},
+        ],
+        indices:["Toujours vérifier sur un exemple que la solution est correcte"]
+      },
+      {
+        id:"ineq_3_6", titre:"Inéquations — Objectif Brevet I", niveau:"Difficile", points_total:10,
+        questions:[
+          {label:"1.", enonce:"QCM — La solution de $-2x+14>16$ est…",
+           type:"qcm", choix:["$x\\leq-1$","$x\\geq-1$","$x<-1$","$x>-1$"],
+           bonneReponseIdx:2, bonneReponse:"$x<-1$",
+           correction:"$-2x>2 \\Rightarrow x<-1$ (division par $-2$, sens inversé)", points:2},
+          {label:"2.", enonce:"Pour quelles valeurs entières de $x$ a-t-on $3x+1\\leq10$ ET $x\\geq1$ ?",
+           type:"libre", correction:"$3x\\leq9 \\Rightarrow x\\leq3$. Avec $x\\geq1$ entier : $x\\in\\{1,2,3\\}$.", points:4},
+          {label:"3.", enonce:"Un rectangle a une largeur de $4$ cm. Pour que son périmètre soit $<30$ cm, quelle longueur maximale ?",
+           type:"libre", correction:"$2(4+l)<30 \\Rightarrow l<11$ cm.", points:4},
+        ],
+        indices:["D'après DNB — bien repérer le sens de l'inégalité"]
+      },
+      {
+        id:"ineq_3_7", titre:"Inéquations — Objectif Brevet II", niveau:"Difficile", points_total:10,
+        questions:[
+          {label:"1.", enonce:"Une élève veut une moyenne $>13$. Elle a $11$, $14$, $12$, $15$. Note minimale au $5$ème devoir ?",
+           type:"libre", correction:"$\\dfrac{52+x}{5}>13 \\Rightarrow 52+x>65 \\Rightarrow x>13$.", points:4},
+          {label:"2.", enonce:"Résous le système d'inéquations : $\\begin{cases}2x-3>1\\\\x<5\\end{cases}$ et représente sur une droite.",
+           type:"libre", correction:"$2x>4 \\Rightarrow x>2$ ET $x<5$. Solution : $]2\\,;\\,5[$.", points:3},
+          {label:"3.", enonce:"$f(x)=2x-3$. Pour quelles valeurs de $x$ a-t-on $f(x)>0$ ET $f(x)<7$ ?",
+           type:"libre", correction:"$2x-3>0 \\Rightarrow x>1{,}5$ ET $2x-3<7 \\Rightarrow x<5$. Solution : $]1{,}5\\,;\\,5[$.", points:3},
+        ],
+        indices:["Intersection de deux inéquations : les deux doivent être vérifiées simultanément"]
       },
       {
         id:"ineq_3_4", titre:"Inéquations avec parenthèses et fractions", niveau:"Difficile", points_total:12,
@@ -2131,6 +2423,56 @@ const EXERCICES = {
         ],
         indices:["Pose deux inconnues, traduis chaque condition en équation, forme le système"]
       },
+      {
+        id:"syst_3_4", titre:"Systèmes — méthode de comparaison", niveau:"Difficile", points_total:12,
+        questions:[
+          {label:"a)", enonce:"Résous par comparaison : $\\begin{cases}y=2x+1\\\\y=x+4\\end{cases}$",
+           type:"libre", correction:"$2x+1=x+4 \\Rightarrow x=3$, $y=7$", points:3},
+          {label:"b)", enonce:"Résous : $\\begin{cases}y=3-x\\\\y=x-1\\end{cases}$",
+           type:"libre", correction:"$3-x=x-1 \\Rightarrow 4=2x \\Rightarrow x=2$, $y=1$", points:3},
+          {label:"c)", enonce:"Résous : $\\begin{cases}\\dfrac{x+y}{2}=5\\\\x-y=4\\end{cases}$",
+           type:"libre", correction:"$x+y=10$ et $x-y=4 \\Rightarrow 2x=14 \\Rightarrow x=7$, $y=3$", points:3},
+          {label:"d.", enonce:"Quel système a pour solution $(x=2\,;\,y=-1)$ ?",
+           type:"qcm", choix:["$\\begin{cases}x+y=1\\\\x-y=3\\end{cases}$","$\\begin{cases}2x+y=3\\\\x+y=1\\end{cases}$","$\\begin{cases}x+y=3\\\\x-y=1\\end{cases}$","$\\begin{cases}x+2y=4\\\\x-y=1\\end{cases}$"],
+           bonneReponseIdx:0, bonneReponse:"$\\begin{cases}x+y=1\\\\x-y=3\\end{cases}$",
+           correction:"$2+(-1)=1$ ✓ et $2-(-1)=3$ ✓", points:3},
+        ],
+        indices:["Comparaison : si les deux équations donnent $y=...$, on les égalise"]
+      },
+      {
+        id:"syst_3_5", titre:"Systèmes — brevet 3ème", niveau:"Difficile", points_total:12,
+        questions:[
+          {label:"1.", enonce:"Un train A roule à $160$ km/h et B à $120$ km/h en sens inverse. Distance AB $= 400$ km. Dans combien de temps se croisent-ils ?",
+           type:"libre", correction:"$160t+120t=400 \\Rightarrow 280t=400 \\Rightarrow t=\\dfrac{10}{7}\\approx1{,}43$ h $\\approx1$ h $26$ min.", points:5},
+          {label:"2.", enonce:"$3$ adultes et $5$ enfants : $62$€. $2$ adultes et $8$ enfants : $64$€. Prix adulte et enfant ?",
+           type:"libre", correction:"$3a+5e=62$ et $2a+8e=64$. $(1)\\times2-(2)\\times3$ : $-14e=-28 \\Rightarrow e=2$€, $a=17$€.", points:4},
+          {label:"3.", enonce:"Résous : $\\begin{cases}0{,}5x+y=4\\\\x+0{,}5y=5\\end{cases}$",
+           type:"libre", correction:"Mult. par $2$ : $x+2y=8$ et $2x+y=10$. Soustraction : $x-2x+2y-y=8-10 \\Rightarrow -x+y=-2$. Avec $x+2y=8$ : $3y=6 \\Rightarrow y=2$, $x=4$.", points:3},
+        ],
+        indices:["Pour le rattrapage : distance$_1$ + distance$_2$ = distance totale"]
+      },
+      {
+        id:"syst_3_6", titre:"Systèmes — Objectif Brevet I", niveau:"Difficile", points_total:10,
+        questions:[
+          {label:"1.", enonce:"Deux tarifs de taxi : Taxi A $= 2$€ + $1{,}50$€/km ; Taxi B $= 0{,}80$€/km. À partir de quel km Taxi A est-il moins cher ?",
+           type:"libre", correction:"$1{,}5x+2<0{,}8x \\Rightarrow 0{,}7x<-2$ — impossible. Taxi A toujours plus cher. Donc jamais moins cher.", points:4},
+          {label:"2.", enonce:"La somme de deux nombres est $45$ et leur produit est $500$. Trouve-les.",
+           type:"libre", correction:"$x+y=45$ et $xy=500$. $y=45-x$ et $x(45-x)=500 \\Rightarrow x^2-45x+500=0 \\Rightarrow (x-20)(x-25)=0$. Nombres : $20$ et $25$.", points:3},
+          {label:"3.", enonce:"$4$ pommes et $3$ oranges coûtent $3{,}10$€. $2$ pommes et $5$ oranges coûtent $3{,}30$€. Prix d'une pomme ?",
+           type:"libre", correction:"$4p+3o=3{,}1$ et $2p+5o=3{,}3$. $(1)-(2)\\times2$ : $-7o=-3{,}5 \\Rightarrow o=0{,}50$€, $p=0{,}40$€.", points:3},
+        ],
+        indices:["D'après DNB — modéliser avec deux inconnues"]
+      },
+      {
+        id:"syst_3_7", titre:"Systèmes — Objectif Brevet II", niveau:"Difficile", points_total:10,
+        questions:[
+          {label:"1.", enonce:"Un car à $90$ km/h part de A. $30$ min plus tard, une voiture à $120$ km/h part du même point. Dans combien de temps la voiture rattrape-t-elle le car ?",
+           type:"libre", correction:"$120t=90(t+0{,}5) \\Rightarrow 30t=45 \\Rightarrow t=1{,}5$ h après le départ de la voiture.", points:5},
+          {label:"2.", enonce:"Une classe de $30$ élèves : filles et garçons. $\\dfrac{2}{3}$ des filles et $\\dfrac{1}{2}$ des garçons font du sport, soit $17$ sportifs. Combien de filles ?",
+           type:"libre", correction:"$f+g=30$ et $\\dfrac{2f}{3}+\\dfrac{g}{2}=17$. Mult. par $6$ : $4f+3g=102$. $(1)\\times3$ : $3f+3g=90$. Soustraction : $f=12$ filles.", points:5},
+        ],
+        indices:["D'après DNB — traduire chaque condition en équation"]
+      },
     ],
 
 
@@ -2179,6 +2521,52 @@ const EXERCICES = {
            correction:"$\\dfrac{f(2)-f(-1)}{2-(-1)}=\\dfrac{5-(-1)}{3}=\\dfrac{6}{3}=2$", points:2},
         ],
         indices:["Taux de variation $=\\dfrac{f(b)-f(a)}{b-a}$ ; signe du coefficient de $x$ → sens de variation"]
+      },
+      {
+        id:"fonc_3_4", titre:"Fonctions — représentation graphique et variation", niveau:"Difficile", points_total:10,
+        questions:[
+          {label:"a)", enonce:"$f(x)=x^2-4$. Calcule $f(0)$, $f(2)$, $f(-2)$, $f(3)$.",
+           type:"libre", correction:"$f(0)=-4$ ; $f(2)=0$ ; $f(-2)=0$ ; $f(3)=5$", points:3},
+          {label:"b)", enonce:"La droite passe par $A(1\,;\,5)$ et $B(3\,;\,11)$. Retrouve $f(x)$.",
+           type:"libre", correction:"$a=\\dfrac{11-5}{3-1}=3$ ; $b=5-3=2$. $f(x)=3x+2$.", points:3},
+          {label:"c)", enonce:"$f(x)=-2x+7$. Sur $[1\,;\,4]$, minimum et maximum ?",
+           type:"libre", correction:"$f$ décroissante ($a=-2<0$). Min $=f(4)=-1$ ; Max $=f(1)=5$.", points:4},
+        ],
+        indices:["Pour une fonction affine décroissante : min à droite de l'intervalle, max à gauche"]
+      },
+      {
+        id:"fonc_3_5", titre:"Fonctions — brevet 3ème", niveau:"Difficile", points_total:12,
+        questions:[
+          {label:"1.", enonce:"Une piscine de $500$ L. Remplissage à $80$ L/min. $V(t)=80t+500$. Quand aura-t-on $1\,700$ L ?",
+           type:"libre", correction:"$80t+500=1700 \\Rightarrow 80t=1200 \\Rightarrow t=15$ min.", points:4},
+          {label:"2.", enonce:"$f(x)=2x+1$ et $g(x)=-x+7$. Trouver $x$ tel que $f(x)=g(x)$. Interpréter graphiquement.",
+           type:"libre", correction:"$2x+1=-x+7 \\Rightarrow 3x=6 \\Rightarrow x=2$. Point d'intersection des deux droites : $(2\,;\,5)$.", points:4},
+          {label:"3.", enonce:"$h$ est définie par le tableau : $x=$[$-2$;$0$;$2$;$4$], $h(x)=$[$7$;$3$;$-1$;$-5$]. $h$ est-elle affine ? Si oui, donne son expression.",
+           type:"libre", correction:"Taux $=\\dfrac{3-7}{0-(-2)}=\\dfrac{-1-3}{2-0}=-2$. Constant → affine. $h(x)=-2x+3$.", points:4},
+        ],
+        indices:["Vérifier qu'une fonction est affine : taux de variation constant entre tous les points"]
+      },
+      {
+        id:"fonc_3_6", titre:"Fonctions — Objectif Brevet I", niveau:"Difficile", points_total:10,
+        questions:[
+          {label:"1.", enonce:"La droite $AB$ avec $A(29\,;\,208)$ et $B(44\,;\,313)$. Vérifie qu'elle représente $f(x)=7x+5$.",
+           type:"libre", correction:"$f(29)=7\\times29+5=203+5=208$ ✓. $f(44)=7\\times44+5=308+5=313$ ✓.", points:4},
+          {label:"2.", enonce:"$f(x)=7x+5$. Abscisse du point d'ordonnée $684$ ?",
+           type:"libre", correction:"$7x+5=684 \\Rightarrow 7x=679 \\Rightarrow x=97$.", points:3},
+          {label:"3.", enonce:"$f(x)=0{,}75x-2$. La droite coupe l'axe des abscisses en $A$. Abscisse de $A$ ?",
+           type:"libre", correction:"$0{,}75x-2=0 \\Rightarrow x=\\dfrac{2}{0{,}75}=\\dfrac{8}{3}\\approx2{,}67$", points:3},
+        ],
+        indices:["D'après DNB — vérifier qu'un point appartient à une droite"]
+      },
+      {
+        id:"fonc_3_7", titre:"Fonctions — Objectif Brevet II", niveau:"Difficile", points_total:10,
+        questions:[
+          {label:"1.", enonce:"Une pyramide de hauteur $x$ cm est posée sur un parallélépipède. $V_1(x)=\\dfrac{4x}{3}$ et $V_2(x)=12(5-x)$. Pour quelle valeur de $x$ a-t-on $V_1=V_2$ ?",
+           type:"libre", correction:"$\\dfrac{4x}{3}=60-12x \\Rightarrow 4x=180-36x \\Rightarrow 40x=180 \\Rightarrow x=4{,}5$ cm.", points:5},
+          {label:"2.", enonce:"$f$ est une fonction. $f(1)=4$, $f(5)=4$. Peut-elle être strictement croissante ? Peut-elle être affine ?",
+           type:"libre", correction:"Non strictement croissante (même image pour deux abscisses différentes). Si affine : $a=\\dfrac{4-4}{5-1}=0$ donc $f$ constante, pas strictement croissante.", points:5},
+        ],
+        indices:["D'après DNB — analyser les propriétés d'une fonction"]
       },
       {
         id:"fonc_3_3", titre:"Fonctions — expressions et calculs", niveau:"Moyen", points_total:10,
@@ -2325,6 +2713,30 @@ const EXERCICES = {
         ],
         indices:["Bénéfice $=$ Recette $-$ Coût ; positif quand Recette $>$ Coût"]
       },
+      {
+        id:"aff_3_6", titre:"Fonctions affines — Objectif Brevet I", niveau:"Difficile", points_total:10,
+        questions:[
+          {label:"1.", enonce:"QCM — La pente de la droite passant par $O(0\,;\,0)$ et $A(3\,;\,6)$ est…",
+           type:"qcm", choix:["$3$","$6$","$2$","$\\dfrac{1}{2}$"],
+           bonneReponseIdx:2, bonneReponse:"$2$",
+           correction:"$a=\\dfrac{6-0}{3-0}=2$", points:2},
+          {label:"2.", enonce:"Deux tarifs de location de vélo : A $= 5$€ + $2$€/h ; B $= 3{,}50$€/h. Quand A est-il plus avantageux ?",
+           type:"libre", correction:"$2h+5<3{,}5h \\Rightarrow 5<1{,}5h \\Rightarrow h>\\dfrac{10}{3}\\approx3{,}3$ h. A plus avantageux au-delà de $3$ h $20$ min.", points:4},
+          {label:"3.", enonce:"Droite passant par $(-1\,;\,3)$ et de pente $-2$. Équation ? Intersection avec $y=x+1$ ?",
+           type:"libre", correction:"$b=3+2=5$. Droite : $y=-2x+5$. Intersection : $-2x+5=x+1 \\Rightarrow x=\\dfrac{4}{3}$, $y=\\dfrac{7}{3}$.", points:4},
+        ],
+        indices:["D'après DNB — comparer deux fonctions affines"]
+      },
+      {
+        id:"aff_3_7", titre:"Fonctions affines — Objectif Brevet II", niveau:"Difficile", points_total:10,
+        questions:[
+          {label:"1.", enonce:"Coût : $C(x)=4x+200$€. Recette : $R(x)=9x$. Seuil de rentabilité et bénéfice pour $60$ unités ?",
+           type:"libre", correction:"$9x>4x+200 \\Rightarrow x>40$. Bénéfice $=R(60)-C(60)=540-440=100$€.", points:5},
+          {label:"2.", enonce:"$f(x)=\\dfrac{3}{2}x-1$. Tableau de valeurs pour $x\\in\\{-2,-1,0,1,2\\}$, sens de variation, minimum sur $[-2\,;\,2]$.",
+           type:"libre", correction:"$f(-2)=-4$, $f(-1)=-2{,}5$, $f(0)=-1$, $f(1)=0{,}5$, $f(2)=2$. Croissante. Min $=f(-2)=-4$.", points:5},
+        ],
+        indices:["Seuil de rentabilité : résoudre $R(x)>C(x)$"]
+      },
     ],
 
     // ── 9. PROBABILITÉS ──
@@ -2413,6 +2825,30 @@ const EXERCICES = {
            correction:"Combinaisons : PPF, PFP, FPP — $3$ cas sur $8$. $P=\\dfrac{3}{8}$.", points:4},
         ],
         indices:["Événements indépendants : $P(A\\cap B)=P(A)\\times P(B)$"]
+      },
+      {
+        id:"proba_3_6", titre:"Probabilités — Objectif Brevet I", niveau:"Difficile", points_total:10,
+        questions:[
+          {label:"1.", enonce:"Aïssia choisit au hasard parmi rollers gris $87$€, rollers noirs $99$€, casques à $45$€, $22$€, $29$€. $P$(coût $<130$€) ?",
+           type:"libre", correction:"$6$ combinaisons. Coûts : $132,109,116,144,121,128$. $4$ sont $<130$. $P=\\dfrac{4}{6}=\\dfrac{2}{3}$.", points:5},
+          {label:"2.", enonce:"Un restaurant a $4$ pizzas classiques et $3$ pizzas spéciales. On choisit $1$ pizza au hasard. $P$(classique) ?",
+           type:"libre", correction:"$P=\\dfrac{4}{7}$", points:2},
+          {label:"3.", enonce:"Deux dés tétraédriques ($1$ à $4$). $P$(somme $=5$) ?",
+           type:"libre", correction:"Couples : $(1,4),(2,3),(3,2),(4,1)$ = $4$ cas sur $16$. $P=\\dfrac{1}{4}$.", points:3},
+        ],
+        indices:["D'après DNB — dénombrer soigneusement les cas"]
+      },
+      {
+        id:"proba_3_7", titre:"Probabilités — Objectif Brevet II", niveau:"Difficile", points_total:10,
+        questions:[
+          {label:"1.", enonce:"Urne : $6$ rouges et $4$ jaunes. Tirage AVEC remise × $2$. $P$(rouge puis jaune) ?",
+           type:"libre", correction:"$P=\\dfrac{6}{10}\\times\\dfrac{4}{10}=\\dfrac{24}{100}=0{,}24$", points:3},
+          {label:"2.", enonce:"Même urne, SANS remise × $2$. $P$(même couleur) ?",
+           type:"libre", correction:"$P(RR)+P(JJ)=\\dfrac{6}{10}\\times\\dfrac{5}{9}+\\dfrac{4}{10}\\times\\dfrac{3}{9}=\\dfrac{30}{90}+\\dfrac{12}{90}=\\dfrac{42}{90}=\\dfrac{7}{15}$", points:4},
+          {label:"3.", enonce:"Réduction de $20\\%$ sur $144$€. Le nouveau prix modifie-t-il la probabilité $P=\\dfrac{4}{6}$ si les $5$ ensembles coûtent désormais $<130$€ ?",
+           type:"libre", correction:"$144\\times0{,}8=115{,}20$€ $<130$€. Maintenant $5$ sur $6$ coûtent $<130$€. $P=\\dfrac{5}{6}$. Oui.", points:3},
+        ],
+        indices:["D'après DNB — tirage avec et sans remise"]
       },
     ],
 
@@ -2507,6 +2943,30 @@ const EXERCICES = {
         ],
         indices:["Écart interquartile plus petit = série plus homogène"]
       },
+      {
+        id:"stat_3_6", titre:"Statistiques — Objectif Brevet I", niveau:"Difficile", points_total:10,
+        questions:[
+          {label:"1.", enonce:"$20$ données : $5$ valent $8$, $8$ valent $12$, $4$ valent $14$, $3$ valent $18$. Moyenne et médiane ?",
+           type:"libre", correction:"$\\bar{x}=\\dfrac{40+96+56+54}{20}=\\dfrac{246}{20}=12{,}3$. Médiane : valeur $10$ ou $11$ → toutes à $12$. Médiane $=12$.", points:5},
+          {label:"2.", enonce:"Interprète : Série A ($Q_1=6$, $Q_3=14$) et Série B ($Q_1=10$, $Q_3=13$), même médiane $=11$. Laquelle est plus homogène ?",
+           type:"libre", correction:"Écart IQ A $=8$ ; B $=3$. Série B plus homogène.", points:3},
+          {label:"3.", enonce:"On ajoute $5$ à toutes les valeurs. Que deviennent la moyenne, la médiane, l'étendue ?",
+           type:"libre", correction:"Moyenne $+5$, médiane $+5$, étendue inchangée.", points:2},
+        ],
+        indices:["D'après DNB — interpréter des indicateurs statistiques"]
+      },
+      {
+        id:"stat_3_7", titre:"Statistiques — Objectif Brevet II", niveau:"Difficile", points_total:10,
+        questions:[
+          {label:"1.", enonce:"Notes : $8(3), 10(5), 12(6), 14(4), 16(2)$. Moyenne pondérée ?",
+           type:"libre", correction:"$\\bar{x}=\\dfrac{24+50+72+56+32}{20}=\\dfrac{234}{20}=11{,}7$", points:4},
+          {label:"2.", enonce:"Même série. Quelle note ajouter pour que la moyenne passe à $12$ ?",
+           type:"libre", correction:"$\\dfrac{234+x}{21}=12 \\Rightarrow 234+x=252 \\Rightarrow x=18$", points:3},
+          {label:"3.", enonce:"Marathon : $53$ pros (moy $2$h$15$) et $2354$ amateurs (moy $3$h$59$). Temps moyen global ?",
+           type:"libre", correction:"$\\bar{x}=\\dfrac{53\\times135+2354\\times239}{2407}\\approx237$ min $\\approx3$h$57$", points:3},
+        ],
+        indices:["D'après DNB — moyenne pondérée et interprétation"]
+      },
     ],
 
     // ── 11. PYTHAGORE ──
@@ -2599,6 +3059,26 @@ const EXERCICES = {
         ],
         indices:["Dans un losange, les diagonales sont perpendiculaires et se coupent en leur milieu"]
       },
+      {
+        id:"pyth_3_6", titre:"Pythagore — Objectif Brevet I", niveau:"Difficile", points_total:10,
+        questions:[
+          {label:"1.", enonce:"Le triangle DEF est une réduction de ABC ($AB=4$, $AC=5$) dans le rapport $k=0{,}7$. Calcule $DE$, $DF$ et $EF$.",
+           type:"libre", correction:"$DE=4\\times0{,}7=2{,}8$ cm. $DF=5\\times0{,}7=3{,}5$ cm. $EF=\\sqrt{3{,}5^2-2{,}8^2}=\\sqrt{4{,}41}=2{,}1$ cm.", points:5},
+          {label:"2.", enonce:"Pyramide du Louvre : base carrée $34$ m × $34$ m, hauteur $21{,}6$ m. Longueur d'une arête latérale ?",
+           type:"libre", correction:"Demi-diagonale base $=\\dfrac{34}{2}\\sqrt{2}\\approx24{,}04$ m. Arête $=\\sqrt{21{,}6^2+24{,}04^2}\\approx\\sqrt{466{,}6+578}\\approx32{,}3$ m.", points:5},
+        ],
+        indices:["D'après DNB — Pythagore dans un contexte réel"]
+      },
+      {
+        id:"pyth_3_7", titre:"Pythagore — Objectif Brevet II", niveau:"Difficile", points_total:10,
+        questions:[
+          {label:"1.", enonce:"Grand cône glacé : $32$ cL, hauteur $12$ cm. Petit cône : réduction au rapport $75\\%$. Hauteur et contenance ?",
+           type:"libre", correction:"Hauteur $=12\\times0{,}75=9$ cm. Contenance $=0{,}75^3\\times32=0{,}421875\\times32\\approx13{,}5$ cL.", points:5},
+          {label:"2.", enonce:"Maquette d'avion au $1:100$. Envergure maquette $=65$ cm. Envergure réelle ? Si la longueur est $75$ cm sur la maquette, longueur réelle ?",
+           type:"libre", correction:"Envergure $=65\\times100=6\\,500$ cm $=65$ m. Longueur $=75$ m.", points:5},
+        ],
+        indices:["D'après DNB — agrandissement/réduction : longueurs × $k$, aires × $k^2$, volumes × $k^3$"]
+      },
     ],
 
     // ── 12. THÉORÈME DE THALÈS ──
@@ -2684,6 +3164,30 @@ const EXERCICES = {
            correction:"$\\dfrac{24}{P}=\\dfrac{3}{5} \\Rightarrow P=40$ cm", points:4},
         ],
         indices:["Théorème des milieux : segment $MN$ joignant les milieux de deux côtés vaut la moitié du 3ème"]
+      },
+      {
+        id:"thales_3_6", titre:"Thalès — Objectif Brevet I", niveau:"Difficile", points_total:10,
+        questions:[
+          {label:"1.", enonce:"Ivan fait une maquette d'avion au $1:100$. L'envergure est $65$ cm, longueur $75$ cm. Dimensions réelles ?",
+           type:"libre", correction:"Envergure $=65$ m, longueur $=75$ m.", points:3},
+          {label:"2.", enonce:"$DE\\parallel BC$. $AD=5$, $AB=8$, $BC=6{,}4$. Calcule $DE$ et $AE$ si $AC=6$.",
+           type:"libre", correction:"$DE=\\dfrac{5\\times6{,}4}{8}=4$ cm. $AE=\\dfrac{5\\times6}{8}=3{,}75$ cm.", points:4},
+          {label:"3.", enonce:"Réduction au rapport $0{,}2$ d'un rectangle $5\\times8$ cm. Périmètre et aire du nouveau rectangle ?",
+           type:"libre", correction:"Dim : $1\\times1{,}6$ cm. Périmètre $=5{,}2$ cm. Aire $=0{,}2^2\\times40=1{,}6$ cm².", points:3},
+        ],
+        indices:["D'après DNB — agrandissement/réduction"]
+      },
+      {
+        id:"thales_3_7", titre:"Thalès — Objectif Brevet II", niveau:"Difficile", points_total:10,
+        questions:[
+          {label:"1.", enonce:"$GHI$ et $GJK$ sont des triangles avec $G$ commun. $GJ=6$, $GH=9$, $GK=4$, $GI=6$. $JK\\parallel HI$ ?",
+           type:"libre", correction:"$\\dfrac{GJ}{GH}=\\dfrac{6}{9}=\\dfrac{2}{3}$ et $\\dfrac{GK}{GI}=\\dfrac{4}{6}=\\dfrac{2}{3}$ ✓. Oui, $JK\\parallel HI$.", points:4},
+          {label:"2.", enonce:"Un loch (mesure de vitesse nautique) indique $12$ nœuds ($1$ nœud $=1{,}852$ km/h). En $2$h$30$, quelle distance ? (Thalès ou proportion)",
+           type:"libre", correction:"$v=12\\times1{,}852=22{,}224$ km/h. $d=22{,}224\\times2{,}5\\approx55{,}6$ km.", points:3},
+          {label:"3.", enonce:"$M$ et $N$ milieux de $[AB]$ et $[AC]$. $BC=11{,}4$ cm. Calcule $MN$.",
+           type:"libre", correction:"Théorème des milieux : $MN=\\dfrac{BC}{2}=5{,}7$ cm.", points:3},
+        ],
+        indices:["D'après DNB — réciproque de Thalès et théorème des milieux"]
       },
     ],
 
@@ -2773,6 +3277,28 @@ const EXERCICES = {
            correction:"$\\hat{C}=180-35-55=90°$. Triangle rect. en $C$. $\\cos(\\hat{B})=\\dfrac{BC}{AB} \\Rightarrow BC=10\\cos(55°)\\approx5{,}74$ cm", points:4},
         ],
         indices:["Angle d'élévation = angle depuis l'horizontal vers le haut ; dépression = vers le bas"]
+      },
+      {
+        id:"trigo_3_6", titre:"Trigonométrie — Objectif Brevet I", niveau:"Difficile", points_total:10,
+        questions:[
+          {label:"1.", enonce:"Triangle rect. en $A$. $AB=5{,}2$ cm, $\\hat{B}=53°$. Calcule $BC$ et $AC$.",
+           type:"libre", correction:"$BC=\\dfrac{5{,}2}{\\cos(53°)}\\approx\\dfrac{5{,}2}{0{,}602}\\approx8{,}6$ cm. $AC=5{,}2\\tan(53°)\\approx6{,}9$ cm.", points:4},
+          {label:"2.", enonce:"Skieur sur une piste inclinée à $25°$. Longueur $=800$ m. Dénivelé vertical ?",
+           type:"libre", correction:"$h=800\\sin(25°)\\approx800\\times0{,}423\\approx338$ m.", points:3},
+          {label:"3.", enonce:"Du sommet d'une tour de $45$ m, angle de dépression d'un bateau $=15°$. Distance du bateau ?",
+           type:"libre", correction:"$\\tan(15°)=\\dfrac{45}{d} \\Rightarrow d=\\dfrac{45}{0{,}268}\\approx168$ m.", points:3},
+        ],
+        indices:["D'après DNB — SOH CAH TOA dans un contexte réel"]
+      },
+      {
+        id:"trigo_3_7", titre:"Trigonométrie — Objectif Brevet II", niveau:"Difficile", points_total:10,
+        questions:[
+          {label:"1.", enonce:"$\\cos(30°)=\\dfrac{\\sqrt{3}}{2}$, $\\sin(30°)=0{,}5$, $\\tan(30°)=\\dfrac{\\sqrt{3}}{3}$. Triangle rect. en $A$, $BC=12$, $\\hat{B}=30°$. Calcule $AB$ et $AC$ exactement.",
+           type:"libre", correction:"$AB=12\\cos(30°)=12\\times\\dfrac{\\sqrt{3}}{2}=6\\sqrt{3}$ cm. $AC=12\\sin(30°)=6$ cm.", points:5},
+          {label:"2.", enonce:"Un radar détecte un avion à $3{,}2$ km de distance et à $1{,}8$ km d'altitude. Angle d'élévation ?",
+           type:"libre", correction:"$\\sin(\\theta)=\\dfrac{1{,}8}{3{,}2}=0{,}5625 \\Rightarrow \\theta=\\sin^{-1}(0{,}5625)\\approx34{,}2°$", points:5},
+        ],
+        indices:["D'après DNB — valeurs exactes de sin, cos, tan pour $30°$, $45°$, $60°$"]
       },
     ],
 
@@ -2872,6 +3398,30 @@ const EXERCICES = {
         ],
         indices:["Un rectangle a $2$ axes de symétrie ; un carré en a $4$"]
       },
+      {
+        id:"transfo_3_6", titre:"Transformations — Objectif Brevet I", niveau:"Difficile", points_total:10,
+        questions:[
+          {label:"1.", enonce:"Triangle $ABC$ : $A(0,0)$, $B(4,0)$, $C(2,3)$. Donne les images par translation $\\vec{u}\\binom{-1}{2}$.",
+           type:"libre", correction:"$A'(-1,2)$, $B'(3,2)$, $C'(1,5)$", points:3},
+          {label:"2.", enonce:"Rotation de $90°$ sens direct de centre $O$. Image de $P(3,-2)$ ?",
+           type:"libre", correction:"$(x,y)\\to(-y,x)$ : $P'(2,3)$", points:3},
+          {label:"3.", enonce:"Pavage : une frise a un motif qui se répète par translation de vecteur $\\binom{5}{0}$. Image de $A(2,1)$ après $3$ translations ?",
+           type:"libre", correction:"$A'(2+3\\times5\\,;\\,1)=A'(17\\,;\\,1)$", points:4},
+        ],
+        indices:["D'après DNB — translations et rotations dans le plan"]
+      },
+      {
+        id:"transfo_3_7", titre:"Transformations — Objectif Brevet II", niveau:"Difficile", points_total:10,
+        questions:[
+          {label:"1.", enonce:"Polygone régulier à $8$ côtés. Combien d'axes de symétrie ? Quel angle de rotation minimal qui lui est sa propre image ?",
+           type:"libre", correction:"$8$ axes de symétrie. Rotation de $\\dfrac{360°}{8}=45°$.", points:4},
+          {label:"2.", enonce:"$ABCD$ carré. La symétrie centrale de centre $I$ (milieu de $[AC]$) envoie $A$ sur $C$. Que devient $B$ ? Et $D$ ?",
+           type:"libre", correction:"$B$ → $D$ et $D$ → $B$ (car $I$ est aussi le milieu de $[BD]$).", points:3},
+          {label:"3.", enonce:"Translation $\\vec{u}\\binom{3}{2}$ puis symétrie d'axe $(Ox)$. Image de $M(1,-1)$ ?",
+           type:"libre", correction:"Après translation : $M'(4,1)$. Après sym $(Ox)$ : $M''(4,-1)$.", points:3},
+        ],
+        indices:["D'après DNB — composition de transformations"]
+      },
     ],
 
     // ── 15. VOLUMES DE SOLIDES ──
@@ -2963,6 +3513,30 @@ const EXERCICES = {
            correction:"$\\pi r^2\\times15=1\\,000 \\Rightarrow r^2=\\dfrac{1000}{15\\pi}\\approx21{,}2 \\Rightarrow r\\approx4{,}6$ cm", points:4},
         ],
         indices:["Décompose les solides complexes en solides simples"]
+      },
+      {
+        id:"vol_3_6", titre:"Volumes — Objectif Brevet I", niveau:"Difficile", points_total:10,
+        questions:[
+          {label:"1.", enonce:"Cylindre $r=3$ cm, $h=8$ cm. Cône de mêmes dimensions. Rapport des volumes ?",
+           type:"libre", correction:"$V_{cyl}=72\\pi$. $V_{cône}=24\\pi$. Rapport $=\\dfrac{1}{3}$.", points:3},
+          {label:"2.", enonce:"Silo : cylindre ($r=2$ m, $h=7$ m) + cône ($r=2$ m, $h=3$ m). Volume en m³ ?",
+           type:"libre", correction:"$V=\\pi\\times4\\times7+\\dfrac{1}{3}\\times\\pi\\times4\\times3=28\\pi+4\\pi=32\\pi\\approx100{,}5$ m³.", points:4},
+          {label:"3.", enonce:"Le rayon d'une sphère est multiplié par $3$. Par quel facteur son volume est-il multiplié ?",
+           type:"libre", correction:"$V=\\dfrac{4}{3}\\pi r^3$. Si $r\\to3r$ : $V\\to27V$. Facteur $27$.", points:3},
+        ],
+        indices:["D'après DNB — $V_{cône}=\\dfrac{1}{3}V_{cylindre}$ mêmes dimensions"]
+      },
+      {
+        id:"vol_3_7", titre:"Volumes — Objectif Brevet II", niveau:"Difficile", points_total:10,
+        questions:[
+          {label:"1.", enonce:"Pyramide du Louvre : base carrée $34$ m × $34$ m, hauteur $21{,}6$ m. Volume en m³ ?",
+           type:"libre", correction:"$V=\\dfrac{1}{3}\\times34^2\\times21{,}6=\\dfrac{1}{3}\\times1156\\times21{,}6\\approx8\\,323$ m³.", points:4},
+          {label:"2.", enonce:"Aquarium $60\\times40\\times30$ cm rempli aux $\\dfrac{3}{4}$. Volume d'eau en litres ?",
+           type:"libre", correction:"$V_{total}=72\\,000$ cm³ $=72$ L. $V_{eau}=54$ L.", points:3},
+          {label:"3.", enonce:"Une boule de glace ($r=3$ cm) fond dans un cylindre ($r=4$ cm). De combien monte le niveau d'eau ?",
+           type:"libre", correction:"$V_{boule}=\\dfrac{4}{3}\\pi\\times27=36\\pi$ cm³. $h=\\dfrac{36\\pi}{\\pi\\times16}=\\dfrac{36}{16}=2{,}25$ cm.", points:3},
+        ],
+        indices:["D'après DNB — volumes dans des contextes réels"]
       },
     ],
 
@@ -3058,6 +3632,30 @@ const EXERCICES = {
            correction:"$\\text{Prix HT}=\\dfrac{144}{1{,}20}=120$€", points:4},
         ],
         indices:["Prix TTC $=$ Prix HT $\\times(1+\\text{taux TVA})$"]
+      },
+      {
+        id:"prop_3_6", titre:"Proportionnalité — Objectif Brevet I", niveau:"Difficile", points_total:10,
+        questions:[
+          {label:"1.", enonce:"Actions : $500$€. $+12\\%$ en mars, $-8\\%$ en juillet. Valeur finale ?",
+           type:"libre", correction:"$500\\times1{,}12\\times0{,}92=500\\times1{,}0304=515{,}20$€", points:3},
+          {label:"2.", enonce:"Salaire $1\\,800$€. Hausse $5\\%$/an. Valeur après $3$ ans ?",
+           type:"libre", correction:"$1800\\times(1{,}05)^3\\approx1800\\times1{,}1576\\approx2\\,083$€", points:3},
+          {label:"3.", enonce:"Article soldé $-30\\%$ puis encore $-20\\%$. Taux de réduction global ?",
+           type:"libre", correction:"$0{,}7\\times0{,}8=0{,}56$. Réduction globale $=1-0{,}56=44\\%$.", points:4},
+        ],
+        indices:["D'après DNB — évolutions successives : multiplier les coefficients"]
+      },
+      {
+        id:"prop_3_7", titre:"Proportionnalité — Objectif Brevet II", niveau:"Difficile", points_total:10,
+        questions:[
+          {label:"1.", enonce:"En $2015$, $7{,}35$ milliards d'humains ont consommé $4{,}851\\times10^{12}$ L d'eau. Consommation journalière par personne ?",
+           type:"libre", correction:"$\\dfrac{4{,}851\\times10^{12}}{7{,}35\\times10^9}\\approx660$ L/an $\\approx1{,}8$ L/jour.", points:4},
+          {label:"2.", enonce:"Vitesse d'un TGV : $320$ km/h. Durée Paris-Marseille ($775$ km) ?",
+           type:"libre", correction:"$t=\\dfrac{775}{320}\\approx2{,}42$ h $\\approx2$ h $25$ min.", points:3},
+          {label:"3.", enonce:"Un bien immobilier vaut $200\\,000$€. Il prend $4\\%$ de valeur par an. Dans combien d'années dépassera-t-il $250\\,000$€ ?",
+           type:"libre", correction:"$(1{,}04)^n>1{,}25$. $n=5$ : $(1{,}04)^5\\approx1{,}217$ ; $n=6$ : $\\approx1{,}265>1{,}25$. Dans $6$ ans.", points:3},
+        ],
+        indices:["D'après DNB — proportionnalité dans des contextes variés"]
       },
     ],
 
@@ -3157,6 +3755,30 @@ const EXERCICES = {
            correction:"$2\\,016$ est la notation de $2016$. Tout nombre est divisible par lui-même : $2016\\div2016=1$.", points:4},
         ],
         indices:["$2$ est le seul nombre premier pair ; tout nombre premier $>2$ est impair"]
+      },
+      {
+        id:"div_3_6", titre:"Divisibilité — Objectif Brevet I", niveau:"Difficile", points_total:10,
+        questions:[
+          {label:"1.", enonce:"Simplifier $\\dfrac{120}{168}$. Donner la fraction irréductible.",
+           type:"libre", correction:"PGCD$(120,168)=24$. $\\dfrac{120}{168}=\\dfrac{5}{7}$.", points:3},
+          {label:"2.", enonce:"Deux clignotants : l'un toutes les $15$ s, l'autre toutes les $20$ s. Ils clignotent ensemble à $t=0$. Quand à nouveau ?",
+           type:"libre", correction:"PPCM$(15,20)=60$ s.", points:3},
+          {label:"3.", enonce:"$n=2^3\\times3^2\\times7$. Combien de diviseurs $n$ a-t-il ?",
+           type:"libre", correction:"Nombre de diviseurs $=(3+1)(2+1)(1+1)=4\\times3\\times2=24$ diviseurs.", points:4},
+        ],
+        indices:["D'après DNB — PGCD, PPCM et décomposition en facteurs premiers"]
+      },
+      {
+        id:"div_3_7", titre:"Divisibilité — Objectif Brevet II", niveau:"Difficile", points_total:10,
+        questions:[
+          {label:"1.", enonce:"Montre que $n^2+n+2$ est toujours pair.",
+           type:"libre", correction:"$n^2+n+2=n(n+1)+2$. $n(n+1)$ est pair (consécutifs) et $2$ est pair → somme paire. ✓", points:4},
+          {label:"2.", enonce:"Trouve tous les couples de premiers $(p,q)$ avec $p+q=30$.",
+           type:"libre", correction:"Un doit être $2$ : $2+28=30$ ($28$ non premier). Ou deux impairs : $7+23$ ✓, $11+19$ ✓, $13+17$ ✓. Couples : $(7,23)$, $(11,19)$, $(13,17)$.", points:3},
+          {label:"3.", enonce:"$a=2^4\\times3\\times5^2$ et $b=2^2\\times3^3\\times5$. Calcule PGCD$(a,b)$ et PPCM$(a,b)$.",
+           type:"libre", correction:"PGCD $=2^2\\times3\\times5=60$. PPCM $=2^4\\times3^3\\times5^2=5400$.", points:3},
+        ],
+        indices:["D'après DNB — démontrer une propriété de divisibilité"]
       },
     ],
 
@@ -3884,6 +4506,228 @@ const EXERCICES = {
         indices:["Moyenne globale : pondérer par les effectifs de chaque groupe"]
       },
     ],
+
+    "Fractions": [
+      {
+        id:"frac_6_1", titre:"Fractions — lire et comparer", niveau:"Facile", points_total:8,
+        questions:[
+          {label:"1.", enonce:"Laquelle de ces fractions est égale à $\\dfrac{1}{2}$ ?",
+           type:"qcm", choix:["$\\dfrac{2}{3}$","$\\dfrac{3}{6}$","$\\dfrac{4}{6}$","$\\dfrac{2}{5}$"],
+           bonneReponseIdx:1, bonneReponse:"$\\dfrac{3}{6}$",
+           correction:"$\\dfrac{3}{6}=\\dfrac{3\\div3}{6\\div3}=\\dfrac{1}{2}$ ✓", points:2},
+          {label:"2.", enonce:"Range dans l'ordre croissant : $\\dfrac{3}{4}$, $\\dfrac{2}{3}$, $\\dfrac{5}{6}$",
+           type:"libre", correction:"$\\dfrac{2}{3}\\approx0{,}667 < \\dfrac{3}{4}=0{,}75 < \\dfrac{5}{6}\\approx0{,}833$", points:2},
+          {label:"3.", enonce:"Calcule : $\\dfrac{2}{5}+\\dfrac{1}{3}$",
+           type:"libre", correction:"$\\dfrac{6}{15}+\\dfrac{5}{15}=\\dfrac{11}{15}$", points:2},
+          {label:"4.", enonce:"$\\dfrac{3}{4}$ d'une classe de $28$ élèves. Combien d'élèves ?",
+           type:"libre", correction:"$28\\times\\dfrac{3}{4}=21$ élèves", points:2},
+        ],
+        indices:["Pour comparer des fractions, réduis au même dénominateur ou convertis en décimal"]
+      },
+      {
+        id:"frac_6_2", titre:"Fractions — additionner et soustraire", niveau:"Facile", points_total:8,
+        questions:[
+          {label:"a)", enonce:"Calcule : $\\dfrac{1}{4}+\\dfrac{3}{4}$",
+           type:"libre", correction:"$\\dfrac{4}{4}=1$", points:2},
+          {label:"b)", enonce:"Calcule : $\\dfrac{5}{6}-\\dfrac{1}{3}$",
+           type:"libre", correction:"$\\dfrac{5}{6}-\\dfrac{2}{6}=\\dfrac{3}{6}=\\dfrac{1}{2}$", points:2},
+          {label:"c)", enonce:"Calcule : $2+\\dfrac{3}{5}$",
+           type:"libre", correction:"$\\dfrac{10}{5}+\\dfrac{3}{5}=\\dfrac{13}{5}=2{,}6$", points:2},
+          {label:"d)", enonce:"Calcule : $1-\\dfrac{2}{7}$",
+           type:"libre", correction:"$\\dfrac{7}{7}-\\dfrac{2}{7}=\\dfrac{5}{7}$", points:2},
+        ],
+        indices:["Même dénominateur pour additionner : cherche le PPCM"]
+      },
+      {
+        id:"frac_6_3", titre:"Fractions — multiplier", niveau:"Moyen", points_total:10,
+        questions:[
+          {label:"a)", enonce:"Calcule : $\\dfrac{3}{4}\\times\\dfrac{8}{9}$",
+           type:"libre", correction:"$\\dfrac{24}{36}=\\dfrac{2}{3}$", points:3},
+          {label:"b)", enonce:"$\\dfrac{2}{3}$ de $150$€",
+           type:"libre", correction:"$150\\times\\dfrac{2}{3}=100$€", points:3},
+          {label:"c)", enonce:"Simplifie avant de calculer : $\\dfrac{4}{7}\\times\\dfrac{14}{8}$",
+           type:"libre", correction:"$\\dfrac{4\\times14}{7\\times8}=\\dfrac{56}{56}=1$", points:4},
+        ],
+        indices:["Pour multiplier des fractions : numérateur × numérateur, dénominateur × dénominateur"]
+      },
+      {
+        id:"frac_6_4", titre:"Fractions — problèmes", niveau:"Moyen", points_total:10,
+        questions:[
+          {label:"a)", enonce:"Pierre lit $\\dfrac{3}{8}$ d'un livre de $240$ pages. Combien de pages a-t-il lues ?",
+           type:"libre", correction:"$240\\times\\dfrac{3}{8}=90$ pages", points:3},
+          {label:"b)", enonce:"Une pizza est partagée en $8$ parts. Marc mange $3$ parts, Sofia $2$ parts. Quelle fraction reste-t-il ?",
+           type:"libre", correction:"$1-\\dfrac{3}{8}-\\dfrac{2}{8}=\\dfrac{3}{8}$", points:3},
+          {label:"c)", enonce:"$\\dfrac{2}{5}$ des élèves sont des filles. Il y a $18$ filles. Combien y a-t-il d'élèves en tout ?",
+           type:"libre", correction:"$\\dfrac{2}{5}\\times n=18 \\Rightarrow n=18\\times\\dfrac{5}{2}=45$ élèves", points:4},
+        ],
+        indices:["Fraction d'une quantité : multiplier la quantité par la fraction"]
+      },
+      {
+        id:"frac_6_5", titre:"Fractions — brevet 6ème", niveau:"Difficile", points_total:12,
+        questions:[
+          {label:"1.", enonce:"Montre que $\\dfrac{3}{4}+\\dfrac{5}{6}=\\dfrac{19}{12}$",
+           type:"libre", correction:"$\\dfrac{9}{12}+\\dfrac{10}{12}=\\dfrac{19}{12}$ ✓", points:3},
+          {label:"2.", enonce:"Un réservoir contient $\\dfrac{5}{8}$ de sa capacité, soit $350$ L. Capacité totale ?",
+           type:"libre", correction:"$\\dfrac{5}{8}\\times C=350 \\Rightarrow C=350\\times\\dfrac{8}{5}=560$ L", points:4},
+          {label:"3.", enonce:"Calcule et simplifie : $\\dfrac{2}{3}\\times\\dfrac{9}{4}+\\dfrac{1}{2}$",
+           type:"libre", correction:"$\\dfrac{18}{12}+\\dfrac{6}{12}=\\dfrac{24}{12}=2$", points:5},
+        ],
+        indices:["Priorité aux multiplications avant les additions"]
+      },
+    ],
+
+    "Divisibilité & PGCD": [
+      {
+        id:"div_6_1", titre:"Multiples et diviseurs", niveau:"Facile", points_total:8,
+        questions:[
+          {label:"1.", enonce:"$24$ est-il divisible par $3$ ?",
+           type:"qcm", choix:["Oui, car $2+4=6$","Non","Oui, car $24$ est pair","Non, car $24>3$"],
+           bonneReponseIdx:0, bonneReponse:"Oui, car $2+4=6$",
+           correction:"Critère de $3$ : somme des chiffres divisible par $3$. $2+4=6$ divisible par $3$ ✓", points:2},
+          {label:"2.", enonce:"Donne tous les diviseurs de $36$.",
+           type:"libre", correction:"$1, 2, 3, 4, 6, 9, 12, 18, 36$", points:3},
+          {label:"3.", enonce:"$378$ est-il divisible par $2$ ? Par $3$ ? Par $9$ ?",
+           type:"libre", correction:"Par $2$ : oui (chiffre pair). Par $3$ : $3+7+8=18$ oui. Par $9$ : $18\\div9=2$ oui.", points:3},
+        ],
+        indices:["Divisible par 9 si somme des chiffres divisible par 9 ; par 6 si divisible par 2 ET 3"]
+      },
+      {
+        id:"div_6_2", titre:"PGCD — calcul et applications", niveau:"Moyen", points_total:10,
+        questions:[
+          {label:"a)", enonce:"Calcule le PGCD de $24$ et $36$.",
+           type:"libre", correction:"$24=2^3\\times3$ ; $36=2^2\\times3^2$. PGCD $=2^2\\times3=12$", points:3},
+          {label:"b)", enonce:"Simplifie $\\dfrac{36}{48}$ en fraction irréductible.",
+           type:"libre", correction:"PGCD$(36,48)=12$. $\\dfrac{36}{48}=\\dfrac{3}{4}$", points:3},
+          {label:"c)", enonce:"$36$ garçons et $48$ filles. Groupes mixtes de même taille max. Combien d'élèves par groupe ?",
+           type:"libre", correction:"PGCD$(36,48)=12$ élèves par groupe.", points:4},
+        ],
+        indices:["PGCD = plus grand nombre qui divise les deux à la fois"]
+      },
+      {
+        id:"div_6_3", titre:"Nombres premiers", niveau:"Moyen", points_total:10,
+        questions:[
+          {label:"1.", enonce:"Parmi ces nombres, lesquels sont premiers : $11$, $15$, $17$, $21$, $23$ ?",
+           type:"qcm", choix:["$11$, $15$, $17$","$11$, $17$, $23$","$15$, $21$","$17$, $21$, $23$"],
+           bonneReponseIdx:1, bonneReponse:"$11$, $17$, $23$",
+           correction:"$15=3\\times5$ et $21=3\\times7$ ne sont pas premiers. $11$, $17$, $23$ n'ont que $1$ et eux-mêmes comme diviseurs.", points:3},
+          {label:"2.", enonce:"Décompose $60$ en produit de facteurs premiers.",
+           type:"libre", correction:"$60=2^2\\times3\\times5$", points:3},
+          {label:"3.", enonce:"Décompose $126$.",
+           type:"libre", correction:"$126=2\\times3^2\\times7$", points:4},
+        ],
+        indices:["Nombre premier : exactement 2 diviseurs ($1$ et lui-même)"]
+      },
+      {
+        id:"div_6_4", titre:"Divisibilité — problèmes", niveau:"Difficile", points_total:10,
+        questions:[
+          {label:"a)", enonce:"Un carrelage $24$ cm × $36$ cm. Plus grands carreaux carrés identiques possibles ?",
+           type:"libre", correction:"PGCD$(24,36)=12$ cm", points:3},
+          {label:"b)", enonce:"PPCM de $12$ et $18$.",
+           type:"libre", correction:"$12=2^2\\times3$ ; $18=2\\times3^2$. PPCM $=2^2\\times3^2=36$", points:3},
+          {label:"c)", enonce:"Deux gyrophares clignotent toutes les $12$ s et $18$ s. Ils clignotent ensemble à $t=0$. Quand à nouveau ?",
+           type:"libre", correction:"PPCM$(12,18)=36$ secondes.", points:4},
+        ],
+        indices:["PPCM = plus petit multiple commun aux deux nombres"]
+      },
+      {
+        id:"div_6_5", titre:"Divisibilité — brevet 6ème", niveau:"Difficile", points_total:12,
+        questions:[
+          {label:"1.", enonce:"Est-ce que $2\,016$ est divisible par $2$, $3$, $4$, $6$, $9$ ?",
+           type:"libre", correction:"Par $2$ ✓ (pair). Par $3$ ✓ ($2+0+1+6=9$). Par $4$ ✓ ($16\\div4=4$). Par $6$ ✓ ($2$ et $3$). Par $9$ ✓ ($9\\div9=1$).", points:4},
+          {label:"2.", enonce:"Simplifie $\\dfrac{84}{126}$.",
+           type:"libre", correction:"PGCD$(84,126)=42$. $\\dfrac{84}{126}=\\dfrac{2}{3}$", points:4},
+          {label:"3.", enonce:"Montre que $n(n+1)$ est toujours pair pour tout entier $n$.",
+           type:"libre", correction:"$n$ et $n+1$ sont consécutifs donc l'un est pair. Un produit avec un facteur pair est toujours pair.", points:4},
+        ],
+        indices:["D'après DNB — justifier une propriété de divisibilité"]
+      },
+    ],
+
+    "Angles & Géométrie": [
+      {
+        id:"ang_6_1", titre:"Angles — mesurer et calculer", niveau:"Facile", points_total:8,
+        questions:[
+          {label:"1.", enonce:"Angle droit = ? degrés",
+           type:"qcm", choix:["$45°$","$90°$","$180°$","$360°$"],
+           bonneReponseIdx:1, bonneReponse:"$90°$",
+           correction:"Un angle droit mesure exactement $90°$.", points:2},
+          {label:"2.", enonce:"Deux angles supplémentaires ont une somme de $180°$. L'un vaut $65°$. L'autre ?",
+           type:"libre", correction:"$180°-65°=115°$", points:2},
+          {label:"3.", enonce:"Deux angles complémentaires ont une somme de $90°$. L'un vaut $37°$. L'autre ?",
+           type:"libre", correction:"$90°-37°=53°$", points:2},
+          {label:"4.", enonce:"Un triangle a deux angles de $55°$ et $75°$. Le troisième ?",
+           type:"libre", correction:"$180°-55°-75°=50°$", points:2},
+        ],
+        indices:["Somme des angles d'un triangle $= 180°$"]
+      },
+      {
+        id:"ang_6_2", titre:"Droites parallèles et perpendiculaires", niveau:"Moyen", points_total:10,
+        questions:[
+          {label:"1.", enonce:"Deux droites perpendiculaires forment un angle de ?",
+           type:"qcm", choix:["$45°$","$60°$","$90°$","$180°$"],
+           bonneReponseIdx:2, bonneReponse:"$90°$",
+           correction:"Des droites perpendiculaires forment des angles droits ($90°$).", points:2},
+          {label:"2.", enonce:"Une droite coupe deux parallèles. Les angles alternes-internes sont…",
+           type:"qcm", choix:["Supplémentaires","Égaux","Complémentaires","Quelconques"],
+           bonneReponseIdx:1, bonneReponse:"Égaux",
+           correction:"Propriété des droites parallèles : angles alternes-internes sont égaux.", points:3},
+          {label:"3.", enonce:"Un carré a $4$ angles droits. Somme de ses angles internes ?",
+           type:"libre", correction:"$4\\times90°=360°$", points:3},
+          {label:"d)", enonce:"La médiatrice d'un segment est la droite qui le coupe en son milieu…",
+           type:"qcm", choix:["à $45°$","à $90°$","à $60°$","parallèlement"],
+           bonneReponseIdx:1, bonneReponse:"à $90°$",
+           correction:"La médiatrice est perpendiculaire ($90°$) au segment et passe par son milieu.", points:2},
+        ],
+        indices:["Médiatrice : perpendiculaire passant par le milieu du segment"]
+      },
+      {
+        id:"ang_6_3", titre:"Symétrie axiale", niveau:"Moyen", points_total:10,
+        questions:[
+          {label:"1.", enonce:"Combien d'axes de symétrie a un triangle équilatéral ?",
+           type:"qcm", choix:["$1$","$2$","$3$","$6$"],
+           bonneReponseIdx:2, bonneReponse:"$3$",
+           correction:"Un triangle équilatéral a $3$ axes de symétrie (une par sommet).", points:2},
+          {label:"2.", enonce:"Symétrique de $A(3\,;\,2)$ par rapport à l'axe $(Oy)$.",
+           type:"libre", correction:"$A'(-3\,;\,2)$", points:3},
+          {label:"3.", enonce:"Symétrique de $B(-1\,;\,4)$ par rapport à l'axe $(Ox)$.",
+           type:"libre", correction:"$B'(-1\,;\,-4)$", points:3},
+          {label:"4.", enonce:"Un rectangle non carré a combien d'axes de symétrie ?",
+           type:"qcm", choix:["$1$","$2$","$4$","Aucun"],
+           bonneReponseIdx:1, bonneReponse:"$2$",
+           correction:"Un rectangle a $2$ axes de symétrie : horizontal et vertical.", points:2},
+        ],
+        indices:["Axe $(Oy)$ : change le signe de $x$ ; Axe $(Ox)$ : change le signe de $y$"]
+      },
+      {
+        id:"ang_6_4", titre:"Cercle et figures usuelles", niveau:"Moyen", points_total:10,
+        questions:[
+          {label:"a)", enonce:"Périmètre d'un cercle de rayon $5$ cm.",
+           type:"libre", correction:"$P=2\\pi r=10\\pi\\approx31{,}4$ cm", points:2},
+          {label:"b)", enonce:"Aire d'un cercle de diamètre $8$ cm.",
+           type:"libre", correction:"$r=4$ cm. $A=\\pi r^2=16\\pi\\approx50{,}3$ cm²", points:3},
+          {label:"c)", enonce:"Un disque a une aire de $28{,}26$ cm². Quel est son rayon ? ($\\pi\\approx3{,}14$)",
+           type:"libre", correction:"$\\pi r^2=28{,}26 \\Rightarrow r^2=9 \\Rightarrow r=3$ cm", points:3},
+          {label:"d)", enonce:"Quelle est la somme des angles d'un quadrilatère quelconque ?",
+           type:"qcm", choix:["$180°$","$270°$","$360°$","$540°$"],
+           bonneReponseIdx:2, bonneReponse:"$360°$",
+           correction:"La somme des angles internes d'un quadrilatère vaut toujours $360°$.", points:2},
+        ],
+        indices:["Cercle : $C=2\\pi r$ ; $A=\\pi r^2$"]
+      },
+      {
+        id:"ang_6_5", titre:"Géométrie — brevet 6ème", niveau:"Difficile", points_total:12,
+        questions:[
+          {label:"1.", enonce:"Un terrain en forme de triangle rectangle a des cathètes de $8$ m et $15$ m. Périmètre et aire ?",
+           type:"libre", correction:"Hypoténuse $=\\sqrt{64+225}=17$ m. $P=8+15+17=40$ m. $A=\\dfrac{8\\times15}{2}=60$ m².", points:4},
+          {label:"2.", enonce:"Un parc circulaire a un diamètre de $20$ m. Coût de la clôture à $12$€/m ?",
+           type:"libre", correction:"$P=20\\pi\\approx62{,}8$ m. Coût $\\approx62{,}8\\times12\\approx754$€.", points:4},
+          {label:"3.", enonce:"Losange de diagonales $6$ cm et $8$ cm. Périmètre ?",
+           type:"libre", correction:"Côté $=\\sqrt{3^2+4^2}=5$ cm. $P=4\\times5=20$ cm.", points:4},
+        ],
+        indices:["D'après DNB — combiner Pythagore et formules géométriques"]
+      },
+    ],
+
   },
 
   // ═══════════════════════════════
@@ -4635,6 +5479,135 @@ const EXERCICES = {
         indices:["Combine Thalès, Pythagore et trigonométrie selon ce que tu connais"]
       },
     ],
+    "Probabilités 4ème": [
+      {
+        id:"proba_4_1", titre:"Probabilités — fréquences et dénombrement", niveau:"Facile", points_total:8,
+        questions:[
+          {label:"1.", enonce:"On lance un dé à $6$ faces. $P(\\text{multiple de 3})$ ?",
+           type:"qcm", choix:["$\\dfrac{1}{6}$","$\\dfrac{1}{3}$","$\\dfrac{1}{2}$","$\\dfrac{2}{3}$"],
+           bonneReponseIdx:1, bonneReponse:"$\\dfrac{1}{3}$",
+           correction:"Multiples de $3$ : $\\{3,6\\}$ → $2$ cas sur $6$. $P=\\dfrac{2}{6}=\\dfrac{1}{3}$", points:2},
+          {label:"2.", enonce:"Urne : $5$ rouges, $3$ bleues, $2$ vertes. $P(\\text{pas rouge})$ ?",
+           type:"libre", correction:"$P=1-\\dfrac{5}{10}=\\dfrac{1}{2}$", points:2},
+          {label:"3.", enonce:"On tire $2$ cartes d'un jeu de $32$. $P(\\text{2 as})$ en tirage sans remise ?",
+           type:"libre", correction:"$P=\\dfrac{4}{32}\\times\\dfrac{3}{31}=\\dfrac{12}{992}=\\dfrac{3}{248}$", points:4},
+        ],
+        indices:["$P(A)+P(\\bar{A})=1$ ; sans remise : l'urne change après chaque tirage"]
+      },
+      {
+        id:"proba_4_2", titre:"Probabilités — arbre et tableaux", niveau:"Moyen", points_total:10,
+        questions:[
+          {label:"a)", enonce:"On lance $2$ dés. $P(\\text{somme}=8)$ ?",
+           type:"libre", correction:"$(2,6),(3,5),(4,4),(5,3),(6,2)$ = $5$ cas sur $36$. $P=\\dfrac{5}{36}$", points:3},
+          {label:"b)", enonce:"Sac A : $3$ rouges, $2$ bleues. Sac B : $1$ rouge, $4$ bleues. On choisit un sac au hasard, puis une boule. $P(\\text{rouge})$ ?",
+           type:"libre", correction:"$P=\\dfrac{1}{2}\\times\\dfrac{3}{5}+\\dfrac{1}{2}\\times\\dfrac{1}{5}=\\dfrac{3}{10}+\\dfrac{1}{10}=\\dfrac{4}{10}=\\dfrac{2}{5}$", points:4},
+          {label:"c)", enonce:"$P(A)=0{,}4$ et $P(B)=0{,}5$, $A$ et $B$ indépendants. $P(A\\cap B)$ ?",
+           type:"libre", correction:"$P=0{,}4\\times0{,}5=0{,}2$", points:3},
+        ],
+        indices:["Arbre : multiplier les probabilités sur chaque chemin, additionner les chemins favorables"]
+      },
+      {
+        id:"proba_4_3", titre:"Probabilités — simulation", niveau:"Moyen", points_total:10,
+        questions:[
+          {label:"1.", enonce:"On simule $500$ lancers d'une pièce : $260$ piles. Fréquence de pile ? Est-ce cohérent ?",
+           type:"libre", correction:"$f=\\dfrac{260}{500}=0{,}52=52\\%$. Cohérent car proche de $50\\%$.", points:4},
+          {label:"2.", enonce:"Intervalle de fluctuation au seuil $95\\%$ pour $p=0{,}5$, $n=500$.",
+           type:"libre", correction:"$IF=\\left[0{,}5-\\dfrac{1}{\\sqrt{500}}\,;\,0{,}5+\\dfrac{1}{\\sqrt{500}}\\right]\\approx[0{,}455\,;\,0{,}545]$. $52\\%\\in[45{,}5\\%;54{,}5\\%]$ ✓", points:3},
+          {label:"3.", enonce:"Quelle taille d'échantillon pour avoir un IF de largeur $0{,}1$ ?",
+           type:"libre", correction:"$\\dfrac{2}{\\sqrt{n}}=0{,}1 \\Rightarrow \\sqrt{n}=20 \\Rightarrow n=400$", points:3},
+        ],
+        indices:["IF au seuil $95\\%$ : $\\left[p-\\dfrac{1}{\\sqrt{n}}\,;\,p+\\dfrac{1}{\\sqrt{n}}\\right]$"]
+      },
+      {
+        id:"proba_4_4", titre:"Probabilités — espérance", niveau:"Difficile", points_total:10,
+        questions:[
+          {label:"a)", enonce:"Jeu : dé à $6$ faces. Si $6$ : gagner $5$€. Sinon : perdre $1$€. Espérance ?",
+           type:"libre", correction:"$E=\\dfrac{1}{6}\\times5+\\dfrac{5}{6}\\times(-1)=\\dfrac{5-5}{6}=0$€. Jeu équitable.", points:4},
+          {label:"b)", enonce:"Loterie : $1000$ tickets à $2$€. $1$ lot de $500$€, $10$ lots de $50$€, $100$ lots de $5$€. Espérance de gain ?",
+           type:"libre", correction:"$E=\\dfrac{500+500+500}{1000}-2=1{,}50-2=-0{,}50$€. En moyenne on perd $0{,}50$€.", points:3},
+          {label:"c)", enonce:"Pour quel gain $g$ le jeu du dé devient-il favorable ?",
+           type:"libre", correction:"$\\dfrac{g}{6}-\\dfrac{5}{6}>0 \\Rightarrow g>5$€.", points:3},
+        ],
+        indices:["Espérance $=\\sum P(x_i)\\times x_i$ ; jeu équitable si espérance $=0$"]
+      },
+      {
+        id:"proba_4_5", titre:"Probabilités — brevet 4ème", niveau:"Difficile", points_total:12,
+        questions:[
+          {label:"1.", enonce:"$40\\%$ des élèves font sport. $30\\%$ font musique. $15\\%$ font les deux. $P(\\text{sport OU musique})$ ?",
+           type:"libre", correction:"$P=0{,}4+0{,}3-0{,}15=0{,}55$", points:4},
+          {label:"2.", enonce:"On lance $3$ fois une pièce. $P(\\text{exactement 2 piles})$ ?",
+           type:"libre", correction:"PPF, PFP, FPP : $3$ cas sur $8$. $P=\\dfrac{3}{8}$.", points:4},
+          {label:"3.", enonce:"Une urne contient $n$ boules rouges et $4$ bleues. $P(\\text{rouge})=\\dfrac{3}{5}$. Calcule $n$.",
+           type:"libre", correction:"$\\dfrac{n}{n+4}=\\dfrac{3}{5} \\Rightarrow 5n=3n+12 \\Rightarrow n=6$ boules rouges.", points:4},
+        ],
+        indices:["$P(A\\cup B)=P(A)+P(B)-P(A\\cap B)$"]
+      },
+    ],
+
+    "Statistiques 4ème": [
+      {
+        id:"stat_4_1", titre:"Statistiques — caractéristiques de position", niveau:"Facile", points_total:8,
+        questions:[
+          {label:"a)", enonce:"Notes : $12, 15, 8, 14, 11, 13, 9$. Moyenne ?",
+           type:"libre", correction:"$\\bar{x}=\\dfrac{82}{7}\\approx11{,}7$", points:2},
+          {label:"b)", enonce:"Série triée : $8, 9, 11, 12, 13, 14, 15$. Médiane ?",
+           type:"libre", correction:"$12$ (valeur centrale, rang $4$ sur $7$)", points:2},
+          {label:"c)", enonce:"$Q_1$ et $Q_3$ de cette série.",
+           type:"libre", correction:"$Q_1=9$ (médiane des $3$ premières) ; $Q_3=14$ (médiane des $3$ dernières)", points:4},
+        ],
+        indices:["$Q_1$ = médiane de la moitié inférieure ; $Q_3$ = médiane de la moitié supérieure"]
+      },
+      {
+        id:"stat_4_2", titre:"Statistiques — dispersion", niveau:"Moyen", points_total:10,
+        questions:[
+          {label:"a)", enonce:"Étendue et écart interquartile de la série : $8, 9, 11, 12, 13, 14, 15$.",
+           type:"libre", correction:"Étendue $=15-8=7$. Écart IQ $=14-9=5$.", points:3},
+          {label:"b)", enonce:"Classe A : moy $=12$, étendue $=10$. Classe B : moy $=12$, écart IQ $=2$. Laquelle est plus homogène ?",
+           type:"libre", correction:"Classe B : écart IQ plus faible = plus concentrée = plus homogène.", points:3},
+          {label:"c)", enonce:"$30$ élèves : moyenne $=11$. On ajoute $5$ élèves avec $16$ de moyenne. Nouvelle moyenne ?",
+           type:"libre", correction:"$\\dfrac{330+80}{35}=\\dfrac{410}{35}\\approx11{,}7$", points:4},
+        ],
+        indices:["Étendue = max − min ; Écart IQ = $Q_3-Q_1$"]
+      },
+      {
+        id:"stat_4_3", titre:"Statistiques — représentations graphiques", niveau:"Moyen", points_total:10,
+        questions:[
+          {label:"1.", enonce:"Diagramme circulaire : $40\\%$ foot, $35\\%$ tennis, $25\\%$ natation. Angle du secteur foot ?",
+           type:"libre", correction:"$0{,}4\\times360°=144°$", points:3},
+          {label:"2.", enonce:"Diagramme en boîte : min=$4$, $Q_1=8$, $Q_2=13$, $Q_3=17$, max=$22$. Écart IQ ?",
+           type:"libre", correction:"$Q_3-Q_1=17-8=9$", points:3},
+          {label:"3.", enonce:"Histogramme : classe $[0;10[$ : $5$ élèves, $[10;20[$ : $12$, $[20;30[$ : $8$. Effectif total et médiane de classe ?",
+           type:"libre", correction:"Total $=25$. La médiane est le $13$ème — dans $[10;20[$.", points:4},
+        ],
+        indices:["Angle secteur $= \\dfrac{\\text{effectif}}{\\text{total}}\\times360°$"]
+      },
+      {
+        id:"stat_4_4", titre:"Statistiques — série avec tableaux", niveau:"Difficile", points_total:10,
+        questions:[
+          {label:"a)", enonce:"Notes avec effectifs : $8(3)$, $11(5)$, $13(7)$, $15(4)$, $18(1)$. Moyenne pondérée ?",
+           type:"libre", correction:"$\\bar{x}=\\dfrac{24+55+91+60+18}{20}=\\dfrac{248}{20}=12{,}4$", points:4},
+          {label:"b)", enonce:"Même série. Quelle note ajouter pour que la moyenne passe à $13$ ?",
+           type:"libre", correction:"$\\dfrac{248+x}{21}=13 \\Rightarrow x=273-248=25$. Note $=25$... impossible (max $20$). Donc impossible avec une seule note.", points:3},
+          {label:"c)", enonce:"Si on multiplie toutes les notes par $2$, que devient la moyenne ?",
+           type:"libre", correction:"La moyenne est aussi multipliée par $2$ : $\\bar{x}=24{,}8$.", points:3},
+        ],
+        indices:["Multiplier toutes les valeurs par $k$ → moyenne multipliée par $k$"]
+      },
+      {
+        id:"stat_4_5", titre:"Statistiques — brevet 4ème", niveau:"Difficile", points_total:12,
+        questions:[
+          {label:"1.", enonce:"Marathon : $53$ pros (moy $2$h$15$=$135$ min) et $2354$ amateurs (moy $3$h$59$=$239$ min). Temps moyen global ?",
+           type:"libre", correction:"$\\bar{x}=\\dfrac{53\\times135+2354\\times239}{2407}\\approx\\dfrac{7155+562606}{2407}\\approx237$ min $\\approx3$h$57$", points:5},
+          {label:"2.", enonce:"Boîte à moustaches : min=$5$, $Q_1=9$, $Q_2=14$, $Q_3=17$, max=$22$. Peut-on avoir $50\\%$ des valeurs dans $[9;17]$ ?",
+           type:"libre", correction:"Oui — c'est exactement la définition de $[Q_1;Q_3]$ qui contient $50\\%$ des données.", points:4},
+          {label:"3.", enonce:"Série A (étendue $=20$) et Série B (étendue $=3$), même moyenne $=12$. Interprète.",
+           type:"libre", correction:"Même niveau moyen mais A très hétérogène (certains très bons, d'autres en difficulté) ; B très homogène.", points:3},
+        ],
+        indices:["D'après DNB — analyser et interpréter des données statistiques"]
+      },
+    ],
+
+
   },
 
 };
@@ -4674,6 +5647,7 @@ function showPage(page, filter) {
 
   if(page === 'exercices') { currentFilter = filter || 'all'; renderExercices(); }
   if(page === 'parcours') initParcours();
+  if(page === 'prof') { setTimeout(renderTableauBord, 100); }
 
   window.scrollTo({top:0, behavior:'smooth'});
 }
@@ -4695,8 +5669,197 @@ function getAllExercices(classeFilter) {
 }
 
 // ═══════════════════════════════════════
-//  GÉNÉRATEUR PDF
+//  TABLEAU DE BORD PROF
 // ═══════════════════════════════════════
+
+// Données fictives réalistes pour la démo
+const DB_CLASSES = {
+  '3B': {
+    nom: '3ème B',
+    eleves: [
+      { nom:'Sophie B.',    initiales:'SB', couleur:'#F59E0B', ex:24, score:91, dernier:'Équations',       jours:0,  actif:true  },
+      { nom:'Karim M.',     initiales:'KM', couleur:'#6B7280', ex:21, score:87, dernier:'Probabilités',    jours:1,  actif:true  },
+      { nom:'Léa R.',       initiales:'LR', couleur:'#D97706', ex:19, score:82, dernier:'Fonctions',       jours:1,  actif:true  },
+      { nom:'Marwa A.',     initiales:'MA', couleur:'#16A34A', ex:18, score:78, dernier:'Thalès',          jours:2,  actif:true  },
+      { nom:'Yassine B.',   initiales:'YB', couleur:'#4A90D9', ex:16, score:74, dernier:'Inéquations',     jours:2,  actif:true  },
+      { nom:'Nour A.',      initiales:'NA', couleur:'#E84040', ex:15, score:70, dernier:'Pythagore',       jours:3,  actif:true  },
+      { nom:'Adam L.',      initiales:'AL', couleur:'#7C3AED', ex:14, score:68, dernier:'Trigonométrie',   jours:3,  actif:true  },
+      { nom:'Sara T.',      initiales:'ST', couleur:'#0EA5E9', ex:12, score:63, dernier:'Volumes',         jours:4,  actif:true  },
+      { nom:'Mehdi C.',     initiales:'MC', couleur:'#D97706', ex:8,  score:45, dernier:'Statistiques',    jours:7,  actif:false, alerte:'En difficulté sur les statistiques. Inactif depuis 7 jours.' },
+      { nom:'Imane H.',     initiales:'IH', couleur:'#6B7280', ex:6,  score:38, dernier:'Équations',       jours:9,  actif:false, alerte:'Bloqué sur les équations. N\'a pas terminé un seul exercice cette semaine.' },
+      { nom:'Thomas M.',    initiales:'TM', couleur:'#F59E0B', ex:10, score:52, dernier:'Inéquations',     jours:5,  actif:false, alerte:'Régression notable : score passé de 70% à 52% en 2 semaines.' },
+      { nom:'Fatima Z.',    initiales:'FZ', couleur:'#16A34A', ex:17, score:76, dernier:'Proportionnalité',jours:2,  actif:true  },
+      { nom:'Rayan S.',     initiales:'RS', couleur:'#E84040', ex:13, score:61, dernier:'Thalès',          jours:4,  actif:true  },
+      { nom:'Inès B.',      initiales:'IB', couleur:'#7C3AED', ex:20, score:84, dernier:'Fonctions',       jours:1,  actif:true  },
+    ]
+  },
+  '3A': {
+    nom: '3ème A',
+    eleves: [
+      { nom:'Ali K.',       initiales:'AK', couleur:'#4A90D9', ex:22, score:88, dernier:'Systèmes',        jours:1,  actif:true  },
+      { nom:'Chloé D.',     initiales:'CD', couleur:'#F59E0B', ex:20, score:85, dernier:'Probabilités',    jours:0,  actif:true  },
+      { nom:'Omar B.',      initiales:'OB', couleur:'#D97706', ex:18, score:79, dernier:'Thalès',          jours:2,  actif:true  },
+      { nom:'Lina M.',      initiales:'LM', couleur:'#16A34A', ex:15, score:71, dernier:'Trigonométrie',   jours:3,  actif:true  },
+      { nom:'Hamza R.',     initiales:'HR', couleur:'#EF4444', ex:7,  score:41, dernier:'Équations',       jours:10, actif:false, alerte:'Inactif depuis 10 jours. Aucun exercice complété ce mois.' },
+    ]
+  },
+  '2A': {
+    nom: '2nde A',
+    eleves: [
+      { nom:'Jade L.',      initiales:'JL', couleur:'#7C3AED', ex:19, score:86, dernier:'Second degré',    jours:1,  actif:true  },
+      { nom:'Nassim A.',    initiales:'NA', couleur:'#4A90D9', ex:16, score:77, dernier:'Fonctions ref.',  jours:2,  actif:true  },
+      { nom:'Emma T.',      initiales:'ET', couleur:'#F59E0B', ex:14, score:72, dernier:'Statistiques',    jours:2,  actif:true  },
+      { nom:'Bilal M.',     initiales:'BM', couleur:'#EF4444', ex:5,  score:33, dernier:'Intervalles',     jours:8,  actif:false, alerte:'Très en difficulté sur les intervalles. Score < 35%.' },
+    ]
+  }
+};
+
+const DB_CHAPITRES_STATS = [
+  { nom:'Équations', pct:82, couleur:'#4A90D9' },
+  { nom:'Probabilités', pct:76, couleur:'#22C55E' },
+  { nom:'Fonctions affines', pct:71, couleur:'#4A90D9' },
+  { nom:'Pythagore', pct:68, couleur:'#F59E0B' },
+  { nom:'Thalès', pct:64, couleur:'#F59E0B' },
+  { nom:'Trigonométrie', pct:59, couleur:'#F59E0B' },
+  { nom:'Statistiques', pct:54, couleur:'#EF4444' },
+  { nom:'Systèmes', pct:48, couleur:'#EF4444' },
+];
+
+function switchProfTab(tab) {
+  document.querySelectorAll('.prof-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('prof-dashboard').style.display = tab === 'dashboard' ? '' : 'none';
+  document.getElementById('prof-outils').style.display = tab === 'outils' ? '' : 'none';
+  event.target.classList.add('active');
+}
+
+function showDashboard() {
+  showPage('prof');
+  setTimeout(() => {
+    document.querySelectorAll('.prof-tab').forEach((t,i) => t.classList.toggle('active', i===0));
+    document.getElementById('prof-dashboard').style.display = '';
+    document.getElementById('prof-outils').style.display = 'none';
+  }, 100);
+}
+
+function renderTableauBord() {
+  renderAlertes();
+  renderTableauEleves();
+  renderChapitresChart();
+}
+
+function renderAlertes() {
+  const classe = document.getElementById('db-classe-select')?.value || '3B';
+  const eleves = DB_CLASSES[classe]?.eleves || [];
+  const alertes = eleves.filter(e => e.alerte);
+  const el = document.getElementById('db-alertes-list');
+  if(!el) return;
+
+  if(alertes.length === 0) {
+    el.innerHTML = '<div style="color:var(--vert);font-size:13px;padding:8px">✅ Aucune alerte — tous les élèves sont actifs.</div>';
+    return;
+  }
+
+  el.innerHTML = alertes.map(e => `
+    <div class="db-alerte-item">
+      <div class="db-alerte-avatar" style="background:${e.couleur}">${e.initiales}</div>
+      <div class="db-alerte-info">
+        <div class="db-alerte-nom">${e.nom}</div>
+        <div class="db-alerte-detail">⚠️ ${e.alerte}</div>
+      </div>
+      <span class="db-alerte-badge">Inactif ${e.jours}j</span>
+    </div>
+  `).join('');
+
+  document.getElementById('db-alertes').textContent = alertes.length;
+}
+
+function renderTableauEleves() {
+  const classe = document.getElementById('db-classe-select')?.value || '3B';
+  const data = DB_CLASSES[classe];
+  if(!data) return;
+
+  const eleves = [...data.eleves].sort((a,b) => b.score - a.score);
+  const tbody = document.getElementById('db-tbody');
+  if(!tbody) return;
+
+  tbody.innerHTML = eleves.map(e => {
+    const scoreClass = e.score >= 75 ? 'vert' : e.score >= 55 ? 'amber' : 'rouge';
+    const barColor = e.score >= 75 ? '#22C55E' : e.score >= 55 ? '#F59E0B' : '#EF4444';
+    const activiteClass = e.jours === 0 ? 'active' : e.jours > 5 ? 'warning' : '';
+    const activiteTxt = e.jours === 0 ? "Aujourd'hui" : e.jours === 1 ? "Hier" : `Il y a ${e.jours}j`;
+
+    return `
+      <tr>
+        <td>
+          <div class="db-eleve-avatar" style="background:${e.couleur}">${e.initiales}</div>
+          <span class="db-eleve-nom">${e.nom}</span>
+          ${e.alerte ? '<span style="color:var(--rouge);margin-left:4px" title="'+e.alerte+'">⚠️</span>' : ''}
+        </td>
+        <td style="font-weight:600">${e.ex}</td>
+        <td><span class="db-score ${scoreClass}">${e.score}%</span></td>
+        <td>
+          <div style="display:flex;align-items:center;gap:8px">
+            <div class="db-progress-mini">
+              <div class="db-progress-fill" style="width:${e.score}%;background:${barColor}"></div>
+            </div>
+            <span style="font-size:11px;color:var(--muted)">${e.score}%</span>
+          </div>
+        </td>
+        <td style="font-size:12px;color:var(--muted)">${e.dernier}</td>
+        <td><span class="db-activite ${activiteClass}">${activiteTxt}</span></td>
+      </tr>
+    `;
+  }).join('');
+
+  // Mettre à jour les stats
+  const total = eleves.length;
+  const moy = Math.round(eleves.reduce((s,e) => s+e.score, 0) / total);
+  const exTotal = eleves.reduce((s,e) => s+e.ex, 0);
+  const alertes = eleves.filter(e => e.alerte).length;
+
+  document.getElementById('db-nb-eleves').textContent = total;
+  document.getElementById('db-moyenne').textContent = moy + '%';
+  document.getElementById('db-ex-semaine').textContent = exTotal;
+  document.getElementById('db-alertes').textContent = alertes;
+
+  renderAlertes();
+}
+
+function renderChapitresChart() {
+  const el = document.getElementById('db-chapitres-chart');
+  if(!el) return;
+  el.innerHTML = DB_CHAPITRES_STATS.map(c => `
+    <div class="db-chap-row">
+      <div class="db-chap-nom">${c.nom}</div>
+      <div class="db-chap-bar-wrap">
+        <div class="db-chap-bar" style="width:${c.pct}%;background:${c.couleur}"></div>
+      </div>
+      <div class="db-chap-pct" style="color:${c.couleur}">${c.pct}%</div>
+    </div>
+  `).join('');
+}
+
+function exportCSV() {
+  const classe = document.getElementById('db-classe-select')?.value || '3B';
+  const data = DB_CLASSES[classe];
+  if(!data) return;
+
+  let csv = 'Nom,Exercices,Score (%),Dernier chapitre,Activité\n';
+  data.eleves.forEach(e => {
+    const activ = e.jours === 0 ? "Aujourd'hui" : `Il y a ${e.jours} jours`;
+    csv += `"${e.nom}",${e.ex},${e.score},"${e.dernier}","${activ}"\n`;
+  });
+
+  const blob = new Blob([csv], {type:'text/csv;charset=utf-8;'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `poussemaths_${data.nom.replace(' ','_')}.csv`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+
 
 let pdfExercicesSelectionnes = [];
 
