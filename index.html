@@ -605,6 +605,24 @@ nav {
 .qcm-choix.qcm-wrong .qcm-lettre { background:var(--rouge); color:white; }
 .qcm-choix:disabled { cursor:default; opacity:0.85; }
 
+/* ══ CLAVIER VIRTUEL MATH ══ */
+.clavier-math {
+  display:flex; flex-wrap:wrap; gap:5px;
+  margin:8px 0; padding:8px;
+  background:#F8FAFC; border-radius:var(--r);
+  border:1px solid var(--bordure);
+}
+.cm-btn {
+  padding:5px 10px; border-radius:6px;
+  border:1px solid var(--bordure); background:white;
+  font-size:14px; cursor:pointer; color:var(--texte);
+  font-family:'DM Sans',sans-serif;
+  transition:all 0.15s; font-weight:600;
+  min-width:36px; text-align:center;
+}
+.cm-btn:hover { background:var(--bleu); color:white; border-color:var(--bleu); }
+.cm-btn:active { transform:scale(0.95); }
+
 /* ══ WOW STRIP ══ */
 .wow-strip {
   display:flex; align-items:stretch;
@@ -1404,7 +1422,7 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
     <div class="eleve-header">
       <div class="eleve-avatar">MA</div>
       <div>
-        <div class="eleve-name">Marwa A.</div>
+        <div class="eleve-name">Yasmine R.</div>
         <div class="eleve-meta">3ème B · Lycée Victor Hugo · Inscrite depuis sept. 2025</div>
       </div>
       <div class="eleve-stats-mini">
@@ -1430,7 +1448,7 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
           <div class="top15-item"><span class="top15-rank gold">1</span><div class="top15-avatar" style="background:linear-gradient(135deg,#F59E0B,#D97706)">SB</div><span class="top15-name">Sophie B. 🏆</span><span class="top15-pts">420 pts</span></div>
           <div class="top15-item"><span class="top15-rank silver">2</span><div class="top15-avatar" style="background:linear-gradient(135deg,#6B7280,#9CA3AF)">KM</div><span class="top15-name">Karim M.</span><span class="top15-pts">387 pts</span></div>
           <div class="top15-item"><span class="top15-rank bronze">3</span><div class="top15-avatar" style="background:linear-gradient(135deg,#D97706,#F59E0B)">LR</div><span class="top15-name">Léa R.</span><span class="top15-pts">341 pts</span></div>
-          <div class="top15-item me"><span class="top15-rank" style="color:var(--vert)">4</span><div class="top15-avatar" style="background:linear-gradient(135deg,#16A34A,#22C55E)">MA</div><span class="top15-name">Marwa A. 👈 Toi</span><span class="top15-pts" id="mes-pts">298 pts</span></div>
+          <div class="top15-item me"><span class="top15-rank" style="color:var(--vert)">4</span><div class="top15-avatar" style="background:linear-gradient(135deg,#16A34A,#22C55E)">MA</div><span class="top15-name">Yasmine R. 👈 Toi</span><span class="top15-pts" id="mes-pts">298 pts</span></div>
           <div class="top15-item"><span class="top15-rank">5</span><div class="top15-avatar" style="background:linear-gradient(135deg,var(--bleu),#7B4FE9)">YB</div><span class="top15-name">Yassine B.</span><span class="top15-pts">276 pts</span></div>
           <div class="top15-item"><span class="top15-rank">6</span><div class="top15-avatar" style="background:linear-gradient(135deg,#E84040,#E09020)">NA</div><span class="top15-name">Nour A.</span><span class="top15-pts">254 pts</span></div>
         </div>
@@ -3865,6 +3883,44 @@ const EXERCICES = {
         ],
         indices:["Domaine de $\\sqrt{u(x)}$ : résoudre $u(x)\\geq0$"]
       },
+      {
+        id:"fc_2_3", titre:"Fonction carré — approfondissement", niveau:"Moyen", points_total:10,
+        questions:[
+          {label:"1.", enonce:"$f(x)=x^2$. Sur $[-3\\,;\\,2]$, dresse le tableau de variations et donne le max et le min.",
+           type:"libre", correction:"Décroissante sur $[-3\\,;\\,0]$, croissante sur $[0\\,;\\,2]$. Min $=f(0)=0$ ; Max $=f(-3)=9$.", points:4},
+          {label:"2.", enonce:"$f(x)=x^2$. Combien d'antécédents pour $4$ ? Pour $0$ ? Pour $-1$ ?",
+           type:"libre", correction:"$4$ : deux ($x=2$ et $x=-2$). $0$ : un ($x=0$). $-1$ : aucun ($f\\geq0$).", points:3},
+          {label:"3.", enonce:"$f(x)=(x-2)^2$. Minimum ? En quelle valeur est-il atteint ?",
+           type:"libre", correction:"Min $=0$ atteint en $x=2$ (carré d'un réel toujours $\\geq0$).", points:3},
+        ],
+        indices:["$f(x)=x^2$ est paire : $f(-x)=f(x)$ — symétrique par rapport à l'axe des ordonnées"]
+      },
+      {
+        id:"fi_2_2", titre:"Fonction inverse — variations et applications", niveau:"Moyen", points_total:10,
+        questions:[
+          {label:"1.", enonce:"Agence de location : Tarif A $= 50x$€, Tarif B $= 20x+4500$€, Tarif C $= 8000$€. Pour $x=80$ km, quel tarif est le plus avantageux ?",
+           type:"libre", correction:"A $=4000$€ ; B $=6100$€ ; C $=8000$€. Tarif A.", points:3},
+          {label:"2.", enonce:"À partir de combien de km le Tarif B est-il moins cher que le Tarif A ?",
+           type:"libre", correction:"$50x > 20x+4500 \\\\Rightarrow 30x > 4500 \\\\Rightarrow x > 150$ km.", points:4},
+          {label:"3.", enonce:"$g(x)=\\\\dfrac{1}{x}$. Sur $]0\\\\,;\\\\,+\\\\infty[$, $g$ est-elle croissante ou décroissante ? Justifie avec $g(1)$ et $g(2)$.",
+           type:"libre", correction:"$g(1)=1$ et $g(2)=0{,}5$. $1>2$ donne $g(1)>g(2)$. Donc décroissante.", points:3},
+        ],
+        indices:["Comparer deux tarifs : résoudre $f(x) < g(x)$"]
+      },
+      {
+        id:"fref_2_2", titre:"Les 3 fonctions — tableaux de variations", niveau:"Difficile", points_total:12,
+        questions:[
+          {label:"1.", enonce:"Dresse le tableau de variations de $h(x)=\\\\sqrt{x}$ sur $[0\\\\,;\\\\,+\\\\infty[$.",
+           type:"qcm", choix:["Croissante","Décroissante","Constante","Non définie"],
+           bonneReponseIdx:0, bonneReponse:"Croissante",
+           correction:"$h$ est croissante sur $[0\\\\,;\\\\,+\\\\infty[$ : $\\\\sqrt{4}=2 > \\\\sqrt{1}=1$.", points:3},
+          {label:"2.", enonce:"Pour $x\\\\in[-2\\\\,;\\\\,3]$, compare $f(x)=x^2$ et $h(x)=\\\\sqrt{x}$ (définie sur $[0\\\\,;\\\\,3]$). Lequel est le plus grand en $x=0{,}25$ ?",
+           type:"libre", correction:"$f(0{,}25)=0{,}0625$ ; $h(0{,}25)=0{,}5$. Donc $h>f$ pour $x=0{,}25$.", points:4},
+          {label:"3.", enonce:"Site vidéo : Tarif A $=4x$€, Tarif B $=2{,}5x+18$€. À partir de combien de films B est-il plus avantageux ?",
+           type:"libre", correction:"$4x > 2{,}5x+18 \\\\Rightarrow 1{,}5x > 18 \\\\Rightarrow x > 12$. B plus avantageux au-delà de $12$ films.", points:5},
+        ],
+        indices:["D'après 1001 exercices — comparer des fonctions dans un contexte réel"]
+      },
     ],
 
     "Systèmes d'équations": [
@@ -5680,7 +5736,7 @@ const DB_CLASSES = {
       { nom:'Sophie B.',    initiales:'SB', couleur:'#F59E0B', ex:24, score:91, dernier:'Équations',       jours:0,  actif:true  },
       { nom:'Karim M.',     initiales:'KM', couleur:'#6B7280', ex:21, score:87, dernier:'Probabilités',    jours:1,  actif:true  },
       { nom:'Léa R.',       initiales:'LR', couleur:'#D97706', ex:19, score:82, dernier:'Fonctions',       jours:1,  actif:true  },
-      { nom:'Marwa A.',     initiales:'MA', couleur:'#16A34A', ex:18, score:78, dernier:'Thalès',          jours:2,  actif:true  },
+      { nom:'Yasmine R.',     initiales:'YR', couleur:'#16A34A', ex:18, score:78, dernier:'Thalès',          jours:2,  actif:true  },
       { nom:'Yassine B.',   initiales:'YB', couleur:'#4A90D9', ex:16, score:74, dernier:'Inéquations',     jours:2,  actif:true  },
       { nom:'Nour A.',      initiales:'NA', couleur:'#E84040', ex:15, score:70, dernier:'Pythagore',       jours:3,  actif:true  },
       { nom:'Adam L.',      initiales:'AL', couleur:'#7C3AED', ex:14, score:68, dernier:'Trigonométrie',   jours:3,  actif:true  },
@@ -6349,6 +6405,10 @@ function setFilter(f) {
   else renderNiveaux();
 }
 
+
+function niveauEtoiles(n) {
+  return n === "Facile" ? "⭐" : n === "Moyen" ? "⭐⭐" : "⭐⭐⭐";
+}
 function renderNiveaux() {
   navEtat = { niveau: null, chapitre: null };
   document.getElementById('ex-titre').textContent = 'Choisir un niveau';
@@ -6451,7 +6511,7 @@ function allerExercices(niveauId, chapitre) {
             </div>
             <div class="ex-ligne-meta">${ex.points_total} pts · ${ex.questions.length} questions</div>
           </div>
-          <span class="ex-ligne-badge niv-${ex.niveau.toLowerCase()}">${ex.niveau}</span>
+          <span class="ex-ligne-badge niv-${ex.niveau.toLowerCase()}">${ex.niveau==="Facile"?"⭐":ex.niveau==="Moyen"?"⭐⭐":"⭐⭐⭐"}</span>
           <span class="ex-ligne-arrow">›</span>
         </div>`).join('')}
     </div>`;
@@ -6528,6 +6588,24 @@ function renderQuestion() {
         <input class="q-input" id="q-input" type="text" placeholder="Ta réponse..." onkeydown="if(event.key==='Enter')verifier()">
         <button class="btn-verif" onclick="verifier()">Vérifier →</button>
       </div>
+      <div class="clavier-math" id="clavier-math">
+        <button class="cm-btn" onclick="insertMath('²')" title="Carré">x²</button>
+        <button class="cm-btn" onclick="insertMath('³')" title="Cube">x³</button>
+        <button class="cm-btn" onclick="insertMath('^')" title="Puissance">xⁿ</button>
+        <button class="cm-btn" onclick="insertMath('√')" title="Racine carrée">√</button>
+        <button class="cm-btn" onclick="insertMath('/')" title="Fraction">a/b</button>
+        <button class="cm-btn" onclick="insertMath('π')" title="Pi">π</button>
+        <button class="cm-btn" onclick="insertMath('∞')" title="Infini">∞</button>
+        <button class="cm-btn" onclick="insertMath(' ; ')" title="Séparateur">;</button>
+        <button class="cm-btn" onclick="insertMath('≤')" title="Inférieur ou égal">≤</button>
+        <button class="cm-btn" onclick="insertMath('≥')" title="Supérieur ou égal">≥</button>
+        <button class="cm-btn" onclick="insertMath('≠')" title="Différent">≠</button>
+        <button class="cm-btn" onclick="insertMath('×')" title="Multiplication">×</button>
+        <button class="cm-btn" onclick="insertMath('÷')" title="Division">÷</button>
+        <button class="cm-btn" onclick="insertMath('[')" title="Crochet fermé">[</button>
+        <button class="cm-btn" onclick="insertMath(']')" title="Crochet ouvert">]</button>
+        <button class="cm-btn" onclick="insertMath('°')" title="Degré">°</button>
+      </div>
       <div class="correction-box" id="correction-box">
         <div class="corr-title" id="corr-title"></div>
         <div class="corr-text" id="corr-text"></div>
@@ -6543,6 +6621,17 @@ function renderQuestion() {
       delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]
     });
   }
+}
+
+function insertMath(sym) {
+  const inp = document.getElementById('q-input');
+  if(!inp) return;
+  const start = inp.selectionStart;
+  const end = inp.selectionEnd;
+  const val = inp.value;
+  inp.value = val.slice(0, start) + sym + val.slice(end);
+  inp.selectionStart = inp.selectionEnd = start + sym.length;
+  inp.focus();
 }
 
 // ── VÉRIFICATION QCM ──
@@ -6604,78 +6693,85 @@ function afficherCorrection(correct, q) {
 //  MOTEUR DE VÉRIFICATION INTELLIGENT
 // ═══════════════════════════════════════
 function verifierReponse(userRaw, correctionRaw) {
-  // Nettoyer les deux valeurs
   const clean = s => s
-    .replace(/\s+/g, '')           // supprimer espaces
-    .replace(/,/g, '.')            // virgule → point décimal
-    .replace(/×/g, '*')            // × → *
-    .replace(/÷/g, '/')            // ÷ → /
-    .replace(/['']/g, "'")         // apostrophes
+    .replace(/\s+/g, '')
+    .replace(/,/g, '.')
+    .replace(/×/g, '*')
+    .replace(/÷/g, '/')
+    .replace(/['']/g, "'")
+    .replace(/[−–]/g, '-')
     .toLowerCase();
 
-  const user = clean(userRaw);
+  const user = clean(userRaw.trim());
 
-  // Extraire les réponses attendues de la correction
-  // La correction contient la réponse après → ou = ou est la réponse elle-même
-  const extractReponses = (correction) => {
+  // ── Extraire TOUS les nombres de la correction ──
+  const extractNombres = (correction) => {
     const c = correction
-      .replace(/\$\\Rightarrow\$/g, '→')
-      .replace(/\\Rightarrow/g, '→')
-      .replace(/\$[^$]*\$/g, m => m.replace(/\$/g,'').replace(/\s/g,''))
-      .replace(/[{}\\]/g, '');
+      .replace(/\\Rightarrow/g, ' ')
+      .replace(/\$([^$]+)\$/g, ' $1 ')
+      .replace(/[{}\\]/g, ' ');
 
-    const reponsesStr = [];
-
-    // Chercher les patterns x = N, y = N, résultat = N
-    const matchesEgal = c.matchAll(/[xy=→]\s*([−-]?\d+(?:[.,]\d+)?)/g);
-    for(const m of matchesEgal) reponsesStr.push(m[1].replace(',','.').replace('−','-'));
-
-    // Chercher les nombres isolés
-    const matchesNum = c.matchAll(/(?:^|[\s;·])\s*([−-]?\d+(?:[.,]\d+)?)\s*(?:$|[\s;·%°])/g);
-    for(const m of matchesNum) reponsesStr.push(m[1].replace(',','.').replace('−','-'));
-
-    return [...new Set(reponsesStr)];
+    const nums = [];
+    // Nombres décimaux et entiers (y compris négatifs)
+    const matches = c.matchAll(/(?<![a-zA-Z])(-?\d+(?:[.,]\d+)?)(?![a-zA-Z])/g);
+    for(const m of matches) nums.push(parseFloat(m[1].replace(',','.')));
+    return [...new Set(nums)];
   };
 
-  const attendus = extractReponses(correctionRaw);
+  const attendus = extractNombres(correctionRaw);
 
-  // 1 — Comparaison numérique exacte
-  const userNum = parseFloat(user.replace(',','.').replace('−','-'));
+  // ── 1. Réponse numérique unique ──
+  const userNum = parseFloat(user.replace(',','.'));
   if(!isNaN(userNum)) {
     for(const a of attendus) {
-      const aNum = parseFloat(a);
-      if(!isNaN(aNum) && Math.abs(userNum - aNum) < 0.05) return true;
+      if(Math.abs(userNum - a) < 0.06) return true;
     }
   }
 
-  // 2 — Comparaison texte normalisée
-  const corrClean = clean(correctionRaw
-    .replace(/\$[^$]*\$/g, m => m.replace(/\$/g,''))
-    .replace(/[\\{}]/g, '')
-    .replace(/Rightarrow/g, '')
-  );
-
-  if(corrClean.includes(user) && user.length >= 1) {
-    // Vérifier que c'est pas juste une lettre commune
-    if(user.length >= 2 || !isNaN(parseFloat(user))) return true;
+  // ── 2. Réponses multiples séparées par ; ou virgule ──
+  // Ex: "f(0)=-4 ; f(2)=0 ; f(-2)=0" → l'élève tape "-4;0;0" ou "-4 0 0"
+  const userParts = userRaw.split(/[;,\s]+/).map(s => parseFloat(clean(s))).filter(n => !isNaN(n));
+  if(userParts.length >= 2) {
+    // Vérifier que tous les nombres de l'élève sont dans les attendus
+    let matchCount = 0;
+    for(const u of userParts) {
+      for(const a of attendus) {
+        if(Math.abs(u - a) < 0.06) { matchCount++; break; }
+      }
+    }
+    if(matchCount >= userParts.length && matchCount >= 1) return true;
   }
 
-  // 3 — Fraction : "3/4" == "0.75"
+  // ── 3. Fraction ──
   const fracMatch = user.match(/^(-?\d+)\/(\d+)$/);
   if(fracMatch) {
     const fracVal = parseFloat(fracMatch[1]) / parseFloat(fracMatch[2]);
     for(const a of attendus) {
-      const aNum = parseFloat(a);
-      if(!isNaN(aNum) && Math.abs(fracVal - aNum) < 0.01) return true;
+      if(Math.abs(fracVal - a) < 0.01) return true;
     }
   }
 
-  // 4 — Oui / Non
+  // ── 4. Texte normalisé (intervalles, lettres) ──
+  const corrClean = clean(correctionRaw
+    .replace(/\$([^$]+)\$/g, '$1')
+    .replace(/[\\{}]/g, '')
+    .replace(/rightarrow/gi, '')
+  );
+  if(user.length >= 2 && corrClean.includes(user)) return true;
+
+  // ── 5. Oui / Non ──
   if(['oui','yes','vrai','true'].includes(user)) {
     if(corrClean.includes('oui') || corrClean.includes('✓') || corrClean.includes('vrai')) return true;
   }
   if(['non','no','faux','false'].includes(user)) {
     if(corrClean.includes('non') || corrClean.includes('faux')) return true;
+  }
+
+  // ── 6. Intervalle : [2;5] ou ]2;+inf[ ──
+  if(user.includes('[') || user.includes(']') || user.includes('inf')) {
+    const userI = user.replace(/\s/g,'').replace('infty','inf').replace('+inf','inf');
+    const corrI = corrClean.replace(/\s/g,'').replace('infty','inf').replace('+inf','inf');
+    if(corrI.includes(userI) || userI === corrI) return true;
   }
 
   return false;
