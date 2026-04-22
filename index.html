@@ -1805,8 +1805,10 @@ const EXERCICES = {
         questions:[
           {label:"1.", enonce:"La distance Terre-Soleil est $1{,}5 \\times 10^8$ km. La lumière parcourt $3 \\times 10^5$ km/s. Temps pour arriver sur Terre ?",
            type:"libre", correction:"$t=\\dfrac{1{,}5\\times10^8}{3\\times10^5}=0{,}5\\times10^3=500$ s $\\approx8$ min $20$ s", points:5},
-          {label:"2.", enonce:"Montre que $(2^3)^4 = 2^{12}$. Généralise la règle.",
-           type:"libre", correction:"$(2^3)^4=2^3\\times2^3\\times2^3\\times2^3=2^{12}$. Règle : $(a^m)^n=a^{m\\times n}$.", points:4},
+          {label:"2.", enonce:"$(2^3)^4 = ?$ et quelle est la règle générale ?",
+           type:"qcm", choix:["$2^7$ et $(a^m)^n=a^{m+n}$","$2^{12}$ et $(a^m)^n=a^{m\\times n}$","$2^{12}$ et $(a^m)^n=a^{m+n}$","$8^4$ et aucune règle"],
+           bonneReponseIdx:1, bonneReponse:"$2^{12}$ et $(a^m)^n=a^{m\\times n}$",
+           correction:"$(2^3)^4=2^{3\\times4}=2^{12}$. Règle : $(a^m)^n=a^{m\\times n}$.", points:4},
           {label:"3.", enonce:"Un atome a un diamètre de $2{,}8 \\times 10^{-10}$ m. Combien d'atomes alignés pour $1$ mm ?",
            type:"libre", correction:"$\\dfrac{10^{-3}}{2{,}8\\times10^{-10}}=\\dfrac{1}{2{,}8}\\times10^7\\approx3{,}6\\times10^6$ atomes", points:3},
         ],
@@ -1897,8 +1899,10 @@ const EXERCICES = {
       {
         id:"rac_3_5", titre:"Racines carrées — brevet", niveau:"Difficile", points_total:12,
         questions:[
-          {label:"1.", enonce:"Montre que $\\dfrac{\\sqrt{3}}{\\sqrt{3}+1}=\\dfrac{\\sqrt{3}(\\sqrt{3}-1)}{2}$",
-           type:"libre", correction:"Multiplier par $\\dfrac{\\sqrt{3}-1}{\\sqrt{3}-1}$ : $\\dfrac{\\sqrt{3}(\\sqrt{3}-1)}{3-1}=\\dfrac{3-\\sqrt{3}}{2}$", points:5},
+          {label:"1.", enonce:"Que donne $\\dfrac{\\sqrt{3}}{\\sqrt{3}+1}$ après rationalisation (multiplication par $\\dfrac{\\sqrt{3}-1}{\\sqrt{3}-1}$) ?",
+           type:"qcm", choix:["$\\dfrac{3-\\sqrt{3}}{2}$","$\\dfrac{\\sqrt{3}}{2}$","$\\dfrac{3}{2}$","$1$"],
+           bonneReponseIdx:0, bonneReponse:"$\\dfrac{3-\\sqrt{3}}{2}$",
+           correction:"$\\dfrac{\\sqrt{3}(\\sqrt{3}-1)}{(\\sqrt{3}+1)(\\sqrt{3}-1)}=\\dfrac{3-\\sqrt{3}}{3-1}=\\dfrac{3-\\sqrt{3}}{2}$", points:5},
           {label:"2.", enonce:"Simplifie et réduis : $3\\sqrt{2}+\\sqrt{18}-\\sqrt{8}$",
            type:"libre", correction:"$3\\sqrt{2}+3\\sqrt{2}-2\\sqrt{2}=4\\sqrt{2}$", points:4},
           {label:"3.", enonce:"Longueur de la diagonale d'un carré de côté $1$. Exprime sans racine au dénominateur.",
@@ -1921,7 +1925,7 @@ const EXERCICES = {
       {
         id:"rac_3_7", titre:"Racines carrées — Objectif Brevet II", niveau:"Difficile", points_total:10,
         questions:[
-          {label:"1.", enonce:"Montre que $\\sqrt{3}$ est irrationnel (non décimal).",
+          {label:"1.", enonce:"Qu'est-ce qu'un nombre irrationnel comme $\\sqrt{3}$ ?",
            type:"qcm", choix:["C'est un entier","Il ne peut pas s'écrire sous forme de fraction","$\\sqrt{3}\\approx1{,}732$","Il n'existe pas"],
            bonneReponseIdx:1, bonneReponse:"Il ne peut pas s'écrire sous forme de fraction",
            correction:"Un irrationnel ne peut pas s'écrire $\\dfrac{p}{q}$ avec $p,q$ entiers.", points:3},
@@ -2002,8 +2006,10 @@ const EXERCICES = {
         questions:[
           {label:"1.", enonce:"Développe et réduis : $(3x-2)^2-(3x+2)(3x-2)$",
            type:"libre", correction:"$(9x^2-12x+4)-(9x^2-4)=-12x+8$", points:4},
-          {label:"2.", enonce:"Montre que $n^2+n$ est toujours pair pour tout entier $n$.",
-           type:"libre", correction:"$n^2+n=n(n+1)$. Deux entiers consécutifs : l'un est pair → produit pair.", points:4},
+          {label:"2.", enonce:"Pourquoi $n^2+n = n(n+1)$ est-il toujours pair ?",
+           type:"qcm", choix:["Car $n$ est toujours pair","Car $n(n+1)$ est un produit de deux entiers consécutifs dont l'un est pair","Car $n^2$ est pair","On ne peut pas le savoir"],
+           bonneReponseIdx:1, bonneReponse:"Car $n(n+1)$ est un produit de deux entiers consécutifs dont l'un est pair",
+           correction:"$n^2+n=n(n+1)$. Deux entiers consécutifs : l'un est toujours pair → le produit est pair.", points:4},
           {label:"3.", enonce:"$A=x^2-9$ et $B=x^2-6x+9$. Factorise $A$ et $B$, puis simplifie $\\dfrac{A}{B}$ pour $x\\neq3$.",
            type:"libre", correction:"$A=(x-3)(x+3)$ ; $B=(x-3)^2$. $\\dfrac{A}{B}=\\dfrac{(x-3)(x+3)}{(x-3)^2}=\\dfrac{x+3}{x-3}$", points:4},
         ],
@@ -2018,8 +2024,10 @@ const EXERCICES = {
            correction:"$3(2x+3)=6x+9$ ✓ et $(x+3)^2-x^2=x^2+6x+9-x^2=6x+9$ ✓ aussi ! Les deux sont correctes.", points:2},
           {label:"2.", enonce:"Programme : choisir $x$, additionner $3$, multiplier par $x$, soustraire $x^2$. Prouve que le résultat vaut toujours $3x$.",
            type:"libre", correction:"$(x+3)\\times x - x^2 = x^2+3x-x^2=3x$ ✓", points:4},
-          {label:"3.", enonce:"Montre que la somme de $3$ entiers consécutifs est un multiple de $3$.",
-           type:"libre", correction:"$n+(n+1)+(n+2)=3n+3=3(n+1)$ — multiple de $3$ ✓", points:4},
+          {label:"3.", enonce:"La somme de $3$ entiers consécutifs $n$, $n+1$, $n+2$ vaut $3n+3$. Pourquoi est-ce un multiple de $3$ ?",
+           type:"qcm", choix:["Car $3n$ est toujours pair","Car $3n+3=3(n+1)$ est divisible par $3$","Car $n+1$ est pair","Ce n'est pas toujours vrai"],
+           bonneReponseIdx:1, bonneReponse:"Car $3n+3=3(n+1)$ est divisible par $3$",
+           correction:"$n+(n+1)+(n+2)=3n+3=3(n+1)$ — multiple de $3$ ✓", points:4},
         ],
         indices:["D'après DNB — développer puis factoriser pour prouver"]
       },
@@ -2160,8 +2168,10 @@ const EXERCICES = {
            type:"libre", correction:"$3^{10}=59\\,049>50\\,000$. Donc au bout de $10$ bonnes réponses.", points:4},
           {label:"2.", enonce:"Somme de $3$ entiers consécutifs $=69$. Trouve-les.",
            type:"libre", correction:"$n+(n+1)+(n+2)=3n+3=69 \\Rightarrow n=22$. Entiers : $22$, $23$, $24$.", points:3},
-          {label:"3.", enonce:"Montre que la somme de $3$ entiers consécutifs est toujours un multiple de $3$.",
-           type:"libre", correction:"$n+(n+1)+(n+2)=3n+3=3(n+1)$ — multiple de $3$ ✓", points:3},
+          {label:"3.", enonce:"La somme $n+(n+1)+(n+2)$ simplifie en $3n+3$. Pourquoi est-ce un multiple de $3$ ?",
+           type:"qcm", choix:["Car $3n$ est pair","Car $3n+3=3(n+1)$","Car $n$ est impair","Ce n'est pas toujours vrai"],
+           bonneReponseIdx:1, bonneReponse:"Car $3n+3=3(n+1)$",
+           correction:"$3n+3=3(n+1)$ — produit de $3$ par un entier → multiple de $3$ ✓", points:3},
         ],
         indices:["D'après DNB — démontrer une propriété générale"]
       },
@@ -2557,7 +2567,7 @@ const EXERCICES = {
         questions:[
           {label:"1.", enonce:"Une piscine de $500$ L. Remplissage à $80$ L/min. $V(t)=80t+500$. Quand aura-t-on $1\,700$ L ?",
            type:"libre", correction:"$80t+500=1700 \\Rightarrow 80t=1200 \\Rightarrow t=15$ min.", points:4},
-          {label:"2.", enonce:"$f(x)=2x+1$ et $g(x)=-x+7$. Trouver $x$ tel que $f(x)=g(x)$. Interpréter graphiquement.",
+          {label:"2.", enonce:"$f(x)=2x+1$ et $g(x)=-x+7$. Trouver $x$ tel que $f(x)=g(x)$.",
            type:"libre", correction:"$2x+1=-x+7 \\Rightarrow 3x=6 \\Rightarrow x=2$. Point d'intersection des deux droites : $(2\,;\,5)$.", points:4},
           {label:"3.", enonce:"$h$ est définie par le tableau : $x=$[$-2$;$0$;$2$;$4$], $h(x)=$[$7$;$3$;$-1$;$-5$]. $h$ est-elle affine ? Si oui, donne son expression.",
            type:"libre", correction:"Taux $=\\dfrac{3-7}{0-(-2)}=\\dfrac{-1-3}{2-0}=-2$. Constant → affine. $h(x)=-2x+3$.", points:4},
@@ -2571,7 +2581,7 @@ const EXERCICES = {
            type:"libre", correction:"$f(29)=7\\times29+5=203+5=208$ ✓. $f(44)=7\\times44+5=308+5=313$ ✓.", points:4},
           {label:"2.", enonce:"$f(x)=7x+5$. Abscisse du point d'ordonnée $684$ ?",
            type:"libre", correction:"$7x+5=684 \\Rightarrow 7x=679 \\Rightarrow x=97$.", points:3},
-          {label:"3.", enonce:"$f(x)=0{,}75x-2$. La droite coupe l'axe des abscisses en $A$. Abscisse de $A$ ?",
+          {label:"3.", enonce:"$f(x)=0{,}75x-2$. Calcule l'abscisse du point d'intersection avec l'axe des abscisses.",
            type:"libre", correction:"$0{,}75x-2=0 \\Rightarrow x=\\dfrac{2}{0{,}75}=\\dfrac{8}{3}\\approx2{,}67$", points:3},
         ],
         indices:["D'après DNB — vérifier qu'un point appartient à une droite"]
@@ -2726,8 +2736,10 @@ const EXERCICES = {
            type:"libre", correction:"$8x > 3x+200 \\Rightarrow 5x > 200 \\Rightarrow x > 40$. Au-delà de $40$ objets.", points:4},
           {label:"2.", enonce:"Deux droites : $d_1 : y=2x+1$ et $d_2 : y=-x+7$. Intersection ?",
            type:"libre", correction:"$2x+1=-x+7 \\Rightarrow 3x=6 \\Rightarrow x=2$, $y=5$. Point $(2\\,;\\,5)$.", points:4},
-          {label:"3.", enonce:"La droite $AB$ passe par $A(0\\,;\\,-2)$ et $B(3\\,;\\,4)$. Équation ? Ordonnée pour $x=5$ ?",
-           type:"libre", correction:"$a=\\dfrac{4-(-2)}{3-0}=2$ ; $b=-2$. Droite : $y=2x-2$. Pour $x=5$ : $y=8$.", points:4},
+          {label:"3.", enonce:"La droite passe par $A(0,-2)$ et $B(3,4)$. Donne son équation.",
+           type:"libre", correction:"$a=\\dfrac{4-(-2)}{3-0}=2$, $b=-2$. Droite : $y=2x-2$.",
+           },{label:"3b.", enonce:"Avec $y=2x-2$, calcule l'ordonnée pour $x=5$.",
+           type:"libre", correction:"$y=2(5)-2=8$.", points:4},
         ],
         indices:["Bénéfice $=$ Recette $-$ Coût ; positif quand Recette $>$ Coût"]
       },
@@ -2740,7 +2752,7 @@ const EXERCICES = {
            correction:"$a=\\dfrac{6-0}{3-0}=2$", points:2},
           {label:"2.", enonce:"Deux tarifs de location de vélo : A $= 5$€ + $2$€/h ; B $= 3{,}50$€/h. Quand A est-il plus avantageux ?",
            type:"libre", correction:"$2h+5<3{,}5h \\Rightarrow 5<1{,}5h \\Rightarrow h>\\dfrac{10}{3}\\approx3{,}3$ h. A plus avantageux au-delà de $3$ h $20$ min.", points:4},
-          {label:"3.", enonce:"Droite passant par $(-1\,;\,3)$ et de pente $-2$. Équation ? Intersection avec $y=x+1$ ?",
+          {label:"3.", enonce:"Droite passant par $(-1\,;\,3)$ et de pente $-2$. Donne son équation.",
            type:"libre", correction:"$b=3+2=5$. Droite : $y=-2x+5$. Intersection : $-2x+5=x+1 \\Rightarrow x=\\dfrac{4}{3}$, $y=\\dfrac{7}{3}$.", points:4},
         ],
         indices:["D'après DNB — comparer deux fonctions affines"]
@@ -2787,7 +2799,7 @@ const EXERCICES = {
           {label:"a)", enonce:"Dé à 6 faces. $P(\\text{pair})$ ? $P(>4)$ ? $P(7)$ ?",
            type:"libre",
            correction:"$P(\\text{pair})=\\dfrac{1}{2}$ ; $P(>4)=\\dfrac{2}{6}=\\dfrac{1}{3}$ ; $P(7)=0$", points:3},
-          {label:"b)", enonce:"Jeu de 32 cartes. $P$(as) ? $P$(cœur) ?",
+          {label:"b)", enonce:"Jeu de 32 cartes. Calcule $P$(as).",
            type:"libre",
            correction:"$P(\\text{as})=\\dfrac{4}{32}=\\dfrac{1}{8}$ ; $P(\\text{cœur})=\\dfrac{8}{32}=\\dfrac{1}{4}$", points:3},
           {label:"c)", enonce:"Une classe a $15$ filles et $12$ garçons. On tire au hasard un élève. $P$(fille) ?",
@@ -3071,7 +3083,7 @@ const EXERCICES = {
           {label:"2.", enonce:"Losange de diagonales $10$ cm et $24$ cm. Calcule son périmètre.",
            type:"libre",
            correction:"Demi-diagonales : $5$ et $12$. Côté $=\\sqrt{25+144}=\\sqrt{169}=13$ cm. Périmètre $=4\\times13=52$ cm.", points:5},
-          {label:"3.", enonce:"Un écran $16/9$ a une diagonale de $40$ cm. Calcule sa largeur et sa hauteur.",
+          {label:"3.", enonce:"Un écran $16/9$ a une diagonale de $40$ cm. Calcule $k$ (avec $l=16k$, $h=9k$).",
            type:"libre",
            correction:"$l=16k$, $h=9k$. $(16k)^2+(9k)^2=40^2 \\Rightarrow 337k^2=1600 \\Rightarrow k\\approx2{,}18$. $l\\approx34{,}9$ cm, $h\\approx19{,}6$ cm.", points:4},
         ],
@@ -3092,8 +3104,10 @@ const EXERCICES = {
         questions:[
           {label:"1.", enonce:"Grand cône glacé : $32$ cL, hauteur $12$ cm. Petit cône : réduction au rapport $75\\%$. Hauteur et contenance ?",
            type:"libre", correction:"Hauteur $=12\\times0{,}75=9$ cm. Contenance $=0{,}75^3\\times32=0{,}421875\\times32\\approx13{,}5$ cL.", points:5},
-          {label:"2.", enonce:"Maquette d'avion au $1:100$. Envergure maquette $=65$ cm. Envergure réelle ? Si la longueur est $75$ cm sur la maquette, longueur réelle ?",
-           type:"libre", correction:"Envergure $=65\\times100=6\\,500$ cm $=65$ m. Longueur $=75$ m.", points:5},
+          {label:"2.", enonce:"Maquette d'avion au $1:100$. Envergure maquette $=65$ cm. Envergure réelle ?",
+           type:"libre", correction:"Envergure $=65\\times100=6500$ cm $=65$ m.",
+           },{label:"2b.", enonce:"Longueur maquette $=75$ cm. Longueur réelle en m ?",
+           type:"libre", correction:"$75\\times100=7500$ cm $=75$ m.", points:5},
         ],
         indices:["D'après DNB — agrandissement/réduction : longueurs × $k$, aires × $k^2$, volumes × $k^3$"]
       },
@@ -3431,10 +3445,18 @@ const EXERCICES = {
       {
         id:"transfo_3_7", titre:"Transformations — Objectif Brevet II", niveau:"Difficile", points_total:10,
         questions:[
-          {label:"1.", enonce:"Polygone régulier à $8$ côtés. Combien d'axes de symétrie ? Quel angle de rotation minimal qui lui est sa propre image ?",
-           type:"libre", correction:"$8$ axes de symétrie. Rotation de $\\dfrac{360°}{8}=45°$.", points:4},
-          {label:"2.", enonce:"$ABCD$ carré. La symétrie centrale de centre $I$ (milieu de $[AC]$) envoie $A$ sur $C$. Que devient $B$ ? Et $D$ ?",
-           type:"libre", correction:"$B$ → $D$ et $D$ → $B$ (car $I$ est aussi le milieu de $[BD]$).", points:3},
+          {label:"1.", enonce:"Polygone régulier à $8$ côtés. Combien d'axes de symétrie ?",
+           type:"libre", correction:"$8$ axes de symétrie.",
+           },{label:"1b.", enonce:"Quel est l'angle de rotation minimal qui laisse ce polygone invariant ?",
+           type:"libre", correction:"$\\dfrac{360°}{8}=45°$.", points:4},
+          {label:"2.", enonce:"$ABCD$ carré, symétrie centrale de centre $I$. Où va $B$ ?",
+           type:"qcm", choix:["En $A$","En $C$","En $D$","En $I$"],
+           bonneReponseIdx:2, bonneReponse:"En $D$",
+           correction:"$I$ est le milieu de $[BD]$ aussi → $B$ va en $D$.",
+           },{label:"2b.", enonce:"Même symétrie. Où va $D$ ?",
+           type:"qcm", choix:["En $A$","En $B$","En $C$","En $I$"],
+           bonneReponseIdx:1, bonneReponse:"En $B$",
+           correction:"$D$ va en $B$ (symétrique de $B$).", points:3},
           {label:"3.", enonce:"Translation $\\vec{u}\\binom{3}{2}$ puis symétrie d'axe $(Ox)$. Image de $M(1,-1)$ ?",
            type:"libre", correction:"Après translation : $M'(4,1)$. Après sym $(Ox)$ : $M''(4,-1)$.", points:3},
         ],
@@ -3506,7 +3528,7 @@ const EXERCICES = {
           {label:"b)", enonce:"On remplit l'aquarium aux $\\dfrac{3}{4}$. Volume d'eau ?",
            type:"libre",
            correction:"$V_{\\text{eau}}=\\dfrac{3}{4}\\times72=54$ L", points:3},
-          {label:"c)", enonce:"Un cône est inscrit dans un cylindre de mêmes dimensions ($r=5$, $h=12$). Quel % du cylindre le cône représente-t-il ?",
+          {label:"c)", enonce:"Un cône est inscrit dans un cylindre de mêmes dimensions ($r=5$, $h=12$). Calcule $\\dfrac{V_{cône}}{V_{cyl}}$ en %.",
            type:"libre",
            correction:"$V_{\\text{cyl}}=\\pi\\times25\\times12=300\\pi$. $V_{\\text{cône}}=\\dfrac{1}{3}\\times300\\pi=100\\pi$. Ratio $=\\dfrac{1}{3}\\approx33{,}3\\%$", points:3},
           {label:"d)", enonce:"Le rayon d'une sphère double. Par quel facteur son volume est-il multiplié ?",
@@ -3603,7 +3625,7 @@ const EXERCICES = {
       {
         id:"prop_3_3", titre:"Taux d'évolution et évolutions successives", niveau:"Moyen", points_total:12,
         questions:[
-          {label:"a)", enonce:"$+20\\%$ puis $-20\\%$. Revient-on au prix initial ? Justifie.",
+          {label:"a)", enonce:"$+20\\%$ puis $-20\\%$. Quel est le coefficient multiplicateur global ?",
            type:"libre",
            correction:"$100 \\to 120 \\to 96$. Non — perte de $4\\%$. Les deux évolutions ne se compensent pas.", points:3},
           {label:"b)", enonce:"Coefficient multiplicateur de deux évolutions successives : $+15\\%$ puis $+10\\%$.",
@@ -3687,8 +3709,10 @@ const EXERCICES = {
            choix:["$234$","$315$","$421$","$512$"],
            bonneReponseIdx:1, bonneReponse:"$315$",
            correction:"$3+1+5=9$ divisible par $9$ ✓. $2+3+4=9$ aussi ✓ — les deux sont divisibles ! Mais $315$ est la seule option listée correcte. Vérifions : $315\\div9=35$ ✓", points:2},
-          {label:"2.", enonce:"$738$ est-il divisible par $2$, $3$, $6$, $9$ ?",
-           type:"libre",
+          {label:"2.", enonce:"$738$ est-il divisible par $9$ ? (Indice : somme des chiffres = $7+3+8$)",
+           type:"qcm", choix:["Oui","Non"],
+           bonneReponseIdx:0, bonneReponse:"Oui",
+           correction:"$7+3+8=18$ divisible par $9$ ✓. Donc $738$ est divisible par $9$ (et aussi par $2$, $3$, $6$).",
            correction:"Par $2$ : oui (dernier chiffre $=8$). Par $3$ : oui ($7+3+8=18$). Par $6$ : oui (divisible par $2$ ET $3$). Par $9$ : oui ($18\\div9=2$).", points:2},
           {label:"3.", enonce:"Qu'est-ce qu'un nombre premier ?",
            type:"qcm",
@@ -3760,7 +3784,7 @@ const EXERCICES = {
       {
         id:"div_3_5", titre:"Nombres premiers — brevet", niveau:"Difficile", points_total:12,
         questions:[
-          {label:"1.", enonce:"Démontrer que $n^2+n$ est toujours pair pour tout entier $n$.",
+          {label:"1.", enonce:"Pourquoi $n^2+n=n(n+1)$ est-il toujours pair ?",
            type:"libre",
            correction:"$n^2+n=n(n+1)$. Deux entiers consécutifs : l'un est pair. Donc le produit est toujours pair.", points:4},
           {label:"2.", enonce:"Trouver tous les couples $(p,q)$ de nombres premiers tels que $p+q=20$.",
@@ -3789,12 +3813,16 @@ const EXERCICES = {
       {
         id:"div_3_7", titre:"Divisibilité — Objectif Brevet II", niveau:"Difficile", points_total:10,
         questions:[
-          {label:"1.", enonce:"Montre que $n^2+n+2$ est toujours pair.",
-           type:"libre", correction:"$n^2+n+2=n(n+1)+2$. $n(n+1)$ est pair (consécutifs) et $2$ est pair → somme paire. ✓", points:4},
+          {label:"1.", enonce:"$n^2+n+2=n(n+1)+2$. Pourquoi est-ce toujours pair ?",
+           type:"qcm", choix:["Car $n$ est pair","Car $n(n+1)$ est pair et $2$ est pair → somme paire","Car $n+2$ est pair","Ce n'est pas toujours vrai"],
+           bonneReponseIdx:1, bonneReponse:"Car $n(n+1)$ est pair et $2$ est pair → somme paire",
+           correction:"$n(n+1)$ est pair (consécutifs) et $2$ est pair → somme paire ✓", points:4},
           {label:"2.", enonce:"Trouve tous les couples de premiers $(p,q)$ avec $p+q=30$.",
            type:"libre", correction:"Un doit être $2$ : $2+28=30$ ($28$ non premier). Ou deux impairs : $7+23$ ✓, $11+19$ ✓, $13+17$ ✓. Couples : $(7,23)$, $(11,19)$, $(13,17)$.", points:3},
-          {label:"3.", enonce:"$a=2^4\\times3\\times5^2$ et $b=2^2\\times3^3\\times5$. Calcule PGCD$(a,b)$ et PPCM$(a,b)$.",
-           type:"libre", correction:"PGCD $=2^2\\times3\\times5=60$. PPCM $=2^4\\times3^3\\times5^2=5400$.", points:3},
+          {label:"3.", enonce:"$a=2^4\\times3\\times5^2$, $b=2^2\\times3^3\\times5$. Calcule le PGCD$(a,b)$.",
+           type:"libre", correction:"PGCD $=2^2\\times3\\times5=60$.", points:1},
+          {label:"3b.", enonce:"Avec $a$ et $b$ ci-dessus. Calcule le PPCM$(a,b)$.",
+           type:"libre", correction:"PPCM $=2^4\\times3^3\\times5^2=5400$.", points:2},
         ],
         indices:["D'après DNB — démontrer une propriété de divisibilité"]
       },
@@ -3894,10 +3922,22 @@ const EXERCICES = {
            type:"qcm", choix:["Croissante","Décroissante","Constante","Ni l'un ni l'autre"],
            bonneReponseIdx:0, bonneReponse:"Croissante",
            correction:"Sur $[0\\,;\\,+\\infty[$, $f(x)=x^2$ est croissante : plus $x$ augmente, plus $x^2$ augmente.", points:2},
-          {label:"2.", enonce:"$f(x)=x^2$. Combien d'antécédents pour $4$ ? Pour $0$ ? Pour $-1$ ?",
-           type:"libre", correction:"$4$ : deux ($x=2$ et $x=-2$). $0$ : un ($x=0$). $-1$ : aucun ($f\\geq0$).", points:3},
-          {label:"3.", enonce:"$f(x)=(x-2)^2$. Minimum ? En quelle valeur est-il atteint ?",
-           type:"libre", correction:"Min $=0$ atteint en $x=2$ (carré d'un réel toujours $\\geq0$).", points:3},
+          {label:"2a.", enonce:"$f(x)=x^2$. Combien d'antécédents pour $4$ ?",
+           type:"qcm", choix:["Aucun","Un seul : $x=4$","Deux : $x=2$ et $x=-2$","Une infinité"],
+           bonneReponseIdx:2, bonneReponse:"Deux : $x=2$ et $x=-2$",
+           correction:"$x^2=4 \\Rightarrow x=2$ ou $x=-2$. Deux antécédents.", points:1},
+          {label:"2b.", enonce:"$f(x)=x^2$. Combien d'antécédents pour $0$ ?",
+           type:"qcm", choix:["Aucun","Un seul : $x=0$","Deux : $x=0$ et $x=1$","Une infinité"],
+           bonneReponseIdx:1, bonneReponse:"Un seul : $x=0$",
+           correction:"$x^2=0 \\Rightarrow x=0$ uniquement. Un seul antécédent.", points:1},
+          {label:"2c.", enonce:"$f(x)=x^2$. Combien d'antécédents pour $-1$ ?",
+           type:"qcm", choix:["Aucun — $f(x)\\geq0$ toujours","Un seul : $x=-1$","Deux antécédents","Une infinité"],
+           bonneReponseIdx:0, bonneReponse:"Aucun — $f(x)\\geq0$ toujours",
+           correction:"$f(x)=x^2\\geq0$ toujours — impossible d'avoir $f(x)=-1$. Aucun antécédent.", points:1},
+          {label:"3.", enonce:"$f(x)=(x-2)^2$. Quelle est la valeur du minimum ?",
+           type:"libre", correction:"Min $=0$ (car $(x-2)^2\\geq0$ toujours).", points:1},
+          {label:"3b.", enonce:"$f(x)=(x-2)^2$. En quelle valeur de $x$ ce minimum est-il atteint ?",
+           type:"libre", correction:"En $x=2$ (car $(2-2)^2=0$).", points:2},
         ],
         indices:["$f(x)=x^2$ est paire : $f(-x)=f(x)$ — symétrique par rapport à l'axe des ordonnées"]
       },
@@ -3908,7 +3948,7 @@ const EXERCICES = {
            type:"libre", correction:"A $=4000$€ ; B $=6100$€ ; C $=8000$€. Tarif A.", points:3},
           {label:"2.", enonce:"À partir de combien de km le Tarif B est-il moins cher que le Tarif A ?",
            type:"libre", correction:"$50x > 20x+4500 \\\\Rightarrow 30x > 4500 \\\\Rightarrow x > 150$ km.", points:4},
-          {label:"3.", enonce:"$g(x)=\\\\dfrac{1}{x}$. Sur $]0\\\\,;\\\\,+\\\\infty[$, $g$ est-elle croissante ou décroissante ? Justifie avec $g(1)$ et $g(2)$.",
+          {label:"3.", enonce:"$g(x)=\\dfrac{1}{x}$. $g(1)=1$ et $g(2)=0{,}5$. Que peut-on conclure sur les variations de $g$ sur $]0\\,;\\,+\\infty[$ ?",
            type:"libre", correction:"$g(1)=1$ et $g(2)=0{,}5$. $1>2$ donne $g(1)>g(2)$. Donc décroissante.", points:3},
         ],
         indices:["Comparer deux tarifs : résoudre $f(x) < g(x)$"]
@@ -4087,7 +4127,7 @@ const EXERCICES = {
       {
         id:"proba_2_E", titre:"Probabilités 2nde — brevet", niveau:"Difficile", points_total:12,
         questions:[
-          {label:"1.", enonce:"$200$ lancers d'une pièce : $112$ piles. La pièce est-elle équilibrée ? Intervalle de fluctuation au seuil $95\\%$ ?",
+          {label:"1.", enonce:"$200$ lancers d'une pièce : $112$ piles. Calcule l'intervalle de fluctuation au seuil $95\\%$.",
            type:"libre", correction:"$IF=\\left[0{,}5-\\dfrac{1}{\\sqrt{200}}\\,;\\,0{,}5+\\dfrac{1}{\\sqrt{200}}\\right]\\approx[0{,}43\\,;\\,0{,}57]$. $112/200=0{,}56\\in[0{,}43\\,;\\,0{,}57]$. Oui, équilibrée.", points:5},
           {label:"2.", enonce:"$P(A)=0{,}4$, $P(B)=0{,}35$, $A$ et $B$ indépendants. Calcule $P(A\\cup B)$.",
            type:"libre", correction:"$P(A\\cap B)=0{,}4\\times0{,}35=0{,}14$. $P(A\\cup B)=0{,}4+0{,}35-0{,}14=0{,}61$", points:4},
@@ -4414,11 +4454,13 @@ const EXERCICES = {
       {
         id:"geo_6_5", titre:"Géométrie — problèmes brevet 6ème", niveau:"Difficile", points_total:12,
         questions:[
-          {label:"1.", enonce:"Une piscine rectangulaire mesure $12$ m × $5$ m. Calcule son périmètre et son aire.",
-           type:"libre", correction:"$P=2(12+5)=34$ m ; $A=12\\times5=60$ m²", points:3},
+          {label:"1.", enonce:"Une piscine rectangulaire mesure $12$ m × $5$ m. Calcule son périmètre.",
+           type:"libre", correction:"$P=2(12+5)=34$ m", points:1},
+          {label:"1b.", enonce:"Calcule l'aire de cette piscine ($12$ m × $5$ m).",
+           type:"libre", correction:"$A=12\\times5=60$ m²", points:2},
           {label:"2.", enonce:"Un carreleur pose des carreaux de $30$ cm × $30$ cm dans une pièce de $4{,}5$ m × $3$ m. Combien de carreaux faut-il ?",
            type:"libre", correction:"Aire pièce $=4{,}5\\times3=13{,}5$ m² $=135\\,000$ cm². Aire carreau $=900$ cm². $135\\,000 ÷ 900 = 150$ carreaux.", points:5},
-          {label:"3.", enonce:"Un triangle a des côtés de $5$ cm, $12$ cm et $13$ cm. Est-il rectangle ? Justifie.",
+          {label:"3.", enonce:"Calcule $5^2+12^2$ et $13^2$. Conclure : le triangle est-il rectangle ?",
            type:"libre", correction:"$5^2+12^2=25+144=169=13^2$ ✓ Oui, rectangle.", points:4},
         ],
         indices:["Convertis toutes les unités avant de calculer"]
@@ -4493,8 +4535,10 @@ const EXERCICES = {
            type:"libre", correction:"$\\dfrac{300}{4} \\times 10 = 750$ g", points:3},
           {label:"2.", enonce:"Un magazine coûte $3{,}50$€. Avec $24{,}50$€, combien peut-on acheter de magazines ?",
            type:"libre", correction:"$24{,}50 ÷ 3{,}50 = 7$ magazines", points:4},
-          {label:"3.", enonce:"Un robinet remplit un réservoir de $180$ L en $45$ min. Quel débit en L/min ? Temps pour $240$ L ?",
-           type:"libre", correction:"Débit $= 180÷45 = 4$ L/min. Temps $= 240÷4 = 60$ min.", points:5},
+          {label:"3.", enonce:"Un robinet remplit un réservoir de $180$ L en $45$ min. Quel est son débit en L/min ?",
+           type:"libre", correction:"Débit $= 180÷45 = 4$ L/min.",
+           },{label:"c2.", enonce:"Avec ce débit ($4$ L/min), combien de temps pour remplir $240$ L ?",
+           type:"libre", correction:"$240÷4 = 60$ min.", points:5},
         ],
         indices:["Passage par l'unité : trouve d'abord la valeur pour $1$, puis multiplie"]
       },
@@ -4546,7 +4590,7 @@ const EXERCICES = {
       {
         id:"stat_6_4", titre:"Statistiques — approfondissement", niveau:"Difficile", points_total:10,
         questions:[
-          {label:"a)", enonce:"Notes : $10, 12, 15, 8, 14, 11, 13$. Calcule la moyenne et la médiane.",
+          {label:"a)", enonce:"Notes : $10, 12, 15, 8, 14, 11, 13$. Calcule la moyenne.",
            type:"libre", correction:"Moyenne $= \\dfrac{83}{7} \\approx 11{,}9$. Triée : $8,10,11,12,13,14,15$ → Médiane $= 12$", points:4},
           {label:"b)", enonce:"Si on augmente toutes les notes de $2$ points, que devient la moyenne ?",
            type:"libre", correction:"La moyenne augmente aussi de $2$ : $11{,}9 + 2 = 13{,}9$", points:3},
@@ -4648,8 +4692,15 @@ const EXERCICES = {
            correction:"Critère de $3$ : somme des chiffres divisible par $3$. $2+4=6$ divisible par $3$ ✓", points:2},
           {label:"2.", enonce:"Donne tous les diviseurs de $36$.",
            type:"libre", correction:"$1, 2, 3, 4, 6, 9, 12, 18, 36$", points:3},
-          {label:"3.", enonce:"$378$ est-il divisible par $2$ ? Par $3$ ? Par $9$ ?",
-           type:"libre", correction:"Par $2$ : oui (chiffre pair). Par $3$ : $3+7+8=18$ oui. Par $9$ : $18\\div9=2$ oui.", points:3},
+          {label:"3.", enonce:"$378$ est-il divisible par $2$ ?",
+           type:"qcm", choix:["Oui","Non"], bonneReponseIdx:0, bonneReponse:"Oui",
+           correction:"Dernier chiffre $=8$ pair → divisible par $2$.",
+           },{label:"3b.", enonce:"$378$ est-il divisible par $3$ ?",
+           type:"qcm", choix:["Oui","Non"], bonneReponseIdx:0, bonneReponse:"Oui",
+           correction:"$3+7+8=18$ divisible par $3$ → oui.",
+           },{label:"3c.", enonce:"$378$ est-il divisible par $9$ ?",
+           type:"qcm", choix:["Oui","Non"], bonneReponseIdx:0, bonneReponse:"Oui",
+           correction:"$3+7+8=18$ divisible par $9$ → oui.", correction:"Par $2$ : oui (chiffre pair). Par $3$ : $3+7+8=18$ oui. Par $9$ : $18\\div9=2$ oui.", points:3},
         ],
         indices:["Divisible par 9 si somme des chiffres divisible par 9 ; par 6 si divisible par 2 ET 3"]
       },
@@ -4698,8 +4749,10 @@ const EXERCICES = {
            type:"libre", correction:"Par $2$ ✓ (pair). Par $3$ ✓ ($2+0+1+6=9$). Par $4$ ✓ ($16\\div4=4$). Par $6$ ✓ ($2$ et $3$). Par $9$ ✓ ($9\\div9=1$).", points:4},
           {label:"2.", enonce:"Simplifie $\\dfrac{84}{126}$.",
            type:"libre", correction:"PGCD$(84,126)=42$. $\\dfrac{84}{126}=\\dfrac{2}{3}$", points:4},
-          {label:"3.", enonce:"Montre que $n(n+1)$ est toujours pair pour tout entier $n$.",
-           type:"libre", correction:"$n$ et $n+1$ sont consécutifs donc l'un est pair. Un produit avec un facteur pair est toujours pair.", points:4},
+          {label:"3.", enonce:"Pourquoi $n(n+1)$ est-il toujours pair pour tout entier $n$ ?",
+           type:"qcm", choix:["Car $n$ est toujours pair","Car $n$ et $n+1$ sont consécutifs — l'un est pair","Car $n+1$ est toujours pair","Ce n'est pas toujours vrai"],
+           bonneReponseIdx:1, bonneReponse:"Car $n$ et $n+1$ sont consécutifs — l'un est pair",
+           correction:"Deux entiers consécutifs : l'un est pair → leur produit est pair ✓", points:4},
         ],
         indices:["D'après DNB — justifier une propriété de divisibilité"]
       },
@@ -5036,8 +5089,14 @@ const EXERCICES = {
            type:"libre", correction:"$\\dfrac{53\\times135+2354\\times239}{2407}\\approx237$ min $\\approx3$h$57$", points:5},
           {label:"2.", enonce:"Classe A (étendue $=18$) et Classe B (étendue $=3$), même moyenne. Laquelle est plus homogène ?",
            type:"libre", correction:"Classe B — étendue plus faible = plus homogène.", points:3},
-          {label:"3.", enonce:"Si on multiplie toutes les valeurs par $2$, que devient la moyenne ? L'étendue ?",
-           type:"libre", correction:"La moyenne est multipliée par $2$. L'étendue est aussi multipliée par $2$.", points:4},
+          {label:"3.", enonce:"Si on multiplie toutes les valeurs par $2$, que devient la moyenne ?",
+           type:"qcm", choix:["Elle reste la même","Elle est multipliée par $2$","Elle est divisée par $2$","Elle augmente de $2$"],
+           bonneReponseIdx:1, bonneReponse:"Elle est multipliée par $2$",
+           correction:"Multiplier toutes les valeurs par $k$ multiplie la moyenne par $k$.", points:2},
+          {label:"3b.", enonce:"Si on multiplie toutes les valeurs par $2$, que devient l'étendue ?",
+           type:"qcm", choix:["Elle reste la même","Elle est multipliée par $2$","Elle est divisée par $2$","Elle augmente de $2$"],
+           bonneReponseIdx:1, bonneReponse:"Elle est multipliée par $2$",
+           correction:"L'étendue $=$ max $-$ min. Si on multiplie par $2$ : nouvelle étendue $= 2\\times$max $- 2\\times$min $= 2\\times$ étendue.", points:2},
         ],
         indices:["Multiplier toutes les valeurs par $k$ : moyenne × $k$, étendue × $k$"]
       },
@@ -5340,7 +5399,7 @@ const EXERCICES = {
            type:"libre", correction:"$(9x^2-12x+4)-(9x^2-4)=-12x+8$", points:5},
           {label:"2.", enonce:"Pour quelles valeurs de $x$ a-t-on $(x-3)(x+5)=0$ ?",
            type:"libre", correction:"$x=3$ ou $x=-5$", points:4},
-          {label:"3.", enonce:"$A=n^2+n$. Montre que $A$ est toujours un entier pair.",
+          {label:"3.", enonce:"$A=n^2+n$. Pourquoi $A=n(n+1)$ est-il toujours pair ?",
            type:"libre", correction:"$A=n(n+1)$. Deux entiers consécutifs : l'un est pair → produit toujours pair.", points:3},
         ],
         indices:["$ab=0 \\Rightarrow a=0$ ou $b=0$"]
@@ -5571,8 +5630,10 @@ const EXERCICES = {
       {
         id:"proba_4_3", titre:"Probabilités — simulation", niveau:"Moyen", points_total:10,
         questions:[
-          {label:"1.", enonce:"On simule $500$ lancers d'une pièce : $260$ piles. Fréquence de pile ? Est-ce cohérent ?",
-           type:"libre", correction:"$f=\\dfrac{260}{500}=0{,}52=52\\%$. Cohérent car proche de $50\\%$.", points:4},
+          {label:"1.", enonce:"On simule $500$ lancers d'une pièce : $260$ piles. La fréquence de pile est-elle cohérente avec $p=0{,}5$ ?",
+           type:"qcm", choix:["Oui, $260/500=0{,}52\\approx0{,}5$","Non, trop loin de $0{,}5$","Impossible à dire","Oui car $260>250$"],
+           bonneReponseIdx:0, bonneReponse:"Oui, $260/500=0{,}52\\approx0{,}5$",
+           correction:"Fréquence $=260/500=0{,}52$. Proche de $0{,}5$ → cohérent pour $500$ lancers.", points:"$f=\\dfrac{260}{500}=0{,}52=52\\%$. Cohérent car proche de $50\\%$.", points:4},
           {label:"2.", enonce:"Intervalle de fluctuation au seuil $95\\%$ pour $p=0{,}5$, $n=500$.",
            type:"libre", correction:"$IF=\\left[0{,}5-\\dfrac{1}{\\sqrt{500}}\,;\,0{,}5+\\dfrac{1}{\\sqrt{500}}\\right]\\approx[0{,}455\,;\,0{,}545]$. $52\\%\\in[45{,}5\\%;54{,}5\\%]$ ✓", points:3},
           {label:"3.", enonce:"Quelle taille d'échantillon pour avoir un IF de largeur $0{,}1$ ?",
@@ -6530,6 +6591,23 @@ function renderMathSafe(el) {
   }
 }
 
+// Convertit le LaTeX $...$ en HTML KaTeX AVANT injection innerHTML
+// Évite le double-rendu et les problèmes de backslashes
+function texToHtml(str) {
+  if(!str) return '';
+  if(!window.katex) {
+    // KaTeX pas encore chargé — retourner le texte brut pour renderMathSafe ensuite
+    return str;
+  }
+  return str.replace(/\$\$([^$]+)\$\$/g, (_, tex) => {
+    try { return katex.renderToString(tex, {displayMode:true, throwOnError:false}); }
+    catch(e) { return `$$${tex}$$`; }
+  }).replace(/\$([^$\n]+)\$/g, (_, tex) => {
+    try { return katex.renderToString(tex, {displayMode:false, throwOnError:false}); }
+    catch(e) { return `$${tex}$`; }
+  });
+}
+
 
 // ═══════════════════════════════════════
 //  MODAL EXERCICE
@@ -6570,13 +6648,13 @@ function renderQuestion() {
     const choixHtml = q.choix.map((c, i) => `
       <button class="qcm-choix" id="qcm-${i}" onclick="verifierQCM(${i})">
         <span class="qcm-lettre">${String.fromCharCode(65+i)}</span>
-        <span class="qcm-texte">${c}</span>
+        <span class="qcm-texte">${texToHtml(c)}</span>
       </button>
     `).join('');
 
     document.getElementById('modal-content').innerHTML = `
       <div class="q-number">Question ${currentQuestion+1} / ${total} · ${q.points} point${q.points>1?'s':''}</div>
-      <div class="q-enonce">${q.label} ${q.enonce}</div>
+      <div class="q-enonce">${texToHtml(q.label + ' ' + q.enonce)}</div>
       ${indiceHtml}
       <div class="qcm-grid">${choixHtml}</div>
       <div class="correction-box" id="correction-box">
@@ -6588,7 +6666,7 @@ function renderQuestion() {
   // ── MODE SAISIE LIBRE ──
     document.getElementById('modal-content').innerHTML = `
       <div class="q-number">Question ${currentQuestion+1} / ${total} · ${q.points} point${q.points>1?'s':''}</div>
-      <div class="q-enonce">${q.label} ${q.enonce}</div>
+      <div class="q-enonce">${texToHtml(q.label + ' ' + q.enonce)}</div>
       ${indiceHtml}
       <div class="q-input-row">
         <input class="q-input" id="q-input" type="text" placeholder="Ta réponse..." onkeydown="if(event.key==='Enter')verifier()">
@@ -6602,6 +6680,8 @@ function renderQuestion() {
         <button class="cm-btn" onclick="insertMath('/')" title="Fraction">a/b</button>
         <button class="cm-btn" onclick="insertMath('π')" title="Pi">π</button>
         <button class="cm-btn" onclick="insertMath('∞')" title="Infini">∞</button>
+        <button class="cm-btn" onclick="insertMath('+∞')" title="+Infini">+∞</button>
+        <button class="cm-btn" onclick="insertMath('-∞')" title="-Infini">-∞</button>
         <button class="cm-btn" onclick="insertMath(' ; ')" title="Séparateur">;</button>
         <button class="cm-btn" onclick="insertMath('≤')" title="Inférieur ou égal">≤</button>
         <button class="cm-btn" onclick="insertMath('≥')" title="Supérieur ou égal">≥</button>
@@ -6617,16 +6697,14 @@ function renderQuestion() {
         <div class="corr-text" id="corr-text"></div>
       </div>
     `;
-    setTimeout(() => { const inp = document.getElementById('q-input'); if(inp) inp.focus(); }, 100);
+    setTimeout(() => {
+      const inp = document.getElementById('q-input');
+      if(inp) inp.focus();
+    }, 100);
   }
 
   reponseDonnee = false;
-
-  if(window.renderMathInElement) {
-    renderMathInElement(document.getElementById('modal-content'), {
-      delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]
-    });
-  }
+  // texToHtml() a déjà rendu le LaTeX — pas besoin de renderMathInElement
 }
 
 function insertMath(sym) {
@@ -6686,13 +6764,8 @@ function afficherCorrection(correct, q) {
 
   corrBox.className = `correction-box ${correct?'ok':'ko'} show`;
   corrTitle.textContent = correct ? '✅ Bonne réponse !' : '❌ Pas tout à fait…';
-  corrText.innerHTML = `Correction : ${q.correction}`;
-
-  if(window.renderMathInElement) {
-    renderMathInElement(corrBox, {
-      delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]
-    });
-  }
+  corrText.innerHTML = texToHtml(`Correction : ${q.correction}`);
+  // Plus besoin de renderMathInElement — texToHtml a déjà tout rendu
 }
 
 // ═══════════════════════════════════════
@@ -6764,6 +6837,25 @@ function verifierReponse(userRaw, correctionRaw) {
     .replace(/rightarrow/gi, '')
   );
   if(user.length >= 2 && corrClean.includes(user)) return true;
+
+  // ── 4b. Intervalles — normalisation poussée ──
+  const normaliserIntervalle = s => s
+    .replace(/\s/g, '')
+    .replace(/\+∞|\\+\\infty|\+infty|\+inf/gi, '+inf')
+    .replace(/−∞|-∞|\\-\\infty|-infty|-inf/gi, '-inf')
+    .replace(/∞|\\infty|infty/gi, '+inf')
+    .replace(/,/g, ';')
+    .toLowerCase();
+
+  const userN = normaliserIntervalle(userRaw);
+  const corrN = normaliserIntervalle(correctionRaw);
+
+  if(userN.length >= 3 && corrN.includes(userN)) return true;
+
+  // Vérifier aussi sans les crochets (l'élève tape "3;+inf" au lieu de "[3;+inf[")
+  const userSansC = userN.replace(/[\[\]]/g,'');
+  const corrSansC = corrN.replace(/[\[\]]/g,'');
+  if(userSansC.length >= 3 && corrSansC.includes(userSansC)) return true;
 
   // ── 5. Oui / Non ──
   if(['oui','yes','vrai','true'].includes(user)) {
