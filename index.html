@@ -3790,7 +3790,7 @@ const EXERCICES = {
   "2nde": {
     "Fonctions de référence": [
       {
-        id:"fc_2_1", titre:"Fonction carré — images et antécédents", niveau:"Facile", points_total:8,
+        id:"fc_2_1", titre:"Fonction carré — images et antécédents", niveau:"Facile", points_total:9,
         questions:[
           {label:"1.", enonce:"$f(x)=x^2$. Quelle est l'image de $-3$ par $f$ ?",
            type:"qcm", choix:["$-9$","$6$","$9$","$-6$"],
@@ -3800,8 +3800,12 @@ const EXERCICES = {
            type:"qcm", choix:["$5$ seulement","$-5$ seulement","$5$ et $-5$","Aucun"],
            bonneReponseIdx:2, bonneReponse:"$5$ et $-5$",
            correction:"$x^2=25 \\Rightarrow x=5$ ou $x=-5$. La fonction carré a deux antécédents pour tout réel strictement positif.", points:2},
-          {label:"3.", enonce:"$f(x)=x^2$. Calcule $f(0)$, $f(4)$ et $f(-4)$.",
-           type:"libre", correction:"$f(0)=0$ ; $f(4)=16$ ; $f(-4)=16$", points:2},
+          {label:"3a.", enonce:"$f(x)=x^2$. Calcule $f(0)$.",
+           type:"libre", correction:"$f(0)=0^2=0$", points:1},
+          {label:"3b.", enonce:"$f(x)=x^2$. Calcule $f(4)$.",
+           type:"libre", correction:"$f(4)=4^2=16$", points:1},
+          {label:"3c.", enonce:"$f(x)=x^2$. Calcule $f(-4)$.",
+           type:"libre", correction:"$f(-4)=(-4)^2=16$", points:1},
           {label:"4.", enonce:"$f(x)=x^2$. Quel est le minimum de $f$ et en quelle valeur est-il atteint ?",
            type:"libre", correction:"Minimum $=0$ atteint en $x=0$.", points:2},
         ],
@@ -3814,8 +3818,10 @@ const EXERCICES = {
            type:"qcm", choix:["$[0\\,;\\,+\\infty[$","$]-\\infty\\,;\\,0]$","$\\mathbb{R}$ entier","Elle n'est jamais décroissante"],
            bonneReponseIdx:1, bonneReponse:"$]-\\infty\\,;\\,0]$",
            correction:"$f$ est décroissante sur $]-\\infty\\,;\\,0]$ et croissante sur $[0\\,;\\,+\\infty[$.", points:2},
-          {label:"b)", enonce:"Sur $[-3\\,;\\,5]$, donne le minimum et le maximum de $f(x)=x^2$.",
-           type:"libre", correction:"Min $=f(0)=0$ ; Max $=f(5)=25$ (car $|5|>|-3|$).", points:3},
+          {label:"b1)", enonce:"Sur $[-3\\,;\\,5]$, quel est le minimum de $f(x)=x^2$ ?",
+           type:"libre", correction:"Min $=f(0)=0$", points:1},
+          {label:"b2)", enonce:"Sur $[-3\\,;\\,5]$, quel est le maximum de $f(x)=x^2$ ?",
+           type:"libre", correction:"Max $=f(5)=25$ (car $|5|>|-3|$)", points:2},
           {label:"c)", enonce:"La courbe de $f(x)=x^2$ passe-t-elle par $A(3\\,;\\,9)$ et $B(-2\\,;\\,5)$ ?",
            type:"libre", correction:"$f(3)=9$ ✓ $A$ est sur la courbe. $f(-2)=4\\neq5$ ✗ $B$ n'est pas sur la courbe.", points:3},
         ],
@@ -3828,8 +3834,12 @@ const EXERCICES = {
            type:"qcm", choix:["$\\mathbb{R}$","$\\mathbb{R}\\setminus\\{0\\}$","$]0\\,;\\,+\\infty[$","$[-1\\,;\\,1]$"],
            bonneReponseIdx:1, bonneReponse:"$\\mathbb{R}\\setminus\\{0\\}$",
            correction:"On ne peut pas diviser par zéro, donc $x\\neq0$.", points:2},
-          {label:"2.", enonce:"$g(x)=\\dfrac{1}{x}$. Calcule $g(2)$, $g(-4)$ et $g(0{,}5)$.",
-           type:"libre", correction:"$g(2)=0{,}5$ ; $g(-4)=-0{,}25$ ; $g(0{,}5)=2$", points:3},
+          {label:"2a.", enonce:"$g(x)=\\dfrac{1}{x}$. Calcule $g(2)$.",
+           type:"libre", correction:"$g(2)=\\dfrac{1}{2}=0{,}5$", points:1},
+          {label:"2b.", enonce:"$g(x)=\\dfrac{1}{x}$. Calcule $g(-4)$.",
+           type:"libre", correction:"$g(-4)=\\dfrac{1}{-4}=-0{,}25$", points:1},
+          {label:"2c.", enonce:"$g(x)=\\dfrac{1}{x}$. Calcule $g(0{,}5)$.",
+           type:"libre", correction:"$g(0{,}5)=\\dfrac{1}{0{,}5}=2$", points:1},
           {label:"3.", enonce:"$g(x)=\\dfrac{1}{x}$ est-elle croissante ou décroissante sur $]0\\,;\\,+\\infty[$ ?",
            type:"qcm", choix:["Croissante","Décroissante","Constante","Ni l'un ni l'autre"],
            bonneReponseIdx:1, bonneReponse:"Décroissante",
@@ -3844,8 +3854,12 @@ const EXERCICES = {
            type:"qcm", choix:["$\\mathbb{R}$","$\\mathbb{R}^*$","$[0\\,;\\,+\\infty[$","$]0\\,;\\,+\\infty[$"],
            bonneReponseIdx:2, bonneReponse:"$[0\\,;\\,+\\infty[$",
            correction:"La racine carrée n'est définie que pour les réels $\\geq 0$.", points:2},
-          {label:"2.", enonce:"$h(x)=\\sqrt{x}$. Calcule $h(0)$, $h(9)$, $h(25)$.",
-           type:"libre", correction:"$h(0)=0$ ; $h(9)=3$ ; $h(25)=5$", points:3},
+          {label:"2a.", enonce:"$h(x)=\\sqrt{x}$. Calcule $h(0)$.",
+           type:"libre", correction:"$h(0)=\\sqrt{0}=0$", points:1},
+          {label:"2b.", enonce:"$h(x)=\\sqrt{x}$. Calcule $h(9)$.",
+           type:"libre", correction:"$h(9)=\\sqrt{9}=3$", points:1},
+          {label:"2c.", enonce:"$h(x)=\\sqrt{x}$. Calcule $h(25)$.",
+           type:"libre", correction:"$h(25)=\\sqrt{25}=5$", points:1},
           {label:"3.", enonce:"Résous $\\sqrt{x}=7$.",
            type:"libre", correction:"$x=7^2=49$", points:3},
         ],
@@ -3916,7 +3930,7 @@ const EXERCICES = {
            type:"qcm", choix:["Croissante","Décroissante","Constante","Non définie"],
            bonneReponseIdx:0, bonneReponse:"Croissante",
            correction:"$h$ est croissante sur $[0\\,;\\,+\\infty[$ : $\\sqrt{4}=2 > \\sqrt{1}=1$.", points:3},
-          {label:"2.", enonce:"Pour $x\\\\in[-2\\\\,;\\\\,3]$, compare $f(x)=x^2$ et $h(x)=\\\\sqrt{x}$ (définie sur $[0\\\\,;\\\\,3]$). Lequel est le plus grand en $x=0{,}25$ ?",
+          {label:"2.", enonce:"Pour $x\\in[-2\\,;\\,3]$, compare $f(x)=x^2$ et $h(x)=\\sqrt{x}$ (définie sur $[0\\,;\\,3]$). Lequel est le plus grand en $x=0{,}25$ ?",
            type:"libre", correction:"$f(0{,}25)=0{,}0625$ ; $h(0{,}25)=0{,}5$. Donc $h>f$ pour $x=0{,}25$.", points:4},
           {label:"3.", enonce:"Site vidéo : Tarif A $=4x$€, Tarif B $=2{,}5x+18$€. À partir de combien de films B est-il plus avantageux ?",
            type:"libre", correction:"$4x > 2{,}5x+18 \\\\Rightarrow 1{,}5x > 18 \\\\Rightarrow x > 12$. B plus avantageux au-delà de $12$ films.", points:5},
@@ -4060,7 +4074,7 @@ const EXERCICES = {
         indices:["$P(A \\cup B) = P(A) + P(B) - P(A \\cap B)$ ; $P(B|A) = \\dfrac{P(A \\cap B)}{P(A)}$"]
       },
       {
-        id:"proba_2_C", titre:"Échantillonnage et intervalle de fluctuation", niveau:"Difficile", points_total:9,
+        id:"proba_2_C", titre:"Échantillonnage et intervalle de fluctuation", niveau:"Difficile", points_total:19,
         questions:[
           {label:"a)", enonce:"Une pièce est équilibrée. On la lance $100$ fois. Donne l'intervalle de fluctuation au seuil de $95\\%$.", correction:"$p=0{,}5$, $n=100$. Intervalle : $\\left[0{,}5 - \\dfrac{1}{\\sqrt{100}}\\,;\\,0{,}5 + \\dfrac{1}{\\sqrt{100}}\\right] = [0{,}4\\,;\\,0{,}6]$", points:3},
           {label:"b)", enonce:"On obtient $62$ piles sur $100$ lancers. La pièce semble-t-elle équilibrée ?", correction:"$62\\%$ est en dehors de $[40\\%\\,;\\,60\\%]$. On peut douter de l'équilibre de la pièce.", points:3},
@@ -5222,7 +5236,7 @@ const EXERCICES = {
 
     "Probabilités": [
       {
-        id:"proba_5_1", titre:"Probabilités — bases", niveau:"Facile", points_total:8,
+        id:"proba_5_1", titre:"Probabilités — bases", niveau:"Facile", points_total:18,
         questions:[
           {label:"1.", enonce:"Dé à $6$ faces. $P(\\text{nombre pair})$ ?",
            type:"libre", correction:"$P=\\dfrac{3}{6}=\\dfrac{1}{2}$", points:2},
@@ -5584,7 +5598,7 @@ const EXERCICES = {
         indices:["Arbre : multiplier les probabilités sur chaque chemin, additionner les chemins favorables"]
       },
       {
-        id:"proba_4_3", titre:"Probabilités — simulation", niveau:"Moyen", points_total:10,
+        id:"proba_4_3", titre:"Probabilités — simulation", niveau:"Moyen", points_total:20,
         questions:[
           {label:"1.", enonce:"On simule $500$ lancers d'une pièce : $260$ piles. La fréquence de pile est-elle cohérente avec $p=0{,}5$ ?",
            type:"qcm", choix:["Oui, $260/500=0{,}52\\approx0{,}5$","Non, trop loin de $0{,}5$","Impossible à dire","Oui car $260>250$"],
@@ -6596,7 +6610,7 @@ function renderQuestion() {
   document.getElementById('btn-next').textContent = isLast ? 'Terminer ✓' : 'Suivant →';
 
   const indiceHtml = ex.indices && ex.indices.length ? `
-    <div class="indice-box">💡 <strong>Indice :</strong> ${ex.indices.join(' · ')}</div>
+    <div class="indice-box">💡 <strong>Indice :</strong> ${texToHtml(ex.indices.join(' · '))}</div>
   ` : '';
 
   // ── MODE QCM ──
