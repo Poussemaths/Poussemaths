@@ -7,6 +7,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<!-- ── SUPABASE ── -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
@@ -605,6 +607,31 @@ nav {
 .qcm-choix.qcm-wrong .qcm-lettre { background:var(--rouge); color:white; }
 .qcm-choix:disabled { cursor:default; opacity:0.85; }
 
+/* ══ AUTH MODAL ══ */
+.auth-overlay { position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:1000; }
+.auth-box { position:fixed;top:50%;left:50%;transform:translate(-50%,-60%);opacity:0;transition:all 0.25s;z-index:1001;background:white;border-radius:var(--r-lg);padding:2rem;width:min(440px,94vw);box-shadow:0 20px 60px rgba(0,0,0,0.2); }
+.auth-box.show { transform:translate(-50%,-50%);opacity:1; }
+.auth-close { position:absolute;top:12px;right:14px;background:none;border:none;font-size:22px;cursor:pointer;color:var(--muted);line-height:1; }
+.auth-logo { text-align:center;font-size:20px;font-weight:800;color:var(--bleu);margin-bottom:1.25rem;font-family:'Fraunces',serif; }
+.auth-tabs { display:flex;gap:4px;border-bottom:2px solid var(--bordure);margin-bottom:1.25rem; }
+.auth-tab { flex:1;padding:8px;border:none;background:none;font-size:14px;font-weight:600;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;font-family:'DM Sans',sans-serif; }
+.auth-tab.active { color:var(--bleu);border-bottom-color:var(--bleu); }
+.auth-field { margin-bottom:12px; }
+.auth-field label { display:block;font-size:12px;font-weight:600;color:var(--muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px; }
+.auth-field input, .auth-field select { width:100%;padding:10px 12px;border:1.5px solid var(--bordure);border-radius:var(--r);font-size:14px;font-family:'DM Sans',sans-serif;box-sizing:border-box;transition:border-color 0.15s; }
+.auth-field input:focus, .auth-field select:focus { outline:none;border-color:var(--bleu); }
+.auth-row { display:grid;grid-template-columns:1fr 1fr;gap:10px; }
+.auth-btn { width:100%;padding:12px;background:var(--bleu);color:white;border:none;border-radius:var(--r);font-size:15px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background 0.15s; }
+.auth-btn:hover { background:var(--bleu-fort); }
+.auth-btn-code { width:100%;padding:10px;background:var(--bleu-doux);color:var(--bleu);border:1.5px solid var(--bleu);border-radius:var(--r);font-size:14px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif; }
+.auth-btn-secondary { width:100%;padding:8px;background:none;color:var(--muted);border:1.5px solid var(--bordure);border-radius:var(--r);font-size:13px;cursor:pointer;font-family:'DM Sans',sans-serif; }
+.auth-separator { text-align:center;color:var(--muted);font-size:12px;margin:12px 0; }
+.auth-error { background:#FEF2F2;color:#DC2626;padding:8px 12px;border-radius:var(--r);font-size:13px;margin-bottom:10px; }
+
+/* ══ TOAST ══ */
+.toast-notif { position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);opacity:0;background:var(--texte);color:white;padding:10px 20px;border-radius:30px;font-size:14px;font-weight:600;z-index:9999;transition:all 0.3s;white-space:nowrap; }
+.toast-notif.show { opacity:1;transform:translateX(-50%) translateY(0); }
+
 /* ══ CLAVIER VIRTUEL MATH ══ */
 .clavier-math {
   display:flex; flex-wrap:wrap; gap:5px;
@@ -1138,7 +1165,7 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
     <li><button class="nav-tab active" onclick="showPage('accueil')">Accueil</button></li>
     <li><button class="nav-tab" onclick="showPage('exercices')">Exercices</button></li>
     <li><button class="nav-tab" onclick="showPage('parcours')">Parcours</button></li>
-    <li><button class="nav-tab" onclick="showPage('eleve')">Espace Élève</button></li>
+    <li><button id="btn-espace-eleve" class="nav-tab" onclick="currentEleve ? showPage('eleve') : ouvrirModalConnexion()">Espace Élève</button></li>
     <li><button class="nav-tab" onclick="showPage('prof')">Espace Prof</button></li>
   </ul>
   <div class="nav-right">
@@ -5762,6 +5789,233 @@ function getAllExercices(classeFilter) {
 }
 
 // ═══════════════════════════════════════
+//  SUPABASE — CONFIGURATION
+// ═══════════════════════════════════════
+
+const SUPABASE_URL = 'https://jnzdawixrqrvomurkewf.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_z9cxUDLcFMFsb5w692JScg_VSzVvhp2';
+
+let supabaseClient = null;
+let currentEleve = null;
+
+function initSupabase() {
+  try {
+    supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    console.log('✅ Supabase connecté');
+    checkSession();
+  } catch(e) {
+    console.warn('Supabase non disponible:', e);
+  }
+}
+
+async function checkSession() {
+  if(!supabaseClient) return;
+  const { data: { session } } = await supabaseClient.auth.getSession();
+  if(session) {
+    await chargerProfilEleve(session.user.id);
+    updateNavEleve();
+  }
+}
+
+async function chargerProfilEleve(userId) {
+  const { data } = await supabaseClient.from('eleves').select('*').eq('user_id', userId).single();
+  if(data) { currentEleve = data; }
+}
+
+function updateNavEleve() {
+  const btn = document.getElementById('btn-espace-eleve');
+  if(btn && currentEleve) btn.textContent = `👤 ${currentEleve.prenom}`;
+}
+
+// ═══════════════════════════════════════
+//  MODAL CONNEXION / INSCRIPTION
+// ═══════════════════════════════════════
+
+function ouvrirModalConnexion(mode = 'connexion') {
+  document.getElementById('modal-auth')?.remove();
+  const modal = document.createElement('div');
+  modal.id = 'modal-auth';
+  modal.innerHTML = `
+    <div class="auth-overlay" onclick="fermerModalConnexion()"></div>
+    <div class="auth-box">
+      <button class="auth-close" onclick="fermerModalConnexion()">×</button>
+      <div class="auth-logo">🌱 Poussemaths</div>
+      <div class="auth-tabs">
+        <button class="auth-tab ${mode==='connexion'?'active':''}" onclick="switchAuthTab('connexion')">Se connecter</button>
+        <button class="auth-tab ${mode==='inscription'?'active':''}" onclick="switchAuthTab('inscription')">S'inscrire</button>
+      </div>
+      <div id="auth-connexion" style="display:${mode==='connexion'?'block':'none'}">
+        <div class="auth-field"><label>Email</label><input type="email" id="auth-email" placeholder="ton@email.com"></div>
+        <div class="auth-field"><label>Mot de passe</label><input type="password" id="auth-password" placeholder="••••••••"></div>
+        <div id="auth-error" class="auth-error" style="display:none"></div>
+        <button class="auth-btn" onclick="connexionEmail()">Se connecter →</button>
+        <div class="auth-separator">ou</div>
+        <button class="auth-btn-code" onclick="switchAuthTab('code')">🏫 Rejoindre avec un code de classe</button>
+      </div>
+      <div id="auth-inscription" style="display:${mode==='inscription'?'block':'none'}">
+        <div class="auth-row">
+          <div class="auth-field"><label>Prénom</label><input type="text" id="auth-prenom" placeholder="Prénom"></div>
+          <div class="auth-field"><label>Nom</label><input type="text" id="auth-nom" placeholder="Nom"></div>
+        </div>
+        <div class="auth-field"><label>Email</label><input type="email" id="auth-email-ins" placeholder="ton@email.com"></div>
+        <div class="auth-field"><label>Mot de passe</label><input type="password" id="auth-password-ins" placeholder="8 caractères minimum"></div>
+        <div class="auth-field"><label>Niveau</label>
+          <select id="auth-niveau">
+            <option value="6eme">6ème</option><option value="5eme">5ème</option>
+            <option value="4eme">4ème</option><option value="3eme">3ème</option>
+            <option value="2nde" selected>2nde</option><option value="1ere">1ère</option>
+            <option value="terminale">Terminale</option>
+          </select>
+        </div>
+        <div id="auth-error-ins" class="auth-error" style="display:none"></div>
+        <button class="auth-btn" onclick="inscriptionEmail()">Créer mon compte →</button>
+      </div>
+      <div id="auth-code" style="display:none">
+        <p style="font-size:13px;color:var(--muted);margin-bottom:1rem">Entre le code donné par ton professeur.</p>
+        <div class="auth-row">
+          <div class="auth-field"><label>Prénom</label><input type="text" id="auth-prenom-code" placeholder="Prénom"></div>
+          <div class="auth-field"><label>Nom</label><input type="text" id="auth-nom-code" placeholder="Nom"></div>
+        </div>
+        <div class="auth-field"><label>Code de classe</label><input type="text" id="auth-code-classe" placeholder="Ex: 3B-VH-2026" style="text-transform:uppercase;letter-spacing:2px"></div>
+        <div class="auth-field"><label>Email</label><input type="email" id="auth-email-code" placeholder="ton@email.com"></div>
+        <div class="auth-field"><label>Mot de passe</label><input type="password" id="auth-password-code" placeholder="8 caractères minimum"></div>
+        <div id="auth-error-code" class="auth-error" style="display:none"></div>
+        <button class="auth-btn" onclick="inscriptionCodeClasse()">Rejoindre la classe →</button>
+        <button class="auth-btn-secondary" onclick="switchAuthTab('connexion')" style="margin-top:8px">← Retour</button>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(modal);
+  setTimeout(() => modal.querySelector('.auth-box').classList.add('show'), 10);
+}
+
+function fermerModalConnexion() { document.getElementById('modal-auth')?.remove(); }
+
+function switchAuthTab(tab) {
+  ['connexion','inscription','code'].forEach(t => {
+    document.getElementById(`auth-${t}`).style.display = t===tab?'block':'none';
+  });
+  document.querySelectorAll('.auth-tab').forEach((btn,i) => {
+    btn.classList.toggle('active', (i===0&&tab==='connexion')||(i===1&&tab==='inscription'));
+  });
+}
+
+async function connexionEmail() {
+  if(!supabaseClient) return;
+  const email = document.getElementById('auth-email').value.trim();
+  const password = document.getElementById('auth-password').value;
+  const errEl = document.getElementById('auth-error');
+  if(!email||!password){showAuthError(errEl,'Remplis tous les champs.');return;}
+  const {data,error} = await supabaseClient.auth.signInWithPassword({email,password});
+  if(error){showAuthError(errEl,'Email ou mot de passe incorrect.');return;}
+  await chargerProfilEleve(data.user.id);
+  fermerModalConnexion(); updateNavEleve();
+  showToast(`Bienvenue ${currentEleve?.prenom||''} ! 🌱`);
+  showPage('eleve');
+}
+
+async function inscriptionEmail() {
+  if(!supabaseClient) return;
+  const prenom = document.getElementById('auth-prenom').value.trim();
+  const nom = document.getElementById('auth-nom').value.trim();
+  const email = document.getElementById('auth-email-ins').value.trim();
+  const password = document.getElementById('auth-password-ins').value;
+  const niveau = document.getElementById('auth-niveau').value;
+  const errEl = document.getElementById('auth-error-ins');
+  if(!prenom||!nom||!email||!password){showAuthError(errEl,'Remplis tous les champs.');return;}
+  if(password.length<8){showAuthError(errEl,'Mot de passe : 8 caractères minimum.');return;}
+  const {data,error} = await supabaseClient.auth.signUp({email,password});
+  if(error){showAuthError(errEl,error.message);return;}
+  await supabaseClient.from('eleves').insert({user_id:data.user.id,nom,prenom,niveau});
+  await chargerProfilEleve(data.user.id);
+  fermerModalConnexion(); updateNavEleve();
+  showToast(`Compte créé ! Bienvenue ${prenom} 🌱`);
+  showPage('eleve');
+}
+
+async function inscriptionCodeClasse() {
+  if(!supabaseClient) return;
+  const prenom = document.getElementById('auth-prenom-code').value.trim();
+  const nom = document.getElementById('auth-nom-code').value.trim();
+  const code = document.getElementById('auth-code-classe').value.trim().toUpperCase();
+  const email = document.getElementById('auth-email-code').value.trim();
+  const password = document.getElementById('auth-password-code').value;
+  const errEl = document.getElementById('auth-error-code');
+  if(!prenom||!nom||!code||!password){showAuthError(errEl,'Remplis tous les champs.');return;}
+  if(password.length<8){showAuthError(errEl,'8 caractères minimum.');return;}
+  const {data:classe,error:errClasse} = await supabaseClient.from('classes').select('*').eq('code',code).single();
+  if(errClasse||!classe){showAuthError(errEl,'Code invalide. Vérifie avec ton professeur.');return;}
+  const emailFinal = email||`${prenom.toLowerCase()}.${nom.toLowerCase()}.${code.toLowerCase()}@poussemaths.fr`;
+  const {data,error} = await supabaseClient.auth.signUp({email:emailFinal,password});
+  if(error){showAuthError(errEl,'Erreur création compte.');return;}
+  await supabaseClient.from('eleves').insert({user_id:data.user.id,nom,prenom,niveau:classe.niveau,classe:classe.nom,code_classe:code});
+  await chargerProfilEleve(data.user.id);
+  fermerModalConnexion(); updateNavEleve();
+  showToast(`Bienvenue dans la classe ${classe.nom}, ${prenom} ! 🌱`);
+  showPage('eleve');
+}
+
+async function deconnexion() {
+  if(!supabaseClient) return;
+  await supabaseClient.auth.signOut();
+  currentEleve = null;
+  const btn = document.getElementById('btn-espace-eleve');
+  if(btn) btn.textContent = '👤 Espace Élève';
+  showPage('accueil');
+  showToast('Déconnecté. À bientôt ! 🌱');
+}
+
+function showAuthError(el, msg) {
+  if(!el) return;
+  el.textContent = msg; el.style.display = 'block';
+  setTimeout(() => el.style.display='none', 4000);
+}
+
+function showToast(msg) {
+  const t = document.createElement('div');
+  t.className = 'toast-notif'; t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(() => t.classList.add('show'), 10);
+  setTimeout(() => { t.classList.remove('show'); setTimeout(() => t.remove(), 300); }, 3000);
+}
+
+// ═══════════════════════════════════════
+//  PROGRESSION — SAUVEGARDER DANS SUPABASE
+// ═══════════════════════════════════════
+
+async function sauvegarderProgression(exerciceId, chapitre, niveau, scorePercent, pointsObtenus, pointsTotal) {
+  if(!supabaseClient || !currentEleve) return;
+  await supabaseClient.from('progression').upsert({
+    eleve_id: currentEleve.id,
+    exercice_id: exerciceId,
+    chapitre, niveau,
+    score: scorePercent,
+    points_obtenus: pointsObtenus,
+    points_total: pointsTotal,
+    completed_at: new Date().toISOString()
+  }, { onConflict: 'eleve_id,exercice_id' });
+  await verifierBadges(chapitre, niveau);
+}
+
+async function verifierBadges(chapitre, niveau) {
+  if(!supabaseClient || !currentEleve) return;
+  const {data:progs} = await supabaseClient.from('progression').select('score').eq('eleve_id',currentEleve.id).eq('chapitre',chapitre);
+  if(!progs||progs.length===0) return;
+  const moy = Math.round(progs.reduce((s,p)=>s+p.score,0)/progs.length);
+  let badgeType = moy>=90?'or':moy>=70?'argent':moy>=50?'bronze':null;
+  if(!badgeType) return;
+  const {error} = await supabaseClient.from('badges').upsert({
+    eleve_id:currentEleve.id, badge_type:badgeType, chapitre, niveau
+  },{onConflict:'eleve_id,badge_type,chapitre'});
+  if(!error) {
+    const emoji = badgeType==='or'?'🥇':badgeType==='argent'?'🥈':'🥉';
+    showToast(`${emoji} Badge ${badgeType} — ${chapitre} !`);
+  }
+}
+
+window.addEventListener('load', initSupabase);
+
+// ═══════════════════════════════════════
 //  TABLEAU DE BORD PROF
 // ═══════════════════════════════════════
 
@@ -6873,11 +7127,23 @@ function showResult() {
   document.getElementById('btn-next').textContent = 'Fermer';
   document.getElementById('btn-next').onclick = fermerModal;
 
+  // ── Sauvegarder dans Supabase si élève connecté ──
+  if(currentEleve && currentExercice) {
+    const chapitre = currentExercice.titre || '';
+    const niveau = currentExercice.id.includes('_3_') ? '3eme'
+      : currentExercice.id.includes('_2_') ? '2nde'
+      : currentExercice.id.includes('_6_') ? '6eme'
+      : currentExercice.id.includes('_5_') ? '5eme'
+      : currentExercice.id.includes('_4_') ? '4eme' : '';
+    sauvegarderProgression(currentExercice.id, chapitre, niveau, pct, score, totalPoints);
+  }
+
   document.getElementById('modal-content').innerHTML = `
     <div class="result-screen">
       <div class="result-emoji">${emoji}</div>
       <div class="result-title">${msg}</div>
       <div class="result-score">Score : <span class="result-pts">${score} / ${totalPoints}</span> points (${pct}%)</div>
+      ${currentEleve ? `<div style="font-size:12px;color:var(--vert);margin-top:8px">✅ Progression sauvegardée</div>` : `<div style="font-size:12px;color:var(--muted);margin-top:8px"><a href="#" onclick="ouvrirModalConnexion()" style="color:var(--bleu)">Connecte-toi</a> pour sauvegarder ta progression</div>`}
       <div style="margin-top:1.5rem;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
         <button class="btn-nav-modal primary" onclick="ouvrirExercice('${currentExercice.id}')">Recommencer</button>
         <button class="btn-nav-modal" onclick="fermerModal();showPage('exercices')">Autres exercices</button>
