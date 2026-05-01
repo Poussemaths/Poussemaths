@@ -1166,7 +1166,7 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
     <li><button class="nav-tab" onclick="showPage('exercices')">Exercices</button></li>
     <li><button class="nav-tab" onclick="showPage('parcours')">Parcours</button></li>
     <li><button id="btn-espace-eleve" class="nav-tab" onclick="currentEleve ? showPage('eleve') : ouvrirModalConnexion()">Espace Élève</button></li>
-    <li><button class="nav-tab" onclick="showPage('prof')">Espace Prof</button></li>
+    <li><button class="nav-tab" onclick="accesProf()" id="btn-nav-prof" style="display:none">Espace Prof</button></li>
   </ul>
   <div class="nav-right">
     <button class="btn-nav-outline" onclick="showPage('eleve')">Se connecter</button>
@@ -1183,7 +1183,7 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
   <button onclick="showPage('exercices');toggleMenu()">📝 Exercices</button>
   <button onclick="showPage('parcours');toggleMenu()">🎯 Parcours noté</button>
   <button onclick="showPage('eleve');toggleMenu()">🏆 Espace Élève</button>
-  <button onclick="showPage('prof');toggleMenu()">👨‍🏫 Espace Prof</button>
+  <button onclick="accesProf();toggleMenu()" style="display:none">👨‍🏫 Espace Prof</button>
 </div>
 
 <!-- ═══ BANDEAU BO ═══ -->
@@ -6012,6 +6012,23 @@ async function verifierBadges(chapitre, niveau) {
     showToast(`${emoji} Badge ${badgeType} — ${chapitre} !`);
   }
 }
+
+// ── Accès Espace Prof protégé par mot de passe ──
+function accesProf() {
+  const code = prompt('Code d\'accès professeur :');
+  if(code === 'poussemaths2026') {
+    showPage('prof');
+  } else if(code !== null) {
+    alert('Code incorrect.');
+  }
+}
+
+// Raccourci clavier secret : Ctrl+Shift+P → Espace Prof
+document.addEventListener('keydown', e => {
+  if(e.ctrlKey && e.shiftKey && e.key === 'P') {
+    accesProf();
+  }
+});
 
 window.addEventListener('load', initSupabase);
 
