@@ -1401,68 +1401,9 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
      PAGE : ESPACE ÉLÈVE
 ════════════════════════════════════════ -->
 <div class="page" id="page-eleve" style="padding-top:64px">
-  <div class="eleve-page">
-    <div class="eleve-header">
-      <div class="eleve-avatar">MA</div>
-      <div>
-        <div class="eleve-name">Yasmine R.</div>
-        <div class="eleve-meta">3ème B · Lycée Victor Hugo · Inscrite depuis sept. 2025</div>
-      </div>
-      <div class="eleve-stats-mini">
-        <div class="esm-item"><span class="esm-num" id="score-global">0</span><div class="esm-label">Points</div></div>
-        <div class="esm-item"><span class="esm-num" id="ex-faits">0</span><div class="esm-label">Exercices</div></div>
-        <div class="esm-item"><span class="esm-num">🔥 3</span><div class="esm-label">Jours série</div></div>
-      </div>
-    </div>
-    <div class="eleve-grid">
-      <!-- Progression -->
-      <div class="eleve-card">
-        <div class="eleve-card-title">📊 Progression par chapitre</div>
-        <div class="chap-item"><div class="chap-top"><span class="chap-name">📐 Algèbre & Équations</span><span class="chap-pct">88%</span></div><div class="chap-bar"><div class="chap-bar-fill" style="width:88%;background:linear-gradient(90deg,var(--vert),#22C55E)"></div></div></div>
-        <div class="chap-item"><div class="chap-top"><span class="chap-name">📏 Géométrie</span><span class="chap-pct">74%</span></div><div class="chap-bar"><div class="chap-bar-fill" style="width:74%;background:linear-gradient(90deg,var(--bleu),var(--bleu-fort))"></div></div></div>
-        <div class="chap-item"><div class="chap-top"><span class="chap-name">📈 Fonctions</span><span class="chap-pct">61%</span></div><div class="chap-bar"><div class="chap-bar-fill" style="width:61%;background:linear-gradient(90deg,var(--amber),#F59E0B)"></div></div></div>
-        <div class="chap-item"><div class="chap-top"><span class="chap-name">🎲 Stats & Probabilités</span><span class="chap-pct">45%</span></div><div class="chap-bar"><div class="chap-bar-fill" style="width:45%;background:linear-gradient(90deg,var(--rouge),#F87171)"></div></div></div>
-        <div class="chap-item"><div class="chap-top"><span class="chap-name">🔢 Fractions & Calcul</span><span class="chap-pct">92%</span></div><div class="chap-bar"><div class="chap-bar-fill" style="width:92%;background:linear-gradient(90deg,#7C3AED,#A78BFA)"></div></div></div>
-      </div>
-      <!-- Top 15 -->
-      <div class="eleve-card">
-        <div class="eleve-card-title">🏆 Top 15 — Semaine en cours</div>
-        <div class="top15-list">
-          <div class="top15-item"><span class="top15-rank gold">1</span><div class="top15-avatar" style="background:linear-gradient(135deg,#F59E0B,#D97706)">SB</div><span class="top15-name">Sophie B. 🏆</span><span class="top15-pts">420 pts</span></div>
-          <div class="top15-item"><span class="top15-rank silver">2</span><div class="top15-avatar" style="background:linear-gradient(135deg,#6B7280,#9CA3AF)">KM</div><span class="top15-name">Karim M.</span><span class="top15-pts">387 pts</span></div>
-          <div class="top15-item"><span class="top15-rank bronze">3</span><div class="top15-avatar" style="background:linear-gradient(135deg,#D97706,#F59E0B)">LR</div><span class="top15-name">Léa R.</span><span class="top15-pts">341 pts</span></div>
-          <div class="top15-item me"><span class="top15-rank" style="color:var(--vert)">4</span><div class="top15-avatar" style="background:linear-gradient(135deg,#16A34A,#22C55E)">MA</div><span class="top15-name">Yasmine R. 👈 Toi</span><span class="top15-pts" id="mes-pts">298 pts</span></div>
-          <div class="top15-item"><span class="top15-rank">5</span><div class="top15-avatar" style="background:linear-gradient(135deg,var(--bleu),#7B4FE9)">YB</div><span class="top15-name">Yassine B.</span><span class="top15-pts">276 pts</span></div>
-          <div class="top15-item"><span class="top15-rank">6</span><div class="top15-avatar" style="background:linear-gradient(135deg,#E84040,#E09020)">NA</div><span class="top15-name">Nour A.</span><span class="top15-pts">254 pts</span></div>
-        </div>
-      </div>
-      <!-- Modes entraînement -->
-      <div class="eleve-card">
-        <div class="eleve-card-title">⚡ Modes d'entraînement</div>
-        <div class="train-grid">
-          <div class="train-card" onclick="showPage('exercices')"><div class="train-icon">🎯</div><div class="train-title">Exercice rapide</div><div class="train-desc">1 exercice aléatoire selon ton niveau</div><div class="train-pts">+10 pts</div></div>
-          <div class="train-card" onclick="showPage('exercices')"><div class="train-icon">🔥</div><div class="train-title">Série de 5</div><div class="train-desc">5 exercices d'affilée. Bonus si tout juste !</div><div class="train-pts">+60 pts si 5/5</div></div>
-          <div class="train-card" onclick="showPage('exercices')"><div class="train-icon">⚔️</div><div class="train-title">Défi chrono</div><div class="train-desc">Réponds en moins de 30 secondes</div><div class="train-pts">+25 pts · Badge ⚡</div></div>
-          <div class="train-card" onclick="showPage('exercices')"><div class="train-icon">📐</div><div class="train-title">Par chapitre</div><div class="train-desc">Choisis ton chapitre et entraîne-toi</div><div class="train-pts">+10 pts / exercice</div></div>
-          <div class="train-card" onclick="showPage('exercices')"><div class="train-icon">🎲</div><div class="train-title">Mode révision</div><div class="train-desc">Révise tes points faibles automatiquement</div><div class="train-pts">+15 pts</div></div>
-          <div class="train-card" onclick="alert('Défi ami — bientôt disponible ! 🌱')"><div class="train-icon">🤝</div><div class="train-title">Défi ami</div><div class="train-desc">Défie un camarade sur un exercice</div><div class="train-pts">Bientôt 🌱</div></div>
-        </div>
-      </div>
-      <!-- Badges -->
-      <div class="eleve-card">
-        <div class="eleve-card-title">🏅 Mes badges</div>
-        <div class="badges-grid">
-          <div class="badge-card unlocked"><div class="badge-icon">🌱</div><div class="badge-name">Première Pousse</div><div class="badge-desc">Premier exercice complété</div><div class="badge-status">✅ Obtenu</div></div>
-          <div class="badge-card unlocked"><div class="badge-icon">🔥</div><div class="badge-name">Série de feu</div><div class="badge-desc">7 jours consécutifs</div><div class="badge-status">✅ Obtenu</div></div>
-          <div class="badge-card unlocked"><div class="badge-icon">🎯</div><div class="badge-name">Sniper</div><div class="badge-desc">10 bonnes réponses d'affilée</div><div class="badge-status">✅ Obtenu</div></div>
-          <div class="badge-card unlocked"><div class="badge-icon">🥇</div><div class="badge-name">Or — Algèbre</div><div class="badge-desc">30 exercices + 90% réussite</div><div class="badge-status">✅ Obtenu</div></div>
-          <div class="badge-card locked"><div class="badge-icon">⚡</div><div class="badge-name">Éclair</div><div class="badge-desc">Répondre en moins de 30s</div><div class="badge-status">3/10 exercices</div></div>
-          <div class="badge-card locked"><div class="badge-icon">🦉</div><div class="badge-name">Hibou</div><div class="badge-desc">Travailler après 21h</div><div class="badge-status">1/5 sessions</div></div>
-          <div class="badge-card locked"><div class="badge-icon">🏆</div><div class="badge-name">Champion</div><div class="badge-desc">Top 1 du classement</div><div class="badge-status">Actuellement 4e</div></div>
-          <div class="badge-card locked"><div class="badge-icon">💎</div><div class="badge-name">Diamant</div><div class="badge-desc">Tous les badges Or</div><div class="badge-status">1/7 chapitres</div></div>
-        </div>
-      </div>
-    </div>
+  <div class="eleve-page" id="eleve-page-content">
+    <!-- Contenu chargé dynamiquement par renderEspaceEleve() -->
+    <div style="text-align:center;padding:4rem;color:var(--muted)">Chargement...</div>
   </div>
 </div>
 
@@ -5768,6 +5709,7 @@ function showPage(page, filter) {
   if(page === 'exercices') { currentFilter = filter || 'all'; renderExercices(); }
   if(page === 'parcours') initParcours();
   if(page === 'prof') { setTimeout(renderTableauBord, 100); }
+  if(page === 'eleve') { setTimeout(renderEspaceEleve, 100); }
 
   window.scrollTo({top:0, behavior:'smooth'});
 }
@@ -5999,18 +5941,254 @@ async function sauvegarderProgression(exerciceId, chapitre, niveau, scorePercent
 
 async function verifierBadges(chapitre, niveau) {
   if(!supabaseClient || !currentEleve) return;
-  const {data:progs} = await supabaseClient.from('progression').select('score').eq('eleve_id',currentEleve.id).eq('chapitre',chapitre);
-  if(!progs||progs.length===0) return;
-  const moy = Math.round(progs.reduce((s,p)=>s+p.score,0)/progs.length);
-  let badgeType = moy>=90?'or':moy>=70?'argent':moy>=50?'bronze':null;
+
+  // Récupérer toute la progression sur ce chapitre
+  const {data:progs} = await supabaseClient
+    .from('progression')
+    .select('score, exercice_id, completed_at')
+    .eq('eleve_id', currentEleve.id)
+    .eq('chapitre', chapitre);
+
+  if(!progs || progs.length === 0) return;
+
+  const nbFaits = progs.length;
+  const moy = Math.round(progs.reduce((s,p) => s+p.score, 0) / nbFaits);
+
+  // Compter le nombre total d'exercices du chapitre dans la plateforme
+  const tousExos = getAllExercices().filter(e => {
+    // Chercher les exercices dont le titre correspond au chapitre
+    return e.titre && e.titre.toLowerCase().includes(chapitre.toLowerCase().substring(0, 8));
+  });
+  const nbTotal = Math.max(tousExos.length, nbFaits, 1);
+
+  // ── Conditions en % du chapitre ──
+  // 🥉 Apprenti : 40% des exercices + score moyen ≥ 60%
+  // 🥈 Maître   : 70% des exercices + score moyen ≥ 75%
+  // 🥇 Expert   : 100% des exercices + score moyen ≥ 85%
+
+  const pctFait = nbFaits / nbTotal;
+
+  let badgeType = null;
+  if(pctFait >= 1.0 && moy >= 85) {
+    badgeType = 'or'; // Expert
+  } else if(pctFait >= 0.7 && moy >= 75) {
+    badgeType = 'argent'; // Maître
+  } else if(pctFait >= 0.4 && moy >= 60) {
+    badgeType = 'bronze'; // Apprenti
+  }
+
   if(!badgeType) return;
+
+  // Vérifier si un badge de même niveau ou meilleur existe déjà
+  const {data:existants} = await supabaseClient
+    .from('badges')
+    .select('badge_type, obtenu_at')
+    .eq('eleve_id', currentEleve.id)
+    .eq('chapitre', chapitre);
+
+  const niveaux = { bronze:1, argent:2, or:3 };
+  const meilleurExistant = existants?.reduce((max,b) => Math.max(max, niveaux[b.badge_type]||0), 0) || 0;
+
+  if(niveaux[badgeType] <= meilleurExistant) return;
+
+  // Noms des badges par chapitre
+  const nomBadge = badgeType === 'or'
+    ? `Expert ${chapitre}`
+    : badgeType === 'argent'
+    ? `Maître ${chapitre}`
+    : `Apprenti ${chapitre}`;
+
   const {error} = await supabaseClient.from('badges').upsert({
-    eleve_id:currentEleve.id, badge_type:badgeType, chapitre, niveau
-  },{onConflict:'eleve_id,badge_type,chapitre'});
+    eleve_id: currentEleve.id,
+    badge_type: badgeType,
+    chapitre,
+    niveau,
+    obtenu_at: new Date().toISOString()
+  }, { onConflict: 'eleve_id,badge_type,chapitre' });
+
   if(!error) {
     const emoji = badgeType==='or'?'🥇':badgeType==='argent'?'🥈':'🥉';
-    showToast(`${emoji} Badge ${badgeType} — ${chapitre} !`);
+    showToast(`${emoji} ${nomBadge} ! (${nbFaits}/${nbTotal} exercices · ${moy}%)`);
   }
+}
+
+// ── Vérifier la validité des badges (45 jours d'inactivité) ──
+async function verifierValiditeBadges() {
+  if(!supabaseClient || !currentEleve) return;
+
+  const {data:badges} = await supabaseClient
+    .from('badges')
+    .select('id, chapitre, badge_type, obtenu_at')
+    .eq('eleve_id', currentEleve.id);
+
+  if(!badges || badges.length === 0) return;
+
+  const limite45j = new Date();
+  limite45j.setDate(limite45j.getDate() - 45);
+
+  for(const badge of badges) {
+    // Vérifier la dernière activité sur ce chapitre
+    const {data:derniereActivite} = await supabaseClient
+      .from('progression')
+      .select('completed_at')
+      .eq('eleve_id', currentEleve.id)
+      .eq('chapitre', badge.chapitre)
+      .order('completed_at', {ascending: false})
+      .limit(1)
+      .single();
+
+    if(!derniereActivite) continue;
+
+    const dateActivite = new Date(derniereActivite.completed_at);
+    if(dateActivite < limite45j) {
+      // Badge expiré — le supprimer
+      await supabaseClient.from('badges').delete().eq('id', badge.id);
+      console.log(`Badge expiré supprimé : ${badge.badge_type} — ${badge.chapitre}`);
+    }
+  }
+}
+
+// ═══════════════════════════════════════
+//  ESPACE ÉLÈVE — DONNÉES RÉELLES SUPABASE
+// ═══════════════════════════════════════
+
+async function renderEspaceEleve() {
+  const container = document.getElementById('eleve-page-content');
+  if(!container) return;
+
+  // Si pas connecté → afficher invite connexion
+  if(!currentEleve) {
+    container.innerHTML = `
+      <div style="text-align:center;padding:4rem 2rem">
+        <div style="font-size:3rem;margin-bottom:1rem">🔒</div>
+        <h2 style="font-family:'Fraunces',serif;font-size:1.8rem;margin-bottom:0.5rem">Connecte-toi pour accéder à ton espace</h2>
+        <p style="color:var(--muted);margin-bottom:1.5rem">Sauvegarde ta progression, gagne des badges et suis ton évolution.</p>
+        <button class="btn-hero" onclick="ouvrirModalConnexion()">Se connecter / S'inscrire</button>
+      </div>
+    `;
+    return;
+  }
+
+  // Afficher chargement
+  container.innerHTML = `<div style="text-align:center;padding:4rem;color:var(--muted)">Chargement de ta progression...</div>`;
+
+  // Vérifier d'abord la validité des badges (45 jours)
+  await verifierValiditeBadges();
+
+  // Charger progression et badges depuis Supabase
+  let progressions = [], badges = [];
+  if(supabaseClient && currentEleve) {
+    const {data: prog} = await supabaseClient.from('progression').select('*').eq('eleve_id', currentEleve.id).order('completed_at', {ascending: false});
+    const {data: bdg} = await supabaseClient.from('badges').select('*').eq('eleve_id', currentEleve.id);
+    progressions = prog || [];
+    badges = bdg || [];
+  }
+
+  // Calculer les stats
+  const totalPoints = progressions.reduce((s,p) => s + (p.points_obtenus || 0), 0);
+  const nbExercices = progressions.length;
+  const moyenneGlobale = nbExercices > 0 ? Math.round(progressions.reduce((s,p) => s + p.score, 0) / nbExercices) : 0;
+
+  // Grouper par chapitre
+  const parChapitre = {};
+  progressions.forEach(p => {
+    if(!parChapitre[p.chapitre]) parChapitre[p.chapitre] = [];
+    parChapitre[p.chapitre].push(p.score);
+  });
+
+  // Initiales de l'élève
+  const initiales = (currentEleve.prenom?.[0] || '') + (currentEleve.nom?.[0] || '');
+  const couleurs = ['#4A90D9','#E84040','#16A34A','#F59E0B','#7C3AED','#D97706'];
+  const couleur = couleurs[initiales.charCodeAt(0) % couleurs.length];
+
+  // Rendu progression par chapitre
+  const chapitresHtml = Object.entries(parChapitre).length > 0
+    ? Object.entries(parChapitre).map(([chap, scores]) => {
+        const moy = Math.round(scores.reduce((a,b)=>a+b,0)/scores.length);
+        const barColor = moy>=70?'linear-gradient(90deg,var(--vert),#22C55E)':moy>=50?'linear-gradient(90deg,var(--amber),#F59E0B)':'linear-gradient(90deg,var(--rouge),#F87171)';
+        const badge = badges.find(b => b.chapitre === chap);
+        const badgeEmoji = badge ? (badge.badge_type==='or'?'🥇':badge.badge_type==='argent'?'🥈':'🥉') : '';
+        return `
+          <div class="chap-item">
+            <div class="chap-top">
+              <span class="chap-name">${badgeEmoji} ${chap}</span>
+              <span class="chap-pct">${moy}%</span>
+            </div>
+            <div class="chap-bar"><div class="chap-bar-fill" style="width:${moy}%;background:${barColor}"></div></div>
+          </div>
+        `;
+      }).join('')
+    : '<div style="color:var(--muted);font-size:13px;text-align:center;padding:1rem">Aucun exercice terminé encore.<br><a onclick="showPage(\'exercices\')" style="color:var(--bleu);cursor:pointer">Commencer maintenant →</a></div>';
+
+  // Rendu badges — groupés par chapitre avec nom personnalisé
+  const badgesHtml = badges.length > 0
+    ? badges.map(b => {
+        const emoji = b.badge_type==='or'?'🥇':b.badge_type==='argent'?'🥈':'🥉';
+        const nomType = b.badge_type==='or'?'Expert':b.badge_type==='argent'?'Maître':'Apprenti';
+        const dateObtenu = b.obtenu_at ? new Date(b.obtenu_at).toLocaleDateString('fr-FR') : '';
+        return `
+          <div class="badge-card unlocked">
+            <div class="badge-icon">${emoji}</div>
+            <div class="badge-name">${nomType}</div>
+            <div class="badge-desc">${b.chapitre}</div>
+            <div class="badge-status">✅ ${dateObtenu}</div>
+          </div>
+        `;
+      }).join('')
+    : `<div style="color:var(--muted);font-size:13px;text-align:center;padding:1.5rem;grid-column:1/-1">
+        Aucun badge encore.<br>
+        <span style="font-size:12px">40% des exercices d'un chapitre à 60% minimum pour le premier badge.</span>
+       </div>`;
+
+  // Rendu final
+  container.innerHTML = `
+    <div class="eleve-header">
+      <div class="eleve-avatar" style="background:${couleur}">${initiales}</div>
+      <div>
+        <div class="eleve-name">${currentEleve.prenom} ${currentEleve.nom}</div>
+        <div class="eleve-meta">${currentEleve.classe || currentEleve.niveau || ''} · ${currentEleve.code_classe ? 'Classe '+currentEleve.code_classe : 'Inscrit(e)'}</div>
+      </div>
+      <div class="eleve-stats-mini">
+        <div class="esm-item"><span class="esm-num">${totalPoints}</span><div class="esm-label">Points</div></div>
+        <div class="esm-item"><span class="esm-num">${nbExercices}</span><div class="esm-label">Exercices</div></div>
+        <div class="esm-item"><span class="esm-num">${moyenneGlobale}%</span><div class="esm-label">Moyenne</div></div>
+      </div>
+    </div>
+
+    <div class="eleve-grid">
+      <div class="eleve-card">
+        <div class="eleve-card-title">📊 Progression par chapitre</div>
+        ${chapitresHtml}
+      </div>
+
+      <div class="eleve-card">
+        <div class="eleve-card-title">⚡ Modes d'entraînement</div>
+        <div class="train-grid">
+          <div class="train-card" onclick="showPage('exercices')"><div class="train-icon">🎯</div><div class="train-title">Exercice rapide</div><div class="train-desc">Choisis un chapitre et entraîne-toi</div></div>
+          <div class="train-card" onclick="showPage('parcours')"><div class="train-icon">🔥</div><div class="train-title">Parcours noté</div><div class="train-desc">Série d'exercices avec score final</div></div>
+          <div class="train-card" onclick="alert('Défi ami — bientôt disponible 🌱')"><div class="train-icon">🤝</div><div class="train-title">Défi ami</div><div class="train-desc">Bientôt disponible 🌱</div></div>
+        </div>
+      </div>
+
+      <div class="eleve-card">
+        <div class="eleve-card-title">🏅 Mes badges (${badges.length})</div>
+        <div class="badges-grid">${badgesHtml}</div>
+      </div>
+
+      <div class="eleve-card">
+        <div class="eleve-card-title">📋 Derniers exercices</div>
+        ${progressions.slice(0,5).map(p => `
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--bordure);font-size:13px">
+            <span style="color:var(--texte);font-weight:500">${p.chapitre}</span>
+            <span style="font-weight:700;color:${p.score>=70?'var(--vert)':p.score>=50?'var(--amber)':'var(--rouge)'}">${p.score}%</span>
+          </div>
+        `).join('') || '<div style="color:var(--muted);font-size:13px;padding:1rem;text-align:center">Aucun exercice encore.</div>'}
+        <div style="margin-top:12px">
+          <button class="auth-btn-secondary" onclick="deconnexion()">Se déconnecter</button>
+        </div>
+      </div>
+    </div>
+  `;
 }
 
 // ── Accès Espace Prof protégé par mot de passe ──
