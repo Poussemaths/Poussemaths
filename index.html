@@ -1165,7 +1165,7 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
     <li><button class="nav-tab active" onclick="showPage('accueil')">Accueil</button></li>
     <li><button class="nav-tab" onclick="showPage('exercices')">Exercices</button></li>
     <li><button class="nav-tab" onclick="showPage('parcours')">Parcours</button></li>
-    <li><button id="btn-espace-eleve" class="nav-tab" onclick="currentEleve ? showPage('eleve') : ouvrirModalConnexion()">Espace Élève</button></li>
+    <li><button id="btn-espace-eleve" class="nav-tab" onclick="showPage('eleve')">Espace Élève</button></li>
     <li><button class="nav-tab" onclick="accesProf()" id="btn-nav-prof">Espace Prof</button></li>
   </ul>
   <div class="nav-right">
@@ -6056,14 +6056,38 @@ async function renderEspaceEleve() {
   const container = document.getElementById('eleve-page-content');
   if(!container) return;
 
-  // Si pas connecté → afficher invite connexion
+  // Si pas connecté → afficher espace public avec invitation
   if(!currentEleve) {
     container.innerHTML = `
-      <div style="text-align:center;padding:4rem 2rem">
-        <div style="font-size:3rem;margin-bottom:1rem">🔒</div>
-        <h2 style="font-family:'Fraunces',serif;font-size:1.8rem;margin-bottom:0.5rem">Connecte-toi pour accéder à ton espace</h2>
-        <p style="color:var(--muted);margin-bottom:1.5rem">Sauvegarde ta progression, gagne des badges et suis ton évolution.</p>
-        <button class="btn-hero" onclick="ouvrirModalConnexion()">Se connecter / S'inscrire</button>
+      <div class="eleve-header" style="background:var(--bleu-doux);border:1.5px solid var(--bleu);border-radius:var(--r-lg);padding:1.5rem;margin-bottom:1.5rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap">
+        <div style="font-size:2.5rem">🌱</div>
+        <div style="flex:1">
+          <div style="font-weight:700;font-size:16px;color:var(--bleu)">Crée ton compte pour sauvegarder ta progression</div>
+          <div style="font-size:13px;color:var(--muted);margin-top:4px">Gratuit · Badges · Suivi par chapitre · Historique</div>
+        </div>
+        <button class="auth-btn" style="width:auto;padding:10px 24px" onclick="ouvrirModalConnexion()">
+          Se connecter / S'inscrire →
+        </button>
+      </div>
+
+      <div class="eleve-grid">
+        <div class="eleve-card">
+          <div class="eleve-card-title">⚡ Commencer maintenant</div>
+          <div class="train-grid">
+            <div class="train-card" onclick="showPage('exercices')"><div class="train-icon">🎯</div><div class="train-title">Exercices</div><div class="train-desc">Choisis ton niveau et entraîne-toi</div></div>
+            <div class="train-card" onclick="showPage('parcours')"><div class="train-icon">🔥</div><div class="train-title">Parcours</div><div class="train-desc">Série d'exercices avec score final</div></div>
+            <div class="train-card" onclick="ouvrirCalcMental()"><div class="train-icon">🧮</div><div class="train-title">Calcul mental</div><div class="train-desc">Entraînement express chrono</div></div>
+          </div>
+        </div>
+        <div class="eleve-card">
+          <div class="eleve-card-title">🏅 Badges à débloquer</div>
+          <div class="badges-grid">
+            <div class="badge-card locked"><div class="badge-icon">🥉</div><div class="badge-name">Apprenti</div><div class="badge-desc">40% des exercices · 60% de score</div><div class="badge-status">🔒 Connexion requise</div></div>
+            <div class="badge-card locked"><div class="badge-icon">🥈</div><div class="badge-name">Maître</div><div class="badge-desc">70% des exercices · 75% de score</div><div class="badge-status">🔒 Connexion requise</div></div>
+            <div class="badge-card locked"><div class="badge-icon">🥇</div><div class="badge-name">Expert</div><div class="badge-desc">Tous les exercices · 85% de score</div><div class="badge-status">🔒 Connexion requise</div></div>
+            <div class="badge-card locked"><div class="badge-icon">🎓</div><div class="badge-name">Diplôme</div><div class="badge-desc">70% sur tous les chapitres du niveau</div><div class="badge-status">🔒 Connexion requise</div></div>
+          </div>
+        </div>
       </div>
     `;
     return;
