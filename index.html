@@ -1166,7 +1166,7 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
     <li><button class="nav-tab" onclick="showPage('exercices')">Exercices</button></li>
     <li><button class="nav-tab" onclick="showPage('parcours')">Parcours</button></li>
     <li><button id="btn-espace-eleve" class="nav-tab" onclick="currentEleve ? showPage('eleve') : ouvrirModalConnexion()">Espace Élève</button></li>
-    <li><button class="nav-tab" onclick="accesProf()" id="btn-nav-prof" style="display:none">Espace Prof</button></li>
+    <li><button class="nav-tab" onclick="accesProf()" id="btn-nav-prof">Espace Prof</button></li>
   </ul>
   <div class="nav-right">
     <button class="btn-nav-outline" onclick="showPage('eleve')">Se connecter</button>
@@ -1183,7 +1183,7 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
   <button onclick="showPage('exercices');toggleMenu()">📝 Exercices</button>
   <button onclick="showPage('parcours');toggleMenu()">🎯 Parcours noté</button>
   <button onclick="showPage('eleve');toggleMenu()">🏆 Espace Élève</button>
-  <button onclick="accesProf();toggleMenu()" style="display:none">👨‍🏫 Espace Prof</button>
+  <button onclick="accesProf();toggleMenu()">👨‍🏫 Espace Prof</button>
 </div>
 
 <!-- ═══ BANDEAU BO ═══ -->
@@ -6193,11 +6193,77 @@ async function renderEspaceEleve() {
 
 // ── Accès Espace Prof protégé par mot de passe ──
 function accesProf() {
-  const code = prompt('Code d\'accès professeur :');
-  if(code === 'poussemaths2026') {
+  // Déjà connecté comme prof
+  if(sessionStorage.getItem('prof_auth') === 'ok') {
     showPage('prof');
-  } else if(code !== null) {
-    alert('Code incorrect.');
+    return;
+  }
+
+  // Afficher modal login prof
+  document.getElementById('modal-prof-login')?.remove();
+  const modal = document.createElement('div');
+  modal.id = 'modal-prof-login';
+  modal.innerHTML = `
+    <div class="auth-overlay" onclick="fermerLoginProf()"></div>
+    <div class="auth-box">
+      <button class="auth-close" onclick="fermerLoginProf()">×</button>
+      <div class="auth-logo">👨‍🏫 Espace Professeur</div>
+      <p style="font-size:13px;color:var(--muted);text-align:center;margin-bottom:1.5rem">
+        Accès réservé aux enseignants Poussemaths
+      </p>
+      <div class="auth-field">
+        <label>Identifiant</label>
+        <input type="text" id="prof-login-id" placeholder="Votre identifiant" autocomplete="username">
+      </div>
+      <div class="auth-field">
+        <label>Mot de passe</label>
+        <input type="password" id="prof-login-pwd" placeholder="••••••••" 
+          onkeydown="if(event.key==='Enter') validerLoginProf()" autocomplete="current-password">
+      </div>
+      <div id="prof-login-error" class="auth-error" style="display:none"></div>
+      <button class="auth-btn" onclick="validerLoginProf()">Accéder →</button>
+      <p style="font-size:11px;color:var(--muted);text-align:center;margin-top:1rem">
+        Accès non autorisé ? Contactez <a href="mailto:contact@poussemaths.fr">contact@poussemaths.fr</a>
+      </p>
+    </div>
+  `;
+  document.body.appendChild(modal);
+  setTimeout(() => {
+    modal.querySelector('.auth-box').classList.add('show');
+    document.getElementById('prof-login-id').focus();
+  }, 10);
+}
+
+function fermerLoginProf() {
+  document.getElementById('modal-prof-login')?.remove();
+}
+
+function validerLoginProf() {
+  const id  = document.getElementById('prof-login-id').value.trim();
+  const pwd = document.getElementById('prof-login-pwd').value;
+  const err = document.getElementById('prof-login-error');
+
+  // Identifiants autorisés — à stocker côté serveur plus tard
+  const PROFS = [
+    { login: 'j.rahel',    pwd: 'Hugo2026!' },
+    { login: 'jamalrahel', pwd: 'Hugo2026!' },
+    { login: 'charmkech',  pwd: 'Poussemaths2026!' },
+  ];
+
+  const ok = PROFS.find(p => p.login === id && p.pwd === pwd);
+
+  if(ok) {
+    sessionStorage.setItem('prof_auth', 'ok');
+    sessionStorage.setItem('prof_login', id);
+    fermerLoginProf();
+    showPage('prof');
+    showToast('Bienvenue dans l\'espace professeur 👨‍🏫');
+  } else {
+    err.textContent = 'Identifiant ou mot de passe incorrect.';
+    err.style.display = 'block';
+    document.getElementById('prof-login-pwd').value = '';
+    document.getElementById('prof-login-pwd').focus();
+    setTimeout(() => err.style.display = 'none', 3000);
   }
 }
 
