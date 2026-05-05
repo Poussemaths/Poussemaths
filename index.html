@@ -58,7 +58,7 @@ body {
    NAV
 ══════════════════════════════════ */
 nav {
-  position:fixed; top:37px; left:0; right:0; z-index:200;
+  position:fixed; top:0; left:0; right:0; z-index:200;
   height:64px;
   background:rgba(255,255,255,0.96);
   backdrop-filter:blur(16px);
@@ -1156,9 +1156,9 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
 <body>
 
 <!-- ── BANNIÈRE BETA ── -->
-<div id="banniere-beta" style="background:linear-gradient(90deg,#2D6A9F,#7B4FE9);color:white;text-align:center;padding:8px 16px;font-size:13px;font-weight:600;font-family:'DM Sans',sans-serif;position:fixed;top:0;left:0;right:0;z-index:999;">
-  🌱 La plateforme est en construction — revenez chaque semaine pour découvrir de nouveaux exercices !
-  <button onclick="document.getElementById('banniere-beta').style.display='none';document.querySelector('nav').style.top='0'" style="background:rgba(255,255,255,0.2);border:none;color:white;margin-left:12px;padding:2px 10px;border-radius:20px;cursor:pointer;font-size:12px;font-family:'DM Sans',sans-serif;">✕</button>
+<div id="banniere-beta" style="background:linear-gradient(90deg,var(--bleu),#7B4FE9);color:white;text-align:center;padding:8px 16px;font-size:13px;font-weight:600;font-family:'DM Sans',sans-serif;position:relative;z-index:200;">
+  🌱 Poussemaths est en version bêta — nouveaux exercices et fonctionnalités chaque semaine !
+  <button onclick="this.parentElement.style.display='none'" style="background:rgba(255,255,255,0.2);border:none;color:white;margin-left:12px;padding:2px 10px;border-radius:20px;cursor:pointer;font-size:12px;font-family:'DM Sans',sans-serif;">✕</button>
 </div>
 
 <!-- ═══ NAV ═══ -->
@@ -1391,7 +1391,7 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
 <!-- ═══════════════════════════════════════
      PAGE : EXERCICES
 ════════════════════════════════════════ -->
-<div class="page" id="page-exercices" style="padding-top:101px">
+<div class="page" id="page-exercices" style="padding-top:64px">
   <div class="bo-banner"><p><span class="bo-pill">BO 2026</span>Exercices alignés sur les nouveaux programmes officiels</p></div>
   <div class="exercices-page">
     <div class="ex-header">
@@ -1406,7 +1406,7 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
 <!-- ═══════════════════════════════════════
      PAGE : ESPACE ÉLÈVE
 ════════════════════════════════════════ -->
-<div class="page" id="page-eleve" style="padding-top:101px">
+<div class="page" id="page-eleve" style="padding-top:64px">
   <div class="eleve-page" id="eleve-page-content">
     <!-- Contenu chargé dynamiquement par renderEspaceEleve() -->
     <div style="text-align:center;padding:4rem;color:var(--muted)">Chargement...</div>
@@ -1416,7 +1416,7 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
 <!-- ═══════════════════════════════════════
      PAGE : PARCOURS
 ════════════════════════════════════════ -->
-<div class="page" id="page-parcours" style="padding-top:101px">
+<div class="page" id="page-parcours" style="padding-top:64px">
   <div style="max-width:900px;margin:0 auto;padding:2rem 2rem 4rem">
     <div style="margin-bottom:2rem">
       <div class="s-label">Entraînement</div>
@@ -1461,7 +1461,7 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
 <!-- ═══════════════════════════════════════
      PAGE : ESPACE PROF (placeholder)
 ════════════════════════════════════════ -->
-<div class="page" id="page-prof" style="padding-top:101px">
+<div class="page" id="page-prof" style="padding-top:64px">
   <div class="prof-page">
 
     <!-- HEADER PROF -->
@@ -5677,6 +5677,139 @@ const EXERCICES = {
 
   },
 
+  // ═══════════════════════════════════════
+  //  1ÈRE — SPÉCIALITÉ MATHÉMATIQUES
+  // ═══════════════════════════════════════
+  "1ere": {
+
+    // ── SUITES NUMÉRIQUES ──
+    "Suites — définition et premiers termes": [
+      {
+        id:"suite_1_1", titre:"Suites — définition explicite", niveau:"Facile", points_total:8,
+        questions:[
+          {label:"1a.", enonce:"$u_n = n^2 - 3n + 1$. Calcule $u_0$.",
+           type:"libre", correction:"$u_0 = 0 - 0 + 1 = 1$", points:2},
+          {label:"1b.", enonce:"$u_n = n^2 - 3n + 1$. Calcule $u_1$.",
+           type:"libre", correction:"$u_1 = 1 - 3 + 1 = -1$", points:2},
+          {label:"1c.", enonce:"$u_n = n^2 - 3n + 1$. Calcule $u_3$.",
+           type:"libre", correction:"$u_3 = 9 - 9 + 1 = 1$", points:2},
+          {label:"2.", enonce:"$v_n = \\\\dfrac{2n+1}{n+2}$. Calcule $v_0$.",
+           type:"libre", correction:"$v_0 = \\\\dfrac{1}{2}$", points:2},
+        ],
+        indices:["Pour une suite explicite : substitue directement $n$ par sa valeur"]
+      },
+      {
+        id:"suite_1_2", titre:"Suites — définition par récurrence", niveau:"Facile", points_total:8,
+        questions:[
+          {label:"1a.", enonce:"$u_0 = 2$ et $u_{n+1} = 3u_n - 1$. Calcule $u_1$.",
+           type:"libre", correction:"$u_1 = 3 \\\\times 2 - 1 = 5$", points:2},
+          {label:"1b.", enonce:"$u_0 = 2$ et $u_{n+1} = 3u_n - 1$. Calcule $u_2$.",
+           type:"libre", correction:"$u_2 = 3 \\\\times 5 - 1 = 14$", points:2},
+          {label:"1c.", enonce:"$u_0 = 2$ et $u_{n+1} = 3u_n - 1$. Calcule $u_3$.",
+           type:"libre", correction:"$u_3 = 3 \\\\times 14 - 1 = 41$", points:2},
+          {label:"2.", enonce:"$u_1 = -1$ et $u_{n+1} = u_n + 2n$. Calcule $u_2$.",
+           type:"libre", correction:"$u_2 = u_1 + 2 \\\\times 1 = -1 + 2 = 1$", points:2},
+        ],
+        indices:["Pour une suite par récurrence : calcule chaque terme à partir du précédent"]
+      },
+      {
+        id:"suite_1_3", titre:"Suites — mode de définition", niveau:"Moyen", points_total:8,
+        questions:[
+          {label:"1.", enonce:"$u_n = 2^n - n$. Cette suite est-elle définie de façon explicite ou par récurrence ?",
+           type:"qcm", choix:["Explicite","Par récurrence","Les deux","Ni l'un ni l'autre"],
+           bonneReponseIdx:0, bonneReponse:"Explicite",
+           correction:"On peut calculer directement $u_n$ à partir de $n$ sans connaître les termes précédents.", points:2},
+          {label:"2.", enonce:"$u_0 = 1$ et $u_{n+1} = \\\\dfrac{u_n}{2} + 1$. Cette suite est-elle définie de façon explicite ou par récurrence ?",
+           type:"qcm", choix:["Explicite","Par récurrence","Les deux","Ni l'un ni l'autre"],
+           bonneReponseIdx:1, bonneReponse:"Par récurrence",
+           correction:"Chaque terme dépend du précédent — c'est une définition par récurrence.", points:2},
+          {label:"3.", enonce:"$u_0 = 1$ et $u_{n+1} = \\\\dfrac{u_n}{2} + 1$. Calcule $u_3$.",
+           type:"libre", correction:"$u_1 = 1{,}5$, $u_2 = 1{,}75$, $u_3 = 1{,}875$", points:2},
+          {label:"4.", enonce:"$u_n = \\\\dfrac{3^n}{n!}$. Calcule $u_3$. ($3! = 6$)",
+           type:"libre", correction:"$u_3 = \\\\dfrac{27}{6} = \\\\dfrac{9}{2} = 4{,}5$", points:2},
+        ],
+        indices:["Explicite : formule directe en $n$. Récurrence : chaque terme dépend du précédent."]
+      },
+      {
+        id:"suite_1_4", titre:"Suites — sens de variation (différence)", niveau:"Moyen", points_total:10,
+        questions:[
+          {label:"1.", enonce:"$u_n = 3n - 5$. Calcule $u_{n+1} - u_n$. La suite est-elle croissante ?",
+           type:"libre", correction:"$u_{n+1} - u_n = 3(n+1)-5-(3n-5) = 3 > 0$. Croissante.", points:3},
+          {label:"2.", enonce:"$u_n = 3n - 5$. Est-elle croissante, décroissante ou ni l'un ni l'autre ?",
+           type:"qcm", choix:["Croissante","Décroissante","Ni l'un ni l'autre","Constante"],
+           bonneReponseIdx:0, bonneReponse:"Croissante",
+           correction:"$u_{n+1} - u_n = 3 > 0$ pour tout $n$ → strictement croissante.", points:2},
+          {label:"3.", enonce:"$u_0 = 10$, $u_{n+1} = u_n - 4$. Calcule $u_{n+1} - u_n$.",
+           type:"libre", correction:"$u_{n+1} - u_n = -4$", points:2},
+          {label:"4.", enonce:"La suite $u_0 = 10$, $u_{n+1} = u_n - 4$ est-elle croissante ou décroissante ?",
+           type:"qcm", choix:["Croissante","Décroissante","Constante","On ne peut pas savoir"],
+           bonneReponseIdx:1, bonneReponse:"Décroissante",
+           correction:"$u_{n+1} - u_n = -4 < 0$ pour tout $n$ → strictement décroissante.", points:3},
+        ],
+        indices:["Si $u_{n+1} - u_n > 0$ : croissante. Si $< 0$ : décroissante."]
+      },
+      {
+        id:"suite_1_5", titre:"Suites — sens de variation (quotient)", niveau:"Moyen", points_total:10,
+        questions:[
+          {label:"1.", enonce:"$u_n = 3 \\\\times 2^n$. Calcule $\\\\dfrac{u_{n+1}}{u_n}$.",
+           type:"libre", correction:"$\\\\dfrac{u_{n+1}}{u_n} = \\\\dfrac{3 \\\\times 2^{n+1}}{3 \\\\times 2^n} = 2$", points:3},
+          {label:"2.", enonce:"$u_n = 3 \\\\times 2^n$ (termes positifs). Est-elle croissante ou décroissante ?",
+           type:"qcm", choix:["Croissante car le quotient est > 1","Décroissante car le quotient est > 1","Croissante car le quotient est < 1","Décroissante car le quotient est < 1"],
+           bonneReponseIdx:0, bonneReponse:"Croissante car le quotient est > 1",
+           correction:"$\\\\dfrac{u_{n+1}}{u_n} = 2 > 1$ et $u_n > 0$ → suite croissante.", points:3},
+          {label:"3.", enonce:"$u_n = 5 \\\\times (0{,}8)^n$. Le quotient $\\\\dfrac{u_{n+1}}{u_n}$ vaut ?",
+           type:"libre", correction:"$0{,}8$", points:2},
+          {label:"4.", enonce:"$u_n = 5 \\\\times (0{,}8)^n$ est-elle croissante ou décroissante ?",
+           type:"qcm", choix:["Croissante","Décroissante","Constante","On ne peut pas savoir"],
+           bonneReponseIdx:1, bonneReponse:"Décroissante",
+           correction:"$0 < \\\\dfrac{u_{n+1}}{u_n} = 0{,}8 < 1$ et $u_n > 0$ → décroissante.", points:2},
+        ],
+        indices:["Méthode quotient (termes positifs) : quotient $> 1$ → croissante ; quotient $< 1$ → décroissante"]
+      },
+      {
+        id:"suite_1_6", titre:"Suites bornées et suite de Fibonacci", niveau:"Difficile", points_total:12,
+        questions:[
+          {label:"1.", enonce:"$u_n = \\\\dfrac{3n-1}{n+2}$. Calcule $u_0$, $u_5$, $u_{10}$.",
+           type:"libre", correction:"$u_0 = -\\\\dfrac{1}{2}$, $u_5 = \\\\dfrac{14}{7}=2$, $u_{10} = \\\\dfrac{29}{12}$", points:3},
+          {label:"2.", enonce:"$u_n = \\\\dfrac{3n-1}{n+2}$. Vers quelle valeur semble tendre $u_n$ quand $n$ devient très grand ?",
+           type:"qcm", choix:["$0$","$1$","$3$","$+\\\\infty$"],
+           bonneReponseIdx:2, bonneReponse:"$3$",
+           correction:"Quand $n$ est très grand : $\\\\dfrac{3n}{n} = 3$. La suite tend vers $3$.", points:3},
+          {label:"3.", enonce:"Suite de Fibonacci : $u_0=1$, $u_1=1$, $u_{n+2}=u_n+u_{n+1}$. Calcule $u_2$, $u_3$, $u_4$.",
+           type:"libre", correction:"$u_2=2$, $u_3=3$, $u_4=5$", points:3},
+          {label:"4.", enonce:"La suite de Fibonacci est-elle bornée ?",
+           type:"qcm", choix:["Oui, elle est bornée","Non, elle tend vers $+\\\\infty$","Elle oscille indéfiniment","On ne peut pas savoir"],
+           bonneReponseIdx:1, bonneReponse:"Non, elle tend vers $+\\\\infty$",
+           correction:"Chaque terme est la somme des deux précédents → la suite est strictement croissante et non bornée.", points:3},
+        ],
+        indices:["Suite bornée : il existe $M$ et $m$ tels que $m \\\\leq u_n \\\\leq M$ pour tout $n$"]
+      },
+      {
+        id:"suite_1_7", titre:"Suites — Vrai/Faux et synthèse", niveau:"Difficile", points_total:12,
+        questions:[
+          {label:"1.", enonce:"Vrai ou Faux : toute suite croissante est minorée.",
+           type:"qcm", choix:["Vrai","Faux"],
+           bonneReponseIdx:1, bonneReponse:"Faux",
+           correction:"Faux. La suite $u_n = n$ est croissante mais non majorée. En revanche elle est bien minorée par $u_0$.", points:3},
+          {label:"2.", enonce:"Vrai ou Faux : si $u_{n+1} - u_n > 0$ pour tout $n$, alors $(u_n)$ est croissante.",
+           type:"qcm", choix:["Vrai","Faux"],
+           bonneReponseIdx:0, bonneReponse:"Vrai",
+           correction:"C'est exactement la définition d'une suite strictement croissante.", points:3},
+          {label:"3.", enonce:"Vrai ou Faux : une suite bornée est toujours convergente.",
+           type:"qcm", choix:["Vrai","Faux"],
+           bonneReponseIdx:1, bonneReponse:"Faux",
+           correction:"Faux. La suite $u_n = (-1)^n$ est bornée ($-1 \\\\leq u_n \\\\leq 1$) mais n'est pas convergente : elle oscille entre $-1$ et $1$.", points:3},
+          {label:"4.", enonce:"Vrai ou Faux : la suite $u_n = (-1)^n$ est bornée.",
+           type:"qcm", choix:["Vrai","Faux"],
+           bonneReponseIdx:0, bonneReponse:"Vrai",
+           correction:"$-1 \\\\leq (-1)^n \\\\leq 1$ pour tout $n$ → bornée entre $-1$ et $1$.", points:3},
+        ],
+        indices:["Bornée ≠ convergente. Croissante et bornée supérieurement → convergente (admis en 1ère)."]
+      },
+    ],
+
+  },
+
 };
 
 // ═══════════════════════════════════════
@@ -7002,6 +7135,7 @@ function renderNiveaux() {
     {id:'4eme',label:'4ème',desc:'Algèbre et géométrie'},
     {id:'3eme',label:'3ème',desc:'Préparation brevet'},
     {id:'2nde',label:'2nde',desc:'Nouveau programme BO 2026',badge:'BO 2026'},
+    {id:'1ere',label:'1ère',desc:'Spécialité Maths — Épreuve anticipée',badge:'Spé'},
   ];
   const content = document.getElementById('ex-content');
   content.innerHTML = `<div class="niveaux-nav-grid">
