@@ -5690,11 +5690,11 @@ const EXERCICES = {
           {label:"1a.", enonce:"$u_n = n^2 - 3n + 1$. Calcule $u_0$.",
            type:"libre", correction:"$u_0 = 0^2 - 3 \\times 0 + 1 = 1$", points:2},
           {label:"1b.", enonce:"$u_n = n^2 - 3n + 1$. Calcule $u_1$.",
-           type:"libre", correction:"$u_1 = 1 - 3 + 1 = -1$", points:2},
+           type:"libre", correction:"$u_1 = 1^2 - 3 \\times 1 + 1 = -1$", points:2},
           {label:"1c.", enonce:"$u_n = n^2 - 3n + 1$. Calcule $u_3$.",
            type:"libre", correction:"$u_3 = 9 - 9 + 1 = 1$", points:2},
           {label:"2a.", enonce:"$v_n = \\dfrac{2n+1}{n+2}$. Calcule $v_0$.",
-           type:"libre", correction:"$v_0 = \\dfrac{1}{2}$", points:2},
+           type:"libre", correction:"$v_0 = \\dfrac{1}{2} = 0{,}5$", points:2},
           {label:"2b.", enonce:"$v_n = \\dfrac{2n+1}{n+2}$. Calcule $v_3$.",
            type:"libre", correction:"$v_3 = \\dfrac{7}{5} = 1{,}4$", points:2},
         ],
@@ -5807,8 +5807,8 @@ const EXERCICES = {
         questions:[
           {label:"1.", enonce:"Vrai ou Faux : toute suite croissante est minorée.",
            type:"qcm", choix:["Vrai","Faux"],
-           bonneReponseIdx:1, bonneReponse:"Faux",
-           correction:"Faux. La suite $u_n = n$ est croissante mais non majorée. En revanche toute suite croissante est minorée par son premier terme $u_0$.", points:3},
+           bonneReponseIdx:0, bonneReponse:"Vrai",
+           correction:"Vrai. Si $(u_n)$ est croissante, alors $u_n \\geq u_0$ pour tout $n$. Donc $u_0$ est un minorant — la suite est bien minorée.", points:3},
           {label:"2.", enonce:"Vrai ou Faux : si $u_{n+1} - u_n > 0$ pour tout $n$, alors $(u_n)$ est strictement croissante.",
            type:"qcm", choix:["Vrai","Faux"],
            bonneReponseIdx:0, bonneReponse:"Vrai",
@@ -7450,93 +7450,146 @@ function verifierReponse(userRaw, correctionRaw) {
 
   const user = clean(userRaw.trim());
 
-  // ── Extraire TOUS les nombres de la correction ──
-  const extractNombres = (correction) => {
+  // ── Extraire le RÉSULTAT FINAL de la correction ──
+  // On cherche la dernière valeur numérique après le dernier = ou ≈
+  const extraireResultatFinal = (correction) => {
+    // Nettoyer le LaTeX
     const c = correction
-      .replace(/\\Rightarrow/g, ' ')
       .replace(/\$([^$]+)\$/g, ' $1 ')
-      .replace(/[{}\\]/g, ' ');
+      .replace(/\{,\}/g, '.')          // {,} → . (notation décimale française LaTeX)
+      .replace(/\\[a-zA-Z]+/g, ' ')
+      .replace(/[{}]/g, ' ')
+      .replace(/[−–]/g, '-');
 
+    // Chercher toutes les expressions après un =
+    const parties = c.split(/[=≈→]/);
+    const resultats = [];
+
+    for(const partie of parties) {
+      const p = partie.trim();
+      // Chercher un nombre à la fin de chaque partie
+      const matchFin = p.match(/(-?\d+(?:[.,]\d+)?)\s*$/);
+      if(matchFin) {
+        resultats.push(parseFloat(matchFin[1].replace(',','.')));
+      }
+      // Chercher aussi les fractions à la fin
+      const matchFrac = p.match(/(-?\d+)\s*\/\s*(\d+)\s*$/);
+      if(matchFrac) {
+        resultats.push(parseFloat(matchFrac[1]) / parseFloat(matchFrac[2]));
+      }
+    }
+
+    // Retourner le dernier résultat trouvé (= résultat final)
+    return resultats.length > 0 ? [resultats[resultats.length - 1]] : [];
+  };
+
+  // Extraire aussi tous les nombres pour les cas multi-réponses
+  const extraireTousNombres = (correction) => {
+    const c = correction
+      .replace(/\$([^$]+)\$/g, ' $1 ')
+      .replace(/\{,\}/g, '.')
+      .replace(/\\[a-zA-Z]+/g, ' ')
+      .replace(/[{}]/g, ' ')
+      .replace(/[−–]/g, '-');
     const nums = [];
-    // Nombres décimaux et entiers (y compris négatifs)
-    const matches = c.matchAll(/(?<![a-zA-Z])(-?\d+(?:[.,]\d+)?)(?![a-zA-Z])/g);
+    const matches = c.matchAll(/(?<![a-zA-Z/])(-?\d+(?:[.,]\d+)?)(?![a-zA-Z/\d])/g);
     for(const m of matches) nums.push(parseFloat(m[1].replace(',','.')));
     return [...new Set(nums)];
   };
 
-  const attendus = extractNombres(correctionRaw);
+  const resultatFinal = extraireResultatFinal(correctionRaw);
+  const tousNombres = extraireTousNombres(correctionRaw);
 
-  // ── 1. Réponse numérique unique ──
-  const userNum = parseFloat(user.replace(',','.'));
-  if(!isNaN(userNum)) {
-    for(const a of attendus) {
-      if(Math.abs(userNum - a) < 0.06) return true;
+  // ── 1. Fraction tapée par l'élève ──
+  const fracMatch = user.match(/^(-?\d+)\.?(\d*)\/(\d+)\.?(\d*)$/);
+  if(fracMatch) {
+    const fracVal = parseFloat(fracMatch[1] + (fracMatch[2] ? '.'+fracMatch[2] : ''))
+                  / parseFloat(fracMatch[3] + (fracMatch[4] ? '.'+fracMatch[4] : ''));
+    // Comparer avec le résultat final uniquement
+    for(const r of resultatFinal) {
+      if(Math.abs(fracVal - r) < 0.01) return true;
     }
-  }
-
-  // ── 2. Réponses multiples séparées par ; ou virgule ──
-  // Ex: "f(0)=-4 ; f(2)=0 ; f(-2)=0" → l'élève tape "-4;0;0" ou "-4 0 0"
-  const userParts = userRaw.split(/[;,\s]+/).map(s => parseFloat(clean(s))).filter(n => !isNaN(n));
-  if(userParts.length >= 2) {
-    // Vérifier que tous les nombres de l'élève sont dans les attendus
-    let matchCount = 0;
-    for(const u of userParts) {
-      for(const a of attendus) {
-        if(Math.abs(u - a) < 0.06) { matchCount++; break; }
+    // Aussi avec tous les nombres si résultat final non trouvé
+    if(resultatFinal.length === 0) {
+      for(const r of tousNombres) {
+        if(Math.abs(fracVal - r) < 0.01) return true;
       }
     }
-    if(matchCount >= userParts.length && matchCount >= 1) return true;
   }
 
-  // ── 3. Fraction ──
-  const fracMatch = user.match(/^(-?\d+)\/(\d+)$/);
-  if(fracMatch) {
-    const fracVal = parseFloat(fracMatch[1]) / parseFloat(fracMatch[2]);
-    for(const a of attendus) {
-      if(Math.abs(fracVal - a) < 0.01) return true;
+  // ── 2. Nombre unique tapé par l'élève ──
+  const userNum = parseFloat(user.replace(',','.'));
+  if(!isNaN(userNum)) {
+    // D'abord comparer avec le résultat final
+    for(const r of resultatFinal) {
+      if(Math.abs(userNum - r) < 0.06) return true;
+    }
+    // Si pas de résultat final clair, chercher dans tous les nombres
+    // MAIS seulement si la correction contient un seul nombre distinct
+    const nombresUniques = [...new Set(tousNombres.map(n => Math.round(n*100)/100))];
+    if(nombresUniques.length === 1) {
+      if(Math.abs(userNum - nombresUniques[0]) < 0.06) return true;
     }
   }
 
-  // ── 4. Texte normalisé (intervalles, lettres) ──
+  // ── 3. Réponses multiples (l'élève tape plusieurs valeurs) ──
+  const userParts = userRaw.split(/[;,\s]+/)
+    .map(s => s.trim())
+    .filter(s => s.length > 0);
+
+  if(userParts.length >= 2) {
+    // Convertir en nombres
+    const userNums = userParts.map(s => {
+      const f = s.match(/^(-?\d+)\/(\d+)$/);
+      if(f) return parseFloat(f[1])/parseFloat(f[2]);
+      return parseFloat(clean(s));
+    }).filter(n => !isNaN(n));
+
+    if(userNums.length >= 2) {
+      let matchCount = 0;
+      for(const u of userNums) {
+        for(const a of tousNombres) {
+          if(Math.abs(u - a) < 0.06) { matchCount++; break; }
+        }
+      }
+      // Tous les nombres de l'élève doivent être dans la correction
+      if(matchCount === userNums.length) return true;
+    }
+  }
+
+  // ── 4. Texte normalisé (intervalles, expressions) ──
   const corrClean = clean(correctionRaw
     .replace(/\$([^$]+)\$/g, '$1')
     .replace(/[\\{}]/g, '')
     .replace(/rightarrow/gi, '')
+    .replace(/Rightarrow/gi, '')
   );
+
+  // Texte exact
   if(user.length >= 2 && corrClean.includes(user)) return true;
 
-  // ── 4b. Intervalles — normalisation poussée ──
+  // ── 4b. Intervalles ──
   const normaliserIntervalle = s => s
     .replace(/\s/g, '')
-    .replace(/\+∞|\\+\\infty|\+infty|\+inf/gi, '+inf')
-    .replace(/−∞|-∞|\\-\\infty|-infty|-inf/gi, '-inf')
+    .replace(/\+∞|\+\\infty|\+infty|\+inf/gi, '+inf')
+    .replace(/−∞|-∞|-\\infty|-infty|-inf/gi, '-inf')
     .replace(/∞|\\infty|infty/gi, '+inf')
     .replace(/,/g, ';')
     .toLowerCase();
 
   const userN = normaliserIntervalle(userRaw);
   const corrN = normaliserIntervalle(correctionRaw);
-
   if(userN.length >= 3 && corrN.includes(userN)) return true;
-
-  // Vérifier aussi sans les crochets (l'élève tape "3;+inf" au lieu de "[3;+inf[")
   const userSansC = userN.replace(/[\[\]]/g,'');
   const corrSansC = corrN.replace(/[\[\]]/g,'');
   if(userSansC.length >= 3 && corrSansC.includes(userSansC)) return true;
 
-  // ── 5. Oui / Non ──
-  if(['oui','yes','vrai','true'].includes(user)) {
-    if(corrClean.includes('oui') || corrClean.includes('✓') || corrClean.includes('vrai')) return true;
-  }
+  // ── 5. Oui / Non / Vrai / Faux ──
   if(['non','no','faux','false'].includes(user)) {
-    if(corrClean.includes('non') || corrClean.includes('faux')) return true;
+    if(corrClean.match(/\bfaux\b/) || corrClean.match(/\bnon\b/)) return true;
   }
-
-  // ── 6. Intervalle : [2;5] ou ]2;+inf[ ──
-  if(user.includes('[') || user.includes(']') || user.includes('inf')) {
-    const userI = user.replace(/\s/g,'').replace('infty','inf').replace('+inf','inf');
-    const corrI = corrClean.replace(/\s/g,'').replace('infty','inf').replace('+inf','inf');
-    if(corrI.includes(userI) || userI === corrI) return true;
+  if(['oui','yes','vrai','true'].includes(user)) {
+    if(corrClean.match(/\bvrai\b/) || corrClean.match(/\boui\b/) || corrClean.includes('✓')) return true;
   }
 
   return false;
