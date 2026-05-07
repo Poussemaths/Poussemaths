@@ -5897,8 +5897,10 @@ const EXERCICES = {
            type:"qcm", choix:["$n \\geq 10$","$n \\geq 9$","$n \\geq 11$","$n \\geq 8$"],
            bonneReponseIdx:0, bonneReponse:"$n \\geq 10$",
            correction:"$u_{10} = 0{,}0625 < 0{,}1$ et $u_9 = 0{,}125 > 0{,}1$. Donc à partir de $n = 10$.", points:2},
-          {label:"6.", enonce:"$(u_n)$ géométrique, $q = \\dfrac{1}{2}$, $u_0 = 64$. Calcule $S = u_0 + u_1 + \\cdots + u_{10}$.",
-           type:"libre", correction:"$S = 64 \\times \\dfrac{1-(0{,}5)^{11}}{1-0{,}5} \\approx 128 \\times (1 - 0{,}00049) \\approx 127{,}9$", points:2},
+          {label:"6.", enonce:"$(u_n)$ géométrique, $q = \\dfrac{1}{2}$, $u_0 = 64$. Quelle est la valeur exacte de $S = u_0 + u_1 + \\cdots + u_{10}$ ?",
+           type:"qcm", choix:["$S = 64 \\times \\dfrac{1-(1/2)^{11}}{1/2} = \\dfrac{2047}{16}$","$S = 128$","$S = 64$","$S = 127$"],
+           bonneReponseIdx:0, bonneReponse:"$S = 64 \\times \\dfrac{1-(1/2)^{11}}{1/2} = \\dfrac{2047}{16}$",
+           correction:"$S = 64 \\times \\dfrac{1-(1/2)^{11}}{1-1/2} = 128 \\times \\left(1 - \\dfrac{1}{2048}\\right) = \\dfrac{2047}{16} \\approx 127{,}9$. Attention : $128$ est la limite mais pas la somme exacte.", points:2},
         ],
         indices:["Suite géométrique : $u_n = u_0 \\times q^n$. Somme : $S_n = u_0 \\times \\dfrac{1-q^{n+1}}{1-q}$ si $q \\neq 1$"]
       },
@@ -5931,7 +5933,7 @@ const EXERCICES = {
            type:"qcm", choix:["Oui, de raison $1{,}03$","Oui, de raison $1000$","Non","Oui, de raison $0{,}03$"],
            bonneReponseIdx:0, bonneReponse:"Oui, de raison $1{,}03$",
            correction:"$v_{n+1} = 1{,}03u_n + 1000 + \\dfrac{1000}{0{,}03} = 1{,}03(u_n + \\dfrac{1000}{0{,}03}) = 1{,}03 v_n$.", points:3},
-          {label:"3.", enonce:"$\\dfrac{1000}{0{,}03} \\approx 33\\,333$€. Calcule $v_0 = u_0 + 33\\,333$.",
+          {label:"3.", enonce:"$\\dfrac{1000}{0{,}03} \\approx 33\\,333$€. Calcule $v_0 = u_0 + 33\\,333$ avec $u_0 = 10\\,000$.",
            type:"libre", correction:"$v_0 = 10\\,000 + 33\\,333 = 43\\,333$", points:2},
           {label:"4.", enonce:"$(v_n)$ géométrique, $q = 1{,}03$, $v_0 = 43\\,333$. Calcule $v_{10}$. ($(1{,}03)^{10} \\approx 1{,}344$)",
            type:"libre", correction:"$v_{10} = 43\\,333 \\times 1{,}344 \\approx 58\\,240$", points:2},
@@ -7559,6 +7561,13 @@ function afficherCorrection(correct, q) {
 //  MOTEUR DE VÉRIFICATION INTELLIGENT
 // ═══════════════════════════════════════
 function verifierReponse(userRaw, correctionRaw) {
+  // Normaliser : supprimer les espaces utilisés comme séparateurs de milliers
+  // Ex: "210 000" → "210000", "1 717" → "1717"
+  const supprimerEspacesMilliers = s => s.replace(/(\d)\s+(\d)/g, '$1$2').replace(/(\d)\s+(\d)/g, '$1$2');
+
+  const userNorm = supprimerEspacesMilliers(userRaw.trim());
+  const corrNorm = supprimerEspacesMilliers(correctionRaw);
+
   const clean = s => s
     .replace(/\s+/g, '')
     .replace(/,/g, '.')
@@ -7568,7 +7577,7 @@ function verifierReponse(userRaw, correctionRaw) {
     .replace(/[−–]/g, '-')
     .toLowerCase();
 
-  const user = clean(userRaw.trim());
+  const user = clean(userNorm);
 
   // ── Extraire le RÉSULTAT FINAL de la correction ──
   // On cherche la dernière valeur numérique après le dernier = ou ≈
@@ -7576,10 +7585,12 @@ function verifierReponse(userRaw, correctionRaw) {
     // Nettoyer le LaTeX
     const c = correction
       .replace(/\$([^$]+)\$/g, ' $1 ')
-      .replace(/\{,\}/g, '.')          // {,} → . (notation décimale française LaTeX)
+      .replace(/\{,\}/g, '.')
       .replace(/\\[a-zA-Z]+/g, ' ')
       .replace(/[{}]/g, ' ')
-      .replace(/[−–]/g, '-');
+      .replace(/[−–]/g, '-')
+      .replace(/(\d)\s+(\d)/g, '$1$2')  // supprimer espaces milliers
+      .replace(/(\d)\s+(\d)/g, '$1$2'); // double passe pour "1 000 000"
 
     // Chercher toutes les expressions après un =
     const parties = c.split(/[=≈→]/);
@@ -7617,38 +7628,39 @@ function verifierReponse(userRaw, correctionRaw) {
     return [...new Set(nums)];
   };
 
-  const resultatFinal = extraireResultatFinal(correctionRaw);
-  const tousNombres = extraireTousNombres(correctionRaw);
+  const resultatFinal = extraireResultatFinal(corrNorm);
+  const tousNombres = extraireTousNombres(corrNorm);
 
   // ── 1. Fraction tapée par l'élève ──
   const fracMatch = user.match(/^(-?\d+)\.?(\d*)\/(\d+)\.?(\d*)$/);
   if(fracMatch) {
-    const fracVal = parseFloat(fracMatch[1] + (fracMatch[2] ? '.'+fracMatch[2] : ''))
-                  / parseFloat(fracMatch[3] + (fracMatch[4] ? '.'+fracMatch[4] : ''));
-    // Comparer avec le résultat final uniquement
+    const num = parseFloat(fracMatch[1] + (fracMatch[2] ? '.'+fracMatch[2] : ''));
+    const den = parseFloat(fracMatch[3] + (fracMatch[4] ? '.'+fracMatch[4] : ''));
+    if(den === 0) return false;
+    const fracVal = num / den;
+
+    // Comparer UNIQUEMENT avec le résultat final — jamais avec tous les nombres
     for(const r of resultatFinal) {
-      if(Math.abs(fracVal - r) < 0.01) return true;
+      // Tolérance 0.001 pour les fractions exactes, 1% pour les valeurs approchées
+      const tolerance = 0.001;
+      if(Math.abs(fracVal - r) < tolerance) return true;
     }
-    // Aussi avec tous les nombres si résultat final non trouvé
-    if(resultatFinal.length === 0) {
-      for(const r of tousNombres) {
-        if(Math.abs(fracVal - r) < 0.01) return true;
-      }
-    }
+    // Si pas de résultat final : refuser — la correction doit être améliorée
+    return false;
   }
 
   // ── 2. Nombre unique tapé par l'élève ──
   const userNum = parseFloat(user.replace(',','.'));
   if(!isNaN(userNum)) {
-    // D'abord comparer avec le résultat final
+    // Comparer avec le résultat final uniquement
     for(const r of resultatFinal) {
-      if(Math.abs(userNum - r) < 0.06) return true;
+      const tolerance = 0.001;
+      if(Math.abs(userNum - r) < tolerance) return true;
     }
-    // Si pas de résultat final clair, chercher dans tous les nombres
-    // MAIS seulement si la correction contient un seul nombre distinct
+    // Si résultat final absent ET un seul nombre dans la correction → accepter
     const nombresUniques = [...new Set(tousNombres.map(n => Math.round(n*100)/100))];
-    if(nombresUniques.length === 1) {
-      if(Math.abs(userNum - nombresUniques[0]) < 0.06) return true;
+    if(resultatFinal.length === 0 && nombresUniques.length === 1) {
+      if(Math.abs(userNum - nombresUniques[0]) < 0.001) return true;
     }
   }
 
@@ -7669,7 +7681,7 @@ function verifierReponse(userRaw, correctionRaw) {
       let matchCount = 0;
       for(const u of userNums) {
         for(const a of tousNombres) {
-          if(Math.abs(u - a) < 0.06) { matchCount++; break; }
+          if(Math.abs(u - a) < 0.001) { matchCount++; break; }
         }
       }
       // Tous les nombres de l'élève doivent être dans la correction
