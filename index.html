@@ -6495,14 +6495,11 @@ async function renderEspaceEleve() {
 }
 
 // ── Accès Espace Prof protégé par mot de passe ──
-function accesProf() {
-  // Déjà connecté comme prof
+async function accesProf() {
   if(sessionStorage.getItem('prof_auth') === 'ok') {
     showPage('prof');
     return;
   }
-
-  // Afficher modal login prof
   document.getElementById('modal-prof-login')?.remove();
   const modal = document.createElement('div');
   modal.id = 'modal-prof-login';
@@ -6515,13 +6512,14 @@ function accesProf() {
         Accès réservé aux enseignants Poussemaths
       </p>
       <div class="auth-field">
-        <label>Identifiant</label>
-        <input type="text" id="prof-login-id" placeholder="Votre identifiant" autocomplete="username">
+        <label>Email</label>
+        <input type="email" id="prof-login-id" placeholder="votre@email.com" autocomplete="email">
       </div>
       <div class="auth-field">
         <label>Mot de passe</label>
-        <input type="password" id="prof-login-pwd" placeholder="••••••••" 
-          onkeydown="if(event.key==='Enter') validerLoginProf()" autocomplete="current-password">
+        <input type="password" id="prof-login-pwd" placeholder="••••••••"
+          onkeydown="if(event.key==='Enter') validerLoginProf()"
+          autocomplete="current-password">
       </div>
       <div id="prof-login-error" class="auth-error" style="display:none"></div>
       <button class="auth-btn" onclick="validerLoginProf()">Accéder →</button>
@@ -6541,33 +6539,47 @@ function fermerLoginProf() {
   document.getElementById('modal-prof-login')?.remove();
 }
 
-function validerLoginProf() {
-  const id  = document.getElementById('prof-login-id').value.trim();
+async function validerLoginProf() {
+  if(!supabaseClient) return;
+  const email = document.getElementById('prof-login-id').value.trim();
   const pwd = document.getElementById('prof-login-pwd').value;
   const err = document.getElementById('prof-login-error');
 
-  // Identifiants autorisés — à stocker côté serveur plus tard
-  const PROFS = [
-    { login: 'j.rahel',    pwd: 'Hugo2026!' },
-    { login: 'jamalrahel', pwd: 'Hugo2026!' },
-    { login: 'charmkech',  pwd: 'Poussemaths2026!' },
-  ];
-
-  const ok = PROFS.find(p => p.login === id && p.pwd === pwd);
-
-  if(ok) {
-    sessionStorage.setItem('prof_auth', 'ok');
-    sessionStorage.setItem('prof_login', id);
-    fermerLoginProf();
-    showPage('prof');
-    showToast('Bienvenue dans l\'espace professeur 👨‍🏫');
-  } else {
-    err.textContent = 'Identifiant ou mot de passe incorrect.';
+  if(!email || !pwd) {
+    err.textContent = 'Remplis tous les champs.';
     err.style.display = 'block';
-    document.getElementById('prof-login-pwd').value = '';
-    document.getElementById('prof-login-pwd').focus();
-    setTimeout(() => err.style.display = 'none', 3000);
+    return;
   }
+
+  const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password: pwd });
+  if(error) {
+    err.textContent = 'Email ou mot de passe incorrect.';
+    err.style.display = 'block';
+    setTimeout(() => err.style.display = 'none', 3000);
+    return;
+  }
+
+  const { data: prof, error: errProf } = await supabaseClient
+    .from('profs_autorises')
+    .select('*')
+    .eq('user_id', data.user.id)
+    .eq('actif', true)
+    .single();
+
+  if(errProf || !prof) {
+    await supabaseClient.auth.signOut();
+    err.textContent = 'Accès non autorisé. Contactez l\'administrateur.';
+    err.style.display = 'block';
+    return;
+  }
+
+  sessionStorage.setItem('prof_auth', 'ok');
+  sessionStorage.setItem('prof_nom', prof.nom);
+  sessionStorage.setItem('prof_email', prof.email);
+
+  fermerLoginProf();
+  showPage('prof');
+  showToast(`Bienvenue ${prof.nom} 👨‍🏫`);
 }
 
 // Raccourci clavier secret : Ctrl+Shift+P → Espace Prof
