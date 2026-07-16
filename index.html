@@ -4311,6 +4311,18 @@ const EXERCICES = {
         indices:["Ordre : Parenthèses → Puissances → × et ÷ → + et −"]
       },
       {
+        id:"nb_6_genere_priorites", titre:"Priorités opératoires — entraînement infini", niveau:"Facile", points_total:5,
+        genere: true, templateId: "priorites_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["Ordre : Parenthèses → × et ÷ → + et −"]
+      },
+      {
         id:"nb_6_4", titre:"Fractions — comprendre et calculer", niveau:"Moyen", points_total:10,
         questions:[
           {label:"a)", enonce:"Écris $\\dfrac{3}{4}$ en nombre décimal.",
@@ -4453,6 +4465,18 @@ const EXERCICES = {
            type:"qcm", choix:["$7$","$9$","$12$","$15$"],
            bonneReponseIdx:1, bonneReponse:"$9$",
            correction:"$60 \\times 0{,}15 = 9$", points:2},
+        ],
+        indices:["$p\\%$ de $x = x \\times \\dfrac{p}{100}$"]
+      },
+      {
+        id:"prop_6_genere_pourcentage", titre:"Pourcentages — entraînement infini", niveau:"Facile", points_total:5,
+        genere: true, templateId: "pourcentage_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
         ],
         indices:["$p\\%$ de $x = x \\times \\dfrac{p}{100}$"]
       },
@@ -7430,8 +7454,16 @@ function texToHtml(str) {
 //  EXERCICES GÉNÉRÉS (templates paramétrés, correction côté serveur)
 // ═══════════════════════════════════════
 const EDGE_FUNCTIONS_BASE = SUPABASE_URL + '/functions/v1';
-const TEMPLATES_GENERATEUR = { equation_1er_degre_v1: 'exo-equation-generer' };
-const TEMPLATES_VALIDATEUR = { equation_1er_degre_v1: 'exo-equation-valider' };
+const TEMPLATES_GENERATEUR = {
+  equation_1er_degre_v1: 'exo-equation-generer',
+  pourcentage_v1: 'exo-pourcentage-generer',
+  priorites_v1: 'exo-priorites-generer',
+};
+const TEMPLATES_VALIDATEUR = {
+  equation_1er_degre_v1: 'exo-equation-valider',
+  pourcentage_v1: 'exo-pourcentage-valider',
+  priorites_v1: 'exo-priorites-valider',
+};
 let currentGenTokens = [];
 
 async function appelEdgeFunction(slug, method, body) {

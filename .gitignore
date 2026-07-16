@@ -1,0 +1,19 @@
+# Secrets
+supabase .txt
+.env
+.env.*
+
+# Historique de versions manuelles (volumineux, pas destiné à git)
+Historiques/
+
+# Contexte perso/business — le dépôt est public
+CLAUDE.md
+ROADMAP.md
+Poussemaths_Suivi.xlsx
+A corriger.rtf
+poussemaths_final*.html
+poussemaths_index*.html
+
+# OS
+.DS_Store
+Thumbs.db
