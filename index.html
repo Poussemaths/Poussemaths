@@ -781,6 +781,12 @@ nav {
 .cm-theme-btn.selected { border-color:var(--bleu); background:var(--bleu-doux); color:var(--bleu); font-weight:700; }
 .cm-theme-emoji { font-size:1.5rem; display:block; margin-bottom:4px; }
 .cm-theme-name { font-size:12px; font-weight:600; }
+.cm-mode-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:1.5rem; }
+.cm-mode-btn { padding:14px; border:1.5px solid var(--bordure); border-radius:var(--r); cursor:pointer; background:var(--bg); transition:all 0.15s; }
+.cm-mode-btn:hover { border-color:#0D9488; }
+.cm-mode-btn.selected { border-color:#0D9488; background:#F0FDFA; }
+.cm-mode-titre { font-size:14px; font-weight:700; color:var(--texte); margin-bottom:4px; }
+.cm-mode-desc { font-size:12px; color:var(--muted); line-height:1.4; }
 .cm-settings { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1.5rem; }
 .cm-setting label { display:block; font-size:12px; font-weight:700; color:var(--muted); margin-bottom:6px; text-transform:uppercase; letter-spacing:.5px; }
 .cm-setting select { width:100%; padding:10px; border:1.5px solid var(--bordure); border-radius:var(--r); font-size:14px; background:var(--bg); font-family:'DM Sans',sans-serif; }
@@ -1181,6 +1187,7 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
     <li><button class="nav-tab" onclick="accesProf()" id="btn-nav-prof">Espace Prof</button></li>
   </ul>
   <div class="nav-right">
+    <button class="btn-nav-outline" onclick="ouvrirRejoindreCM()">📱 Rejoindre</button>
     <button class="btn-nav-outline" onclick="showPage('eleve')">Se connecter</button>
     <button class="btn-nav-primary" onclick="showPage('exercices')">Commencer →</button>
     <button class="nav-hamburger" id="hamburger" onclick="toggleMenu()">
@@ -1191,6 +1198,7 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
 
 <!-- MENU MOBILE -->
 <div class="mobile-menu" id="mobile-menu">
+  <button onclick="ouvrirRejoindreCM();toggleMenu()">📱 Rejoindre un calcul mental</button>
   <button onclick="showPage('accueil');toggleMenu()">🏠 Accueil</button>
   <button onclick="showPage('exercices');toggleMenu()">📝 Exercices</button>
   <button onclick="showPage('parcours');toggleMenu()">🎯 Parcours noté</button>
@@ -1616,6 +1624,7 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
 
 <!-- ═══ PROJECTION CALCUL MENTAL (plein écran) ═══ -->
 <div id="cm-projection" style="display:none;position:fixed;inset:0;background:#1C1E26;z-index:9999;flex-direction:column;align-items:center;justify-content:center;cursor:pointer" onclick="cmProchaine()">
+  <div style="position:absolute;top:20px;left:24px;color:#5EEAD4;font-weight:700;font-size:1rem" id="cm-code-session"></div>
   <div style="position:absolute;top:20px;right:24px;display:flex;gap:12px;align-items:center">
     <div id="cm-chrono" style="font-size:2.5rem;font-weight:800;color:white;font-family:'Fraunces',serif"></div>
     <button onclick="event.stopPropagation();fermerProjection()" style="background:rgba(255,255,255,0.15);border:none;color:white;padding:8px 16px;border-radius:8px;cursor:pointer;font-size:14px">✕ Quitter</button>
@@ -1623,7 +1632,58 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
   <div id="cm-num-question" style="font-size:1.2rem;color:rgba(255,255,255,0.4);margin-bottom:2rem"></div>
   <div id="cm-enonce-proj" style="font-size:clamp(2rem,6vw,5rem);font-weight:800;color:white;text-align:center;padding:0 2rem;font-family:'Fraunces',serif;line-height:1.2"></div>
   <div id="cm-reponse-proj" style="font-size:2rem;color:#4A90D9;margin-top:2rem;font-weight:700;min-height:3rem"></div>
+  <div id="cm-dashboard-prof" style="position:absolute;bottom:56px;color:#5EEAD4;font-size:15px;font-weight:600"></div>
   <div style="position:absolute;bottom:24px;color:rgba(255,255,255,0.3);font-size:13px">Clic ou espace → question suivante · Entrée → afficher la réponse</div>
+</div>
+
+<!-- ═══ REJOINDRE UN CALCUL MENTAL (élève) ═══ -->
+<div class="modal-overlay" id="rejoindre-cm-overlay" onclick="fermerRejoindreCM(event)">
+  <div class="modal" style="max-width:400px">
+    <div class="modal-header">
+      <span class="modal-header-title">📱 Rejoindre un calcul mental</span>
+      <button class="modal-close" onclick="fermerRejoindreCM()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="cm-setting" style="margin-bottom:1rem">
+        <label>Code de session</label>
+        <input type="text" id="cm-join-code" maxlength="4" inputmode="numeric" placeholder="4242"
+          style="width:100%;padding:14px;border:1.5px solid var(--bordure);border-radius:var(--r);font-size:24px;text-align:center;letter-spacing:4px;font-weight:800">
+      </div>
+      <div class="cm-setting" style="margin-bottom:1rem">
+        <label>Ton prénom</label>
+        <input type="text" id="cm-join-prenom" placeholder="Ton prénom"
+          style="width:100%;padding:12px;border:1.5px solid var(--bordure);border-radius:var(--r);font-size:15px">
+      </div>
+      <div id="cm-join-error" style="color:var(--rouge);font-size:13px;margin-bottom:1rem;display:none"></div>
+      <button class="cm-launch-btn" onclick="rejoindreSessionCM()">Rejoindre →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ VUE ÉLÈVE — CALCUL MENTAL CONNECTÉ (plein écran) ═══ -->
+<div id="cm-participant-view" style="display:none;position:fixed;inset:0;background:#1C1E26;z-index:9999;flex-direction:column;align-items:center;justify-content:center;padding:1.5rem">
+  <div style="position:absolute;top:20px;right:24px">
+    <button onclick="quitterParticipationCM()" style="background:rgba(255,255,255,0.15);border:none;color:white;padding:8px 16px;border-radius:8px;cursor:pointer;font-size:14px">✕ Quitter</button>
+  </div>
+  <div id="cm-part-attente" style="color:white;text-align:center">
+    <div style="font-size:1.3rem;font-weight:700;margin-bottom:8px">En attente du prof…</div>
+    <div style="color:rgba(255,255,255,0.5);font-size:14px">La première question va s'afficher ici dès que la session démarre.</div>
+  </div>
+  <div id="cm-part-question" style="display:none;text-align:center;width:100%;max-width:480px">
+    <div id="cm-part-num" style="font-size:1rem;color:rgba(255,255,255,0.4);margin-bottom:1.5rem"></div>
+    <div id="cm-part-enonce" style="font-size:clamp(1.6rem,7vw,2.8rem);font-weight:800;color:white;margin-bottom:2rem;font-family:'Fraunces',serif"></div>
+    <input type="text" id="cm-part-input" inputmode="decimal" placeholder="Ta réponse..."
+      style="width:100%;padding:16px;border-radius:var(--r);border:none;font-size:22px;text-align:center;margin-bottom:1rem"
+      onkeydown="if(event.key==='Enter')soumettreReponseCM()">
+    <button class="cm-launch-btn" onclick="soumettreReponseCM()" id="cm-part-btn">Valider →</button>
+    <div id="cm-part-feedback" style="margin-top:1.5rem;font-size:1.4rem;font-weight:800;min-height:2rem"></div>
+  </div>
+  <div id="cm-part-fin" style="display:none;color:white;text-align:center">
+    <div style="font-size:2.5rem;margin-bottom:1rem">🏁</div>
+    <div style="font-size:1.4rem;font-weight:800;margin-bottom:8px">Terminé !</div>
+    <div id="cm-part-score" style="font-size:1.1rem;color:#5EEAD4"></div>
+    <button class="cm-launch-btn" style="margin-top:1.5rem" onclick="quitterParticipationCM()">Fermer</button>
+  </div>
 </div>
 
 <!-- ═══════════════════════════════════════
@@ -6619,6 +6679,7 @@ async function validerLoginProf() {
   sessionStorage.setItem('prof_auth', 'ok');
   sessionStorage.setItem('prof_nom', prof.nom);
   sessionStorage.setItem('prof_email', prof.email);
+  sessionStorage.setItem('prof_user_id', data.user.id);
 
   fermerLoginProf();
   showPage('prof');
@@ -7069,11 +7130,15 @@ function genererPDF() {
 //  CALCUL MENTAL
 // ═══════════════════════════════════════
 
-let cmConfig = { theme: null, chrono: 5, nb: 10 };
+let cmConfig = { themes: [], chrono: 5, nb: 10, mode: 'projection' };
 let cmQuestions = [];
 let cmIndex = 0;
 let cmTimer = null;
 let cmReponseVisible = false;
+let cmSessionId = null;
+let cmSessionCode = null;
+let cmChannel = null;
+let cmDashboard = {};
 
 const CM_THEMES = {
   'Tables de multiplication': {
@@ -7167,14 +7232,27 @@ function renderCMConfig() {
   const body = document.getElementById('cm-modal-body');
   body.innerHTML = `
     <div class="pdf-section">
-      <div class="pdf-section-title">🎯 Choisir un thème</div>
+      <div class="pdf-section-title">🎯 Choisir un ou plusieurs thèmes</div>
       <div class="cm-themes-grid">
         ${Object.entries(CM_THEMES).map(([nom, data]) => `
-          <div class="cm-theme-btn ${cmConfig.theme===nom?'selected':''}" onclick="selectCMTheme('${nom}', this)">
+          <div class="cm-theme-btn ${cmConfig.themes.includes(nom)?'selected':''}" onclick="toggleCMTheme('${nom}', this)">
             <span class="cm-theme-emoji">${data.emoji}</span>
             <span class="cm-theme-name">${nom}</span>
           </div>
         `).join('')}
+      </div>
+    </div>
+    <div class="pdf-section">
+      <div class="pdf-section-title">📡 Mode</div>
+      <div class="cm-mode-grid">
+        <div class="cm-mode-btn ${cmConfig.mode==='projection'?'selected':''}" onclick="setCMMode('projection')">
+          <div class="cm-mode-titre">🖥️ Projection seule</div>
+          <div class="cm-mode-desc">Affiché au tableau, la classe répond à l'oral. Idéal pour un démarrage rapide.</div>
+        </div>
+        <div class="cm-mode-btn ${cmConfig.mode==='connecte'?'selected':''}" onclick="setCMMode('connecte')">
+          <div class="cm-mode-titre">📱 Connecté</div>
+          <div class="cm-mode-desc">Chaque élève répond en privé sur son appareil. Tu vois les résultats en direct.</div>
+        </div>
       </div>
     </div>
     <div class="cm-settings">
@@ -7200,25 +7278,99 @@ function renderCMConfig() {
       </div>
     </div>
     <button class="cm-launch-btn" onclick="lancerCalcMental()">
-      🚀 Lancer et projeter
+      🚀 Lancer${cmConfig.mode==='connecte'?' la session':' et projeter'}
     </button>
   `;
 }
 
-function selectCMTheme(nom, el) {
-  cmConfig.theme = nom;
-  document.querySelectorAll('.cm-theme-btn').forEach(b => b.classList.remove('selected'));
-  el.classList.add('selected');
+function toggleCMTheme(nom, el) {
+  const idx = cmConfig.themes.indexOf(nom);
+  if(idx === -1) cmConfig.themes.push(nom);
+  else cmConfig.themes.splice(idx, 1);
+  el.classList.toggle('selected');
 }
 
-function lancerCalcMental() {
-  if(!cmConfig.theme) { alert('Choisis un thème d\'abord'); return; }
-  const gen = CM_THEMES[cmConfig.theme].gen;
-  cmQuestions = Array.from({length: cmConfig.nb}, () => gen());
+function setCMMode(mode) {
+  cmConfig.mode = mode;
+  renderCMConfig();
+}
+
+function genererQuestionCM() {
+  const nom = cmConfig.themes[Math.floor(Math.random() * cmConfig.themes.length)];
+  return { theme: nom, ...CM_THEMES[nom].gen() };
+}
+
+async function lancerCalcMental() {
+  if(!cmConfig.themes.length) { alert('Choisis au moins un thème d\'abord'); return; }
+  cmQuestions = Array.from({length: cmConfig.nb}, () => genererQuestionCM());
   cmIndex = 0;
   cmReponseVisible = false;
+  cmDashboard = {};
+
+  if(cmConfig.mode === 'connecte') {
+    const ok = await creerSessionCM();
+    if(!ok) { alert('Impossible de créer la session. Vérifie ta connexion.'); return; }
+  } else {
+    cmSessionId = null; cmSessionCode = null;
+  }
+
   document.getElementById('cm-overlay').style.display = 'none';
   afficherQuestionCM();
+}
+
+// ── MODE CONNECTÉ : session live avec les élèves ──
+async function creerSessionCM() {
+  const profUserId = sessionStorage.getItem('prof_user_id');
+  if(!supabaseClient || !profUserId) return false;
+  const code = String(Math.floor(1000 + Math.random() * 9000));
+  const { data, error } = await supabaseClient
+    .from('sessions_calcul_mental')
+    .insert({
+      code, prof_id: profUserId,
+      themes: cmConfig.themes, chrono: cmConfig.chrono, nb_questions: cmConfig.nb,
+    })
+    .select('id, code')
+    .single();
+  if(error || !data) { console.error(error); return false; }
+  cmSessionId = data.id;
+  cmSessionCode = data.code;
+
+  cmChannel = supabaseClient.channel(`cm-session-${cmSessionCode}`);
+  cmChannel
+    .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'reponses_session', filter: `session_id=eq.${cmSessionId}` },
+      (payload) => enregistrerReponseDashboard(payload.new))
+    .subscribe();
+
+  return true;
+}
+
+function enregistrerReponseDashboard(row) {
+  if(row.question_index !== cmIndex) return;
+  const q = cmQuestions[cmIndex];
+  const val = parseFloat(String(row.reponse).trim().replace(',', '.'));
+  const correct = !isNaN(val) && Math.abs(val - q.r) < 0.01;
+  if(!cmDashboard[cmIndex]) cmDashboard[cmIndex] = { total: 0, correct: 0 };
+  cmDashboard[cmIndex].total++;
+  if(correct) cmDashboard[cmIndex].correct++;
+  majAffichageDashboardCM();
+}
+
+function majAffichageDashboardCM() {
+  const el = document.getElementById('cm-dashboard-prof');
+  if(!el) return;
+  const d = cmDashboard[cmIndex] || { total: 0, correct: 0 };
+  const pct = d.total ? Math.round(d.correct / d.total * 100) : 0;
+  el.innerHTML = `${d.total} réponse${d.total>1?'s':''} · ${pct}% correct`;
+}
+
+async function diffuserEtatCM(statut) {
+  if(!cmChannel || !cmSessionId) return;
+  const q = cmQuestions[cmIndex];
+  cmChannel.send({
+    type: 'broadcast', event: 'etat',
+    payload: { index: cmIndex, statut, enonce: q ? q.q : null, reponse: statut === 'reponse_visible' ? q.r : null },
+  });
+  await supabaseClient.from('sessions_calcul_mental').update({ question_index: cmIndex, statut }).eq('id', cmSessionId);
 }
 
 function afficherQuestionCM() {
@@ -7232,9 +7384,13 @@ function afficherQuestionCM() {
   cmReponseVisible = false;
 
   const q = cmQuestions[cmIndex];
-  document.getElementById('cm-num-question').textContent = `Question ${cmIndex+1} / ${cmQuestions.length} — ${cmConfig.theme}`;
+  document.getElementById('cm-num-question').textContent = `Question ${cmIndex+1} / ${cmQuestions.length} — ${q.theme}`;
   document.getElementById('cm-enonce-proj').textContent = q.q;
   document.getElementById('cm-reponse-proj').textContent = '';
+  document.getElementById('cm-code-session').textContent = cmSessionCode ? `Code : ${cmSessionCode}` : '';
+  document.getElementById('cm-dashboard-prof').textContent = '';
+
+  if(cmConfig.mode === 'connecte') diffuserEtatCM('en_cours');
 
   // Chrono
   let timeLeft = cmConfig.chrono;
@@ -7257,6 +7413,7 @@ function afficherReponseCM() {
   const q = cmQuestions[cmIndex];
   document.getElementById('cm-reponse-proj').textContent = `→ ${q.r}`;
   document.getElementById('cm-chrono').textContent = '✓';
+  if(cmConfig.mode === 'connecte') diffuserEtatCM('reponse_visible');
 }
 
 function cmProchaine() {
@@ -7271,6 +7428,11 @@ function cmProchaine() {
 function fermerProjection() {
   clearInterval(cmTimer);
   document.getElementById('cm-projection').style.display = 'none';
+  if(cmConfig.mode === 'connecte' && cmSessionId) {
+    diffuserEtatCM('termine');
+    if(cmChannel) { supabaseClient.removeChannel(cmChannel); cmChannel = null; }
+    cmSessionId = null; cmSessionCode = null;
+  }
 }
 
 // Raccourcis clavier pour la projection
@@ -7283,6 +7445,145 @@ document.addEventListener('keydown', (e) => {
     e.preventDefault();
   }
 });
+
+// ═══════════════════════════════════════
+//  CALCUL MENTAL CONNECTÉ — VUE ÉLÈVE
+// ═══════════════════════════════════════
+let cmPartSessionId = null;
+let cmPartParticipantId = null;
+let cmPartChannel = null;
+let cmPartIndex = -1;
+let cmPartAnswered = false;
+let cmPartHistorique = [];
+
+function ouvrirRejoindreCM() {
+  const params = new URLSearchParams(window.location.search);
+  const codePrerempli = params.get('rejoindre');
+  document.getElementById('cm-join-error').style.display = 'none';
+  document.getElementById('cm-join-code').value = codePrerempli || '';
+  document.getElementById('cm-join-prenom').value = '';
+  document.getElementById('rejoindre-cm-overlay').classList.add('open');
+}
+
+function fermerRejoindreCM(e) {
+  if(!e || e.target === document.getElementById('rejoindre-cm-overlay')) {
+    document.getElementById('rejoindre-cm-overlay').classList.remove('open');
+  }
+}
+
+async function rejoindreSessionCM() {
+  const errEl = document.getElementById('cm-join-error');
+  errEl.style.display = 'none';
+  const code = document.getElementById('cm-join-code').value.trim();
+  const prenom = document.getElementById('cm-join-prenom').value.trim();
+  if(!code || !prenom) {
+    errEl.textContent = 'Renseigne le code et ton prénom.';
+    errEl.style.display = 'block';
+    return;
+  }
+
+  const { data: session, error: errSession } = await supabaseClient
+    .from('sessions_calcul_mental')
+    .select('id, code, statut')
+    .eq('code', code)
+    .eq('statut', 'attente')
+    .order('created_at', { ascending: false })
+    .limit(1)
+    .maybeSingle();
+
+  if(errSession || !session) {
+    errEl.textContent = 'Code invalide, ou la session a déjà commencé.';
+    errEl.style.display = 'block';
+    return;
+  }
+
+  const { data: participant, error: errPart } = await supabaseClient
+    .from('participants_session')
+    .insert({ session_id: session.id, prenom })
+    .select('id')
+    .single();
+
+  if(errPart || !participant) {
+    errEl.textContent = 'Impossible de rejoindre. Réessaie.';
+    errEl.style.display = 'block';
+    return;
+  }
+
+  cmPartSessionId = session.id;
+  cmPartParticipantId = participant.id;
+  cmPartIndex = -1;
+  cmPartHistorique = [];
+
+  fermerRejoindreCM();
+  document.getElementById('cm-participant-view').style.display = 'flex';
+  document.getElementById('cm-part-attente').style.display = 'block';
+  document.getElementById('cm-part-question').style.display = 'none';
+  document.getElementById('cm-part-fin').style.display = 'none';
+
+  cmPartChannel = supabaseClient.channel(`cm-session-${code}`);
+  cmPartChannel.on('broadcast', { event: 'etat' }, (msg) => traiterEtatCMParticipant(msg.payload)).subscribe();
+}
+
+function traiterEtatCMParticipant(payload) {
+  if(payload.statut === 'termine') {
+    finParticipationCM();
+    return;
+  }
+  if(payload.statut === 'en_cours') {
+    cmPartIndex = payload.index;
+    cmPartAnswered = false;
+    document.getElementById('cm-part-attente').style.display = 'none';
+    document.getElementById('cm-part-fin').style.display = 'none';
+    document.getElementById('cm-part-question').style.display = 'block';
+    document.getElementById('cm-part-num').textContent = `Question ${payload.index + 1}`;
+    document.getElementById('cm-part-enonce').textContent = payload.enonce;
+    document.getElementById('cm-part-input').value = '';
+    document.getElementById('cm-part-input').disabled = false;
+    document.getElementById('cm-part-btn').disabled = false;
+    document.getElementById('cm-part-feedback').textContent = '';
+    setTimeout(() => document.getElementById('cm-part-input').focus(), 50);
+  } else if(payload.statut === 'reponse_visible') {
+    document.getElementById('cm-part-input').disabled = true;
+    document.getElementById('cm-part-btn').disabled = true;
+    const donnee = parseFloat(document.getElementById('cm-part-input').value.trim().replace(',', '.'));
+    const correct = !cmPartAnswered ? false : (!isNaN(donnee) && Math.abs(donnee - payload.reponse) < 0.01);
+    cmPartHistorique.push({ index: payload.index, correct, repondu: cmPartAnswered });
+    const feedback = document.getElementById('cm-part-feedback');
+    if(!cmPartAnswered) {
+      feedback.textContent = `⏱️ Temps écoulé — réponse : ${payload.reponse}`;
+      feedback.style.color = '#F59E0B';
+    } else {
+      feedback.textContent = correct ? '✅ Bonne réponse !' : `❌ La bonne réponse était ${payload.reponse}`;
+      feedback.style.color = correct ? '#22C55E' : '#EF4444';
+    }
+  }
+}
+
+async function soumettreReponseCM() {
+  if(cmPartAnswered) return;
+  const val = document.getElementById('cm-part-input').value.trim();
+  if(!val) return;
+  cmPartAnswered = true;
+  document.getElementById('cm-part-btn').disabled = true;
+  await supabaseClient.from('reponses_session').insert({
+    session_id: cmPartSessionId, participant_id: cmPartParticipantId,
+    question_index: cmPartIndex, reponse: val,
+  });
+}
+
+function finParticipationCM() {
+  document.getElementById('cm-part-question').style.display = 'none';
+  document.getElementById('cm-part-attente').style.display = 'none';
+  document.getElementById('cm-part-fin').style.display = 'block';
+  const nbCorrect = cmPartHistorique.filter(h => h.correct).length;
+  document.getElementById('cm-part-score').textContent = `${nbCorrect} / ${cmPartHistorique.length} bonnes réponses`;
+}
+
+function quitterParticipationCM() {
+  if(cmPartChannel) { supabaseClient.removeChannel(cmPartChannel); cmPartChannel = null; }
+  document.getElementById('cm-participant-view').style.display = 'none';
+  cmPartSessionId = null; cmPartParticipantId = null; cmPartIndex = -1; cmPartHistorique = [];
+}
 
 
 
