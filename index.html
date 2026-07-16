@@ -874,6 +874,12 @@ nav {
   margin-right:6px;
 }
 
+.ex-ligne-num.infini { background:#0D9488; font-size:16px; }
+.ex-etiquette-infini { color:#0D9488; background:#E6FFFA; }
+.ex-ligne-infini { border-color:#99F6E4; background:#F0FDFA; }
+.ex-ligne-infini:hover { border-color:#0D9488; box-shadow:0 2px 12px rgba(13,148,136,0.12); }
+.ex-fil-infini { margin-top:2rem; padding-top:1.5rem; border-top:1.5px dashed var(--bordure); }
+
 .ex-fil-header {
   display:flex; align-items:center; gap:12px; margin-bottom:1.5rem;
 }
@@ -7394,7 +7400,9 @@ function allerExercices(niveauId, chapitre) {
     <span class="sep">›</span>
     <span onclick="allerChapitres('${niveauId}')">${label}</span>
     <span class="sep">›</span><strong>${chapitre}</strong>`;
-  const exs = getAllExercices(niveauId).filter(e => e.chapitre === chapitre);
+  const tousExs = getAllExercices(niveauId).filter(e => e.chapitre === chapitre);
+  const exs = tousExs.filter(e => !e.genere);
+  const exsGeneres = tousExs.filter(e => e.genere);
   const ETIQ = ['Découverte','Application','Méthode','Approfondissement','Brevet'];
   const CLR = ['n1','n2','n3','n4','n5'];
   const content = document.getElementById('ex-content');
@@ -7419,7 +7427,28 @@ function allerExercices(niveauId, chapitre) {
           <span class="ex-ligne-badge niv-${ex.niveau.toLowerCase()}">${ex.niveau==="Facile"?"⭐":ex.niveau==="Moyen"?"⭐⭐":"⭐⭐⭐"}</span>
           <span class="ex-ligne-arrow">›</span>
         </div>`).join('')}
-    </div>`;
+    </div>
+    ${exsGeneres.length ? `
+    <div class="ex-fil-header ex-fil-infini">
+      <div class="ex-fil-emoji">♾️</div>
+      <div>
+        <div class="ex-fil-chap">Entraînement illimité</div>
+        <div class="ex-fil-desc">Questions générées à volonté, jamais les mêmes deux fois — pour s'entraîner une fois le cours acquis</div>
+      </div>
+    </div>
+    <div class="exercices-chapitre-grid">
+      ${exsGeneres.map(ex => `
+        <div class="ex-ligne ex-ligne-infini" onclick="ouvrirExercice('${ex.id}')">
+          <div class="ex-ligne-num infini">♾️</div>
+          <div class="ex-ligne-info">
+            <div class="ex-ligne-titre">
+              <span class="ex-etiquette ex-etiquette-infini">Illimité</span>${ex.titre}
+            </div>
+            <div class="ex-ligne-meta">${ex.questions.length} questions générées · niveau ${ex.niveau.toLowerCase()}</div>
+          </div>
+          <span class="ex-ligne-arrow">›</span>
+        </div>`).join('')}
+    </div>` : ''}`;
   renderMathSafe(content);
 }
 
