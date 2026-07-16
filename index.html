@@ -1976,10 +1976,14 @@ const EXERCICES = {
     // ── 4. ÉQUATIONS DU PREMIER DEGRÉ ──
     "Équations du premier degré": [
       {
-        id:"eq_3_genere_test", titre:"Équations — entraînement infini (test)", niveau:"Facile", points_total:1,
+        id:"eq_3_genere_test", titre:"Équations — entraînement infini (test)", niveau:"Facile", points_total:5,
         genere: true, templateId: "equation_1er_degre_v1",
         questions:[
-          {label:"", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
         ],
         indices:["Isole $x$ en effectuant la même opération des deux côtés de l'égalité"]
       },
@@ -7428,7 +7432,7 @@ function texToHtml(str) {
 const EDGE_FUNCTIONS_BASE = SUPABASE_URL + '/functions/v1';
 const TEMPLATES_GENERATEUR = { equation_1er_degre_v1: 'exo-equation-generer' };
 const TEMPLATES_VALIDATEUR = { equation_1er_degre_v1: 'exo-equation-valider' };
-let currentGenToken = null;
+let currentGenTokens = [];
 
 async function appelEdgeFunction(slug, method, body) {
   const { data: { session } } = await supabaseClient.auth.getSession();
@@ -7445,12 +7449,16 @@ async function appelEdgeFunction(slug, method, body) {
   return resp.json();
 }
 
-async function chargerExerciceGenere() {
+async function chargerInstanceGeneree(index) {
   const slug = TEMPLATES_GENERATEUR[currentExercice.templateId];
   const instance = await appelEdgeFunction(slug, 'POST');
-  currentGenToken = instance.token;
-  currentExercice.questions[0].enonce = instance.enonce;
-  currentExercice.questions[0].correction = '';
+  currentGenTokens[index] = instance.token;
+  currentExercice.questions[index].enonce = instance.enonce;
+  currentExercice.questions[index].correction = '';
+}
+
+async function chargerExerciceGenere() {
+  await chargerInstanceGeneree(0);
   renderQuestion();
 }
 
@@ -7463,6 +7471,7 @@ function ouvrirExercice(id) {
   score = 0;
   totalPoints = currentExercice.points_total;
   reponseDonnee = false;
+  currentGenTokens = [];
 
   document.getElementById('modal-title').textContent = currentExercice.titre;
   document.getElementById('modal-overlay').classList.add('open');
@@ -7621,9 +7630,9 @@ async function verifierExerciceGenere(val, q, inp) {
     : currentExercice.id.includes('_4_') ? '4eme' : '';
 
   const result = await appelEdgeFunction(slug, 'POST', {
-    token: currentGenToken,
+    token: currentGenTokens[currentQuestion],
     reponse: val,
-    exercice_id: currentExercice.id,
+    exercice_id: `${currentExercice.id}_${currentQuestion + 1}`,
     chapitre, niveau,
   });
 
@@ -7632,7 +7641,7 @@ async function verifierExerciceGenere(val, q, inp) {
 
   inp.classList.add(correct ? 'correct' : 'wrong');
   afficherCorrection(correct, q);
-  score = correct ? q.points : 0;
+  score += correct ? q.points : 0;
   if(correct) { pointsGlobal += 10; exFaits++; }
   updateEleveStats();
 }
@@ -7823,7 +7832,12 @@ function nextQuestion() {
   const total = currentExercice.questions.length;
   if(currentQuestion < total - 1) {
     currentQuestion++;
-    renderQuestion();
+    if(currentExercice.genere) {
+      document.getElementById('modal-content').innerHTML = '<div style="padding:2rem;text-align:center;color:var(--muted)">Génération de l\'exercice…</div>';
+      chargerInstanceGeneree(currentQuestion).then(renderQuestion);
+    } else {
+      renderQuestion();
+    }
   } else {
     showResult();
   }
