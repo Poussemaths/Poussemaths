@@ -18,7 +18,23 @@ async function decryptToken(token: string): Promise<{ x: number; template: strin
 }
 
 function parseReponse(s: string): number | null {
-  const norm = s.trim().replace(/\s/g, "").replace(",", ".");
+  const norm = s
+    .trim()
+    .replace(/\s/g, "")
+    .replace(",", ".")
+    .replace(/×/g, "*")
+    .replace(/÷/g, "/")
+    .replace(/[−–]/g, "-");
+
+  // Fraction du type a/b (y compris decimales : 2.5/4)
+  const fracMatch = norm.match(/^(-?\d+(?:\.\d+)?)\/(-?\d+(?:\.\d+)?)$/);
+  if (fracMatch) {
+    const num = parseFloat(fracMatch[1]);
+    const den = parseFloat(fracMatch[2]);
+    if (den === 0) return null;
+    return num / den;
+  }
+
   const n = Number(norm);
   return Number.isFinite(n) ? n : null;
 }
