@@ -33,7 +33,16 @@ async function encryptPayload(payload: unknown): Promise<string> {
   return `${ivB64}.${ctB64}`;
 }
 
-Deno.serve(async (_req) => {
+const corsHeaders = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+  "Access-Control-Allow-Methods": "POST, OPTIONS",
+};
+
+Deno.serve(async (req) => {
+  if (req.method === "OPTIONS") {
+    return new Response(null, { headers: corsHeaders });
+  }
   try {
     let a = randInt(2, 9);
     if (Math.random() < 0.5) a = -a;
@@ -46,9 +55,12 @@ Deno.serve(async (_req) => {
     const token = await encryptPayload({ x, template: "equation_1er_degre_v1", ts: Date.now() });
 
     return new Response(JSON.stringify({ enonce, token }), {
-      headers: { "Content-Type": "application/json" },
+      headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   } catch (e) {
-    return new Response(JSON.stringify({ error: String(e) }), { status: 500 });
+    return new Response(JSON.stringify({ error: String(e) }), {
+      status: 500,
+      headers: corsHeaders,
+    });
   }
 });

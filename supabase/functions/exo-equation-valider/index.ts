@@ -33,24 +33,42 @@ function decodeJwtSub(jwt: string): string | null {
   }
 }
 
+const corsHeaders = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+  "Access-Control-Allow-Methods": "POST, OPTIONS",
+};
+
 Deno.serve(async (req) => {
+  if (req.method === "OPTIONS") {
+    return new Response(null, { headers: corsHeaders });
+  }
   try {
     const jwt = (req.headers.get("Authorization") ?? "").replace("Bearer ", "");
     const userId = decodeJwtSub(jwt);
     if (!userId) {
-      return new Response(JSON.stringify({ error: "utilisateur non authentifie" }), { status: 401 });
+      return new Response(JSON.stringify({ error: "utilisateur non authentifie" }), {
+        status: 401,
+        headers: corsHeaders,
+      });
     }
 
     const { token, reponse, exercice_id, chapitre, niveau } = await req.json();
     if (!token || reponse === undefined) {
-      return new Response(JSON.stringify({ error: "token et reponse requis" }), { status: 400 });
+      return new Response(JSON.stringify({ error: "token et reponse requis" }), {
+        status: 400,
+        headers: corsHeaders,
+      });
     }
 
     let payload;
     try {
       payload = await decryptToken(token);
     } catch {
-      return new Response(JSON.stringify({ error: "token invalide" }), { status: 400 });
+      return new Response(JSON.stringify({ error: "token invalide" }), {
+        status: 400,
+        headers: corsHeaders,
+      });
     }
 
     const donnee = parseReponse(String(reponse));
@@ -65,7 +83,10 @@ Deno.serve(async (req) => {
     });
     const eleves = await eleveResp.json();
     if (!Array.isArray(eleves) || eleves.length === 0) {
-      return new Response(JSON.stringify({ error: "eleve introuvable" }), { status: 404 });
+      return new Response(JSON.stringify({ error: "eleve introuvable" }), {
+        status: 404,
+        headers: corsHeaders,
+      });
     }
     const eleveId = eleves[0].id;
 
@@ -96,13 +117,17 @@ Deno.serve(async (req) => {
       const errText = await writeResp.text();
       return new Response(JSON.stringify({ error: "ecriture progression echouee", detail: errText }), {
         status: 500,
+        headers: corsHeaders,
       });
     }
 
     return new Response(JSON.stringify({ correcte, score, valeur: payload.x }), {
-      headers: { "Content-Type": "application/json" },
+      headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   } catch (e) {
-    return new Response(JSON.stringify({ error: String(e) }), { status: 500 });
+    return new Response(JSON.stringify({ error: String(e) }), {
+      status: 500,
+      headers: corsHeaders,
+    });
   }
 });
