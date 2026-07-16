@@ -6164,7 +6164,8 @@ async function inscriptionCodeClasse() {
   const errEl = document.getElementById('auth-error-code');
   if(!prenom||!nom||!code||!password){showAuthError(errEl,'Remplis tous les champs.');return;}
   if(password.length<8){showAuthError(errEl,'8 caractères minimum.');return;}
-  const {data:classe,error:errClasse} = await supabaseClient.from('classes').select('*').eq('code',code).single();
+  const {data:classesTrouvees,error:errClasse} = await supabaseClient.rpc('verifier_code_classe',{p_code:code});
+  const classe = classesTrouvees && classesTrouvees[0];
   if(errClasse||!classe){showAuthError(errEl,'Code invalide. Vérifie avec ton professeur.');return;}
   const emailFinal = email||`${prenom.toLowerCase()}.${nom.toLowerCase()}.${code.toLowerCase()}@poussemaths.fr`;
   const {data,error} = await supabaseClient.auth.signUp({email:emailFinal,password});
