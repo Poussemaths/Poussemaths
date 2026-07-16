@@ -1976,6 +1976,14 @@ const EXERCICES = {
     // ── 4. ÉQUATIONS DU PREMIER DEGRÉ ──
     "Équations du premier degré": [
       {
+        id:"eq_3_genere_test", titre:"Équations — entraînement infini (test)", niveau:"Facile", points_total:1,
+        genere: true, templateId: "equation_1er_degre_v1",
+        questions:[
+          {label:"", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["Isole $x$ en effectuant la même opération des deux côtés de l'égalité"]
+      },
+      {
         id:"eq_3_1", titre:"Équations — lecture et sens", niveau:"Facile", points_total:8,
         questions:[
           {label:"1.", enonce:"Parmi ces équations, laquelle a pour solution $x = 5$ ?",
@@ -7414,6 +7422,38 @@ function texToHtml(str) {
 // ═══════════════════════════════════════
 //  MODAL EXERCICE
 // ═══════════════════════════════════════
+// ═══════════════════════════════════════
+//  EXERCICES GÉNÉRÉS (templates paramétrés, correction côté serveur)
+// ═══════════════════════════════════════
+const EDGE_FUNCTIONS_BASE = SUPABASE_URL + '/functions/v1';
+const TEMPLATES_GENERATEUR = { equation_1er_degre_v1: 'exo-equation-generer' };
+const TEMPLATES_VALIDATEUR = { equation_1er_degre_v1: 'exo-equation-valider' };
+let currentGenToken = null;
+
+async function appelEdgeFunction(slug, method, body) {
+  const { data: { session } } = await supabaseClient.auth.getSession();
+  const accessToken = session ? session.access_token : SUPABASE_KEY;
+  const resp = await fetch(`${EDGE_FUNCTIONS_BASE}/${slug}`, {
+    method: method || 'GET',
+    headers: {
+      'apikey': SUPABASE_KEY,
+      'Authorization': `Bearer ${accessToken}`,
+      'Content-Type': 'application/json',
+    },
+    body: body ? JSON.stringify(body) : undefined,
+  });
+  return resp.json();
+}
+
+async function chargerExerciceGenere() {
+  const slug = TEMPLATES_GENERATEUR[currentExercice.templateId];
+  const instance = await appelEdgeFunction(slug, 'POST');
+  currentGenToken = instance.token;
+  currentExercice.questions[0].enonce = instance.enonce;
+  currentExercice.questions[0].correction = '';
+  renderQuestion();
+}
+
 function ouvrirExercice(id) {
   const all = getAllExercices();
   currentExercice = all.find(e => e.id === id);
@@ -7426,7 +7466,13 @@ function ouvrirExercice(id) {
 
   document.getElementById('modal-title').textContent = currentExercice.titre;
   document.getElementById('modal-overlay').classList.add('open');
-  renderQuestion();
+
+  if(currentExercice.genere) {
+    document.getElementById('modal-content').innerHTML = '<div style="padding:2rem;text-align:center;color:var(--muted)">Génération de l\'exercice…</div>';
+    chargerExerciceGenere();
+  } else {
+    renderQuestion();
+  }
 }
 
 function renderQuestion() {
@@ -7550,11 +7596,44 @@ function verifier() {
   if(!val) return;
 
   reponseDonnee = true;
+
+  if(currentExercice.genere) {
+    verifierExerciceGenere(val, q, inp);
+    return;
+  }
+
   const correct = verifierReponse(val, q.correction);
 
   inp.classList.add(correct ? 'correct' : 'wrong');
   afficherCorrection(correct, q);
   if(correct) { score += q.points; pointsGlobal += 10; exFaits++; }
+  updateEleveStats();
+}
+
+// ── VÉRIFICATION SAISIE LIBRE (EXERCICE GÉNÉRÉ, validation serveur) ──
+async function verifierExerciceGenere(val, q, inp) {
+  const slug = TEMPLATES_VALIDATEUR[currentExercice.templateId];
+  const chapitre = currentExercice.titre || '';
+  const niveau = currentExercice.id.includes('_3_') ? '3eme'
+    : currentExercice.id.includes('_2_') ? '2nde'
+    : currentExercice.id.includes('_6_') ? '6eme'
+    : currentExercice.id.includes('_5_') ? '5eme'
+    : currentExercice.id.includes('_4_') ? '4eme' : '';
+
+  const result = await appelEdgeFunction(slug, 'POST', {
+    token: currentGenToken,
+    reponse: val,
+    exercice_id: currentExercice.id,
+    chapitre, niveau,
+  });
+
+  const correct = !!result.correcte;
+  q.correction = result.valeur !== undefined ? `$x = ${String(result.valeur).replace('.', '{,}')}$` : '';
+
+  inp.classList.add(correct ? 'correct' : 'wrong');
+  afficherCorrection(correct, q);
+  score = correct ? q.points : 0;
+  if(correct) { pointsGlobal += 10; exFaits++; }
   updateEleveStats();
 }
 
@@ -7769,7 +7848,8 @@ function showResult() {
   document.getElementById('btn-next').onclick = fermerModal;
 
   // ── Sauvegarder dans Supabase si élève connecté ──
-  if(currentEleve && currentExercice) {
+  // (les exercices générés sont déjà sauvegardés côté serveur par verifierExerciceGenere)
+  if(currentEleve && currentExercice && !currentExercice.genere) {
     const chapitre = currentExercice.titre || '';
     const niveau = currentExercice.id.includes('_3_') ? '3eme'
       : currentExercice.id.includes('_2_') ? '2nde'
