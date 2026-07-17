@@ -1766,6 +1766,18 @@ const EXERCICES = {
     // ── 1. PUISSANCES & NOTATION SCIENTIFIQUE ──
     "Puissances & Notation scientifique": [
       {
+        id:"puis_3_genere", titre:"Puissances — entraînement infini", niveau:"Facile", points_total:5,
+        genere: true, templateId: "puissance_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["$a^n = a\\times a\\times ... \\times a$ ($n$ fois)"]
+      },
+      {
         id:"puis_3_1", titre:"Puissances — reconnaître et calculer", niveau:"Facile", points_total:8,
         questions:[
           {label:"1.", enonce:"Que vaut $2^5$ ?",
@@ -1869,6 +1881,18 @@ const EXERCICES = {
     // ── 2. RACINES CARRÉES ──
     "Racines carrées": [
       {
+        id:"rac_3_genere", titre:"Racines carrées — entraînement infini", niveau:"Facile", points_total:5,
+        genere: true, templateId: "racine_carree_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["Cherche quel nombre, multiplié par lui-même, donne le résultat"]
+      },
+      {
         id:"rac_3_1", titre:"Racines carrées — comprendre et calculer", niveau:"Facile", points_total:8,
         questions:[
           {label:"1.", enonce:"Que vaut $\\sqrt{64}$ ?",
@@ -1966,6 +1990,18 @@ const EXERCICES = {
 
     // ── 3. CALCUL LITTÉRAL ──
     "Calcul littéral": [
+      {
+        id:"lit_3_genere", titre:"Évaluation de fonction — entraînement infini", niveau:"Facile", points_total:5,
+        genere: true, templateId: "evaluation_fonction_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["Remplace $x$ par la valeur donnée, puis calcule"]
+      },
       {
         id:"lit_3_1", titre:"Calcul littéral — reconnaître développer factoriser", niveau:"Facile", points_total:8,
         questions:[
@@ -8096,11 +8132,17 @@ const TEMPLATES_GENERATEUR = {
   equation_1er_degre_v1: 'exo-equation-generer',
   pourcentage_v1: 'exo-pourcentage-generer',
   priorites_v1: 'exo-priorites-generer',
+  puissance_v1: 'exo-puissance-generer',
+  racine_carree_v1: 'exo-racine-generer',
+  evaluation_fonction_v1: 'exo-fonction-generer',
 };
 const TEMPLATES_VALIDATEUR = {
   equation_1er_degre_v1: 'exo-equation-valider',
   pourcentage_v1: 'exo-pourcentage-valider',
   priorites_v1: 'exo-priorites-valider',
+  puissance_v1: 'exo-puissance-valider',
+  racine_carree_v1: 'exo-racine-valider',
+  evaluation_fonction_v1: 'exo-fonction-valider',
 };
 let currentGenTokens = [];
 
