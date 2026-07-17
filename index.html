@@ -2959,6 +2959,18 @@ const EXERCICES = {
     // ── 10. STATISTIQUES ──
     "Statistiques descriptives": [
       {
+        id:"stat_3_genere", titre:"Moyenne — entraînement infini", niveau:"Facile", points_total:5,
+        genere: true, templateId: "moyenne_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["Moyenne = somme des valeurs ÷ nombre de valeurs"]
+      },
+      {
         id:"stat_3_1", titre:"Statistiques — comprendre les indicateurs", niveau:"Facile", points_total:8,
         questions:[
           {label:"1.", enonce:"Qu'est-ce que la médiane d'une série statistique ?",
@@ -3075,6 +3087,18 @@ const EXERCICES = {
 
     // ── 11. PYTHAGORE ──
     "Théorème de Pythagore": [
+      {
+        id:"pyth_3_genere", titre:"Pythagore — entraînement infini", niveau:"Facile", points_total:5,
+        genere: true, templateId: "pythagore_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["$hypoténuse^2 = côté_1^2 + côté_2^2$"]
+      },
       {
         id:"pyth_3_1", titre:"Pythagore — comprendre et identifier", niveau:"Facile", points_total:8,
         questions:[
@@ -3540,6 +3564,18 @@ const EXERCICES = {
 
     // ── 15. VOLUMES DE SOLIDES ──
     "Volumes de solides": [
+      {
+        id:"vol_3_genere", titre:"Volume du pavé droit — entraînement infini", niveau:"Facile", points_total:5,
+        genere: true, templateId: "volume_pave_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["Volume = longueur $\\times$ largeur $\\times$ hauteur"]
+      },
       {
         id:"vol_3_1", titre:"Volumes — formules et reconnaissance", niveau:"Facile", points_total:8,
         questions:[
@@ -4963,6 +4999,18 @@ const EXERCICES = {
   "5eme": {
 
     "Nombres relatifs": [
+      {
+        id:"rel_5_genere", titre:"Addition et soustraction de relatifs — entraînement infini", niveau:"Facile", points_total:5,
+        genere: true, templateId: "relatifs_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["Additionner un nombre négatif revient à soustraire sa valeur absolue"]
+      },
       {
         id:"rel_5_1", titre:"Nombres relatifs — comprendre", niveau:"Facile", points_total:8,
         questions:[
@@ -8135,6 +8183,10 @@ const TEMPLATES_GENERATEUR = {
   puissance_v1: 'exo-puissance-generer',
   racine_carree_v1: 'exo-racine-generer',
   evaluation_fonction_v1: 'exo-fonction-generer',
+  pythagore_v1: 'exo-pythagore-generer',
+  moyenne_v1: 'exo-moyenne-generer',
+  volume_pave_v1: 'exo-volume-generer',
+  relatifs_v1: 'exo-relatifs-generer',
 };
 const TEMPLATES_VALIDATEUR = {
   equation_1er_degre_v1: 'exo-equation-valider',
@@ -8143,6 +8195,10 @@ const TEMPLATES_VALIDATEUR = {
   puissance_v1: 'exo-puissance-valider',
   racine_carree_v1: 'exo-racine-valider',
   evaluation_fonction_v1: 'exo-fonction-valider',
+  pythagore_v1: 'exo-pythagore-valider',
+  moyenne_v1: 'exo-moyenne-valider',
+  volume_pave_v1: 'exo-volume-valider',
+  relatifs_v1: 'exo-relatifs-valider',
 };
 let currentGenTokens = [];
 
