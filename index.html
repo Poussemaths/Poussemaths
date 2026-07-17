@@ -781,6 +781,15 @@ nav {
 .cm-theme-btn.selected { border-color:var(--bleu); background:var(--bleu-doux); color:var(--bleu); font-weight:700; }
 .cm-theme-emoji { font-size:1.5rem; display:block; margin-bottom:4px; }
 .cm-theme-name { font-size:12px; font-weight:600; }
+.intrus-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1.5rem; max-width:600px; padding:0 1.5rem; }
+.intrus-carte {
+  background:rgba(255,255,255,0.06); border:2px solid rgba(255,255,255,0.15); border-radius:var(--r-lg);
+  padding:2rem; min-width:220px; min-height:140px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:clamp(1.5rem,4vw,2.2rem); font-weight:800; color:white; font-family:'Fraunces',serif;
+  transition:all 0.25s;
+}
+.intrus-carte.intrus-trouve { border-color:#5EEAD4; background:rgba(94,234,212,0.12); }
 .cm-mode-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:1.5rem; }
 .cm-mode-btn { padding:14px; border:1.5px solid var(--bordure); border-radius:var(--r); cursor:pointer; background:var(--bg); transition:all 0.15s; }
 .cm-mode-btn:hover { border-color:#0D9488; }
@@ -1486,6 +1495,7 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
       </div>
       <div class="prof-actions-top">
         <button class="btn-prof-action" onclick="ouvrirCalcMental()">🔢 Calcul mental</button>
+        <button class="btn-prof-action" onclick="ouvrirIntrus()">🕵️ Intrus maths</button>
         <button class="btn-prof-action" onclick="ouvrirGenerateurPDF()">📄 Devoir PDF</button>
         <button class="btn-prof-action primary" onclick="showDashboard()">📊 Tableau de bord</button>
       </div>
@@ -1684,6 +1694,26 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
     <div id="cm-part-score" style="font-size:1.1rem;color:#5EEAD4"></div>
     <button class="cm-launch-btn" style="margin-top:1.5rem" onclick="quitterParticipationCM()">Fermer</button>
   </div>
+</div>
+
+<!-- ═══ MODAL INTRUS MATHS (config) ═══ -->
+<div class="modal-overlay" id="intrus-overlay" onclick="fermerIntrusModal(event)">
+  <div class="modal" style="max-width:640px">
+    <div class="modal-header">
+      <span class="modal-header-title">🕵️ Intrus maths</span>
+      <button class="modal-close" onclick="fermerIntrusModal()">✕</button>
+    </div>
+    <div class="modal-body" id="intrus-modal-body"></div>
+  </div>
+</div>
+
+<!-- ═══ PROJECTION INTRUS MATHS (plein écran) ═══ -->
+<div id="intrus-projection" style="display:none;position:fixed;inset:0;background:#1C1E26;z-index:9999;flex-direction:column;align-items:center;justify-content:center;cursor:pointer" onclick="intrusProchaine()">
+  <button onclick="event.stopPropagation();fermerProjectionIntrus()" style="position:absolute;top:20px;right:24px;background:rgba(255,255,255,0.15);border:none;color:white;padding:8px 16px;border-radius:8px;cursor:pointer;font-size:14px">✕ Quitter</button>
+  <div id="intrus-num" style="font-size:1.2rem;color:rgba(255,255,255,0.4);margin-bottom:2rem"></div>
+  <div id="intrus-grid" class="intrus-grid"></div>
+  <div id="intrus-justification" style="font-size:1.3rem;color:#5EEAD4;margin-top:2rem;font-weight:700;text-align:center;padding:0 2rem;min-height:2rem"></div>
+  <div style="position:absolute;bottom:24px;color:rgba(255,255,255,0.3);font-size:13px">Clic ou espace → révéler l'intrus · Clic à nouveau → série suivante</div>
 </div>
 
 <!-- ═══════════════════════════════════════
@@ -7627,7 +7657,243 @@ function quitterParticipationCM() {
   cmPartSessionId = null; cmPartParticipantId = null; cmPartIndex = -1; cmPartHistorique = [];
 }
 
+// ═══════════════════════════════════════
+//  INTRUS MATHS — OUTIL DE PROJECTION (débat à l'oral)
+// ═══════════════════════════════════════
+function melanger(arr) {
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
+  return a;
+}
 
+const INTRUS_SVG = {
+  triangle: `<svg viewBox="0 0 100 100" width="90" height="90"><polygon points="50,10 90,85 10,85" fill="none" stroke="white" stroke-width="4"/></svg>`,
+  carre: `<svg viewBox="0 0 100 100" width="90" height="90"><rect x="15" y="15" width="70" height="70" fill="none" stroke="white" stroke-width="4"/></svg>`,
+  rectangle: `<svg viewBox="0 0 100 100" width="90" height="90"><rect x="10" y="25" width="80" height="50" fill="none" stroke="white" stroke-width="4"/></svg>`,
+  losange: `<svg viewBox="0 0 100 100" width="90" height="90"><polygon points="50,10 90,50 50,90 10,50" fill="none" stroke="white" stroke-width="4"/></svg>`,
+  pentagone: `<svg viewBox="0 0 100 100" width="90" height="90"><polygon points="50,8 90,38 75,85 25,85 10,38" fill="none" stroke="white" stroke-width="4"/></svg>`,
+  hexagone: `<svg viewBox="0 0 100 100" width="90" height="90"><polygon points="50,8 87,29 87,71 50,92 13,71 13,29" fill="none" stroke="white" stroke-width="4"/></svg>`,
+  cercle: `<svg viewBox="0 0 100 100" width="90" height="90"><circle cx="50" cy="50" r="40" fill="none" stroke="white" stroke-width="4"/></svg>`,
+};
+
+const INTRUS_FAMILLES = {
+  'Multiples': {
+    emoji: '✖️', niveau: '6eme',
+    gen: () => {
+      const n = rand(3,9);
+      const multiples = melanger([2,3,4,5,6,7].map(k=>n*k)).slice(0,3);
+      let intrus = multiples[0] + rand(1,2);
+      while(intrus % n === 0) intrus++;
+      const items = melanger([...multiples, intrus].map(v => ({ label: String(v), estIntrus: v === intrus })));
+      const idx = items.findIndex(it => it.estIntrus);
+      return { items: items.map(it => it.label), intrusIndex: idx, justification: `Les 3 autres sont des multiples de ${n} ; ${intrus} ne l'est pas.` };
+    }
+  },
+  'Formes géométriques': {
+    emoji: '🔺', niveau: '6eme',
+    gen: () => {
+      const quatreCotes = ['carre','rectangle','losange'];
+      const intrusForme = melanger(['triangle','pentagone','hexagone','cercle'])[0];
+      const noms = { triangle:'un triangle (3 côtés)', pentagone:'un pentagone (5 côtés)', hexagone:'un hexagone (6 côtés)', cercle:'un cercle (0 côté)' };
+      const items = melanger([...quatreCotes.map(f=>({forme:f,estIntrus:false})), {forme:intrusForme,estIntrus:true}]);
+      const idx = items.findIndex(it => it.estIntrus);
+      return { items: items.map(it => INTRUS_SVG[it.forme]), intrusIndex: idx, justification: `Les 3 autres ont 4 côtés (carré, rectangle, losange) ; c'est ${noms[intrusForme]}.` };
+    }
+  },
+  'Nombres premiers': {
+    emoji: '🔢', niveau: '5eme',
+    gen: () => {
+      const premiers = [2,3,5,7,11,13,17,19,23];
+      const composes = [4,6,8,9,10,12,14,15,16,18,20,21,22];
+      const modePremier = Math.random() < 0.5;
+      const base = modePremier ? premiers : composes;
+      const autre = modePremier ? composes : premiers;
+      const trois = melanger(base).slice(0,3);
+      const intrus = melanger(autre)[0];
+      const items = melanger([...trois, intrus].map(v => ({ label:String(v), estIntrus: v===intrus })));
+      const idx = items.findIndex(it => it.estIntrus);
+      const just = modePremier ? `Les 3 autres sont premiers ; ${intrus} ne l'est pas (il a d'autres diviseurs que 1 et lui-même).`
+                                : `Les 3 autres sont composés ; ${intrus} est premier.`;
+      return { items: items.map(it => it.label), intrusIndex: idx, justification: just };
+    }
+  },
+  'Fractions équivalentes': {
+    emoji: '½', niveau: '5eme',
+    gen: () => {
+      const a = rand(1,5), b = rand(a+1,8);
+      const dfrac = (n,d) => `$\\dfrac{${n}}{${d}}$`;
+      const trois = melanger([2,3,4]).slice(0,3).map(k => ({ n:a*k, d:b*k, estIntrus:false }));
+      let x, y;
+      do { x = rand(1,8); y = rand(x+1,10); } while(x*b === a*y);
+      const items = melanger([...trois, { n:x, d:y, estIntrus:true }]);
+      const idx = items.findIndex(it => it.estIntrus);
+      return { items: items.map(it => dfrac(it.n, it.d)), intrusIndex: idx, justification: `Les 3 autres sont toutes égales à ${dfrac(a,b)} simplifiée ; ${dfrac(x,y)} vaut autre chose.` };
+    }
+  },
+  'Résultats égaux': {
+    emoji: '🟰', niveau: '4eme',
+    gen: () => {
+      const cible = rand(10,30);
+      const expr = new Set();
+      while(expr.size < 3) {
+        const type = rand(0,2);
+        if(type===0){ const a=rand(1,cible-1); expr.add(`${a} + ${cible-a}`); }
+        else if(type===1){ const a=rand(2,9); if(cible%a===0) expr.add(`${a} × ${cible/a}`); }
+        else { const a=rand(cible+1,cible+15); expr.add(`${a} − ${a-cible}`); }
+      }
+      const troisExpr = [...expr].slice(0,3);
+      let intrusVal = cible + (rand(0,1)?1:-1)*rand(2,6);
+      const intrusExpr = `${intrusVal-5} + 5`;
+      const items = melanger([...troisExpr.map(e=>({label:e,estIntrus:false})), {label:intrusExpr,estIntrus:true}]);
+      const idx = items.findIndex(it => it.estIntrus);
+      return { items: items.map(it => `$${it.label}$`), intrusIndex: idx, justification: `Les 3 autres valent ${cible} ; $${intrusExpr}$ vaut ${intrusVal}.` };
+    }
+  },
+};
+
+function intrusPourNiveau(niveau) {
+  const limite = CM_NIVEAUX_ORDRE.indexOf(niveau);
+  return Object.entries(INTRUS_FAMILLES).filter(([, d]) => CM_NIVEAUX_ORDRE.indexOf(d.niveau) <= limite);
+}
+
+let intrusConfig = { niveau: null, familles: [], nb: 8 };
+let intrusSeries = [];
+let intrusIndex = 0;
+let intrusRevele = false;
+
+function ouvrirIntrus() {
+  intrusConfig.niveau = null;
+  intrusConfig.familles = [];
+  document.getElementById('intrus-overlay').style.display = 'flex';
+  renderIntrusConfig();
+}
+
+function fermerIntrusModal(e) {
+  if(!e || e.target === document.getElementById('intrus-overlay')) {
+    document.getElementById('intrus-overlay').style.display = 'none';
+  }
+}
+
+function choisirNiveauIntrus(niveau) {
+  intrusConfig.niveau = niveau;
+  intrusConfig.familles = [];
+  renderIntrusConfig();
+}
+
+function changerNiveauIntrus() {
+  intrusConfig.niveau = null;
+  renderIntrusConfig();
+}
+
+function toggleIntrusFamille(nom, el) {
+  const idx = intrusConfig.familles.indexOf(nom);
+  if(idx === -1) intrusConfig.familles.push(nom);
+  else intrusConfig.familles.splice(idx, 1);
+  el.classList.toggle('selected');
+}
+
+function renderIntrusConfig() {
+  const body = document.getElementById('intrus-modal-body');
+
+  if(!intrusConfig.niveau) {
+    body.innerHTML = `
+      <div class="pdf-section">
+        <div class="pdf-section-title">📚 Choisir un niveau</div>
+        <div class="cm-mode-grid" style="grid-template-columns:repeat(auto-fill,minmax(110px,1fr))">
+          ${CM_NIVEAUX_ORDRE.map(n => `
+            <div class="cm-mode-btn" style="text-align:center" onclick="choisirNiveauIntrus('${n}')">
+              <div class="cm-mode-titre">${LABELS_CLASSES[n] || n}</div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `;
+    return;
+  }
+
+  const famillesDispo = intrusPourNiveau(intrusConfig.niveau);
+  body.innerHTML = `
+    <div class="pdf-section">
+      <div class="pdf-section-title">
+        🕵️ Familles — ${LABELS_CLASSES[intrusConfig.niveau] || intrusConfig.niveau}
+        <span onclick="changerNiveauIntrus()" style="float:right;color:var(--bleu);font-weight:600;cursor:pointer;text-transform:none;letter-spacing:0">Changer de niveau</span>
+      </div>
+      <div class="cm-themes-grid">
+        ${famillesDispo.map(([nom, data]) => `
+          <div class="cm-theme-btn ${intrusConfig.familles.includes(nom)?'selected':''}" onclick="toggleIntrusFamille('${nom}', this)">
+            <span class="cm-theme-emoji">${data.emoji}</span>
+            <span class="cm-theme-name">${nom}</span>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+    <div class="cm-settings" style="grid-template-columns:1fr">
+      <div class="cm-setting">
+        <label>🔢 Nombre de séries</label>
+        <select id="intrus-nb-select" onchange="intrusConfig.nb=parseInt(this.value)">
+          <option value="5" ${intrusConfig.nb===5?'selected':''}>5 séries</option>
+          <option value="8" ${intrusConfig.nb===8?'selected':''}>8 séries</option>
+          <option value="12" ${intrusConfig.nb===12?'selected':''}>12 séries</option>
+        </select>
+      </div>
+    </div>
+    <button class="cm-launch-btn" onclick="lancerIntrus()">🚀 Lancer et projeter</button>
+  `;
+}
+
+function genererSerieIntrus() {
+  const nom = intrusConfig.familles[Math.floor(Math.random() * intrusConfig.familles.length)];
+  return { famille: nom, ...INTRUS_FAMILLES[nom].gen() };
+}
+
+function lancerIntrus() {
+  if(!intrusConfig.familles.length) { alert('Choisis au moins une famille d\'abord'); return; }
+  intrusSeries = Array.from({length: intrusConfig.nb}, () => genererSerieIntrus());
+  intrusIndex = 0;
+  document.getElementById('intrus-overlay').style.display = 'none';
+  afficherSerieIntrus();
+}
+
+function afficherSerieIntrus() {
+  if(intrusIndex >= intrusSeries.length) { fermerProjectionIntrus(); return; }
+  const s = intrusSeries[intrusIndex];
+  intrusRevele = false;
+  document.getElementById('intrus-projection').style.display = 'flex';
+  document.getElementById('intrus-num').textContent = `Série ${intrusIndex+1} / ${intrusSeries.length} — ${s.famille}`;
+  document.getElementById('intrus-justification').textContent = '';
+  const grid = document.getElementById('intrus-grid');
+  grid.innerHTML = s.items.map((item, i) => `
+    <div class="intrus-carte" id="intrus-carte-${i}">${texToHtml(item)}</div>
+  `).join('');
+  renderMathSafe(grid);
+}
+
+function reveleIntrus() {
+  if(intrusRevele) return;
+  intrusRevele = true;
+  const s = intrusSeries[intrusIndex];
+  document.getElementById(`intrus-carte-${s.intrusIndex}`).classList.add('intrus-trouve');
+  document.getElementById('intrus-justification').textContent = s.justification;
+}
+
+function intrusProchaine() {
+  if(!intrusRevele) reveleIntrus();
+  else { intrusIndex++; afficherSerieIntrus(); }
+}
+
+function fermerProjectionIntrus() {
+  document.getElementById('intrus-projection').style.display = 'none';
+}
+
+document.addEventListener('keydown', (e) => {
+  const proj = document.getElementById('intrus-projection');
+  if(proj && proj.style.display === 'flex') {
+    if(e.key === 'Enter') reveleIntrus();
+    if(e.key === ' ' || e.key === 'ArrowRight') intrusProchaine();
+    if(e.key === 'Escape') fermerProjectionIntrus();
+    e.preventDefault();
+  }
+});
 
 const LABELS_CLASSES = {'6eme':'6ème','5eme':'5ème','4eme':'4ème','3eme':'3ème','2nde':'2nde'};
 
