@@ -2726,6 +2726,18 @@ const EXERCICES = {
     // ── 8. FONCTIONS LINÉAIRES ET AFFINES ──
     "Fonctions linéaires et affines": [
       {
+        id:"aff_3_genere", titre:"Coefficient directeur — entraînement infini", niveau:"Facile", points_total:5,
+        genere: true, templateId: "coefficient_directeur_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["$m = \\dfrac{y_B - y_A}{x_B - x_A}$"]
+      },
+      {
         id:"aff_3_1", titre:"Fonctions linéaires et affines — reconnaître", niveau:"Facile", points_total:8,
         questions:[
           {label:"1.", enonce:"Laquelle de ces fonctions est une fonction linéaire ?",
@@ -4312,6 +4324,18 @@ const EXERCICES = {
 
     "Géométrie repérée": [
       {
+        id:"georep_2_genere", titre:"Distance entre deux points — entraînement infini", niveau:"Facile", points_total:5,
+        genere: true, templateId: "distance_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["$AB = \\sqrt{(x_B-x_A)^2 + (y_B-y_A)^2}$"]
+      },
+      {
         id:"georep_2_A", titre:"Vecteurs — coordonnées et opérations", niveau:"Facile", points_total:6,
         questions:[
           {label:"a)", enonce:"$A(2\\,;\\,1)$ et $B(5\\,;\\,4)$. Donne les coordonnées du vecteur $\\overrightarrow{AB}$.", correction:"$\\overrightarrow{AB} = \\binom{5-2}{4-1} = \\binom{3}{3}$", points:2},
@@ -4991,6 +5015,18 @@ const EXERCICES = {
     ],
 
     "Angles & Géométrie": [
+      {
+        id:"ang_6_genere", titre:"Angles d'un triangle — entraînement infini", niveau:"Facile", points_total:5,
+        genere: true, templateId: "angle_triangle_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["La somme des angles d'un triangle vaut toujours $180°$"]
+      },
       {
         id:"ang_6_1", titre:"Angles — mesurer et calculer", niveau:"Facile", points_total:8,
         questions:[
@@ -6132,6 +6168,18 @@ const EXERCICES = {
 
     // ── SUITES ARITHMÉTIQUES ──
     "Suites arithmétiques": [
+      {
+        id:"suite_1_genere", titre:"Terme d'une suite — entraînement infini", niveau:"Facile", points_total:5,
+        genere: true, templateId: "suite_arithmetique_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["$u_n = u_0 + n \\times r$"]
+      },
       {
         id:"suite_1_8", titre:"Suites arithmétiques — reconnaître et calculer", niveau:"Facile", points_total:12,
         questions:[
@@ -8278,6 +8326,10 @@ const TEMPLATES_GENERATEUR = {
   thales_v1: 'exo-thales-generer',
   trigonometrie_v1: 'exo-trigonometrie-generer',
   valeur_absolue_v1: 'exo-valeur-absolue-generer',
+  coefficient_directeur_v1: 'exo-coeff-directeur-generer',
+  distance_v1: 'exo-distance-generer',
+  angle_triangle_v1: 'exo-angle-triangle-generer',
+  suite_arithmetique_v1: 'exo-suite-arithmetique-generer',
 };
 const TEMPLATES_VALIDATEUR = {
   equation_1er_degre_v1: 'exo-equation-valider',
@@ -8297,6 +8349,10 @@ const TEMPLATES_VALIDATEUR = {
   thales_v1: 'exo-thales-valider',
   trigonometrie_v1: 'exo-trigonometrie-valider',
   valeur_absolue_v1: 'exo-valeur-absolue-valider',
+  coefficient_directeur_v1: 'exo-coeff-directeur-valider',
+  distance_v1: 'exo-distance-valider',
+  angle_triangle_v1: 'exo-angle-triangle-valider',
+  suite_arithmetique_v1: 'exo-suite-arithmetique-valider',
 };
 let currentGenTokens = [];
 
@@ -8493,7 +8549,8 @@ async function verifierExerciceGenere(val, q, inp) {
     : currentExercice.id.includes('_2_') ? '2nde'
     : currentExercice.id.includes('_6_') ? '6eme'
     : currentExercice.id.includes('_5_') ? '5eme'
-    : currentExercice.id.includes('_4_') ? '4eme' : '';
+    : currentExercice.id.includes('_4_') ? '4eme'
+    : currentExercice.id.includes('_1_') ? '1ere' : '';
 
   const result = await appelEdgeFunction(slug, 'POST', {
     token: currentGenTokens[currentQuestion],
@@ -8735,7 +8792,8 @@ function showResult() {
       : currentExercice.id.includes('_2_') ? '2nde'
       : currentExercice.id.includes('_6_') ? '6eme'
       : currentExercice.id.includes('_5_') ? '5eme'
-      : currentExercice.id.includes('_4_') ? '4eme' : '';
+      : currentExercice.id.includes('_4_') ? '4eme'
+      : currentExercice.id.includes('_1_') ? '1ere' : '';
     sauvegarderProgression(currentExercice.id, chapitre, niveau, pct, score, totalPoints);
   }
 
