@@ -3226,6 +3226,18 @@ const EXERCICES = {
     // ── 12. THÉORÈME DE THALÈS ──
     "Théorème de Thalès": [
       {
+        id:"thales_3_genere", titre:"Thalès — entraînement infini", niveau:"Facile", points_total:5,
+        genere: true, templateId: "thales_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["$\\dfrac{AB}{AD} = \\dfrac{AC}{AE}$"]
+      },
+      {
         id:"thales_3_1", titre:"Thalès — comprendre et identifier", niveau:"Facile", points_total:8,
         questions:[
           {label:"1.", enonce:"Quelle condition faut-il pour appliquer le théorème de Thalès dans un triangle ?",
@@ -3335,6 +3347,18 @@ const EXERCICES = {
 
     // ── 13. TRIGONOMÉTRIE ──
     "Trigonométrie": [
+      {
+        id:"trigo_3_genere", titre:"Trigonométrie — entraînement infini", niveau:"Facile", points_total:5,
+        genere: true, templateId: "trigonometrie_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["cos = adjacent ÷ hypoténuse ; sin = opposé ÷ hypoténuse"]
+      },
       {
         id:"trigo_3_1", titre:"Trigonométrie — SOH CAH TOA", niveau:"Facile", points_total:8,
         questions:[
@@ -4341,6 +4365,18 @@ const EXERCICES = {
     ],
 
     "Intervalles & Valeur absolue": [
+      {
+        id:"interv_2_genere", titre:"Valeur absolue — entraînement infini", niveau:"Facile", points_total:5,
+        genere: true, templateId: "valeur_absolue_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["$|a - b|$ = distance entre $a$ et $b$ sur la droite graduée"]
+      },
       {
         id:"interv_2_A", titre:"Intervalles et inéquations", niveau:"Facile", points_total:6,
         questions:[
@@ -8239,6 +8275,9 @@ const TEMPLATES_GENERATEUR = {
   pgcd_v1: 'exo-pgcd-generer',
   discriminant_v1: 'exo-discriminant-generer',
   fraction_addition_v1: 'exo-fraction-add-generer',
+  thales_v1: 'exo-thales-generer',
+  trigonometrie_v1: 'exo-trigonometrie-generer',
+  valeur_absolue_v1: 'exo-valeur-absolue-generer',
 };
 const TEMPLATES_VALIDATEUR = {
   equation_1er_degre_v1: 'exo-equation-valider',
@@ -8255,6 +8294,9 @@ const TEMPLATES_VALIDATEUR = {
   pgcd_v1: 'exo-pgcd-valider',
   discriminant_v1: 'exo-discriminant-valider',
   fraction_addition_v1: 'exo-fraction-add-valider',
+  thales_v1: 'exo-thales-valider',
+  trigonometrie_v1: 'exo-trigonometrie-valider',
+  valeur_absolue_v1: 'exo-valeur-absolue-valider',
 };
 let currentGenTokens = [];
 
