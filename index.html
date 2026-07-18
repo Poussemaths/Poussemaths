@@ -2846,6 +2846,18 @@ const EXERCICES = {
     // ── 9. PROBABILITÉS ──
     "Probabilités": [
       {
+        id:"proba_3_genere", titre:"Probabilités — entraînement infini", niveau:"Facile", points_total:5,
+        genere: true, templateId: "probabilite_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["Probabilité = nombre de cas favorables ÷ nombre de cas possibles"]
+      },
+      {
         id:"proba_3_1", titre:"Probabilités — comprendre et définir", niveau:"Facile", points_total:8,
         questions:[
           {label:"1.", enonce:"On lance un dé à 6 faces. Quelle est la probabilité d'obtenir un nombre pair ?",
@@ -3812,6 +3824,18 @@ const EXERCICES = {
     // ── 17. NOMBRES PREMIERS ET DIVISIBILITÉ ──
     "Divisibilité & Nombres premiers": [
       {
+        id:"div_3_genere", titre:"PGCD — entraînement infini", niveau:"Facile", points_total:5,
+        genere: true, templateId: "pgcd_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["Utilise l'algorithme d'Euclide : divisions successives jusqu'au reste nul"]
+      },
+      {
         id:"div_3_1", titre:"Divisibilité — critères et définitions", niveau:"Facile", points_total:8,
         questions:[
           {label:"1.", enonce:"Lequel de ces nombres est divisible par $9$ ?",
@@ -4375,6 +4399,18 @@ const EXERCICES = {
 
     "Second degré": [
       {
+        id:"deg2_2_genere", titre:"Discriminant — entraînement infini", niveau:"Facile", points_total:5,
+        genere: true, templateId: "discriminant_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["$\\Delta = b^2 - 4ac$"]
+      },
+      {
         id:"deg2_2_A", titre:"Discriminant et racines", niveau:"Facile", points_total:6,
         questions:[
           {label:"a)", enonce:"Calcule le discriminant de $x^2 - 5x + 6$.", correction:"$\\Delta = (-5)^2 - 4 \\times 1 \\times 6 = 25 - 24 = 1 > 0$ → deux racines réelles.", points:2},
@@ -4762,6 +4798,18 @@ const EXERCICES = {
     ],
 
     "Fractions": [
+      {
+        id:"frac_6_genere", titre:"Addition de fractions — entraînement infini", niveau:"Facile", points_total:5,
+        genere: true, templateId: "fraction_addition_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["Mets les deux fractions au même dénominateur avant d'additionner"]
+      },
       {
         id:"frac_6_1", titre:"Fractions — lire et comparer", niveau:"Facile", points_total:8,
         questions:[
@@ -8187,6 +8235,10 @@ const TEMPLATES_GENERATEUR = {
   moyenne_v1: 'exo-moyenne-generer',
   volume_pave_v1: 'exo-volume-generer',
   relatifs_v1: 'exo-relatifs-generer',
+  probabilite_v1: 'exo-probabilite-generer',
+  pgcd_v1: 'exo-pgcd-generer',
+  discriminant_v1: 'exo-discriminant-generer',
+  fraction_addition_v1: 'exo-fraction-add-generer',
 };
 const TEMPLATES_VALIDATEUR = {
   equation_1er_degre_v1: 'exo-equation-valider',
@@ -8199,6 +8251,10 @@ const TEMPLATES_VALIDATEUR = {
   moyenne_v1: 'exo-moyenne-valider',
   volume_pave_v1: 'exo-volume-valider',
   relatifs_v1: 'exo-relatifs-valider',
+  probabilite_v1: 'exo-probabilite-valider',
+  pgcd_v1: 'exo-pgcd-valider',
+  discriminant_v1: 'exo-discriminant-valider',
+  fraction_addition_v1: 'exo-fraction-add-valider',
 };
 let currentGenTokens = [];
 
