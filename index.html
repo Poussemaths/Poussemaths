@@ -1541,10 +1541,8 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
         <div class="db-section-header">
           <div class="db-section-titre">📋 Suivi par élève</div>
           <div class="db-classe-selector">
-            <select id="db-classe-select" onchange="renderTableauEleves()">
-              <option value="3B">3ème B</option>
-              <option value="3A">3ème A</option>
-              <option value="2A">2nde A</option>
+            <select id="db-classe-select" onchange="changerClasseDashboard()">
+              <option value="">Chargement…</option>
             </select>
           </div>
         </div>
@@ -7254,61 +7252,90 @@ document.addEventListener('keydown', e => {
 window.addEventListener('load', initSupabase);
 
 // ═══════════════════════════════════════
-//  TABLEAU DE BORD PROF
+//  TABLEAU DE BORD PROF — DONNÉES RÉELLES SUPABASE
 // ═══════════════════════════════════════
 
-// Données fictives réalistes pour la démo
-const DB_CLASSES = {
-  '3B': {
-    nom: '3ème B',
-    eleves: [
-      { nom:'Sophie B.',    initiales:'SB', couleur:'#F59E0B', ex:24, score:91, dernier:'Équations',       jours:0,  actif:true  },
-      { nom:'Karim M.',     initiales:'KM', couleur:'#6B7280', ex:21, score:87, dernier:'Probabilités',    jours:1,  actif:true  },
-      { nom:'Léa R.',       initiales:'LR', couleur:'#D97706', ex:19, score:82, dernier:'Fonctions',       jours:1,  actif:true  },
-      { nom:'Yasmine R.',     initiales:'YR', couleur:'#16A34A', ex:18, score:78, dernier:'Thalès',          jours:2,  actif:true  },
-      { nom:'Yassine B.',   initiales:'YB', couleur:'#4A90D9', ex:16, score:74, dernier:'Inéquations',     jours:2,  actif:true  },
-      { nom:'Nour A.',      initiales:'NA', couleur:'#E84040', ex:15, score:70, dernier:'Pythagore',       jours:3,  actif:true  },
-      { nom:'Adam L.',      initiales:'AL', couleur:'#7C3AED', ex:14, score:68, dernier:'Trigonométrie',   jours:3,  actif:true  },
-      { nom:'Sara T.',      initiales:'ST', couleur:'#0EA5E9', ex:12, score:63, dernier:'Volumes',         jours:4,  actif:true  },
-      { nom:'Mehdi C.',     initiales:'MC', couleur:'#D97706', ex:8,  score:45, dernier:'Statistiques',    jours:7,  actif:false, alerte:'En difficulté sur les statistiques. Inactif depuis 7 jours.' },
-      { nom:'Imane H.',     initiales:'IH', couleur:'#6B7280', ex:6,  score:38, dernier:'Équations',       jours:9,  actif:false, alerte:'Bloqué sur les équations. N\'a pas terminé un seul exercice cette semaine.' },
-      { nom:'Thomas M.',    initiales:'TM', couleur:'#F59E0B', ex:10, score:52, dernier:'Inéquations',     jours:5,  actif:false, alerte:'Régression notable : score passé de 70% à 52% en 2 semaines.' },
-      { nom:'Fatima Z.',    initiales:'FZ', couleur:'#16A34A', ex:17, score:76, dernier:'Proportionnalité',jours:2,  actif:true  },
-      { nom:'Rayan S.',     initiales:'RS', couleur:'#E84040', ex:13, score:61, dernier:'Thalès',          jours:4,  actif:true  },
-      { nom:'Inès B.',      initiales:'IB', couleur:'#7C3AED', ex:20, score:84, dernier:'Fonctions',       jours:1,  actif:true  },
-    ]
-  },
-  '3A': {
-    nom: '3ème A',
-    eleves: [
-      { nom:'Ali K.',       initiales:'AK', couleur:'#4A90D9', ex:22, score:88, dernier:'Systèmes',        jours:1,  actif:true  },
-      { nom:'Chloé D.',     initiales:'CD', couleur:'#F59E0B', ex:20, score:85, dernier:'Probabilités',    jours:0,  actif:true  },
-      { nom:'Omar B.',      initiales:'OB', couleur:'#D97706', ex:18, score:79, dernier:'Thalès',          jours:2,  actif:true  },
-      { nom:'Lina M.',      initiales:'LM', couleur:'#16A34A', ex:15, score:71, dernier:'Trigonométrie',   jours:3,  actif:true  },
-      { nom:'Hamza R.',     initiales:'HR', couleur:'#EF4444', ex:7,  score:41, dernier:'Équations',       jours:10, actif:false, alerte:'Inactif depuis 10 jours. Aucun exercice complété ce mois.' },
-    ]
-  },
-  '2A': {
-    nom: '2nde A',
-    eleves: [
-      { nom:'Jade L.',      initiales:'JL', couleur:'#7C3AED', ex:19, score:86, dernier:'Second degré',    jours:1,  actif:true  },
-      { nom:'Nassim A.',    initiales:'NA', couleur:'#4A90D9', ex:16, score:77, dernier:'Fonctions ref.',  jours:2,  actif:true  },
-      { nom:'Emma T.',      initiales:'ET', couleur:'#F59E0B', ex:14, score:72, dernier:'Statistiques',    jours:2,  actif:true  },
-      { nom:'Bilal M.',     initiales:'BM', couleur:'#EF4444', ex:5,  score:33, dernier:'Intervalles',     jours:8,  actif:false, alerte:'Très en difficulté sur les intervalles. Score < 35%.' },
-    ]
-  }
-};
+let profClasses = [];
+let dbDonneesClasse = { eleves: [], chapitresStats: [] };
 
-const DB_CHAPITRES_STATS = [
-  { nom:'Équations', pct:82, couleur:'#4A90D9' },
-  { nom:'Probabilités', pct:76, couleur:'#22C55E' },
-  { nom:'Fonctions affines', pct:71, couleur:'#4A90D9' },
-  { nom:'Pythagore', pct:68, couleur:'#F59E0B' },
-  { nom:'Thalès', pct:64, couleur:'#F59E0B' },
-  { nom:'Trigonométrie', pct:59, couleur:'#F59E0B' },
-  { nom:'Statistiques', pct:54, couleur:'#EF4444' },
-  { nom:'Systèmes', pct:48, couleur:'#EF4444' },
-];
+async function chargerClassesProf() {
+  const sel = document.getElementById('db-classe-select');
+  if(!supabaseClient) { profClasses = []; if(sel) sel.innerHTML = '<option value="">Supabase indisponible</option>'; return; }
+
+  const profUserId = sessionStorage.getItem('prof_user_id');
+  if(!profUserId) { profClasses = []; if(sel) sel.innerHTML = '<option value="">Non connecté</option>'; return; }
+
+  const { data, error } = await supabaseClient.from('classes').select('*').eq('prof_id', profUserId);
+  profClasses = data || [];
+
+  if(sel) {
+    sel.innerHTML = profClasses.length
+      ? profClasses.map(c => `<option value="${c.code}">${c.nom}</option>`).join('')
+      : '<option value="">Aucune classe créée</option>';
+  }
+}
+
+async function chargerDonneesClasse() {
+  const code = document.getElementById('db-classe-select')?.value;
+  if(!code || !supabaseClient) { dbDonneesClasse = { eleves: [], chapitresStats: [] }; return; }
+
+  const { data: eleves } = await supabaseClient.from('eleves').select('id,nom,prenom').eq('code_classe', code);
+  const eleveIds = (eleves || []).map(e => e.id);
+
+  let progRows = [];
+  if(eleveIds.length) {
+    const { data: prog } = await supabaseClient.from('progression').select('eleve_id,chapitre,score,completed_at').in('eleve_id', eleveIds);
+    progRows = prog || [];
+  }
+
+  const maintenant = new Date();
+  const couleurs = ['#4A90D9','#E84040','#16A34A','#F59E0B','#7C3AED','#D97706'];
+
+  const elevesEnrichis = (eleves || []).map((e, i) => {
+    const lignes = progRows.filter(p => p.eleve_id === e.id);
+    const ex = lignes.length;
+    const score = ex > 0 ? Math.round(lignes.reduce((s,p) => s + p.score, 0) / ex) : 0;
+    const derniere = lignes.reduce((max,p) => (!max || p.completed_at > max.completed_at) ? p : max, null);
+    const jours = derniere ? Math.floor((maintenant - new Date(derniere.completed_at)) / 86400000) : null;
+
+    let alerte = null;
+    if(jours !== null && jours > 5) alerte = `Inactif depuis ${jours} jour${jours>1?'s':''}.`;
+    else if(ex >= 3 && score < 50) alerte = `En difficulté : score moyen de ${score}%.`;
+
+    return {
+      nom: `${e.prenom || ''} ${e.nom || ''}`.trim() || 'Élève',
+      initiales: (e.prenom?.[0] || '') + (e.nom?.[0] || ''),
+      couleur: couleurs[i % couleurs.length],
+      ex, score,
+      dernier: derniere ? derniere.chapitre : '—',
+      jours,
+      actif: jours !== null && jours <= 5,
+      alerte,
+    };
+  });
+
+  const parChapitre = {};
+  progRows.forEach(p => {
+    if(!parChapitre[p.chapitre]) parChapitre[p.chapitre] = [];
+    parChapitre[p.chapitre].push(p.score);
+  });
+  const chapitresStats = Object.entries(parChapitre)
+    .map(([nom, scores]) => {
+      const pct = Math.round(scores.reduce((a,b) => a+b, 0) / scores.length);
+      const couleur = pct >= 70 ? '#22C55E' : pct >= 50 ? '#F59E0B' : '#EF4444';
+      return { nom, pct, couleur };
+    })
+    .sort((a,b) => b.pct - a.pct);
+
+  dbDonneesClasse = { eleves: elevesEnrichis, chapitresStats };
+}
+
+async function changerClasseDashboard() {
+  await chargerDonneesClasse();
+  renderAlertes();
+  renderTableauEleves();
+  renderChapitresChart();
+}
 
 function switchProfTab(tab) {
   document.querySelectorAll('.prof-tab').forEach(t => t.classList.remove('active'));
@@ -7326,15 +7353,16 @@ function showDashboard() {
   }, 100);
 }
 
-function renderTableauBord() {
+async function renderTableauBord() {
+  await chargerClassesProf();
+  await chargerDonneesClasse();
   renderAlertes();
   renderTableauEleves();
   renderChapitresChart();
 }
 
 function renderAlertes() {
-  const classe = document.getElementById('db-classe-select')?.value || '3B';
-  const eleves = DB_CLASSES[classe]?.eleves || [];
+  const eleves = dbDonneesClasse.eleves || [];
   const alertes = eleves.filter(e => e.alerte);
   const el = document.getElementById('db-alertes-list');
   if(!el) return;
@@ -7351,7 +7379,7 @@ function renderAlertes() {
         <div class="db-alerte-nom">${e.nom}</div>
         <div class="db-alerte-detail">⚠️ ${e.alerte}</div>
       </div>
-      <span class="db-alerte-badge">Inactif ${e.jours}j</span>
+      <span class="db-alerte-badge">${e.jours === null ? 'Aucune activité' : `Inactif ${e.jours}j`}</span>
     </div>
   `).join('');
 
@@ -7359,19 +7387,24 @@ function renderAlertes() {
 }
 
 function renderTableauEleves() {
-  const classe = document.getElementById('db-classe-select')?.value || '3B';
-  const data = DB_CLASSES[classe];
-  if(!data) return;
-
-  const eleves = [...data.eleves].sort((a,b) => b.score - a.score);
+  const eleves = [...(dbDonneesClasse.eleves || [])].sort((a,b) => b.score - a.score);
   const tbody = document.getElementById('db-tbody');
   if(!tbody) return;
+
+  if(eleves.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;color:var(--muted);padding:2rem">Aucun élève inscrit dans cette classe pour l'instant.</td></tr>`;
+    document.getElementById('db-nb-eleves').textContent = 0;
+    document.getElementById('db-moyenne').textContent = '—';
+    document.getElementById('db-ex-semaine').textContent = 0;
+    document.getElementById('db-alertes').textContent = 0;
+    return;
+  }
 
   tbody.innerHTML = eleves.map(e => {
     const scoreClass = e.score >= 75 ? 'vert' : e.score >= 55 ? 'amber' : 'rouge';
     const barColor = e.score >= 75 ? '#22C55E' : e.score >= 55 ? '#F59E0B' : '#EF4444';
-    const activiteClass = e.jours === 0 ? 'active' : e.jours > 5 ? 'warning' : '';
-    const activiteTxt = e.jours === 0 ? "Aujourd'hui" : e.jours === 1 ? "Hier" : `Il y a ${e.jours}j`;
+    const activiteClass = e.jours === null ? '' : e.jours === 0 ? 'active' : e.jours > 5 ? 'warning' : '';
+    const activiteTxt = e.jours === null ? 'Aucune activité' : e.jours === 0 ? "Aujourd'hui" : e.jours === 1 ? "Hier" : `Il y a ${e.jours}j`;
 
     return `
       <tr>
@@ -7413,7 +7446,12 @@ function renderTableauEleves() {
 function renderChapitresChart() {
   const el = document.getElementById('db-chapitres-chart');
   if(!el) return;
-  el.innerHTML = DB_CHAPITRES_STATS.map(c => `
+  const stats = dbDonneesClasse.chapitresStats || [];
+  if(stats.length === 0) {
+    el.innerHTML = '<div style="color:var(--muted);font-size:13px;padding:8px">Aucune donnée pour l\'instant.</div>';
+    return;
+  }
+  el.innerHTML = stats.map(c => `
     <div class="db-chap-row">
       <div class="db-chap-nom">${c.nom}</div>
       <div class="db-chap-bar-wrap">
@@ -7425,13 +7463,13 @@ function renderChapitresChart() {
 }
 
 function exportCSV() {
-  const classe = document.getElementById('db-classe-select')?.value || '3B';
-  const data = DB_CLASSES[classe];
-  if(!data) return;
+  const eleves = dbDonneesClasse.eleves || [];
+  if(eleves.length === 0) return;
+  const classeNom = profClasses.find(c => c.code === document.getElementById('db-classe-select')?.value)?.nom || 'classe';
 
   let csv = 'Nom,Exercices,Score (%),Dernier chapitre,Activité\n';
-  data.eleves.forEach(e => {
-    const activ = e.jours === 0 ? "Aujourd'hui" : `Il y a ${e.jours} jours`;
+  eleves.forEach(e => {
+    const activ = e.jours === null ? 'Aucune activité' : e.jours === 0 ? "Aujourd'hui" : `Il y a ${e.jours} jours`;
     csv += `"${e.nom}",${e.ex},${e.score},"${e.dernier}","${activ}"\n`;
   });
 
@@ -7439,7 +7477,7 @@ function exportCSV() {
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
-  a.download = `poussemaths_${data.nom.replace(' ','_')}.csv`;
+  a.download = `poussemaths_${classeNom.replace(/\s+/g,'_')}.csv`;
   a.click();
   URL.revokeObjectURL(url);
 }
