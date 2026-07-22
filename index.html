@@ -2254,6 +2254,18 @@ const EXERCICES = {
     // ── 5. INÉQUATIONS ──
     "Inéquations": [
       {
+        id:"ineq_3_genere", titre:"Inéquations — entraînement infini", niveau:"Facile", points_total:5,
+        genere: true, templateId: "inequation_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["En divisant par un nombre négatif, le sens de l'inégalité s'inverse"]
+      },
+      {
         id:"ineq_3_1", titre:"Inéquations — comprendre le sens", niveau:"Facile", points_total:8,
         questions:[
           {label:"1.", enonce:"Laquelle de ces valeurs vérifie l'inéquation $3x - 1 > 5$ ?",
@@ -2592,6 +2604,18 @@ const EXERCICES = {
 
     // ── 7. FONCTIONS — GÉNÉRALITÉS ──
     "Fonctions — généralités": [
+      {
+        id:"fonc_3_genere", titre:"Fonctions — entraînement infini", niveau:"Facile", points_total:5,
+        genere: true, templateId: "fonction_generalites_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["Image de $x$ par $f$ : calcule $f(x)$. Antécédent de $y$ par $f$ : résous $f(x)=y$"]
+      },
       {
         id:"fonc_3_1", titre:"Fonctions — vocabulaire et images", niveau:"Facile", points_total:8,
         questions:[
@@ -8625,6 +8649,8 @@ const TEMPLATES_GENERATEUR = {
   identite_remarquable_v1: 'exo-identite-remarquable-generer',
   suite_geometrique_v1: 'exo-suite-geometrique-generer',
   suite_premiers_termes_v1: 'exo-suite-premiers-termes-generer',
+  inequation_v1: 'exo-inequation-generer',
+  fonction_generalites_v1: 'exo-fonction-generalites-generer',
 };
 const TEMPLATES_VALIDATEUR = {
   equation_1er_degre_v1: 'exo-equation-valider',
@@ -8655,6 +8681,8 @@ const TEMPLATES_VALIDATEUR = {
   identite_remarquable_v1: 'exo-identite-remarquable-valider',
   suite_geometrique_v1: 'exo-suite-geometrique-valider',
   suite_premiers_termes_v1: 'exo-suite-premiers-termes-valider',
+  inequation_v1: 'exo-inequation-valider',
+  fonction_generalites_v1: 'exo-fonction-generalites-valider',
 };
 let currentGenTokens = [];
 
@@ -8677,8 +8705,25 @@ async function chargerInstanceGeneree(index) {
   const slug = TEMPLATES_GENERATEUR[currentExercice.templateId];
   const instance = await appelEdgeFunction(slug, 'POST');
   currentGenTokens[index] = instance.token;
-  currentExercice.questions[index].enonce = instance.enonce;
-  currentExercice.questions[index].correction = '';
+  const q = currentExercice.questions[index];
+  q.enonce = instance.enonce;
+  q.correction = '';
+  if(instance.choix) {
+    q.type = 'qcm';
+    q.choix = instance.choix;
+  } else {
+    q.type = 'libre';
+    delete q.choix;
+  }
+}
+
+function detecterNiveauDepuisId(id) {
+  return id.includes('_3_') ? '3eme'
+    : id.includes('_2_') ? '2nde'
+    : id.includes('_6_') ? '6eme'
+    : id.includes('_5_') ? '5eme'
+    : id.includes('_4_') ? '4eme'
+    : id.includes('_1_') ? '1ere' : '';
 }
 
 async function chargerExerciceGenere() {
@@ -8804,6 +8849,11 @@ function verifierQCM(idx) {
   if(reponseDonnee) return;
   reponseDonnee = true;
 
+  if(currentExercice.genere) {
+    verifierQCMGenere(idx);
+    return;
+  }
+
   const q = currentExercice.questions[currentQuestion];
   const bonIdx = q.bonneReponseIdx !== undefined ? q.bonneReponseIdx : q.choix.indexOf(q.bonneReponse);
   const correct = idx === bonIdx;
@@ -8817,6 +8867,36 @@ function verifierQCM(idx) {
 
   afficherCorrection(correct, q);
   if(correct) { score += q.points; pointsGlobal += 10; exFaits++; }
+  updateEleveStats();
+}
+
+// ── VÉRIFICATION QCM (EXERCICE GÉNÉRÉ, validation serveur) ──
+async function verifierQCMGenere(idx) {
+  const q = currentExercice.questions[currentQuestion];
+  const slug = TEMPLATES_VALIDATEUR[currentExercice.templateId];
+  const chapitre = currentExercice.titre || '';
+  const niveau = detecterNiveauDepuisId(currentExercice.id);
+
+  const result = await appelEdgeFunction(slug, 'POST', {
+    token: currentGenTokens[currentQuestion],
+    reponse: idx,
+    exercice_id: `${currentExercice.id}_${currentQuestion + 1}`,
+    chapitre, niveau,
+  });
+
+  const correct = !!result.correcte;
+  const bonIdx = result.bonIdx;
+  q.correction = result.correction || '';
+
+  document.querySelectorAll('.qcm-choix').forEach((btn, i) => {
+    btn.disabled = true;
+    if(i === bonIdx) btn.classList.add('qcm-correct');
+    else if(i === idx && !correct) btn.classList.add('qcm-wrong');
+  });
+
+  afficherCorrection(correct, q);
+  score += correct ? q.points : 0;
+  if(correct) { pointsGlobal += 10; exFaits++; }
   updateEleveStats();
 }
 
@@ -8847,12 +8927,7 @@ function verifier() {
 async function verifierExerciceGenere(val, q, inp) {
   const slug = TEMPLATES_VALIDATEUR[currentExercice.templateId];
   const chapitre = currentExercice.titre || '';
-  const niveau = currentExercice.id.includes('_3_') ? '3eme'
-    : currentExercice.id.includes('_2_') ? '2nde'
-    : currentExercice.id.includes('_6_') ? '6eme'
-    : currentExercice.id.includes('_5_') ? '5eme'
-    : currentExercice.id.includes('_4_') ? '4eme'
-    : currentExercice.id.includes('_1_') ? '1ere' : '';
+  const niveau = detecterNiveauDepuisId(currentExercice.id);
 
   const result = await appelEdgeFunction(slug, 'POST', {
     token: currentGenTokens[currentQuestion],
@@ -9090,12 +9165,7 @@ function showResult() {
   // (les exercices générés sont déjà sauvegardés côté serveur par verifierExerciceGenere)
   if(currentEleve && currentExercice && !currentExercice.genere) {
     const chapitre = currentExercice.titre || '';
-    const niveau = currentExercice.id.includes('_3_') ? '3eme'
-      : currentExercice.id.includes('_2_') ? '2nde'
-      : currentExercice.id.includes('_6_') ? '6eme'
-      : currentExercice.id.includes('_5_') ? '5eme'
-      : currentExercice.id.includes('_4_') ? '4eme'
-      : currentExercice.id.includes('_1_') ? '1ere' : '';
+    const niveau = detecterNiveauDepuisId(currentExercice.id);
     sauvegarderProgression(currentExercice.id, chapitre, niveau, pct, score, totalPoints);
   }
 
