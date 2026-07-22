@@ -8882,6 +8882,7 @@ async function verifierQCMGenere(idx) {
     reponse: idx,
     exercice_id: `${currentExercice.id}_${currentQuestion + 1}`,
     chapitre, niveau,
+    enonce: q.enonce, choix: q.choix,
   });
 
   const correct = !!result.correcte;
@@ -8934,6 +8935,7 @@ async function verifierExerciceGenere(val, q, inp) {
     reponse: val,
     exercice_id: `${currentExercice.id}_${currentQuestion + 1}`,
     chapitre, niveau,
+    enonce: q.enonce,
   });
 
   const correct = !!result.correcte;

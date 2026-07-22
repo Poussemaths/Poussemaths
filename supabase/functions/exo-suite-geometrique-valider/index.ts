@@ -50,7 +50,7 @@ Deno.serve(async (req) => {
     const userId = decodeJwtSub(jwt);
     if (!userId) return new Response(JSON.stringify({ error: "utilisateur non authentifie" }), { status: 401, headers: corsHeaders });
 
-    const { token, reponse, exercice_id, chapitre, niveau } = await req.json();
+    const { token, reponse, exercice_id, chapitre, niveau, enonce } = await req.json();
     if (!token || reponse === undefined) return new Response(JSON.stringify({ error: "token et reponse requis" }), { status: 400, headers: corsHeaders });
 
     let payload;
@@ -84,6 +84,9 @@ Deno.serve(async (req) => {
         niveau: niveau ?? "1ere",
         score, points_obtenus: correcte ? 1 : 0, points_total: 1,
         completed_at: new Date().toISOString(),
+          enonce: enonce ?? null,
+          reponse_donnee: String(reponse),
+          reponse_attendue: String(payload.x),
       }),
     });
 

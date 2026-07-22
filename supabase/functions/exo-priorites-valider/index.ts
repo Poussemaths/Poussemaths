@@ -67,7 +67,7 @@ Deno.serve(async (req) => {
       });
     }
 
-    const { token, reponse, exercice_id, chapitre, niveau } = await req.json();
+    const { token, reponse, exercice_id, chapitre, niveau, enonce } = await req.json();
     if (!token || reponse === undefined) {
       return new Response(JSON.stringify({ error: "token et reponse requis" }), {
         status: 400,
@@ -123,6 +123,9 @@ Deno.serve(async (req) => {
           points_obtenus: correcte ? 1 : 0,
           points_total: 1,
           completed_at: new Date().toISOString(),
+          enonce: enonce ?? null,
+          reponse_donnee: String(reponse),
+          reponse_attendue: String(payload.x),
         }),
       },
     );
