@@ -9263,18 +9263,20 @@ const GENERATEURS = {
           };
         },
         moyen: () => {
-          const a = rand(2,6), b = rand(1,8), c = rand(1,5), d = rand(c*10, c*10+20);
-          const x = rand(1,8);
-          const rhs = c*x + d;
-          const lhs_const = b;
-          // ax + b = cx + d => (a-c)x = d-b
-          const A = a+c, B = rand(2,10);
-          const X = rand(1,7);
-          const RHS = A*X + B;
+          const X = rand(1,8);
+          const a = rand(2,7);
+          let c = rand(2,7);
+          while (c === a) c = rand(2,7);
+          const d = rand(1,15);
+          const b = d + (c-a)*X;
+          const bStr = b >= 0 ? `+ ${b}` : `- ${Math.abs(b)}`;
+          const dStr = d >= 0 ? `+ ${d}` : `- ${Math.abs(d)}`;
+          const diffAC = a - c;
+          const diffACStr = diffAC >= 0 ? `${diffAC}` : `(${diffAC})`;
           return {
-            enonce: `Résous : $${a}x + ${B} = ${c}x + ${RHS - a*X}$... soit $${a}x - ${c}x = ${RHS - a*X - B}$`,
+            enonce: `Résous : $${a}x ${bStr} = ${c}x ${dStr}$`,
             reponse: X,
-            correction: `$${a-c > 0 ? a-c : '('+( a-c)+')'}x = ${RHS - a*X - B + (a-c)*0}$... $x = ${X}$`,
+            correction: `$${a}x - ${c}x = ${d} - (${b}) \\Rightarrow ${diffACStr}x = ${d-b} \\Rightarrow x = ${X}$`,
             type: 'nombre'
           };
         },
@@ -9332,7 +9334,7 @@ const GENERATEURS = {
         };
       }
       const a=rand(1,5),b=rand(2,8),c=rand(1,5),d=rand(2,8);
-      const num=a*d, den=b*c, g=pgcd(num,den);
+      const num=a*c, den=b*d, g=pgcd(num,den);
       return {
         enonce: `Calcule : $\\dfrac{${a}}{${b}} \\times \\dfrac{${c}}{${d}}$`,
         reponse: `${num/g}/${den/g}`,
@@ -9360,7 +9362,7 @@ const GENERATEURS = {
       if(diff === 'moyen') {
         const old = rand(4,15)*10;
         const p = [5,10,15,20,25][rand(0,4)];
-        const nouveau = old * (1 + p/100);
+        const nouveau = Math.round(old * (1 + p/100) * 100) / 100;
         return {
           enonce: `Un article à $${old}$€ augmente de $${p}\\%$. Nouveau prix ?`,
           reponse: nouveau,
@@ -9455,7 +9457,7 @@ const GENERATEURS = {
         return { enonce:`Calcule : $${b}^${e}$`, reponse:Math.pow(b,e), correction:`$${b}^${e} = ${Math.pow(b,e)}$`, type:'nombre' };
       }
       const b = rand(2,4), e1 = rand(2,4), e2 = rand(1,3);
-      return { enonce:`Simplifie : $${b}^${e1} \\times ${b}^${e2}$`, reponse:e1+e2, correction:`$${b}^{${e1}+${e2}} = ${b}^{${e1+e2}}$`, type:'nombre' };
+      return { enonce:`Simplifie $${b}^${e1} \\times ${b}^${e2}$ sous la forme $${b}^n$. Donne la valeur de $n$.`, reponse:e1+e2, correction:`$${b}^{${e1}+${e2}} = ${b}^{${e1+e2}}$ donc $n=${e1+e2}$`, type:'nombre' };
     }
   },
 
@@ -9494,14 +9496,15 @@ const GENERATEURS = {
     generer(diff) {
       const old = rand(4,20)*10;
       const t = [5,10,15,20,25][rand(0,4)];
-      const nouveau = old * (1 + t/100);
+      const nouveau = Math.round(old * (1 + t/100) * 100) / 100;
       if(diff === 'facile') {
         return { enonce:`Prix $${old}$€, hausse de $${t}\\%$. Nouveau prix ?`, reponse:nouveau, correction:`$${old} \\times ${1+t/100} = ${nouveau}$€`, type:'nombre' };
       }
       const t2 = [5,10,15][rand(0,2)];
       const cm = Math.round((1+t/100)*(1-t2/100)*1000)/1000;
       const tg = Math.round((cm-1)*1000)/10;
-      return { enonce:`Hausse $${t}\\%$ puis baisse $${t2}\\%$. Taux global (%) ?`, reponse:tg, correction:`$(1{,}${t/100*100|0 < 10 ? '0'+(t/100*100|0) : t/100*100|0}) \\times (0{,}${100-t2}) = ${cm}$ soit $${tg}\\%$`, type:'nombre' };
+      const tPad = t < 10 ? '0'+t : `${t}`;
+      return { enonce:`Hausse $${t}\\%$ puis baisse $${t2}\\%$. Taux global (%) ?`, reponse:tg, correction:`$(1{,}${tPad}) \\times (0{,}${100-t2}) = ${cm}$ soit $${tg}\\%$`, type:'nombre' };
     }
   },
 
