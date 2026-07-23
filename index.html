@@ -7781,7 +7781,10 @@ const CM_THEMES = {
     gen: () => {
       const pcts = [10,20,25,50,75];
       const p = pcts[rand(0,pcts.length-1)];
-      const n = rand(2,20)*10;
+      // n multiple de 20 (donc de 4) pour garantir un resultat entier exact avec
+      // 25% et 75% aussi (n*p/100 pouvait valoir X,5 avec l'ancien pas de 10,
+      // et Math.round arrondissait alors la cle de correction elle-meme a tort).
+      const n = rand(1,10)*20;
       return { q: `${p}% de ${n} = ?`, r: Math.round(n*p/100) };
     }
   },
@@ -8089,6 +8092,7 @@ document.addEventListener('keydown', (e) => {
 // ═══════════════════════════════════════
 let cmPartSessionId = null;
 let cmPartParticipantId = null;
+let cmPartReponseSoumise = null;
 let cmPartChannel = null;
 let cmPartIndex = -1;
 let cmPartAnswered = false;
@@ -8170,6 +8174,7 @@ function traiterEtatCMParticipant(payload) {
   if(payload.statut === 'en_cours') {
     cmPartIndex = payload.index;
     cmPartAnswered = false;
+    cmPartReponseSoumise = null;
     document.getElementById('cm-part-attente').style.display = 'none';
     document.getElementById('cm-part-fin').style.display = 'none';
     document.getElementById('cm-part-question').style.display = 'block';
@@ -8183,7 +8188,11 @@ function traiterEtatCMParticipant(payload) {
   } else if(payload.statut === 'reponse_visible') {
     document.getElementById('cm-part-input').disabled = true;
     document.getElementById('cm-part-btn').disabled = true;
-    const donnee = parseFloat(document.getElementById('cm-part-input').value.trim().replace(',', '.'));
+    // Utilise la reponse effectivement soumise (memorisee a l'envoi), jamais une
+    // relecture du champ au moment de la revelation : le champ n'etant plus
+    // modifiable des la soumission, une relecture tardive pouvait donner une
+    // valeur perimee/differente si l'eleve avait retouche le champ entre-temps.
+    const donnee = cmPartReponseSoumise !== null ? parseFloat(cmPartReponseSoumise.replace(',', '.')) : NaN;
     const correct = !cmPartAnswered ? false : (!isNaN(donnee) && Math.abs(donnee - payload.reponse) < 0.01);
     cmPartHistorique.push({ index: payload.index, correct, repondu: cmPartAnswered });
     const feedback = document.getElementById('cm-part-feedback');
@@ -8202,7 +8211,9 @@ async function soumettreReponseCM() {
   const val = document.getElementById('cm-part-input').value.trim();
   if(!val) return;
   cmPartAnswered = true;
+  cmPartReponseSoumise = val;
   document.getElementById('cm-part-btn').disabled = true;
+  document.getElementById('cm-part-input').disabled = true;
   await supabaseClient.from('reponses_session').insert({
     session_id: cmPartSessionId, participant_id: cmPartParticipantId,
     question_index: cmPartIndex, reponse: val,
