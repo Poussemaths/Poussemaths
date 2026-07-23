@@ -9022,32 +9022,50 @@ function verifierReponse(userRaw, correctionRaw) {
 
   // ── Extraire le RÉSULTAT FINAL de la correction ──
   // On cherche la dernière valeur numérique après le dernier = ou ≈
+  // IMPORTANT : une fraction \dfrac{a}{b} en fin de segment doit être calculée
+  // (a/b), pas coupée en deux nombres séparés par le nettoyage LaTeX générique —
+  // sinon "...=\dfrac{6}{7}$" faisait extraire "7" (juste le dénominateur) au lieu
+  // de 0,857, rejetant à tort toute réponse fractionnaire pourtant correcte.
   const extraireResultatFinal = (correction) => {
-    // Nettoyer le LaTeX
-    const c = correction
+    // Nettoyage qui PRÉSERVE la structure \dfrac{a}{b} (pas de suppression \\[a-zA-Z]+ ici)
+    const cPreserve = correction
       .replace(/\$([^$]+)\$/g, ' $1 ')
       .replace(/\{,\}/g, '.')
-      .replace(/\\[a-zA-Z]+/g, ' ')
-      .replace(/[{}]/g, ' ')
       .replace(/[−–]/g, '-')
       .replace(/(\d)\s+(\d)/g, '$1$2')  // supprimer espaces milliers
       .replace(/(\d)\s+(\d)/g, '$1$2'); // double passe pour "1 000 000"
 
-    // Chercher toutes les expressions après un =
-    const parties = c.split(/[=≈→]/);
+    const parties = cPreserve.split(/[=≈→]/);
     const resultats = [];
 
     for(const partie of parties) {
       const p = partie.trim();
-      // Chercher un nombre à la fin de chaque partie
-      const matchFin = p.match(/(-?\d+(?:[.,]\d+)?)\s*$/);
-      if(matchFin) {
-        resultats.push(parseFloat(matchFin[1].replace(',','.')));
+
+      // Priorité : une fraction \dfrac{a}{b} ou \frac{a}{b} tout à la fin du segment
+      const matchDfrac = p.match(/\\d?frac\{(-?\d+)\}\{(-?\d+)\}\s*$/);
+      if(matchDfrac) {
+        const den = parseFloat(matchDfrac[2]);
+        if(den !== 0) { resultats.push(parseFloat(matchDfrac[1]) / den); continue; }
       }
-      // Chercher aussi les fractions à la fin
-      const matchFrac = p.match(/(-?\d+)\s*\/\s*(\d+)\s*$/);
+
+      // Sinon, un nombre simple à la fin (après avoir retiré les commandes LaTeX restantes).
+      // \\[a-zA-Z]+ ne retire QUE les commandes-mots (\dfrac, \times...) — un symbole
+      // LaTeX échappé comme \% ("...=60\%$") n'a pas de lettre et lui échappait,
+      // cassant l'extraction du "60" final. Retiré explicitement en plus.
+      // Idem pour une unité en texte libre APRÈS le $ fermant ("...=10$ cm") : très
+      // fréquent en géométrie (Pythagore, Thalès, volumes...), ça faisait retomber
+      // l'extraction sur une valeur intermédiaire fausse au lieu du résultat final.
+      const UNITE_RE = 'cm²|cm³|dm³|km\\/h|m\\/s|mL|mg|min|cm|dm|km|mm|kg|m²|m³|m|g|s|h|°|%|€';
+      const pClean = p.replace(/\\[a-zA-Z]+/g, ' ').replace(/\\[%$&_#]/g, ' ').replace(/[{}]/g, ' ')
+        .replace(new RegExp(`\\s*(?:${UNITE_RE})\\s*$`, 'i'), '');
+      const matchFin = pClean.match(/(-?\d+(?:\.\d+)?)\s*$/);
+      if(matchFin) { resultats.push(parseFloat(matchFin[1])); continue; }
+
+      // Ou une fraction simple "a/b" (sans \dfrac) à la fin
+      const matchFrac = pClean.match(/(-?\d+)\s*\/\s*(-?\d+)\s*$/);
       if(matchFrac) {
-        resultats.push(parseFloat(matchFrac[1]) / parseFloat(matchFrac[2]));
+        const den = parseFloat(matchFrac[2]);
+        if(den !== 0) resultats.push(parseFloat(matchFrac[1]) / den);
       }
     }
 
@@ -9057,13 +9075,21 @@ function verifierReponse(userRaw, correctionRaw) {
 
   // Extraire aussi tous les nombres pour les cas multi-réponses
   const extraireTousNombres = (correction) => {
+    const nums = [];
+    // Fractions \dfrac{a}{b} / \frac{a}{b} : ajouter leur valeur calculée (a/b),
+    // sans quoi elles n'apparaissaient dans l'ensemble que comme 2 entiers isolés.
+    const fracRe = /\\d?frac\{(-?\d+)\}\{(-?\d+)\}/g;
+    let fm;
+    while((fm = fracRe.exec(correction)) !== null) {
+      const den = parseFloat(fm[2]);
+      if(den !== 0) nums.push(parseFloat(fm[1]) / den);
+    }
     const c = correction
       .replace(/\$([^$]+)\$/g, ' $1 ')
       .replace(/\{,\}/g, '.')
       .replace(/\\[a-zA-Z]+/g, ' ')
       .replace(/[{}]/g, ' ')
       .replace(/[−–]/g, '-');
-    const nums = [];
     const matches = c.matchAll(/(?<![a-zA-Z/])(-?\d+(?:[.,]\d+)?)(?![a-zA-Z/\d])/g);
     for(const m of matches) nums.push(parseFloat(m[1].replace(',','.')));
     return [...new Set(nums)];
@@ -9073,7 +9099,7 @@ function verifierReponse(userRaw, correctionRaw) {
   const tousNombres = extraireTousNombres(corrNorm);
 
   // ── 1. Fraction tapée par l'élève ──
-  const fracMatch = user.match(/^(-?\d+)\.?(\d*)\/(\d+)\.?(\d*)$/);
+  const fracMatch = user.match(/^(-?\d+)\.?(\d*)\/(-?\d+)\.?(\d*)$/);
   if(fracMatch) {
     const num = parseFloat(fracMatch[1] + (fracMatch[2] ? '.'+fracMatch[2] : ''));
     const den = parseFloat(fracMatch[3] + (fracMatch[4] ? '.'+fracMatch[4] : ''));
@@ -9106,7 +9132,10 @@ function verifierReponse(userRaw, correctionRaw) {
   }
 
   // ── 3. Réponses multiples (l'élève tape plusieurs valeurs) ──
-  const userParts = userRaw.split(/[;,\s]+/)
+  // La virgule décimale française ("0,125") ne doit jamais être confondue avec
+  // une virgule séparatrice entre plusieurs réponses : on ne coupe QUE sur une
+  // virgule non suivie d'un chiffre (ex: "81, 0,125, 1" -> ["81","0,125","1"]).
+  const userParts = userRaw.split(/;|,(?!\d)|\s+/)
     .map(s => s.trim())
     .filter(s => s.length > 0);
 
