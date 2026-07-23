@@ -6880,23 +6880,29 @@ async function sauvegarderProgression(exerciceId, chapitre, niveau, scorePercent
 async function verifierBadges(chapitre, niveau) {
   if(!supabaseClient || !currentEleve) return;
 
-  // Récupérer toute la progression sur ce chapitre
+  // Récupérer toute la progression sur ce chapitre (même niveau uniquement,
+  // cf. note plus bas sur les chapitres homonymes entre niveaux)
   const {data:progs} = await supabaseClient
     .from('progression')
     .select('score, exercice_id, completed_at')
     .eq('eleve_id', currentEleve.id)
-    .eq('chapitre', chapitre);
+    .eq('chapitre', chapitre)
+    .eq('niveau', niveau);
 
   if(!progs || progs.length === 0) return;
 
   const nbFaits = progs.length;
   const moy = Math.round(progs.reduce((s,p) => s+p.score, 0) / nbFaits);
 
-  // Compter le nombre total d'exercices du chapitre dans la plateforme
-  const tousExos = getAllExercices().filter(e => {
-    // Chercher les exercices dont le titre correspond au chapitre
-    return e.titre && e.titre.toLowerCase().includes(chapitre.toLowerCase().substring(0, 8));
-  });
+  // Compter le nombre total d'exercices du chapitre dans la plateforme.
+  // IMPORTANT : filtrer par niveau ET comparer le vrai champ chapitre (exact),
+  // jamais un match flou sur le TITRE de l'exercice. L'ancienne heuristique
+  // (8 premiers caractères du nom du chapitre cherches dans le titre, sans
+  // filtre de niveau) agregeait les exercices de chapitres homonymes d'AUTRES
+  // niveaux (ex: "Probabilités" existe en 3e/4e/5e/2nde) : un eleve terminant
+  // 100% de son propre chapitre voyait un denominateur gonfle par les
+  // exercices des autres niveaux, et n'atteignait jamais le badge Expert.
+  const tousExos = getAllExercices(niveau).filter(e => e.chapitre === chapitre);
   const nbTotal = Math.max(tousExos.length, nbFaits, 1);
 
   // ── Conditions en % du chapitre ──
@@ -6956,7 +6962,7 @@ async function verifierValiditeBadges() {
 
   const {data:badges} = await supabaseClient
     .from('badges')
-    .select('id, chapitre, badge_type, obtenu_at')
+    .select('id, chapitre, niveau, badge_type, obtenu_at')
     .eq('eleve_id', currentEleve.id);
 
   if(!badges || badges.length === 0) return;
@@ -6965,12 +6971,16 @@ async function verifierValiditeBadges() {
   limite45j.setDate(limite45j.getDate() - 45);
 
   for(const badge of badges) {
-    // Vérifier la dernière activité sur ce chapitre
+    // Vérifier la dernière activité sur ce chapitre (même niveau uniquement —
+    // certains chapitres portent le même nom à plusieurs niveaux, ex.
+    // "Probabilités" en 3e/4e/5e/2nde ; sans le filtre niveau, une activité
+    // sur un autre niveau pouvait maintenir artificiellement ce badge en vie)
     const {data:derniereActivite} = await supabaseClient
       .from('progression')
       .select('completed_at')
       .eq('eleve_id', currentEleve.id)
       .eq('chapitre', badge.chapitre)
+      .eq('niveau', badge.niveau)
       .order('completed_at', {ascending: false})
       .limit(1)
       .single();
@@ -7051,11 +7061,14 @@ async function renderEspaceEleve() {
   const nbExercices = progressions.length;
   const moyenneGlobale = nbExercices > 0 ? Math.round(progressions.reduce((s,p) => s + p.score, 0) / nbExercices) : 0;
 
-  // Grouper par chapitre
+  // Grouper par chapitre ET par niveau (cle composite) : certains chapitres
+  // portent le meme nom a plusieurs niveaux (ex. "Probabilités" en 3e/4e/5e/2nde)
+  // — grouper sur le seul nom de chapitre melangeait leurs moyennes et badges.
   const parChapitre = {};
   progressions.forEach(p => {
-    if(!parChapitre[p.chapitre]) parChapitre[p.chapitre] = [];
-    parChapitre[p.chapitre].push(p.score);
+    const cle = `${p.niveau || ''}::${p.chapitre}`;
+    if(!parChapitre[cle]) parChapitre[cle] = { chapitre: p.chapitre, niveau: p.niveau, scores: [] };
+    parChapitre[cle].scores.push(p.score);
   });
 
   // Initiales de l'élève
@@ -7064,11 +7077,11 @@ async function renderEspaceEleve() {
   const couleur = couleurs[initiales.charCodeAt(0) % couleurs.length];
 
   // Rendu progression par chapitre
-  const chapitresHtml = Object.entries(parChapitre).length > 0
-    ? Object.entries(parChapitre).map(([chap, scores]) => {
+  const chapitresHtml = Object.values(parChapitre).length > 0
+    ? Object.values(parChapitre).map(({chapitre: chap, niveau: niv, scores}) => {
         const moy = Math.round(scores.reduce((a,b)=>a+b,0)/scores.length);
         const barColor = moy>=70?'linear-gradient(90deg,var(--vert),#22C55E)':moy>=50?'linear-gradient(90deg,var(--amber),#F59E0B)':'linear-gradient(90deg,var(--rouge),#F87171)';
-        const badge = badges.find(b => b.chapitre === chap);
+        const badge = badges.find(b => b.chapitre === chap && b.niveau === niv);
         const badgeEmoji = badge ? (badge.badge_type==='or'?'🥇':badge.badge_type==='argent'?'🥈':'🥉') : '';
         return `
           <div class="chap-item">
@@ -7284,7 +7297,7 @@ async function chargerDonneesClasse() {
 
   let progRows = [];
   if(eleveIds.length) {
-    const { data: prog } = await supabaseClient.from('progression').select('eleve_id,chapitre,score,completed_at').in('eleve_id', eleveIds);
+    const { data: prog } = await supabaseClient.from('progression').select('eleve_id,chapitre,niveau,score,completed_at').in('eleve_id', eleveIds);
     progRows = prog || [];
   }
 
@@ -7314,13 +7327,17 @@ async function chargerDonneesClasse() {
     };
   });
 
+  // Cle composite chapitre+niveau : un eleve peut avoir fait un exercice hors du
+  // niveau de sa classe (navigation libre dans "Exercices"), et certains noms de
+  // chapitre se retrouvent a plusieurs niveaux (ex. "Probabilités" en 3e/4e/5e/2nde).
   const parChapitre = {};
   progRows.forEach(p => {
-    if(!parChapitre[p.chapitre]) parChapitre[p.chapitre] = [];
-    parChapitre[p.chapitre].push(p.score);
+    const cle = `${p.niveau || ''}::${p.chapitre}`;
+    if(!parChapitre[cle]) parChapitre[cle] = { nom: p.chapitre, scores: [] };
+    parChapitre[cle].scores.push(p.score);
   });
-  const chapitresStats = Object.entries(parChapitre)
-    .map(([nom, scores]) => {
+  const chapitresStats = Object.values(parChapitre)
+    .map(({nom, scores}) => {
       const pct = Math.round(scores.reduce((a,b) => a+b, 0) / scores.length);
       const couleur = pct >= 70 ? '#22C55E' : pct >= 50 ? '#F59E0B' : '#EF4444';
       return { nom, pct, couleur };
