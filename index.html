@@ -9056,10 +9056,19 @@ function verifierReponse(userRaw, correctionRaw) {
   // de 0,857, rejetant à tort toute réponse fractionnaire pourtant correcte.
   const extraireResultatFinal = (correction) => {
     // Nettoyage qui PRÉSERVE la structure \dfrac{a}{b} (pas de suppression \\[a-zA-Z]+ ici)
+    // IMPORTANT : beaucoup de corrections écrivent "mène à" en LaTeX texte
+    // (\approx, \Rightarrow, \rightarrow, \to) plutôt qu'en symbole unicode
+    // (≈, →) — repéré sur 274 corrections dans le fichier. Ces commandes
+    // n'étaient jamais reconnues comme séparateur de segment, donc le
+    // "résultat final" retombait sur une valeur intermédiaire fausse pour
+    // toute correction en plusieurs étapes finissant par un \approx/\Rightarrow
+    // (ex: "...=0,421875\times32\approx13,5$ cL" faisait extraire 32 au lieu
+    // de 13,5 — trouvé via le cas concret signalé par Jamal le 23/07/2026).
     const cPreserve = correction
       .replace(/\$([^$]+)\$/g, ' $1 ')
       .replace(/\{,\}/g, '.')
       .replace(/[−–]/g, '-')
+      .replace(/\\approx|\\Rightarrow|\\rightarrow|\\Leftrightarrow|\\Longrightarrow|\\to(?![a-zA-Z])/gi, '=')
       .replace(/(\d)\s+(\d)/g, '$1$2')  // supprimer espaces milliers
       .replace(/(\d)\s+(\d)/g, '$1$2'); // double passe pour "1 000 000"
 
@@ -9083,8 +9092,11 @@ function verifierReponse(userRaw, correctionRaw) {
       // Idem pour une unité en texte libre APRÈS le $ fermant ("...=10$ cm") : très
       // fréquent en géométrie (Pythagore, Thalès, volumes...), ça faisait retomber
       // l'extraction sur une valeur intermédiaire fausse au lieu du résultat final.
-      const UNITE_RE = 'cm²|cm³|dm³|km\\/h|m\\/s|mL|mg|min|cm|dm|km|mm|kg|m²|m³|m|g|s|h|°|%|€';
+      const UNITE_RE = 'cm²|cm³|dm³|km\\/h|m\\/s|mL|cL|dL|hL|mg|min|cm|dm|km|mm|kg|m²|m³|m|g|s|h|L|°|%|€';
       const pClean = p.replace(/\\[a-zA-Z]+/g, ' ').replace(/\\[%$&_#]/g, ' ').replace(/[{}]/g, ' ')
+        // Ponctuation de fin de phrase après l'unité ("...=13,5 cL.") sinon
+        // l'unité n'est plus en toute fin de chaîne et n'est pas retirée.
+        .replace(/[.,;:]+\s*$/, '')
         .replace(new RegExp(`\\s*(?:${UNITE_RE})\\s*$`, 'i'), '');
       const matchFin = pClean.match(/(-?\d+(?:\.\d+)?)\s*$/);
       if(matchFin) { resultats.push(parseFloat(matchFin[1])); continue; }
@@ -9188,38 +9200,46 @@ function verifierReponse(userRaw, correctionRaw) {
   }
 
   // ── 4. Texte normalisé (intervalles, expressions) ──
-  const corrClean = clean(correctionRaw
-    .replace(/\$([^$]+)\$/g, '$1')
-    .replace(/[\\{}]/g, '')
-    .replace(/rightarrow/gi, '')
-    .replace(/Rightarrow/gi, '')
-  );
+  // IMPORTANT : reservee aux questions dont la reponse n'est PAS numerique
+  // (resultatFinal vide). Sinon un simple mot de 2 lettres qui se trouve etre
+  // une sous-chaine de la correction (une unite comme "cl"/"cm", un bout de
+  // \Rightarrow mal nettoye, etc.) etait accepte comme reponse valable meme
+  // sans le moindre chiffre — trouve par Jamal le 23/07/2026 (taper juste
+  // "cl" ou "cm" seul etait marque juste sur un exercice numerique).
+  if(resultatFinal.length === 0) {
+    const corrClean = clean(correctionRaw
+      .replace(/\$([^$]+)\$/g, '$1')
+      .replace(/[\\{}]/g, '')
+      .replace(/rightarrow/gi, '')
+      .replace(/Rightarrow/gi, '')
+    );
 
-  // Texte exact
-  if(user.length >= 2 && corrClean.includes(user)) return true;
+    // Texte exact
+    if(user.length >= 2 && corrClean.includes(user)) return true;
 
-  // ── 4b. Intervalles ──
-  const normaliserIntervalle = s => s
-    .replace(/\s/g, '')
-    .replace(/\+∞|\+\\infty|\+infty|\+inf/gi, '+inf')
-    .replace(/−∞|-∞|-\\infty|-infty|-inf/gi, '-inf')
-    .replace(/∞|\\infty|infty/gi, '+inf')
-    .replace(/,/g, ';')
-    .toLowerCase();
+    // ── 4b. Intervalles ──
+    const normaliserIntervalle = s => s
+      .replace(/\s/g, '')
+      .replace(/\+∞|\+\\infty|\+infty|\+inf/gi, '+inf')
+      .replace(/−∞|-∞|-\\infty|-infty|-inf/gi, '-inf')
+      .replace(/∞|\\infty|infty/gi, '+inf')
+      .replace(/,/g, ';')
+      .toLowerCase();
 
-  const userN = normaliserIntervalle(userRaw);
-  const corrN = normaliserIntervalle(correctionRaw);
-  if(userN.length >= 3 && corrN.includes(userN)) return true;
-  const userSansC = userN.replace(/[\[\]]/g,'');
-  const corrSansC = corrN.replace(/[\[\]]/g,'');
-  if(userSansC.length >= 3 && corrSansC.includes(userSansC)) return true;
+    const userN = normaliserIntervalle(userRaw);
+    const corrN = normaliserIntervalle(correctionRaw);
+    if(userN.length >= 3 && corrN.includes(userN)) return true;
+    const userSansC = userN.replace(/[\[\]]/g,'');
+    const corrSansC = corrN.replace(/[\[\]]/g,'');
+    if(userSansC.length >= 3 && corrSansC.includes(userSansC)) return true;
 
-  // ── 5. Oui / Non / Vrai / Faux ──
-  if(['non','no','faux','false'].includes(user)) {
-    if(corrClean.match(/\bfaux\b/) || corrClean.match(/\bnon\b/)) return true;
-  }
-  if(['oui','yes','vrai','true'].includes(user)) {
-    if(corrClean.match(/\bvrai\b/) || corrClean.match(/\boui\b/) || corrClean.includes('✓')) return true;
+    // ── 5. Oui / Non / Vrai / Faux ──
+    if(['non','no','faux','false'].includes(user)) {
+      if(corrClean.match(/\bfaux\b/) || corrClean.match(/\bnon\b/)) return true;
+    }
+    if(['oui','yes','vrai','true'].includes(user)) {
+      if(corrClean.match(/\bvrai\b/) || corrClean.match(/\boui\b/) || corrClean.includes('✓')) return true;
+    }
   }
 
   return false;
