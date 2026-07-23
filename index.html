@@ -4394,7 +4394,7 @@ const EXERCICES = {
         indices:["$P(A \\cup B) = P(A) + P(B) - P(A \\cap B)$ ; $P(B|A) = \\dfrac{P(A \\cap B)}{P(A)}$"]
       },
       {
-        id:"proba_2_C", titre:"Échantillonnage et intervalle de fluctuation", niveau:"Difficile", points_total:19,
+        id:"proba_2_C", titre:"Échantillonnage et intervalle de fluctuation", niveau:"Difficile", points_total:9,
         questions:[
           {label:"a)", enonce:"Une pièce est équilibrée. On la lance $100$ fois. Donne l'intervalle de fluctuation au seuil de $95\\%$.", correction:"$p=0{,}5$, $n=100$. Intervalle : $\\left[0{,}5 - \\dfrac{1}{\\sqrt{100}}\\,;\\,0{,}5 + \\dfrac{1}{\\sqrt{100}}\\right] = [0{,}4\\,;\\,0{,}6]$", points:3},
           {label:"b)", enonce:"On obtient $62$ piles sur $100$ lancers. La pièce semble-t-elle équilibrée ?", correction:"$62\\%$ est en dehors de $[40\\%\\,;\\,60\\%]$. On peut douter de l'équilibre de la pièce.", points:3},
@@ -5760,7 +5760,7 @@ const EXERCICES = {
         indices:["Probabilité = nombre de cas favorables ÷ nombre de cas possibles"]
       },
       {
-        id:"proba_5_1", titre:"Probabilités — bases", niveau:"Facile", points_total:18,
+        id:"proba_5_1", titre:"Probabilités — bases", niveau:"Facile", points_total:8,
         questions:[
           {label:"1.", enonce:"Dé à $6$ faces. $P(\\text{nombre pair})$ ?",
            type:"libre", correction:"$P=\\dfrac{3}{6}=\\dfrac{1}{2}$", points:2},
@@ -6182,12 +6182,12 @@ const EXERCICES = {
         indices:["Arbre : multiplier les probabilités sur chaque chemin, additionner les chemins favorables"]
       },
       {
-        id:"proba_4_3", titre:"Probabilités — simulation", niveau:"Moyen", points_total:20,
+        id:"proba_4_3", titre:"Probabilités — simulation", niveau:"Moyen", points_total:10,
         questions:[
           {label:"1.", enonce:"On simule $500$ lancers d'une pièce : $260$ piles. La fréquence de pile est-elle cohérente avec $p=0{,}5$ ?",
            type:"qcm", choix:["Oui, $260/500=0{,}52\\approx0{,}5$","Non, trop loin de $0{,}5$","Impossible à dire","Oui car $260>250$"],
            bonneReponseIdx:0, bonneReponse:"Oui, $260/500=0{,}52\\approx0{,}5$",
-           correction:"Fréquence $=260/500=0{,}52$. Proche de $0{,}5$ → cohérent pour $500$ lancers.", points:"$f=\\dfrac{260}{500}=0{,}52=52\\%$. Cohérent car proche de $50\\%$.", points:4},
+           correction:"Fréquence $=260/500=0{,}52=52\\%$. Proche de $0{,}5$ → cohérent pour $500$ lancers.", points:4},
           {label:"2.", enonce:"Intervalle de fluctuation au seuil $95\\%$ pour $p=0{,}5$, $n=500$.",
            type:"libre", correction:"$IF=\\left[0{,}5-\\dfrac{1}{\\sqrt{500}}\,;\,0{,}5+\\dfrac{1}{\\sqrt{500}}\\right]\\approx[0{,}455\,;\,0{,}545]$. $52\\%\\in[45{,}5\\%;54{,}5\\%]$ ✓", points:3},
           {label:"3.", enonce:"Quelle taille d'échantillon pour avoir un IF de largeur $0{,}1$ ?",
