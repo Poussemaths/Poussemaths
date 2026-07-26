@@ -1320,12 +1320,18 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
           <p class="nc-desc">Nouveau programme — fonctions de référence, second degré, stats.</p>
           <div class="nc-tags"><span class="nc-tag">Fonctions</span><span class="nc-tag">Second degré</span></div>
         </div>
-        <div class="niveau-card soon reveal">
-          <span class="nc-badge-soon">Bientôt</span>
+        <div class="niveau-card reveal" onclick="showPage('exercices','1ere')">
           <div class="nc-icon">1ère</div>
           <div class="nc-name">Première</div>
-          <p class="nc-desc">Spécialité maths — en cours d'intégration.</p>
+          <p class="nc-desc">Spécialité maths — dérivation, exponentielle, produit scalaire, probabilités.</p>
           <div class="nc-tags"><span class="nc-tag">Dérivation</span><span class="nc-tag">Suites</span></div>
+        </div>
+        <div class="niveau-card soon reveal">
+          <span class="nc-badge-soon">Bientôt</span>
+          <div class="nc-icon">Tle</div>
+          <div class="nc-name">Terminale</div>
+          <p class="nc-desc">Spécialité maths — en cours d'intégration.</p>
+          <div class="nc-tags"><span class="nc-tag">Limites</span><span class="nc-tag">Intégrales</span></div>
         </div>
       </div>
 
@@ -6467,6 +6473,100 @@ const EXERCICES = {
 
   },
 
+  // ═══════════════════════════════════════
+  //  TERMINALE — SPÉCIALITÉ MATHÉMATIQUES
+  // ═══════════════════════════════════════
+  "terminale": {
+
+    "Limites de suites": [
+      {
+        id:"limsu_t_1", titre:"Limites de suites — définitions", niveau:"Facile", points_total:8,
+        questions:[
+          {label:"a)", enonce:"« La suite $(u_n)$ admet pour limite $+\\infty$ » signifie que :",
+           type:"qcm", choix:["Pour tout réel $A$, $u_n$ finit par dépasser $A$ à partir d'un certain rang","La suite est croissante","$u_n$ devient négatif","La suite est bornée"],
+           bonneReponseIdx:0, bonneReponse:"Pour tout réel $A$, $u_n$ finit par dépasser $A$ à partir d'un certain rang",
+           correction:"$\\lim u_n=+\\infty$ signifie que $u_n$ dépasse n'importe quel seuil $A$ à partir d'un certain rang.", points:2},
+          {label:"b)", enonce:"$u_n=n^2-3n$. Quelle est la limite de $u_n$ quand $n\\to+\\infty$ ?",
+           type:"qcm", choix:["$+\\infty$","$-\\infty$","$0$","$3$"],
+           bonneReponseIdx:0, bonneReponse:"$+\\infty$",
+           correction:"$u_n=n^2\\left(1-\\dfrac{3}{n}\\right)$ : le terme $n^2$ (prépondérant) tend vers $+\\infty$.", points:2},
+          {label:"c)", enonce:"Calcule $\\lim\\limits_{n\\to+\\infty}\\dfrac{3n+1}{n}$ (indice : divise le numérateur et le dénominateur par $n$).",
+           type:"libre", correction:"$\\dfrac{3n+1}{n}=3+\\dfrac{1}{n}\\to3$", points:2},
+          {label:"d)", enonce:"Une suite géométrique a pour raison $q=1{,}05$. Que vaut $\\lim\\limits_{n\\to+\\infty}q^n$ ?",
+           type:"qcm", choix:["$+\\infty$","$0$","$1$","$1{,}05$"],
+           bonneReponseIdx:0, bonneReponse:"$+\\infty$",
+           correction:"$q=1{,}05>1$ donc $q^n\\to+\\infty$ quand $n\\to+\\infty$.", points:2},
+        ],
+        indices:["Pour une limite en $+\\infty$ d'une expression polynomiale, seul le terme de plus haut degré compte ; $q^n\\to+\\infty$ si $q>1$"]
+      },
+      {
+        id:"limsu_t_2", titre:"Limites de suites — comparaison et théorème des gendarmes", niveau:"Moyen", points_total:9,
+        questions:[
+          {label:"a)", enonce:"Pour tout $n$, $2n-1\\leq u_n\\leq 2n+3$. En utilisant un théorème de comparaison, quelle est la limite de $u_n$ quand $n\\to+\\infty$ ?",
+           type:"qcm", choix:["$+\\infty$","$-\\infty$","$2$","$0$"],
+           bonneReponseIdx:0, bonneReponse:"$+\\infty$",
+           correction:"$2n-1\\to+\\infty$, et $u_n\\geq 2n-1$, donc par comparaison $u_n\\to+\\infty$.", points:3},
+          {label:"b)", enonce:"Pour tout $n\\geq1$, $3-\\dfrac{1}{n}\\leq v_n\\leq 3+\\dfrac{1}{n}$. Calcule $\\lim\\limits_{n\\to+\\infty}v_n$ (théorème des gendarmes).",
+           type:"libre", correction:"$3-\\dfrac{1}{n}\\to3$ et $3+\\dfrac{1}{n}\\to3$ donc par le théorème des gendarmes $v_n\\to3$", points:3},
+          {label:"c)", enonce:"$(u_n)$ est croissante et majorée par $10$. Que peut-on affirmer sur sa limite ?",
+           type:"qcm", choix:["Elle converge vers une limite $\\leq10$","Elle diverge vers $+\\infty$","Elle est constante","On ne peut rien dire"],
+           bonneReponseIdx:0, bonneReponse:"Elle converge vers une limite $\\leq10$",
+           correction:"Toute suite croissante et majorée converge (théorème admis), vers une limite inférieure ou égale au majorant.", points:3},
+        ],
+        indices:["Théorème des gendarmes : si $v_n\\leq u_n\\leq w_n$ et $v_n,w_n\\to\\ell$ alors $u_n\\to\\ell$"]
+      },
+    ],
+
+    "Limites de fonctions": [
+      {
+        id:"limfo_t_1", titre:"Limites de fonctions et asymptotes", niveau:"Moyen", points_total:9,
+        questions:[
+          {label:"a)", enonce:"$\\lim\\limits_{x\\to+\\infty}\\dfrac{1}{x}=$",
+           type:"qcm", choix:["$0$","$+\\infty$","$1$","N'existe pas"],
+           bonneReponseIdx:0, bonneReponse:"$0$",
+           correction:"$\\dfrac{1}{x}\\to0$ quand $x\\to+\\infty$.", points:2},
+          {label:"b)", enonce:"Calcule $\\lim\\limits_{x\\to+\\infty}(3x^2-5x)$ en factorisant par le terme prépondérant.",
+           type:"qcm", choix:["$+\\infty$","$-\\infty$","$0$","$3$"],
+           bonneReponseIdx:0, bonneReponse:"$+\\infty$",
+           correction:"$3x^2-5x=x^2\\left(3-\\dfrac{5}{x}\\right)$ : $x^2\\to+\\infty$ et $\\left(3-\\dfrac{5}{x}\\right)\\to3$, donc le produit tend vers $+\\infty$.", points:3},
+          {label:"c)", enonce:"Calcule $\\lim\\limits_{x\\to0}\\dfrac{2x^2+x}{x}$ (simplifie d'abord en divisant par $x$).",
+           type:"libre", correction:"$\\dfrac{2x^2+x}{x}=2x+1\\to1$", points:4},
+        ],
+        indices:["Pour une limite en $\\pm\\infty$, factoriser par le terme de plus haut degré ; pour une forme $\\dfrac{0}{0}$, simplifier avant de passer à la limite"]
+      },
+    ],
+
+    "Primitives et calcul intégral": [
+      {
+        id:"int_t_1", titre:"Primitives", niveau:"Facile", points_total:8,
+        questions:[
+          {label:"a)", enonce:"Une primitive de $f(x)=x^2$ est :",
+           type:"qcm", choix:["$\\dfrac{x^3}{3}$","$2x$","$x^3$","$3x^3$"],
+           bonneReponseIdx:0, bonneReponse:"$\\dfrac{x^3}{3}$",
+           correction:"Une primitive de $x^n$ est $\\dfrac{x^{n+1}}{n+1}$, donc pour $x^2$ : $\\dfrac{x^3}{3}$.", points:2},
+          {label:"b)", enonce:"Sachant que $F(x)=x^3+x^2+C$ est une primitive de $f(x)=3x^2+2x$, calcule $C$ pour que $F(0)=1$.",
+           type:"libre", correction:"$F(0)=0+0+C=1 \\Rightarrow C=1$", points:3},
+          {label:"c)", enonce:"Calcule $F(1)$ avec $F(x)=x^3+x^2+1$.",
+           type:"libre", correction:"$F(1)=1+1+1=3$", points:3},
+        ],
+        indices:["Une primitive de $x^n$ ($n\\neq-1$) est $\\dfrac{x^{n+1}}{n+1}$ ; deux primitives d'une même fonction diffèrent d'une constante"]
+      },
+      {
+        id:"int_t_2", titre:"Calcul intégral — aire sous la courbe", niveau:"Difficile", points_total:10,
+        questions:[
+          {label:"a)", enonce:"Calcule $\\displaystyle\\int_0^2 x\\,dx$ (primitive de $x$ : $\\dfrac{x^2}{2}$).",
+           type:"libre", correction:"$\\left[\\dfrac{x^2}{2}\\right]_0^2=2-0=2$", points:3},
+          {label:"b)", enonce:"Calcule $\\displaystyle\\int_1^3 2x\\,dx$ (primitive de $2x$ : $x^2$).",
+           type:"libre", correction:"$\\left[x^2\\right]_1^3=9-1=8$", points:3},
+          {label:"c)", enonce:"Calcule $\\displaystyle\\int_0^4 5\\,dx$ (primitive de la constante $5$ : $5x$).",
+           type:"libre", correction:"$\\left[5x\\right]_0^4=20-0=20$", points:4},
+        ],
+        indices:["$\\displaystyle\\int_a^b f(x)\\,dx=F(b)-F(a)$ où $F$ est une primitive de $f$ ; pour $f>0$, c'est l'aire sous la courbe entre $a$ et $b$"]
+      },
+    ],
+
+  },
+
 };
 
 // ═══════════════════════════════════════
@@ -8348,7 +8448,7 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
-const LABELS_CLASSES = {'6eme':'6ème','5eme':'5ème','4eme':'4ème','3eme':'3ème','2nde':'2nde'};
+const LABELS_CLASSES = {'6eme':'6ème','5eme':'5ème','4eme':'4ème','3eme':'3ème','2nde':'2nde','1ere':'1ère','terminale':'Terminale'};
 
 const CHAPITRES_EMOJI = {
   'Puissances & Notation scientifique':'⚡','Racines carrées':'√','Calcul littéral':'✏️',
@@ -8373,7 +8473,7 @@ function renderExercices() {
 }
 
 function setFilter(f) {
-  if(['6eme','5eme','4eme','3eme','2nde'].includes(f)) allerChapitres(f);
+  if(['6eme','5eme','4eme','3eme','2nde','1ere','terminale'].includes(f)) allerChapitres(f);
   else renderNiveaux();
 }
 
@@ -8387,12 +8487,13 @@ function renderNiveaux() {
   document.getElementById('ex-sous-titre').textContent = 'Sélectionne ton niveau pour voir les chapitres';
   document.getElementById('ex-breadcrumb').innerHTML = '';
   const niveauxInfos = [
-    {id:'6eme',label:'6ème',desc:'Fondamentaux du collège'},
+    {id:'6eme',label:'6ème',desc:'Fondamentaux du collège',badge:'BO 2026'},
     {id:'5eme',label:'5ème',desc:'Nouveau programme BO 2026',badge:'BO 2026'},
     {id:'4eme',label:'4ème',desc:'Algèbre et géométrie'},
     {id:'3eme',label:'3ème',desc:'Préparation brevet'},
     {id:'2nde',label:'2nde',desc:'Nouveau programme BO 2026',badge:'BO 2026'},
     {id:'1ere',label:'1ère',desc:'Spécialité Maths — Épreuve anticipée',badge:'Spé'},
+    {id:'terminale',label:'Terminale',desc:'Spécialité Maths — Épreuve finale',badge:'Spé'},
   ];
   const content = document.getElementById('ex-content');
   content.innerHTML = `<div class="niveaux-nav-grid">
@@ -8648,7 +8749,8 @@ function detecterNiveauDepuisId(id) {
     : id.includes('_6_') ? '6eme'
     : id.includes('_5_') ? '5eme'
     : id.includes('_4_') ? '4eme'
-    : id.includes('_1_') ? '1ere' : '';
+    : id.includes('_1_') ? '1ere'
+    : id.includes('_t_') ? 'terminale' : '';
 }
 
 async function chargerExerciceGenere() {
