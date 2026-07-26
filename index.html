@@ -8609,7 +8609,18 @@ function verifierReponse(userRaw, correctionRaw) {
         .replace(/[.,;:]+\s*$/, '')
         .replace(new RegExp(`\\s*(?:${UNITE_RE})\\s*$`, 'i'), '');
       const matchFin = pClean.match(/(-?\d+(?:\.\d+)?)\s*$/);
-      if(matchFin) { resultats.push(parseFloat(matchFin[1])); continue; }
+      if(matchFin) {
+        // Si le segment contient encore une lettre AVANT ce nombre final
+        // (ex: "5x+13", "r^3"), ce n'est pas un résultat numérique mais une
+        // expression algébrique dont le dernier caractère est accessoirement
+        // un chiffre — ne pas la pousser comme "résultat final", sinon le
+        // check 4 (comparaison texte, seul capable de valider une expression
+        // du type "5x+13") se retrouve à tort désactivé pour les exercices
+        // de type développer/factoriser/simplifier.
+        const avantNombre = pClean.slice(0, matchFin.index);
+        if(!/[a-zA-Z]/.test(avantNombre)) resultats.push(parseFloat(matchFin[1]));
+        continue;
+      }
 
       // Ou une fraction simple "a/b" (sans \dfrac) à la fin
       const matchFrac = pClean.match(/(-?\d+)\s*\/\s*(-?\d+)\s*$/);
