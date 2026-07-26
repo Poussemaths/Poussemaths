@@ -6338,6 +6338,47 @@ const EXERCICES = {
       },
     ],
 
+    "Produit scalaire": [
+      {
+        id:"scal_1_1", titre:"Produit scalaire — définitions et calculs", niveau:"Facile", points_total:8,
+        questions:[
+          {label:"a)", enonce:"Le produit scalaire de deux vecteurs orthogonaux vaut :",
+           type:"qcm", choix:["$0$","$1$","$-1$","Cela dépend des normes"],
+           bonneReponseIdx:0, bonneReponse:"$0$",
+           correction:"Deux vecteurs sont orthogonaux si et seulement si leur produit scalaire est nul.", points:2},
+          {label:"b)", enonce:"$\\vec{u}(3\\,;\\,4)$ et $\\vec{v}(2\\,;\\,-1)$ dans une base orthonormée. Calcule $\\vec{u}\\cdot\\vec{v}$.",
+           type:"libre", correction:"$\\vec{u}\\cdot\\vec{v}=3\\times2+4\\times(-1)=6-4=2$", points:3},
+          {label:"c)", enonce:"$\\|\\vec{u}\\|=5$, $\\|\\vec{v}\\|=3$, angle $(\\vec{u},\\vec{v})=60°$. Calcule $\\vec{u}\\cdot\\vec{v}$ (utilise $\\vec{u}\\cdot\\vec{v}=\\|\\vec{u}\\|\\times\\|\\vec{v}\\|\\times\\cos(\\theta)$).",
+           type:"libre", correction:"$\\vec{u}\\cdot\\vec{v}=5\\times3\\times\\cos(60°)=15\\times0{,}5=7{,}5$", points:3},
+        ],
+        indices:["$\\vec{u}(x;y)\\cdot\\vec{v}(x';y')=xx'+yy'$ en base orthonormée ; $\\vec{u}\\cdot\\vec{v}=\\|\\vec{u}\\|\\|\\vec{v}\\|\\cos(\\vec{u},\\vec{v})$"]
+      },
+      {
+        id:"scal_1_2", titre:"Norme et développement", niveau:"Moyen", points_total:9,
+        questions:[
+          {label:"a)", enonce:"$\\vec{u}(6\\,;\\,8)$ en base orthonormée. Calcule $\\|\\vec{u}\\|$.",
+           type:"libre", correction:"$\\|\\vec{u}\\|=\\sqrt{36+64}=\\sqrt{100}=10$", points:3},
+          {label:"b)", enonce:"Le développement de $\\|\\vec{u}+\\vec{v}\\|^2$ est :",
+           type:"qcm", choix:["$\\|\\vec{u}\\|^2+2\\vec{u}\\cdot\\vec{v}+\\|\\vec{v}\\|^2$","$\\|\\vec{u}\\|^2+\\|\\vec{v}\\|^2$","$\\|\\vec{u}\\|^2-2\\vec{u}\\cdot\\vec{v}+\\|\\vec{v}\\|^2$","$2\\|\\vec{u}\\|\\|\\vec{v}\\|$"],
+           bonneReponseIdx:0, bonneReponse:"$\\|\\vec{u}\\|^2+2\\vec{u}\\cdot\\vec{v}+\\|\\vec{v}\\|^2$",
+           correction:"$\\|\\vec{u}+\\vec{v}\\|^2=(\\vec{u}+\\vec{v})\\cdot(\\vec{u}+\\vec{v})=\\|\\vec{u}\\|^2+2\\vec{u}\\cdot\\vec{v}+\\|\\vec{v}\\|^2$", points:3},
+          {label:"c)", enonce:"$\\|\\vec{u}\\|=3$, $\\|\\vec{v}\\|=4$, $\\vec{u}\\cdot\\vec{v}=2$. Calcule $\\|\\vec{u}+\\vec{v}\\|^2$.",
+           type:"libre", correction:"$\\|\\vec{u}+\\vec{v}\\|^2=9+2\\times2+16=29$", points:3},
+        ],
+        indices:["$\\|\\vec{u}\\|^2=\\vec{u}\\cdot\\vec{u}$ ; $\\|\\vec{u}+\\vec{v}\\|^2=\\|\\vec{u}\\|^2+2\\vec{u}\\cdot\\vec{v}+\\|\\vec{v}\\|^2$"]
+      },
+      {
+        id:"scal_1_3", titre:"Formule d'Al-Kashi", niveau:"Difficile", points_total:10,
+        questions:[
+          {label:"a)", enonce:"Triangle $ABC$ : $AB=7$, $AC=5$, $\\hat{A}=60°$. Calcule $BC^2$ avec la formule d'Al-Kashi : $BC^2=AB^2+AC^2-2\\times AB\\times AC\\times\\cos(\\hat{A})$.",
+           type:"libre", correction:"$BC^2=49+25-2\\times7\\times5\\times\\cos(60°)=74-70\\times0{,}5=74-35=39$", points:5},
+          {label:"b)", enonce:"En déduis $BC$ (valeur arrondie au centième).",
+           type:"libre", correction:"$BC=\\sqrt{39}\\approx6{,}24$", points:5},
+        ],
+        indices:["Al-Kashi : $a^2=b^2+c^2-2bc\\cos(\\hat{A})$ — généralisation de Pythagore à un triangle quelconque"]
+      },
+    ],
+
   },
 
 };
