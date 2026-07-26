@@ -6183,6 +6183,61 @@ const EXERCICES = {
       },
     ],
 
+    "Probabilités conditionnelles et indépendance": [
+      {
+        id:"cond_1_1", titre:"Indépendance de deux événements", niveau:"Facile", points_total:8,
+        questions:[
+          {label:"a)", enonce:"$A$ et $B$ sont indépendants si et seulement si :",
+           type:"qcm", choix:["$P(A\\cap B)=P(A)\\times P(B)$","$P(A\\cap B)=P(A)+P(B)$","$P(A\\cap B)=0$","$A$ et $B$ sont incompatibles"],
+           bonneReponseIdx:0, bonneReponse:"$P(A\\cap B)=P(A)\\times P(B)$",
+           correction:"Deux événements sont indépendants quand $P(A\\cap B)=P(A)\\times P(B)$.", points:2},
+          {label:"b)", enonce:"$P(A)=0{,}3$, $P(B)=0{,}5$, $A$ et $B$ indépendants. Calcule $P(A\\cap B)$.",
+           type:"libre", correction:"$P(A\\cap B)=0{,}3\\times0{,}5=0{,}15$", points:3},
+          {label:"c)", enonce:"$P(A)=0{,}4$, $P(B)=0{,}25$, $P(A\\cap B)=0{,}1$. $A$ et $B$ sont-ils indépendants ?",
+           type:"qcm", choix:["Oui","Non"],
+           bonneReponseIdx:0, bonneReponse:"Oui",
+           correction:"$P(A)\\times P(B)=0{,}4\\times0{,}25=0{,}1=P(A\\cap B)$ ✓ Oui, ils sont indépendants.", points:3},
+        ],
+        indices:["Indépendance : $P(A\\cap B)=P(A)\\times P(B)$ — à ne pas confondre avec incompatibilité ($P(A\\cap B)=0$)"]
+      },
+      {
+        id:"cond_1_2", titre:"Probabilité conditionnelle et arbre pondéré", niveau:"Moyen", points_total:10,
+        questions:[
+          {label:"a)", enonce:"Une entreprise reçoit des pièces de deux fournisseurs : $60\\%$ du fournisseur A (dont $2\\%$ sont défectueuses) et $40\\%$ du fournisseur B (dont $5\\%$ sont défectueuses). Calcule $P(A\\cap D)$ (venir de A ET être défectueuse).",
+           type:"libre", correction:"$P(A\\cap D)=0{,}6\\times0{,}02=0{,}012$", points:3},
+          {label:"b)", enonce:"Calcule $P(B\\cap D)$ (venir de B ET être défectueuse).",
+           type:"libre", correction:"$P(B\\cap D)=0{,}4\\times0{,}05=0{,}02$", points:3},
+          {label:"c)", enonce:"$A$ et $B$ forment une partition (toute pièce vient de A ou de B). Calcule $P(D)$, la probabilité qu'une pièce prise au hasard soit défectueuse.",
+           type:"libre", correction:"$P(D)=P(A\\cap D)+P(B\\cap D)=0{,}012+0{,}02=0{,}032$", points:4},
+        ],
+        indices:["Sur un arbre pondéré : multiplier le long d'un chemin, additionner les chemins qui mènent au même résultat"]
+      },
+      {
+        id:"cond_1_3", titre:"Formule des probabilités totales", niveau:"Moyen", points_total:10,
+        questions:[
+          {label:"a)", enonce:"$70\\%$ des candidats choisissent l'option $1$ (taux de réussite $80\\%$), les $30\\%$ restants choisissent l'option $2$ (taux de réussite $60\\%$). Calcule $P(\\text{option 1}\\cap\\text{réussite})$.",
+           type:"libre", correction:"$0{,}7\\times0{,}8=0{,}56$", points:3},
+          {label:"b)", enonce:"Calcule $P(\\text{option 2}\\cap\\text{réussite})$.",
+           type:"libre", correction:"$0{,}3\\times0{,}6=0{,}18$", points:3},
+          {label:"c)", enonce:"En utilisant la formule des probabilités totales, calcule $P(\\text{réussite})$ tous candidats confondus.",
+           type:"libre", correction:"$P(\\text{réussite})=0{,}56+0{,}18=0{,}74$", points:4},
+        ],
+        indices:["Formule des probabilités totales : $P(B)=P(A)\\times P_A(B)+P(\\bar{A})\\times P_{\\bar{A}}(B)$"]
+      },
+      {
+        id:"cond_1_4", titre:"Épreuves de Bernoulli répétées (n ≤ 4)", niveau:"Difficile", points_total:10,
+        questions:[
+          {label:"a)", enonce:"On lance $4$ fois une pièce équilibrée. Combien y a-t-il de résultats possibles au total (listes ordonnées de Pile/Face) ?",
+           type:"libre", correction:"$2^4=16$", points:2},
+          {label:"b)", enonce:"Combien y a-t-il de façons différentes d'obtenir exactement $2$ piles parmi les $4$ lancers ?",
+           type:"libre", correction:"$\\binom{4}{2}=6$", points:4},
+          {label:"c)", enonce:"En déduis $P(\\text{exactement 2 piles})$.",
+           type:"libre", correction:"$\\binom{4}{2}\\times(0{,}5)^4=\\dfrac{6}{16}=\\dfrac{3}{8}$", points:4},
+        ],
+        indices:["$\\binom{n}{k}$ = nombre de façons de choisir $k$ succès parmi $n$ répétitions"]
+      },
+    ],
+
   },
 
 };
