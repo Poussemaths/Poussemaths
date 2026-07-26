@@ -4946,6 +4946,37 @@ const EXERCICES = {
       },
     ],
 
+    "Volumes": [
+      {
+        id:"vol_6_1", titre:"Volumes — cube et pavé droit", niveau:"Facile", points_total:8,
+        questions:[
+          {label:"a)", enonce:"Un cube a une arête de $4$ cm. Calcule son volume.",
+           type:"libre", correction:"$V=4\\times4\\times4=64$ cm³", points:2},
+          {label:"b)", enonce:"Un pavé droit mesure $5$ cm $\\times$ $3$ cm $\\times$ $2$ cm. Calcule son volume.",
+           type:"libre", correction:"$V=5\\times3\\times2=30$ cm³", points:3},
+          {label:"c)", enonce:"Un assemblage est formé de $12$ cubes de $1$ cm³ chacun. Quel est son volume total ?",
+           type:"libre", correction:"$V=12\\times1=12$ cm³", points:3},
+        ],
+        indices:["Volume du pavé droit $=$ longueur $\\times$ largeur $\\times$ hauteur ; volume du cube $=$ arête$^3$"]
+      },
+      {
+        id:"vol_6_2", titre:"Volumes — dénombrement et comparaison", niveau:"Moyen", points_total:8,
+        questions:[
+          {label:"a)", enonce:"Un cube de $1$ cm d'arête a un volume de :",
+           type:"qcm", choix:["$1$ cm³","$3$ cm³","$6$ cm³","$1$ cm²"],
+           bonneReponseIdx:0, bonneReponse:"$1$ cm³",
+           correction:"Un cube de $1$ cm d'arête a un volume de $1\\times1\\times1=1$ cm³ : c'est l'unité de volume de référence.", points:2},
+          {label:"b)", enonce:"Un solide est un assemblage de cubes de $1$ cm³, organisé en $3$ couches identiques de $2\\times4$ cubes chacune. Calcule le volume total.",
+           type:"libre", correction:"$V=3\\times(2\\times4)=3\\times8=24$ cm³", points:3},
+          {label:"c)", enonce:"Pavé 1 : volume $40$ cm³. Pavé 2 : $4$ cm $\\times$ $5$ cm $\\times$ $3$ cm. Lequel a le plus grand volume ?",
+           type:"qcm", choix:["Pavé 1","Pavé 2","Ils sont égaux"],
+           bonneReponseIdx:1, bonneReponse:"Pavé 2",
+           correction:"$V_2=4\\times5\\times3=60$ cm³ $>40$ cm³ : le pavé 2 a le plus grand volume.", points:3},
+        ],
+        indices:["Pour comparer deux volumes, calcule-les dans la même unité"]
+      },
+    ],
+
     "Angles & Géométrie": [
       {
         id:"ang_6_genere", titre:"Angles d'un triangle — entraînement infini", niveau:"Facile", points_total:5,
