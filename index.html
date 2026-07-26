@@ -4281,6 +4281,18 @@ const EXERCICES = {
         ],
         indices:["$P(A \\cup B) = P(A) + P(B) - P(A \\cap B)$ ; $P(B|A) = \\dfrac{P(A \\cap B)}{P(A)}$"]
       },
+      {
+        id:"proba_2_C", titre:"Arbre pondéré à deux branches", niveau:"Moyen", points_total:9,
+        questions:[
+          {label:"a)", enonce:"Une urne contient $40\\%$ de boules rouges et $60\\%$ de boules vertes. Parmi les rouges, $25\\%$ sont brillantes. Parmi les vertes, $10\\%$ sont brillantes. En suivant le premier chemin de l'arbre (rouge puis brillante), calcule $P(\\text{rouge}\\cap\\text{brillante})$.",
+           type:"libre", correction:"$P(\\text{rouge}\\cap\\text{brillante})=0{,}4\\times0{,}25=0{,}1$", points:3},
+          {label:"b)", enonce:"En suivant le second chemin (verte puis brillante), calcule $P(\\text{verte}\\cap\\text{brillante})$.",
+           type:"libre", correction:"$P(\\text{verte}\\cap\\text{brillante})=0{,}6\\times0{,}1=0{,}06$", points:3},
+          {label:"c)", enonce:"En additionnant les deux chemins de l'arbre qui mènent à une boule brillante, calcule $P(\\text{brillante})$.",
+           type:"libre", correction:"$P(\\text{brillante})=0{,}1+0{,}06=0{,}16$", points:3},
+        ],
+        indices:["Sur un arbre pondéré : on multiplie les probabilités le long d'un chemin, on additionne les chemins qui mènent au même résultat final"]
+      },
     ],
 
     "Géométrie repérée": [
