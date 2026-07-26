@@ -4131,40 +4131,6 @@ const EXERCICES = {
         indices:["$g(x)=\\dfrac{1}{x}$ : décroissante sur chaque intervalle de son domaine"]
       },
       {
-        id:"fr_2_1", titre:"Fonction racine carrée", niveau:"Moyen", points_total:8,
-        questions:[
-          {label:"1.", enonce:"Quel est le domaine de définition de $h(x)=\\sqrt{x}$ ?",
-           type:"qcm", choix:["$\\mathbb{R}$","$\\mathbb{R}^*$","$[0\\,;\\,+\\infty[$","$]0\\,;\\,+\\infty[$"],
-           bonneReponseIdx:2, bonneReponse:"$[0\\,;\\,+\\infty[$",
-           correction:"La racine carrée n'est définie que pour les réels $\\geq 0$.", points:2},
-          {label:"2a.", enonce:"$h(x)=\\sqrt{x}$. Calcule $h(0)$.",
-           type:"libre", correction:"$h(0)=\\sqrt{0}=0$", points:1},
-          {label:"2b.", enonce:"$h(x)=\\sqrt{x}$. Calcule $h(9)$.",
-           type:"libre", correction:"$h(9)=\\sqrt{9}=3$", points:1},
-          {label:"2c.", enonce:"$h(x)=\\sqrt{x}$. Calcule $h(25)$.",
-           type:"libre", correction:"$h(25)=\\sqrt{25}=5$", points:1},
-          {label:"3.", enonce:"Résous $\\sqrt{x}=7$.",
-           type:"libre", correction:"$x=7^2=49$", points:3},
-        ],
-        indices:["$\\sqrt{x}=k \\Rightarrow x=k^2$ (valable si $k\\geq0$)"]
-      },
-      {
-        id:"fref_2_synthese", titre:"Les 3 fonctions de référence — synthèse", niveau:"Difficile", points_total:12,
-        questions:[
-          {label:"1.", enonce:"Pour $x=4$, classe dans l'ordre croissant $f(x)=x^2$, $g(x)=\\dfrac{1}{x}$, $h(x)=\\sqrt{x}$.",
-           type:"libre", correction:"$g(4)=0{,}25 < h(4)=2 < f(4)=16$", points:3},
-          {label:"2.", enonce:"Laquelle est définie sur tout $\\mathbb{R}$ ?",
-           type:"qcm", choix:["$f(x)=x^2$","$g(x)=\\dfrac{1}{x}$","$h(x)=\\sqrt{x}$","Aucune"],
-           bonneReponseIdx:0, bonneReponse:"$f(x)=x^2$",
-           correction:"$f(x)=x^2$ est définie pour tout réel. $g$ exclut $0$, $h$ exclut les négatifs.", points:3},
-          {label:"3.", enonce:"Résous $x^2=\\sqrt{x}$ pour $x\\geq0$.",
-           type:"libre", correction:"$x^4=x \\Rightarrow x^4-x=0 \\Rightarrow x(x^3-1)=0 \\Rightarrow x=0$ ou $x=1$.", points:3},
-          {label:"4.", enonce:"Domaine de définition de $f(x)=\\sqrt{x-3}$.",
-           type:"libre", correction:"$x-3\\geq0 \\Rightarrow x\\geq3$. Domaine : $[3\\,;\\,+\\infty[$.", points:3},
-        ],
-        indices:["Domaine de $\\sqrt{u(x)}$ : résoudre $u(x)\\geq0$"]
-      },
-      {
         id:"fc_2_3", titre:"Fonction carré — approfondissement", niveau:"Moyen", points_total:10,
         questions:[
           {label:"1.", enonce:"$f(x)=x^2$. Sur $[-3\\,;\\,2]$, quelle est la valeur du minimum ?",
@@ -4207,91 +4173,14 @@ const EXERCICES = {
         indices:["Comparer deux tarifs : résoudre $f(x) < g(x)$"]
       },
       {
-        id:"fref_2_2", titre:"Les 3 fonctions — tableaux de variations", niveau:"Difficile", points_total:12,
+        id:"fref_2_2", titre:"Fonctions — comparaison de tarifs", niveau:"Difficile", points_total:8,
         questions:[
-          {label:"1.", enonce:"Sur $[0\\,;\\,+\\infty[$, $h(x)=\\sqrt{x}$ est-elle croissante ou décroissante ?",
-           type:"qcm", choix:["Croissante","Décroissante","Constante","Non définie"],
-           bonneReponseIdx:0, bonneReponse:"Croissante",
-           correction:"$h$ est croissante sur $[0\\,;\\,+\\infty[$ : $\\sqrt{4}=2 > \\sqrt{1}=1$.", points:3},
-          {label:"2.", enonce:"Pour $x\\in[-2\\,;\\,3]$, compare $f(x)=x^2$ et $h(x)=\\sqrt{x}$ (définie sur $[0\\,;\\,3]$). Lequel est le plus grand en $x=0{,}25$ ?",
-           type:"libre", correction:"$f(0{,}25)=0{,}0625$ ; $h(0{,}25)=0{,}5$. Donc $h>f$ pour $x=0{,}25$.", points:4},
-          {label:"3.", enonce:"Site vidéo : Tarif A $=4x$€, Tarif B $=2{,}5x+18$€. À partir de combien de films B est-il plus avantageux ?",
-           type:"libre", correction:"$4x > 2{,}5x+18 \\\\Rightarrow 1{,}5x > 18 \\\\Rightarrow x > 12$. B plus avantageux au-delà de $12$ films.", points:5},
+          {label:"1.", enonce:"Site vidéo : Tarif A $=4x$€, Tarif B $=2{,}5x+18$€. À partir de combien de films B est-il plus avantageux ?",
+           type:"libre", correction:"$4x > 2{,}5x+18 \\Rightarrow 1{,}5x > 18 \\Rightarrow x > 12$. B plus avantageux au-delà de $12$ films.", points:5},
+          {label:"2.", enonce:"Pour ces deux tarifs, à $x=12$ films exactement, que peut-on dire des deux prix ?",
+           type:"libre", correction:"$4(12)=48$€ et $2{,}5(12)+18=48$€ : les deux tarifs sont égaux à $12$ films.", points:3},
         ],
-        indices:["D'après 1001 exercices — comparer des fonctions dans un contexte réel"]
-      },
-    ],
-
-    "Systèmes d'équations": [
-      {
-        id:"syst_2_genere", titre:"Systèmes d'équations — entraînement infini", niveau:"Facile", points_total:5,
-        genere: true, templateId: "systeme_v1",
-        questions:[
-          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
-          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
-          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
-          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
-          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
-        ],
-        indices:["Isole une inconnue dans une équation, puis substitue-la dans l'autre"]
-      },
-      {
-        id:"syst_2_1", titre:"Systèmes — vérifier et comprendre", niveau:"Facile", points_total:8,
-        questions:[
-          {label:"1.", enonce:"Le couple $(2\\,;\\,3)$ est-il solution de $\\begin{cases}x+y=5\\\\2x-y=1\\end{cases}$ ?",
-           type:"qcm", choix:["Oui","Non, seule la 1ère équation est vérifiée","Non, seule la 2ème est vérifiée","Non, aucune n'est vérifiée"],
-           bonneReponseIdx:0, bonneReponse:"Oui",
-           correction:"$2+3=5$ ✓ et $2(2)-3=1$ ✓. Les deux sont vérifiées.", points:2},
-          {label:"2.", enonce:"Résous par substitution : $\\begin{cases}y=2x+1\\\\3x+y=11\\end{cases}$. Donne $x$.",
-           type:"libre", correction:"$3x+2x+1=11 \\Rightarrow 5x=10 \\Rightarrow x=2$, $y=5$", points:3},
-          {label:"3.", enonce:"Résous par combinaison : $\\begin{cases}2x+y=7\\\\2x-y=1\\end{cases}$. Donne $y$.",
-           type:"libre", correction:"Addition : $4x=8 \\Rightarrow x=2$. $y=7-4=3$.", points:3},
-        ],
-        indices:["Substitution si une variable est isolée ; combinaison si les coefficients s'annulent"]
-      },
-      {
-        id:"syst_2_2", titre:"Systèmes — problèmes", niveau:"Moyen", points_total:10,
-        questions:[
-          {label:"a)", enonce:"Somme de deux nombres $=31$, différence $=7$. Trouve le plus grand.",
-           type:"libre", correction:"$x+y=31$, $x-y=7$ → $2x=38 \\Rightarrow x=19$", points:4},
-          {label:"b)", enonce:"$3$ cahiers et $2$ stylos coûtent $8{,}50$€. $1$ cahier et $4$ stylos coûtent $6{,}50$€. Prix d'un cahier ?",
-           type:"libre", correction:"$3c+2s=8{,}5$ et $c+4s=6{,}5$. $c=7{,}5-4s$... $c=1{,}50$€, $s=1{,}25$€", points:6},
-        ],
-        indices:["Pose deux inconnues, traduis chaque condition en équation"]
-      },
-      {
-        id:"syst_2_3", titre:"Systèmes — fractions et difficile", niveau:"Difficile", points_total:10,
-        questions:[
-          {label:"a)", enonce:"Résous : $\\begin{cases}\\dfrac{x}{2}+y=5\\\\x-\\dfrac{y}{3}=4\\end{cases}$. Donne $x$.",
-           type:"libre", correction:"Mult. par 6 : $3x+6y=30$ et $6x-2y=24$. De (2) : $y=3x-12$. Dans (1) : $3x+18x-72=30 \\Rightarrow 21x=102 \\Rightarrow x=\\dfrac{34}{7}$... Simplifié : $x=6$, $y=2$.", points:5},
-          {label:"b)", enonce:"Un train A roule à $120$ km/h et B à $80$ km/h en sens inverse. Ils partent de villes distantes de $400$ km. Dans combien de temps se croisent-ils ?",
-           type:"libre", correction:"$120t+80t=400 \\Rightarrow 200t=400 \\Rightarrow t=2$ h.", points:5},
-        ],
-        indices:["Commence par éliminer les fractions en multipliant par le PPCM"]
-      },
-      {
-        id:"syst_2_4", titre:"Systèmes — inéquations et domaine", niveau:"Moyen", points_total:10,
-        questions:[
-          {label:"a)", enonce:"Résous : $\\begin{cases}2x+y>5\\\\x-y<1\\end{cases}$. $x=2$, $y=2$ est-il solution ?",
-           type:"libre", correction:"$2(2)+2=6>5$ ✓ et $2-2=0<1$ ✓. Oui.", points:3},
-          {label:"b)", enonce:"Résous par substitution : $\\begin{cases}y=x^2\\\\y=2x+3\\end{cases}$",
-           type:"libre", correction:"$x^2=2x+3 \\Rightarrow x^2-2x-3=0 \\Rightarrow (x-3)(x+1)=0$. $x=3,y=9$ ou $x=-1,y=1$.", points:4},
-          {label:"c)", enonce:"Résous : $\\begin{cases}3x+2y=12\\\\x=y-1\\end{cases}$",
-           type:"libre", correction:"$3(y-1)+2y=12 \\Rightarrow 5y=15 \\Rightarrow y=3, x=2$", points:3},
-        ],
-        indices:["Un système peut avoir 0, 1 ou 2 solutions quand une équation est du second degré"]
-      },
-      {
-        id:"syst_2_5", titre:"Systèmes — optimisation et brevet", niveau:"Difficile", points_total:12,
-        questions:[
-          {label:"1.", enonce:"Un train A à $160$ km/h et B à $120$ km/h partent vers la même destination distante de $240$ km. B part $30$ min avant A. A rattrape-t-il B ? Quand ?",
-           type:"libre", correction:"$160t=120(t+0{,}5) \\Rightarrow 40t=60 \\Rightarrow t=1{,}5$ h. Oui, après $1{,}5$ h, à $240$ km.", points:5},
-          {label:"2.", enonce:"$3$ adultes et $5$ enfants : $62$€. $2$ adultes et $8$ enfants : $64$€. Prix adulte et enfant ?",
-           type:"libre", correction:"$3a+5e=62$ et $2a+8e=64$. $(1)\\times2-(2)\\times3$ : $-14e=-28 \\Rightarrow e=2$€, $a=17$€.", points:4},
-          {label:"3.", enonce:"Résous : $\\begin{cases}\\dfrac{x+y}{2}=5\\\\x-y=6\\end{cases}$",
-           type:"libre", correction:"$x+y=10$ et $x-y=6 \\Rightarrow 2x=16 \\Rightarrow x=8, y=2$", points:3},
-        ],
-        indices:["Pour les problèmes de rattrapage : les deux mobiles parcourent la même distance"]
+        indices:["Comparer deux tarifs : résoudre $f(x) < g(x)$"]
       },
     ],
 
@@ -4392,39 +4281,6 @@ const EXERCICES = {
         ],
         indices:["$P(A \\cup B) = P(A) + P(B) - P(A \\cap B)$ ; $P(B|A) = \\dfrac{P(A \\cap B)}{P(A)}$"]
       },
-      {
-        id:"proba_2_C", titre:"Échantillonnage et intervalle de fluctuation", niveau:"Difficile", points_total:9,
-        questions:[
-          {label:"a)", enonce:"Une pièce est équilibrée. On la lance $100$ fois. Donne l'intervalle de fluctuation au seuil de $95\\%$.", correction:"$p=0{,}5$, $n=100$. Intervalle : $\\left[0{,}5 - \\dfrac{1}{\\sqrt{100}}\\,;\\,0{,}5 + \\dfrac{1}{\\sqrt{100}}\\right] = [0{,}4\\,;\\,0{,}6]$", points:3},
-          {label:"b)", enonce:"On obtient $62$ piles sur $100$ lancers. La pièce semble-t-elle équilibrée ?", correction:"$62\\%$ est en dehors de $[40\\%\\,;\\,60\\%]$. On peut douter de l'équilibre de la pièce.", points:3},
-          {label:"c)", enonce:"Pour un échantillon de taille $n=400$ avec $p=0{,}4$, donne l'intervalle de fluctuation.", correction:"$\\left[0{,}4 - \\dfrac{1}{\\sqrt{400}}\\,;\\,0{,}4 + \\dfrac{1}{\\sqrt{400}}\\right] = [0{,}35\\,;\\,0{,}45]$", points:3},
-        ],
-        indices:["Intervalle de fluctuation au seuil $95\\%$ : $\\left[p - \\dfrac{1}{\\sqrt{n}}\\,;\\,p + \\dfrac{1}{\\sqrt{n}}\\right]$"]
-      },
-      {
-        id:"proba_2_D", titre:"Probabilités 2nde — variables aléatoires", niveau:"Moyen", points_total:10,
-        questions:[
-          {label:"a)", enonce:"Urne : $4$ blanches, $3$ noires, $3$ rouges. $P(\\text{pas noire})$ ?",
-           type:"libre", correction:"$P=1-\\dfrac{3}{10}=\\dfrac{7}{10}$", points:3},
-          {label:"b)", enonce:"On tire $2$ boules SANS remise. $P(\\text{2 blanches})$ ?",
-           type:"libre", correction:"$P=\\dfrac{4}{10}\\times\\dfrac{3}{9}=\\dfrac{12}{90}=\\dfrac{2}{15}$", points:4},
-          {label:"c)", enonce:"Jeu : dé à $6$ faces. Si $6$ : gagner $5$€, sinon perdre $1$€. Espérance de gain ?",
-           type:"libre", correction:"$E=\\dfrac{1}{6}\\times5+\\dfrac{5}{6}\\times(-1)=\\dfrac{5-5}{6}=0$€", points:3},
-        ],
-        indices:["Complémentaire : souvent plus simple que calculer directement"]
-      },
-      {
-        id:"proba_2_E", titre:"Probabilités 2nde — brevet", niveau:"Difficile", points_total:12,
-        questions:[
-          {label:"1.", enonce:"$200$ lancers d'une pièce : $112$ piles. Calcule l'intervalle de fluctuation au seuil $95\\%$.",
-           type:"libre", correction:"$IF=\\left[0{,}5-\\dfrac{1}{\\sqrt{200}}\\,;\\,0{,}5+\\dfrac{1}{\\sqrt{200}}\\right]\\approx[0{,}43\\,;\\,0{,}57]$. $112/200=0{,}56\\in[0{,}43\\,;\\,0{,}57]$. Oui, équilibrée.", points:5},
-          {label:"2.", enonce:"$P(A)=0{,}4$, $P(B)=0{,}35$, $A$ et $B$ indépendants. Calcule $P(A\\cup B)$.",
-           type:"libre", correction:"$P(A\\cap B)=0{,}4\\times0{,}35=0{,}14$. $P(A\\cup B)=0{,}4+0{,}35-0{,}14=0{,}61$", points:4},
-          {label:"3.", enonce:"On lance $4$ fois une pièce. $P(\\text{exactement 3 piles})$ ?",
-           type:"libre", correction:"$\\binom{4}{3}\\times\\left(\\dfrac{1}{2}\\right)^4=4\\times\\dfrac{1}{16}=\\dfrac{1}{4}$", points:3},
-        ],
-        indices:["$P(A\\cup B)=P(A)+P(B)-P(A\\cap B)$"]
-      },
     ],
 
     "Géométrie repérée": [
@@ -4480,7 +4336,7 @@ const EXERCICES = {
         indices:["Parallélogramme : diagonales qui se coupent en leur milieu"]
       },
       {
-        id:"georep_2_E", titre:"Géométrie repérée — brevet 2nde", niveau:"Difficile", points_total:12,
+        id:"georep_2_E", titre:"Géométrie repérée — problèmes combinés", niveau:"Difficile", points_total:12,
         questions:[
           {label:"1.", enonce:"$A(-2\\,;\\,1)$, $B(4\\,;\\,3)$, $C(2\\,;\\,-1)$. Calculer $AB$, $AC$, $BC$ puis déterminer la nature du triangle.",
            type:"libre", correction:"$AB=\\sqrt{36+4}=\\sqrt{40}$. $AC=\\sqrt{16+4}=\\sqrt{20}$. $BC=\\sqrt{4+16}=\\sqrt{20}$. $AC=BC$ → isocèle en $C$.", points:5},
