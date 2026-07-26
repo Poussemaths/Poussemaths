@@ -6285,6 +6285,59 @@ const EXERCICES = {
       },
     ],
 
+    "Trigonométrie — cercle trigonométrique": [
+      {
+        id:"trig_1_1", titre:"Radians et cercle trigonométrique", niveau:"Facile", points_total:8,
+        questions:[
+          {label:"a)", enonce:"Un tour complet du cercle trigonométrique correspond à :",
+           type:"qcm", choix:["$2\\pi$ radians","$\\pi$ radians","$\\dfrac{\\pi}{2}$ radians","$360$ radians"],
+           bonneReponseIdx:0, bonneReponse:"$2\\pi$ radians",
+           correction:"Un tour complet (360°) correspond à $2\\pi$ radians.", points:2},
+          {label:"b)", enonce:"Convertis $180°$ en radians (valeur arrondie au centième).",
+           type:"libre", correction:"$180°=\\pi\\approx3{,}14$ rad", points:2},
+          {label:"c)", enonce:"Convertis $\\dfrac{\\pi}{2}$ radians en degrés.",
+           type:"libre", correction:"$\\dfrac{\\pi}{2}\\text{ rad}=90°$", points:2},
+          {label:"d)", enonce:"La longueur d'un arc de cercle de rayon $r$ intercepté par un angle $\\theta$ (en radians) est donnée par :",
+           type:"qcm", choix:["$r\\theta$","$r\\theta^2$","$2r\\theta$","$\\pi r\\theta$"],
+           bonneReponseIdx:0, bonneReponse:"$r\\theta$",
+           correction:"Longueur d'arc $=r\\theta$ (avec $\\theta$ en radians).", points:2},
+        ],
+        indices:["$180°=\\pi$ rad ; longueur d'arc $=r\\theta$ ($\\theta$ en radians)"]
+      },
+      {
+        id:"trig_1_2", titre:"Cosinus et sinus — valeurs remarquables", niveau:"Moyen", points_total:9,
+        questions:[
+          {label:"a)", enonce:"Donne la valeur exacte de $\\cos(0)$.",
+           type:"libre", correction:"$\\cos(0)=1$", points:2},
+          {label:"b)", enonce:"Donne la valeur exacte de $\\sin\\left(\\dfrac{\\pi}{2}\\right)$.",
+           type:"libre", correction:"$\\sin\\left(\\dfrac{\\pi}{2}\\right)=1$", points:3},
+          {label:"c)", enonce:"Donne la valeur exacte de $\\cos(\\pi)$.",
+           type:"libre", correction:"$\\cos(\\pi)=-1$", points:2},
+          {label:"d)", enonce:"$\\sin(0)=$ ?",
+           type:"qcm", choix:["$0$","$1$","$-1$","Non défini"],
+           bonneReponseIdx:0, bonneReponse:"$0$",
+           correction:"$\\sin(0)=0$", points:2},
+        ],
+        indices:["Sur le cercle trigonométrique : $\\cos$ = abscisse, $\\sin$ = ordonnée du point associé à l'angle"]
+      },
+      {
+        id:"trig_1_3", titre:"Équations trigonométriques simples", niveau:"Difficile", points_total:10,
+        questions:[
+          {label:"a)", enonce:"Sur $[0\\,;\\,2\\pi[$, l'équation $\\cos(x)=1$ a pour solution :",
+           type:"qcm", choix:["$x=0$","$x=\\pi$","$x=\\dfrac{\\pi}{2}$","Aucune solution"],
+           bonneReponseIdx:0, bonneReponse:"$x=0$",
+           correction:"$\\cos(x)=1$ uniquement en $x=0$ sur $[0\\,;\\,2\\pi[$.", points:3},
+          {label:"b)", enonce:"Sur $[0\\,;\\,2\\pi[$, l'équation $\\sin(x)=0$ a pour solutions :",
+           type:"qcm", choix:["$x=0$ et $x=\\pi$","$x=\\dfrac{\\pi}{2}$ seulement","$x=0$ seulement","$x=\\pi$ et $x=2\\pi$"],
+           bonneReponseIdx:0, bonneReponse:"$x=0$ et $x=\\pi$",
+           correction:"$\\sin(x)=0$ en $x=0$ et $x=\\pi$ sur $[0\\,;\\,2\\pi[$.", points:3},
+          {label:"c)", enonce:"Sur $[0\\,;\\,2\\pi[$, combien l'équation $\\cos(x)=0{,}5$ a-t-elle de solutions ? (Les solutions sont $x=\\dfrac{\\pi}{3}$ et $x=\\dfrac{5\\pi}{3}$.) Réponds uniquement par un nombre.",
+           type:"libre", correction:"$2$", points:4},
+        ],
+        indices:["Sur le cercle trigonométrique, une valeur de $\\cos$ (autre que $\\pm1$) est atteinte par exactement $2$ angles sur $[0\\,;\\,2\\pi[$"]
+      },
+    ],
+
   },
 
 };
@@ -8778,7 +8831,7 @@ function verifierReponse(userRaw, correctionRaw) {
       // Idem pour une unité en texte libre APRÈS le $ fermant ("...=10$ cm") : très
       // fréquent en géométrie (Pythagore, Thalès, volumes...), ça faisait retomber
       // l'extraction sur une valeur intermédiaire fausse au lieu du résultat final.
-      const UNITE_RE = 'cm²|cm³|dm³|km\\/h|m\\/s|mL|cL|dL|hL|mg|min|cm|dm|km|mm|kg|m²|m³|m|g|s|h|L|°|%|€';
+      const UNITE_RE = 'cm²|cm³|dm³|km\\/h|m\\/s|mL|cL|dL|hL|mg|min|rad|cm|dm|km|mm|kg|m²|m³|m|g|s|h|L|°|%|€';
       const pClean = p.replace(/\\[a-zA-Z]+/g, ' ').replace(/\\[%$&_#]/g, ' ').replace(/[{}]/g, ' ')
         // Ponctuation de fin de phrase après l'unité ("...=13,5 cL.") sinon
         // l'unité n'est plus en toute fin de chaîne et n'est pas retirée.
