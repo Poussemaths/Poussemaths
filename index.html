@@ -5580,47 +5580,7 @@ const EXERCICES = {
   // ═══════════════════════════════
   "4eme": {
 
-    "Calcul littéral & Identités": [
-      {
-        id:"lit_4_genere", titre:"Identités remarquables — entraînement infini", niveau:"Facile", points_total:5,
-        genere: true, templateId: "identite_remarquable_v1",
-        questions:[
-          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
-          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
-          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
-          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
-          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
-        ],
-        indices:["$(x+y)^2=x^2+2xy+y^2$, $(x-y)^2=x^2-2xy+y^2$, $(x+y)(x-y)=x^2-y^2$"]
-      },
-      {
-        id:"lit_4_1", titre:"Identités remarquables — reconnaître", niveau:"Facile", points_total:8,
-        questions:[
-          {label:"1.", enonce:"$(x+3)^2 = ?$",
-           type:"qcm", choix:["$x^2+9$","$x^2+6x+9$","$x^2+3x+9$","$2x+6$"],
-           bonneReponseIdx:1, bonneReponse:"$x^2+6x+9$",
-           correction:"$(a+b)^2=a^2+2ab+b^2=(x)^2+2(x)(3)+(3)^2=x^2+6x+9$", points:2},
-          {label:"2.", enonce:"Développe : $(x-4)^2$",
-           type:"libre", correction:"$x^2-8x+16$", points:2},
-          {label:"3.", enonce:"Développe : $(x+5)(x-5)$",
-           type:"libre", correction:"$x^2-25$", points:2},
-          {label:"4.", enonce:"Factorise : $x^2-49$",
-           type:"libre", correction:"$(x-7)(x+7)$", points:2},
-        ],
-        indices:["$(a+b)^2=a^2+2ab+b^2$ ; $(a-b)^2=a^2-2ab+b^2$ ; $(a+b)(a-b)=a^2-b^2$"]
-      },
-      {
-        id:"lit_4_2", titre:"Développer et réduire", niveau:"Facile", points_total:8,
-        questions:[
-          {label:"a)", enonce:"Développe et réduis : $2(3x+4)-(x-5)$",
-           type:"libre", correction:"$6x+8-x+5=5x+13$", points:2},
-          {label:"b)", enonce:"Développe : $(2x-3)(x+5)$",
-           type:"libre", correction:"$2x^2+10x-3x-15=2x^2+7x-15$", points:3},
-          {label:"c)", enonce:"Factorise : $x^2-36$ et $4x^2-9$",
-           type:"libre", correction:"$(x-6)(x+6)$ ; $(2x-3)(2x+3)$", points:3},
-        ],
-        indices:["$(a+b)(c+d)=ac+ad+bc+bd$"]
-      },
+    "Calcul littéral": [
       {
         id:"lit_4_3", titre:"Équations du premier degré — 4ème", niveau:"Moyen", points_total:10,
         questions:[
@@ -5644,95 +5604,6 @@ const EXERCICES = {
            type:"libre", correction:"$2^{5+3-4}=2^4=16$", points:4},
         ],
         indices:["$a\\times10^n$ avec $1\\leq a<10$ ; $a^m\\times a^n=a^{m+n}$"]
-      },
-      {
-        id:"lit_4_5", titre:"Calcul littéral — brevet 4ème", niveau:"Difficile", points_total:12,
-        questions:[
-          {label:"1.", enonce:"Développe et réduis : $(3x-2)^2-(3x+2)(3x-2)$",
-           type:"libre", correction:"$(9x^2-12x+4)-(9x^2-4)=-12x+8$", points:5},
-          {label:"2.", enonce:"Pour quelles valeurs de $x$ a-t-on $(x-3)(x+5)=0$ ?",
-           type:"libre", correction:"$x=3$ ou $x=-5$", points:4},
-          {label:"3.", enonce:"$A=n^2+n$. Pourquoi $A=n(n+1)$ est-il toujours pair ?",
-           type:"libre", correction:"$A=n(n+1)$. Deux entiers consécutifs : l'un est pair → produit toujours pair.", points:3},
-        ],
-        indices:["$ab=0 \\Rightarrow a=0$ ou $b=0$"]
-      },
-    ],
-
-    "Trigonométrie": [
-      {
-        id:"trigo_4_genere", titre:"Trigonométrie — entraînement infini", niveau:"Facile", points_total:5,
-        genere: true, templateId: "trigonometrie_v1",
-        questions:[
-          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
-          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
-          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
-          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
-          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
-        ],
-        indices:["$\\cos(\\hat{A}) = \\dfrac{adjacent}{hypoténuse}$, $\\sin(\\hat{A}) = \\dfrac{oppose}{hypoténuse}$"]
-      },
-      {
-        id:"trigo_4_1", titre:"SOH CAH TOA — reconnaître", niveau:"Facile", points_total:8,
-        questions:[
-          {label:"1.", enonce:"$\\cos(\\hat{B}) = ?$ dans un triangle rectangle en $A$",
-           type:"qcm", choix:["$\\dfrac{\\text{opposé}}{\\text{hyp}}$","$\\dfrac{\\text{adjacent}}{\\text{hyp}}$","$\\dfrac{\\text{opposé}}{\\text{adjacent}}$","$\\dfrac{\\text{hyp}}{\\text{adjacent}}$"],
-           bonneReponseIdx:1, bonneReponse:"$\\dfrac{\\text{adjacent}}{\\text{hyp}}$",
-           correction:"CAH : $\\cos = \\dfrac{\\text{Adjacent}}{\\text{Hypoténuse}}$", points:2},
-          {label:"2.", enonce:"Triangle rect. en $A$, $BC=10$, $AB=6$. Calcule $\\cos(\\hat{B})$.",
-           type:"libre", correction:"$\\cos(\\hat{B})=\\dfrac{AB}{BC}=\\dfrac{6}{10}=0{,}6$", points:3},
-          {label:"3.", enonce:"Triangle rect. en $A$, $\\hat{B}=40°$, $BC=12$. Calcule $AB$.",
-           type:"libre", correction:"$AB=12\\cos(40°)\\approx9{,}19$ cm", points:3},
-        ],
-        indices:["SOH : $\\sin=\\dfrac{\\text{Opp}}{\\text{Hyp}}$ · CAH : $\\cos=\\dfrac{\\text{Adj}}{\\text{Hyp}}$ · TOA : $\\tan=\\dfrac{\\text{Opp}}{\\text{Adj}}$"]
-      },
-      {
-        id:"trigo_4_2", titre:"Calculer un angle inconnu", niveau:"Moyen", points_total:10,
-        questions:[
-          {label:"a)", enonce:"Triangle rect. en $A$, $AB=7$, $BC=14$. Calcule $\\hat{B}$.",
-           type:"libre", correction:"$\\cos(\\hat{B})=\\dfrac{7}{14}=0{,}5 \\Rightarrow \\hat{B}=60°$", points:3},
-          {label:"b)", enonce:"Triangle rect. en $A$, $AC=5$, $AB=5$. Calcule $\\hat{B}$.",
-           type:"libre", correction:"$\\tan(\\hat{B})=\\dfrac{5}{5}=1 \\Rightarrow \\hat{B}=45°$", points:3},
-          {label:"c)", enonce:"Triangle rect. en $B$, $AB=8$, $AC=10$. Calcule $\\hat{A}$.",
-           type:"libre", correction:"$\\sin(\\hat{A})=\\dfrac{8}{10}=0{,}8 \\Rightarrow \\hat{A}\\approx53{,}1°$", points:4},
-        ],
-        indices:["Utilise $\\cos^{-1}$, $\\sin^{-1}$ ou $\\tan^{-1}$ sur la calculatrice"]
-      },
-      {
-        id:"trigo_4_3", titre:"Probabilités — arbre et tableaux", niveau:"Moyen", points_total:10,
-        questions:[
-          {label:"a)", enonce:"On lance deux dés. $P$(somme $=7$) ?",
-           type:"libre", correction:"$6$ couples sur $36$ : $P=\\dfrac{1}{6}$", points:3},
-          {label:"b)", enonce:"Urne : $3$ rouges, $2$ bleues. Tirage AVEC remise × $2$. $P$(2 rouges) ?",
-           type:"libre", correction:"$P=\\dfrac{3}{5}\\times\\dfrac{3}{5}=\\dfrac{9}{25}$", points:3},
-          {label:"c)", enonce:"Même urne, SANS remise. $P$(2 rouges) ?",
-           type:"libre", correction:"$P=\\dfrac{3}{5}\\times\\dfrac{2}{4}=\\dfrac{3}{10}$", points:4},
-        ],
-        indices:["Avec remise : mêmes proba à chaque tirage ; sans remise : l'urne change"]
-      },
-      {
-        id:"trigo_4_4", titre:"Thalès — applications", niveau:"Difficile", points_total:10,
-        questions:[
-          {label:"a)", enonce:"$DE\\parallel BC$, $AD=4$, $AB=10$, $DE=3$. Calcule $BC$.",
-           type:"libre", correction:"$\\dfrac{4}{10}=\\dfrac{3}{BC} \\Rightarrow BC=7{,}5$", points:3},
-          {label:"b)", enonce:"Réciproque : $AD=2$, $DB=4$, $AE=1{,}5$, $EC=3$. Parallèles ?",
-           type:"libre", correction:"$\\dfrac{2}{6}=\\dfrac{1}{3}$ et $\\dfrac{1{,}5}{4{,}5}=\\dfrac{1}{3}$ ✓ Oui.", points:3},
-          {label:"c)", enonce:"Un arbre de $8$ m projette une ombre de $6$ m. Un poteau de $2$ m projette une ombre de combien ?",
-           type:"libre", correction:"$\\dfrac{8}{6}=\\dfrac{2}{x} \\Rightarrow x=1{,}5$ m", points:4},
-        ],
-        indices:["Si $DE\\parallel BC$ : $\\dfrac{AD}{AB}=\\dfrac{AE}{AC}=\\dfrac{DE}{BC}$"]
-      },
-      {
-        id:"trigo_4_5", titre:"Trigonométrie — brevet 4ème", niveau:"Difficile", points_total:12,
-        questions:[
-          {label:"1.", enonce:"Un toboggan de $5$ m fait un angle de $30°$ avec l'horizontale. Hauteur ?",
-           type:"libre", correction:"$h=5\\sin(30°)=5\\times0{,}5=2{,}5$ m", points:3},
-          {label:"2.", enonce:"Escalier : marches de $20$ cm de hauteur et $25$ cm de profondeur. Angle d'inclinaison ?",
-           type:"libre", correction:"$\\tan\\theta=\\dfrac{20}{25}=0{,}8 \\Rightarrow \\theta\\approx38{,}7°$", points:4},
-          {label:"3.", enonce:"Triangle $ABC$ rectangle en $A$. $AB=5$, $BC=13$. Calcule $\\hat{B}$ et $AC$.",
-           type:"libre", correction:"$\\cos(\\hat{B})=\\dfrac{5}{13}\\approx0{,}385 \\Rightarrow \\hat{B}\\approx67{,}4°$. $AC=\\sqrt{169-25}=12$ cm.", points:5},
-        ],
-        indices:["Fais toujours un schéma et identifie l'angle droit avant tout"]
       },
     ],
 
@@ -5815,10 +5686,10 @@ const EXERCICES = {
       },
     ],
 
-    "Thalès & Pythagore": [
+    "Théorème de Pythagore": [
       {
-        id:"thales_4_genere", titre:"Thalès — entraînement infini", niveau:"Facile", points_total:5,
-        genere: true, templateId: "thales_v1",
+        id:"pyth_4_genere", titre:"Pythagore — entraînement infini", niveau:"Facile", points_total:5,
+        genere: true, templateId: "pythagore_v1",
         questions:[
           {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
           {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
@@ -5826,31 +5697,7 @@ const EXERCICES = {
           {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
           {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
         ],
-        indices:["$\\dfrac{AB}{AD} = \\dfrac{AC}{AE}$"]
-      },
-      {
-        id:"thales_4_1", titre:"Théorème de Thalès — applications", niveau:"Facile", points_total:8,
-        questions:[
-          {label:"1.", enonce:"$DE\\parallel BC$. $AD=6$, $AB=9$, $AE=4$. Calcule $AC$.",
-           type:"libre", correction:"$\\dfrac{6}{9}=\\dfrac{4}{AC} \\Rightarrow AC=6$ cm", points:2},
-          {label:"2.", enonce:"$DE\\parallel BC$. $AD=4$, $DB=6$, $DE=3$. Calcule $BC$.",
-           type:"libre", correction:"$\\dfrac{4}{10}=\\dfrac{3}{BC} \\Rightarrow BC=7{,}5$ cm", points:3},
-          {label:"3.", enonce:"Un poteau de $3$ m projette une ombre de $2$ m. Un arbre projette une ombre de $8$ m. Hauteur de l'arbre ?",
-           type:"libre", correction:"$\\dfrac{3}{2}=\\dfrac{h}{8} \\Rightarrow h=12$ m", points:3},
-        ],
-        indices:["$DE\\parallel BC \\Rightarrow \\dfrac{AD}{AB}=\\dfrac{AE}{AC}=\\dfrac{DE}{BC}$"]
-      },
-      {
-        id:"thales_4_2", titre:"Réciproque de Thalès", niveau:"Moyen", points_total:10,
-        questions:[
-          {label:"a)", enonce:"$AD=4$, $DB=6$, $AE=3$, $EC=4{,}5$. $DE\\parallel BC$ ?",
-           type:"libre", correction:"$\\dfrac{4}{10}=0{,}4$ et $\\dfrac{3}{7{,}5}=0{,}4$ ✓ Oui.", points:3},
-          {label:"b)", enonce:"$AD=3$, $DB=5$, $AE=2$, $EC=4$. $DE\\parallel BC$ ?",
-           type:"libre", correction:"$\\dfrac{3}{8}=0{,}375\\neq\\dfrac{2}{6}=0{,}333$ ✗ Non.", points:3},
-          {label:"c)", enonce:"$DE\\parallel BC$, $AD=x$, $AB=12$, $AE=x-2$, $AC=9$. Calcule $x$.",
-           type:"libre", correction:"$\\dfrac{x}{12}=\\dfrac{x-2}{9} \\Rightarrow 9x=12(x-2) \\Rightarrow 9x=12x-24 \\Rightarrow x=8$", points:4},
-        ],
-        indices:["Réciproque : si $\\dfrac{AD}{AB}=\\dfrac{AE}{AC}$ alors $DE\\parallel BC$"]
+        indices:["$hypoténuse^2 = côté_1^2 + côté_2^2$"]
       },
       {
         id:"thales_4_3", titre:"Pythagore — réciproque et applications", niveau:"Moyen", points_total:10,
@@ -5864,8 +5711,23 @@ const EXERCICES = {
         ],
         indices:["Dans un losange, les diagonales se coupent perpendiculairement en leur milieu"]
       },
+    ],
+
+    "Proportionnalité & Pourcentages": [
       {
-        id:"thales_4_4", titre:"Proportionnalité & Pourcentages 4ème", niveau:"Difficile", points_total:10,
+        id:"prop_4_genere", titre:"Pourcentages — entraînement infini", niveau:"Facile", points_total:5,
+        genere: true, templateId: "pourcentage_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["Coefficient multiplicateur : $+t\\% \\Rightarrow \\times(1+t/100)$, $-t\\% \\Rightarrow \\times(1-t/100)$"]
+      },
+      {
+        id:"prop_4_1", titre:"Évolutions successives", niveau:"Difficile", points_total:10,
         questions:[
           {label:"a)", enonce:"Hausse de $5\\%$ puis hausse de $3\\%$. Taux global ?",
            type:"libre", correction:"$1{,}05\\times1{,}03=1{,}0815$ soit $+8{,}15\\%$", points:3},
@@ -5876,19 +5738,8 @@ const EXERCICES = {
         ],
         indices:["Évolutions successives : multiplier les coefficients"]
       },
-      {
-        id:"thales_4_5", titre:"Géométrie — brevet 4ème complet", niveau:"Difficile", points_total:12,
-        questions:[
-          {label:"1.", enonce:"$DE\\parallel BC$, $AD=4$, $DB=6$, $AE=3$, $DE=5$. Calcule $EC$ et $BC$.",
-           type:"libre", correction:"$\\dfrac{4}{10}=\\dfrac{3}{AC} \\Rightarrow AC=7{,}5 \\Rightarrow EC=4{,}5$. $BC=\\dfrac{10\\times5}{4}=12{,}5$ cm.", points:5},
-          {label:"2.", enonce:"Un triangle $ABC$ a $\\hat{A}=90°$, $AB=7{,}5$ cm et $BC=12{,}5$ cm. Calcule $AC$ puis $\\hat{B}$.",
-           type:"libre", correction:"$AC=\\sqrt{12{,}5^2-7{,}5^2}=\\sqrt{100}=10$ cm. $\\cos(\\hat{B})=\\dfrac{7{,}5}{12{,}5}=0{,}6 \\Rightarrow \\hat{B}\\approx53{,}1°$.", points:4},
-          {label:"3.", enonce:"Un silo : cylindre ($r=2$ m, $h=5$ m) + cône ($r=2$ m, $h=3$ m). Volume total ?",
-           type:"libre", correction:"$V=\\pi(2)^2\\times5+\\dfrac{1}{3}\\pi(2)^2\\times3=20\\pi+4\\pi=24\\pi\\approx75{,}4$ m³", points:3},
-        ],
-        indices:["Combine Thalès, Pythagore et trigonométrie selon ce que tu connais"]
-      },
     ],
+
     "Probabilités 4ème": [
       {
         id:"proba_4_genere", titre:"Probabilités — entraînement infini", niveau:"Facile", points_total:5,
@@ -5915,56 +5766,6 @@ const EXERCICES = {
            type:"libre", correction:"$P=\\dfrac{4}{32}\\times\\dfrac{3}{31}=\\dfrac{12}{992}=\\dfrac{3}{248}$", points:4},
         ],
         indices:["$P(A)+P(\\bar{A})=1$ ; sans remise : l'urne change après chaque tirage"]
-      },
-      {
-        id:"proba_4_2", titre:"Probabilités — arbre et tableaux", niveau:"Moyen", points_total:10,
-        questions:[
-          {label:"a)", enonce:"On lance $2$ dés. $P(\\text{somme}=8)$ ?",
-           type:"libre", correction:"$(2,6),(3,5),(4,4),(5,3),(6,2)$ = $5$ cas sur $36$. $P=\\dfrac{5}{36}$", points:3},
-          {label:"b)", enonce:"Sac A : $3$ rouges, $2$ bleues. Sac B : $1$ rouge, $4$ bleues. On choisit un sac au hasard, puis une boule. $P(\\text{rouge})$ ?",
-           type:"libre", correction:"$P=\\dfrac{1}{2}\\times\\dfrac{3}{5}+\\dfrac{1}{2}\\times\\dfrac{1}{5}=\\dfrac{3}{10}+\\dfrac{1}{10}=\\dfrac{4}{10}=\\dfrac{2}{5}$", points:4},
-          {label:"c)", enonce:"$P(A)=0{,}4$ et $P(B)=0{,}5$, $A$ et $B$ indépendants. $P(A\\cap B)$ ?",
-           type:"libre", correction:"$P=0{,}4\\times0{,}5=0{,}2$", points:3},
-        ],
-        indices:["Arbre : multiplier les probabilités sur chaque chemin, additionner les chemins favorables"]
-      },
-      {
-        id:"proba_4_3", titre:"Probabilités — simulation", niveau:"Moyen", points_total:10,
-        questions:[
-          {label:"1.", enonce:"On simule $500$ lancers d'une pièce : $260$ piles. La fréquence de pile est-elle cohérente avec $p=0{,}5$ ?",
-           type:"qcm", choix:["Oui, $260/500=0{,}52\\approx0{,}5$","Non, trop loin de $0{,}5$","Impossible à dire","Oui car $260>250$"],
-           bonneReponseIdx:0, bonneReponse:"Oui, $260/500=0{,}52\\approx0{,}5$",
-           correction:"Fréquence $=260/500=0{,}52=52\\%$. Proche de $0{,}5$ → cohérent pour $500$ lancers.", points:4},
-          {label:"2.", enonce:"Intervalle de fluctuation au seuil $95\\%$ pour $p=0{,}5$, $n=500$.",
-           type:"libre", correction:"$IF=\\left[0{,}5-\\dfrac{1}{\\sqrt{500}}\,;\,0{,}5+\\dfrac{1}{\\sqrt{500}}\\right]\\approx[0{,}455\,;\,0{,}545]$. $52\\%\\in[45{,}5\\%;54{,}5\\%]$ ✓", points:3},
-          {label:"3.", enonce:"Quelle taille d'échantillon pour avoir un IF de largeur $0{,}1$ ?",
-           type:"libre", correction:"$\\dfrac{2}{\\sqrt{n}}=0{,}1 \\Rightarrow \\sqrt{n}=20 \\Rightarrow n=400$", points:3},
-        ],
-        indices:["IF au seuil $95\\%$ : $\\left[p-\\dfrac{1}{\\sqrt{n}}\,;\,p+\\dfrac{1}{\\sqrt{n}}\\right]$"]
-      },
-      {
-        id:"proba_4_4", titre:"Probabilités — espérance", niveau:"Difficile", points_total:10,
-        questions:[
-          {label:"a)", enonce:"Jeu : dé à $6$ faces. Si $6$ : gagner $5$€. Sinon : perdre $1$€. Espérance ?",
-           type:"libre", correction:"$E=\\dfrac{1}{6}\\times5+\\dfrac{5}{6}\\times(-1)=\\dfrac{5-5}{6}=0$€. Jeu équitable.", points:4},
-          {label:"b)", enonce:"Loterie : $1000$ tickets à $2$€. $1$ lot de $500$€, $10$ lots de $50$€, $100$ lots de $5$€. Espérance de gain ?",
-           type:"libre", correction:"$E=\\dfrac{500+500+500}{1000}-2=1{,}50-2=-0{,}50$€. En moyenne on perd $0{,}50$€.", points:3},
-          {label:"c)", enonce:"Pour quel gain $g$ le jeu du dé devient-il favorable ?",
-           type:"libre", correction:"$\\dfrac{g}{6}-\\dfrac{5}{6}>0 \\Rightarrow g>5$€.", points:3},
-        ],
-        indices:["Espérance $=\\sum P(x_i)\\times x_i$ ; jeu équitable si espérance $=0$"]
-      },
-      {
-        id:"proba_4_5", titre:"Probabilités — brevet 4ème", niveau:"Difficile", points_total:12,
-        questions:[
-          {label:"1.", enonce:"$40\\%$ des élèves font sport. $30\\%$ font musique. $15\\%$ font les deux. $P(\\text{sport OU musique})$ ?",
-           type:"libre", correction:"$P=0{,}4+0{,}3-0{,}15=0{,}55$", points:4},
-          {label:"2.", enonce:"On lance $3$ fois une pièce. $P(\\text{exactement 2 piles})$ ?",
-           type:"libre", correction:"PPF, PFP, FPP : $3$ cas sur $8$. $P=\\dfrac{3}{8}$.", points:4},
-          {label:"3.", enonce:"Une urne contient $n$ boules rouges et $4$ bleues. $P(\\text{rouge})=\\dfrac{3}{5}$. Calcule $n$.",
-           type:"libre", correction:"$\\dfrac{n}{n+4}=\\dfrac{3}{5} \\Rightarrow 5n=3n+12 \\Rightarrow n=6$ boules rouges.", points:4},
-        ],
-        indices:["$P(A\\cup B)=P(A)+P(B)-P(A\\cap B)$"]
       },
     ],
 
@@ -6030,7 +5831,7 @@ const EXERCICES = {
         indices:["Multiplier toutes les valeurs par $k$ → moyenne multipliée par $k$"]
       },
       {
-        id:"stat_4_5", titre:"Statistiques — brevet 4ème", niveau:"Difficile", points_total:12,
+        id:"stat_4_5", titre:"Statistiques — problèmes combinés", niveau:"Difficile", points_total:12,
         questions:[
           {label:"1.", enonce:"Marathon : $53$ pros (moy $2$h$15$=$135$ min) et $2354$ amateurs (moy $3$h$59$=$239$ min). Temps moyen global ?",
            type:"libre", correction:"$\\bar{x}=\\dfrac{53\\times135+2354\\times239}{2407}\\approx\\dfrac{7155+562606}{2407}\\approx237$ min $\\approx3$h$57$", points:5},
