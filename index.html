@@ -6116,6 +6116,73 @@ const EXERCICES = {
       },
     ],
 
+    "Dérivation": [
+      {
+        id:"deriv_1_1", titre:"Nombre dérivé — taux de variation", niveau:"Facile", points_total:8,
+        questions:[
+          {label:"a)", enonce:"$f(x)=x^2$. Le taux de variation de $f$ entre $2$ et $2+h$ (avec $h\\neq0$) est égal à :",
+           type:"qcm", choix:["$4+h$","$2+h$","$4h$","$h^2$"],
+           bonneReponseIdx:0, bonneReponse:"$4+h$",
+           correction:"$\\dfrac{f(2+h)-f(2)}{h}=\\dfrac{(2+h)^2-4}{h}=\\dfrac{4h+h^2}{h}=4+h$", points:2},
+          {label:"b)", enonce:"En déduis $f'(2)$ (limite du taux de variation quand $h$ tend vers $0$).",
+           type:"libre", correction:"$f'(2)=4$", points:3},
+          {label:"c)", enonce:"Sachant $f(2)=4$ et $f'(2)=4$, l'équation réduite de la tangente à la courbe de $f$ au point d'abscisse $2$ est :",
+           type:"qcm", choix:["$y=4x-4$","$y=4x+4$","$y=2x-4$","$y=4x$"],
+           bonneReponseIdx:0, bonneReponse:"$y=4x-4$",
+           correction:"$y=f'(2)(x-2)+f(2)=4(x-2)+4=4x-4$", points:3},
+        ],
+        indices:["$f'(a)$ est la limite du taux de variation $\\dfrac{f(a+h)-f(a)}{h}$ quand $h\\to0$ ; tangente en $a$ : $y=f'(a)(x-a)+f(a)$"]
+      },
+      {
+        id:"deriv_1_2", titre:"Dérivées usuelles", niveau:"Facile", points_total:8,
+        questions:[
+          {label:"a)", enonce:"La dérivée de $f(x)=x^3$ est :",
+           type:"qcm", choix:["$3x^2$","$x^2$","$3x$","$x^3$"],
+           bonneReponseIdx:0, bonneReponse:"$3x^2$",
+           correction:"$(x^n)'=nx^{n-1}$ donc $(x^3)'=3x^2$", points:2},
+          {label:"b)", enonce:"La dérivée de $g(x)=\\dfrac{1}{x}$ sur $\\mathbb{R}^*$ est :",
+           type:"qcm", choix:["$-\\dfrac{1}{x^2}$","$\\dfrac{1}{x^2}$","$-\\dfrac{1}{x}$","$\\ln(x)$"],
+           bonneReponseIdx:0, bonneReponse:"$-\\dfrac{1}{x^2}$",
+           correction:"$\\left(\\dfrac{1}{x}\\right)'=-\\dfrac{1}{x^2}$", points:3},
+          {label:"c)", enonce:"La dérivée de $h(x)=\\sqrt{x}$ sur $]0\\,;\\,+\\infty[$ est :",
+           type:"qcm", choix:["$\\dfrac{1}{2\\sqrt{x}}$","$\\dfrac{1}{\\sqrt{x}}$","$2\\sqrt{x}$","$\\dfrac{1}{2x}$"],
+           bonneReponseIdx:0, bonneReponse:"$\\dfrac{1}{2\\sqrt{x}}$",
+           correction:"$(\\sqrt{x})'=\\dfrac{1}{2\\sqrt{x}}$", points:3},
+        ],
+        indices:["$(x^n)'=nx^{n-1}$ ; $\\left(\\dfrac{1}{x}\\right)'=-\\dfrac{1}{x^2}$ ; $(\\sqrt{x})'=\\dfrac{1}{2\\sqrt{x}}$"]
+      },
+      {
+        id:"deriv_1_3", titre:"Dérivée d'une somme et sens de variation", niveau:"Moyen", points_total:10,
+        questions:[
+          {label:"a)", enonce:"$f(x)=3x^2-5x+2$. Sachant $f'(x)=6x-5$, calcule $f'(1)$.",
+           type:"libre", correction:"$f'(1)=6(1)-5=1$", points:3},
+          {label:"b)", enonce:"Résous $f'(x)=0$ avec $f'(x)=6x-5$.",
+           type:"libre", correction:"$6x-5=0 \\Rightarrow x=\\dfrac{5}{6}$", points:3},
+          {label:"c)", enonce:"$a=3>0$ (parabole tournée vers le haut) et $f'(x)$ s'annule en changeant de signe en $\\dfrac{5}{6}$. $f$ est-elle croissante ou décroissante sur $\\left]-\\infty\\,;\\,\\dfrac{5}{6}\\right]$ ?",
+           type:"qcm", choix:["Croissante","Décroissante"],
+           bonneReponseIdx:1, bonneReponse:"Décroissante",
+           correction:"$f'(x)<0$ pour $x<\\dfrac{5}{6}$ (car $a=3>0$) donc $f$ est décroissante avant $\\dfrac{5}{6}$, puis croissante après.", points:4},
+        ],
+        indices:["$f'(x)>0 \\Rightarrow f$ croissante ; $f'(x)<0 \\Rightarrow f$ décroissante"]
+      },
+      {
+        id:"deriv_1_4", titre:"Dérivée d'un produit et extremum", niveau:"Difficile", points_total:10,
+        questions:[
+          {label:"a)", enonce:"La dérivée de $f(x)=(2x-1)(x+3)$ (développée puis dérivée) est :",
+           type:"qcm", choix:["$4x+5$","$2x+5$","$4x-5$","$2x-2$"],
+           bonneReponseIdx:0, bonneReponse:"$4x+5$",
+           correction:"$f(x)=(2x-1)(x+3)=2x^2+6x-x-3=2x^2+5x-3$ donc $f'(x)=4x+5$", points:3},
+          {label:"b)", enonce:"Résous $f'(x)=0$ avec $f'(x)=4x+5$.",
+           type:"libre", correction:"$4x+5=0 \\Rightarrow x=-\\dfrac{5}{4}$", points:3},
+          {label:"c)", enonce:"$g(x)=-x^2+6x-5$. Calcule l'abscisse du sommet de la parabole (valeur de $x$ où $g'(x)=0$).",
+           type:"libre", correction:"$g'(x)=-2x+6=0 \\Rightarrow x=3$", points:2},
+          {label:"d)", enonce:"Calcule $g(3)$ (l'ordonnée du sommet, donc le maximum de $g$).",
+           type:"libre", correction:"$g(3)=-9+18-5=4$", points:2},
+        ],
+        indices:["$(uv)'=u'v+uv'$ ; le sommet d'une parabole est atteint là où la dérivée s'annule"]
+      },
+    ],
+
   },
 
 };
@@ -8589,10 +8656,17 @@ function verifierReponse(userRaw, correctionRaw) {
       const p = partie.trim();
 
       // Priorité : une fraction \dfrac{a}{b} ou \frac{a}{b} tout à la fin du segment
-      const matchDfrac = p.match(/\\d?frac\{(-?\d+)\}\{(-?\d+)\}\s*$/);
+      // Le signe "-" est parfois placé AVANT la commande ("-\dfrac{5}{4}") plutôt
+      // qu'à l'intérieur du numérateur ("\dfrac{-5}{4}") : sans le capturer, le
+      // regex (non ancré au début) ignore ce "-" et calcule +5/4 au lieu de -5/4.
+      const matchDfrac = p.match(/(-)?\\d?frac\{(-?\d+)\}\{(-?\d+)\}\s*$/);
       if(matchDfrac) {
-        const den = parseFloat(matchDfrac[2]);
-        if(den !== 0) { resultats.push(parseFloat(matchDfrac[1]) / den); continue; }
+        const den = parseFloat(matchDfrac[3]);
+        if(den !== 0) {
+          const signeExterne = matchDfrac[1] ? -1 : 1;
+          resultats.push(signeExterne * parseFloat(matchDfrac[2]) / den);
+          continue;
+        }
       }
 
       // Sinon, un nombre simple à la fin (après avoir retiré les commandes LaTeX restantes).
@@ -8639,11 +8713,11 @@ function verifierReponse(userRaw, correctionRaw) {
     const nums = [];
     // Fractions \dfrac{a}{b} / \frac{a}{b} : ajouter leur valeur calculée (a/b),
     // sans quoi elles n'apparaissaient dans l'ensemble que comme 2 entiers isolés.
-    const fracRe = /\\d?frac\{(-?\d+)\}\{(-?\d+)\}/g;
+    const fracRe = /(-)?\\d?frac\{(-?\d+)\}\{(-?\d+)\}/g;
     let fm;
     while((fm = fracRe.exec(correction)) !== null) {
-      const den = parseFloat(fm[2]);
-      if(den !== 0) nums.push(parseFloat(fm[1]) / den);
+      const den = parseFloat(fm[3]);
+      if(den !== 0) nums.push((fm[1] ? -1 : 1) * parseFloat(fm[2]) / den);
     }
     const c = correction
       .replace(/\$([^$]+)\$/g, ' $1 ')
