@@ -4288,7 +4288,7 @@ const EXERCICES = {
         indices:["$P(A \\cup B) = P(A) + P(B) - P(A \\cap B)$ ; $P(B|A) = \\dfrac{P(A \\cap B)}{P(A)}$"]
       },
       {
-        id:"proba_2_C", titre:"Arbre pondéré à deux branches", niveau:"Moyen", points_total:9,
+        id:"proba_2_C", titre:"Arbre pondéré à deux branches", niveau:"Moyen", points_total:15,
         questions:[
           {label:"a)", enonce:"Une urne contient $40\\%$ de boules rouges et $60\\%$ de boules vertes. Parmi les rouges, $25\\%$ sont brillantes. Parmi les vertes, $10\\%$ sont brillantes. En suivant le premier chemin de l'arbre (rouge puis brillante), calcule $P(\\text{rouge}\\cap\\text{brillante})$.",
            type:"libre", correction:"$P(\\text{rouge}\\cap\\text{brillante})=0{,}4\\times0{,}25=0{,}1$", points:3},
@@ -4296,6 +4296,10 @@ const EXERCICES = {
            type:"libre", correction:"$P(\\text{verte}\\cap\\text{brillante})=0{,}6\\times0{,}1=0{,}06$", points:3},
           {label:"c)", enonce:"En additionnant les deux chemins de l'arbre qui mènent à une boule brillante, calcule $P(\\text{brillante})$.",
            type:"libre", correction:"$P(\\text{brillante})=0{,}1+0{,}06=0{,}16$", points:3},
+          {label:"d)", enonce:"En déduis $P(\\text{non brillante})$.",
+           type:"libre", correction:"$P(\\text{non brillante})=1-0{,}16=0{,}84$", points:3},
+          {label:"e)", enonce:"Parmi les rouges ($40\\%$ du total, dont $25\\%$ brillantes), calcule $P(\\text{rouge}\\cap\\text{non brillante})$.",
+           type:"libre", correction:"$P(\\text{rouge}\\cap\\text{non brillante})=0{,}4\\times0{,}75=0{,}3$", points:3},
         ],
         indices:["Sur un arbre pondéré : on multiplie les probabilités le long d'un chemin, on additionne les chemins qui mènent au même résultat final"]
       },
@@ -4933,11 +4937,15 @@ const EXERCICES = {
           {label:"d)", enonce:"Dé à $6$ faces numérotées de $1$ à $6$. Toutes les faces ont-elles la même chance de sortir ?",
            type:"qcm", choix:["Oui","Non"], bonneReponseIdx:0, bonneReponse:"Oui",
            correction:"Chaque face a la même chance de sortir : $\\dfrac{1}{6}$ chacune. C'est une situation d'équiprobabilité.", points:2},
+          {label:"e)", enonce:"On tire une carte parmi $4$ cartes numérotées $1,2,3,4$. L'événement « tirer un nombre inférieur à $10$ » est :",
+           type:"qcm", choix:["Certain","Impossible","Ni l'un ni l'autre"],
+           bonneReponseIdx:0, bonneReponse:"Certain",
+           correction:"Toutes les cartes ($1,2,3,4$) sont inférieures à $10$ : l'événement se réalise toujours, il est certain.", points:2},
         ],
         indices:["Un événement impossible a une probabilité de $0$ ; un événement certain a une probabilité de $1$"]
       },
       {
-        id:"proba_6_2", titre:"Probabilités — fractions, décimaux et pourcentages", niveau:"Moyen", points_total:10,
+        id:"proba_6_2", titre:"Probabilités — fractions, décimaux et pourcentages", niveau:"Moyen", points_total:13,
         questions:[
           {label:"a)", enonce:"Sac de $10$ boules : $4$ rouges, $6$ vertes. Calcule $P(\\text{rouge})$ sous forme de fraction irréductible.",
            type:"libre", correction:"$P=\\dfrac{4}{10}=\\dfrac{2}{5}$", points:3},
@@ -4947,6 +4955,8 @@ const EXERCICES = {
            type:"libre", correction:"$P=40\\%$", points:2},
           {label:"d)", enonce:"Roue de loterie à $4$ secteurs identiques : $1$ rouge, $1$ bleu, $2$ verts. Calcule $P(\\text{vert})$.",
            type:"libre", correction:"$P=\\dfrac{2}{4}=\\dfrac{1}{2}$", points:3},
+          {label:"e)", enonce:"Sac de $20$ boules dont $5$ jaunes. Calcule $P(\\text{jaune})$ sous forme de fraction irréductible.",
+           type:"libre", correction:"$P=\\dfrac{5}{20}=\\dfrac{1}{4}$", points:3},
         ],
         indices:["Une même probabilité peut s'écrire comme fraction, comme nombre décimal ou comme pourcentage"]
       },
@@ -4954,7 +4964,7 @@ const EXERCICES = {
 
     "Volumes": [
       {
-        id:"vol_6_1", titre:"Volumes — cube et pavé droit", niveau:"Facile", points_total:8,
+        id:"vol_6_1", titre:"Volumes — cube et pavé droit", niveau:"Facile", points_total:14,
         questions:[
           {label:"a)", enonce:"Un cube a une arête de $4$ cm. Calcule son volume.",
            type:"libre", correction:"$V=4\\times4\\times4=64$ cm³", points:2},
@@ -4962,11 +4972,15 @@ const EXERCICES = {
            type:"libre", correction:"$V=5\\times3\\times2=30$ cm³", points:3},
           {label:"c)", enonce:"Un assemblage est formé de $12$ cubes de $1$ cm³ chacun. Quel est son volume total ?",
            type:"libre", correction:"$V=12\\times1=12$ cm³", points:3},
+          {label:"d)", enonce:"Un cube a une arête de $3$ cm. Calcule son volume.",
+           type:"libre", correction:"$V=3\\times3\\times3=27$ cm³", points:3},
+          {label:"e)", enonce:"Un pavé droit mesure $6$ cm $\\times$ $4$ cm $\\times$ $5$ cm. Calcule son volume.",
+           type:"libre", correction:"$V=6\\times4\\times5=120$ cm³", points:3},
         ],
         indices:["Volume du pavé droit $=$ longueur $\\times$ largeur $\\times$ hauteur ; volume du cube $=$ arête$^3$"]
       },
       {
-        id:"vol_6_2", titre:"Volumes — dénombrement et comparaison", niveau:"Moyen", points_total:8,
+        id:"vol_6_2", titre:"Volumes — dénombrement et comparaison", niveau:"Moyen", points_total:13,
         questions:[
           {label:"a)", enonce:"Un cube de $1$ cm d'arête a un volume de :",
            type:"qcm", choix:["$1$ cm³","$3$ cm³","$6$ cm³","$1$ cm²"],
@@ -4978,6 +4992,12 @@ const EXERCICES = {
            type:"qcm", choix:["Pavé 1","Pavé 2","Ils sont égaux"],
            bonneReponseIdx:1, bonneReponse:"Pavé 2",
            correction:"$V_2=4\\times5\\times3=60$ cm³ $>40$ cm³ : le pavé 2 a le plus grand volume.", points:3},
+          {label:"d)", enonce:"Un solide est un assemblage de cubes de $1$ cm³, organisé en $2$ couches identiques de $3\\times3$ cubes chacune. Calcule le volume total.",
+           type:"libre", correction:"$V=2\\times(3\\times3)=2\\times9=18$ cm³", points:2},
+          {label:"e)", enonce:"Un cube de $2$ cm d'arête a un volume de :",
+           type:"qcm", choix:["$8$ cm³","$6$ cm³","$4$ cm³","$2$ cm³"],
+           bonneReponseIdx:0, bonneReponse:"$8$ cm³",
+           correction:"$V=2\\times2\\times2=8$ cm³", points:3},
         ],
         indices:["Pour comparer deux volumes, calcule-les dans la même unité"]
       },
@@ -6119,47 +6139,66 @@ const EXERCICES = {
         indices:["$\\Delta = b^2 - 4ac$"]
       },
       {
-        id:"deg2_1_A", titre:"Discriminant et racines", niveau:"Facile", points_total:6,
+        id:"deg2_1_A", titre:"Discriminant et racines", niveau:"Facile", points_total:10,
         questions:[
           {label:"a)", enonce:"Calcule le discriminant de $x^2 - 5x + 6$.", correction:"$\\Delta = (-5)^2 - 4 \\times 1 \\times 6 = 25 - 24 = 1 > 0$ → deux racines réelles.", points:2},
           {label:"b)", enonce:"Résous $x^2 - 5x + 6 = 0$.", correction:"$x_1 = \\dfrac{5+1}{2} = 3$ ; $x_2 = \\dfrac{5-1}{2} = 2$", points:2},
           {label:"c)", enonce:"Résous $x^2 + 4 = 0$.", correction:"$\\Delta = 0 - 16 = -16 < 0$ → pas de solution réelle.", points:2},
+          {label:"d)", enonce:"Résous $x^2 - 2x - 3 = 0$.", correction:"$\\Delta = 4+12=16$ ; $x_1=\\dfrac{2+4}{2}=3$ ; $x_2=\\dfrac{2-4}{2}=-1$", points:2},
+          {label:"e)", enonce:"Calcule le discriminant de $2x^2+3x-2$.", correction:"$\\Delta=3^2-4\\times2\\times(-2)=9+16=25$", points:2},
         ],
         indices:["$\\Delta = b^2 - 4ac$ ; si $\\Delta > 0$ : $x_{1,2} = \\dfrac{-b \\pm \\sqrt{\\Delta}}{2a}$ ; si $\\Delta < 0$ : pas de solution"]
       },
       {
-        id:"deg2_1_B", titre:"Forme canonique", niveau:"Moyen", points_total:9,
+        id:"deg2_1_B", titre:"Forme canonique", niveau:"Moyen", points_total:15,
         questions:[
           {label:"a)", enonce:"Mets $f(x) = x^2 - 6x + 5$ sous forme canonique $a(x-h)^2 + k$.", correction:"$f(x) = (x-3)^2 - 9 + 5 = (x-3)^2 - 4$ — sommet en $(3\\,;\\,-4)$", points:3},
           {label:"b)", enonce:"Déduis le minimum de $f$ et la valeur de $x$ où il est atteint.", correction:"Minimum $= -4$ atteint en $x = 3$ (car $a = 1 > 0$, parabole tournée vers le haut)", points:3},
           {label:"c)", enonce:"Résous $x^2 - 6x + 5 = 0$ en utilisant la forme canonique.", correction:"$(x-3)^2 = 4 \\Rightarrow x-3 = \\pm 2 \\Rightarrow x = 5$ ou $x = 1$", points:3},
+          {label:"d)", enonce:"Mets $g(x)=x^2+2x-3$ sous forme canonique $a(x-h)^2+k$.", correction:"$g(x)=(x+1)^2-1-3=(x+1)^2-4$", points:3},
+          {label:"e)", enonce:"Pour $g(x)=(x+1)^2-4$, quel est le minimum de $g$ et en quelle valeur est-il atteint ?",
+           type:"qcm", choix:["Minimum $-4$ en $x=-1$","Minimum $-1$ en $x=-4$","Maximum $-4$ en $x=-1$","Minimum $4$ en $x=1$"],
+           bonneReponseIdx:0, bonneReponse:"Minimum $-4$ en $x=-1$",
+           correction:"Pour $a(x-h)^2+k$ avec $a>0$, le minimum vaut $k$ atteint en $x=h$ : ici $h=-1$, $k=-4$.", points:3},
         ],
         indices:["Forme canonique : $a\\left(x + \\dfrac{b}{2a}\\right)^2 - \\dfrac{b^2-4ac}{4a}$ — le sommet est en $h = -\\dfrac{b}{2a}$"]
       },
       {
-        id:"deg2_1_C", titre:"Forme factorisée et signe", niveau:"Moyen", points_total:9,
+        id:"deg2_1_C", titre:"Forme factorisée et signe", niveau:"Moyen", points_total:15,
         questions:[
           {label:"a)", enonce:"Factorise $f(x) = 2x^2 - 8x + 6$ sachant que les racines sont $x_1 = 1$ et $x_2 = 3$.", correction:"$f(x) = 2(x-1)(x-3)$", points:3},
           {label:"b)", enonce:"Résous l'inéquation $2x^2 - 8x + 6 \\leq 0$.", correction:"$2(x-1)(x-3) \\leq 0$ — négatif entre les racines : $x \\in [1\\,;\\,3]$", points:3},
           {label:"c)", enonce:"$f(x) = -x^2 + 4x - 3$. Calcule $\\Delta$, les racines, et dis pour quels $x$ on a $f(x) > 0$.", correction:"$\\Delta = 16-12 = 4$ ; $x_1=1$, $x_2=3$. $f(x) > 0$ pour $x \\in ]1\\,;\\,3[$ (parabole vers le bas)", points:3},
+          {label:"d)", enonce:"Factorise $h(x)=x^2-x-6$ sachant que les racines sont $x_1=3$ et $x_2=-2$.", correction:"$h(x)=(x-3)(x+2)$", points:3},
+          {label:"e)", enonce:"En utilisant $h(x)=(x-3)(x+2)$, résous l'inéquation $(x-3)(x+2)\\geq0$.",
+           type:"qcm", choix:["$x\\in\\,]-\\infty\\,;\\,-2]\\cup[3\\,;\\,+\\infty[$","$x\\in[-2\\,;\\,3]$","$x\\in\\,]-2\\,;\\,3[$","Aucune solution"],
+           bonneReponseIdx:0, bonneReponse:"$x\\in\\,]-\\infty\\,;\\,-2]\\cup[3\\,;\\,+\\infty[$",
+           correction:"$a=1>0$ : le produit est positif à l'extérieur des racines, soit $x\\leq-2$ ou $x\\geq3$.", points:3},
         ],
         indices:["Si $\\Delta > 0$ : $f(x) = a(x-x_1)(x-x_2)$ ; signe de $f$ : même signe que $a$ à l'extérieur des racines"]
       },
       {
-        id:"deg2_1_D", titre:"Équations du second degré — applications", niveau:"Difficile", points_total:10,
+        id:"deg2_1_D", titre:"Équations du second degré — applications", niveau:"Difficile", points_total:16,
         questions:[
           {label:"a)", enonce:"Résous $3x^2 - 7x + 2 = 0$.", correction:"$\\Delta = 49 - 24 = 25$ ; $x_1 = \\dfrac{7+5}{6} = 2$ ; $x_2 = \\dfrac{7-5}{6} = \\dfrac{1}{3}$", points:3},
-          {label:"b)", enonce:"Un rectangle a un périmètre de $20$ cm et une aire de $24$ cm². Trouve ses dimensions.", correction:"$l + L = 10$ et $lL = 24$ → $x^2 - 10x + 24 = 0$ → $\\Delta=4$ → $x=6$ ou $x=4$. Dimensions : $6$ cm et $4$ cm.", points:4},
+          {label:"b)", enonce:"Un rectangle a un périmètre de $20$ cm et une aire de $24$ cm². Trouve ses dimensions.", correction:"$l + L = 10$ et $lL = 24$ → $x^2 - 10x + 24 = 0$ → $\\Delta=4$ → $x=6$ ou $x=4$. Dimensions : $6$ cm et $4$ cm.", points:3},
           {label:"c)", enonce:"Pour quelles valeurs de $k$ l'équation $x^2 + kx + 9 = 0$ a-t-elle une solution double ?", correction:"$\\Delta = k^2 - 36 = 0 \\Rightarrow k = 6$ ou $k = -6$", points:3},
+          {label:"d)", enonce:"Résous $x^2-4x-5=0$.", correction:"$\\Delta=16+20=36$ ; $x_1=\\dfrac{4+6}{2}=5$ ; $x_2=\\dfrac{4-6}{2}=-1$", points:3},
+          {label:"e)", enonce:"La somme de deux nombres est $12$ et leur produit est $32$. En résolvant $x^2-12x+32=0$, trouve le plus grand des deux.", correction:"$\\Delta=144-128=16$ ; $x_1=\\dfrac{12+4}{2}=8$ ; $x_2=\\dfrac{12-4}{2}=4$. Le plus grand est $8$.", points:4},
         ],
         indices:["Solution double quand $\\Delta = 0$ ; pour un problème, poser l'inconnue et former l'équation du 2nd degré"]
       },
       {
-        id:"deg2_1_E", titre:"Parabole et représentation graphique", niveau:"Moyen", points_total:8,
+        id:"deg2_1_E", titre:"Parabole et représentation graphique", niveau:"Moyen", points_total:13,
         questions:[
           {label:"a)", enonce:"$f(x) = x^2 - 4x + 3$. Donne les coordonnées du sommet $S$ de la parabole.", correction:"$h = -\\dfrac{-4}{2} = 2$ ; $k = f(2) = 4-8+3 = -1$ → $S(2\\,;\\,-1)$", points:2},
           {label:"b)", enonce:"La parabole coupe-t-elle l'axe des abscisses ? Si oui, en quels points ?", correction:"$\\Delta = 16-12=4 > 0$ → oui, en $x_1=1$ et $x_2=3$, soit les points $(1\\,;\\,0)$ et $(3\\,;\\,0)$", points:3},
           {label:"c)", enonce:"Quel est le point d'intersection avec l'axe des ordonnées ?", correction:"$f(0) = 0-0+3 = 3$ → point $(0\\,;\\,3)$", points:3},
+          {label:"d)", enonce:"$f(x)=x^2-4x+3$ a pour coefficient $a=1>0$. La parabole est-elle tournée vers le haut ou vers le bas ?",
+           type:"qcm", choix:["Vers le haut","Vers le bas"],
+           bonneReponseIdx:0, bonneReponse:"Vers le haut",
+           correction:"$a>0$ : la parabole est tournée vers le haut (elle admet un minimum).", points:2},
+          {label:"e)", enonce:"Calcule $f(4)$ avec $f(x)=x^2-4x+3$.", correction:"$f(4)=16-16+3=3$", points:3},
         ],
         indices:["Sommet : $h = -\\dfrac{b}{2a}$ et $k = f(h)$ ; intersection axe $Oy$ : $f(0) = c$"]
       },
@@ -6167,7 +6206,7 @@ const EXERCICES = {
 
     "Dérivation": [
       {
-        id:"deriv_1_1", titre:"Nombre dérivé — taux de variation", niveau:"Facile", points_total:8,
+        id:"deriv_1_1", titre:"Nombre dérivé — taux de variation", niveau:"Facile", points_total:14,
         questions:[
           {label:"a)", enonce:"$f(x)=x^2$. Le taux de variation de $f$ entre $2$ et $2+h$ (avec $h\\neq0$) est égal à :",
            type:"qcm", choix:["$4+h$","$2+h$","$4h$","$h^2$"],
@@ -6179,11 +6218,17 @@ const EXERCICES = {
            type:"qcm", choix:["$y=4x-4$","$y=4x+4$","$y=2x-4$","$y=4x$"],
            bonneReponseIdx:0, bonneReponse:"$y=4x-4$",
            correction:"$y=f'(2)(x-2)+f(2)=4(x-2)+4=4x-4$", points:3},
+          {label:"d)", enonce:"$f(x)=x^2$ a pour dérivée $f'(x)=2x$. Calcule $f'(3)$.",
+           type:"libre", correction:"$f'(3)=2\\times3=6$", points:3},
+          {label:"e)", enonce:"Sachant $f(3)=9$ et $f'(3)=6$, l'équation réduite de la tangente en $x=3$ est :",
+           type:"qcm", choix:["$y=6x-9$","$y=6x+9$","$y=9x-6$","$y=6x$"],
+           bonneReponseIdx:0, bonneReponse:"$y=6x-9$",
+           correction:"$y=6(x-3)+9=6x-18+9=6x-9$", points:3},
         ],
         indices:["$f'(a)$ est la limite du taux de variation $\\dfrac{f(a+h)-f(a)}{h}$ quand $h\\to0$ ; tangente en $a$ : $y=f'(a)(x-a)+f(a)$"]
       },
       {
-        id:"deriv_1_2", titre:"Dérivées usuelles", niveau:"Facile", points_total:8,
+        id:"deriv_1_2", titre:"Dérivées usuelles", niveau:"Facile", points_total:13,
         questions:[
           {label:"a)", enonce:"La dérivée de $f(x)=x^3$ est :",
            type:"qcm", choix:["$3x^2$","$x^2$","$3x$","$x^3$"],
@@ -6197,11 +6242,17 @@ const EXERCICES = {
            type:"qcm", choix:["$\\dfrac{1}{2\\sqrt{x}}$","$\\dfrac{1}{\\sqrt{x}}$","$2\\sqrt{x}$","$\\dfrac{1}{2x}$"],
            bonneReponseIdx:0, bonneReponse:"$\\dfrac{1}{2\\sqrt{x}}$",
            correction:"$(\\sqrt{x})'=\\dfrac{1}{2\\sqrt{x}}$", points:3},
+          {label:"d)", enonce:"La dérivée de $f(x)=x^4$ est :",
+           type:"qcm", choix:["$4x^3$","$x^3$","$4x$","$x^4$"],
+           bonneReponseIdx:0, bonneReponse:"$4x^3$",
+           correction:"$(x^n)'=nx^{n-1}$ donc $(x^4)'=4x^3$", points:2},
+          {label:"e)", enonce:"$f(x)=x^3$ a pour dérivée $f'(x)=3x^2$. Calcule $f'(2)$.",
+           type:"libre", correction:"$f'(2)=3\\times4=12$", points:3},
         ],
         indices:["$(x^n)'=nx^{n-1}$ ; $\\left(\\dfrac{1}{x}\\right)'=-\\dfrac{1}{x^2}$ ; $(\\sqrt{x})'=\\dfrac{1}{2\\sqrt{x}}$"]
       },
       {
-        id:"deriv_1_3", titre:"Dérivée d'une somme et sens de variation", niveau:"Moyen", points_total:10,
+        id:"deriv_1_3", titre:"Dérivée d'une somme et sens de variation", niveau:"Moyen", points_total:17,
         questions:[
           {label:"a)", enonce:"$f(x)=3x^2-5x+2$. Sachant $f'(x)=6x-5$, calcule $f'(1)$.",
            type:"libre", correction:"$f'(1)=6(1)-5=1$", points:3},
@@ -6211,22 +6262,30 @@ const EXERCICES = {
            type:"qcm", choix:["Croissante","Décroissante"],
            bonneReponseIdx:1, bonneReponse:"Décroissante",
            correction:"$f'(x)<0$ pour $x<\\dfrac{5}{6}$ (car $a=3>0$) donc $f$ est décroissante avant $\\dfrac{5}{6}$, puis croissante après.", points:4},
+          {label:"d)", enonce:"Calcule $f(1)$ avec $f(x)=3x^2-5x+2$.",
+           type:"libre", correction:"$f(1)=3-5+2=0$", points:3},
+          {label:"e)", enonce:"Le minimum de $f(x)=3x^2-5x+2$ (atteint en $x=\\dfrac{5}{6}$) est-il un minimum global ou seulement local ?",
+           type:"qcm", choix:["Global (car $a>0$, parabole vers le haut)","Local seulement","Ni l'un ni l'autre","Un maximum"],
+           bonneReponseIdx:0, bonneReponse:"Global (car $a>0$, parabole vers le haut)",
+           correction:"Pour une parabole tournée vers le haut ($a>0$), l'unique minimum est global sur $\\mathbb{R}$.", points:4},
         ],
         indices:["$f'(x)>0 \\Rightarrow f$ croissante ; $f'(x)<0 \\Rightarrow f$ décroissante"]
       },
       {
-        id:"deriv_1_4", titre:"Dérivée d'un produit et extremum", niveau:"Difficile", points_total:10,
+        id:"deriv_1_4", titre:"Dérivée d'un produit et extremum", niveau:"Difficile", points_total:12,
         questions:[
           {label:"a)", enonce:"La dérivée de $f(x)=(2x-1)(x+3)$ (développée puis dérivée) est :",
            type:"qcm", choix:["$4x+5$","$2x+5$","$4x-5$","$2x-2$"],
            bonneReponseIdx:0, bonneReponse:"$4x+5$",
            correction:"$f(x)=(2x-1)(x+3)=2x^2+6x-x-3=2x^2+5x-3$ donc $f'(x)=4x+5$", points:3},
           {label:"b)", enonce:"Résous $f'(x)=0$ avec $f'(x)=4x+5$.",
-           type:"libre", correction:"$4x+5=0 \\Rightarrow x=-\\dfrac{5}{4}$", points:3},
+           type:"libre", correction:"$4x+5=0 \\Rightarrow x=-\\dfrac{5}{4}$", points:2},
           {label:"c)", enonce:"$g(x)=-x^2+6x-5$. Calcule l'abscisse du sommet de la parabole (valeur de $x$ où $g'(x)=0$).",
            type:"libre", correction:"$g'(x)=-2x+6=0 \\Rightarrow x=3$", points:2},
           {label:"d)", enonce:"Calcule $g(3)$ (l'ordonnée du sommet, donc le maximum de $g$).",
            type:"libre", correction:"$g(3)=-9+18-5=4$", points:2},
+          {label:"e)", enonce:"Avec $g'(x)=-2x+6$, calcule $g'(1)$.",
+           type:"libre", correction:"$g'(1)=-2+6=4$", points:3},
         ],
         indices:["$(uv)'=u'v+uv'$ ; le sommet d'une parabole est atteint là où la dérivée s'annule"]
       },
@@ -6246,11 +6305,17 @@ const EXERCICES = {
            type:"qcm", choix:["Oui","Non"],
            bonneReponseIdx:0, bonneReponse:"Oui",
            correction:"$P(A)\\times P(B)=0{,}4\\times0{,}25=0{,}1=P(A\\cap B)$ ✓ Oui, ils sont indépendants.", points:3},
+          {label:"d)", enonce:"$P(A)=0{,}6$, $P(B)=0{,}2$, $A$ et $B$ indépendants. Calcule $P(A\\cap B)$.",
+           type:"libre", correction:"$P(A\\cap B)=0{,}6\\times0{,}2=0{,}12$", points:3},
+          {label:"e)", enonce:"$P(A)=0{,}5$, $P(B)=0{,}4$, $P(A\\cap B)=0{,}3$. $A$ et $B$ sont-ils indépendants ?",
+           type:"qcm", choix:["Oui","Non"],
+           bonneReponseIdx:1, bonneReponse:"Non",
+           correction:"$P(A)\\times P(B)=0{,}5\\times0{,}4=0{,}2\\neq0{,}3=P(A\\cap B)$ : ils ne sont pas indépendants.", points:2},
         ],
         indices:["Indépendance : $P(A\\cap B)=P(A)\\times P(B)$ — à ne pas confondre avec incompatibilité ($P(A\\cap B)=0$)"]
       },
       {
-        id:"cond_1_2", titre:"Probabilité conditionnelle et arbre pondéré", niveau:"Moyen", points_total:10,
+        id:"cond_1_2", titre:"Probabilité conditionnelle et arbre pondéré", niveau:"Moyen", points_total:16,
         questions:[
           {label:"a)", enonce:"Une entreprise reçoit des pièces de deux fournisseurs : $60\\%$ du fournisseur A (dont $2\\%$ sont défectueuses) et $40\\%$ du fournisseur B (dont $5\\%$ sont défectueuses). Calcule $P(A\\cap D)$ (venir de A ET être défectueuse).",
            type:"libre", correction:"$P(A\\cap D)=0{,}6\\times0{,}02=0{,}012$", points:3},
@@ -6258,11 +6323,15 @@ const EXERCICES = {
            type:"libre", correction:"$P(B\\cap D)=0{,}4\\times0{,}05=0{,}02$", points:3},
           {label:"c)", enonce:"$A$ et $B$ forment une partition (toute pièce vient de A ou de B). Calcule $P(D)$, la probabilité qu'une pièce prise au hasard soit défectueuse.",
            type:"libre", correction:"$P(D)=P(A\\cap D)+P(B\\cap D)=0{,}012+0{,}02=0{,}032$", points:4},
+          {label:"d)", enonce:"En déduis $P(\\bar{D})$, la probabilité qu'une pièce prise au hasard ne soit PAS défectueuse.",
+           type:"libre", correction:"$P(\\bar{D})=1-0{,}032=0{,}968$", points:3},
+          {label:"e)", enonce:"Si le fournisseur A fournissait $80\\%$ des pièces (et B $20\\%$, mêmes taux de défauts), calcule le nouveau $P(A\\cap D)$.",
+           type:"libre", correction:"$0{,}8\\times0{,}02=0{,}016$", points:3},
         ],
         indices:["Sur un arbre pondéré : multiplier le long d'un chemin, additionner les chemins qui mènent au même résultat"]
       },
       {
-        id:"cond_1_3", titre:"Formule des probabilités totales", niveau:"Moyen", points_total:10,
+        id:"cond_1_3", titre:"Formule des probabilités totales", niveau:"Moyen", points_total:16,
         questions:[
           {label:"a)", enonce:"$70\\%$ des candidats choisissent l'option $1$ (taux de réussite $80\\%$), les $30\\%$ restants choisissent l'option $2$ (taux de réussite $60\\%$). Calcule $P(\\text{option 1}\\cap\\text{réussite})$.",
            type:"libre", correction:"$0{,}7\\times0{,}8=0{,}56$", points:3},
@@ -6270,11 +6339,15 @@ const EXERCICES = {
            type:"libre", correction:"$0{,}3\\times0{,}6=0{,}18$", points:3},
           {label:"c)", enonce:"En utilisant la formule des probabilités totales, calcule $P(\\text{réussite})$ tous candidats confondus.",
            type:"libre", correction:"$P(\\text{réussite})=0{,}56+0{,}18=0{,}74$", points:4},
+          {label:"d)", enonce:"Dans un autre groupe, $60\\%$ choisissent l'option $1$ (réussite $75\\%$) et $40\\%$ l'option $2$ (réussite $50\\%$). Calcule $P(\\text{option 1}\\cap\\text{réussite})$.",
+           type:"libre", correction:"$0{,}6\\times0{,}75=0{,}45$", points:3},
+          {label:"e)", enonce:"Avec les mêmes données, calcule $P(\\text{option 2}\\cap\\text{réussite})$.",
+           type:"libre", correction:"$0{,}4\\times0{,}5=0{,}2$", points:3},
         ],
         indices:["Formule des probabilités totales : $P(B)=P(A)\\times P_A(B)+P(\\bar{A})\\times P_{\\bar{A}}(B)$"]
       },
       {
-        id:"cond_1_4", titre:"Épreuves de Bernoulli répétées (n ≤ 4)", niveau:"Difficile", points_total:10,
+        id:"cond_1_4", titre:"Épreuves de Bernoulli répétées (n ≤ 4)", niveau:"Difficile", points_total:16,
         questions:[
           {label:"a)", enonce:"On lance $4$ fois une pièce équilibrée. Combien y a-t-il de résultats possibles au total (listes ordonnées de Pile/Face) ?",
            type:"libre", correction:"$2^4=16$", points:2},
@@ -6282,6 +6355,10 @@ const EXERCICES = {
            type:"libre", correction:"$\\binom{4}{2}=6$", points:4},
           {label:"c)", enonce:"En déduis $P(\\text{exactement 2 piles})$.",
            type:"libre", correction:"$\\binom{4}{2}\\times(0{,}5)^4=\\dfrac{6}{16}=\\dfrac{3}{8}$", points:4},
+          {label:"d)", enonce:"Combien y a-t-il de façons différentes d'obtenir exactement $3$ piles parmi les $4$ lancers ?",
+           type:"libre", correction:"$\\binom{4}{3}=4$", points:3},
+          {label:"e)", enonce:"En déduis $P(\\text{exactement 3 piles})$.",
+           type:"libre", correction:"$\\binom{4}{3}\\times(0{,}5)^4=\\dfrac{4}{16}=\\dfrac{1}{4}$", points:3},
         ],
         indices:["$\\binom{n}{k}$ = nombre de façons de choisir $k$ succès parmi $n$ répétitions"]
       },
@@ -6289,7 +6366,7 @@ const EXERCICES = {
 
     "Fonction exponentielle": [
       {
-        id:"exp_1_1", titre:"Exponentielle — définition et propriétés", niveau:"Facile", points_total:8,
+        id:"exp_1_1", titre:"Exponentielle — définition et propriétés", niveau:"Facile", points_total:10,
         questions:[
           {label:"a)", enonce:"La fonction exponentielle est l'unique fonction $f$ dérivable sur $\\mathbb{R}$ telle que :",
            type:"qcm", choix:["$f'=f$ et $f(0)=1$","$f'=f$ et $f(0)=0$","$f'=-f$ et $f(0)=1$","$f(x)=x$ pour tout $x$"],
@@ -6301,11 +6378,13 @@ const EXERCICES = {
            type:"libre", correction:"$e^2\\times e^3=e^{2+3}=e^5$", points:2},
           {label:"d)", enonce:"Simplifie $\\dfrac{e^7}{e^3}$ en utilisant $\\dfrac{e^a}{e^b}=e^{a-b}$.",
            type:"libre", correction:"$\\dfrac{e^7}{e^3}=e^{7-3}=e^4$", points:2},
+          {label:"e)", enonce:"Calcule $e^1\\times e^{-1}$ en utilisant $e^a\\times e^b=e^{a+b}$.",
+           type:"libre", correction:"$e^1\\times e^{-1}=e^{1-1}=e^0=1$", points:2},
         ],
         indices:["$e^a\\times e^b=e^{a+b}$ ; $\\dfrac{e^a}{e^b}=e^{a-b}$ ; $e^0=1$"]
       },
       {
-        id:"exp_1_2", titre:"Dérivée de l'exponentielle", niveau:"Moyen", points_total:9,
+        id:"exp_1_2", titre:"Dérivée de l'exponentielle", niveau:"Moyen", points_total:14,
         questions:[
           {label:"a)", enonce:"La dérivée de $f(x)=e^x$ est :",
            type:"qcm", choix:["$e^x$","$xe^{x-1}$","$1$","$e$"],
@@ -6315,20 +6394,30 @@ const EXERCICES = {
            type:"libre", correction:"$f'(x)=3e^x$", points:3},
           {label:"c)", enonce:"Résous l'équation $e^x=e^3$ (utilise que $\\exp$ est strictement croissante donc injective).",
            type:"libre", correction:"$x=3$", points:3},
+          {label:"d)", enonce:"La dérivée de $f(x)=-5e^x$ est :",
+           type:"qcm", choix:["$-5e^x$","$5e^x$","$-5$","$e^x$"],
+           bonneReponseIdx:0, bonneReponse:"$-5e^x$",
+           correction:"$(ke^x)'=ke^x$ donc $(-5e^x)'=-5e^x$.", points:2},
+          {label:"e)", enonce:"Résous l'équation $e^{3x}=e^9$.",
+           type:"libre", correction:"$3x=9 \\Rightarrow x=3$", points:3},
         ],
         indices:["$(ke^x)'=ke^x$ ; $e^u=e^v \\Leftrightarrow u=v$"]
       },
       {
-        id:"exp_1_3", titre:"Résolution d'équations avec l'exponentielle", niveau:"Difficile", points_total:10,
+        id:"exp_1_3", titre:"Résolution d'équations avec l'exponentielle", niveau:"Difficile", points_total:16,
         questions:[
           {label:"a)", enonce:"Résous $e^{2x}=e^6$.",
            type:"libre", correction:"$2x=6 \\Rightarrow x=3$", points:3},
           {label:"b)", enonce:"Résous $e^x\\times e^2=e^7$ (utilise $e^a\\times e^b=e^{a+b}$).",
-           type:"libre", correction:"$e^{x+2}=e^7 \\Rightarrow x+2=7 \\Rightarrow x=5$", points:4},
+           type:"libre", correction:"$e^{x+2}=e^7 \\Rightarrow x+2=7 \\Rightarrow x=5$", points:3},
           {label:"c)", enonce:"Une suite géométrique a pour raison $q=e^{0{,}1}$. Sachant que $\\exp$ est strictement croissante et que $e^0=1$, cette suite est-elle croissante ou décroissante ?",
            type:"qcm", choix:["Croissante","Décroissante"],
            bonneReponseIdx:0, bonneReponse:"Croissante",
            correction:"$0{,}1>0$ et $\\exp$ est strictement croissante donc $e^{0{,}1}>e^0=1$ : la raison $q>1$, la suite est croissante.", points:3},
+          {label:"d)", enonce:"Résous $\\dfrac{e^x}{e^2}=e^4$ (utilise $\\dfrac{e^a}{e^b}=e^{a-b}$).",
+           type:"libre", correction:"$e^{x-2}=e^4 \\Rightarrow x-2=4 \\Rightarrow x=6$", points:4},
+          {label:"e)", enonce:"Résous $e^{-x}=e^{-7}$.",
+           type:"libre", correction:"$-x=-7 \\Rightarrow x=7$", points:3},
         ],
         indices:["$e^u=e^v \\Leftrightarrow u=v$ (injectivité de l'exponentielle)"]
       },
@@ -6336,7 +6425,7 @@ const EXERCICES = {
 
     "Trigonométrie — cercle trigonométrique": [
       {
-        id:"trig_1_1", titre:"Radians et cercle trigonométrique", niveau:"Facile", points_total:8,
+        id:"trig_1_1", titre:"Radians et cercle trigonométrique", niveau:"Facile", points_total:10,
         questions:[
           {label:"a)", enonce:"Un tour complet du cercle trigonométrique correspond à :",
            type:"qcm", choix:["$2\\pi$ radians","$\\pi$ radians","$\\dfrac{\\pi}{2}$ radians","$360$ radians"],
@@ -6350,27 +6439,35 @@ const EXERCICES = {
            type:"qcm", choix:["$r\\theta$","$r\\theta^2$","$2r\\theta$","$\\pi r\\theta$"],
            bonneReponseIdx:0, bonneReponse:"$r\\theta$",
            correction:"Longueur d'arc $=r\\theta$ (avec $\\theta$ en radians).", points:2},
+          {label:"e)", enonce:"$60°$ en radians vaut :",
+           type:"qcm", choix:["$\\dfrac{\\pi}{3}$","$\\dfrac{\\pi}{6}$","$\\dfrac{\\pi}{2}$","$\\dfrac{2\\pi}{3}$"],
+           bonneReponseIdx:0, bonneReponse:"$\\dfrac{\\pi}{3}$",
+           correction:"$60°=\\dfrac{60}{180}\\times\\pi=\\dfrac{\\pi}{3}$", points:2},
         ],
         indices:["$180°=\\pi$ rad ; longueur d'arc $=r\\theta$ ($\\theta$ en radians)"]
       },
       {
-        id:"trig_1_2", titre:"Cosinus et sinus — valeurs remarquables", niveau:"Moyen", points_total:9,
+        id:"trig_1_2", titre:"Cosinus et sinus — valeurs remarquables", niveau:"Moyen", points_total:11,
         questions:[
           {label:"a)", enonce:"Donne la valeur exacte de $\\cos(0)$.",
            type:"libre", correction:"$\\cos(0)=1$", points:2},
           {label:"b)", enonce:"Donne la valeur exacte de $\\sin\\left(\\dfrac{\\pi}{2}\\right)$.",
-           type:"libre", correction:"$\\sin\\left(\\dfrac{\\pi}{2}\\right)=1$", points:3},
+           type:"libre", correction:"$\\sin\\left(\\dfrac{\\pi}{2}\\right)=1$", points:2},
           {label:"c)", enonce:"Donne la valeur exacte de $\\cos(\\pi)$.",
            type:"libre", correction:"$\\cos(\\pi)=-1$", points:2},
           {label:"d)", enonce:"$\\sin(0)=$ ?",
            type:"qcm", choix:["$0$","$1$","$-1$","Non défini"],
            bonneReponseIdx:0, bonneReponse:"$0$",
            correction:"$\\sin(0)=0$", points:2},
+          {label:"e)", enonce:"$\\cos\\left(\\dfrac{\\pi}{2}\\right)=$ ?",
+           type:"qcm", choix:["$0$","$1$","$-1$","Non défini"],
+           bonneReponseIdx:0, bonneReponse:"$0$",
+           correction:"$\\cos\\left(\\dfrac{\\pi}{2}\\right)=0$", points:3},
         ],
         indices:["Sur le cercle trigonométrique : $\\cos$ = abscisse, $\\sin$ = ordonnée du point associé à l'angle"]
       },
       {
-        id:"trig_1_3", titre:"Équations trigonométriques simples", niveau:"Difficile", points_total:10,
+        id:"trig_1_3", titre:"Équations trigonométriques simples", niveau:"Difficile", points_total:16,
         questions:[
           {label:"a)", enonce:"Sur $[0\\,;\\,2\\pi[$, l'équation $\\cos(x)=1$ a pour solution :",
            type:"qcm", choix:["$x=0$","$x=\\pi$","$x=\\dfrac{\\pi}{2}$","Aucune solution"],
@@ -6381,15 +6478,21 @@ const EXERCICES = {
            bonneReponseIdx:0, bonneReponse:"$x=0$ et $x=\\pi$",
            correction:"$\\sin(x)=0$ en $x=0$ et $x=\\pi$ sur $[0\\,;\\,2\\pi[$.", points:3},
           {label:"c)", enonce:"Sur $[0\\,;\\,2\\pi[$, combien l'équation $\\cos(x)=0{,}5$ a-t-elle de solutions ? (Les solutions sont $x=\\dfrac{\\pi}{3}$ et $x=\\dfrac{5\\pi}{3}$.) Réponds uniquement par un nombre.",
+           type:"libre", correction:"$2$", points:3},
+          {label:"d)", enonce:"Sur $[0\\,;\\,2\\pi[$, l'équation $\\sin(x)=1$ a pour solution :",
+           type:"qcm", choix:["$x=\\dfrac{\\pi}{2}$","$x=0$","$x=\\pi$","Aucune solution"],
+           bonneReponseIdx:0, bonneReponse:"$x=\\dfrac{\\pi}{2}$",
+           correction:"$\\sin(x)=1$ uniquement en $x=\\dfrac{\\pi}{2}$ sur $[0\\,;\\,2\\pi[$.", points:3},
+          {label:"e)", enonce:"Sur $[0\\,;\\,2\\pi[$, combien l'équation $\\sin(x)=0{,}5$ a-t-elle de solutions ? (Les solutions sont $x=\\dfrac{\\pi}{6}$ et $x=\\dfrac{5\\pi}{6}$.) Réponds uniquement par un nombre.",
            type:"libre", correction:"$2$", points:4},
         ],
-        indices:["Sur le cercle trigonométrique, une valeur de $\\cos$ (autre que $\\pm1$) est atteinte par exactement $2$ angles sur $[0\\,;\\,2\\pi[$"]
+        indices:["Sur le cercle trigonométrique, une valeur de $\\cos$ ou de $\\sin$ (autre que $\\pm1$) est atteinte par exactement $2$ angles sur $[0\\,;\\,2\\pi[$"]
       },
     ],
 
     "Produit scalaire": [
       {
-        id:"scal_1_1", titre:"Produit scalaire — définitions et calculs", niveau:"Facile", points_total:8,
+        id:"scal_1_1", titre:"Produit scalaire — définitions et calculs", niveau:"Facile", points_total:12,
         questions:[
           {label:"a)", enonce:"Le produit scalaire de deux vecteurs orthogonaux vaut :",
            type:"qcm", choix:["$0$","$1$","$-1$","Cela dépend des normes"],
@@ -6399,11 +6502,17 @@ const EXERCICES = {
            type:"libre", correction:"$\\vec{u}\\cdot\\vec{v}=3\\times2+4\\times(-1)=6-4=2$", points:3},
           {label:"c)", enonce:"$\\|\\vec{u}\\|=5$, $\\|\\vec{v}\\|=3$, angle $(\\vec{u},\\vec{v})=60°$. Calcule $\\vec{u}\\cdot\\vec{v}$ (utilise $\\vec{u}\\cdot\\vec{v}=\\|\\vec{u}\\|\\times\\|\\vec{v}\\|\\times\\cos(\\theta)$).",
            type:"libre", correction:"$\\vec{u}\\cdot\\vec{v}=5\\times3\\times\\cos(60°)=15\\times0{,}5=7{,}5$", points:3},
+          {label:"d)", enonce:"$\\vec{u}(1\\,;\\,2)$ et $\\vec{v}(-3\\,;\\,4)$ dans une base orthonormée. Calcule $\\vec{u}\\cdot\\vec{v}$.",
+           type:"libre", correction:"$\\vec{u}\\cdot\\vec{v}=1\\times(-3)+2\\times4=-3+8=5$", points:2},
+          {label:"e)", enonce:"$\\|\\vec{u}\\|=4$, $\\|\\vec{v}\\|=2$, angle $(\\vec{u},\\vec{v})=90°$. Que vaut $\\vec{u}\\cdot\\vec{v}$ ?",
+           type:"qcm", choix:["$0$","$8$","$4$","$2$"],
+           bonneReponseIdx:0, bonneReponse:"$0$",
+           correction:"$\\cos(90°)=0$ donc $\\vec{u}\\cdot\\vec{v}=4\\times2\\times0=0$ : les vecteurs sont orthogonaux.", points:2},
         ],
         indices:["$\\vec{u}(x;y)\\cdot\\vec{v}(x';y')=xx'+yy'$ en base orthonormée ; $\\vec{u}\\cdot\\vec{v}=\\|\\vec{u}\\|\\|\\vec{v}\\|\\cos(\\vec{u},\\vec{v})$"]
       },
       {
-        id:"scal_1_2", titre:"Norme et développement", niveau:"Moyen", points_total:9,
+        id:"scal_1_2", titre:"Norme et développement", niveau:"Moyen", points_total:15,
         questions:[
           {label:"a)", enonce:"$\\vec{u}(6\\,;\\,8)$ en base orthonormée. Calcule $\\|\\vec{u}\\|$.",
            type:"libre", correction:"$\\|\\vec{u}\\|=\\sqrt{36+64}=\\sqrt{100}=10$", points:3},
@@ -6413,16 +6522,26 @@ const EXERCICES = {
            correction:"$\\|\\vec{u}+\\vec{v}\\|^2=(\\vec{u}+\\vec{v})\\cdot(\\vec{u}+\\vec{v})=\\|\\vec{u}\\|^2+2\\vec{u}\\cdot\\vec{v}+\\|\\vec{v}\\|^2$", points:3},
           {label:"c)", enonce:"$\\|\\vec{u}\\|=3$, $\\|\\vec{v}\\|=4$, $\\vec{u}\\cdot\\vec{v}=2$. Calcule $\\|\\vec{u}+\\vec{v}\\|^2$.",
            type:"libre", correction:"$\\|\\vec{u}+\\vec{v}\\|^2=9+2\\times2+16=29$", points:3},
+          {label:"d)", enonce:"$\\vec{v}(5\\,;\\,12)$ en base orthonormée. Calcule $\\|\\vec{v}\\|$.",
+           type:"libre", correction:"$\\|\\vec{v}\\|=\\sqrt{25+144}=\\sqrt{169}=13$", points:3},
+          {label:"e)", enonce:"$\\|\\vec{u}\\|=2$, $\\|\\vec{v}\\|=5$, $\\vec{u}\\cdot\\vec{v}=-3$. Calcule $\\|\\vec{u}+\\vec{v}\\|^2$.",
+           type:"libre", correction:"$\\|\\vec{u}+\\vec{v}\\|^2=4+2\\times(-3)+25=23$", points:3},
         ],
         indices:["$\\|\\vec{u}\\|^2=\\vec{u}\\cdot\\vec{u}$ ; $\\|\\vec{u}+\\vec{v}\\|^2=\\|\\vec{u}\\|^2+2\\vec{u}\\cdot\\vec{v}+\\|\\vec{v}\\|^2$"]
       },
       {
-        id:"scal_1_3", titre:"Formule d'Al-Kashi", niveau:"Difficile", points_total:10,
+        id:"scal_1_3", titre:"Formule d'Al-Kashi", niveau:"Difficile", points_total:22,
         questions:[
           {label:"a)", enonce:"Triangle $ABC$ : $AB=7$, $AC=5$, $\\hat{A}=60°$. Calcule $BC^2$ avec la formule d'Al-Kashi : $BC^2=AB^2+AC^2-2\\times AB\\times AC\\times\\cos(\\hat{A})$.",
-           type:"libre", correction:"$BC^2=49+25-2\\times7\\times5\\times\\cos(60°)=74-70\\times0{,}5=74-35=39$", points:5},
+           type:"libre", correction:"$BC^2=49+25-2\\times7\\times5\\times\\cos(60°)=74-70\\times0{,}5=74-35=39$", points:4},
           {label:"b)", enonce:"En déduis $BC$ (valeur arrondie au centième).",
-           type:"libre", correction:"$BC=\\sqrt{39}\\approx6{,}24$", points:5},
+           type:"libre", correction:"$BC=\\sqrt{39}\\approx6{,}24$", points:4},
+          {label:"c)", enonce:"Triangle $ABC$ : $AB=8$, $AC=6$, $\\hat{A}=90°$. Calcule $BC^2$ avec Al-Kashi (remarque : $\\cos(90°)=0$, on retrouve Pythagore).",
+           type:"libre", correction:"$BC^2=64+36-2\\times8\\times6\\times\\cos(90°)=100-96\\times0=100$", points:4},
+          {label:"d)", enonce:"En déduis $BC$.",
+           type:"libre", correction:"$BC=\\sqrt{100}=10$", points:4},
+          {label:"e)", enonce:"Triangle $DEF$ : $DE=4$, $DF=6$, $\\hat{D}=120°$ (avec $\\cos(120°)=-0{,}5$). Calcule $EF^2$.",
+           type:"libre", correction:"$EF^2=16+36-2\\times4\\times6\\times(-0{,}5)=52+24=76$", points:6},
         ],
         indices:["Al-Kashi : $a^2=b^2+c^2-2bc\\cos(\\hat{A})$ — généralisation de Pythagore à un triangle quelconque"]
       },
@@ -6430,7 +6549,7 @@ const EXERCICES = {
 
     "Variables aléatoires": [
       {
-        id:"var_1_1", titre:"Loi de probabilité d'une variable aléatoire", niveau:"Facile", points_total:8,
+        id:"var_1_1", titre:"Loi de probabilité d'une variable aléatoire", niveau:"Facile", points_total:13,
         questions:[
           {label:"a)", enonce:"On lance un dé équilibré à $6$ faces. $X$ = gain en euros : si le résultat est pair, on gagne $2$€ ; si le résultat est impair, on perd $1$€. Quelles sont les valeurs possibles prises par $X$ ?",
            type:"qcm", choix:["$-1$ et $2$","$0$ et $1$","$1,2,3,4,5,6$","Uniquement $2$"],
@@ -6440,25 +6559,33 @@ const EXERCICES = {
            type:"libre", correction:"$P(X=2)=\\dfrac{3}{6}=\\dfrac{1}{2}$", points:3},
           {label:"c)", enonce:"Calcule $P(X=-1)$.",
            type:"libre", correction:"$P(X=-1)=\\dfrac{3}{6}=\\dfrac{1}{2}$", points:3},
+          {label:"d)", enonce:"Vérifie que $P(X=2)+P(X=-1)=1$ (donne le résultat de cette somme).",
+           type:"libre", correction:"$P(X=2)+P(X=-1)=\\dfrac{1}{2}+\\dfrac{1}{2}=1$", points:2},
+          {label:"e)", enonce:"Pourquoi la somme des probabilités d'une loi de probabilité doit-elle toujours valoir $1$ ?",
+           type:"qcm", choix:["Car $X$ prend nécessairement l'une de ses valeurs possibles","Par convention arbitraire","Ce n'est vrai que pour ce dé","Ce n'est pas toujours le cas"],
+           bonneReponseIdx:0, bonneReponse:"Car $X$ prend nécessairement l'une de ses valeurs possibles",
+           correction:"Les valeurs possibles de $X$ forment l'univers complet des issues : leurs probabilités somment donc à $1$.", points:3},
         ],
         indices:["La loi de probabilité d'une variable aléatoire liste chaque valeur possible avec sa probabilité"]
       },
       {
-        id:"var_1_2", titre:"Espérance, variance et écart-type", niveau:"Moyen", points_total:10,
+        id:"var_1_2", titre:"Espérance, variance et écart-type", niveau:"Moyen", points_total:13,
         questions:[
           {label:"a)", enonce:"Avec $P(X=2)=0{,}5$ et $P(X=-1)=0{,}5$, calcule l'espérance $E(X)$.",
            type:"libre", correction:"$E(X)=2\\times0{,}5+(-1)\\times0{,}5=1-0{,}5=0{,}5$", points:2},
           {label:"b)", enonce:"Calcule $E(X^2)$ (nécessaire pour la variance).",
            type:"libre", correction:"$E(X^2)=4\\times0{,}5+1\\times0{,}5=2+0{,}5=2{,}5$", points:3},
           {label:"c)", enonce:"Formule de König-Huygens : $V(X)=E(X^2)-E(X)^2$. Calcule $V(X)$.",
-           type:"libre", correction:"$V(X)=2{,}5-0{,}5^2=2{,}5-0{,}25=2{,}25$", points:3},
+           type:"libre", correction:"$V(X)=2{,}5-0{,}5^2=2{,}5-0{,}25=2{,}25$", points:2},
           {label:"d)", enonce:"En déduis l'écart-type $\\sigma(X)=\\sqrt{V(X)}$.",
            type:"libre", correction:"$\\sigma(X)=\\sqrt{2{,}25}=1{,}5$", points:2},
+          {label:"e)", enonce:"$Y$ a pour espérance $E(Y)=3$ et $E(Y^2)=13$. Calcule $V(Y)$ avec la formule de König-Huygens.",
+           type:"libre", correction:"$V(Y)=13-3^2=13-9=4$", points:4},
         ],
         indices:["$E(X)=\\sum x_i P(X=x_i)$ ; $V(X)=E(X^2)-E(X)^2$ ; $\\sigma(X)=\\sqrt{V(X)}$"]
       },
       {
-        id:"var_1_3", titre:"Linéarité de l'espérance", niveau:"Difficile", points_total:8,
+        id:"var_1_3", titre:"Linéarité de l'espérance", niveau:"Difficile", points_total:13,
         questions:[
           {label:"a)", enonce:"$E(X)=3$. En utilisant $E(aX+b)=aE(X)+b$, calcule $E(2X+5)$.",
            type:"libre", correction:"$E(2X+5)=2\\times3+5=11$", points:3},
@@ -6466,6 +6593,10 @@ const EXERCICES = {
            type:"libre", correction:"$E(X+Y)=E(X)+E(Y)=4+6=10$", points:2},
           {label:"c)", enonce:"Un jeu coûte $2$€ à jouer. L'espérance du gain avant de payer la mise est $E(G)=1{,}5$€. Calcule l'espérance nette $E(G)-2$ pour savoir si le jeu est favorable au joueur.",
            type:"libre", correction:"$E(G)-2=1{,}5-2=-0{,}5$", points:3},
+          {label:"d)", enonce:"$E(X)=5$. Calcule $E(3X-2)$.",
+           type:"libre", correction:"$E(3X-2)=3\\times5-2=13$", points:2},
+          {label:"e)", enonce:"$E(X)=2$ et $E(Y)=-3$. Calcule $E(X+Y)$.",
+           type:"libre", correction:"$E(X+Y)=2+(-3)=-1$", points:3},
         ],
         indices:["$E(aX+b)=aE(X)+b$ ; $E(X+Y)=E(X)+E(Y)$ — l'espérance nette d'un jeu est $E(\\text{gain})-\\text{mise}$"]
       },
@@ -6480,7 +6611,7 @@ const EXERCICES = {
 
     "Limites de suites": [
       {
-        id:"limsu_t_1", titre:"Limites de suites — définitions", niveau:"Facile", points_total:8,
+        id:"limsu_t_1", titre:"Limites de suites — définitions", niveau:"Facile", points_total:10,
         questions:[
           {label:"a)", enonce:"« La suite $(u_n)$ admet pour limite $+\\infty$ » signifie que :",
            type:"qcm", choix:["Pour tout réel $A$, $u_n$ finit par dépasser $A$ à partir d'un certain rang","La suite est croissante","$u_n$ devient négatif","La suite est bornée"],
@@ -6496,11 +6627,13 @@ const EXERCICES = {
            type:"qcm", choix:["$+\\infty$","$0$","$1$","$1{,}05$"],
            bonneReponseIdx:0, bonneReponse:"$+\\infty$",
            correction:"$q=1{,}05>1$ donc $q^n\\to+\\infty$ quand $n\\to+\\infty$.", points:2},
+          {label:"e)", enonce:"Calcule $\\lim\\limits_{n\\to+\\infty}\\dfrac{2n^2+1}{n^2}$ (divise numérateur et dénominateur par $n^2$).",
+           type:"libre", correction:"$\\dfrac{2n^2+1}{n^2}=2+\\dfrac{1}{n^2}\\to2$", points:2},
         ],
         indices:["Pour une limite en $+\\infty$ d'une expression polynomiale, seul le terme de plus haut degré compte ; $q^n\\to+\\infty$ si $q>1$"]
       },
       {
-        id:"limsu_t_2", titre:"Limites de suites — comparaison et théorème des gendarmes", niveau:"Moyen", points_total:9,
+        id:"limsu_t_2", titre:"Limites de suites — comparaison et théorème des gendarmes", niveau:"Moyen", points_total:15,
         questions:[
           {label:"a)", enonce:"Pour tout $n$, $2n-1\\leq u_n\\leq 2n+3$. En utilisant un théorème de comparaison, quelle est la limite de $u_n$ quand $n\\to+\\infty$ ?",
            type:"qcm", choix:["$+\\infty$","$-\\infty$","$2$","$0$"],
@@ -6512,6 +6645,12 @@ const EXERCICES = {
            type:"qcm", choix:["Elle converge vers une limite $\\leq10$","Elle diverge vers $+\\infty$","Elle est constante","On ne peut rien dire"],
            bonneReponseIdx:0, bonneReponse:"Elle converge vers une limite $\\leq10$",
            correction:"Toute suite croissante et majorée converge (théorème admis), vers une limite inférieure ou égale au majorant.", points:3},
+          {label:"d)", enonce:"$(u_n)$ est décroissante et minorée par $0$. Que peut-on affirmer sur sa limite ?",
+           type:"qcm", choix:["Elle converge vers une limite $\\geq0$","Elle diverge vers $-\\infty$","Elle est constante","On ne peut rien dire"],
+           bonneReponseIdx:0, bonneReponse:"Elle converge vers une limite $\\geq0$",
+           correction:"Toute suite décroissante et minorée converge (théorème admis), vers une limite supérieure ou égale au minorant.", points:3},
+          {label:"e)", enonce:"Pour tout $n\\geq1$, $-\\dfrac{1}{n}\\leq w_n\\leq \\dfrac{1}{n}$. Calcule $\\lim\\limits_{n\\to+\\infty}w_n$ (théorème des gendarmes).",
+           type:"libre", correction:"$-\\dfrac{1}{n}\\to0$ et $\\dfrac{1}{n}\\to0$ donc $w_n\\to0$", points:3},
         ],
         indices:["Théorème des gendarmes : si $v_n\\leq u_n\\leq w_n$ et $v_n,w_n\\to\\ell$ alors $u_n\\to\\ell$"]
       },
@@ -6519,7 +6658,7 @@ const EXERCICES = {
 
     "Limites de fonctions": [
       {
-        id:"limfo_t_1", titre:"Limites de fonctions et asymptotes", niveau:"Moyen", points_total:9,
+        id:"limfo_t_1", titre:"Limites de fonctions et asymptotes", niveau:"Moyen", points_total:15,
         questions:[
           {label:"a)", enonce:"$\\lim\\limits_{x\\to+\\infty}\\dfrac{1}{x}=$",
            type:"qcm", choix:["$0$","$+\\infty$","$1$","N'existe pas"],
@@ -6530,15 +6669,21 @@ const EXERCICES = {
            bonneReponseIdx:0, bonneReponse:"$+\\infty$",
            correction:"$3x^2-5x=x^2\\left(3-\\dfrac{5}{x}\\right)$ : $x^2\\to+\\infty$ et $\\left(3-\\dfrac{5}{x}\\right)\\to3$, donc le produit tend vers $+\\infty$.", points:3},
           {label:"c)", enonce:"Calcule $\\lim\\limits_{x\\to0}\\dfrac{2x^2+x}{x}$ (simplifie d'abord en divisant par $x$).",
-           type:"libre", correction:"$\\dfrac{2x^2+x}{x}=2x+1\\to1$", points:4},
+           type:"libre", correction:"$\\dfrac{2x^2+x}{x}=2x+1\\to1$", points:3},
+          {label:"d)", enonce:"La droite d'équation $y=2$ est asymptote horizontale à la courbe de $f$ en $+\\infty$. Que peut-on en déduire sur $\\lim\\limits_{x\\to+\\infty}f(x)$ ?",
+           type:"qcm", choix:["$\\lim\\limits_{x\\to+\\infty}f(x)=2$","$\\lim\\limits_{x\\to+\\infty}f(x)=+\\infty$","$f(x)=2$ pour tout $x$","On ne peut rien en déduire"],
+           bonneReponseIdx:0, bonneReponse:"$\\lim\\limits_{x\\to+\\infty}f(x)=2$",
+           correction:"Une asymptote horizontale $y=\\ell$ en $+\\infty$ signifie exactement que $\\lim\\limits_{x\\to+\\infty}f(x)=\\ell$.", points:3},
+          {label:"e)", enonce:"Calcule $\\lim\\limits_{x\\to0}\\dfrac{5x^2-3x}{x}$ (simplifie d'abord en divisant par $x$).",
+           type:"libre", correction:"$\\dfrac{5x^2-3x}{x}=5x-3\\to-3$", points:4},
         ],
-        indices:["Pour une limite en $\\pm\\infty$, factoriser par le terme de plus haut degré ; pour une forme $\\dfrac{0}{0}$, simplifier avant de passer à la limite"]
+        indices:["Pour une limite en $\\pm\\infty$, factoriser par le terme de plus haut degré ; pour une forme $\\dfrac{0}{0}$, simplifier avant de passer à la limite ; asymptote horizontale $y=\\ell$ $\\Leftrightarrow$ $\\lim f(x)=\\ell$"]
       },
     ],
 
     "Primitives et calcul intégral": [
       {
-        id:"int_t_1", titre:"Primitives", niveau:"Facile", points_total:8,
+        id:"int_t_1", titre:"Primitives", niveau:"Facile", points_total:12,
         questions:[
           {label:"a)", enonce:"Une primitive de $f(x)=x^2$ est :",
            type:"qcm", choix:["$\\dfrac{x^3}{3}$","$2x$","$x^3$","$3x^3$"],
@@ -6548,18 +6693,28 @@ const EXERCICES = {
            type:"libre", correction:"$F(0)=0+0+C=1 \\Rightarrow C=1$", points:3},
           {label:"c)", enonce:"Calcule $F(1)$ avec $F(x)=x^3+x^2+1$.",
            type:"libre", correction:"$F(1)=1+1+1=3$", points:3},
+          {label:"d)", enonce:"Une primitive de $g(x)=e^x$ (constante nulle) vaut, pour $x=0$ :",
+           type:"qcm", choix:["$1$","$0$","$e$","Non défini"],
+           bonneReponseIdx:0, bonneReponse:"$1$",
+           correction:"$e^x$ est sa propre primitive (à une constante près) : en $x=0$, $e^0=1$.", points:2},
+          {label:"e)", enonce:"Calcule $F(2)$ avec $F(x)=\\dfrac{x^3}{3}-x$.",
+           type:"libre", correction:"$F(2)=\\dfrac{8}{3}-2=\\dfrac{8}{3}-\\dfrac{6}{3}=\\dfrac{2}{3}$", points:2},
         ],
         indices:["Une primitive de $x^n$ ($n\\neq-1$) est $\\dfrac{x^{n+1}}{n+1}$ ; deux primitives d'une même fonction diffèrent d'une constante"]
       },
       {
-        id:"int_t_2", titre:"Calcul intégral — aire sous la courbe", niveau:"Difficile", points_total:10,
+        id:"int_t_2", titre:"Calcul intégral — aire sous la courbe", niveau:"Difficile", points_total:16,
         questions:[
           {label:"a)", enonce:"Calcule $\\displaystyle\\int_0^2 x\\,dx$ (primitive de $x$ : $\\dfrac{x^2}{2}$).",
            type:"libre", correction:"$\\left[\\dfrac{x^2}{2}\\right]_0^2=2-0=2$", points:3},
           {label:"b)", enonce:"Calcule $\\displaystyle\\int_1^3 2x\\,dx$ (primitive de $2x$ : $x^2$).",
            type:"libre", correction:"$\\left[x^2\\right]_1^3=9-1=8$", points:3},
           {label:"c)", enonce:"Calcule $\\displaystyle\\int_0^4 5\\,dx$ (primitive de la constante $5$ : $5x$).",
-           type:"libre", correction:"$\\left[5x\\right]_0^4=20-0=20$", points:4},
+           type:"libre", correction:"$\\left[5x\\right]_0^4=20-0=20$", points:3},
+          {label:"d)", enonce:"Calcule $\\displaystyle\\int_0^1 3x^2\\,dx$ (primitive de $3x^2$ : $x^3$).",
+           type:"libre", correction:"$\\left[x^3\\right]_0^1=1-0=1$", points:3},
+          {label:"e)", enonce:"Sachant $\\displaystyle\\int_0^5 f(x)\\,dx=12$, calcule la valeur moyenne de $f$ sur $[0\\,;\\,5]$ (valeur moyenne $=\\dfrac{1}{b-a}\\displaystyle\\int_a^b f(x)\\,dx$).",
+           type:"libre", correction:"$\\dfrac{1}{5}\\times12=\\dfrac{12}{5}=2{,}4$", points:4},
         ],
         indices:["$\\displaystyle\\int_a^b f(x)\\,dx=F(b)-F(a)$ où $F$ est une primitive de $f$ ; pour $f>0$, c'est l'aire sous la courbe entre $a$ et $b$"]
       },
