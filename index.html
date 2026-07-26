@@ -6238,6 +6238,53 @@ const EXERCICES = {
       },
     ],
 
+    "Fonction exponentielle": [
+      {
+        id:"exp_1_1", titre:"Exponentielle — définition et propriétés", niveau:"Facile", points_total:8,
+        questions:[
+          {label:"a)", enonce:"La fonction exponentielle est l'unique fonction $f$ dérivable sur $\\mathbb{R}$ telle que :",
+           type:"qcm", choix:["$f'=f$ et $f(0)=1$","$f'=f$ et $f(0)=0$","$f'=-f$ et $f(0)=1$","$f(x)=x$ pour tout $x$"],
+           bonneReponseIdx:0, bonneReponse:"$f'=f$ et $f(0)=1$",
+           correction:"La fonction exponentielle est définie comme l'unique fonction dérivable sur $\\mathbb{R}$ égale à sa propre dérivée et valant $1$ en $0$.", points:2},
+          {label:"b)", enonce:"Calcule $e^0$.",
+           type:"libre", correction:"$e^0=1$", points:2},
+          {label:"c)", enonce:"Simplifie $e^2\\times e^3$ en utilisant $e^a\\times e^b=e^{a+b}$.",
+           type:"libre", correction:"$e^2\\times e^3=e^{2+3}=e^5$", points:2},
+          {label:"d)", enonce:"Simplifie $\\dfrac{e^7}{e^3}$ en utilisant $\\dfrac{e^a}{e^b}=e^{a-b}$.",
+           type:"libre", correction:"$\\dfrac{e^7}{e^3}=e^{7-3}=e^4$", points:2},
+        ],
+        indices:["$e^a\\times e^b=e^{a+b}$ ; $\\dfrac{e^a}{e^b}=e^{a-b}$ ; $e^0=1$"]
+      },
+      {
+        id:"exp_1_2", titre:"Dérivée de l'exponentielle", niveau:"Moyen", points_total:9,
+        questions:[
+          {label:"a)", enonce:"La dérivée de $f(x)=e^x$ est :",
+           type:"qcm", choix:["$e^x$","$xe^{x-1}$","$1$","$e$"],
+           bonneReponseIdx:0, bonneReponse:"$e^x$",
+           correction:"La fonction exponentielle est sa propre dérivée : $(e^x)'=e^x$.", points:3},
+          {label:"b)", enonce:"$f(x)=3e^x$. Calcule $f'(x)$.",
+           type:"libre", correction:"$f'(x)=3e^x$", points:3},
+          {label:"c)", enonce:"Résous l'équation $e^x=e^3$ (utilise que $\\exp$ est strictement croissante donc injective).",
+           type:"libre", correction:"$x=3$", points:3},
+        ],
+        indices:["$(ke^x)'=ke^x$ ; $e^u=e^v \\Leftrightarrow u=v$"]
+      },
+      {
+        id:"exp_1_3", titre:"Résolution d'équations avec l'exponentielle", niveau:"Difficile", points_total:10,
+        questions:[
+          {label:"a)", enonce:"Résous $e^{2x}=e^6$.",
+           type:"libre", correction:"$2x=6 \\Rightarrow x=3$", points:3},
+          {label:"b)", enonce:"Résous $e^x\\times e^2=e^7$ (utilise $e^a\\times e^b=e^{a+b}$).",
+           type:"libre", correction:"$e^{x+2}=e^7 \\Rightarrow x+2=7 \\Rightarrow x=5$", points:4},
+          {label:"c)", enonce:"Une suite géométrique a pour raison $q=e^{0{,}1}$. Sachant que $\\exp$ est strictement croissante et que $e^0=1$, cette suite est-elle croissante ou décroissante ?",
+           type:"qcm", choix:["Croissante","Décroissante"],
+           bonneReponseIdx:0, bonneReponse:"Croissante",
+           correction:"$0{,}1>0$ et $\\exp$ est strictement croissante donc $e^{0{,}1}>e^0=1$ : la raison $q>1$, la suite est croissante.", points:3},
+        ],
+        indices:["$e^u=e^v \\Leftrightarrow u=v$ (injectivité de l'exponentielle)"]
+      },
+    ],
+
   },
 
 };
