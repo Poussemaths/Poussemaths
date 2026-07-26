@@ -3940,7 +3940,6 @@ const EXERCICES = {
           {label:"2.", enonce:"$738$ est-il divisible par $9$ ? (Indice : somme des chiffres = $7+3+8$)",
            type:"qcm", choix:["Oui","Non"],
            bonneReponseIdx:0, bonneReponse:"Oui",
-           correction:"$7+3+8=18$ divisible par $9$ ✓. Donc $738$ est divisible par $9$ (et aussi par $2$, $3$, $6$).",
            correction:"Par $2$ : oui (dernier chiffre $=8$). Par $3$ : oui ($7+3+8=18$). Par $6$ : oui (divisible par $2$ ET $3$). Par $9$ : oui ($18\\div9=2$).", points:2},
           {label:"3.", enonce:"Qu'est-ce qu'un nombre premier ?",
            type:"qcm",
@@ -4563,65 +4562,6 @@ const EXERCICES = {
       },
     ],
 
-    "Second degré": [
-      {
-        id:"deg2_2_genere", titre:"Discriminant — entraînement infini", niveau:"Facile", points_total:5,
-        genere: true, templateId: "discriminant_v1",
-        questions:[
-          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
-          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
-          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
-          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
-          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
-        ],
-        indices:["$\\Delta = b^2 - 4ac$"]
-      },
-      {
-        id:"deg2_2_A", titre:"Discriminant et racines", niveau:"Facile", points_total:6,
-        questions:[
-          {label:"a)", enonce:"Calcule le discriminant de $x^2 - 5x + 6$.", correction:"$\\Delta = (-5)^2 - 4 \\times 1 \\times 6 = 25 - 24 = 1 > 0$ → deux racines réelles.", points:2},
-          {label:"b)", enonce:"Résous $x^2 - 5x + 6 = 0$.", correction:"$x_1 = \\dfrac{5+1}{2} = 3$ ; $x_2 = \\dfrac{5-1}{2} = 2$", points:2},
-          {label:"c)", enonce:"Résous $x^2 + 4 = 0$.", correction:"$\\Delta = 0 - 16 = -16 < 0$ → pas de solution réelle.", points:2},
-        ],
-        indices:["$\\Delta = b^2 - 4ac$ ; si $\\Delta > 0$ : $x_{1,2} = \\dfrac{-b \\pm \\sqrt{\\Delta}}{2a}$ ; si $\\Delta < 0$ : pas de solution"]
-      },
-      {
-        id:"deg2_2_B", titre:"Forme canonique", niveau:"Moyen", points_total:9,
-        questions:[
-          {label:"a)", enonce:"Mets $f(x) = x^2 - 6x + 5$ sous forme canonique $a(x-h)^2 + k$.", correction:"$f(x) = (x-3)^2 - 9 + 5 = (x-3)^2 - 4$ — sommet en $(3\\,;\\,-4)$", points:3},
-          {label:"b)", enonce:"Déduis le minimum de $f$ et la valeur de $x$ où il est atteint.", correction:"Minimum $= -4$ atteint en $x = 3$ (car $a = 1 > 0$, parabole tournée vers le haut)", points:3},
-          {label:"c)", enonce:"Résous $x^2 - 6x + 5 = 0$ en utilisant la forme canonique.", correction:"$(x-3)^2 = 4 \\Rightarrow x-3 = \\pm 2 \\Rightarrow x = 5$ ou $x = 1$", points:3},
-        ],
-        indices:["Forme canonique : $a\\left(x + \\dfrac{b}{2a}\\right)^2 - \\dfrac{b^2-4ac}{4a}$ — le sommet est en $h = -\\dfrac{b}{2a}$"]
-      },
-      {
-        id:"deg2_2_C", titre:"Forme factorisée et signe", niveau:"Moyen", points_total:9,
-        questions:[
-          {label:"a)", enonce:"Factorise $f(x) = 2x^2 - 8x + 6$ sachant que les racines sont $x_1 = 1$ et $x_2 = 3$.", correction:"$f(x) = 2(x-1)(x-3)$", points:3},
-          {label:"b)", enonce:"Résous l'inéquation $2x^2 - 8x + 6 \\leq 0$.", correction:"$2(x-1)(x-3) \\leq 0$ — négatif entre les racines : $x \\in [1\\,;\\,3]$", points:3},
-          {label:"c)", enonce:"$f(x) = -x^2 + 4x - 3$. Calcule $\\Delta$, les racines, et dis pour quels $x$ on a $f(x) > 0$.", correction:"$\\Delta = 16-12 = 4$ ; $x_1=1$, $x_2=3$. $f(x) > 0$ pour $x \\in ]1\\,;\\,3[$ (parabole vers le bas)", points:3},
-        ],
-        indices:["Si $\\Delta > 0$ : $f(x) = a(x-x_1)(x-x_2)$ ; signe de $f$ : même signe que $a$ à l'extérieur des racines"]
-      },
-      {
-        id:"deg2_2_D", titre:"Équations du second degré — applications", niveau:"Difficile", points_total:10,
-        questions:[
-          {label:"a)", enonce:"Résous $3x^2 - 7x + 2 = 0$.", correction:"$\\Delta = 49 - 24 = 25$ ; $x_1 = \\dfrac{7+5}{6} = 2$ ; $x_2 = \\dfrac{7-5}{6} = \\dfrac{1}{3}$", points:3},
-          {label:"b)", enonce:"Un rectangle a un périmètre de $20$ cm et une aire de $24$ cm². Trouve ses dimensions.", correction:"$l + L = 10$ et $lL = 24$ → $x^2 - 10x + 24 = 0$ → $\\Delta=4$ → $x=6$ ou $x=4$. Dimensions : $6$ cm et $4$ cm.", points:4},
-          {label:"c)", enonce:"Pour quelles valeurs de $k$ l'équation $x^2 + kx + 9 = 0$ a-t-elle une solution double ?", correction:"$\\Delta = k^2 - 36 = 0 \\Rightarrow k = 6$ ou $k = -6$", points:3},
-        ],
-        indices:["Solution double quand $\\Delta = 0$ ; pour un problème, poser l'inconnue et former l'équation du 2nd degré"]
-      },
-      {
-        id:"deg2_2_E", titre:"Parabole et représentation graphique", niveau:"Moyen", points_total:8,
-        questions:[
-          {label:"a)", enonce:"$f(x) = x^2 - 4x + 3$. Donne les coordonnées du sommet $S$ de la parabole.", correction:"$h = -\\dfrac{-4}{2} = 2$ ; $k = f(2) = 4-8+3 = -1$ → $S(2\\,;\\,-1)$", points:2},
-          {label:"b)", enonce:"La parabole coupe-t-elle l'axe des abscisses ? Si oui, en quels points ?", correction:"$\\Delta = 16-12=4 > 0$ → oui, en $x_1=1$ et $x_2=3$, soit les points $(1\\,;\\,0)$ et $(3\\,;\\,0)$", points:3},
-          {label:"c)", enonce:"Quel est le point d'intersection avec l'axe des ordonnées ?", correction:"$f(0) = 0-0+3 = 3$ → point $(0\\,;\\,3)$", points:3},
-        ],
-        indices:["Sommet : $h = -\\dfrac{b}{2a}$ et $k = f(h)$ ; intersection axe $Oy$ : $f(0) = c$"]
-      },
-    ],
   },
 
   // ═══════════════════════════════
@@ -5068,19 +5008,7 @@ const EXERCICES = {
       },
     ],
 
-    "Divisibilité & PGCD": [
-      {
-        id:"div_6_genere", titre:"PGCD — entraînement infini", niveau:"Facile", points_total:5,
-        genere: true, templateId: "pgcd_v1",
-        questions:[
-          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
-          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
-          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
-          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
-          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
-        ],
-        indices:["Utilise l'algorithme d'Euclide : divisions successives jusqu'au reste nul"]
-      },
+    "Multiples et diviseurs": [
       {
         id:"div_6_1", titre:"Multiples et diviseurs", niveau:"Facile", points_total:8,
         questions:[
@@ -5098,61 +5026,9 @@ const EXERCICES = {
            correction:"$3+7+8=18$ divisible par $3$ → oui.",
            },{label:"3c.", enonce:"$378$ est-il divisible par $9$ ?",
            type:"qcm", choix:["Oui","Non"], bonneReponseIdx:0, bonneReponse:"Oui",
-           correction:"$3+7+8=18$ divisible par $9$ → oui.", correction:"Par $2$ : oui (chiffre pair). Par $3$ : $3+7+8=18$ oui. Par $9$ : $18\\div9=2$ oui.", points:3},
+           correction:"Par $2$ : oui (chiffre pair). Par $3$ : $3+7+8=18$ oui. Par $9$ : $18\\div9=2$ oui.", points:3},
         ],
         indices:["Divisible par 9 si somme des chiffres divisible par 9 ; par 6 si divisible par 2 ET 3"]
-      },
-      {
-        id:"div_6_2", titre:"PGCD — calcul et applications", niveau:"Moyen", points_total:10,
-        questions:[
-          {label:"a)", enonce:"Calcule le PGCD de $24$ et $36$.",
-           type:"libre", correction:"$24=2^3\\times3$ ; $36=2^2\\times3^2$. PGCD $=2^2\\times3=12$", points:3},
-          {label:"b)", enonce:"Simplifie $\\dfrac{36}{48}$ en fraction irréductible.",
-           type:"libre", correction:"PGCD$(36,48)=12$. $\\dfrac{36}{48}=\\dfrac{3}{4}$", points:3},
-          {label:"c)", enonce:"$36$ garçons et $48$ filles. Groupes mixtes de même taille max. Combien d'élèves par groupe ?",
-           type:"libre", correction:"PGCD$(36,48)=12$ élèves par groupe.", points:4},
-        ],
-        indices:["PGCD = plus grand nombre qui divise les deux à la fois"]
-      },
-      {
-        id:"div_6_3", titre:"Nombres premiers", niveau:"Moyen", points_total:10,
-        questions:[
-          {label:"1.", enonce:"Parmi ces nombres, lesquels sont premiers : $11$, $15$, $17$, $21$, $23$ ?",
-           type:"qcm", choix:["$11$, $15$, $17$","$11$, $17$, $23$","$15$, $21$","$17$, $21$, $23$"],
-           bonneReponseIdx:1, bonneReponse:"$11$, $17$, $23$",
-           correction:"$15=3\\times5$ et $21=3\\times7$ ne sont pas premiers. $11$, $17$, $23$ n'ont que $1$ et eux-mêmes comme diviseurs.", points:3},
-          {label:"2.", enonce:"Décompose $60$ en produit de facteurs premiers.",
-           type:"libre", correction:"$60=2^2\\times3\\times5$", points:3},
-          {label:"3.", enonce:"Décompose $126$.",
-           type:"libre", correction:"$126=2\\times3^2\\times7$", points:4},
-        ],
-        indices:["Nombre premier : exactement 2 diviseurs ($1$ et lui-même)"]
-      },
-      {
-        id:"div_6_4", titre:"Divisibilité — problèmes", niveau:"Difficile", points_total:10,
-        questions:[
-          {label:"a)", enonce:"Un carrelage $24$ cm × $36$ cm. Plus grands carreaux carrés identiques possibles ?",
-           type:"libre", correction:"PGCD$(24,36)=12$ cm", points:3},
-          {label:"b)", enonce:"PPCM de $12$ et $18$.",
-           type:"libre", correction:"$12=2^2\\times3$ ; $18=2\\times3^2$. PPCM $=2^2\\times3^2=36$", points:3},
-          {label:"c)", enonce:"Deux gyrophares clignotent toutes les $12$ s et $18$ s. Ils clignotent ensemble à $t=0$. Quand à nouveau ?",
-           type:"libre", correction:"PPCM$(12,18)=36$ secondes.", points:4},
-        ],
-        indices:["PPCM = plus petit multiple commun aux deux nombres"]
-      },
-      {
-        id:"div_6_5", titre:"Divisibilité — brevet 6ème", niveau:"Difficile", points_total:12,
-        questions:[
-          {label:"1.", enonce:"Est-ce que $2\,016$ est divisible par $2$, $3$, $4$, $6$, $9$ ?",
-           type:"libre", correction:"Par $2$ ✓ (pair). Par $3$ ✓ ($2+0+1+6=9$). Par $4$ ✓ ($16\\div4=4$). Par $6$ ✓ ($2$ et $3$). Par $9$ ✓ ($9\\div9=1$).", points:4},
-          {label:"2.", enonce:"Simplifie $\\dfrac{84}{126}$.",
-           type:"libre", correction:"PGCD$(84,126)=42$. $\\dfrac{84}{126}=\\dfrac{2}{3}$", points:4},
-          {label:"3.", enonce:"Pourquoi $n(n+1)$ est-il toujours pair pour tout entier $n$ ?",
-           type:"qcm", choix:["Car $n$ est toujours pair","Car $n$ et $n+1$ sont consécutifs — l'un est pair","Car $n+1$ est toujours pair","Ce n'est pas toujours vrai"],
-           bonneReponseIdx:1, bonneReponse:"Car $n$ et $n+1$ sont consécutifs — l'un est pair",
-           correction:"Deux entiers consécutifs : l'un est pair → leur produit est pair ✓", points:4},
-        ],
-        indices:["D'après DNB — justifier une propriété de divisibilité"]
       },
     ],
 
@@ -5667,85 +5543,6 @@ const EXERCICES = {
       },
     ],
 
-    "Pythagore & Thalès": [
-      {
-        id:"pyth_5_genere", titre:"Pythagore — entraînement infini", niveau:"Facile", points_total:5,
-        genere: true, templateId: "pythagore_v1",
-        questions:[
-          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
-          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
-          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
-          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
-          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
-        ],
-        indices:["$hypoténuse^2 = côté_1^2 + côté_2^2$"]
-      },
-      {
-        id:"pyth_5_1", titre:"Théorème de Pythagore — calculer", niveau:"Facile", points_total:8,
-        questions:[
-          {label:"1.", enonce:"Triangle rectangle en $A$, $AB=6$, $AC=8$. Calcule $BC$.",
-           type:"libre", correction:"$BC^2=36+64=100 \\Rightarrow BC=10$", points:2},
-          {label:"2.", enonce:"Triangle rectangle. Hypoténuse $=17$, un côté $=8$. Calcule l'autre côté.",
-           type:"libre", correction:"$c^2=289-64=225 \\Rightarrow c=15$", points:2},
-          {label:"3.", enonce:"Le triangle de côtés $7$, $24$, $25$ est-il rectangle ?",
-           type:"qcm", choix:["Oui","Non","On ne peut pas savoir","Seulement si les angles sont connus"],
-           bonneReponseIdx:0, bonneReponse:"Oui",
-           correction:"$7^2+24^2=49+576=625=25^2$ ✓", points:2},
-          {label:"4.", enonce:"Diagonale d'un carré de côté $5$ cm.",
-           type:"libre", correction:"$d=\\sqrt{25+25}=5\\sqrt{2}\\approx7{,}07$ cm", points:2},
-        ],
-        indices:["$c^2=a^2+b^2$ avec $c$ l'hypoténuse"]
-      },
-      {
-        id:"pyth_5_2", titre:"Théorème de Thalès — calculer", niveau:"Moyen", points_total:10,
-        questions:[
-          {label:"a)", enonce:"$DE\\parallel BC$, $AD=3$, $AB=9$, $DE=4$. Calcule $BC$.",
-           type:"libre", correction:"$\\dfrac{3}{9}=\\dfrac{4}{BC} \\Rightarrow BC=12$", points:3},
-          {label:"b)", enonce:"$DE\\parallel BC$, $AD=5$, $DB=5$, $AE=4$. Calcule $EC$.",
-           type:"libre", correction:"$\\dfrac{5}{10}=\\dfrac{4}{AC} \\Rightarrow AC=8 \\Rightarrow EC=4$", points:3},
-          {label:"c)", enonce:"Un arbre de $6$ m projette une ombre de $4$ m. Un lampadaire projette une ombre de $6$ m. Hauteur du lampadaire ?",
-           type:"libre", correction:"$\\dfrac{6}{4}=\\dfrac{h}{6} \\Rightarrow h=9$ m", points:4},
-        ],
-        indices:["$DE\\parallel BC \\Rightarrow \\dfrac{AD}{AB}=\\dfrac{AE}{AC}=\\dfrac{DE}{BC}$"]
-      },
-      {
-        id:"pyth_5_3", titre:"Pythagore et Thalès — problèmes", niveau:"Difficile", points_total:12,
-        questions:[
-          {label:"1.", enonce:"Mât de $10$ m avec un câble fixé au sol à $8$ m de la base. Longueur du câble ?",
-           type:"libre", correction:"$c=\\sqrt{100+64}=\\sqrt{164}\\approx12{,}8$ m", points:4},
-          {label:"2.", enonce:"Sur plan $1:50\\,000$, deux villes sont à $7{,}2$ cm. Distance réelle ?",
-           type:"libre", correction:"$7{,}2\\times50\\,000=360\\,000$ cm $=3{,}6$ km", points:4},
-          {label:"3.", enonce:"$DE\\parallel BC$, $AD=x$, $DB=8$, $AE=x-1$, $EC=6$. Calcule $x$.",
-           type:"libre", correction:"$\\dfrac{x}{x+8}=\\dfrac{x-1}{x+5} \\Rightarrow x(x+5)=(x-1)(x+8) \\Rightarrow x^2+5x=x^2+7x-8 \\Rightarrow -2x=-8 \\Rightarrow x=4$", points:4},
-        ],
-        indices:["Dessine toujours la situation avant de calculer"]
-      },
-      {
-        id:"pyth_5_4", titre:"Pythagore — applications pratiques", niveau:"Moyen", points_total:10,
-        questions:[
-          {label:"a)", enonce:"Échelle $1:20\\,000$. Deux villes à $4{,}5$ cm sur la carte. Distance réelle ?",
-           type:"libre", correction:"$4{,}5\\times20\\,000=90\\,000$ cm $=900$ m $=0{,}9$ km", points:3},
-          {label:"b)", enonce:"Rectangle $8\\times15$ cm. Diagonale ?",
-           type:"libre", correction:"$d=\\sqrt{64+225}=\\sqrt{289}=17$ cm", points:3},
-          {label:"c)", enonce:"Triangle équilatéral de côté $10$ cm. Hauteur ?",
-           type:"libre", correction:"$h=\\sqrt{100-25}=\\sqrt{75}=5\\sqrt{3}\\approx8{,}66$ cm", points:4},
-        ],
-        indices:["La diagonale d'un rectangle est l'hypoténuse du triangle rectangle formé"]
-      },
-      {
-        id:"pyth_5_5", titre:"Thalès & Pythagore — brevet 5ème", niveau:"Difficile", points_total:12,
-        questions:[
-          {label:"1.", enonce:"$DE\\parallel BC$, $AD=5$, $DB=7$, $AE=4$. Calcule $EC$ et $BC$ si $DE=6$.",
-           type:"libre", correction:"$\\dfrac{5}{12}=\\dfrac{4}{AC}\\Rightarrow AC=9{,}6\\Rightarrow EC=4{,}6$. $BC=\\dfrac{12\\times6}{5}=14{,}4$.", points:5},
-          {label:"2.", enonce:"Mât vertical de $12$ m. Câble ancré à $5$ m de la base. Longueur du câble ?",
-           type:"libre", correction:"$c=\\sqrt{144+25}=\\sqrt{169}=13$ m", points:4},
-          {label:"3.", enonce:"Est-ce que le triangle de côtés $11$, $60$ et $61$ est rectangle ?",
-           type:"libre", correction:"$11^2+60^2=121+3600=3721=61^2$ ✓ Oui.", points:3},
-        ],
-        indices:["Triple pythagoricien célèbre : $(3,4,5)$, $(5,12,13)$, $(8,15,17)$, $(11,60,61)$"]
-      },
-    ],
-
     "Probabilités": [
       {
         id:"proba_5_genere", titre:"Probabilités — entraînement infini", niveau:"Facile", points_total:5,
@@ -5774,56 +5571,6 @@ const EXERCICES = {
            correction:"Un événement certain se réalise toujours : $P=1$", points:2},
         ],
         indices:["$P(A) \\in [0\\,;\\,1]$ ; $P(A)+P(\\bar{A})=1$"]
-      },
-      {
-        id:"proba_5_2", titre:"Expériences à deux épreuves", niveau:"Moyen", points_total:10,
-        questions:[
-          {label:"a)", enonce:"On lance deux pièces. $P(\\text{deux faces})$ ?",
-           type:"libre", correction:"Issues : $\\{PP,PF,FP,FF\\}$. $P=\\dfrac{1}{4}$", points:3},
-          {label:"b)", enonce:"Urne : $3$ rouges, $2$ bleues. Tirage sans remise × 2. $P(\\text{2 rouges})$ ?",
-           type:"libre", correction:"$P=\\dfrac{3}{5}\\times\\dfrac{2}{4}=\\dfrac{6}{20}=\\dfrac{3}{10}$", points:4},
-          {label:"c)", enonce:"On lance un dé. Si $>4$ : gagner $2$€. Sinon : perdre $1$€. Espérance de gain ?",
-           type:"libre", correction:"$E=\\dfrac{2}{6}\\times2+\\dfrac{4}{6}\\times(-1)=\\dfrac{4}{6}-\\dfrac{4}{6}=0$€", points:3},
-        ],
-        indices:["Arbre : multiplier les probabilités sur un chemin"]
-      },
-      {
-        id:"proba_5_3", titre:"Probabilités — simulation et fréquences", niveau:"Difficile", points_total:10,
-        questions:[
-          {label:"1.", enonce:"On lance $100$ fois un dé équilibré. On obtient $22$ fois le $6$. La fréquence est-elle proche de la probabilité théorique ?",
-           type:"qcm", choix:["Oui, car $22\\%\\approx\\dfrac{1}{6}\\approx16{,}7\\%$","Non, c'est trop différent","Oui car toute fréquence est acceptable","On ne peut pas comparer"],
-           bonneReponseIdx:0, bonneReponse:"Oui, car $22\\%\\approx\\dfrac{1}{6}\\approx16{,}7\\%$",
-           correction:"Pour $100$ lancers, une fréquence entre $10\\%$ et $25\\%$ est raisonnable.", points:4},
-          {label:"2.", enonce:"$3$ fois pile sur $10$ lancers d'une pièce. Peut-on dire que la pièce est truquée ?",
-           type:"libre", correction:"Non — avec peu de lancers, les fluctuations sont normales. Il faudrait beaucoup plus d'essais.", points:3},
-          {label:"3.", enonce:"Intervalle de fluctuation au seuil $95\\%$ pour $p=0{,}5$, $n=400$.",
-           type:"libre", correction:"$\\left[0{,}5-\\dfrac{1}{\\sqrt{400}}\\,;\\,0{,}5+\\dfrac{1}{\\sqrt{400}}\\right]=[0{,}45\\,;\\,0{,}55]$", points:3},
-        ],
-        indices:["Plus $n$ est grand, plus la fréquence se rapproche de la probabilité"]
-      },
-      {
-        id:"proba_5_4", titre:"Probabilités — arbres à deux épreuves", niveau:"Moyen", points_total:10,
-        questions:[
-          {label:"a)", enonce:"Sac : $2$ rouges ($R$), $3$ bleues ($B$). Tirage avec remise × $2$. $P(RB)$ ?",
-           type:"libre", correction:"$P=\\dfrac{2}{5}\\times\\dfrac{3}{5}=\\dfrac{6}{25}$", points:3},
-          {label:"b)", enonce:"Même sac, sans remise. $P(\\text{au moins une rouge})$ ?",
-           type:"libre", correction:"$P=1-P(\\text{aucune rouge})=1-\\dfrac{3}{5}\\times\\dfrac{2}{4}=1-\\dfrac{6}{20}=\\dfrac{14}{20}=\\dfrac{7}{10}$", points:4},
-          {label:"c)", enonce:"Lancer d'un dé puis d'une pièce. $P(\\text{pair ET pile})$ ?",
-           type:"libre", correction:"$P=\\dfrac{1}{2}\\times\\dfrac{1}{2}=\\dfrac{1}{4}$", points:3},
-        ],
-        indices:["Complémentaire : $P(A)=1-P(\\bar{A})$ — souvent plus simple que calculer directement"]
-      },
-      {
-        id:"proba_5_5", titre:"Probabilités — brevet 5ème", niveau:"Difficile", points_total:12,
-        questions:[
-          {label:"1.", enonce:"Une classe : $60\\%$ font du sport, $40\\%$ font de la musique, $20\\%$ font les deux. $P(\\text{sport OU musique})$ ?",
-           type:"libre", correction:"$P=0{,}6+0{,}4-0{,}2=0{,}8$", points:4},
-          {label:"2.", enonce:"Jeu : lancer $2$ dés. Gagner si somme $\\geq 10$. $P(\\text{gagner})$ ?",
-           type:"libre", correction:"Cas favorables : $(4,6),(5,5),(5,6),(6,4),(6,5),(6,6)$ = $6$ cas. $P=\\dfrac{6}{36}=\\dfrac{1}{6}$.", points:4},
-          {label:"3.", enonce:"$P(A)=0{,}35$, $P(B)=0{,}45$, $P(A\\cap B)=0{,}15$. Calcule $P(A\\cup B)$.",
-           type:"libre", correction:"$P(A\\cup B)=0{,}35+0{,}45-0{,}15=0{,}65$", points:4},
-        ],
-        indices:["$P(A\\cup B)=P(A)+P(B)-P(A\\cap B)$"]
       },
     ],
   },
@@ -6603,6 +6350,66 @@ const EXERCICES = {
            correction:"$u_{10} = 3 + 10 \\times 5 = 53$. $S = \\dfrac{11 \\times (3+53)}{2} = 308$.", points:3},
         ],
         indices:["Pour linéariser : poser $v_n = u_n + k$ et trouver $k$ tel que $(v_n)$ soit géométrique."]
+      },
+    ],
+
+    "Second degré": [
+      {
+        id:"deg2_1_genere", titre:"Discriminant — entraînement infini", niveau:"Facile", points_total:5,
+        genere: true, templateId: "discriminant_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["$\\Delta = b^2 - 4ac$"]
+      },
+      {
+        id:"deg2_1_A", titre:"Discriminant et racines", niveau:"Facile", points_total:6,
+        questions:[
+          {label:"a)", enonce:"Calcule le discriminant de $x^2 - 5x + 6$.", correction:"$\\Delta = (-5)^2 - 4 \\times 1 \\times 6 = 25 - 24 = 1 > 0$ → deux racines réelles.", points:2},
+          {label:"b)", enonce:"Résous $x^2 - 5x + 6 = 0$.", correction:"$x_1 = \\dfrac{5+1}{2} = 3$ ; $x_2 = \\dfrac{5-1}{2} = 2$", points:2},
+          {label:"c)", enonce:"Résous $x^2 + 4 = 0$.", correction:"$\\Delta = 0 - 16 = -16 < 0$ → pas de solution réelle.", points:2},
+        ],
+        indices:["$\\Delta = b^2 - 4ac$ ; si $\\Delta > 0$ : $x_{1,2} = \\dfrac{-b \\pm \\sqrt{\\Delta}}{2a}$ ; si $\\Delta < 0$ : pas de solution"]
+      },
+      {
+        id:"deg2_1_B", titre:"Forme canonique", niveau:"Moyen", points_total:9,
+        questions:[
+          {label:"a)", enonce:"Mets $f(x) = x^2 - 6x + 5$ sous forme canonique $a(x-h)^2 + k$.", correction:"$f(x) = (x-3)^2 - 9 + 5 = (x-3)^2 - 4$ — sommet en $(3\\,;\\,-4)$", points:3},
+          {label:"b)", enonce:"Déduis le minimum de $f$ et la valeur de $x$ où il est atteint.", correction:"Minimum $= -4$ atteint en $x = 3$ (car $a = 1 > 0$, parabole tournée vers le haut)", points:3},
+          {label:"c)", enonce:"Résous $x^2 - 6x + 5 = 0$ en utilisant la forme canonique.", correction:"$(x-3)^2 = 4 \\Rightarrow x-3 = \\pm 2 \\Rightarrow x = 5$ ou $x = 1$", points:3},
+        ],
+        indices:["Forme canonique : $a\\left(x + \\dfrac{b}{2a}\\right)^2 - \\dfrac{b^2-4ac}{4a}$ — le sommet est en $h = -\\dfrac{b}{2a}$"]
+      },
+      {
+        id:"deg2_1_C", titre:"Forme factorisée et signe", niveau:"Moyen", points_total:9,
+        questions:[
+          {label:"a)", enonce:"Factorise $f(x) = 2x^2 - 8x + 6$ sachant que les racines sont $x_1 = 1$ et $x_2 = 3$.", correction:"$f(x) = 2(x-1)(x-3)$", points:3},
+          {label:"b)", enonce:"Résous l'inéquation $2x^2 - 8x + 6 \\leq 0$.", correction:"$2(x-1)(x-3) \\leq 0$ — négatif entre les racines : $x \\in [1\\,;\\,3]$", points:3},
+          {label:"c)", enonce:"$f(x) = -x^2 + 4x - 3$. Calcule $\\Delta$, les racines, et dis pour quels $x$ on a $f(x) > 0$.", correction:"$\\Delta = 16-12 = 4$ ; $x_1=1$, $x_2=3$. $f(x) > 0$ pour $x \\in ]1\\,;\\,3[$ (parabole vers le bas)", points:3},
+        ],
+        indices:["Si $\\Delta > 0$ : $f(x) = a(x-x_1)(x-x_2)$ ; signe de $f$ : même signe que $a$ à l'extérieur des racines"]
+      },
+      {
+        id:"deg2_1_D", titre:"Équations du second degré — applications", niveau:"Difficile", points_total:10,
+        questions:[
+          {label:"a)", enonce:"Résous $3x^2 - 7x + 2 = 0$.", correction:"$\\Delta = 49 - 24 = 25$ ; $x_1 = \\dfrac{7+5}{6} = 2$ ; $x_2 = \\dfrac{7-5}{6} = \\dfrac{1}{3}$", points:3},
+          {label:"b)", enonce:"Un rectangle a un périmètre de $20$ cm et une aire de $24$ cm². Trouve ses dimensions.", correction:"$l + L = 10$ et $lL = 24$ → $x^2 - 10x + 24 = 0$ → $\\Delta=4$ → $x=6$ ou $x=4$. Dimensions : $6$ cm et $4$ cm.", points:4},
+          {label:"c)", enonce:"Pour quelles valeurs de $k$ l'équation $x^2 + kx + 9 = 0$ a-t-elle une solution double ?", correction:"$\\Delta = k^2 - 36 = 0 \\Rightarrow k = 6$ ou $k = -6$", points:3},
+        ],
+        indices:["Solution double quand $\\Delta = 0$ ; pour un problème, poser l'inconnue et former l'équation du 2nd degré"]
+      },
+      {
+        id:"deg2_1_E", titre:"Parabole et représentation graphique", niveau:"Moyen", points_total:8,
+        questions:[
+          {label:"a)", enonce:"$f(x) = x^2 - 4x + 3$. Donne les coordonnées du sommet $S$ de la parabole.", correction:"$h = -\\dfrac{-4}{2} = 2$ ; $k = f(2) = 4-8+3 = -1$ → $S(2\\,;\\,-1)$", points:2},
+          {label:"b)", enonce:"La parabole coupe-t-elle l'axe des abscisses ? Si oui, en quels points ?", correction:"$\\Delta = 16-12=4 > 0$ → oui, en $x_1=1$ et $x_2=3$, soit les points $(1\\,;\\,0)$ et $(3\\,;\\,0)$", points:3},
+          {label:"c)", enonce:"Quel est le point d'intersection avec l'axe des ordonnées ?", correction:"$f(0) = 0-0+3 = 3$ → point $(0\\,;\\,3)$", points:3},
+        ],
+        indices:["Sommet : $h = -\\dfrac{b}{2a}$ et $k = f(h)$ ; intersection axe $Oy$ : $f(0) = c$"]
       },
     ],
 
