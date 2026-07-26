@@ -6379,6 +6379,49 @@ const EXERCICES = {
       },
     ],
 
+    "Variables aléatoires": [
+      {
+        id:"var_1_1", titre:"Loi de probabilité d'une variable aléatoire", niveau:"Facile", points_total:8,
+        questions:[
+          {label:"a)", enonce:"On lance un dé équilibré à $6$ faces. $X$ = gain en euros : si le résultat est pair, on gagne $2$€ ; si le résultat est impair, on perd $1$€. Quelles sont les valeurs possibles prises par $X$ ?",
+           type:"qcm", choix:["$-1$ et $2$","$0$ et $1$","$1,2,3,4,5,6$","Uniquement $2$"],
+           bonneReponseIdx:0, bonneReponse:"$-1$ et $2$",
+           correction:"$X$ ne prend que deux valeurs : $-1$ (résultat impair) ou $2$ (résultat pair).", points:2},
+          {label:"b)", enonce:"Calcule $P(X=2)$.",
+           type:"libre", correction:"$P(X=2)=\\dfrac{3}{6}=\\dfrac{1}{2}$", points:3},
+          {label:"c)", enonce:"Calcule $P(X=-1)$.",
+           type:"libre", correction:"$P(X=-1)=\\dfrac{3}{6}=\\dfrac{1}{2}$", points:3},
+        ],
+        indices:["La loi de probabilité d'une variable aléatoire liste chaque valeur possible avec sa probabilité"]
+      },
+      {
+        id:"var_1_2", titre:"Espérance, variance et écart-type", niveau:"Moyen", points_total:10,
+        questions:[
+          {label:"a)", enonce:"Avec $P(X=2)=0{,}5$ et $P(X=-1)=0{,}5$, calcule l'espérance $E(X)$.",
+           type:"libre", correction:"$E(X)=2\\times0{,}5+(-1)\\times0{,}5=1-0{,}5=0{,}5$", points:2},
+          {label:"b)", enonce:"Calcule $E(X^2)$ (nécessaire pour la variance).",
+           type:"libre", correction:"$E(X^2)=4\\times0{,}5+1\\times0{,}5=2+0{,}5=2{,}5$", points:3},
+          {label:"c)", enonce:"Formule de König-Huygens : $V(X)=E(X^2)-E(X)^2$. Calcule $V(X)$.",
+           type:"libre", correction:"$V(X)=2{,}5-0{,}5^2=2{,}5-0{,}25=2{,}25$", points:3},
+          {label:"d)", enonce:"En déduis l'écart-type $\\sigma(X)=\\sqrt{V(X)}$.",
+           type:"libre", correction:"$\\sigma(X)=\\sqrt{2{,}25}=1{,}5$", points:2},
+        ],
+        indices:["$E(X)=\\sum x_i P(X=x_i)$ ; $V(X)=E(X^2)-E(X)^2$ ; $\\sigma(X)=\\sqrt{V(X)}$"]
+      },
+      {
+        id:"var_1_3", titre:"Linéarité de l'espérance", niveau:"Difficile", points_total:8,
+        questions:[
+          {label:"a)", enonce:"$E(X)=3$. En utilisant $E(aX+b)=aE(X)+b$, calcule $E(2X+5)$.",
+           type:"libre", correction:"$E(2X+5)=2\\times3+5=11$", points:3},
+          {label:"b)", enonce:"$E(X)=4$ et $E(Y)=6$. Calcule $E(X+Y)$.",
+           type:"libre", correction:"$E(X+Y)=E(X)+E(Y)=4+6=10$", points:2},
+          {label:"c)", enonce:"Un jeu coûte $2$€ à jouer. L'espérance du gain avant de payer la mise est $E(G)=1{,}5$€. Calcule l'espérance nette $E(G)-2$ pour savoir si le jeu est favorable au joueur.",
+           type:"libre", correction:"$E(G)-2=1{,}5-2=-0{,}5$", points:3},
+        ],
+        indices:["$E(aX+b)=aE(X)+b$ ; $E(X+Y)=E(X)+E(Y)$ — l'espérance nette d'un jeu est $E(\\text{gain})-\\text{mise}$"]
+      },
+    ],
+
   },
 
 };
