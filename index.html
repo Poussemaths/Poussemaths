@@ -6783,6 +6783,27 @@ const EXERCICES = {
       },
     ],
 
+    "Géométrie dans l'espace": [
+      {
+        id:"espace_t_1", titre:"Produit scalaire et distances dans l'espace", niveau:"Moyen", points_total:10,
+        questions:[
+          {label:"a)", enonce:"$\\vec{u}(1\\,;\\,2\\,;\\,3)$ et $\\vec{v}(4\\,;\\,-1\\,;\\,2)$ dans une base orthonormée de l'espace. Calcule $\\vec{u}\\cdot\\vec{v}=xx'+yy'+zz'$.",
+           type:"libre", correction:"$\\vec{u}\\cdot\\vec{v}=1\\times4+2\\times(-1)+3\\times2=4-2+6=8$", points:2},
+          {label:"b)", enonce:"$\\vec{u}(2\\,;\\,0\\,;\\,1)$. Calcule $\\|\\vec{u}\\|=\\sqrt{x^2+y^2+z^2}$ (valeur arrondie au centième).",
+           type:"libre", correction:"$\\|\\vec{u}\\|=\\sqrt{4+0+1}=\\sqrt{5}\\approx2{,}24$", points:2},
+          {label:"c)", enonce:"Deux vecteurs de l'espace sont orthogonaux si et seulement si :",
+           type:"qcm", choix:["Leur produit scalaire est nul","Ils sont colinéaires","Leurs normes sont égales","Ils ont la même direction"],
+           bonneReponseIdx:0, bonneReponse:"Leur produit scalaire est nul",
+           correction:"Comme dans le plan, deux vecteurs de l'espace sont orthogonaux ssi leur produit scalaire vaut $0$.", points:1},
+          {label:"d)", enonce:"$A(1\\,;\\,2\\,;\\,3)$ et $B(4\\,;\\,6\\,;\\,3)$. Calcule $AB=\\sqrt{(x_B-x_A)^2+(y_B-y_A)^2+(z_B-z_A)^2}$.",
+           type:"libre", correction:"$AB=\\sqrt{9+16+0}=\\sqrt{25}=5$", points:3},
+          {label:"e)", enonce:"$\\vec{u}(3\\,;\\,1\\,;\\,-2)$ et $\\vec{v}(1\\,;\\,-1\\,;\\,1)$. Calcule $\\vec{u}\\cdot\\vec{v}$.",
+           type:"libre", correction:"$\\vec{u}\\cdot\\vec{v}=3\\times1+1\\times(-1)+(-2)\\times1=3-1-2=0$", points:2},
+        ],
+        indices:["$\\vec{u}(x;y;z)\\cdot\\vec{v}(x';y';z')=xx'+yy'+zz'$ ; $\\|\\vec{u}\\|=\\sqrt{x^2+y^2+z^2}$"]
+      },
+    ],
+
   },
 
 };
