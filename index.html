@@ -6804,6 +6804,51 @@ const EXERCICES = {
       },
     ],
 
+    "Logarithme népérien": [
+      {
+        id:"log_t_1", titre:"Logarithme népérien — définition et propriétés", niveau:"Facile", points_total:10,
+        questions:[
+          {label:"a)", enonce:"$\\ln(1)$ vaut :",
+           type:"qcm", choix:["$0$","$1$","$e$","Non défini"],
+           bonneReponseIdx:0, bonneReponse:"$0$",
+           correction:"Le logarithme népérien de $1$ vaut toujours $0$ : $\\ln(1)=0$.", points:2},
+          {label:"b)", enonce:"Calcule $\\ln(e)$.",
+           type:"libre", correction:"$\\ln(e)=1$", points:2},
+          {label:"c)", enonce:"Simplifie $\\ln(3)+\\ln(4)$ en utilisant $\\ln(a)+\\ln(b)=\\ln(ab)$.",
+           type:"libre", correction:"$\\ln(3)+\\ln(4)=\\ln(12)$", points:2},
+          {label:"d)", enonce:"Résous $\\ln(x)=0$ (utilise que $\\ln(1)=0$ et que $\\ln$ est strictement croissante donc injective).",
+           type:"libre", correction:"$x=1$", points:2},
+          {label:"e)", enonce:"La solution de l'équation $\\ln(x)=1$ est :",
+           type:"qcm", choix:["$x=e$","$x=1$","$x=0$","$x=10$"],
+           bonneReponseIdx:0, bonneReponse:"$x=e$",
+           correction:"$\\ln(e)=1$ donc l'unique solution de $\\ln(x)=1$ est $x=e$.", points:2},
+        ],
+        indices:["$\\ln(1)=0$ ; $\\ln(e)=1$ ; $\\ln(a)+\\ln(b)=\\ln(ab)$ ; $\\ln(u)=\\ln(v) \\Leftrightarrow u=v$"]
+      },
+      {
+        id:"log_t_2", titre:"Dérivée et variations du logarithme", niveau:"Moyen", points_total:9,
+        questions:[
+          {label:"a)", enonce:"La dérivée de $f(x)=\\ln(x)$ sur $]0\\,;\\,+\\infty[$ est :",
+           type:"qcm", choix:["$\\dfrac{1}{x}$","$\\ln(x)$","$x$","$e^x$"],
+           bonneReponseIdx:0, bonneReponse:"$\\dfrac{1}{x}$",
+           correction:"$(\\ln(x))'=\\dfrac{1}{x}$ sur $]0\\,;\\,+\\infty[$.", points:2},
+          {label:"b)", enonce:"Le logarithme népérien est-il croissant ou décroissant sur $]0\\,;\\,+\\infty[$ ?",
+           type:"qcm", choix:["Croissant","Décroissant"],
+           bonneReponseIdx:0, bonneReponse:"Croissant",
+           correction:"$(\\ln(x))'=\\dfrac{1}{x}>0$ sur $]0\\,;\\,+\\infty[$ donc $\\ln$ est strictement croissante.", points:2},
+          {label:"c)", enonce:"$f(x)=3\\ln(x)$. Calcule $f'(x)$.",
+           type:"libre", correction:"$f'(x)=\\dfrac{3}{x}$", points:2},
+          {label:"d)", enonce:"Résous $\\ln(x)=2$ (la solution exacte est $x=e^2$). Donne une valeur approchée arrondie au centième sachant $e^2\\approx7{,}39$.",
+           type:"libre", correction:"$x=e^2\\approx7{,}39$", points:2},
+          {label:"e)", enonce:"$\\lim\\limits_{x\\to0^+}\\ln(x)=$",
+           type:"qcm", choix:["$-\\infty$","$0$","$+\\infty$","$1$"],
+           bonneReponseIdx:0, bonneReponse:"$-\\infty$",
+           correction:"$\\ln(x)\\to-\\infty$ quand $x\\to0^+$ (branche infinie verticale).", points:1},
+        ],
+        indices:["$(\\ln(x))'=\\dfrac{1}{x}$ ; $\\ln$ est strictement croissante sur $]0\\,;\\,+\\infty[$ ; $\\lim_{x\\to0^+}\\ln(x)=-\\infty$"]
+      },
+    ],
+
   },
 
 };
