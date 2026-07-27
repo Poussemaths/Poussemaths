@@ -10245,7 +10245,12 @@ function verifierReponse(userRaw, correctionRaw) {
         // se retrouvait avec un resultatFinal errone (le radicande seul),
         // desactivant a tort le fallback texte (check 4) qui est le seul a
         // pouvoir valider ce type de reponse symbolique.
-        if(!/[a-zA-Z]/.test(avantNombre) && !/\\sqrt/i.test(p)) resultats.push(parseFloat(matchFin[1]));
+        // Meme logique pour une notation scientifique non developpee
+        // ("4,56\times10^5") : l'exposant final ("5") n'est pas le resultat,
+        // c'est juste la puissance de 10 -- sans ce garde, les questions
+        // "ecris en notation scientifique" (reponse attendue sous cette forme,
+        // pas en decimal) etaient invalidables (resultatFinal errone = l'exposant).
+        if(!/[a-zA-Z]/.test(avantNombre) && !/\\sqrt/i.test(p) && !/\\times\s*10\^/i.test(p)) resultats.push(parseFloat(matchFin[1]));
         continue;
       }
 
@@ -10365,6 +10370,14 @@ function verifierReponse(userRaw, correctionRaw) {
       // lieu du grand nombre entier attendu, cassant le fallback texte pour
       // toute reponse correcte comme "27538".
       .replace(/\\,/g, '')
+      // "\times"/"\div" doivent devenir les MEMES symboles ("*"/"/") que ceux
+      // produits par clean() a partir des caracteres unicode ×/÷ du clavier —
+      // sinon le retrait generique des backslash ci-dessous laisse le mot
+      // "times"/"div" en texte brut, qui ne correspond jamais a ce que tape
+      // l'eleve (ex: reponses "en notation scientifique" du type "4,56×10^5",
+      // jamais validables tant que corrClean gardait "4.56times10^5").
+      .replace(/\\times/gi, '*')
+      .replace(/\\div/gi, '/')
       .replace(/[\\{}]/g, '')
       .replace(/rightarrow/gi, '')
       .replace(/Rightarrow/gi, '')
