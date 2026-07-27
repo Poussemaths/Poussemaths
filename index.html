@@ -6504,6 +6504,18 @@ const EXERCICES = {
 
     "Produit scalaire": [
       {
+        id:"scal_1_genere", titre:"Produit scalaire — entraînement infini", niveau:"Facile", points_total:5,
+        genere: true, templateId: "produit_scalaire_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["$\\vec{u}(x;y)\\cdot\\vec{v}(x';y')=xx'+yy'$ en base orthonormée"]
+      },
+      {
         id:"scal_1_1", titre:"Produit scalaire — définitions et calculs", niveau:"Facile", points_total:12,
         questions:[
           {label:"a)", enonce:"Le produit scalaire de deux vecteurs orthogonaux vaut :",
@@ -8845,6 +8857,7 @@ const TEMPLATES_GENERATEUR = {
   inequation_v1: 'exo-inequation-generer',
   fonction_generalites_v1: 'exo-fonction-generalites-generer',
   derivation_v1: 'exo-derivation-generer',
+  produit_scalaire_v1: 'exo-produit-scalaire-generer',
 };
 const TEMPLATES_VALIDATEUR = {
   equation_1er_degre_v1: 'exo-equation-valider',
@@ -8878,6 +8891,7 @@ const TEMPLATES_VALIDATEUR = {
   inequation_v1: 'exo-inequation-valider',
   fonction_generalites_v1: 'exo-fonction-generalites-valider',
   derivation_v1: 'exo-derivation-valider',
+  produit_scalaire_v1: 'exo-produit-scalaire-valider',
 };
 let currentGenTokens = [];
 
