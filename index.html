@@ -6849,6 +6849,31 @@ const EXERCICES = {
       },
     ],
 
+    "Continuité et théorème des valeurs intermédiaires": [
+      {
+        id:"tvi_t_1", titre:"Théorème des valeurs intermédiaires", niveau:"Moyen", points_total:10,
+        questions:[
+          {label:"a)", enonce:"$f$ est continue sur $[a\\,;\\,b]$, $f(a)=-2$ et $f(b)=5$. D'après le théorème des valeurs intermédiaires, l'équation $f(x)=0$ admet, sur $[a\\,;\\,b]$ :",
+           type:"qcm", choix:["Au moins une solution","Exactement une solution","Aucune solution","Une infinité de solutions"],
+           bonneReponseIdx:0, bonneReponse:"Au moins une solution",
+           correction:"Le TVI garantit l'existence d'au moins une solution quand $f$ change de signe, mais pas l'unicité (sauf hypothèse supplémentaire de monotonie).", points:2},
+          {label:"b)", enonce:"Si de plus $f$ est strictement croissante sur $[a\\,;\\,b]$, l'équation $f(x)=0$ admet, sur $[a\\,;\\,b]$ :",
+           type:"qcm", choix:["Exactement une solution","Aucune solution","Une infinité de solutions","On ne peut rien dire"],
+           bonneReponseIdx:0, bonneReponse:"Exactement une solution",
+           correction:"Le corollaire du TVI pour une fonction continue et strictement monotone garantit l'existence ET l'unicité de la solution.", points:2},
+          {label:"c)", enonce:"$f(x)=x^3-2x-5$. Calcule $f(2)$.",
+           type:"libre", correction:"$f(2)=8-4-5=-1$", points:2},
+          {label:"d)", enonce:"Calcule $f(3)$ avec $f(x)=x^3-2x-5$.",
+           type:"libre", correction:"$f(3)=27-6-5=16$", points:2},
+          {label:"e)", enonce:"$f(2)=-1<0$ et $f(3)=16>0$, et $f$ est continue et strictement croissante sur $[2\\,;\\,3]$ (somme de fonctions croissantes). On peut affirmer que l'équation $f(x)=0$ a, sur $]2\\,;\\,3[$ :",
+           type:"qcm", choix:["Une unique solution","Aucune solution","Deux solutions","On ne sait pas"],
+           bonneReponseIdx:0, bonneReponse:"Une unique solution",
+           correction:"Changement de signe + continuité + stricte monotonie $\\Rightarrow$ unique solution (corollaire du TVI).", points:2},
+        ],
+        indices:["TVI : $f$ continue sur $[a;b]$ et $f(a)\\times f(b)<0$ $\\Rightarrow$ $f(x)=0$ a une solution dans $]a;b[$ ; si en plus $f$ est strictement monotone, cette solution est unique"]
+      },
+    ],
+
   },
 
 };
