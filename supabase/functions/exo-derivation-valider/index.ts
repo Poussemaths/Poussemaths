@@ -1,4 +1,4 @@
-// Valide la reponse d'un eleve pour le template discriminant_v1.
+// Valide la reponse d'un eleve pour le template derivation_v1.
 
 async function getKey(): Promise<CryptoKey> {
   const raw = Uint8Array.from(atob(Deno.env.get("EXO_KEY")!), (c) => c.charCodeAt(0));
@@ -79,8 +79,8 @@ Deno.serve(async (req) => {
       headers: { apikey: serviceKey!, Authorization: `Bearer ${serviceKey}`, "Content-Type": "application/json", Prefer: "resolution=merge-duplicates" },
       body: JSON.stringify({
         eleve_id: eleveId,
-        exercice_id: exercice_id ?? "discriminant_v1",
-        chapitre: chapitre ?? "Second degré",
+        exercice_id: exercice_id ?? "derivation_v1",
+        chapitre: chapitre ?? "Dérivation",
         niveau: niveau ?? "1ere",
         score, points_obtenus: correcte ? 1 : 0, points_total: 1,
         completed_at: new Date().toISOString(),

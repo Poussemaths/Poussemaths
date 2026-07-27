@@ -6206,6 +6206,18 @@ const EXERCICES = {
 
     "Dérivation": [
       {
+        id:"deriv_1_genere", titre:"Dérivée en un point — entraînement infini", niveau:"Facile", points_total:5,
+        genere: true, templateId: "derivation_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["$f(x)=ax^2+bx+c \\Rightarrow f'(x)=2ax+b$"]
+      },
+      {
         id:"deriv_1_1", titre:"Nombre dérivé — taux de variation", niveau:"Facile", points_total:14,
         questions:[
           {label:"a)", enonce:"$f(x)=x^2$. Le taux de variation de $f$ entre $2$ et $2+h$ (avec $h\\neq0$) est égal à :",
@@ -8832,6 +8844,7 @@ const TEMPLATES_GENERATEUR = {
   suite_premiers_termes_v1: 'exo-suite-premiers-termes-generer',
   inequation_v1: 'exo-inequation-generer',
   fonction_generalites_v1: 'exo-fonction-generalites-generer',
+  derivation_v1: 'exo-derivation-generer',
 };
 const TEMPLATES_VALIDATEUR = {
   equation_1er_degre_v1: 'exo-equation-valider',
@@ -8864,6 +8877,7 @@ const TEMPLATES_VALIDATEUR = {
   suite_premiers_termes_v1: 'exo-suite-premiers-termes-valider',
   inequation_v1: 'exo-inequation-valider',
   fonction_generalites_v1: 'exo-fonction-generalites-valider',
+  derivation_v1: 'exo-derivation-valider',
 };
 let currentGenTokens = [];
 
