@@ -4440,6 +4440,61 @@ const EXERCICES = {
       },
     ],
 
+    "Algorithmique et programmation (Python)": [
+      {
+        id:"algo_2_1", titre:"Variables et affectation", niveau:"Facile", points_total:10,
+        questions:[
+          {label:"a)", enonce:"En Python, l'instruction <code>x = 5</code> :",
+           type:"qcm", choix:["Affecte la valeur $5$ à la variable x","Teste si x est égal à $5$","Additionne $5$ à x","Crée une fonction nommée x"],
+           bonneReponseIdx:0, bonneReponse:"Affecte la valeur $5$ à la variable x",
+           correction:"Le signe <code>=</code> en Python est une affectation, pas un test d'égalité (qui s'écrit <code>==</code>).", points:2},
+          {label:"b)", enonce:"Après <code>x = 3</code> puis <code>x = x + 2</code>, la valeur de x est :",
+           type:"qcm", choix:["$5$","$3$","$2$","Erreur"],
+           bonneReponseIdx:0, bonneReponse:"$5$",
+           correction:"<code>x = x + 2</code> prend l'ancienne valeur de x ($3$) et lui ajoute $2$ : nouvelle valeur $5$.", points:2},
+          {label:"c)", enonce:"Après <code>a = 2</code>, <code>b = 3</code>, <code>a, b = b, a</code>, quelles sont les valeurs de a et b ?",
+           type:"qcm", choix:["a=3, b=2","a=2, b=3","a=5, b=5","Erreur"],
+           bonneReponseIdx:0, bonneReponse:"a=3, b=2",
+           correction:"<code>a, b = b, a</code> échange les deux valeurs : a devient $3$, b devient $2$.", points:2},
+          {label:"d)", enonce:"Quel est le type de la valeur <code>3.14</code> en Python ?",
+           type:"qcm", choix:["float (nombre décimal)","int (entier)","str (chaîne de caractères)","bool (booléen)"],
+           bonneReponseIdx:0, bonneReponse:"float (nombre décimal)",
+           correction:"Un nombre à virgule est du type <code>float</code> en Python.", points:2},
+          {label:"e)", enonce:"Que produit l'instruction <code>print(2 + 3 * 4)</code> ?",
+           type:"qcm", choix:["$14$","$20$","$9$","$24$"],
+           bonneReponseIdx:0, bonneReponse:"$14$",
+           correction:"Priorité des opérations : la multiplication d'abord ($3\\times4=12$), puis l'addition ($2+12=14$).", points:2},
+        ],
+        indices:["<code>=</code> affecte une valeur ; les priorités opératoires de Python sont les mêmes qu'en mathématiques"]
+      },
+      {
+        id:"algo_2_2", titre:"Boucles et instructions conditionnelles", niveau:"Moyen", points_total:10,
+        questions:[
+          {label:"a)", enonce:"Que fait la boucle <code>for i in range(5):</code> ?",
+           type:"qcm", choix:["Elle répète $5$ fois, avec i allant de $0$ à $4$","Elle répète $4$ fois","Elle répète indéfiniment","Elle répète $5$ fois, avec i allant de $1$ à $5$"],
+           bonneReponseIdx:0, bonneReponse:"Elle répète $5$ fois, avec i allant de $0$ à $4$",
+           correction:"<code>range(5)</code> génère les entiers $0,1,2,3,4$ : la boucle s'exécute $5$ fois.", points:2},
+          {label:"b)", enonce:"Quelle est la dernière valeur affichée par <code>for i in range(1,4): print(i)</code> ?",
+           type:"qcm", choix:["$3$","$4$","$1$","$0$"],
+           bonneReponseIdx:0, bonneReponse:"$3$",
+           correction:"<code>range(1,4)</code> génère $1,2,3$ (la borne $4$ est exclue) : la dernière valeur affichée est $3$.", points:2},
+          {label:"c)", enonce:"Programme : <code>n = 0</code> puis <code>for i in range(3): n = n + 1</code>. Quelle est la valeur finale de n ?",
+           type:"qcm", choix:["$3$","$0$","$2$","Erreur"],
+           bonneReponseIdx:0, bonneReponse:"$3$",
+           correction:"La boucle s'exécute $3$ fois, ajoutant $1$ à n à chaque tour : $0\\to1\\to2\\to3$.", points:2},
+          {label:"d)", enonce:"Que fait <code>if x > 0: print('positif')</code> <code>else: print('non positif')</code> si x vaut $-5$ ?",
+           type:"qcm", choix:["Affiche 'non positif'","Affiche 'positif'","N'affiche rien","Erreur"],
+           bonneReponseIdx:0, bonneReponse:"Affiche 'non positif'",
+           correction:"$-5>0$ est faux, donc c'est la branche <code>else</code> qui s'exécute : affiche 'non positif'.", points:2},
+          {label:"e)", enonce:"Une boucle <code>while</code> s'arrête quand :",
+           type:"qcm", choix:["Sa condition devient fausse","Elle a fait $10$ tours","On appuie sur une touche","Jamais"],
+           bonneReponseIdx:0, bonneReponse:"Sa condition devient fausse",
+           correction:"Une boucle <code>while condition:</code> se répète tant que la condition est vraie, et s'arrête dès qu'elle devient fausse.", points:2},
+        ],
+        indices:["<code>range(a,b)</code> génère les entiers de a à b-1 ; une boucle <code>for</code> répète un nombre de fois connu à l'avance, une boucle <code>while</code> répète tant qu'une condition est vraie"]
+      },
+    ],
+
   },
 
   // ═══════════════════════════════
