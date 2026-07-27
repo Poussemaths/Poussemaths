@@ -6050,14 +6050,22 @@ const EXERCICES = {
         indices:["$hypoténuse^2 = côté_1^2 + côté_2^2$"]
       },
       {
-        id:"thales_4_3", titre:"Pythagore — réciproque et applications", niveau:"Moyen", points_total:10,
+        id:"thales_4_3", titre:"Pythagore — réciproque et applications", niveau:"Moyen", points_total:16,
         questions:[
           {label:"a)", enonce:"Triangle : côtés $9$, $40$, $41$. Rectangle ?",
-           type:"libre", correction:"$9^2+40^2=81+1600=1681=41^2$ ✓ Rectangle.", points:3},
+           type:"qcm", choix:["Oui, rectangle","Non","Impossible à savoir","Seulement si $41$ est l'hypoténuse et c'est faux"],
+           bonneReponseIdx:0, bonneReponse:"Oui, rectangle",
+           correction:"$9^2+40^2=81+1600=1681=41^2$ ✓ Rectangle.", points:3},
           {label:"b)", enonce:"Losange de diagonales $10$ et $24$ cm. Périmètre ?",
            type:"libre", correction:"Côté $=\\sqrt{5^2+12^2}=13$ cm. $P=4\\times13=52$ cm.", points:4},
-          {label:"c)", enonce:"Un écran $16/9$ a une diagonale de $32$ cm. Largeur et hauteur ?",
-           type:"libre", correction:"$(16k)^2+(9k)^2=32^2 \\Rightarrow 337k^2=1024 \\Rightarrow k\\approx1{,}744$. $L\\approx27{,}9$ cm, $H\\approx15{,}7$ cm.", points:3},
+          {label:"c)", enonce:"Un écran $16/9$ a une diagonale de $32$ cm. Quelle est sa largeur (arrondie au dixième) ?",
+           type:"libre", correction:"$(16k)^2+(9k)^2=32^2 \\Rightarrow 337k^2=1024 \\Rightarrow k\\approx1{,}744$. $L\\approx27{,}9$ cm", points:3},
+          {label:"d)", enonce:"Triangle : côtés $7$, $24$, $25$. Rectangle ?",
+           type:"qcm", choix:["Oui, rectangle","Non","Impossible à savoir","Seulement si l'angle est aigu"],
+           bonneReponseIdx:0, bonneReponse:"Oui, rectangle",
+           correction:"$7^2+24^2=49+576=625=25^2$ ✓ Rectangle.", points:3},
+          {label:"e)", enonce:"Losange de diagonales $12$ et $16$ cm. Périmètre ?",
+           type:"libre", correction:"Côté $=\\sqrt{6^2+8^2}=10$ cm. $P=4\\times10=40$ cm.", points:3},
         ],
         indices:["Dans un losange, les diagonales se coupent perpendiculairement en leur milieu"]
       },
@@ -6077,7 +6085,7 @@ const EXERCICES = {
         indices:["Coefficient multiplicateur : $+t\\% \\Rightarrow \\times(1+t/100)$, $-t\\% \\Rightarrow \\times(1-t/100)$"]
       },
       {
-        id:"prop_4_1", titre:"Évolutions successives", niveau:"Difficile", points_total:10,
+        id:"prop_4_1", titre:"Évolutions successives", niveau:"Difficile", points_total:16,
         questions:[
           {label:"a)", enonce:"Hausse de $5\\%$ puis hausse de $3\\%$. Taux global ?",
            type:"libre", correction:"$1{,}05\\times1{,}03=1{,}0815$ soit $+8{,}15\\%$", points:3},
@@ -6085,6 +6093,10 @@ const EXERCICES = {
            type:"libre", correction:"$1{,}20\\times(1+t)=1 \\Rightarrow t=-\\dfrac{1}{6}\\approx-16{,}7\\%$", points:4},
           {label:"c)", enonce:"Capital de $5\\,000$€ placé à $4\\%$/an. Valeur après $3$ ans ?",
            type:"libre", correction:"$5000\\times(1{,}04)^3\\approx5000\\times1{,}1249\\approx5\\,625$€", points:3},
+          {label:"d)", enonce:"Baisse de $10\\%$ puis baisse de $5\\%$. Taux global ?",
+           type:"libre", correction:"$0{,}90\\times0{,}95=0{,}855$ soit $-14{,}5\\%$", points:3},
+          {label:"e)", enonce:"Capital de $3\\,000$€ placé à $2\\%$/an. Valeur après $2$ ans ?",
+           type:"libre", correction:"$3000\\times(1{,}02)^2\\approx3000\\times1{,}0404\\approx3\\,121$€", points:3},
         ],
         indices:["Évolutions successives : multiplier les coefficients"]
       },
@@ -6104,7 +6116,7 @@ const EXERCICES = {
         indices:["Probabilité = nombre de cas favorables ÷ nombre de cas possibles"]
       },
       {
-        id:"proba_4_1", titre:"Probabilités — fréquences et dénombrement", niveau:"Facile", points_total:8,
+        id:"proba_4_1", titre:"Probabilités — fréquences et dénombrement", niveau:"Facile", points_total:14,
         questions:[
           {label:"1.", enonce:"On lance un dé à $6$ faces. $P(\\text{multiple de 3})$ ?",
            type:"qcm", choix:["$\\dfrac{1}{6}$","$\\dfrac{1}{3}$","$\\dfrac{1}{2}$","$\\dfrac{2}{3}$"],
@@ -6114,6 +6126,10 @@ const EXERCICES = {
            type:"libre", correction:"$P=1-\\dfrac{5}{10}=\\dfrac{1}{2}$", points:2},
           {label:"3.", enonce:"On tire $2$ cartes d'un jeu de $32$. $P(\\text{2 as})$ en tirage sans remise ?",
            type:"libre", correction:"$P=\\dfrac{4}{32}\\times\\dfrac{3}{31}=\\dfrac{12}{992}=\\dfrac{3}{248}$", points:4},
+          {label:"4.", enonce:"On lance un dé à $6$ faces. $P(\\text{obtenir au moins 4})$ ?",
+           type:"libre", correction:"Favorables : $\\{4,5,6\\}$. $P=\\dfrac{3}{6}=\\dfrac{1}{2}$", points:3},
+          {label:"5.", enonce:"Urne : $6$ rouges, $4$ bleues. On tire $2$ boules sans remise. $P(\\text{2 rouges})$ ?",
+           type:"libre", correction:"$P=\\dfrac{6}{10}\\times\\dfrac{5}{9}=\\dfrac{30}{90}=\\dfrac{1}{3}$", points:3},
         ],
         indices:["$P(A)+P(\\bar{A})=1$ ; sans remise : l'urne change après chaque tirage"]
       },
