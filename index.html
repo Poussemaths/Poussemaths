@@ -4061,7 +4061,35 @@ const EXERCICES = {
       },
     ],
 
-    
+    "Algorithmique et programmation": [
+      {
+        id:"algo_3_1", titre:"Structuration de programmes et fonctions simples", niveau:"Difficile", points_total:10,
+        questions:[
+          {label:"a)", enonce:"Une fonction en programmation sert à :",
+           type:"qcm", choix:["Regrouper des instructions réutilisables sous un nom","Afficher uniquement du texte","Arrêter tout le programme","Stocker une seule valeur"],
+           bonneReponseIdx:0, bonneReponse:"Regrouper des instructions réutilisables sous un nom",
+           correction:"Une fonction regroupe des instructions sous un nom, pour les réutiliser sans les réécrire.", points:2},
+          {label:"b)", enonce:"Programme : fonction double(x) renvoie x$\\times2$. Que renvoie double($7$) ?",
+           type:"qcm", choix:["$14$","$9$","$7$","$2$"],
+           bonneReponseIdx:0, bonneReponse:"$14$",
+           correction:"double($7$) calcule $7\\times2=14$.", points:2},
+          {label:"c)", enonce:"Boucles imbriquées : « Pour i de $1$ à $3$ : Pour j de $1$ à $2$ : afficher(i,j) ». Combien de fois l'instruction « afficher » est-elle exécutée ?",
+           type:"qcm", choix:["$6$","$3$","$2$","$5$"],
+           bonneReponseIdx:0, bonneReponse:"$6$",
+           correction:"La boucle extérieure fait $3$ tours, la boucle intérieure $2$ tours à chaque fois : $3\\times2=6$ exécutions.", points:2},
+          {label:"d)", enonce:"Condition composée : si (x$>0$ ET x$<100$) alors ... Pour x$=150$, la condition est :",
+           type:"qcm", choix:["Fausse","Vraie","Indéterminée","Erreur"],
+           bonneReponseIdx:0, bonneReponse:"Fausse",
+           correction:"$150>0$ est vrai mais $150<100$ est faux : la condition ET globale est donc fausse.", points:2},
+          {label:"e)", enonce:"Une boucle conditionnelle « tant que » répète tant que sa condition est :",
+           type:"qcm", choix:["Vraie","Fausse","Nulle","Aléatoire"],
+           bonneReponseIdx:0, bonneReponse:"Vraie",
+           correction:"Une boucle « tant que condition » s'exécute tant que la condition reste vraie.", points:2},
+        ],
+        indices:["Une fonction regroupe des instructions réutilisables ; condition ET : les deux tests doivent être vrais ; boucles imbriquées : multiplier le nombre de tours"]
+      },
+    ],
+
   },
 
   "2nde": {
@@ -5628,6 +5656,35 @@ const EXERCICES = {
         indices:["$P(A) \\in [0\\,;\\,1]$ ; $P(A)+P(\\bar{A})=1$"]
       },
     ],
+
+    "Pensée informatique": [
+      {
+        id:"algo_5_1", titre:"Variables et boucles simples", niveau:"Facile", points_total:10,
+        questions:[
+          {label:"a)", enonce:"Dans un programme par blocs, une « variable » sert à :",
+           type:"qcm", choix:["Stocker une valeur qui peut changer pendant le programme","Afficher un dessin","Arrêter le programme","Trier des blocs"],
+           bonneReponseIdx:0, bonneReponse:"Stocker une valeur qui peut changer pendant le programme",
+           correction:"Une variable est un espace nommé qui stocke une valeur pouvant évoluer au cours du programme.", points:2},
+          {label:"b)", enonce:"Un programme demande à l'utilisateur son âge et le stocke dans une variable « age ». Cette action est :",
+           type:"qcm", choix:["Une entrée (donnée saisie par l'utilisateur)","Une sortie","Une boucle","Une variable constante"],
+           bonneReponseIdx:0, bonneReponse:"Une entrée (donnée saisie par l'utilisateur)",
+           correction:"Une donnée fournie par l'utilisateur au programme est une entrée.", points:2},
+          {label:"c)", enonce:"Une boucle « répéter $6$ fois : avancer de $10$ » fait avancer le personnage de :",
+           type:"qcm", choix:["$60$ pas","$10$ pas","$6$ pas","$16$ pas"],
+           bonneReponseIdx:0, bonneReponse:"$60$ pas",
+           correction:"$6$ répétitions de $10$ pas : $6\\times10=60$ pas au total.", points:2},
+          {label:"d)", enonce:"Une boucle « inconditionnelle » (répéter $n$ fois) se caractérise par :",
+           type:"qcm", choix:["Elle se répète un nombre de fois fixé à l'avance","Elle se répète tant qu'une condition est vraie","Elle ne s'exécute jamais","Elle s'arrête au hasard"],
+           bonneReponseIdx:0, bonneReponse:"Elle se répète un nombre de fois fixé à l'avance",
+           correction:"Une boucle inconditionnelle répète un nombre de fois connu d'avance (contrairement à une boucle conditionnelle qui dépend d'un test).", points:2},
+          {label:"e)", enonce:"Un programme initialise une variable « score » à $0$, puis l'augmente de $1$ à chaque bonne réponse. Après $3$ bonnes réponses, que vaut « score » ?",
+           type:"qcm", choix:["$3$","$0$","$1$","$4$"],
+           bonneReponseIdx:0, bonneReponse:"$3$",
+           correction:"score part de $0$ et augmente de $1$ à chaque bonne réponse : après $3$ bonnes réponses, score vaut $3$.", points:2},
+        ],
+        indices:["Variable = valeur qui peut changer ; entrée = donnée fournie ; boucle inconditionnelle = nombre de répétitions fixé à l'avance"]
+      },
+    ],
   },
 
   // ═══════════════════════════════
@@ -5899,6 +5956,34 @@ const EXERCICES = {
       },
     ],
 
+    "Algorithmique et programmation": [
+      {
+        id:"algo_4_1", titre:"Boucles et conditions", niveau:"Moyen", points_total:10,
+        questions:[
+          {label:"a)", enonce:"Programme : si (note $\\geq10$) alors afficher « Admis » sinon afficher « Recalé ». Pour note $=8$, que s'affiche-t-il ?",
+           type:"qcm", choix:["Recalé","Admis","Rien","Erreur"],
+           bonneReponseIdx:0, bonneReponse:"Recalé",
+           correction:"$8\\geq10$ est faux, donc la branche « sinon » s'exécute : affiche « Recalé ».", points:2},
+          {label:"b)", enonce:"Une boucle « Pour i de $1$ à $5$ : afficher i » affiche combien de nombres ?",
+           type:"qcm", choix:["$5$","$4$","$6$","$1$"],
+           bonneReponseIdx:0, bonneReponse:"$5$",
+           correction:"La boucle affiche $1,2,3,4,5$ : $5$ nombres au total.", points:2},
+          {label:"c)", enonce:"Boucle « tant que compteur $<10$ : compteur $=$ compteur $+1$ ». Elle s'arrête quand :",
+           type:"qcm", choix:["compteur atteint $10$","compteur atteint $0$","Après $10$ secondes","Jamais"],
+           bonneReponseIdx:0, bonneReponse:"compteur atteint $10$",
+           correction:"La boucle s'arrête dès que la condition compteur $<10$ devient fausse, c'est-à-dire quand compteur atteint $10$.", points:2},
+          {label:"d)", enonce:"Programme : x$=5$ ; si (x$>0$ ET x$<10$) alors afficher « dans l'intervalle ». Pour x$=5$, que se passe-t-il ?",
+           type:"qcm", choix:["Affiche « dans l'intervalle »","N'affiche rien","Erreur","Affiche $5$"],
+           bonneReponseIdx:0, bonneReponse:"Affiche « dans l'intervalle »",
+           correction:"$5>0$ et $5<10$ sont vraies toutes les deux, donc la condition composée est vraie : le message s'affiche.", points:2},
+          {label:"e)", enonce:"Combien de tours fait la boucle « Pour i de $0$ à $4$ » ?",
+           type:"qcm", choix:["$5$","$4$","$3$","$6$"],
+           bonneReponseIdx:0, bonneReponse:"$5$",
+           correction:"La boucle passe par $i=0,1,2,3,4$ : $5$ valeurs, donc $5$ tours.", points:2},
+        ],
+        indices:["Condition composée : ET exige que les deux tests soient vrais ; une boucle « tant que » s'arrête quand sa condition devient fausse"]
+      },
+    ],
 
   },
 
@@ -7244,6 +7329,35 @@ const EXERCICES = {
            type:"libre", correction:"$\\dfrac{16}{4^2}=\\dfrac{16}{16}=1$", points:1},
         ],
         indices:["Bienaymé-Tchebychev : $P(|X-\\mu|\\geq\\delta)\\leq\\dfrac{V(X)}{\\delta^2}$ ; pour un échantillon : $P(|M_n-\\mu|\\geq\\delta)\\leq\\dfrac{V(X)}{n\\delta^2}\\to0$ quand $n\\to+\\infty$"]
+      },
+    ],
+
+    "Algorithmique — programmation modulaire et listes": [
+      {
+        id:"algo_t_1", titre:"Listes en compréhension et fonctions", niveau:"Difficile", points_total:10,
+        questions:[
+          {label:"a)", enonce:"Une liste en compréhension <code>[i**2 for i in range(4)]</code> donne :",
+           type:"qcm", choix:["[0, 1, 4, 9]","[1, 4, 9, 16]","[0, 1, 2, 3]","[4]"],
+           bonneReponseIdx:0, bonneReponse:"[0, 1, 4, 9]",
+           correction:"<code>range(4)</code> donne $0,1,2,3$ ; leurs carrés sont $0,1,4,9$.", points:2},
+          {label:"b)", enonce:"En programmation modulaire, appeler une fonction déjà définie ailleurs permet de :",
+           type:"qcm", choix:["Réutiliser du code sans le réécrire","Ralentir le programme","Créer des erreurs","Supprimer des variables"],
+           bonneReponseIdx:0, bonneReponse:"Réutiliser du code sans le réécrire",
+           correction:"La programmation modulaire découpe un programme en fonctions réutilisables, évitant de dupliquer du code.", points:2},
+          {label:"c)", enonce:"<code>somme = 0</code> puis <code>for x in [3, 5, 2]: somme = somme + x</code>. Quelle est la valeur finale de somme ?",
+           type:"qcm", choix:["$10$","$3$","$5$","$0$"],
+           bonneReponseIdx:0, bonneReponse:"$10$",
+           correction:"$0+3+5+2=10$.", points:2},
+          {label:"d)", enonce:"Pour parcourir tous les éléments d'une liste L en accédant à leur indice, on utilise typiquement :",
+           type:"qcm", choix:["for i in range(len(L)):","for i in L:","while True:","if L:"],
+           bonneReponseIdx:0, bonneReponse:"for i in range(len(L)):",
+           correction:"<code>for i in range(len(L))</code> donne accès à l'indice i (utilisable pour lire ou modifier <code>L[i]</code>).", points:2},
+          {label:"e)", enonce:"<code>L = [4, 8, 15, 16]</code>. Que vaut <code>L[-1]</code> (indice négatif) ?",
+           type:"qcm", choix:["$16$","$4$","$15$","$-1$"],
+           bonneReponseIdx:0, bonneReponse:"$16$",
+           correction:"L'indice $-1$ désigne le dernier élément de la liste : $16$.", points:2},
+        ],
+        indices:["Liste en compréhension : <code>[expr for i in range(n)]</code> ; <code>L[-1]</code> = dernier élément"]
       },
     ],
 
