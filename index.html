@@ -5343,7 +5343,7 @@ const EXERCICES = {
         indices:["Additionner un nombre négatif revient à soustraire sa valeur absolue"]
       },
       {
-        id:"rel_5_1", titre:"Nombres relatifs — comprendre", niveau:"Facile", points_total:8,
+        id:"rel_5_1", titre:"Nombres relatifs — comprendre", niveau:"Facile", points_total:12,
         questions:[
           {label:"1.", enonce:"Lequel est le plus grand : $-3$ ou $-7$ ?",
            type:"qcm", choix:["$-7$","$-3$","Ils sont égaux","On ne peut pas comparer"],
@@ -5353,11 +5353,15 @@ const EXERCICES = {
            type:"libre", correction:"$(-5)+3=-2$ ; $(-4)-(-7)=-4+7=3$", points:3},
           {label:"3.", enonce:"Calcule : $(-3) \\times (-4)$ et $(-6) \\times 5$",
            type:"libre", correction:"$(-3)\\times(-4)=12$ ; $(-6)\\times5=-30$", points:3},
+          {label:"4.", enonce:"Calcule : $(-8) + (-5)$",
+           type:"libre", correction:"$-13$", points:2},
+          {label:"5.", enonce:"Calcule : $7 - (-9)$",
+           type:"libre", correction:"$7+9=16$", points:2},
         ],
         indices:["$(-) \\times (-) = (+)$ ; $(-) \\times (+) = (-)$ ; $-(−a)=+a$"]
       },
       {
-        id:"rel_5_2", titre:"Relatifs — opérations et repère", niveau:"Moyen", points_total:10,
+        id:"rel_5_2", titre:"Relatifs — opérations et repère", niveau:"Moyen", points_total:12,
         questions:[
           {label:"1.", enonce:"Place les points $A(-3\\,;\\,2)$ et $B(4\\,;\\,-1)$ dans un repère. Quelle est l'abscisse de $A$ ?",
            type:"libre", correction:"Abscisse de $A = -3$", points:2},
@@ -5369,23 +5373,29 @@ const EXERCICES = {
            type:"qcm", choix:["$-4$","$4$","$-36$","$36$"],
            bonneReponseIdx:1, bonneReponse:"$4$",
            correction:"$(-12)\\div(-3) = 4$ (négatif ÷ négatif = positif)", points:2},
+          {label:"5.", enonce:"Quelle est l'ordonnée du point $B(4\\,;\\,-1)$ ?",
+           type:"libre", correction:"Ordonnée de $B = -1$", points:2},
         ],
         indices:["Milieu $= \\left(\\dfrac{x_A+x_B}{2}\\,;\\,\\dfrac{y_A+y_B}{2}\\right)$"]
       },
       {
-        id:"rel_5_3", titre:"Relatifs — problèmes", niveau:"Moyen", points_total:10,
+        id:"rel_5_3", titre:"Relatifs — problèmes", niveau:"Moyen", points_total:16,
         questions:[
           {label:"a)", enonce:"Température : $-8°C$ la nuit, $+5°C$ le jour. Amplitude thermique ?",
            type:"libre", correction:"$5-(-8)=13°C$", points:3},
           {label:"b)", enonce:"Compte bancaire : $-120$€. Dépôt de $350$€, puis retrait de $80$€. Solde final ?",
            type:"libre", correction:"$-120+350-80=150$€", points:3},
           {label:"c)", enonce:"Ascenseur : part du $3$ème sous-sol ($-3$), monte $7$ étages. Où arrive-t-il ?",
-           type:"libre", correction:"$-3+7=4$ème étage", points:4},
+           type:"libre", correction:"$-3+7=4$", points:4},
+          {label:"d)", enonce:"Température : $-6°C$ le matin, elle chute de $4°C$ dans la nuit suivante. Quelle température fait-il alors ?",
+           type:"libre", correction:"$-6-4=-10°C$", points:3},
+          {label:"e)", enonce:"Compte bancaire à $80$€. Trois retraits de $30$€ chacun. Solde final ?",
+           type:"libre", correction:"$80-3\\times30=-10$€", points:3},
         ],
         indices:["Les relatifs servent à modéliser des situations avec des valeurs positives ET négatives"]
       },
       {
-        id:"rel_5_4", titre:"Calcul littéral avec relatifs", niveau:"Difficile", points_total:10,
+        id:"rel_5_4", titre:"Calcul littéral avec relatifs", niveau:"Difficile", points_total:16,
         questions:[
           {label:"a)", enonce:"Développe et réduis : $3(x+2) - 2(x-1)$",
            type:"libre", correction:"$3x+6-2x+2=x+8$", points:3},
@@ -5393,11 +5403,15 @@ const EXERCICES = {
            type:"libre", correction:"$2(-2)^2-3(-2)+1=8+6+1=15$", points:4},
           {label:"c)", enonce:"Résous : $-2x+5=11$",
            type:"libre", correction:"$-2x=6 \\Rightarrow x=-3$", points:3},
+          {label:"d)", enonce:"Développe et réduis : $4(x-3) + 2(x+5)$",
+           type:"libre", correction:"$4x-12+2x+10=6x-2$", points:3},
+          {label:"e)", enonce:"Résous : $-3x-4=8$",
+           type:"libre", correction:"$-3x=12 \\Rightarrow x=-4$", points:3},
         ],
         indices:["Attention au signe lors du développement : $-2(x-1) = -2x+2$"]
       },
       {
-        id:"rel_5_5", titre:"Relatifs — brevet", niveau:"Difficile", points_total:12,
+        id:"rel_5_5", titre:"Relatifs — brevet", niveau:"Difficile", points_total:19,
         questions:[
           {label:"1.", enonce:"La température à l'extérieur est $-15°C$. À l'intérieur, il fait $22°C$ de plus. Température intérieure ?",
            type:"libre", correction:"$-15+22=7°C$", points:3},
@@ -5407,6 +5421,10 @@ const EXERCICES = {
            type:"qcm", choix:["Vrai","Faux","Seulement si $a>0$","Seulement si $a<0$"],
            bonneReponseIdx:0, bonneReponse:"Vrai",
            correction:"$(-a)^2 = (-a)\\times(-a) = a^2$ ✓ toujours vrai.", points:4},
+          {label:"4.", enonce:"La température est $-6°C$ à midi. Elle baisse de $9°C$ dans la soirée. Température le soir ?",
+           type:"libre", correction:"$-6-9=-15°C$", points:3},
+          {label:"5.", enonce:"Simplifie : $\\dfrac{(-4)^2 \\times (-5)}{(-2)^3}$",
+           type:"libre", correction:"$\\dfrac{16 \\times (-5)}{-8}=\\dfrac{-80}{-8}=10$", points:4},
         ],
         indices:["$(-a)^2=a^2$ toujours ; $(-a)^3=-a^3$ toujours"]
       },
