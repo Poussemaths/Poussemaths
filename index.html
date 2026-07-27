@@ -4758,23 +4758,29 @@ const EXERCICES = {
 
     "Proportionnalité": [
       {
-        id:"prop_6_1", titre:"Reconnaître une situation de proportionnalité", niveau:"Facile", points_total:8,
+        id:"prop_6_1", titre:"Reconnaître une situation de proportionnalité", niveau:"Facile", points_total:10,
         questions:[
           {label:"1.", enonce:"Prix de $1$ kg de pommes : $2$€. Le tableau prix/quantité est-il proportionnel ?",
            type:"qcm", choix:["Oui","Non","On ne peut pas savoir","Seulement pour les entiers"],
            bonneReponseIdx:0, bonneReponse:"Oui",
            correction:"Oui — quand la quantité double, le prix double. $1$ kg=$2$€, $2$ kg=$4$€...", points:2},
           {label:"2.", enonce:"Complète : $\\dfrac{2}{5} = \\dfrac{?}{20}$",
-           type:"libre", correction:"$\\dfrac{2}{5} = \\dfrac{8}{20}$ (on multiplie par $4$)", points:2},
+           type:"qcm", choix:["$4$","$6$","$8$","$10$"],
+           bonneReponseIdx:2, bonneReponse:"$8$",
+           correction:"On multiplie par $4$ (car $20 \\div 5 = 4$) : $2\\times4=8$.", points:2},
           {label:"3.", enonce:"$4$ cahiers coûtent $6$€. Prix de $7$ cahiers ?",
            type:"libre", correction:"Prix unitaire $= 1{,}50$€. $7 \\times 1{,}50 = 10{,}50$€", points:2},
           {label:"4.", enonce:"Coefficient de proportionnalité : $3$ m → $18$ personnes. Coefficient = ?",
            type:"libre", correction:"$18 ÷ 3 = 6$", points:2},
+          {label:"5.", enonce:"Complète : $\\dfrac{3}{7} = \\dfrac{?}{28}$",
+           type:"qcm", choix:["$9$","$12$","$15$","$21$"],
+           bonneReponseIdx:1, bonneReponse:"$12$",
+           correction:"On multiplie par $4$ (car $28 \\div 7 = 4$) : $3\\times4=12$.", points:2},
         ],
         indices:["Proportionnel : quand on multiplie par $k$, l'autre quantité est aussi multipliée par $k$"]
       },
       {
-        id:"prop_6_2", titre:"Pourcentages simples", niveau:"Facile", points_total:8,
+        id:"prop_6_2", titre:"Pourcentages simples", niveau:"Facile", points_total:10,
         questions:[
           {label:"a)", enonce:"Calcule $30\\%$ de $200$.",
            type:"libre", correction:"$200 \\times 0{,}30 = 60$", points:2},
@@ -4786,6 +4792,8 @@ const EXERCICES = {
            type:"qcm", choix:["$7$","$9$","$12$","$15$"],
            bonneReponseIdx:1, bonneReponse:"$9$",
            correction:"$60 \\times 0{,}15 = 9$", points:2},
+          {label:"e)", enonce:"Calcule $25\\%$ de $80$.",
+           type:"libre", correction:"$80 \\times 0{,}25 = 20$", points:2},
         ],
         indices:["$p\\%$ de $x = x \\times \\dfrac{p}{100}$"]
       },
@@ -4802,7 +4810,7 @@ const EXERCICES = {
         indices:["$p\\%$ de $x = x \\times \\dfrac{p}{100}$"]
       },
       {
-        id:"prop_6_3", titre:"Vitesse et proportionnalité", niveau:"Moyen", points_total:10,
+        id:"prop_6_3", titre:"Vitesse et proportionnalité", niveau:"Moyen", points_total:13,
         questions:[
           {label:"a)", enonce:"$d=v\\times t$. Un cycliste roule à $15$ km/h pendant $3$ h. Distance ?",
            type:"libre", correction:"$d = 15 \\times 3 = 45$ km", points:2},
@@ -4814,18 +4822,24 @@ const EXERCICES = {
            type:"qcm", choix:["$t=d\\times v$","$t=\\dfrac{d}{v}$","$t=\\dfrac{v}{d}$","$t=d+v$"],
            bonneReponseIdx:1, bonneReponse:"$t=\\dfrac{d}{v}$",
            correction:"$d=v\\times t$ donc $t=\\dfrac{d}{v}$", points:2},
+          {label:"e.", enonce:"Un train roule à $120$ km/h pendant $2{,}5$ h. Distance parcourue ?",
+           type:"libre", correction:"$d = 120 \\times 2{,}5 = 300$ km", points:3},
         ],
         indices:["$d = v \\times t$ ; $v = \\dfrac{d}{t}$ ; $t = \\dfrac{d}{v}$"]
       },
       {
-        id:"prop_6_4", titre:"Échelles et agrandissements", niveau:"Moyen", points_total:10,
+        id:"prop_6_4", titre:"Échelles et agrandissements", niveau:"Moyen", points_total:16,
         questions:[
           {label:"a)", enonce:"Échelle $1:50\\,000$. $4$ cm sur la carte = ? km en réel.",
            type:"libre", correction:"$4 \\times 50\\,000 = 200\\,000$ cm $= 2$ km", points:3},
           {label:"b)", enonce:"Échelle $1:200$. Un mur de $6$ m est représenté par combien de cm ?",
            type:"libre", correction:"$600 ÷ 200 = 3$ cm", points:3},
-          {label:"c)", enonce:"Un plan a l'échelle $1:100$. Une pièce fait $4$ cm × $3$ cm sur le plan. Dimensions réelles ?",
-           type:"libre", correction:"$4 \\times 100 = 400$ cm $= 4$ m et $3 \\times 100 = 300$ cm $= 3$ m", points:4},
+          {label:"c)", enonce:"Un plan a l'échelle $1:100$. Une pièce fait $4$ cm de longueur sur le plan. Longueur réelle (en m) ?",
+           type:"libre", correction:"$4 \\times 100 = 400$ cm $= 4$ m", points:3},
+          {label:"c2)", enonce:"Même plan (échelle $1:100$). La pièce fait $3$ cm de largeur sur le plan. Largeur réelle (en m) ?",
+           type:"libre", correction:"$3 \\times 100 = 300$ cm $= 3$ m", points:3},
+          {label:"d)", enonce:"Échelle $1:25\\,000$. $6$ cm sur la carte = ? km en réel.",
+           type:"libre", correction:"$6 \\times 25\\,000 = 150\\,000$ cm $= 1{,}5$ km", points:4},
         ],
         indices:["Échelle $1:n$ : $1$ cm sur le plan $= n$ cm en réel"]
       },
@@ -4879,7 +4893,7 @@ const EXERCICES = {
         indices:["Médiane = valeur du milieu après tri ; Étendue = max − min"]
       },
       {
-        id:"stat_6_2", titre:"Moyenne pondérée et tableaux", niveau:"Moyen", points_total:14,
+        id:"stat_6_2", titre:"Moyenne pondérée et tableaux", niveau:"Moyen", points_total:17,
         questions:[
           {label:"a)", enonce:"$5$ élèves ont $10$, $3$ ont $14$, $2$ ont $16$. Calcule la moyenne.",
            type:"libre", correction:"$\\dfrac{5\\times10+3\\times14+2\\times16}{10}=\\dfrac{50+42+32}{10}=\\dfrac{124}{10}=12{,}4$", points:4},
@@ -4889,11 +4903,13 @@ const EXERCICES = {
            type:"libre", correction:"Triée : $2,3,4,5,5,6,7,8,8,9$. Médiane $= \\dfrac{5+6}{2}=5{,}5$", points:3},
           {label:"d)", enonce:"$4$ élèves ont eu $8$, $6$ ont eu $12$, $10$ ont eu $15$. Calcule la moyenne.",
            type:"libre", correction:"$\\dfrac{4\\times8+6\\times12+10\\times15}{20}=\\dfrac{32+72+150}{20}=\\dfrac{254}{20}=12{,}7$", points:4},
+          {label:"e)", enonce:"Série : $4, 6, 6, 9, 10, 12, 15$. Quelle est la médiane ?",
+           type:"libre", correction:"Déjà triée ($7$ valeurs). Médiane $= 9$ (valeur centrale)", points:3},
         ],
         indices:["Moyenne pondérée $= \\dfrac{\\sum n_i x_i}{\\sum n_i}$"]
       },
       {
-        id:"stat_6_3", titre:"Diagrammes et représentations", niveau:"Moyen", points_total:14,
+        id:"stat_6_3", titre:"Diagrammes et représentations", niveau:"Moyen", points_total:17,
         questions:[
           {label:"1.", enonce:"Quel type de diagramme utilise-t-on pour montrer des parts d'un tout (ex: répartition filles/garçons) ?",
            type:"qcm", choix:["Diagramme en bâtons","Diagramme circulaire (camembert)","Courbe","Tableau"],
@@ -4905,11 +4921,15 @@ const EXERCICES = {
            type:"libre", correction:"$\\dfrac{8+12+5}{3} = \\dfrac{25}{3} \\approx 8{,}3$", points:4},
           {label:"4.", enonce:"Dans un camembert, $90$ personnes sur $360$ préfèrent le vélo. Quel angle correspond à ce secteur ?",
            type:"libre", correction:"$\\dfrac{90}{360} \\times 360° = 90°$", points:4},
+          {label:"5.", enonce:"Quel type de diagramme utilise-t-on pour suivre l'évolution d'une grandeur au cours du temps ?",
+           type:"qcm", choix:["Diagramme circulaire","Diagramme en bâtons","Courbe (diagramme en ligne)","Tableau"],
+           bonneReponseIdx:2, bonneReponse:"Courbe (diagramme en ligne)",
+           correction:"La courbe (ligne brisée) est adaptée pour montrer une évolution dans le temps.", points:3},
         ],
         indices:["Angle d'un secteur $= \\dfrac{\\text{effectif}}{\\text{total}} \\times 360°$"]
       },
       {
-        id:"stat_6_4", titre:"Statistiques — approfondissement", niveau:"Difficile", points_total:14,
+        id:"stat_6_4", titre:"Statistiques — approfondissement", niveau:"Difficile", points_total:17,
         questions:[
           {label:"a)", enonce:"Notes : $10, 12, 15, 8, 14, 11, 13$. Calcule la moyenne.",
            type:"libre", correction:"Moyenne $= \\dfrac{83}{7} \\approx 11{,}9$. Triée : $8,10,11,12,13,14,15$ → Médiane $= 12$", points:4},
@@ -4921,6 +4941,8 @@ const EXERCICES = {
            correction:"Série B — étendue plus faible = moins de disparité = plus homogène.", points:3},
           {label:"d)", enonce:"Si on multiplie toutes les valeurs d'une série par $3$, que devient l'étendue (initialement $= 5$) ?",
            type:"libre", correction:"L'étendue est aussi multipliée par $3$ : $5 \\times 3 = 15$", points:4},
+          {label:"e)", enonce:"Une série de $9$ valeurs a une moyenne de $10$. On ajoute une dixième valeur de $20$. Quelle est la nouvelle moyenne ?",
+           type:"libre", correction:"Somme initiale $=90$. Nouvelle somme $=110$. Moyenne $=110\\div10=11$", points:3},
         ],
         indices:["Ajouter $k$ à toutes les valeurs : la moyenne augmente de $k$, l'étendue ne change pas"]
       },
@@ -5652,7 +5674,9 @@ const EXERCICES = {
           {label:"1.", enonce:"$4$ stylos coûtent $6$€. Combien coûtent $10$ stylos ?",
            type:"libre", correction:"Prix unitaire $= 1{,}50$€. $10 \\times 1{,}50 = 15$€", points:2},
           {label:"2.", enonce:"Complète le tableau de proportionnalité : $\\dfrac{3}{7} = \\dfrac{?}{35}$",
-           type:"libre", correction:"$\\dfrac{3}{7} = \\dfrac{15}{35}$ (×5)", points:2},
+           type:"qcm", choix:["$10$","$12$","$15$","$21$"],
+           bonneReponseIdx:2, bonneReponse:"$15$",
+           correction:"On multiplie par $5$ (car $35 \\div 7 = 5$) : $3\\times5=15$.", points:2},
           {label:"3.", enonce:"$40\\%$ de $250$ = ?",
            type:"libre", correction:"$250 \\times 0{,}40 = 100$", points:2},
           {label:"4.", enonce:"Quel coefficient multiplicateur correspond à une réduction de $15\\%$ ?",
