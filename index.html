@@ -2856,16 +2856,18 @@ const EXERCICES = {
         indices:["Modélise la situation par $f(x)=ax+b$ puis résous l'équation ou l'inéquation"]
       },
       {
-        id:"aff_3_5", titre:"Fonctions affines — brevet", niveau:"Difficile", points_total:12,
+        id:"aff_3_5", titre:"Fonctions affines — brevet", niveau:"Difficile", points_total:20,
         questions:[
           {label:"1.", enonce:"Coût fixe $200$€ + $3$€/objet. Prix vente $8$€/objet. À partir de combien d'objets l'entreprise est-elle bénéficiaire ?",
            type:"libre", correction:"$8x > 3x+200 \\Rightarrow 5x > 200 \\Rightarrow x > 40$. Au-delà de $40$ objets.", points:4},
           {label:"2.", enonce:"Deux droites : $d_1 : y=2x+1$ et $d_2 : y=-x+7$. Intersection ?",
            type:"libre", correction:"$2x+1=-x+7 \\Rightarrow 3x=6 \\Rightarrow x=2$, $y=5$. Point $(2\\,;\\,5)$.", points:4},
           {label:"3.", enonce:"La droite passe par $A(0,-2)$ et $B(3,4)$. Donne son équation.",
-           type:"libre", correction:"$a=\\dfrac{4-(-2)}{3-0}=2$, $b=-2$. Droite : $y=2x-2$.",
-           },{label:"3b.", enonce:"Avec $y=2x-2$, calcule l'ordonnée pour $x=5$.",
+           type:"libre", correction:"$a=\\dfrac{4-(-2)}{3-0}=2$, $b=-2$. Droite : $y=2x-2$.", points:4},
+          {label:"3b.", enonce:"Avec $y=2x-2$, calcule l'ordonnée pour $x=5$.",
            type:"libre", correction:"$y=2(5)-2=8$.", points:4},
+          {label:"4.", enonce:"Détermine l'équation de la droite parallèle à $y=2x-2$ passant par le point $(0\\,;\\,5)$.",
+           type:"libre", correction:"Même coefficient directeur ($a=2$), ordonnée à l'origine $b=5$ : $y=2x+5$.", points:4},
         ],
         indices:["Bénéfice $=$ Recette $-$ Coût ; positif quand Recette $>$ Coût"]
       },
@@ -3262,14 +3264,18 @@ const EXERCICES = {
         indices:["D'après DNB — Pythagore dans un contexte réel"]
       },
       {
-        id:"pyth_3_7", titre:"Pythagore — Objectif Brevet II", niveau:"Difficile", points_total:10,
+        id:"pyth_3_7", titre:"Pythagore — Objectif Brevet II", niveau:"Difficile", points_total:19,
         questions:[
           {label:"1.", enonce:"Grand cône glacé : $32$ cL, hauteur $12$ cm. Petit cône : réduction au rapport $75\\%$. Hauteur et contenance ?",
            type:"libre", correction:"Hauteur $=12\\times0{,}75=9$ cm. Contenance $=0{,}75^3\\times32=0{,}421875\\times32\\approx13{,}5$ cL.", points:5},
           {label:"2.", enonce:"Maquette d'avion au $1:100$. Envergure maquette $=65$ cm. Envergure réelle ?",
-           type:"libre", correction:"Envergure $=65\\times100=6500$ cm $=65$ m.",
-           },{label:"2b.", enonce:"Longueur maquette $=75$ cm. Longueur réelle en m ?",
+           type:"libre", correction:"Envergure $=65\\times100=6500$ cm $=65$ m.", points:3},
+          {label:"2b.", enonce:"Longueur maquette $=75$ cm. Longueur réelle en m ?",
            type:"libre", correction:"$75\\times100=7500$ cm $=75$ m.", points:5},
+          {label:"3.", enonce:"Le grand cône glacé a un rayon de $4$ cm. Quel est le rayon du petit cône (réduction $75\\%$) ?",
+           type:"libre", correction:"$4\\times0{,}75=3$ cm", points:3},
+          {label:"4.", enonce:"Sur la même maquette d'avion (échelle $1:100$), une aile mesure $20$ cm. Longueur réelle en m ?",
+           type:"libre", correction:"$20\\times100=2000$ cm $=20$ m", points:3},
         ],
         indices:["D'après DNB — agrandissement/réduction : longueurs × $k$, aires × $k^2$, volumes × $k^3$"]
       },
@@ -3647,17 +3653,19 @@ const EXERCICES = {
         indices:["D'après DNB — translations et rotations dans le plan"]
       },
       {
-        id:"transfo_3_7", titre:"Transformations — Objectif Brevet II", niveau:"Difficile", points_total:10,
+        id:"transfo_3_7", titre:"Transformations — Objectif Brevet II", niveau:"Difficile", points_total:16,
         questions:[
-          {label:"1.", enonce:"Polygone régulier à $8$ côtés. Combien d'axes de symétrie ?",
-           type:"libre", correction:"$8$ axes de symétrie.",
-           },{label:"1b.", enonce:"Quel est l'angle de rotation minimal qui laisse ce polygone invariant ?",
+          {label:"1.", enonce:"Polygone régulier à $8$ côtés. Combien d'axes de symétrie a-t-il ?",
+           type:"qcm", choix:["$4$","$6$","$8$","Une infinité"],
+           bonneReponseIdx:2, bonneReponse:"$8$",
+           correction:"Un polygone régulier a autant d'axes de symétrie que de côtés : $8$.", points:3},
+          {label:"1b.", enonce:"Quel est l'angle de rotation minimal qui laisse ce polygone invariant ?",
            type:"libre", correction:"$\\dfrac{360°}{8}=45°$.", points:4},
           {label:"2.", enonce:"$ABCD$ carré, symétrie centrale de centre $I$. Où va $B$ ?",
            type:"qcm", choix:["En $A$","En $C$","En $D$","En $I$"],
            bonneReponseIdx:2, bonneReponse:"En $D$",
-           correction:"$I$ est le milieu de $[BD]$ aussi → $B$ va en $D$.",
-           },{label:"2b.", enonce:"Même symétrie. Où va $D$ ?",
+           correction:"$I$ est le milieu de $[BD]$ aussi → $B$ va en $D$.", points:3},
+          {label:"2b.", enonce:"Même symétrie. Où va $D$ ?",
            type:"qcm", choix:["En $A$","En $B$","En $C$","En $I$"],
            bonneReponseIdx:1, bonneReponse:"En $B$",
            correction:"$D$ va en $B$ (symétrique de $B$).", points:3},
@@ -4822,16 +4830,18 @@ const EXERCICES = {
         indices:["Échelle $1:n$ : $1$ cm sur le plan $= n$ cm en réel"]
       },
       {
-        id:"prop_6_5", titre:"Proportionnalité — brevet 6ème", niveau:"Difficile", points_total:12,
+        id:"prop_6_5", titre:"Proportionnalité — brevet 6ème", niveau:"Difficile", points_total:16,
         questions:[
           {label:"1.", enonce:"Une recette pour $4$ personnes nécessite $300$ g de farine. Quelle quantité pour $10$ personnes ?",
            type:"libre", correction:"$\\dfrac{300}{4} \\times 10 = 750$ g", points:3},
           {label:"2.", enonce:"Un magazine coûte $3{,}50$€. Avec $24{,}50$€, combien peut-on acheter de magazines ?",
            type:"libre", correction:"$24{,}50 ÷ 3{,}50 = 7$ magazines", points:4},
           {label:"3.", enonce:"Un robinet remplit un réservoir de $180$ L en $45$ min. Quel est son débit en L/min ?",
-           type:"libre", correction:"Débit $= 180÷45 = 4$ L/min.",
-           },{label:"c2.", enonce:"Avec ce débit ($4$ L/min), combien de temps pour remplir $240$ L ?",
-           type:"libre", correction:"$240÷4 = 60$ min.", points:5},
+           type:"libre", correction:"Débit $= 180÷45 = 4$ L/min.", points:3},
+          {label:"4.", enonce:"Avec ce débit ($4$ L/min), combien de temps pour remplir $240$ L ?",
+           type:"libre", correction:"$240÷4 = 60$ min.", points:3},
+          {label:"5.", enonce:"Avec ce même débit ($4$ L/min), combien de temps (en min) pour remplir un réservoir de $500$ L ?",
+           type:"libre", correction:"$500÷4 = 125$ min.", points:3},
         ],
         indices:["Passage par l'unité : trouve d'abord la valeur pour $1$, puis multiplie"]
       },
@@ -5001,7 +5011,7 @@ const EXERCICES = {
 
     "Multiples et diviseurs": [
       {
-        id:"div_6_1", titre:"Multiples et diviseurs", niveau:"Facile", points_total:8,
+        id:"div_6_1", titre:"Multiples et diviseurs", niveau:"Facile", points_total:12,
         questions:[
           {label:"1.", enonce:"$24$ est-il divisible par $3$ ?",
            type:"qcm", choix:["Oui, car $2+4=6$","Non","Oui, car $24$ est pair","Non, car $24>3$"],
@@ -5011,11 +5021,11 @@ const EXERCICES = {
            type:"libre", correction:"$1, 2, 3, 4, 6, 9, 12, 18, 36$", points:3},
           {label:"3.", enonce:"$378$ est-il divisible par $2$ ?",
            type:"qcm", choix:["Oui","Non"], bonneReponseIdx:0, bonneReponse:"Oui",
-           correction:"Dernier chiffre $=8$ pair → divisible par $2$.",
-           },{label:"3b.", enonce:"$378$ est-il divisible par $3$ ?",
+           correction:"Dernier chiffre $=8$ pair → divisible par $2$.", points:2},
+          {label:"3b.", enonce:"$378$ est-il divisible par $3$ ?",
            type:"qcm", choix:["Oui","Non"], bonneReponseIdx:0, bonneReponse:"Oui",
-           correction:"$3+7+8=18$ divisible par $3$ → oui.",
-           },{label:"3c.", enonce:"$378$ est-il divisible par $9$ ?",
+           correction:"$3+7+8=18$ divisible par $3$ → oui.", points:2},
+          {label:"3c.", enonce:"$378$ est-il divisible par $9$ ?",
            type:"qcm", choix:["Oui","Non"], bonneReponseIdx:0, bonneReponse:"Oui",
            correction:"Par $2$ : oui (chiffre pair). Par $3$ : $3+7+8=18$ oui. Par $9$ : $18\\div9=2$ oui.", points:3},
         ],
