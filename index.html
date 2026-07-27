@@ -4556,7 +4556,7 @@ const EXERCICES = {
         indices:["Un nombre à 5 chiffres : de gauche à droite → dizaines de mille, milliers, centaines, dizaines, unités"]
       },
       {
-        id:"nb_6_2", titre:"Nombres décimaux — lire et comparer", niveau:"Facile", points_total:8,
+        id:"nb_6_2", titre:"Nombres décimaux — lire et comparer", niveau:"Facile", points_total:10,
         questions:[
           {label:"a)", enonce:"Range dans l'ordre croissant : $3{,}07$ ; $3{,}7$ ; $3{,}007$ ; $3{,}70$",
            type:"libre", correction:"$3{,}007 < 3{,}07 < 3{,}7 = 3{,}70$", points:2},
@@ -4568,11 +4568,13 @@ const EXERCICES = {
            correction:"$4{,}536$ : unités=$4$, dixièmes=$5$, **centièmes=$3$**, millièmes=$6$", points:2},
           {label:"d)", enonce:"Arrondi à l'unité : $7{,}63$",
            type:"libre", correction:"$8$ (car $7{,}63 > 7{,}5$)", points:2},
+          {label:"e)", enonce:"Quel est le plus grand des deux nombres $5{,}09$ et $5{,}9$ ?",
+           type:"libre", correction:"$5{,}9$", points:2},
         ],
         indices:["Pour comparer des décimaux, aligner les virgules et comparer chiffre par chiffre"]
       },
       {
-        id:"nb_6_3", titre:"Priorités opératoires", niveau:"Moyen", points_total:10,
+        id:"nb_6_3", titre:"Priorités opératoires", niveau:"Moyen", points_total:12,
         questions:[
           {label:"1.", enonce:"Calcule en respectant les priorités : $3 + 4 \\times 2$",
            type:"qcm", choix:["$14$","$11$","$24$","$10$"],
@@ -4586,6 +4588,8 @@ const EXERCICES = {
            type:"qcm", choix:["$(5+2) \\times 3 = 21$","$5 + (2 \\times 3) = 11$","Les deux donnent le même résultat","$5 \\times 2 + 3 = 13$"],
            bonneReponseIdx:1, bonneReponse:"$5 + (2 \\times 3) = 11$",
            correction:"On fait la multiplication $2\\times3=6$ avant l'addition.", points:2},
+          {label:"5.", enonce:"Calcule : $(8-3) \\times (6-4)$",
+           type:"libre", correction:"$5 \\times 2 = 10$", points:2},
         ],
         indices:["Ordre : Parenthèses → Puissances → × et ÷ → + et −"]
       },
@@ -4602,7 +4606,7 @@ const EXERCICES = {
         indices:["Ordre : Parenthèses → × et ÷ → + et −"]
       },
       {
-        id:"nb_6_4", titre:"Fractions — comprendre et calculer", niveau:"Moyen", points_total:10,
+        id:"nb_6_4", titre:"Fractions — comprendre et calculer", niveau:"Moyen", points_total:12,
         questions:[
           {label:"a)", enonce:"Écris $\\dfrac{3}{4}$ en nombre décimal.",
            type:"libre", correction:"$3 \\div 4 = 0{,}75$", points:2},
@@ -4614,11 +4618,13 @@ const EXERCICES = {
            type:"qcm", choix:["$\\dfrac{1}{2}$","$\\dfrac{1}{4}$","$\\dfrac{2}{5}$","$\\dfrac{1}{3}$"],
            bonneReponseIdx:1, bonneReponse:"$\\dfrac{1}{4}$",
            correction:"$0{,}25 = \\dfrac{25}{100} = \\dfrac{1}{4}$", points:2},
+          {label:"e)", enonce:"Calcule : $\\dfrac{3}{5} - \\dfrac{1}{5}$",
+           type:"libre", correction:"$\\dfrac{2}{5}$", points:2},
         ],
         indices:["Pour comparer des fractions, convertis-les en décimaux"]
       },
       {
-        id:"nb_6_5", titre:"Proportionnalité — brevet niveau 6ème", niveau:"Difficile", points_total:12,
+        id:"nb_6_5", titre:"Proportionnalité — brevet niveau 6ème", niveau:"Difficile", points_total:19,
         questions:[
           {label:"1.", enonce:"$3$ stylos coûtent $4{,}50$€. Combien coûtent $7$ stylos ?",
            type:"libre", correction:"Prix unitaire $= 1{,}50$€. $7 \\times 1{,}50 = 10{,}50$€", points:3},
@@ -4626,6 +4632,10 @@ const EXERCICES = {
            type:"libre", correction:"$d = 90 \\times 2{,}5 = 225$ km", points:4},
           {label:"3.", enonce:"Dans une classe de $30$ élèves, $18$ sont des filles. Quel pourcentage de filles ?",
            type:"libre", correction:"$\\dfrac{18}{30} \\times 100 = 60\\%$", points:5},
+          {label:"4.", enonce:"Une recette pour $4$ personnes utilise $250$ g de farine. Quelle quantité de farine faut-il pour $6$ personnes ?",
+           type:"libre", correction:"$250 \\div 4 \\times 6 = 375$ g", points:3},
+          {label:"5.", enonce:"Un robinet remplit $15$ L en $3$ minutes. Combien de litres remplit-il en $8$ minutes ?",
+           type:"libre", correction:"Débit $=5$ L/min. $5 \\times 8 = 40$ L", points:4},
         ],
         indices:["Dans un tableau de proportionnalité, on multiplie ou divise par le même nombre"]
       },
@@ -4645,7 +4655,7 @@ const EXERCICES = {
         indices:["Rectangle : aire $=L\\times l$, périmètre $=2\\times(L+l)$. Triangle rectangle : aire $=\\dfrac{a\\times b}{2}$"]
       },
       {
-        id:"geo_6_1", titre:"Périmètres — reconnaître et calculer", niveau:"Facile", points_total:8,
+        id:"geo_6_1", titre:"Périmètres — reconnaître et calculer", niveau:"Facile", points_total:10,
         questions:[
           {label:"1.", enonce:"Quelle est la formule du périmètre d'un rectangle ?",
            type:"qcm", choix:["$l \\times L$","$2(l+L)$","$4 \\times l$","$l + L$"],
@@ -4657,11 +4667,13 @@ const EXERCICES = {
            type:"libre", correction:"$P = 4 \\times 7 = 28$ cm", points:2},
           {label:"4.", enonce:"Un rectangle a un périmètre de $36$ cm et une largeur de $8$ cm. Quelle est sa longueur ?",
            type:"libre", correction:"$2(l+8)=36 \\Rightarrow l+8=18 \\Rightarrow l=10$ cm", points:2},
+          {label:"5.", enonce:"Périmètre d'un triangle équilatéral de côté $6$ cm ?",
+           type:"libre", correction:"$P = 3 \\times 6 = 18$ cm", points:2},
         ],
         indices:["Périmètre = somme de tous les côtés"]
       },
       {
-        id:"geo_6_2", titre:"Aires — calculer", niveau:"Facile", points_total:8,
+        id:"geo_6_2", titre:"Aires — calculer", niveau:"Facile", points_total:10,
         questions:[
           {label:"a)", enonce:"Aire d'un rectangle $8$ cm × $5$ cm ?",
            type:"libre", correction:"$A = 8 \\times 5 = 40$ cm²", points:2},
@@ -4673,11 +4685,13 @@ const EXERCICES = {
            type:"qcm", choix:["cm","m","m²","dm³"],
            bonneReponseIdx:2, bonneReponse:"m²",
            correction:"L'unité d'aire est le mètre carré (m²).", points:2},
+          {label:"e)", enonce:"Aire d'un carré de côté $12$ cm ?",
+           type:"libre", correction:"$A = 12^2 = 144$ cm²", points:2},
         ],
         indices:["Rectangle : $l \\times L$ ; Triangle : $\\dfrac{b \\times h}{2}$ ; Carré : $c^2$"]
       },
       {
-        id:"geo_6_3", titre:"Symétrie axiale", niveau:"Moyen", points_total:10,
+        id:"geo_6_3", titre:"Symétrie axiale", niveau:"Moyen", points_total:12,
         questions:[
           {label:"1.", enonce:"Combien d'axes de symétrie a un rectangle (non carré) ?",
            type:"qcm", choix:["$0$","$1$","$2$","$4$"],
@@ -4691,11 +4705,15 @@ const EXERCICES = {
            type:"qcm", choix:["$0$","$2$","$4$","Une infinité"],
            bonneReponseIdx:3, bonneReponse:"Une infinité",
            correction:"Un cercle a une infinité d'axes de symétrie — tout diamètre est un axe.", points:2},
+          {label:"5.", enonce:"Combien d'axes de symétrie a un triangle équilatéral ?",
+           type:"qcm", choix:["$0$","$1$","$3$","Une infinité"],
+           bonneReponseIdx:2, bonneReponse:"$3$",
+           correction:"Un triangle équilatéral a $3$ axes de symétrie (un par sommet, vers le milieu du côté opposé).", points:2},
         ],
         indices:["Axe $(Oy)$ : change le signe de $x$ ; Axe $(Ox)$ : change le signe de $y$"]
       },
       {
-        id:"geo_6_4", titre:"Figures usuelles — triangles et quadrilatères", niveau:"Moyen", points_total:10,
+        id:"geo_6_4", titre:"Figures usuelles — triangles et quadrilatères", niveau:"Moyen", points_total:12,
         questions:[
           {label:"1.", enonce:"Un quadrilatère avec $4$ angles droits et $4$ côtés égaux est :",
            type:"qcm", choix:["Un rectangle","Un losange","Un carré","Un trapèze"],
@@ -4707,11 +4725,13 @@ const EXERCICES = {
            type:"libre", correction:"$180° - 60° - 70° = 50°$", points:3},
           {label:"4.", enonce:"Un quadrilatère a trois angles de $90°$, $80°$ et $95°$. Calcule le quatrième.",
            type:"libre", correction:"$360° - 90° - 80° - 95° = 95°$", points:3},
+          {label:"5.", enonce:"Un triangle isocèle a un angle au sommet de $40°$. Quelle est la mesure de chacun des deux autres angles (égaux) ?",
+           type:"libre", correction:"$(180°-40°) \\div 2 = 70°$", points:2},
         ],
         indices:["Somme des angles d'un triangle $= 180°$ ; d'un quadrilatère $= 360°$"]
       },
       {
-        id:"geo_6_5", titre:"Géométrie — problèmes brevet 6ème", niveau:"Difficile", points_total:12,
+        id:"geo_6_5", titre:"Géométrie — problèmes brevet 6ème", niveau:"Difficile", points_total:16,
         questions:[
           {label:"1.", enonce:"Une piscine rectangulaire mesure $12$ m × $5$ m. Calcule son périmètre.",
            type:"libre", correction:"$P=2(12+5)=34$ m", points:1},
@@ -4721,6 +4741,8 @@ const EXERCICES = {
            type:"libre", correction:"Aire pièce $=4{,}5\\times3=13{,}5$ m² $=135\\,000$ cm². Aire carreau $=900$ cm². $135\\,000 ÷ 900 = 150$ carreaux.", points:5},
           {label:"3.", enonce:"Calcule $5^2+12^2$ et $13^2$. Conclure : le triangle est-il rectangle ?",
            type:"libre", correction:"$5^2+12^2=25+144=169=13^2$ ✓ Oui, rectangle.", points:4},
+          {label:"4.", enonce:"Un jardin carré a un périmètre de $48$ m. Quelle est son aire ?",
+           type:"libre", correction:"Côté $=48\\div4=12$ m. $A=12^2=144$ m²", points:4},
         ],
         indices:["Convertis toutes les unités avant de calculer"]
       },
