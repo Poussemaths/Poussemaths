@@ -2055,7 +2055,7 @@ const EXERCICES = {
         indices:["Remplace $x$ par la valeur donnée, puis calcule"]
       },
       {
-        id:"lit_3_1", titre:"Calcul littéral — reconnaître développer factoriser", niveau:"Facile", points_total:8,
+        id:"lit_3_1", titre:"Calcul littéral — reconnaître développer factoriser", niveau:"Facile", points_total:10,
         questions:[
           {label:"1.", enonce:"Laquelle de ces expressions est factorisée ?",
            type:"qcm",
@@ -2071,38 +2071,47 @@ const EXERCICES = {
           {label:"4.", enonce:"Développe et réduis : $2(x+3)+3(x-1)$.",
            type:"libre",
            correction:"$2x+6+3x-3=5x+3$", points:2},
+          {label:"5.", enonce:"Factorise : $7x+21$.",
+           type:"libre",
+           correction:"$7(x+3)$", points:2},
         ],
         indices:["Factoriser = mettre en évidence le facteur commun à tous les termes"]
       },
       {
-        id:"lit_3_A", titre:"Développer et réduire", niveau:"Facile", points_total:6,
+        id:"lit_3_A", titre:"Développer et réduire", niveau:"Facile", points_total:10,
         questions:[
           {label:"a)", enonce:"Développe et réduis : $3(2x+5) - 2(x-1)$", correction:"$6x+15-2x+2=4x+17$", points:2},
           {label:"b)", enonce:"Développe : $(x+4)(x+7)$", correction:"$x^2+7x+4x+28=x^2+11x+28$", points:2},
           {label:"c)", enonce:"Développe et réduis : $(2x-3)(x+5)$", correction:"$2x^2+10x-3x-15=2x^2+7x-15$", points:2},
+          {label:"d)", enonce:"Développe et réduis : $4(3x-2) - 3(x+1)$", correction:"$12x-8-3x-3=9x-11$", points:2},
+          {label:"e)", enonce:"Développe : $(x-3)(x+6)$", correction:"$x^2+6x-3x-18=x^2+3x-18$", points:2},
         ],
         indices:["$(a+b)(c+d)=ac+ad+bc+bd$"]
       },
       {
-        id:"lit_3_B", titre:"Identités remarquables", niveau:"Moyen", points_total:9,
+        id:"lit_3_B", titre:"Identités remarquables", niveau:"Moyen", points_total:15,
         questions:[
           {label:"a)", enonce:"Développe : $(x+6)^2$ et $(x-4)^2$", correction:"$x^2+12x+36$ ; $x^2-8x+16$", points:3},
           {label:"b)", enonce:"Développe : $(3x+2)(3x-2)$ et $(x+5)(x-5)$", correction:"$9x^2-4$ ; $x^2-25$", points:3},
           {label:"c)", enonce:"Factorise : $x^2-36$ et $4x^2-9$", correction:"$(x-6)(x+6)$ ; $(2x-3)(2x+3)$", points:3},
+          {label:"d)", enonce:"Développe : $(x+8)^2$", correction:"$x^2+16x+64$", points:3},
+          {label:"e)", enonce:"Factorise : $9x^2-25$", correction:"$(3x-5)(3x+5)$", points:3},
         ],
         indices:["$(a+b)^2=a^2+2ab+b^2$ ; $(a-b)^2=a^2-2ab+b^2$ ; $(a+b)(a-b)=a^2-b^2$"]
       },
       {
-        id:"lit_3_C", titre:"Factoriser une expression", niveau:"Difficile", points_total:8,
+        id:"lit_3_C", titre:"Factoriser une expression", niveau:"Difficile", points_total:13,
         questions:[
           {label:"a)", enonce:"Factorise : $3x^2+6x$ et $5x^2-15x$", correction:"$3x(x+2)$ ; $5x(x-3)$", points:2},
           {label:"b)", enonce:"Factorise : $x^2+5x+6$ (cherche deux nombres de somme $5$ et produit $6$)", correction:"$(x+2)(x+3)$", points:3},
           {label:"c)", enonce:"Développe puis factorise : $(x+3)^2 - (x+3)$", correction:"Facteur commun $(x+3)$ : $(x+3)(x+3-1)=(x+3)(x+2)$", points:3},
+          {label:"d)", enonce:"Factorise : $x^2-2x-15$ (cherche deux nombres de somme $-2$ et produit $-15$)", correction:"$(x-5)(x+3)$", points:3},
+          {label:"e)", enonce:"Factorise : $4x^2+8x$", correction:"$4x(x+2)$", points:2},
         ],
         indices:["Cherche un facteur commun ; ou utilise les identités remarquables"]
       },
       {
-        id:"lit_3_4", titre:"Calcul littéral — équations et factorisations", niveau:"Moyen", points_total:10,
+        id:"lit_3_4", titre:"Calcul littéral — équations et factorisations", niveau:"Moyen", points_total:13,
         questions:[
           {label:"a)", enonce:"Factorise : $x^2-25$",
            type:"libre", correction:"$(x-5)(x+5)$", points:2},
@@ -2112,11 +2121,13 @@ const EXERCICES = {
            type:"libre", correction:"$x=3$ ou $x=-7$", points:2},
           {label:"d)", enonce:"Résous : $(2x-1)(x+3)=0$",
            type:"libre", correction:"$x=\\dfrac{1}{2}$ ou $x=-3$", points:2},
+          {label:"e)", enonce:"Résous : $(3x+2)(x-4)=0$",
+           type:"libre", correction:"$x=-\\dfrac{2}{3}$ ou $x=4$", points:3},
         ],
         indices:["$(a+b)(a-b)=a^2-b^2$ ; produit nul $\\Rightarrow$ un des facteurs est nul"]
       },
       {
-        id:"lit_3_5", titre:"Calcul littéral — brevet", niveau:"Difficile", points_total:12,
+        id:"lit_3_5", titre:"Calcul littéral — brevet", niveau:"Difficile", points_total:19,
         questions:[
           {label:"1.", enonce:"Développe et réduis : $(3x-2)^2-(3x+2)(3x-2)$",
            type:"libre", correction:"$(9x^2-12x+4)-(9x^2-4)=-12x+8$", points:4},
@@ -2126,11 +2137,15 @@ const EXERCICES = {
            correction:"$n^2+n=n(n+1)$. Deux entiers consécutifs : l'un est toujours pair → le produit est pair.", points:4},
           {label:"3.", enonce:"$A=x^2-9$ et $B=x^2-6x+9$. Factorise $A$ et $B$, puis simplifie $\\dfrac{A}{B}$ pour $x\\neq3$.",
            type:"libre", correction:"$A=(x-3)(x+3)$ ; $B=(x-3)^2$. $\\dfrac{A}{B}=\\dfrac{(x-3)(x+3)}{(x-3)^2}=\\dfrac{x+3}{x-3}$", points:4},
+          {label:"4.", enonce:"Développe et réduis : $(2x+1)^2-(2x-1)(2x+1)$",
+           type:"libre", correction:"$(4x^2+4x+1)-(4x^2-1)=4x+2$", points:4},
+          {label:"5.", enonce:"$C=x^2-16$ et $D=x^2+8x+16$. Factorise $C$ et $D$, puis simplifie $\\dfrac{C}{D}$ pour $x\\neq-4$.",
+           type:"libre", correction:"$C=(x-4)(x+4)$ ; $D=(x+4)^2$. $\\dfrac{C}{D}=\\dfrac{x-4}{x+4}$", points:3},
         ],
         indices:["Factoriser avant de simplifier une fraction"]
       },
       {
-        id:"lit_3_6", titre:"Calcul littéral — Objectif Brevet I", niveau:"Difficile", points_total:10,
+        id:"lit_3_6", titre:"Calcul littéral — Objectif Brevet I", niveau:"Difficile", points_total:16,
         questions:[
           {label:"1.", enonce:"QCM — Une expression égale à $6x+9$ est…",
            type:"qcm", choix:["$3(2x+3)$","$(x+3)(x+2)$","$(x+3)^2-x^2$","$6(x+3)$"],
@@ -2142,16 +2157,28 @@ const EXERCICES = {
            type:"qcm", choix:["Car $3n$ est toujours pair","Car $3n+3=3(n+1)$ est divisible par $3$","Car $n+1$ est pair","Ce n'est pas toujours vrai"],
            bonneReponseIdx:1, bonneReponse:"Car $3n+3=3(n+1)$ est divisible par $3$",
            correction:"$n+(n+1)+(n+2)=3n+3=3(n+1)$ — multiple de $3$ ✓", points:4},
+          {label:"4.", enonce:"Programme : choisir $x$, soustraire $2$, multiplier par $x$, ajouter $2x$. Prouve que le résultat vaut toujours $x^2$.",
+           type:"libre", correction:"$(x-2)\\times x + 2x = x^2-2x+2x=x^2$ ✓", points:3},
+          {label:"5.", enonce:"La somme de $2$ entiers pairs consécutifs $2n$ et $2n+2$ vaut $4n+2$. Pourquoi ce résultat n'est-il jamais un multiple de $4$ ?",
+           type:"qcm", choix:["Car $4n$ est un multiple de $4$ mais $+2$ ne l'est jamais","Car $n$ est impair","Ce n'est pas toujours vrai","Car $2n$ est pair"],
+           bonneReponseIdx:0, bonneReponse:"Car $4n$ est un multiple de $4$ mais $+2$ ne l'est jamais",
+           correction:"$4n+2=4n+2$ : le terme $4n$ est multiple de $4$, mais ajouter $2$ empêche jamais la somme totale de l'être.", points:3},
         ],
         indices:["D'après DNB — développer puis factoriser pour prouver"]
       },
       {
-        id:"lit_3_7", titre:"Calcul littéral — Objectif Brevet II", niveau:"Difficile", points_total:10,
+        id:"lit_3_7", titre:"Calcul littéral — Objectif Brevet II", niveau:"Difficile", points_total:19,
         questions:[
-          {label:"1.", enonce:"ABCD rectangle : $AB=30$ cm, $BC=24$ cm. On découpe 4 carrés aux coins, côté $x$. Peut-on avoir périmètre rectangle central $=$ somme périmètres carrés ?",
-           type:"libre", correction:"$P_{central}=108-8x$ ; $S_{carrés}=16x$. $108-8x=16x \\Rightarrow x=4{,}5$ cm. Oui.", points:5},
-          {label:"2.", enonce:"$E=-3x^2-5x+4$. Vérifie $E=-18$ pour $x=2$. Calcule $E$ pour $x=-3$.",
-           type:"libre", correction:"$x=2$ : $-12-10+4=-18$ ✓. $x=-3$ : $-27+15+4=-8$.", points:5},
+          {label:"1.", enonce:"ABCD rectangle : $AB=30$ cm, $BC=24$ cm. On découpe 4 carrés aux coins, côté $x$. Pour quelle valeur de $x$ le périmètre du rectangle central égale-t-il la somme des périmètres des carrés ?",
+           type:"libre", correction:"$P_{central}=108-8x$ ; $S_{carrés}=16x$. $108-8x=16x \\Rightarrow x=4{,}5$", points:5},
+          {label:"2.", enonce:"$E=-3x^2-5x+4$. Calcule $E$ pour $x=2$.",
+           type:"libre", correction:"$-3(2)^2-5(2)+4=-12-10+4=-18$", points:3},
+          {label:"2b.", enonce:"Même expression $E=-3x^2-5x+4$. Calcule $E$ pour $x=-3$.",
+           type:"libre", correction:"$-3(-3)^2-5(-3)+4=-27+15+4=-8$", points:3},
+          {label:"3.", enonce:"ABCD rectangle : $AB=20$ cm, $BC=16$ cm. On découpe 4 carrés aux coins, côté $x$. Exprime le périmètre du rectangle central en fonction de $x$.",
+           type:"libre", correction:"$P_{central}=2(20-2x)+2(16-2x)=72-8x$", points:4},
+          {label:"4.", enonce:"$F=2x^2+3x-1$. Calcule $F$ pour $x=-1$.",
+           type:"libre", correction:"$2(-1)^2+3(-1)-1=2-3-1=-2$", points:4},
         ],
         indices:["D'après DNB — mettre en équation une situation géométrique"]
       },
