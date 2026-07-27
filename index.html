@@ -1894,7 +1894,7 @@ const EXERCICES = {
         indices:["D'après DNB — lire attentivement les unités"]
       },
       {
-        id:"puis_3_7", titre:"Puissances — Objectif Brevet II", niveau:"Difficile", points_total:20,
+        id:"puis_3_7", titre:"Puissances — Objectif Brevet II", niveau:"Difficile", points_total:25,
         questions:[
           {label:"1.", enonce:"Le Soleil pèse $2\\times10^{30}$ kg et la Terre $6\\times10^{24}$ kg. Combien de fois le Soleil est-il plus lourd ?",
            type:"libre", correction:"$\\dfrac{2\\times10^{30}}{6\\times10^{24}}=\\dfrac{1}{3}\\times10^6\\approx333\\,333$", points:5},
@@ -1904,6 +1904,8 @@ const EXERCICES = {
            type:"libre", correction:"$\\dfrac{1{,}9\\times10^{27}}{6\\times10^{24}}\\approx316{,}7 \\Rightarrow 317$", points:5},
           {label:"4.", enonce:"Un virus a un diamètre de $3\\times10^{-8}$ m. Un microscope grossit $5\\times10^4$ fois. Diamètre observé (en mm) ?",
            type:"libre", correction:"$d=3\\times10^{-8}\\times5\\times10^4=1{,}5\\times10^{-3}$ m $=1{,}5$", points:5},
+          {label:"5.", enonce:"Saturne pèse $5{,}7\\times10^{26}$ kg et la Terre $6\\times10^{24}$ kg. Combien de fois Saturne est-il plus lourd (arrondi à l'unité) ?",
+           type:"libre", correction:"$\\dfrac{5{,}7\\times10^{26}}{6\\times10^{24}}\\approx95 \\Rightarrow 95$", points:5},
         ],
         indices:["D'après DNB — contexte scientifique réel"]
       },
@@ -2199,7 +2201,7 @@ const EXERCICES = {
         indices:["Isole $x$ en effectuant la même opération des deux côtés de l'égalité"]
       },
       {
-        id:"eq_3_1", titre:"Équations — lecture et sens", niveau:"Facile", points_total:12,
+        id:"eq_3_1", titre:"Équations — lecture et sens", niveau:"Facile", points_total:14,
         questions:[
           {label:"1.", enonce:"Parmi ces équations, laquelle a pour solution $x = 5$ ?",
            type:"qcm",
@@ -2222,6 +2224,9 @@ const EXERCICES = {
            bonneReponseIdx: 1,
            bonneReponse:"$3x - 2 = 7$",
            correction:"$3x - 2 = 7 \\Rightarrow x = 3$ ✓. Vérif des autres : $2(3)+1=7\\neq6$ ; $3+4=7\\neq9$ ; $5(3)=15\\neq20$.", points:2},
+          {label:"5.", enonce:"Vérifie que $x = 4$ est solution de $2x + 3 = x + 7$. Détaille le calcul.",
+           type:"libre",
+           correction:"$2 \\times 4 + 3 = 8 + 3 = 11$ et $4 + 7 = 11$. Les deux membres sont égaux ✓", points:4},
         ],
         indices:["Pour vérifier une solution, remplace $x$ par la valeur et calcule les deux membres"]
       },
@@ -2923,7 +2928,7 @@ const EXERCICES = {
         indices:["D'après DNB — vérifier qu'un point appartient à une droite"]
       },
       {
-        id:"fonc_3_7", titre:"Fonctions — Objectif Brevet II", niveau:"Difficile", points_total:20,
+        id:"fonc_3_7", titre:"Fonctions — Objectif Brevet II", niveau:"Difficile", points_total:25,
         questions:[
           {label:"1.", enonce:"Une pyramide de hauteur $x$ cm est posée sur un parallélépipède. $V_1(x)=\\dfrac{4x}{3}$ et $V_2(x)=12(5-x)$. Pour quelle valeur de $x$ a-t-on $V_1=V_2$ ?",
            type:"libre", correction:"$\\dfrac{4x}{3}=60-12x \\Rightarrow 4x=180-36x \\Rightarrow 40x=180 \\Rightarrow x=4{,}5$", points:5},
@@ -2935,6 +2940,10 @@ const EXERCICES = {
            type:"libre", correction:"$a=\\dfrac{4-4}{5-1} \\Rightarrow 0$", points:5},
           {label:"4.", enonce:"Une pyramide de hauteur $x$ cm est posée sur un parallélépipède. $V_1(x)=\\dfrac{3x}{2}$ et $V_2(x)=10(4-x)$. Pour quelle valeur de $x$ a-t-on $V_1=V_2$ ?",
            type:"libre", correction:"$\\dfrac{3x}{2}=40-10x \\Rightarrow 3x=80-20x \\Rightarrow 23x=80 \\Rightarrow x\\approx3{,}48$", points:5},
+          {label:"5.", enonce:"$g$ est une fonction. $g(2)=7$, $g(6)=7$. Peut-elle être strictement décroissante ?",
+           type:"qcm", choix:["Oui","Non, deux abscisses différentes donnent la même image","Oui si g est affine","On ne peut pas savoir"],
+           bonneReponseIdx:1, bonneReponse:"Non, deux abscisses différentes donnent la même image",
+           correction:"Non strictement décroissante (même image pour deux abscisses différentes).", points:5},
         ],
         indices:["D'après DNB — analyser les propriétés d'une fonction"]
       },
@@ -3627,7 +3636,7 @@ const EXERCICES = {
         indices:["Dans un losange, les diagonales sont perpendiculaires et se coupent en leur milieu"]
       },
       {
-        id:"pyth_3_6", titre:"Pythagore — Objectif Brevet I", niveau:"Difficile", points_total:19,
+        id:"pyth_3_6", titre:"Pythagore — Objectif Brevet I", niveau:"Difficile", points_total:23,
         questions:[
           {label:"1.", enonce:"Le triangle DEF est une réduction de ABC ($AB=4$, $AC=5$) dans le rapport $k=0{,}7$. Calcule $EF$ (avec $DE=2{,}8$ cm et $DF=3{,}5$ cm, l'angle droit en $D$).",
            type:"libre", correction:"$EF=\\sqrt{3{,}5^2-2{,}8^2}=\\sqrt{4{,}41} \\Rightarrow 2{,}1$", points:5},
@@ -3637,6 +3646,8 @@ const EXERCICES = {
            type:"libre", correction:"$GH=6\\times1{,}5 \\Rightarrow 9$", points:4},
           {label:"4.", enonce:"Une pyramide a une base carrée de $20$ m × $20$ m et une hauteur de $21$ m. Longueur d'une arête latérale (arrondie au dixième) ?",
            type:"libre", correction:"Demi-diagonale base $=\\dfrac{20}{2}\\sqrt{2}\\approx14{,}14$ m. Arête $=\\sqrt{21^2+14{,}14^2}\\approx\\sqrt{441+199{,}9}\\approx25{,}3$", points:5},
+          {label:"5.", enonce:"Le triangle JKL est une réduction de ABC ($AB=9$, $AC=12$) dans le rapport $k=0{,}5$. Calcule $JK$.",
+           type:"libre", correction:"$JK=9\\times0{,}5 \\Rightarrow 4{,}5$", points:4},
         ],
         indices:["D'après DNB — Pythagore dans un contexte réel"]
       },
