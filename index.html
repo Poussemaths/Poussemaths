@@ -6921,6 +6921,47 @@ const EXERCICES = {
       },
     ],
 
+    "Combinatoire et dénombrement": [
+      {
+        id:"combi_t_1", titre:"Principes de dénombrement et factorielle", niveau:"Facile", points_total:10,
+        questions:[
+          {label:"a)", enonce:"Un menu propose $3$ entrées et $4$ plats. En utilisant le principe multiplicatif, combien de menus (entrée + plat) différents peut-on former ?",
+           type:"libre", correction:"$3\\times4=12$", points:2},
+          {label:"b)", enonce:"Calcule $4!$ (factorielle de $4$).",
+           type:"libre", correction:"$4!=4\\times3\\times2\\times1=24$", points:2},
+          {label:"c)", enonce:"Combien y a-t-il de façons de ranger $5$ livres différents sur une étagère ?",
+           type:"libre", correction:"$5!=120$", points:2},
+          {label:"d)", enonce:"Le nombre de parties (sous-ensembles) d'un ensemble à $n$ éléments est :",
+           type:"qcm", choix:["$2^n$","$n!$","$n^2$","$2n$"],
+           bonneReponseIdx:0, bonneReponse:"$2^n$",
+           correction:"Un ensemble à $n$ éléments possède exactement $2^n$ parties (chaque élément est présent ou absent).", points:2},
+          {label:"e)", enonce:"Combien y a-t-il de sous-ensembles (parties) d'un ensemble à $4$ éléments ?",
+           type:"libre", correction:"$2^4=16$", points:2},
+        ],
+        indices:["Principe multiplicatif : multiplier le nombre de choix à chaque étape ; $n!=n\\times(n-1)\\times\\cdots\\times1$"]
+      },
+      {
+        id:"combi_t_2", titre:"Combinaisons et triangle de Pascal", niveau:"Difficile", points_total:10,
+        questions:[
+          {label:"a)", enonce:"Calcule $\\binom{5}{2}=\\dfrac{5!}{2!\\times3!}$.",
+           type:"libre", correction:"$\\binom{5}{2}=\\dfrac{120}{2\\times6}=10$", points:2},
+          {label:"b)", enonce:"Combien y a-t-il de façons de choisir $3$ délégués parmi $8$ élèves (l'ordre ne compte pas) ?",
+           type:"libre", correction:"$\\binom{8}{3}=56$", points:2},
+          {label:"c)", enonce:"$\\binom{n}{0}$ vaut toujours :",
+           type:"qcm", choix:["$1$","$0$","$n$","Non défini"],
+           bonneReponseIdx:0, bonneReponse:"$1$",
+           correction:"Il y a exactement $1$ façon de choisir $0$ élément parmi $n$ (ne rien choisir) : $\\binom{n}{0}=1$.", points:2},
+          {label:"d)", enonce:"Relation de Pascal : $\\binom{5}{2}+\\binom{5}{3}=\\binom{6}{3}$. Sachant $\\binom{5}{2}=10$ et $\\binom{5}{3}=10$, calcule $\\binom{6}{3}$.",
+           type:"libre", correction:"$\\binom{6}{3}=10+10=20$", points:2},
+          {label:"e)", enonce:"La propriété $\\binom{n}{k}=\\binom{n}{n-k}$ est appelée :",
+           type:"qcm", choix:["Symétrie des combinaisons","Factorielle","Principe multiplicatif","Aucune de ces réponses"],
+           bonneReponseIdx:0, bonneReponse:"Symétrie des combinaisons",
+           correction:"Choisir $k$ éléments à garder revient à choisir $n-k$ éléments à écarter : $\\binom{n}{k}=\\binom{n}{n-k}$.", points:2},
+        ],
+        indices:["$\\binom{n}{k}=\\dfrac{n!}{k!(n-k)!}$ ; relation de Pascal : $\\binom{n}{k}+\\binom{n}{k+1}=\\binom{n+1}{k+1}$"]
+      },
+    ],
+
   },
 
 };
