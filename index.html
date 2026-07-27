@@ -9833,6 +9833,14 @@ function verifierReponse(userRaw, correctionRaw) {
     .replace(/÷/g, '/')
     .replace(/['']/g, "'")
     .replace(/[−–]/g, '-')
+    // Le clavier virtuel du site (boutons "x²"/"x³") insère les caractères
+    // unicode ²/³ dans la reponse de l'eleve, alors que TOUTES les corrections
+    // ecrivent les puissances en notation caret ("x^2"). Sans cette normalisation,
+    // un eleve qui utilise le clavier fourni par le site pour taper une reponse
+    // pourtant juste (developpement, forme canonique...) se voyait refuse par
+    // le fallback texte (check 4), faute de correspondance "²" vs "^2".
+    .replace(/²/g, '^2')
+    .replace(/³/g, '^3')
     .toLowerCase();
 
   const user = clean(userNorm);
