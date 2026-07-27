@@ -9846,6 +9846,13 @@ function verifierReponse(userRaw, correctionRaw) {
     // LaTeX ("\sqrt{2}" -> "sqrt2"), laissant le mot "sqrt" en texte brut —
     // sans cette conversion, "7√2" tape par l'eleve ne matchait jamais "7sqrt2".
     .replace(/√/g, 'sqrt')
+    // Meme logique pour les boutons "≤"/"≥"/"≠" du clavier (unicode) face aux
+    // corrections ecrites en LaTeX ("\leq"/"\geq"/"\neq"), qui ne deviennent que
+    // les mots "leq"/"geq"/"neq" une fois les backslashs retires — sans quoi
+    // une reponse d'ineqution correcte ("x≤4") ne matchait jamais "xleq4".
+    .replace(/≤/g, 'leq')
+    .replace(/≥/g, 'geq')
+    .replace(/≠/g, 'neq')
     .toLowerCase();
 
   const user = clean(userNorm);
