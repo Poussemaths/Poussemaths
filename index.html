@@ -6710,6 +6710,35 @@ const EXERCICES = {
       },
     ],
 
+    "Algorithmique — listes en Python": [
+      {
+        id:"algo_1_1", titre:"Manipulation de listes", niveau:"Moyen", points_total:10,
+        questions:[
+          {label:"a)", enonce:"En Python, <code>L = [3, 7, 2, 9]</code>. Que vaut <code>L[0]</code> ?",
+           type:"qcm", choix:["$3$","$7$","$0$","$4$"],
+           bonneReponseIdx:0, bonneReponse:"$3$",
+           correction:"Les indices commencent à $0$ en Python : <code>L[0]</code> est le premier élément, $3$.", points:2},
+          {label:"b)", enonce:"Avec <code>L = [3, 7, 2, 9]</code>, que vaut <code>L[2]</code> ?",
+           type:"qcm", choix:["$2$","$7$","$9$","$3$"],
+           bonneReponseIdx:0, bonneReponse:"$2$",
+           correction:"<code>L[2]</code> est le $3$ème élément (indice $2$) : $2$.", points:2},
+          {label:"c)", enonce:"Avec <code>L = [3, 7, 2, 9]</code>, que vaut <code>len(L)</code> ?",
+           type:"qcm", choix:["$4$","$3$","$9$","$0$"],
+           bonneReponseIdx:0, bonneReponse:"$4$",
+           correction:"<code>len(L)</code> renvoie le nombre d'éléments de la liste : $4$.", points:2},
+          {label:"d)", enonce:"Que fait <code>L.append(5)</code> sur une liste L ?",
+           type:"qcm", choix:["Ajoute $5$ à la fin de la liste","Retire $5$ de la liste","Trie la liste","Affiche $5$"],
+           bonneReponseIdx:0, bonneReponse:"Ajoute $5$ à la fin de la liste",
+           correction:"<code>append</code> ajoute un élément à la fin de la liste.", points:2},
+          {label:"e)", enonce:"Programme : <code>L = []</code> puis <code>for i in range(3): L.append(i)</code>. Quelle est la liste L à la fin ?",
+           type:"qcm", choix:["[0, 1, 2]","[1, 2, 3]","[3]","[]"],
+           bonneReponseIdx:0, bonneReponse:"[0, 1, 2]",
+           correction:"<code>range(3)</code> génère $0,1,2$ : chacun est ajouté successivement à L, qui devient <code>[0, 1, 2]</code>.", points:2},
+        ],
+        indices:["Les indices de liste commencent à $0$ ; <code>len(L)</code> = nombre d'éléments ; <code>L.append(x)</code> ajoute x à la fin"]
+      },
+    ],
+
   },
 
   // ═══════════════════════════════════════
