@@ -6962,6 +6962,51 @@ const EXERCICES = {
       },
     ],
 
+    "Fonctions sinus et cosinus": [
+      {
+        id:"sincos_t_1", titre:"Dérivées des fonctions sinus et cosinus", niveau:"Facile", points_total:10,
+        questions:[
+          {label:"a)", enonce:"La dérivée de $f(x)=\\sin(x)$ est :",
+           type:"qcm", choix:["$\\cos(x)$","$-\\cos(x)$","$-\\sin(x)$","$\\sin(x)$"],
+           bonneReponseIdx:0, bonneReponse:"$\\cos(x)$",
+           correction:"$(\\sin(x))'=\\cos(x)$", points:2},
+          {label:"b)", enonce:"La dérivée de $f(x)=\\cos(x)$ est :",
+           type:"qcm", choix:["$-\\sin(x)$","$\\sin(x)$","$-\\cos(x)$","$\\cos(x)$"],
+           bonneReponseIdx:0, bonneReponse:"$-\\sin(x)$",
+           correction:"$(\\cos(x))'=-\\sin(x)$", points:2},
+          {label:"c)", enonce:"$f(x)=3\\sin(x)$. Calcule $f'(x)$.",
+           type:"libre", correction:"$f'(x)=3\\cos(x)$", points:2},
+          {label:"d)", enonce:"$g(x)=2\\cos(x)$. Calcule $g'(x)$.",
+           type:"libre", correction:"$g'(x)=-2\\sin(x)$", points:2},
+          {label:"e)", enonce:"La dérivée seconde de $\\sin(x)$ (dérivée de $\\cos(x)$) est :",
+           type:"qcm", choix:["$-\\sin(x)$","$\\cos(x)$","$-\\cos(x)$","$\\sin(x)$"],
+           bonneReponseIdx:0, bonneReponse:"$-\\sin(x)$",
+           correction:"$(\\sin(x))'=\\cos(x)$ puis $(\\cos(x))'=-\\sin(x)$ : la dérivée seconde de $\\sin$ est $-\\sin$.", points:2},
+        ],
+        indices:["$(\\sin(x))'=\\cos(x)$ ; $(\\cos(x))'=-\\sin(x)$"]
+      },
+      {
+        id:"sincos_t_2", titre:"Variations des fonctions sinus et cosinus", niveau:"Moyen", points_total:10,
+        questions:[
+          {label:"a)", enonce:"Sur $[0\\,;\\,\\pi]$, la fonction $\\cos$ est :",
+           type:"qcm", choix:["Strictement décroissante","Strictement croissante","Constante","Ni croissante ni décroissante"],
+           bonneReponseIdx:0, bonneReponse:"Strictement décroissante",
+           correction:"$\\cos'(x)=-\\sin(x)\\leq0$ sur $[0\\,;\\,\\pi]$ : $\\cos$ y est strictement décroissante.", points:2},
+          {label:"b)", enonce:"Sur $\\left[-\\dfrac{\\pi}{2}\\,;\\,\\dfrac{\\pi}{2}\\right]$, la fonction $\\sin$ est :",
+           type:"qcm", choix:["Strictement croissante","Strictement décroissante","Constante","Ni l'un ni l'autre"],
+           bonneReponseIdx:0, bonneReponse:"Strictement croissante",
+           correction:"$\\sin'(x)=\\cos(x)\\geq0$ sur $\\left[-\\dfrac{\\pi}{2}\\,;\\,\\dfrac{\\pi}{2}\\right]$ : $\\sin$ y est strictement croissante.", points:2},
+          {label:"c)", enonce:"$f(x)=\\cos(x)$, $f'(x)=-\\sin(x)$. Calcule $f'(0)$.",
+           type:"libre", correction:"$f'(0)=-\\sin(0)=0$", points:2},
+          {label:"d)", enonce:"$g(x)=\\sin(x)$, $g'(x)=\\cos(x)$. Calcule $g'(0)$.",
+           type:"libre", correction:"$g'(0)=\\cos(0)=1$", points:2},
+          {label:"e)", enonce:"Quel est le maximum de la fonction sinus sur $\\mathbb{R}$ ?",
+           type:"libre", correction:"$1$", points:2},
+        ],
+        indices:["$\\sin$ et $\\cos$ sont bornées entre $-1$ et $1$ ; leurs variations s'étudient via le signe de leur dérivée"]
+      },
+    ],
+
   },
 
 };
