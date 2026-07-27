@@ -4538,7 +4538,7 @@ const EXERCICES = {
 
     "Nombres & Calculs": [
       {
-        id:"nb_6_1", titre:"Nombres entiers — comprendre", niveau:"Facile", points_total:8,
+        id:"nb_6_1", titre:"Nombres entiers — comprendre", niveau:"Facile", points_total:10,
         questions:[
           {label:"1.", enonce:"Quel est le chiffre des dizaines dans $27\\,538$ ?",
            type:"qcm", choix:["$2$","$7$","$5$","$3$"],
@@ -4550,6 +4550,8 @@ const EXERCICES = {
            type:"libre", correction:"$4$ zéros : $10\\,000$", points:2},
           {label:"4.", enonce:"Décompose $2\\,531$ : $(\\ldots \\times 1000)+(\\ldots \\times 100)+(\\ldots \\times 10)+\\ldots$",
            type:"libre", correction:"$(2\\times1000)+(5\\times100)+(3\\times10)+1$", points:2},
+          {label:"5.", enonce:"Quel est le plus grand des trois nombres $12\\,450$ ; $12\\,405$ ; $12\\,540$ ?",
+           type:"libre", correction:"$12\\,540$", points:2},
         ],
         indices:["Un nombre à 5 chiffres : de gauche à droite → dizaines de mille, milliers, centaines, dizaines, unités"]
       },
@@ -9882,6 +9884,12 @@ function verifierReponse(userRaw, correctionRaw) {
     const cPreserve = correction
       .replace(/\$([^$]+)\$/g, ' $1 ')
       .replace(/\{,\}/g, '.')
+      // Separateur de milliers LaTeX ("27\,538", tres frequent dans ce fichier
+      // pour les grands nombres) : sans ce retrait, un nombre comme "1\,000\,000"
+      // ne laissait extraire que "000" (le groupe apres le DERNIER "\,"), tronquant
+      // silencieusement le resultat final attendu — un eleve tapant "1000000"
+      // (reponse juste) etait compare a 0 et rejete.
+      .replace(/\\,/g, '')
       .replace(/[−–]/g, '-')
       .replace(/\\approx|\\Rightarrow|\\rightarrow|\\Leftrightarrow|\\Longrightarrow|\\to(?![a-zA-Z])/gi, '=')
       .replace(/(\d)\s+(\d)/g, '$1$2')  // supprimer espaces milliers
@@ -9966,6 +9974,7 @@ function verifierReponse(userRaw, correctionRaw) {
     const c = correction
       .replace(/\$([^$]+)\$/g, ' $1 ')
       .replace(/\{,\}/g, '.')
+      .replace(/\\,/g, '')
       .replace(/\\[a-zA-Z]+/g, ' ')
       .replace(/[{}]/g, ' ')
       .replace(/[−–]/g, '-');
