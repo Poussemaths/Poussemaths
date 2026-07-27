@@ -7030,6 +7030,43 @@ const EXERCICES = {
       },
     ],
 
+    "Sommes de variables aléatoires": [
+      {
+        id:"sommevar_t_1", titre:"Linéarité et additivité", niveau:"Moyen", points_total:10,
+        questions:[
+          {label:"a)", enonce:"$E(X)=5$ et $E(Y)=8$. Calcule $E(X+Y)$.",
+           type:"libre", correction:"$E(X+Y)=5+8=13$", points:2},
+          {label:"b)", enonce:"$V(X)=2$ et $V(Y)=3$, $X$ et $Y$ indépendantes. Calcule $V(X+Y)$.",
+           type:"libre", correction:"$V(X+Y)=2+3=5$", points:2},
+          {label:"c)", enonce:"$E(X)=4$. Calcule $E(3X)$.",
+           type:"libre", correction:"$E(3X)=3\\times4=12$", points:2},
+          {label:"d)", enonce:"$V(X)=2$. Calcule $V(3X)$ avec $V(aX)=a^2V(X)$.",
+           type:"libre", correction:"$V(3X)=3^2\\times2=9\\times2=18$", points:2},
+          {label:"e)", enonce:"Pour une loi binomiale $\\mathcal{B}(n,p)$, l'écart-type $\\sigma(X)$ vaut :",
+           type:"qcm", choix:["$\\sqrt{np(1-p)}$","$np(1-p)$","$np$","$\\sqrt{np}$"],
+           bonneReponseIdx:0, bonneReponse:"$\\sqrt{np(1-p)}$",
+           correction:"$V(X)=np(1-p)$ donc $\\sigma(X)=\\sqrt{np(1-p)}$.", points:2},
+        ],
+        indices:["$E(X+Y)=E(X)+E(Y)$ (toujours) ; $V(X+Y)=V(X)+V(Y)$ (si $X,Y$ indépendantes) ; $E(aX)=aE(X)$ ; $V(aX)=a^2V(X)$"]
+      },
+      {
+        id:"sommevar_t_2", titre:"Échantillonnage : moyenne et somme", niveau:"Difficile", points_total:10,
+        questions:[
+          {label:"a)", enonce:"On prélève un échantillon de taille $n=100$ d'une population où $E(X)=50$ (par individu). Calcule $E(S_n)=nE(X)$, l'espérance de la somme $S_n=X_1+\\cdots+X_n$.",
+           type:"libre", correction:"$E(S_n)=100\\times50=5000$", points:2},
+          {label:"b)", enonce:"Sachant $V(X)=25$ (par individu, tirages indépendants), calcule $V(S_n)=nV(X)$.",
+           type:"libre", correction:"$V(S_n)=100\\times25=2500$", points:2},
+          {label:"c)", enonce:"En déduis l'écart-type $\\sigma(S_n)=\\sqrt{V(S_n)}$.",
+           type:"libre", correction:"$\\sigma(S_n)=\\sqrt{2500}=50$", points:2},
+          {label:"d)", enonce:"Calcule l'espérance de la moyenne $M_n=\\dfrac{S_n}{n}$ (avec $E(M_n)=E(X)$).",
+           type:"libre", correction:"$E(M_n)=50$", points:2},
+          {label:"e)", enonce:"Calcule la variance de $M_n$ (avec $V(M_n)=\\dfrac{V(X)}{n}$).",
+           type:"libre", correction:"$V(M_n)=\\dfrac{25}{100}=0{,}25$", points:2},
+        ],
+        indices:["Pour un échantillon de taille $n$ : $E(S_n)=nE(X)$, $V(S_n)=nV(X)$ ; $E(M_n)=E(X)$, $V(M_n)=\\dfrac{V(X)}{n}$"]
+      },
+    ],
+
   },
 
 };
