@@ -7090,6 +7090,50 @@ const EXERCICES = {
       },
     ],
 
+    "Dérivée de fonction composée": [
+      {
+        id:"compderiv_t_1", titre:"Dérivée d'une fonction composée", niveau:"Difficile", points_total:10,
+        questions:[
+          {label:"a)", enonce:"La dérivée de $v\\circ u$ (notée $(v\\circ u)'$) est donnée par la formule :",
+           type:"qcm", choix:["$(v'\\circ u)\\times u'$","$v'\\times u'$","$v\\circ u'$","$(v\\circ u')'$"],
+           bonneReponseIdx:0, bonneReponse:"$(v'\\circ u)\\times u'$",
+           correction:"Formule de dérivation d'une composée : $(v\\circ u)'=(v'\\circ u)\\times u'$.", points:2},
+          {label:"b)", enonce:"$f(x)=(2x+1)^3$, avec $u(x)=2x+1$ ($u'(x)=2$) et $v(X)=X^3$ ($v'(X)=3X^2$). Sachant $f'(x)=v'(u(x))\\times u'(x)$, calcule $f'(0)$ (avec $u(0)=1$).",
+           type:"libre", correction:"$f'(0)=3(1)^2\\times2=3\\times2=6$", points:2},
+          {label:"c)", enonce:"$g(x)=e^{2x}$. Avec $u(x)=2x$ ($u'(x)=2$) et $(e^{u(x)})'=u'(x)e^{u(x)}$, calcule $g'(0)$ sachant $e^0=1$.",
+           type:"libre", correction:"$g'(0)=2\\times e^0=2\\times1=2$", points:2},
+          {label:"d)", enonce:"La dérivée de $\\sqrt{u(x)}$ (pour $u(x)>0$) est :",
+           type:"qcm", choix:["$\\dfrac{u'(x)}{2\\sqrt{u(x)}}$","$\\dfrac{1}{2\\sqrt{u(x)}}$","$u'(x)\\sqrt{u(x)}$","$2u'(x)\\sqrt{u(x)}$"],
+           bonneReponseIdx:0, bonneReponse:"$\\dfrac{u'(x)}{2\\sqrt{u(x)}}$",
+           correction:"$(\\sqrt{u(x)})'=\\dfrac{u'(x)}{2\\sqrt{u(x)}}$ (cas particulier de la dérivée de composée).", points:2},
+          {label:"e)", enonce:"$h(x)=\\sqrt{x^2+1}$, avec $u(x)=x^2+1$ ($u'(x)=2x$, $u(1)=2$). Calcule $h'(1)=\\dfrac{u'(1)}{2\\sqrt{u(1)}}$ (valeur arrondie au centième).",
+           type:"libre", correction:"$h'(1)=\\dfrac{2}{2\\sqrt{2}}=\\dfrac{1}{\\sqrt{2}}\\approx0{,}71$", points:2},
+        ],
+        indices:["$(v\\circ u)'=(v'\\circ u)\\times u'$ ; cas particuliers : $(e^{u})'=u'e^{u}$, $(\\sqrt{u})'=\\dfrac{u'}{2\\sqrt{u}}$"]
+      },
+    ],
+
+    "Concentration et loi des grands nombres": [
+      {
+        id:"concentr_t_1", titre:"Inégalité de Bienaymé-Tchebychev et loi des grands nombres", niveau:"Difficile", points_total:10,
+        questions:[
+          {label:"a)", enonce:"L'inégalité de Bienaymé-Tchebychev s'écrit $P(|X-\\mu|\\geq\\delta)\\leq\\dfrac{V(X)}{\\delta^2}$. Avec $V(X)=4$ et $\\delta=2$, calcule le majorant $\\dfrac{V(X)}{\\delta^2}$.",
+           type:"libre", correction:"$\\dfrac{4}{2^2}=\\dfrac{4}{4}=1$", points:2},
+          {label:"b)", enonce:"Avec $V(X)=9$ et $\\delta=3$, calcule le majorant $\\dfrac{V(X)}{\\delta^2}$ donné par l'inégalité de Bienaymé-Tchebychev.",
+           type:"libre", correction:"$\\dfrac{9}{3^2}=\\dfrac{9}{9}=1$", points:2},
+          {label:"c)", enonce:"Pour un échantillon de taille $n$, l'inégalité de concentration s'écrit $P(|M_n-\\mu|\\geq\\delta)\\leq\\dfrac{V(X)}{n\\delta^2}$. Avec $V(X)=4$, $n=100$, $\\delta=1$, calcule le majorant.",
+           type:"libre", correction:"$\\dfrac{4}{100\\times1^2}=\\dfrac{4}{100}=0{,}04$", points:3},
+          {label:"d)", enonce:"Dans l'inégalité précédente, si on augmente la taille de l'échantillon $n$ (à $V(X)$ et $\\delta$ fixés), le majorant $\\dfrac{V(X)}{n\\delta^2}$ :",
+           type:"qcm", choix:["Diminue","Augmente","Reste constant","Devient négatif"],
+           bonneReponseIdx:0, bonneReponse:"Diminue",
+           correction:"$n$ est au dénominateur : plus $n$ augmente, plus le majorant $\\dfrac{V(X)}{n\\delta^2}$ diminue — c'est le principe de la loi des grands nombres.", points:2},
+          {label:"e)", enonce:"Avec $V(X)=16$ et $\\delta=4$, calcule le majorant de Bienaymé-Tchebychev $\\dfrac{V(X)}{\\delta^2}$.",
+           type:"libre", correction:"$\\dfrac{16}{4^2}=\\dfrac{16}{16}=1$", points:1},
+        ],
+        indices:["Bienaymé-Tchebychev : $P(|X-\\mu|\\geq\\delta)\\leq\\dfrac{V(X)}{\\delta^2}$ ; pour un échantillon : $P(|M_n-\\mu|\\geq\\delta)\\leq\\dfrac{V(X)}{n\\delta^2}\\to0$ quand $n\\to+\\infty$"]
+      },
+    ],
+
   },
 
 };
