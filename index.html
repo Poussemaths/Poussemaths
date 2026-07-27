@@ -4861,7 +4861,7 @@ const EXERCICES = {
         indices:["Moyenne = somme des valeurs ÷ nombre de valeurs"]
       },
       {
-        id:"stat_6_1", titre:"Lire et organiser des données", niveau:"Facile", points_total:8,
+        id:"stat_6_1", titre:"Lire et organiser des données", niveau:"Facile", points_total:10,
         questions:[
           {label:"1.", enonce:"Notes de $5$ élèves : $12, 14, 8, 16, 10$. Calcule la moyenne.",
            type:"libre", correction:"$\\dfrac{12+14+8+16+10}{5} = \\dfrac{60}{5} = 12$", points:2},
@@ -4873,11 +4873,13 @@ const EXERCICES = {
            type:"qcm", choix:["La moyenne","La valeur centrale","La dispersion (écart entre max et min)","Le nombre de valeurs"],
            bonneReponseIdx:2, bonneReponse:"La dispersion (écart entre max et min)",
            correction:"L'étendue $= \\text{max} - \\text{min}$ mesure la dispersion.", points:2},
+          {label:"5.", enonce:"Notes de $4$ élèves : $9, 11, 13, 15$. Calcule la moyenne.",
+           type:"libre", correction:"$\\dfrac{9+11+13+15}{4} = \\dfrac{48}{4} = 12$", points:2},
         ],
         indices:["Médiane = valeur du milieu après tri ; Étendue = max − min"]
       },
       {
-        id:"stat_6_2", titre:"Moyenne pondérée et tableaux", niveau:"Moyen", points_total:10,
+        id:"stat_6_2", titre:"Moyenne pondérée et tableaux", niveau:"Moyen", points_total:14,
         questions:[
           {label:"a)", enonce:"$5$ élèves ont $10$, $3$ ont $14$, $2$ ont $16$. Calcule la moyenne.",
            type:"libre", correction:"$\\dfrac{5\\times10+3\\times14+2\\times16}{10}=\\dfrac{50+42+32}{10}=\\dfrac{124}{10}=12{,}4$", points:4},
@@ -4885,11 +4887,13 @@ const EXERCICES = {
            type:"libre", correction:"$\\dfrac{6\\times13+x}{7}=13{,}5 \\Rightarrow 78+x=94{,}5 \\Rightarrow x=16{,}5$", points:3},
           {label:"c)", enonce:"Série : $5, 8, 3, 9, 5, 6, 4, 7, 2, 8$. Quelle est la médiane ?",
            type:"libre", correction:"Triée : $2,3,4,5,5,6,7,8,8,9$. Médiane $= \\dfrac{5+6}{2}=5{,}5$", points:3},
+          {label:"d)", enonce:"$4$ élèves ont eu $8$, $6$ ont eu $12$, $10$ ont eu $15$. Calcule la moyenne.",
+           type:"libre", correction:"$\\dfrac{4\\times8+6\\times12+10\\times15}{20}=\\dfrac{32+72+150}{20}=\\dfrac{254}{20}=12{,}7$", points:4},
         ],
         indices:["Moyenne pondérée $= \\dfrac{\\sum n_i x_i}{\\sum n_i}$"]
       },
       {
-        id:"stat_6_3", titre:"Diagrammes et représentations", niveau:"Moyen", points_total:10,
+        id:"stat_6_3", titre:"Diagrammes et représentations", niveau:"Moyen", points_total:14,
         questions:[
           {label:"1.", enonce:"Quel type de diagramme utilise-t-on pour montrer des parts d'un tout (ex: répartition filles/garçons) ?",
            type:"qcm", choix:["Diagramme en bâtons","Diagramme circulaire (camembert)","Courbe","Tableau"],
@@ -4899,30 +4903,40 @@ const EXERCICES = {
            type:"libre", correction:"$\\dfrac{30}{120} \\times 360° = \\dfrac{1}{4} \\times 360° = 90°$", points:4},
           {label:"3.", enonce:"Un diagramme en bâtons montre : Lundi=$8$, Mardi=$12$, Mercredi=$5$. Quelle est la moyenne journalière ?",
            type:"libre", correction:"$\\dfrac{8+12+5}{3} = \\dfrac{25}{3} \\approx 8{,}3$", points:4},
+          {label:"4.", enonce:"Dans un camembert, $90$ personnes sur $360$ préfèrent le vélo. Quel angle correspond à ce secteur ?",
+           type:"libre", correction:"$\\dfrac{90}{360} \\times 360° = 90°$", points:4},
         ],
         indices:["Angle d'un secteur $= \\dfrac{\\text{effectif}}{\\text{total}} \\times 360°$"]
       },
       {
-        id:"stat_6_4", titre:"Statistiques — approfondissement", niveau:"Difficile", points_total:10,
+        id:"stat_6_4", titre:"Statistiques — approfondissement", niveau:"Difficile", points_total:14,
         questions:[
           {label:"a)", enonce:"Notes : $10, 12, 15, 8, 14, 11, 13$. Calcule la moyenne.",
            type:"libre", correction:"Moyenne $= \\dfrac{83}{7} \\approx 11{,}9$. Triée : $8,10,11,12,13,14,15$ → Médiane $= 12$", points:4},
           {label:"b)", enonce:"Si on augmente toutes les notes de $2$ points, que devient la moyenne ?",
            type:"libre", correction:"La moyenne augmente aussi de $2$ : $11{,}9 + 2 = 13{,}9$", points:3},
           {label:"c)", enonce:"Série A : moyenne $= 12$, étendue $= 8$. Série B : moyenne $= 12$, étendue $= 2$. Laquelle est plus homogène ?",
-           type:"libre", correction:"Série B — étendue plus faible = moins de disparité = plus homogène.", points:3},
+           type:"qcm", choix:["Série A","Série B","Les deux sont identiques","On ne peut pas savoir"],
+           bonneReponseIdx:1, bonneReponse:"Série B",
+           correction:"Série B — étendue plus faible = moins de disparité = plus homogène.", points:3},
+          {label:"d)", enonce:"Si on multiplie toutes les valeurs d'une série par $3$, que devient l'étendue (initialement $= 5$) ?",
+           type:"libre", correction:"L'étendue est aussi multipliée par $3$ : $5 \\times 3 = 15$", points:4},
         ],
         indices:["Ajouter $k$ à toutes les valeurs : la moyenne augmente de $k$, l'étendue ne change pas"]
       },
       {
-        id:"stat_6_5", titre:"Statistiques — brevet 6ème", niveau:"Difficile", points_total:12,
+        id:"stat_6_5", titre:"Statistiques — brevet 6ème", niveau:"Difficile", points_total:19,
         questions:[
           {label:"1.", enonce:"Un sondage : $45\\%$ aiment le foot, $30\\%$ le tennis, $25\\%$ la natation. Dans un camembert, quel angle pour le foot ?",
            type:"libre", correction:"$45\\% \\times 360° = 162°$", points:3},
           {label:"2.", enonce:"Classe A : $28$ élèves, moyenne $= 12{,}5$. Classe B : $22$ élèves, moyenne $= 11$. Moyenne globale ?",
            type:"libre", correction:"$\\dfrac{28 \\times 12{,}5 + 22 \\times 11}{50} = \\dfrac{350+242}{50} = \\dfrac{592}{50} = 11{,}84$", points:5},
-          {label:"3.", enonce:"Série : $3, 5, 7, 8, 10, 12, 14$. Donne $Q_1$ et $Q_3$.",
-           type:"libre", correction:"$Q_1=5$ (médiane des 3 premières) ; $Q_3=12$ (médiane des 3 dernières)", points:4},
+          {label:"3.", enonce:"Série : $3, 5, 7, 8, 10, 12, 14$. Donne $Q_1$.",
+           type:"libre", correction:"$Q_1=5$ (médiane des 3 premières valeurs)", points:4},
+          {label:"4.", enonce:"Même série ($3, 5, 7, 8, 10, 12, 14$). Donne $Q_3$.",
+           type:"libre", correction:"$Q_3=12$ (médiane des 3 dernières valeurs)", points:4},
+          {label:"5.", enonce:"Un sondage : $45\\%$ aiment le foot, $30\\%$ le tennis, $25\\%$ la natation. Quel angle pour la natation ?",
+           type:"libre", correction:"$25\\% \\times 360° = 90°$", points:3},
         ],
         indices:["Moyenne globale : pondérer par les effectifs de chaque groupe"]
       },
@@ -4942,7 +4956,7 @@ const EXERCICES = {
         indices:["Mets les deux fractions au même dénominateur avant d'additionner"]
       },
       {
-        id:"frac_6_1", titre:"Fractions — lire et comparer", niveau:"Facile", points_total:8,
+        id:"frac_6_1", titre:"Fractions — lire et comparer", niveau:"Facile", points_total:10,
         questions:[
           {label:"1.", enonce:"Laquelle de ces fractions est égale à $\\dfrac{1}{2}$ ?",
            type:"qcm", choix:["$\\dfrac{2}{3}$","$\\dfrac{3}{6}$","$\\dfrac{4}{6}$","$\\dfrac{2}{5}$"],
@@ -4954,11 +4968,15 @@ const EXERCICES = {
            type:"libre", correction:"$\\dfrac{6}{15}+\\dfrac{5}{15}=\\dfrac{11}{15}$", points:2},
           {label:"4.", enonce:"$\\dfrac{3}{4}$ d'une classe de $28$ élèves. Combien d'élèves ?",
            type:"libre", correction:"$28\\times\\dfrac{3}{4}=21$ élèves", points:2},
+          {label:"5.", enonce:"Quelle fraction est égale à $\\dfrac{6}{8}$ ?",
+           type:"qcm", choix:["$\\dfrac{2}{3}$","$\\dfrac{3}{4}$","$\\dfrac{4}{5}$","$\\dfrac{5}{6}$"],
+           bonneReponseIdx:1, bonneReponse:"$\\dfrac{3}{4}$",
+           correction:"$\\dfrac{6}{8}=\\dfrac{6\\div2}{8\\div2}=\\dfrac{3}{4}$", points:2},
         ],
         indices:["Pour comparer des fractions, réduis au même dénominateur ou convertis en décimal"]
       },
       {
-        id:"frac_6_2", titre:"Fractions — additionner et soustraire", niveau:"Facile", points_total:8,
+        id:"frac_6_2", titre:"Fractions — additionner et soustraire", niveau:"Facile", points_total:10,
         questions:[
           {label:"a)", enonce:"Calcule : $\\dfrac{1}{4}+\\dfrac{3}{4}$",
            type:"libre", correction:"$\\dfrac{4}{4}=1$", points:2},
@@ -4968,11 +4986,13 @@ const EXERCICES = {
            type:"libre", correction:"$\\dfrac{10}{5}+\\dfrac{3}{5}=\\dfrac{13}{5}=2{,}6$", points:2},
           {label:"d)", enonce:"Calcule : $1-\\dfrac{2}{7}$",
            type:"libre", correction:"$\\dfrac{7}{7}-\\dfrac{2}{7}=\\dfrac{5}{7}$", points:2},
+          {label:"e)", enonce:"Calcule : $\\dfrac{3}{4}+\\dfrac{1}{6}$",
+           type:"libre", correction:"$\\dfrac{9}{12}+\\dfrac{2}{12}=\\dfrac{11}{12}$", points:2},
         ],
         indices:["Même dénominateur pour additionner : cherche le PPCM"]
       },
       {
-        id:"frac_6_3", titre:"Fractions — multiplier", niveau:"Moyen", points_total:10,
+        id:"frac_6_3", titre:"Fractions — multiplier", niveau:"Moyen", points_total:16,
         questions:[
           {label:"a)", enonce:"Calcule : $\\dfrac{3}{4}\\times\\dfrac{8}{9}$",
            type:"libre", correction:"$\\dfrac{24}{36}=\\dfrac{2}{3}$", points:3},
@@ -4980,11 +5000,15 @@ const EXERCICES = {
            type:"libre", correction:"$150\\times\\dfrac{2}{3}=100$€", points:3},
           {label:"c)", enonce:"Simplifie avant de calculer : $\\dfrac{4}{7}\\times\\dfrac{14}{8}$",
            type:"libre", correction:"$\\dfrac{4\\times14}{7\\times8}=\\dfrac{56}{56}=1$", points:4},
+          {label:"d)", enonce:"Calcule : $\\dfrac{5}{6}\\times\\dfrac{3}{10}$",
+           type:"libre", correction:"$\\dfrac{15}{60}=\\dfrac{1}{4}$", points:3},
+          {label:"e)", enonce:"$\\dfrac{3}{5}$ de $200$ élèves",
+           type:"libre", correction:"$200\\times\\dfrac{3}{5}=120$ élèves", points:3},
         ],
         indices:["Pour multiplier des fractions : numérateur × numérateur, dénominateur × dénominateur"]
       },
       {
-        id:"frac_6_4", titre:"Fractions — problèmes", niveau:"Moyen", points_total:10,
+        id:"frac_6_4", titre:"Fractions — problèmes", niveau:"Moyen", points_total:17,
         questions:[
           {label:"a)", enonce:"Pierre lit $\\dfrac{3}{8}$ d'un livre de $240$ pages. Combien de pages a-t-il lues ?",
            type:"libre", correction:"$240\\times\\dfrac{3}{8}=90$ pages", points:3},
@@ -4992,11 +5016,15 @@ const EXERCICES = {
            type:"libre", correction:"$1-\\dfrac{3}{8}-\\dfrac{2}{8}=\\dfrac{3}{8}$", points:3},
           {label:"c)", enonce:"$\\dfrac{2}{5}$ des élèves sont des filles. Il y a $18$ filles. Combien y a-t-il d'élèves en tout ?",
            type:"libre", correction:"$\\dfrac{2}{5}\\times n=18 \\Rightarrow n=18\\times\\dfrac{5}{2}=45$ élèves", points:4},
+          {label:"d)", enonce:"Léa a $\\dfrac{1}{4}$ d'un gâteau de $12$ parts. Combien de parts a-t-elle ?",
+           type:"libre", correction:"$12\\times\\dfrac{1}{4}=3$ parts", points:3},
+          {label:"e)", enonce:"$\\dfrac{3}{7}$ des $350$ visiteurs d'un musée sont des enfants. Combien y a-t-il d'enfants ?",
+           type:"libre", correction:"$350\\times\\dfrac{3}{7}=150$ enfants", points:4},
         ],
         indices:["Fraction d'une quantité : multiplier la quantité par la fraction"]
       },
       {
-        id:"frac_6_5", titre:"Fractions — brevet 6ème", niveau:"Difficile", points_total:12,
+        id:"frac_6_5", titre:"Fractions — brevet 6ème", niveau:"Difficile", points_total:19,
         questions:[
           {label:"1.", enonce:"Montre que $\\dfrac{3}{4}+\\dfrac{5}{6}=\\dfrac{19}{12}$",
            type:"libre", correction:"$\\dfrac{9}{12}+\\dfrac{10}{12}=\\dfrac{19}{12}$ ✓", points:3},
@@ -5004,6 +5032,10 @@ const EXERCICES = {
            type:"libre", correction:"$\\dfrac{5}{8}\\times C=350 \\Rightarrow C=350\\times\\dfrac{8}{5}=560$ L", points:4},
           {label:"3.", enonce:"Calcule et simplifie : $\\dfrac{2}{3}\\times\\dfrac{9}{4}+\\dfrac{1}{2}$",
            type:"libre", correction:"$\\dfrac{18}{12}+\\dfrac{6}{12}=\\dfrac{24}{12}=2$", points:5},
+          {label:"4.", enonce:"Une citerne contient $\\dfrac{3}{5}$ de sa capacité, soit $420$ L. Capacité totale ?",
+           type:"libre", correction:"$\\dfrac{3}{5}\\times C=420 \\Rightarrow C=420\\times\\dfrac{5}{3}=700$ L", points:4},
+          {label:"5.", enonce:"Calcule et simplifie : $\\dfrac{3}{4}\\times\\dfrac{2}{3}-\\dfrac{1}{4}$",
+           type:"libre", correction:"$\\dfrac{6}{12}-\\dfrac{3}{12}=\\dfrac{3}{12}=\\dfrac{1}{4}$", points:3},
         ],
         indices:["Priorité aux multiplications avant les additions"]
       },
