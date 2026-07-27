@@ -6874,6 +6874,53 @@ const EXERCICES = {
       },
     ],
 
+    "Convexité": [
+      {
+        id:"convex_t_1", titre:"Dérivée seconde et point d'inflexion", niveau:"Moyen", points_total:10,
+        questions:[
+          {label:"a)", enonce:"$f(x)=x^3-3x$, $f'(x)=3x^2-3$. Sachant $f''(x)=6x$, calcule $f''(2)$.",
+           type:"libre", correction:"$f''(2)=6\\times2=12$", points:2},
+          {label:"b)", enonce:"$f$ est convexe sur un intervalle $I$ si et seulement si :",
+           type:"qcm", choix:["$f''(x)\\geq0$ sur $I$","$f'(x)\\geq0$ sur $I$","$f(x)\\geq0$ sur $I$","$f$ est croissante sur $I$"],
+           bonneReponseIdx:0, bonneReponse:"$f''(x)\\geq0$ sur $I$",
+           correction:"$f$ est convexe sur $I$ ssi sa dérivée seconde $f''$ est positive sur $I$.", points:2},
+          {label:"c)", enonce:"Avec $f''(x)=6x$, résous $f''(x)=0$ (abscisse du point d'inflexion).",
+           type:"libre", correction:"$6x=0 \\Rightarrow x=0$", points:2},
+          {label:"d)", enonce:"Pour $x<0$, $f''(x)=6x$ est négatif. Sur cet intervalle, $f$ est :",
+           type:"qcm", choix:["Concave","Convexe"],
+           bonneReponseIdx:0, bonneReponse:"Concave",
+           correction:"$f''(x)<0$ sur cet intervalle : $f$ y est concave.", points:2},
+          {label:"e)", enonce:"Pour $x>0$, $f''(x)=6x$ est positif. Sur cet intervalle, $f$ est :",
+           type:"qcm", choix:["Convexe","Concave"],
+           bonneReponseIdx:0, bonneReponse:"Convexe",
+           correction:"$f''(x)>0$ sur cet intervalle : $f$ y est convexe. $x=0$ est bien un point d'inflexion (changement de convexité).", points:2},
+        ],
+        indices:["$f''(x)\\geq0 \\Rightarrow f$ convexe ; $f''(x)\\leq0 \\Rightarrow f$ concave ; point d'inflexion = changement de signe de $f''$"]
+      },
+      {
+        id:"convex_t_2", titre:"Convexité et tangentes", niveau:"Facile", points_total:10,
+        questions:[
+          {label:"a)", enonce:"$g(x)=x^2$, $g'(x)=2x$. Calcule $g''(x)$ (dérivée de $g'$).",
+           type:"libre", correction:"$g''(x)=2$", points:2},
+          {label:"b)", enonce:"$g''(x)=2>0$ pour tout $x$. La fonction $g(x)=x^2$ est donc :",
+           type:"qcm", choix:["Convexe sur $\\mathbb{R}$","Concave sur $\\mathbb{R}$","Ni convexe ni concave","On ne peut pas savoir"],
+           bonneReponseIdx:0, bonneReponse:"Convexe sur $\\mathbb{R}$",
+           correction:"$g''(x)=2\\geq0$ pour tout $x$ : $g$ est convexe sur $\\mathbb{R}$ tout entier.", points:2},
+          {label:"c)", enonce:"$h(x)=-x^2$, $h'(x)=-2x$. Calcule $h''(x)$.",
+           type:"libre", correction:"$h''(x)=-2$", points:2},
+          {label:"d)", enonce:"$h''(x)=-2<0$ pour tout $x$. La fonction $h$ est donc :",
+           type:"qcm", choix:["Concave sur $\\mathbb{R}$","Convexe sur $\\mathbb{R}$"],
+           bonneReponseIdx:0, bonneReponse:"Concave sur $\\mathbb{R}$",
+           correction:"$h''(x)=-2\\leq0$ pour tout $x$ : $h$ est concave sur $\\mathbb{R}$ tout entier.", points:2},
+          {label:"e)", enonce:"Une fonction convexe sur un intervalle est toujours située, sur cet intervalle :",
+           type:"qcm", choix:["Au-dessus de ses tangentes","En-dessous de ses tangentes","Sur ses tangentes","Cela dépend du point"],
+           bonneReponseIdx:0, bonneReponse:"Au-dessus de ses tangentes",
+           correction:"C'est la caractérisation géométrique de la convexité : la courbe reste toujours au-dessus de chacune de ses tangentes.", points:2},
+        ],
+        indices:["$g''(x)=(g')'(x)$ ; dérivée seconde constante $\\Rightarrow$ convexité constante sur tout $\\mathbb{R}$"]
+      },
+    ],
+
   },
 
 };
