@@ -5444,7 +5444,7 @@ const EXERCICES = {
         indices:["Remplace $x$ par sa valeur puis calcule dans l'ordre des priorités opératoires"]
       },
       {
-        id:"lit_5_1", titre:"Expressions littérales — reconnaître", niveau:"Facile", points_total:8,
+        id:"lit_5_1", titre:"Expressions littérales — reconnaître", niveau:"Facile", points_total:10,
         questions:[
           {label:"1.", enonce:"Laquelle de ces expressions est une expression littérale réduite ?",
            type:"qcm", choix:["$3x+5x-2x$","$6x$","$x+x+x+x+x+x$","$3\\times x\\times2$"],
@@ -5456,23 +5456,31 @@ const EXERCICES = {
            type:"libre", correction:"$6x+15$", points:2},
           {label:"4.", enonce:"Factorise : $4x+8$",
            type:"libre", correction:"$4(x+2)$", points:2},
+          {label:"5.", enonce:"Réduis : $7x - 2x + 4x$",
+           type:"libre", correction:"$9x$", points:2},
         ],
         indices:["Pour factoriser, cherche le facteur commun à tous les termes"]
       },
       {
-        id:"lit_5_2", titre:"Substitution et programmes de calcul", niveau:"Facile", points_total:8,
+        id:"lit_5_2", titre:"Substitution et programmes de calcul", niveau:"Facile", points_total:15,
         questions:[
           {label:"a)", enonce:"$f(x)=2x-3$. Calcule $f(4)$ et $f(-1)$.",
            type:"libre", correction:"$f(4)=5$ ; $f(-1)=-5$", points:3},
           {label:"b)", enonce:"Programme : « Prendre un nombre, le multiplier par $3$, ajouter $6$, diviser par $3$. » Traduis et simplifie.",
-           type:"libre", correction:"$\\dfrac{3x+6}{3}=x+2$ — le résultat vaut toujours le nombre de départ $+2$", points:3},
+           type:"libre", correction:"$\\dfrac{3x+6}{3}=x+2$", points:3},
           {label:"c)", enonce:"Vérifie que $x=4$ est solution de $2x+1=9$.",
-           type:"libre", correction:"$2\\times4+1=9$ ✓", points:2},
+           type:"qcm", choix:["Oui","Non","On ne peut pas savoir","Seulement pour $x$ positif"],
+           bonneReponseIdx:0, bonneReponse:"Oui",
+           correction:"$2\\times4+1=9$ ✓ Oui.", points:2},
+          {label:"d)", enonce:"$g(x)=3x+1$. Calcule $g(2)$ et $g(-3)$.",
+           type:"libre", correction:"$g(2)=7$ ; $g(-3)=-8$", points:4},
+          {label:"e)", enonce:"Programme : « Prendre un nombre, ajouter $5$, multiplier par $2$. » Pour un nombre de départ $x=3$, quel est le résultat ?",
+           type:"libre", correction:"$(3+5)\\times2=16$", points:3},
         ],
         indices:["Substituer = remplacer la lettre par sa valeur numérique"]
       },
       {
-        id:"lit_5_3", titre:"Développer et factoriser", niveau:"Moyen", points_total:10,
+        id:"lit_5_3", titre:"Développer et factoriser", niveau:"Moyen", points_total:16,
         questions:[
           {label:"a)", enonce:"Développe et réduis : $2(3x+4)-(x-5)$",
            type:"libre", correction:"$6x+8-x+5=5x+13$", points:3},
@@ -5480,11 +5488,15 @@ const EXERCICES = {
            type:"libre", correction:"$x^2+5x+3x+15=x^2+8x+15$", points:4},
           {label:"c)", enonce:"Factorise : $6x^2+9x$",
            type:"libre", correction:"$3x(2x+3)$", points:3},
+          {label:"d)", enonce:"Développe et réduis : $3(2x-1)-(x-4)$",
+           type:"libre", correction:"$6x-3-x+4=5x+1$", points:3},
+          {label:"e)", enonce:"Factorise : $8x^2+12x$",
+           type:"libre", correction:"$4x(2x+3)$", points:3},
         ],
         indices:["$(a+b)(c+d)=ac+ad+bc+bd$"]
       },
       {
-        id:"lit_5_4", titre:"Équations du premier degré — 5ème", niveau:"Moyen", points_total:10,
+        id:"lit_5_4", titre:"Équations du premier degré — 5ème", niveau:"Moyen", points_total:16,
         questions:[
           {label:"a)", enonce:"Résous : $3x+7=22$",
            type:"libre", correction:"$3x=15 \\Rightarrow x=5$", points:2},
@@ -5492,20 +5504,28 @@ const EXERCICES = {
            type:"libre", correction:"$2x+6=x+9 \\Rightarrow x=3$", points:4},
           {label:"c)", enonce:"L'âge de Paul est le triple de l'âge de Marc. Leur somme est $32$. Âge de Marc ?",
            type:"libre", correction:"$x+3x=32 \\Rightarrow 4x=32 \\Rightarrow x=8$", points:4},
+          {label:"d)", enonce:"Résous : $5x-3=17$",
+           type:"libre", correction:"$5x=20 \\Rightarrow x=4$", points:2},
+          {label:"e)", enonce:"La somme de deux entiers consécutifs est $45$. Quel est le plus petit ?",
+           type:"libre", correction:"$x+(x+1)=45 \\Rightarrow 2x=44 \\Rightarrow x=22$", points:4},
         ],
         indices:["Même opération des deux côtés de l'égalité"]
       },
       {
-        id:"lit_5_5", titre:"Calcul littéral — brevet 5ème", niveau:"Difficile", points_total:12,
+        id:"lit_5_5", titre:"Calcul littéral — brevet 5ème", niveau:"Difficile", points_total:19,
         questions:[
           {label:"1.", enonce:"Développe et réduis : $(2x-1)^2 - (2x+1)(2x-1)$",
            type:"libre", correction:"$(4x^2-4x+1)-(4x^2-1)=-4x+2$", points:5},
-          {label:"2.", enonce:"$f(x)=x^2-4x+3$. Calcule $f(0)$, $f(1)$, $f(3)$. Pour quelles valeurs $f(x)=0$ ?",
-           type:"libre", correction:"$f(0)=3$ ; $f(1)=0$ ; $f(3)=0$. $f(x)=0$ pour $x=1$ et $x=3$.", points:4},
+          {label:"2.", enonce:"$f(x)=x^2-4x+3$. Calcule $f(0)$.",
+           type:"libre", correction:"$f(0)=0^2-4\\times0+3=3$", points:3},
+          {label:"2b.", enonce:"Même fonction $f(x)=x^2-4x+3$. Pour quelle valeur positive de $x$ a-t-on $f(x)=0$, sachant que $x=1$ est aussi solution ?",
+           type:"libre", correction:"$f(3)=9-12+3=0$. L'autre solution est $x=3$", points:4},
           {label:"3.", enonce:"Vrai ou faux : $(a+b)^2 = a^2+b^2$.",
            type:"qcm", choix:["Vrai","Faux — il manque $2ab$","Seulement si $a=b$","Seulement si $a=0$"],
            bonneReponseIdx:1, bonneReponse:"Faux — il manque $2ab$",
            correction:"$(a+b)^2=a^2+2ab+b^2$. Il faut le terme $2ab$.", points:3},
+          {label:"4.", enonce:"Développe et réduis : $(3x+2)^2-(3x-2)(3x+2)$",
+           type:"libre", correction:"$(9x^2+12x+4)-(9x^2-4)=12x+8$", points:4},
         ],
         indices:["$(a+b)^2=a^2+2ab+b^2$ ; $(a-b)(a+b)=a^2-b^2$"]
       },
