@@ -6956,6 +6956,18 @@ const EXERCICES = {
 
     "Loi binomiale": [
       {
+        id:"binom_t_genere", titre:"Calcul de P(X=k) — entraînement infini", niveau:"Moyen", points_total:5,
+        genere: true, templateId: "loi_binomiale_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["$P(X=k)=\\binom{n}{k}p^k(1-p)^{n-k}$"]
+      },
+      {
         id:"binom_t_1", titre:"Loi binomiale — définition et paramètres", niveau:"Facile", points_total:8,
         questions:[
           {label:"a)", enonce:"Un schéma de Bernoulli répète $n$ fois une épreuve de Bernoulli de paramètre $p$. La variable $X$ comptant le nombre de succès suit une loi :",
@@ -9488,6 +9500,7 @@ const TEMPLATES_GENERATEUR = {
   derivation_v1: 'exo-derivation-generer',
   produit_scalaire_v1: 'exo-produit-scalaire-generer',
   exponentielle_v1: 'exo-exponentielle-generer',
+  loi_binomiale_v1: 'exo-loi-binomiale-generer',
 };
 const TEMPLATES_VALIDATEUR = {
   equation_1er_degre_v1: 'exo-equation-valider',
@@ -9523,6 +9536,7 @@ const TEMPLATES_VALIDATEUR = {
   derivation_v1: 'exo-derivation-valider',
   produit_scalaire_v1: 'exo-produit-scalaire-valider',
   exponentielle_v1: 'exo-exponentielle-valider',
+  loi_binomiale_v1: 'exo-loi-binomiale-valider',
 };
 let currentGenTokens = [];
 
