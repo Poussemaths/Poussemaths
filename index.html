@@ -5069,37 +5069,45 @@ const EXERCICES = {
         indices:["$|a - b|$ = distance entre $a$ et $b$ sur la droite graduée"]
       },
       {
-        id:"interv_2_A", titre:"Intervalles et inéquations", niveau:"Facile", points_total:6,
+        id:"interv_2_A", titre:"Intervalles et inéquations", niveau:"Facile", points_total:14,
         questions:[
           {label:"a)", enonce:"Résous $2x - 3 < 5$ et donne la solution sous forme d'intervalle.", correction:"$2x < 8 \\Rightarrow x < 4$ — solution : $]-\\infty\\,;\\,4[$", points:2},
           {label:"b)", enonce:"Résous $-3 \\leq 2x + 1 \\leq 7$ et donne la solution.", correction:"$-4 \\leq 2x \\leq 6 \\Rightarrow -2 \\leq x \\leq 3$ — solution : $[-2\\,;\\,3]$", points:2},
-          {label:"c)", enonce:"Donne l'ensemble $A \\cap B$ et $A \\cup B$ avec $A = [-1\\,;\\,3]$ et $B = [1\\,;\\,5]$.", correction:"$A \\cap B = [1\\,;\\,3]$ ; $A \\cup B = [-1\\,;\\,5]$", points:2},
+          {label:"c)", enonce:"Donne l'ensemble $A \\cap B$ avec $A = [-1\\,;\\,3]$ et $B = [1\\,;\\,5]$.", correction:"$A \\cap B = [1\\,;\\,3]$", points:3},
+          {label:"c2)", enonce:"Même ensembles ($A = [-1\\,;\\,3]$, $B = [1\\,;\\,5]$). Donne $A \\cup B$.", correction:"$A \\cup B = [-1\\,;\\,5]$", points:3},
+          {label:"d)", enonce:"Résous $3x + 2 < 14$ et donne la solution sous forme d'intervalle.", correction:"$3x < 12 \\Rightarrow x < 4$ — solution : $]-\\infty\\,;\\,4[$", points:4},
         ],
         indices:["Pour une double inégalité, opère simultanément des deux côtés"]
       },
       {
-        id:"interv_2_B", titre:"Valeur absolue", niveau:"Moyen", points_total:8,
+        id:"interv_2_B", titre:"Valeur absolue", niveau:"Moyen", points_total:15,
         questions:[
-          {label:"a)", enonce:"Calcule $|{-7}|$, $|3-8|$ et $|\\sqrt{2}-1{,}5|$.", correction:"$7$ ; $5$ ; $|1{,}414...-1{,}5| = 0{,}086...$", points:2},
-          {label:"b)", enonce:"Résous $|2x - 4| = 6$.", correction:"$2x-4=6 \\Rightarrow x=5$ ou $2x-4=-6 \\Rightarrow x=-1$", points:3},
+          {label:"a)", enonce:"Calcule $|{-7}|$.", correction:"$7$", points:2},
+          {label:"a2)", enonce:"Calcule $|3-8|$.", correction:"$5$", points:2},
+          {label:"b)", enonce:"Résous $|2x - 4| = 6$. Donne la solution positive.", correction:"$2x-4=6 \\Rightarrow x \\Rightarrow 5$", points:3},
           {label:"c)", enonce:"Résous $|x + 1| < 3$.", correction:"$-3 < x+1 < 3 \\Rightarrow -4 < x < 2$ — solution : $]-4\\,;\\,2[$", points:3},
+          {label:"d)", enonce:"Résous $|3x - 6| = 12$. Donne la solution positive.", correction:"$3x-6=12 \\Rightarrow x \\Rightarrow 6$", points:5},
         ],
         indices:["$|u| = a \\Rightarrow u = a$ ou $u = -a$ ; $|u| < a \\Rightarrow -a < u < a$"]
       },
       {
-        id:"interv_2_E", titre:"Valeur absolue — calculs", niveau:"Moyen", points_total:8,
+        id:"interv_2_E", titre:"Valeur absolue — calculs", niveau:"Moyen", points_total:16,
         questions:[
-          {label:"a)", enonce:"Résous : $|2x-3|=5$",
-           type:"libre", correction:"$2x-3=5 \\Rightarrow x=4$ ou $2x-3=-5 \\Rightarrow x=-1$", points:3},
+          {label:"a)", enonce:"Résous : $|2x-3|=5$. Donne la solution positive.",
+           type:"libre", correction:"$2x-3=5 \\Rightarrow x \\Rightarrow 4$", points:3},
           {label:"b)", enonce:"Résous : $|x+2| < 4$",
            type:"libre", correction:"$-4<x+2<4 \\Rightarrow -6<x<2$ — intervalle $]-6\\,;\\,2[$", points:3},
-          {label:"c)", enonce:"Résous : $|3x-1| \\geq 8$",
-           type:"libre", correction:"$3x-1\\geq8 \\Rightarrow x\\geq3$ ou $3x-1\\leq-8 \\Rightarrow x\\leq-\\dfrac{7}{3}$", points:2},
+          {label:"c)", enonce:"Résous : $|3x-1| \\geq 8$, partie $x\\geq...$",
+           type:"libre", correction:"$3x-1\\geq8 \\Rightarrow x \\Rightarrow 3$", points:3},
+          {label:"d)", enonce:"Résous : $|2x+5|=9$. Donne la solution positive.",
+           type:"libre", correction:"$2x+5=9 \\Rightarrow x \\Rightarrow 2$", points:3},
+          {label:"e)", enonce:"Résous : $|x-3| < 5$",
+           type:"libre", correction:"$-5<x-3<5 \\Rightarrow -2<x<8$ — intervalle $]-2\\,;\\,8[$", points:4},
         ],
         indices:["$|u|=a \\Rightarrow u=a$ ou $u=-a$ ; $|u|<a \\Rightarrow -a<u<a$"]
       },
       {
-        id:"interv_2_C", titre:"Inéquations du second degré", niveau:"Difficile", points_total:10,
+        id:"interv_2_C", titre:"Inéquations du second degré", niveau:"Difficile", points_total:17,
         questions:[
           {label:"a)", enonce:"Résous : $x^2-5x+6 \\leq 0$",
            type:"libre", correction:"$\\Delta=25-24=1$. $x_1=2$, $x_2=3$. Solution : $[2\\,;\\,3]$.", points:4},
@@ -5107,18 +5115,26 @@ const EXERCICES = {
            type:"libre", correction:"$(x-2)(x+2)>0 \\Rightarrow x<-2$ ou $x>2$ — $]-\\infty\\,;\\,-2[\\cup]2\\,;\\,+\\infty[$", points:3},
           {label:"c)", enonce:"Pour quelles valeurs de $x$ a-t-on $2x^2-3x-2 \\leq 0$ ?",
            type:"libre", correction:"$\\Delta=9+16=25$. $x_1=-\\dfrac{1}{2}$, $x_2=2$. Solution : $\\left[-\\dfrac{1}{2}\\,;\\,2\\right]$.", points:3},
+          {label:"d)", enonce:"Résous : $x^2-7x+10 \\leq 0$",
+           type:"libre", correction:"$\\Delta=49-40=9$. $x_1=2$, $x_2=5$. Solution : $[2\\,;\\,5]$.", points:4},
+          {label:"e)", enonce:"Résous : $x^2-9 > 0$",
+           type:"libre", correction:"$(x-3)(x+3)>0 \\Rightarrow x<-3$ ou $x>3$ — $]-\\infty\\,;\\,-3[\\cup]3\\,;\\,+\\infty[$", points:3},
         ],
         indices:["Trinôme $a(x-x_1)(x-x_2)$ : signe de $a$ entre les racines, opposé en dehors"]
       },
       {
-        id:"interv_2_D", titre:"Intervalles et ensembles — brevet", niveau:"Difficile", points_total:10,
+        id:"interv_2_D", titre:"Intervalles et ensembles — brevet", niveau:"Difficile", points_total:19,
         questions:[
-          {label:"1.", enonce:"$A=[-2\\,;\\,5]$ et $B=]1\\,;\\,7]$. Donne $A\\cap B$ et $A\\cup B$.",
-           type:"libre", correction:"$A\\cap B=]1\\,;\\,5]$ ; $A\\cup B=[-2\\,;\\,7]$", points:4},
+          {label:"1.", enonce:"$A=[-2\\,;\\,5]$ et $B=]1\\,;\\,7]$. Donne $A\\cap B$.",
+           type:"libre", correction:"$A\\cap B=]1\\,;\\,5]$", points:4},
+          {label:"1b.", enonce:"Même ensembles ($A=[-2\\,;\\,5]$, $B=]1\\,;\\,7]$). Donne $A\\cup B$.",
+           type:"libre", correction:"$A\\cup B=[-2\\,;\\,7]$", points:4},
           {label:"2.", enonce:"Résous : $|2x-1| \\leq 3$ ET $x \\geq 0$.",
            type:"libre", correction:"$-3\\leq2x-1\\leq3 \\Rightarrow -1\\leq x\\leq2$. Avec $x\\geq0$ : $[0\\,;\\,2]$.", points:3},
-          {label:"3.", enonce:"Pour quelles valeurs entières $n$ a-t-on $|n-5| < 3$ ?",
-           type:"libre", correction:"$-3<n-5<3 \\Rightarrow 2<n<8$. Entiers : $n\\in\\{3,4,5,6,7\\}$.", points:3},
+          {label:"3.", enonce:"Combien d'entiers $n$ vérifient $|n-5| < 3$ ?",
+           type:"libre", correction:"$-3<n-5<3 \\Rightarrow 2<n<8$. Entiers : $3,4,5,6,7$, soit $5$", points:4},
+          {label:"4.", enonce:"$C=[-3\\,;\\,4]$ et $D=]0\\,;\\,6]$. Donne $C\\cap D$.",
+           type:"libre", correction:"$C\\cap D=]0\\,;\\,4]$", points:4},
         ],
         indices:["Intersection $\\cap$ = valeurs dans les deux ; Union $\\cup$ = valeurs dans au moins un"]
       },
