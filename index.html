@@ -6744,6 +6744,45 @@ const EXERCICES = {
       },
     ],
 
+    "Loi binomiale": [
+      {
+        id:"binom_t_1", titre:"Loi binomiale — définition et paramètres", niveau:"Facile", points_total:8,
+        questions:[
+          {label:"a)", enonce:"Un schéma de Bernoulli répète $n$ fois une épreuve de Bernoulli de paramètre $p$. La variable $X$ comptant le nombre de succès suit une loi :",
+           type:"qcm", choix:["Binomiale de paramètres $n$ et $p$","Normale","Uniforme","De Bernoulli"],
+           bonneReponseIdx:0, bonneReponse:"Binomiale de paramètres $n$ et $p$",
+           correction:"Le nombre de succès dans un schéma de Bernoulli répété suit une loi binomiale $\\mathcal{B}(n,p)$.", points:1},
+          {label:"b)", enonce:"$X$ suit une loi $\\mathcal{B}(10\\,;\\,0{,}3)$. Calcule l'espérance $E(X)=np$.",
+           type:"libre", correction:"$E(X)=10\\times0{,}3=3$", points:2},
+          {label:"c)", enonce:"$X$ suit $\\mathcal{B}(10\\,;\\,0{,}3)$. Calcule la variance $V(X)=np(1-p)$.",
+           type:"libre", correction:"$V(X)=10\\times0{,}3\\times0{,}7=2{,}1$", points:2},
+          {label:"d)", enonce:"$X$ suit $\\mathcal{B}(20\\,;\\,0{,}5)$. Calcule $E(X)$.",
+           type:"libre", correction:"$E(X)=20\\times0{,}5=10$", points:2},
+          {label:"e)", enonce:"Une loi binomiale est entièrement déterminée par :",
+           type:"qcm", choix:["$2$ paramètres : $n$ et $p$","$1$ paramètre : $n$ seulement","$3$ paramètres","Aucun paramètre"],
+           bonneReponseIdx:0, bonneReponse:"$2$ paramètres : $n$ et $p$",
+           correction:"Une loi binomiale $\\mathcal{B}(n,p)$ dépend de $2$ paramètres : le nombre de répétitions $n$ et la probabilité de succès $p$.", points:1},
+        ],
+        indices:["$X\\sim\\mathcal{B}(n,p)$ : $E(X)=np$ et $V(X)=np(1-p)$"]
+      },
+      {
+        id:"binom_t_2", titre:"Calcul de probabilités avec la loi binomiale", niveau:"Difficile", points_total:12,
+        questions:[
+          {label:"a)", enonce:"$X$ suit $\\mathcal{B}(5\\,;\\,0{,}5)$. Calcule $P(X=0)=\\binom{5}{0}\\times0{,}5^0\\times0{,}5^5$.",
+           type:"libre", correction:"$\\binom{5}{0}\\times0{,}5^5=1\\times0{,}03125=0{,}03125$", points:3},
+          {label:"b)", enonce:"$X$ suit $\\mathcal{B}(4\\,;\\,0{,}5)$. Calcule $P(X=4)$ (les $4$ épreuves sont des succès).",
+           type:"libre", correction:"$0{,}5^4=0{,}0625$", points:2},
+          {label:"c)", enonce:"$X$ suit $\\mathcal{B}(3\\,;\\,0{,}2)$. Calcule $P(X=0)$ (aucun succès).",
+           type:"libre", correction:"$(1-0{,}2)^3=0{,}8^3=0{,}512$", points:3},
+          {label:"d)", enonce:"En déduis $P(X\\geq1)$ (au moins un succès).",
+           type:"libre", correction:"$P(X\\geq1)=1-0{,}512=0{,}488$", points:2},
+          {label:"e)", enonce:"$X$ suit $\\mathcal{B}(6\\,;\\,0{,}5)$. Calcule $\\binom{6}{3}$ (nombre de façons d'obtenir exactement $3$ succès).",
+           type:"libre", correction:"$\\binom{6}{3}=20$", points:2},
+        ],
+        indices:["$P(X=k)=\\binom{n}{k}p^k(1-p)^{n-k}$ ; $P(X\\geq1)=1-P(X=0)$"]
+      },
+    ],
+
   },
 
 };
