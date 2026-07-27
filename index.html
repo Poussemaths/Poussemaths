@@ -7007,6 +7007,29 @@ const EXERCICES = {
       },
     ],
 
+    "Équations différentielles": [
+      {
+        id:"diffeq_t_1", titre:"Équations différentielles y'=ay et y'=ay+b", niveau:"Moyen", points_total:10,
+        questions:[
+          {label:"a)", enonce:"Les solutions de l'équation différentielle $y'=ay$ (avec $a$ réel) sont de la forme :",
+           type:"qcm", choix:["$y=Ce^{ax}$ ($C$ constante réelle)","$y=ax+C$","$y=Ca^x$","$y=Cx^a$"],
+           bonneReponseIdx:0, bonneReponse:"$y=Ce^{ax}$ ($C$ constante réelle)",
+           correction:"Les solutions de $y'=ay$ sont exactement les fonctions $y=Ce^{ax}$, $C\\in\\mathbb{R}$.", points:2},
+          {label:"b)", enonce:"L'équation $y'=3y$ a pour solution générale $y=Ce^{3x}$. Sachant $y(0)=2$, calcule $C$.",
+           type:"libre", correction:"$y(0)=Ce^0=C=2$", points:2},
+          {label:"c)", enonce:"Une solution particulière constante $y=k$ de $y'=2y+6$ vérifie $0=2k+6$ (car $y'=0$ pour une fonction constante). Résous cette équation pour trouver $k$.",
+           type:"libre", correction:"$2k=-6 \\Rightarrow k=-3$", points:3},
+          {label:"d)", enonce:"La solution générale de $y'=2y+6$ s'obtient en ajoutant la solution générale de $y'=2y$ à la solution particulière $k=-3$. Elle est donc de la forme :",
+           type:"qcm", choix:["$y=Ce^{2x}-3$","$y=Ce^{2x}+6$","$y=Ce^{-2x}-3$","$y=Ce^{2x}$"],
+           bonneReponseIdx:0, bonneReponse:"$y=Ce^{2x}-3$",
+           correction:"Solution générale $=$ solution de $y'=2y$ (soit $Ce^{2x}$) $+$ solution particulière constante ($-3$).", points:2},
+          {label:"e)", enonce:"Avec $y=Ce^{2x}-3$ et $y(0)=1$, calcule $C$.",
+           type:"libre", correction:"$y(0)=Ce^0-3=C-3=1 \\Rightarrow C=4$", points:1},
+        ],
+        indices:["Solutions de $y'=ay$ : $y=Ce^{ax}$ ; pour $y'=ay+b$ : chercher d'abord une solution particulière constante $y=k$ avec $0=ak+b$"]
+      },
+    ],
+
   },
 
 };
