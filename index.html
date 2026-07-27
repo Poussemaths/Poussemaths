@@ -1782,7 +1782,7 @@ const EXERCICES = {
         indices:["$a^n = a\\times a\\times ... \\times a$ ($n$ fois)"]
       },
       {
-        id:"puis_3_1", titre:"Puissances — reconnaître et calculer", niveau:"Facile", points_total:8,
+        id:"puis_3_1", titre:"Puissances — reconnaître et calculer", niveau:"Facile", points_total:10,
         questions:[
           {label:"1.", enonce:"Que vaut $2^5$ ?",
            type:"qcm",
@@ -1800,38 +1800,47 @@ const EXERCICES = {
           {label:"4.", enonce:"Simplifie : $5^3\\times5^2$.",
            type:"libre",
            correction:"$5^{3+2}=5^5=3125$", points:2},
+          {label:"5.", enonce:"Simplifie : $2^4 \\times 2^5 \\times 2^{-6}$.",
+           type:"libre",
+           correction:"$2^{4+5-6}=2^3=8$", points:2},
         ],
         indices:["$a^m\\times a^n=a^{m+n}$ ; $a^{-n}=\\dfrac{1}{a^n}$ ; $a^0=1$"]
       },
       {
-        id:"puis_3_A", titre:"Règles de calcul sur les puissances", niveau:"Facile", points_total:6,
+        id:"puis_3_A", titre:"Règles de calcul sur les puissances", niveau:"Facile", points_total:10,
         questions:[
           {label:"a)", enonce:"Calcule : $3^4$ ; $2^{-3}$ ; $10^0$", correction:"$3^4=81$ ; $2^{-3}=\\dfrac{1}{8}$ ; $10^0=1$", points:2},
           {label:"b)", enonce:"Simplifie : $2^5 \\times 2^3$ et $\\dfrac{5^7}{5^3}$", correction:"$2^5 \\times 2^3 = 2^8 = 256$ ; $\\dfrac{5^7}{5^3}=5^4=625$", points:2},
           {label:"c)", enonce:"Simplifie : $(3^2)^4$ et $7^3 \\times 7^{-3}$", correction:"$(3^2)^4=3^8$ ; $7^3 \\times 7^{-3}=7^0=1$", points:2},
+          {label:"d)", enonce:"Simplifie : $\\dfrac{4^6}{4^2}$", correction:"$4^{6-2}=4^4=256$", points:2},
+          {label:"e)", enonce:"Simplifie : $(2^3)^2 \\times 2$", correction:"$2^6\\times2^1=2^7=128$", points:2},
         ],
         indices:["$a^m \\times a^n = a^{m+n}$ ; $\\dfrac{a^m}{a^n}=a^{m-n}$ ; $(a^m)^n=a^{mn}$"]
       },
       {
-        id:"puis_3_B", titre:"Notation scientifique", niveau:"Moyen", points_total:9,
+        id:"puis_3_B", titre:"Notation scientifique", niveau:"Moyen", points_total:15,
         questions:[
           {label:"a)", enonce:"Écris en notation scientifique : $0{,}000345$ et $12\\,700\\,000$", correction:"$3{,}45 \\times 10^{-4}$ ; $1{,}27 \\times 10^7$", points:3},
-          {label:"b)", enonce:"Calcule : $(4 \\times 10^3) \\times (2 \\times 10^5)$", correction:"$8 \\times 10^8$", points:3},
-          {label:"c)", enonce:"La Terre est à $1{,}496 \\times 10^8$ km du Soleil. Mercure est à $5{,}79 \\times 10^7$ km. Quelle est la différence en km ?", correction:"$1{,}496 \\times 10^8 - 5{,}79 \\times 10^7 = 14{,}96 \\times 10^7 - 5{,}79 \\times 10^7 = 9{,}17 \\times 10^7$ km", points:3},
+          {label:"b)", enonce:"Calcule : $(4 \\times 10^3) \\times (2 \\times 10^5)$ (résultat développé)", correction:"$8 \\times 10^8=800\\,000\\,000$", points:3},
+          {label:"c)", enonce:"La Terre est à $1{,}496 \\times 10^8$ km du Soleil. Mercure est à $5{,}79 \\times 10^7$ km. Quelle est la différence en km ?", correction:"$1{,}496 \\times 10^8 - 5{,}79 \\times 10^7 = 14{,}96 \\times 10^7 - 5{,}79 \\times 10^7 = 9{,}17 \\times 10^7$", points:3},
+          {label:"d)", enonce:"Écris en notation scientifique : $56\\,300\\,000$", correction:"$5{,}63 \\times 10^7$", points:3},
+          {label:"e)", enonce:"Calcule : $(6 \\times 10^{-2}) \\times (3 \\times 10^4)$", correction:"$18 \\times 10^2=1\\,800$", points:3},
         ],
         indices:["Notation scientifique : $a \\times 10^n$ avec $1 \\leq a < 10$"]
       },
       {
-        id:"puis_3_C", titre:"Puissances — approfondissement", niveau:"Difficile", points_total:8,
+        id:"puis_3_C", titre:"Puissances — approfondissement", niveau:"Difficile", points_total:13,
         questions:[
           {label:"a)", enonce:"Simplifie : $\\dfrac{3^5 \\times 3^{-2}}{3^2}$", correction:"$3^{5-2-2}=3^1=3$", points:2},
           {label:"b)", enonce:"Résous : $2^x = 32$", correction:"$32=2^5$ donc $x=5$", points:3},
-          {label:"c)", enonce:"On estime qu'un grain de sable a un volume de $0{,}18$ mm³. Combien de grains dans $1$ L $= 10^6$ mm³ ?", correction:"$\\dfrac{10^6}{0{,}18} \\approx \\dfrac{10^6}{2 \\times 10^{-1}} = 5 \\times 10^6$. Environ $5$ millions.", points:3},
+          {label:"c)", enonce:"On estime qu'un grain de sable a un volume de $0{,}18$ mm³. Combien de grains (environ, en millions) dans $1$ L $= 10^6$ mm³ ?", correction:"$\\dfrac{10^6}{0{,}18} \\approx \\dfrac{10^6}{2 \\times 10^{-1}} \\approx 5\\times10^6 \\Rightarrow 5$", points:3},
+          {label:"d)", enonce:"Résous : $3^x = 81$", correction:"$81=3^4$ donc $x=4$", points:2},
+          {label:"e)", enonce:"Simplifie : $\\dfrac{2^6 \\times 2^{-1}}{2^3}$", correction:"$2^{6-1-3}=2^2=4$", points:3},
         ],
         indices:["$2^1=2, 2^2=4, 2^3=8, 2^4=16, 2^5=32, 2^6=64, 2^7=128, 2^8=256, 2^9=512, 2^{10}=1024$"]
       },
       {
-        id:"puis_3_4", titre:"Puissances — calculs avancés", niveau:"Moyen", points_total:10,
+        id:"puis_3_4", titre:"Puissances — calculs avancés", niveau:"Moyen", points_total:16,
         questions:[
           {label:"a)", enonce:"Simplifie : $\\dfrac{3^7 \\times 3^{-2}}{3^3}$",
            type:"libre", correction:"$3^{7-2-3}=3^2=9$", points:3},
@@ -1839,44 +1848,62 @@ const EXERCICES = {
            type:"libre", correction:"$6{,}4 \\times 10^{-5}$", points:3},
           {label:"c)", enonce:"Calcule : $(2{,}5 \\times 10^3) \\times (4 \\times 10^2)$",
            type:"libre", correction:"$10 \\times 10^5 = 1 \\times 10^6 = 1\\,000\\,000$", points:4},
+          {label:"d)", enonce:"Simplifie : $\\dfrac{2^8 \\times 2^{-3}}{2^2}$",
+           type:"libre", correction:"$2^{8-3-2}=2^3=8$", points:3},
+          {label:"e)", enonce:"Calcule : $(3 \\times 10^4) \\times (2 \\times 10^{-2})$ (résultat développé)",
+           type:"libre", correction:"$6 \\times 10^2 = 600$", points:3},
         ],
         indices:["$a^m \\times a^n = a^{m+n}$ ; $\\dfrac{a^m}{a^n}=a^{m-n}$"]
       },
       {
-        id:"puis_3_5", titre:"Puissances — brevet", niveau:"Difficile", points_total:12,
+        id:"puis_3_5", titre:"Puissances — brevet", niveau:"Difficile", points_total:19,
         questions:[
-          {label:"1.", enonce:"La distance Terre-Soleil est $1{,}5 \\times 10^8$ km. La lumière parcourt $3 \\times 10^5$ km/s. Temps pour arriver sur Terre ?",
-           type:"libre", correction:"$t=\\dfrac{1{,}5\\times10^8}{3\\times10^5}=0{,}5\\times10^3=500$ s $\\approx8$ min $20$ s", points:5},
+          {label:"1.", enonce:"La distance Terre-Soleil est $1{,}5 \\times 10^8$ km. La lumière parcourt $3 \\times 10^5$ km/s. Temps pour arriver sur Terre (en secondes) ?",
+           type:"libre", correction:"$t=\\dfrac{1{,}5\\times10^8}{3\\times10^5}=0{,}5\\times10^3=500$", points:5},
           {label:"2.", enonce:"$(2^3)^4 = ?$ et quelle est la règle générale ?",
            type:"qcm", choix:["$2^7$ et $(a^m)^n=a^{m+n}$","$2^{12}$ et $(a^m)^n=a^{m\\times n}$","$2^{12}$ et $(a^m)^n=a^{m+n}$","$8^4$ et aucune règle"],
            bonneReponseIdx:1, bonneReponse:"$2^{12}$ et $(a^m)^n=a^{m\\times n}$",
            correction:"$(2^3)^4=2^{3\\times4}=2^{12}$. Règle : $(a^m)^n=a^{m\\times n}$.", points:4},
-          {label:"3.", enonce:"Un atome a un diamètre de $2{,}8 \\times 10^{-10}$ m. Combien d'atomes alignés pour $1$ mm ?",
-           type:"libre", correction:"$\\dfrac{10^{-3}}{2{,}8\\times10^{-10}}=\\dfrac{1}{2{,}8}\\times10^7\\approx3{,}6\\times10^6$ atomes", points:3},
+          {label:"3.", enonce:"Un atome a un diamètre de $2{,}8 \\times 10^{-10}$ m. Combien d'atomes alignés (environ, en millions) pour $1$ mm ?",
+           type:"libre", correction:"$\\dfrac{10^{-3}}{2{,}8\\times10^{-10}}=\\dfrac{1}{2{,}8}\\times10^7\\approx3{,}6\\times10^6 \\Rightarrow 3{,}6$", points:3},
+          {label:"4.", enonce:"$(3^2)^3 = ?$",
+           type:"libre", correction:"$3^{2\\times3}=3^6=729$", points:3},
+          {label:"5.", enonce:"La distance Terre-Lune est $3{,}84 \\times 10^5$ km. Un signal radio parcourt $3 \\times 10^5$ km/s. Temps de trajet (en secondes, arrondi au dixième) ?",
+           type:"libre", correction:"$t=\\dfrac{3{,}84\\times10^5}{3\\times10^5}=1{,}28$", points:4},
         ],
         indices:["$(a^m)^n = a^{m \\times n}$"]
       },
       {
-        id:"puis_3_6", titre:"Puissances — Objectif Brevet I", niveau:"Difficile", points_total:10,
+        id:"puis_3_6", titre:"Puissances — Objectif Brevet I", niveau:"Difficile", points_total:16,
         questions:[
           {label:"1.", enonce:"QCM — $(2^6)^2 = ?$",
            type:"qcm", choix:["$2^8$","$2^{12}$","$4^8$","$2^4$"],
            bonneReponseIdx:1, bonneReponse:"$2^{12}$",
            correction:"$(2^6)^2=2^{6\\times2}=2^{12}$", points:2},
-          {label:"2.", enonce:"Donner la notation scientifique de $A=\\dfrac{15-9\\times10^{-3}}{3\\times10^2}$",
-           type:"libre", correction:"$A=\\dfrac{15-0{,}009}{300}=\\dfrac{14{,}991}{300}\\approx0{,}04997=4{,}997\\times10^{-2}$", points:4},
-          {label:"3.", enonce:"Un disque dur de $1{,}5$ To est partagé en dossiers de $60$ Go. Combien ? ($1$ To $=10^3$ Go)",
-           type:"libre", correction:"$1{,}5\\times10^3 = 1500$ Go. $1500\\div60=25$ dossiers.", points:4},
+          {label:"2.", enonce:"Calcule $A=\\dfrac{15-9\\times10^{-3}}{3\\times10^2}$ (arrondi au millième)",
+           type:"libre", correction:"$A=\\dfrac{15-0{,}009}{300}=\\dfrac{14{,}991}{300}\\approx0{,}050$", points:4},
+          {label:"3.", enonce:"Un disque dur de $1{,}5$ To est partagé en dossiers de $60$ Go. Combien de dossiers ? ($1$ To $=10^3$ Go)",
+           type:"libre", correction:"$1{,}5\\times10^3 = 1500$ Go. $1500\\div60=25$", points:4},
+          {label:"4.", enonce:"QCM — $(3^4)^2 = ?$",
+           type:"qcm", choix:["$3^6$","$3^8$","$9^4$","$3^{16}$"],
+           bonneReponseIdx:1, bonneReponse:"$3^8$",
+           correction:"$(3^4)^2=3^{4\\times2}=3^8$", points:3},
+          {label:"5.", enonce:"Un disque dur de $2$ To est partagé en dossiers de $80$ Go. Combien de dossiers ? ($1$ To $=10^3$ Go)",
+           type:"libre", correction:"$2\\times10^3 = 2000$ Go. $2000\\div80=25$", points:3},
         ],
         indices:["D'après DNB — lire attentivement les unités"]
       },
       {
-        id:"puis_3_7", titre:"Puissances — Objectif Brevet II", niveau:"Difficile", points_total:10,
+        id:"puis_3_7", titre:"Puissances — Objectif Brevet II", niveau:"Difficile", points_total:20,
         questions:[
           {label:"1.", enonce:"Le Soleil pèse $2\\times10^{30}$ kg et la Terre $6\\times10^{24}$ kg. Combien de fois le Soleil est-il plus lourd ?",
            type:"libre", correction:"$\\dfrac{2\\times10^{30}}{6\\times10^{24}}=\\dfrac{1}{3}\\times10^6\\approx333\\,333$", points:5},
-          {label:"2.", enonce:"Un microscope a un grossissement de $2\\times10^5$. Le mimivirus a un diamètre de $4\\times10^{-7}$ m. Diamètre observé ?",
-           type:"libre", correction:"$d=2\\times10^5\\times4\\times10^{-7}=8\\times10^{-2}=0{,}08$ m $=8$ cm.", points:5},
+          {label:"2.", enonce:"Un microscope a un grossissement de $2\\times10^5$. Le mimivirus a un diamètre de $4\\times10^{-7}$ m. Diamètre observé (en cm) ?",
+           type:"libre", correction:"$d=2\\times10^5\\times4\\times10^{-7}=8\\times10^{-2}=0{,}08$ m $=8$", points:5},
+          {label:"3.", enonce:"Jupiter pèse $1{,}9\\times10^{27}$ kg et la Terre $6\\times10^{24}$ kg. Combien de fois Jupiter est-il plus lourd (arrondi à l'unité) ?",
+           type:"libre", correction:"$\\dfrac{1{,}9\\times10^{27}}{6\\times10^{24}}\\approx316{,}7 \\Rightarrow 317$", points:5},
+          {label:"4.", enonce:"Un virus a un diamètre de $3\\times10^{-8}$ m. Un microscope grossit $5\\times10^4$ fois. Diamètre observé (en mm) ?",
+           type:"libre", correction:"$d=3\\times10^{-8}\\times5\\times10^4=1{,}5\\times10^{-3}$ m $=1{,}5$", points:5},
         ],
         indices:["D'après DNB — contexte scientifique réel"]
       },
