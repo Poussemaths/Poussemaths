@@ -4324,7 +4324,7 @@ const EXERCICES = {
         indices:["$p\\%$ de $Y$ = $\\dfrac{p}{100} \\times Y$"]
       },
       {
-        id:"prop_3_1", titre:"Pourcentages — comprendre et calculer", niveau:"Facile", points_total:8,
+        id:"prop_3_1", titre:"Pourcentages — comprendre et calculer", niveau:"Facile", points_total:10,
         questions:[
           {label:"1.", enonce:"$30\\%$ de $200$ = ?",
            type:"qcm",
@@ -4342,11 +4342,14 @@ const EXERCICES = {
           {label:"4.", enonce:"Prix : $50$€ → $65$€. Taux d'augmentation (en %) ?",
            type:"libre",
            correction:"$t=\\dfrac{65-50}{50}\\times100=30\\%$", points:2},
+          {label:"5.", enonce:"Article à $60$€ soldé $-15\\%$. Nouveau prix ?",
+           type:"libre",
+           correction:"$60\\times0{,}85=51$€", points:2},
         ],
         indices:["$p\\%$ de $x = x\\times\\dfrac{p}{100}$ ; augmentation de $p\\%$ : multiplier par $1+\\dfrac{p}{100}$"]
       },
       {
-        id:"prop_3_2", titre:"Proportionnalité — tableaux", niveau:"Facile", points_total:10,
+        id:"prop_3_2", titre:"Proportionnalité — tableaux", niveau:"Facile", points_total:13,
         questions:[
           {label:"a)", enonce:"$5$ kg de pommes : $7{,}50$€. Prix de $8$ kg ?",
            type:"libre",
@@ -4360,15 +4363,18 @@ const EXERCICES = {
           {label:"d)", enonce:"Échelle $1:25\\,000$. $4{,}8$ cm sur le plan = ? km en réel ?",
            type:"libre",
            correction:"$4{,}8\\times25\\,000=120\\,000$ cm $=1{,}2$ km", points:2},
+          {label:"e)", enonce:"$4$ kg de pommes de terre : $6$€. Prix de $10$ kg ?",
+           type:"libre",
+           correction:"Prix au kg $=1{,}50$€. $10\\times1{,}50=15$€", points:3},
         ],
         indices:["Dans un tableau de proportionnalité, on multiplie ou divise toujours par le même nombre"]
       },
       {
-        id:"prop_3_3", titre:"Taux d'évolution et évolutions successives", niveau:"Moyen", points_total:12,
+        id:"prop_3_3", titre:"Taux d'évolution et évolutions successives", niveau:"Moyen", points_total:15,
         questions:[
           {label:"a)", enonce:"$+20\\%$ puis $-20\\%$. Quel est le coefficient multiplicateur global ?",
            type:"libre",
-           correction:"$100 \\to 120 \\to 96$. Non — perte de $4\\%$. Les deux évolutions ne se compensent pas.", points:3},
+           correction:"$1{,}20\\times0{,}80 \\Rightarrow 0{,}96$", points:3},
           {label:"b)", enonce:"Coefficient multiplicateur de deux évolutions successives : $+15\\%$ puis $+10\\%$.",
            type:"libre",
            correction:"$1{,}15\\times1{,}10=1{,}265$ soit $+26{,}5\\%$.", points:3},
@@ -4378,11 +4384,14 @@ const EXERCICES = {
           {label:"d)", enonce:"Salaire : $2\\,000$€. Hausse de $3\\%$/an pendant $3$ ans. Salaire final ?",
            type:"libre",
            correction:"$2000\\times(1{,}03)^3=2000\\times1{,}0927\\approx2\\,185{,}5$€", points:3},
+          {label:"e)", enonce:"Coefficient multiplicateur de deux évolutions successives : $-10\\%$ puis $+20\\%$.",
+           type:"libre",
+           correction:"$0{,}90\\times1{,}20 \\Rightarrow 1{,}08$", points:3},
         ],
         indices:["Évolutions successives : multiplier les coefficients ; ne jamais additionner les taux !"]
       },
       {
-        id:"prop_3_4", titre:"Proportionnalité — vitesse et concentrations", niveau:"Difficile", points_total:12,
+        id:"prop_3_4", titre:"Proportionnalité — vitesse et concentrations", niveau:"Difficile", points_total:16,
         questions:[
           {label:"a)", enonce:"Train à $200$ km/h pendant $2h30$. Distance parcourue ?",
            type:"libre",
@@ -4396,45 +4405,62 @@ const EXERCICES = {
           {label:"d)", enonce:"Une recette pour $6$ personnes nécessite $450$ g de farine. Pour $10$ personnes ?",
            type:"libre",
            correction:"$\\dfrac{450}{6}\\times10=75\\times10=750$ g", points:3},
+          {label:"e)", enonce:"Solution : $100$ mL à $20\\%$ de sel + $150$ mL à $8\\%$ de sel. Concentration finale (en %) ?",
+           type:"libre",
+           correction:"Sel total $=100\\times0{,}20+150\\times0{,}08=20+12=32$ g. Volume $=250$ mL. $c=\\dfrac{32}{250}\\times100 \\Rightarrow 12{,}8$", points:4},
         ],
         indices:["$v=\\dfrac{d}{t}$ ; $d=v\\times t$ ; $t=\\dfrac{d}{v}$"]
       },
       {
-        id:"prop_3_5", titre:"Pourcentages — brevet", niveau:"Difficile", points_total:12,
+        id:"prop_3_5", titre:"Pourcentages — brevet", niveau:"Difficile", points_total:19,
         questions:[
           {label:"1.", enonce:"Actions : $500$€ en janvier. Hausse de $12\\%$ en mars, baisse de $8\\%$ en juillet. Valeur finale ?",
            type:"libre",
            correction:"$500\\times1{,}12\\times0{,}92=500\\times1{,}0304=515{,}2$€", points:4},
           {label:"2.", enonce:"Appartement : $180\\,000$€. Hausse de $5\\%$/an. Dans combien d'années dépassera-t-il $220\\,000$€ ?",
            type:"libre",
-           correction:"$180\\,000\\times(1{,}05)^n>220\\,000 \\Rightarrow (1{,}05)^n>1{,}222$. $n=4$ : $(1{,}05)^4\\approx1{,}216$ ; $n=5$ : $(1{,}05)^5\\approx1{,}276>1{,}222$. Dans $5$ ans.", points:4},
+           correction:"$180\\,000\\times(1{,}05)^n>220\\,000 \\Rightarrow (1{,}05)^n>1{,}222$. $n=4$ : $(1{,}05)^4\\approx1{,}216$ ; $n=5$ : $(1{,}05)^5\\approx1{,}276>1{,}222 \\Rightarrow 5$", points:4},
           {label:"3.", enonce:"TVA $20\\%$ incluse dans un prix de $144$€. Prix HT ?",
            type:"libre",
            correction:"$\\text{Prix HT}=\\dfrac{144}{1{,}20}=120$€", points:4},
+          {label:"4.", enonce:"Actions : $400$€ en janvier. Hausse de $10\\%$ en mars, baisse de $15\\%$ en juillet. Valeur finale (arrondie au centième) ?",
+           type:"libre",
+           correction:"$400\\times1{,}10\\times0{,}85=400\\times0{,}935 \\Rightarrow 374$", points:4},
+          {label:"5.", enonce:"TVA $20\\%$ incluse dans un prix de $186$€. Prix HT ?",
+           type:"libre",
+           correction:"$\\text{Prix HT}=\\dfrac{186}{1{,}20} \\Rightarrow 155$", points:3},
         ],
         indices:["Prix TTC $=$ Prix HT $\\times(1+\\text{taux TVA})$"]
       },
       {
-        id:"prop_3_6", titre:"Proportionnalité — Objectif Brevet I", niveau:"Difficile", points_total:10,
+        id:"prop_3_6", titre:"Proportionnalité — Objectif Brevet I", niveau:"Difficile", points_total:17,
         questions:[
           {label:"1.", enonce:"Actions : $500$€. $+12\\%$ en mars, $-8\\%$ en juillet. Valeur finale ?",
            type:"libre", correction:"$500\\times1{,}12\\times0{,}92=500\\times1{,}0304=515{,}20$€", points:3},
-          {label:"2.", enonce:"Salaire $1\\,800$€. Hausse $5\\%$/an. Valeur après $3$ ans ?",
-           type:"libre", correction:"$1800\\times(1{,}05)^3\\approx1800\\times1{,}1576\\approx2\\,083$€", points:3},
-          {label:"3.", enonce:"Article soldé $-30\\%$ puis encore $-20\\%$. Taux de réduction global ?",
-           type:"libre", correction:"$0{,}7\\times0{,}8=0{,}56$. Réduction globale $=1-0{,}56=44\\%$.", points:4},
+          {label:"2.", enonce:"Salaire $1\\,800$€. Hausse $5\\%$/an. Valeur après $3$ ans (arrondie à l'unité) ?",
+           type:"libre", correction:"$1800\\times(1{,}05)^3\\approx1800\\times1{,}1576\\approx2\\,083$", points:3},
+          {label:"3.", enonce:"Article soldé $-30\\%$ puis encore $-20\\%$. Quel est le coefficient multiplicateur global ?",
+           type:"libre", correction:"$0{,}7\\times0{,}8 \\Rightarrow 0{,}56$", points:4},
+          {label:"4.", enonce:"Actions : $600$€. $+8\\%$ en mars, $-5\\%$ en juillet. Valeur finale (arrondie au centième) ?",
+           type:"libre", correction:"$600\\times1{,}08\\times0{,}95=600\\times1{,}026 \\Rightarrow 615{,}6$", points:3},
+          {label:"5.", enonce:"Salaire $2\\,200$€. Hausse $4\\%$/an. Valeur après $2$ ans (arrondie à l'unité) ?",
+           type:"libre", correction:"$2200\\times(1{,}04)^2\\approx2200\\times1{,}0816 \\Rightarrow 2\\,380$", points:4},
         ],
         indices:["D'après DNB — évolutions successives : multiplier les coefficients"]
       },
       {
-        id:"prop_3_7", titre:"Proportionnalité — Objectif Brevet II", niveau:"Difficile", points_total:10,
+        id:"prop_3_7", titre:"Proportionnalité — Objectif Brevet II", niveau:"Difficile", points_total:17,
         questions:[
-          {label:"1.", enonce:"En $2015$, $7{,}35$ milliards d'humains ont consommé $4{,}851\\times10^{12}$ L d'eau. Consommation journalière par personne ?",
-           type:"libre", correction:"$\\dfrac{4{,}851\\times10^{12}}{7{,}35\\times10^9}\\approx660$ L/an $\\approx1{,}8$ L/jour.", points:4},
-          {label:"2.", enonce:"Vitesse d'un TGV : $320$ km/h. Durée Paris-Marseille ($775$ km) ?",
-           type:"libre", correction:"$t=\\dfrac{775}{320}\\approx2{,}42$ h $\\approx2$ h $25$ min.", points:3},
+          {label:"1.", enonce:"En $2015$, $7{,}35$ milliards d'humains ont consommé $4{,}851\\times10^{12}$ L d'eau. Consommation annuelle par personne (en L, arrondie à l'unité) ?",
+           type:"libre", correction:"$\\dfrac{4{,}851\\times10^{12}}{7{,}35\\times10^9}\\approx660$", points:4},
+          {label:"2.", enonce:"Vitesse d'un TGV : $320$ km/h. Durée Paris-Marseille ($775$ km), en heures (arrondie au centième) ?",
+           type:"libre", correction:"$t=\\dfrac{775}{320}\\approx2{,}42$", points:3},
           {label:"3.", enonce:"Un bien immobilier vaut $200\\,000$€. Il prend $4\\%$ de valeur par an. Dans combien d'années dépassera-t-il $250\\,000$€ ?",
-           type:"libre", correction:"$(1{,}04)^n>1{,}25$. $n=5$ : $(1{,}04)^5\\approx1{,}217$ ; $n=6$ : $\\approx1{,}265>1{,}25$. Dans $6$ ans.", points:3},
+           type:"libre", correction:"$(1{,}04)^n>1{,}25$. $n=5$ : $(1{,}04)^5\\approx1{,}217$ ; $n=6$ : $(1{,}04)^6\\approx1{,}265>1{,}25 \\Rightarrow 6$", points:3},
+          {label:"4.", enonce:"Vitesse d'un TGV : $300$ km/h. Durée Paris-Bordeaux ($500$ km), en heures (arrondie au centième) ?",
+           type:"libre", correction:"$t=\\dfrac{500}{300}\\approx1{,}67$", points:3},
+          {label:"5.", enonce:"Un bien immobilier vaut $150\\,000$€. Il prend $3\\%$ de valeur par an. Dans combien d'années dépassera-t-il $180\\,000$€ ?",
+           type:"libre", correction:"$(1{,}03)^n>1{,}2$. $n=6$ : $(1{,}03)^6\\approx1{,}194$ ; $n=7$ : $(1{,}03)^7\\approx1{,}230>1{,}2 \\Rightarrow 7$", points:4},
         ],
         indices:["D'après DNB — proportionnalité dans des contextes variés"]
       },
