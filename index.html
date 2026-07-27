@@ -6547,6 +6547,18 @@ const EXERCICES = {
 
     "Fonction exponentielle": [
       {
+        id:"exp_1_genere", titre:"Équations avec l'exponentielle — entraînement infini", niveau:"Facile", points_total:5,
+        genere: true, templateId: "exponentielle_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["$e^u=e^v \\Leftrightarrow u=v$ (injectivité de l'exponentielle)"]
+      },
+      {
         id:"exp_1_1", titre:"Exponentielle — définition et propriétés", niveau:"Facile", points_total:10,
         questions:[
           {label:"a)", enonce:"La fonction exponentielle est l'unique fonction $f$ dérivable sur $\\mathbb{R}$ telle que :",
@@ -9475,6 +9487,7 @@ const TEMPLATES_GENERATEUR = {
   fonction_generalites_v1: 'exo-fonction-generalites-generer',
   derivation_v1: 'exo-derivation-generer',
   produit_scalaire_v1: 'exo-produit-scalaire-generer',
+  exponentielle_v1: 'exo-exponentielle-generer',
 };
 const TEMPLATES_VALIDATEUR = {
   equation_1er_degre_v1: 'exo-equation-valider',
@@ -9509,6 +9522,7 @@ const TEMPLATES_VALIDATEUR = {
   fonction_generalites_v1: 'exo-fonction-generalites-valider',
   derivation_v1: 'exo-derivation-valider',
   produit_scalaire_v1: 'exo-produit-scalaire-valider',
+  exponentielle_v1: 'exo-exponentielle-valider',
 };
 let currentGenTokens = [];
 
