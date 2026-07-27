@@ -6963,14 +6963,12 @@ const EXERCICES = {
         indices:["Pour une suite explicite : substitue directement $n$ par sa valeur dans la formule"]
       },
       {
-        id:"suite_1_2", titre:"Suites — définition par récurrence", niveau:"Facile", points_total:12,
+        id:"suite_1_2", titre:"Suites — définition par récurrence", niveau:"Facile", points_total:10,
         questions:[
           {label:"1a.", enonce:"$u_0 = 2$ et $u_{n+1} = 3u_n - 1$. Calcule $u_1$.",
            type:"libre", correction:"$u_1 = 3 \\times 2 - 1 = 5$", points:2},
           {label:"1b.", enonce:"$u_0 = 2$ et $u_{n+1} = 3u_n - 1$. Calcule $u_2$.",
            type:"libre", correction:"$u_2 = 3 \\times 5 - 1 = 14$", points:2},
-          {label:"1c.", enonce:"$u_0 = 2$ et $u_{n+1} = 3u_n - 1$. Calcule $u_3$.",
-           type:"libre", correction:"$u_3 = 3 \\times 14 - 1 = 41$", points:2},
           {label:"2a.", enonce:"$u_1 = -1$ et $u_{n+1} = u_n + 2n$. Calcule $u_2$.",
            type:"libre", correction:"$u_2 = u_1 + 2 \\times 1 = -1 + 2 = 1$", points:2},
           {label:"2b.", enonce:"$u_1 = -1$ et $u_{n+1} = u_n + 2n$. Calcule $u_3$.",
@@ -7001,7 +6999,7 @@ const EXERCICES = {
         indices:["Explicite : formule directe en $n$. Récurrence : chaque terme dépend du précédent."]
       },
       {
-        id:"suite_1_4", titre:"Suites — sens de variation (méthode différence)", niveau:"Moyen", points_total:12,
+        id:"suite_1_4", titre:"Suites — sens de variation (méthode différence)", niveau:"Moyen", points_total:10,
         questions:[
           {label:"1a.", enonce:"$u_n = 3n - 5$. Calcule $u_{n+1} - u_n$.",
            type:"libre", correction:"$u_{n+1} - u_n = 3(n+1)-5-(3n-5) = 3$", points:2},
@@ -7009,8 +7007,6 @@ const EXERCICES = {
            type:"qcm", choix:["Croissante","Décroissante","Ni l'un ni l'autre","Constante"],
            bonneReponseIdx:0, bonneReponse:"Croissante",
            correction:"$u_{n+1} - u_n = 3 > 0$ pour tout $n$ → strictement croissante.", points:2},
-          {label:"2a.", enonce:"$u_0 = 10$, $u_{n+1} = u_n - 4$. Calcule $u_{n+1} - u_n$.",
-           type:"libre", correction:"$u_{n+1} - u_n = -4$", points:2},
           {label:"2b.", enonce:"La suite $u_0 = 10$, $u_{n+1} = u_n - 4$ est-elle croissante ou décroissante ?",
            type:"qcm", choix:["Croissante","Décroissante","Constante","On ne peut pas savoir"],
            bonneReponseIdx:1, bonneReponse:"Décroissante",
@@ -7027,7 +7023,7 @@ const EXERCICES = {
         indices:["Si $u_{n+1} - u_n > 0$ : croissante. Si $u_{n+1} - u_n < 0$ : décroissante."]
       },
       {
-        id:"suite_1_5", titre:"Suites — sens de variation (méthode quotient)", niveau:"Moyen", points_total:12,
+        id:"suite_1_5", titre:"Suites — sens de variation (méthode quotient)", niveau:"Moyen", points_total:14,
         questions:[
           {label:"1a.", enonce:"$u_n = 3 \\times 2^n$ (termes positifs). Calcule $\\dfrac{u_{n+1}}{u_n}$.",
            type:"libre", correction:"$\\dfrac{u_{n+1}}{u_n} = \\dfrac{3 \\times 2^{n+1}}{3 \\times 2^n} = 2$", points:3},
@@ -7041,16 +7037,18 @@ const EXERCICES = {
            type:"qcm", choix:["Croissante","Décroissante","Constante","On ne peut pas savoir"],
            bonneReponseIdx:1, bonneReponse:"Décroissante",
            correction:"$0 < \\dfrac{u_{n+1}}{u_n} = 0{,}8 < 1$ et $u_n > 0$ → strictement décroissante.", points:3},
+          {label:"3.", enonce:"Pour appliquer la méthode du quotient sur une suite $(u_n)$, quelle condition est indispensable ?",
+           type:"qcm", choix:["Tous les termes $u_n$ doivent être strictement positifs (ou tous strictement négatifs)","La suite doit être arithmétique","La suite doit être bornée","Aucune condition particulière"],
+           bonneReponseIdx:0, bonneReponse:"Tous les termes $u_n$ doivent être strictement positifs (ou tous strictement négatifs)",
+           correction:"Le signe de $u_{n+1}-u_n$ ne se déduit du quotient $\\dfrac{u_{n+1}}{u_n}$ que si tous les $u_n$ sont de même signe.", points:2},
         ],
         indices:["Méthode quotient (termes $> 0$) : quotient $> 1$ → croissante ; $0 <$ quotient $< 1$ → décroissante"]
       },
       {
-        id:"suite_1_6", titre:"Suites bornées et suite de Fibonacci", niveau:"Difficile", points_total:14,
+        id:"suite_1_6", titre:"Suites bornées et suite de Fibonacci", niveau:"Difficile", points_total:10,
         questions:[
           {label:"1a.", enonce:"$u_n = \\dfrac{3n-1}{n+2}$. Calcule $u_0$.",
            type:"libre", correction:"$u_0 = \\dfrac{-1}{2} = -0{,}5$", points:2},
-          {label:"1b.", enonce:"$u_n = \\dfrac{3n-1}{n+2}$. Calcule $u_5$.",
-           type:"libre", correction:"$u_5 = \\dfrac{14}{7} = 2$", points:2},
           {label:"1c.", enonce:"$u_n = \\dfrac{3n-1}{n+2}$. Vers quelle valeur semble tendre $u_n$ quand $n$ devient très grand ?",
            type:"qcm", choix:["$0$","$1$","$3$","$+\\infty$"],
            bonneReponseIdx:2, bonneReponse:"$3$",
@@ -7059,8 +7057,6 @@ const EXERCICES = {
            type:"libre", correction:"$u_2 = u_0 + u_1 = 1 + 1 = 2$", points:2},
           {label:"2b.", enonce:"Suite de Fibonacci. Calcule $u_3$.",
            type:"libre", correction:"$u_3 = u_1 + u_2 = 1 + 2 = 3$", points:2},
-          {label:"2c.", enonce:"Suite de Fibonacci. Calcule $u_4$.",
-           type:"libre", correction:"$u_4 = u_2 + u_3 = 2 + 3 = 5$", points:2},
           {label:"3.", enonce:"La suite de Fibonacci est-elle bornée ?",
            type:"qcm", choix:["Oui, elle est bornée","Non, elle tend vers $+\\infty$","Elle oscille entre deux valeurs","On ne peut pas savoir"],
            bonneReponseIdx:1, bonneReponse:"Non, elle tend vers $+\\infty$",
@@ -7069,7 +7065,7 @@ const EXERCICES = {
         indices:["Suite bornée : il existe $M$ et $m$ tels que $m \\leq u_n \\leq M$ pour tout $n$"]
       },
       {
-        id:"suite_1_7", titre:"Suites — Vrai/Faux et synthèse", niveau:"Difficile", points_total:12,
+        id:"suite_1_7", titre:"Suites — Vrai/Faux et synthèse", niveau:"Difficile", points_total:15,
         questions:[
           {label:"1.", enonce:"Vrai ou Faux : toute suite croissante est minorée.",
            type:"qcm", choix:["Vrai","Faux"],
@@ -7087,6 +7083,10 @@ const EXERCICES = {
            type:"qcm", choix:["Vrai","Faux"],
            bonneReponseIdx:0, bonneReponse:"Vrai",
            correction:"$-1 \\leq (-1)^n \\leq 1$ pour tout $n$ → bornée entre $-1$ et $1$.", points:3},
+          {label:"5.", enonce:"Vrai ou Faux : une suite croissante et majorée converge.",
+           type:"qcm", choix:["Vrai","Faux"],
+           bonneReponseIdx:0, bonneReponse:"Vrai",
+           correction:"Vrai (théorème admis en 1ère) : toute suite croissante et majorée converge vers une limite finie.", points:3},
         ],
         indices:["Bornée $\\neq$ convergente. Croissante et majorée $\\Rightarrow$ convergente (admis en 1ère)."]
       },
@@ -7107,7 +7107,7 @@ const EXERCICES = {
         indices:["$u_n = u_0 + n \\times r$"]
       },
       {
-        id:"suite_1_8", titre:"Suites arithmétiques — reconnaître et calculer", niveau:"Facile", points_total:12,
+        id:"suite_1_8", titre:"Suites arithmétiques — reconnaître et calculer", niveau:"Facile", points_total:10,
         questions:[
           {label:"1.", enonce:"$u_n = 4n - 3$. Cette suite est-elle arithmétique ?",
            type:"qcm", choix:["Oui, de raison $4$","Oui, de raison $-3$","Non","Oui, de raison $1$"],
@@ -7125,8 +7125,6 @@ const EXERCICES = {
            type:"qcm", choix:["$n = 7$","$n = 6$","$n = 8$","$n = 5$"],
            bonneReponseIdx:0, bonneReponse:"$n = 7$",
            correction:"$20 - 3n < 0 \\Rightarrow n > 6{,}67 \\Rightarrow n = 7$. Vérif : $u_7 = 20-21 = -1 < 0$.", points:2},
-          {label:"6.", enonce:"$(u_n)$ arithmétique, $r=-3$, $u_0=20$. Calcule $S = u_0 + u_1 + \\cdots + u_{20}$.",
-           type:"libre", correction:"$S = \\dfrac{21 \\times (20 + (-40))}{2} = \\dfrac{21 \\times (-20)}{2} = -210$", points:2},
         ],
         indices:["Suite arithmétique : $u_n = u_0 + nr$. Somme : $S = \\dfrac{(n+1)(u_0+u_n)}{2}$"]
       },
@@ -7165,16 +7163,12 @@ const EXERCICES = {
         indices:["$u_n = u_0 \\times q^n$"]
       },
       {
-        id:"suite_1_10", titre:"Suites géométriques — reconnaître et calculer", niveau:"Facile", points_total:12,
+        id:"suite_1_10", titre:"Suites géométriques — reconnaître et calculer", niveau:"Facile", points_total:10,
         questions:[
           {label:"1.", enonce:"$u_n = 5 \\times 3^n$. Cette suite est-elle géométrique ? Si oui, quelle est sa raison ?",
            type:"qcm", choix:["Oui, $q = 3$","Oui, $q = 5$","Oui, $q = 15$","Non"],
            bonneReponseIdx:0, bonneReponse:"Oui, $q = 3$",
            correction:"$\\dfrac{u_{n+1}}{u_n} = \\dfrac{5 \\times 3^{n+1}}{5 \\times 3^n} = 3$. Suite géométrique de raison $q = 3$.", points:2},
-          {label:"2.", enonce:"$u_n = (-2)^n$. Cette suite est-elle géométrique ?",
-           type:"qcm", choix:["Oui, $q = -2$","Oui, $q = 2$","Non","Oui, $q = -1$"],
-           bonneReponseIdx:0, bonneReponse:"Oui, $q = -2$",
-           correction:"$\\dfrac{u_{n+1}}{u_n} = -2$. Suite géométrique de raison $q = -2$.", points:2},
           {label:"3.", enonce:"$(u_n)$ géométrique, $q = \\dfrac{1}{2}$, $u_0 = 64$. Calcule $u_6$.",
            type:"libre", correction:"$u_6 = 64 \\times \\left(\\dfrac{1}{2}\\right)^6 = \\dfrac{64}{64} = 1$", points:2},
           {label:"4.", enonce:"$(u_n)$ géométrique, $q = \\dfrac{1}{2}$, $u_0 = 64$. Calcule $u_{10}$.",
@@ -7211,7 +7205,7 @@ const EXERCICES = {
         indices:["$u_n = u_0 \\times q^n$. Pour trouver $q$ : $q = \\sqrt[p]{\\dfrac{u_p}{u_0}}$"]
       },
       {
-        id:"suite_1_12", titre:"Suites — problème financier", niveau:"Difficile", points_total:14,
+        id:"suite_1_12", titre:"Suites — problème financier", niveau:"Difficile", points_total:11,
         questions:[
           {label:"1.", enonce:"Marie place $10\\,000$€ à $3\\%$/an et ajoute $1\\,000$€ chaque année. $u_0 = 10\\,000$. Calcule $u_1$.",
            type:"libre", correction:"$u_1 = 1{,}03 \\times 10\\,000 + 1\\,000 = 11\\,300$", points:2},
@@ -7225,10 +7219,6 @@ const EXERCICES = {
            type:"libre", correction:"$v_{10} = 43\\,333 \\times 1{,}344 \\approx 58\\,240$", points:2},
           {label:"5.", enonce:"Quelle somme Marie a-t-elle après $10$ ans ? ($u_{10} = v_{10} - 33\\,333$)",
            type:"libre", correction:"$u_{10} = 58\\,240 - 33\\,333 \\approx 24\\,907$€", points:2},
-          {label:"6.", enonce:"Suite arithmétique, $u_0=3$, $r=5$. La somme $S = u_0+\\cdots+u_{10}$ vaut :",
-           type:"qcm", choix:["$308$","$255$","$364$","$38$"],
-           bonneReponseIdx:0, bonneReponse:"$308$",
-           correction:"$u_{10} = 3 + 10 \\times 5 = 53$. $S = \\dfrac{11 \\times (3+53)}{2} = 308$.", points:3},
         ],
         indices:["Pour linéariser : poser $v_n = u_n + k$ et trouver $k$ tel que $(v_n)$ soit géométrique."]
       },
