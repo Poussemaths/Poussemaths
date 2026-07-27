@@ -5172,7 +5172,7 @@ const EXERCICES = {
         indices:["La somme des angles d'un triangle vaut toujours $180°$"]
       },
       {
-        id:"ang_6_1", titre:"Angles — mesurer et calculer", niveau:"Facile", points_total:8,
+        id:"ang_6_1", titre:"Angles — mesurer et calculer", niveau:"Facile", points_total:10,
         questions:[
           {label:"1.", enonce:"Angle droit = ? degrés",
            type:"qcm", choix:["$45°$","$90°$","$180°$","$360°$"],
@@ -5184,11 +5184,13 @@ const EXERCICES = {
            type:"libre", correction:"$90°-37°=53°$", points:2},
           {label:"4.", enonce:"Un triangle a deux angles de $55°$ et $75°$. Le troisième ?",
            type:"libre", correction:"$180°-55°-75°=50°$", points:2},
+          {label:"5.", enonce:"Deux angles supplémentaires. L'un vaut $3$ fois l'autre. Calcule le plus petit.",
+           type:"libre", correction:"$x+3x=180° \\Rightarrow 4x=180° \\Rightarrow x=45°$", points:2},
         ],
         indices:["Somme des angles d'un triangle $= 180°$"]
       },
       {
-        id:"ang_6_2", titre:"Droites parallèles et perpendiculaires", niveau:"Moyen", points_total:10,
+        id:"ang_6_2", titre:"Droites parallèles et perpendiculaires", niveau:"Moyen", points_total:12,
         questions:[
           {label:"1.", enonce:"Deux droites perpendiculaires forment un angle de ?",
            type:"qcm", choix:["$45°$","$60°$","$90°$","$180°$"],
@@ -5204,11 +5206,15 @@ const EXERCICES = {
            type:"qcm", choix:["à $45°$","à $90°$","à $60°$","parallèlement"],
            bonneReponseIdx:1, bonneReponse:"à $90°$",
            correction:"La médiatrice est perpendiculaire ($90°$) au segment et passe par son milieu.", points:2},
+          {label:"e)", enonce:"Une droite coupe deux parallèles. Les angles correspondants sont…",
+           type:"qcm", choix:["Supplémentaires","Égaux","Complémentaires","Quelconques"],
+           bonneReponseIdx:1, bonneReponse:"Égaux",
+           correction:"Propriété des droites parallèles : angles correspondants sont égaux.", points:2},
         ],
         indices:["Médiatrice : perpendiculaire passant par le milieu du segment"]
       },
       {
-        id:"ang_6_3", titre:"Symétrie axiale", niveau:"Moyen", points_total:10,
+        id:"ang_6_3", titre:"Symétrie axiale", niveau:"Moyen", points_total:12,
         questions:[
           {label:"1.", enonce:"Combien d'axes de symétrie a un triangle équilatéral ?",
            type:"qcm", choix:["$1$","$2$","$3$","$6$"],
@@ -5222,11 +5228,15 @@ const EXERCICES = {
            type:"qcm", choix:["$1$","$2$","$4$","Aucun"],
            bonneReponseIdx:1, bonneReponse:"$2$",
            correction:"Un rectangle a $2$ axes de symétrie : horizontal et vertical.", points:2},
+          {label:"5.", enonce:"Combien d'axes de symétrie a un losange (non carré) ?",
+           type:"qcm", choix:["$0$","$1$","$2$","$4$"],
+           bonneReponseIdx:2, bonneReponse:"$2$",
+           correction:"Un losange a $2$ axes de symétrie : ses deux diagonales.", points:2},
         ],
         indices:["Axe $(Oy)$ : change le signe de $x$ ; Axe $(Ox)$ : change le signe de $y$"]
       },
       {
-        id:"ang_6_4", titre:"Cercle et figures usuelles", niveau:"Moyen", points_total:10,
+        id:"ang_6_4", titre:"Cercle et figures usuelles", niveau:"Moyen", points_total:13,
         questions:[
           {label:"a)", enonce:"Périmètre d'un cercle de rayon $5$ cm.",
            type:"libre", correction:"$P=2\\pi r=10\\pi\\approx31{,}4$ cm", points:2},
@@ -5238,18 +5248,24 @@ const EXERCICES = {
            type:"qcm", choix:["$180°$","$270°$","$360°$","$540°$"],
            bonneReponseIdx:2, bonneReponse:"$360°$",
            correction:"La somme des angles internes d'un quadrilatère vaut toujours $360°$.", points:2},
+          {label:"e)", enonce:"Périmètre d'un cercle de diamètre $14$ cm ($\\pi\\approx3{,}14$).",
+           type:"libre", correction:"$P=\\pi \\times 14\\approx43{,}96$ cm", points:3},
         ],
         indices:["Cercle : $C=2\\pi r$ ; $A=\\pi r^2$"]
       },
       {
-        id:"ang_6_5", titre:"Géométrie — brevet 6ème", niveau:"Difficile", points_total:12,
+        id:"ang_6_5", titre:"Géométrie — brevet 6ème", niveau:"Difficile", points_total:19,
         questions:[
-          {label:"1.", enonce:"Un terrain en forme de triangle rectangle a des cathètes de $8$ m et $15$ m. Périmètre et aire ?",
-           type:"libre", correction:"Hypoténuse $=\\sqrt{64+225}=17$ m. $P=8+15+17=40$ m. $A=\\dfrac{8\\times15}{2}=60$ m².", points:4},
+          {label:"1.", enonce:"Un terrain en forme de triangle rectangle a des cathètes de $8$ m et $15$ m. Calcule son périmètre.",
+           type:"libre", correction:"Hypoténuse $=\\sqrt{64+225}=17$ m. $P=8+15+17=40$ m.", points:3},
+          {label:"1b.", enonce:"Même terrain (cathètes $8$ m et $15$ m). Calcule son aire.",
+           type:"libre", correction:"$A=\\dfrac{8\\times15}{2}=60$ m².", points:3},
           {label:"2.", enonce:"Un parc circulaire a un diamètre de $20$ m. Coût de la clôture à $12$€/m ?",
            type:"libre", correction:"$P=20\\pi\\approx62{,}8$ m. Coût $\\approx62{,}8\\times12\\approx754$€.", points:4},
           {label:"3.", enonce:"Losange de diagonales $6$ cm et $8$ cm. Périmètre ?",
            type:"libre", correction:"Côté $=\\sqrt{3^2+4^2}=5$ cm. $P=4\\times5=20$ cm.", points:4},
+          {label:"4.", enonce:"Un jardin circulaire a un rayon de $6$ m. Coût du grillage à $8$€/m ($\\pi\\approx3{,}14$) ?",
+           type:"libre", correction:"$P=2\\pi\\times6\\approx37{,}68$ m. Coût $\\approx37{,}68\\times8\\approx301{,}44$€.", points:5},
         ],
         indices:["D'après DNB — combiner Pythagore et formules géométriques"]
       },
