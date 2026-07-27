@@ -5545,7 +5545,7 @@ const EXERCICES = {
         indices:["Rectangle : aire $=L\\times l$, périmètre $=2\\times(L+l)$. Triangle rectangle : aire $=\\dfrac{a\\times b}{2}$"]
       },
       {
-        id:"geo_5_1", titre:"Triangles et angles", niveau:"Facile", points_total:8,
+        id:"geo_5_1", titre:"Triangles et angles", niveau:"Facile", points_total:10,
         questions:[
           {label:"1.", enonce:"Somme des angles d'un triangle = ?",
            type:"qcm", choix:["$90°$","$180°$","$270°$","$360°$"],
@@ -5555,13 +5555,15 @@ const EXERCICES = {
            type:"libre", correction:"$\\hat{C}=180°-60°-75°=45°$", points:2},
           {label:"3.", enonce:"Un quadrilatère a trois angles : $90°$, $85°$, $110°$. Calcule le quatrième.",
            type:"libre", correction:"$360°-90°-85°-110°=75°$", points:2},
-          {label:"4.", enonce:"Un triangle isocèle a un angle au sommet de $40°$. Calcule les angles à la base.",
-           type:"libre", correction:"$(180°-40°)\\div2=70°$ chacun", points:2},
+          {label:"4.", enonce:"Un triangle isocèle a un angle au sommet de $40°$. Calcule un des deux angles à la base.",
+           type:"libre", correction:"$(180°-40°)\\div2=70°$", points:2},
+          {label:"5.", enonce:"$\\hat{A}=45°$, $\\hat{B}=95°$. Calcule $\\hat{C}$.",
+           type:"libre", correction:"$\\hat{C}=180°-45°-95°=40°$", points:2},
         ],
         indices:["Triangle : $\\hat{A}+\\hat{B}+\\hat{C}=180°$ ; Quadrilatère : somme $=360°$"]
       },
       {
-        id:"geo_5_2", titre:"Pythagore — introduction", niveau:"Moyen", points_total:10,
+        id:"geo_5_2", titre:"Pythagore — introduction", niveau:"Moyen", points_total:17,
         questions:[
           {label:"1.", enonce:"Est-ce que le triangle de côtés $3$, $4$ et $5$ est rectangle ?",
            type:"qcm", choix:["Oui, rectangle en l'angle opposé à $5$","Non","Oui, rectangle en l'angle opposé à $4$","On ne peut pas savoir"],
@@ -5571,11 +5573,17 @@ const EXERCICES = {
            type:"libre", correction:"$AB^2=6^2+8^2=100 \\Rightarrow AB=10$", points:4},
           {label:"3.", enonce:"Triangle rectangle. Hypoténuse $=13$, un côté $=5$. Calcule l'autre côté.",
            type:"libre", correction:"$c^2=13^2-5^2=144 \\Rightarrow c=12$", points:3},
+          {label:"4.", enonce:"Est-ce que le triangle de côtés $6$, $8$ et $9$ est rectangle ?",
+           type:"qcm", choix:["Oui","Non, $6^2+8^2\\neq9^2$","Non, c'est impossible","On ne peut pas savoir"],
+           bonneReponseIdx:1, bonneReponse:"Non, $6^2+8^2\\neq9^2$",
+           correction:"$6^2+8^2=36+64=100\\neq81=9^2$. Non rectangle.", points:3},
+          {label:"5.", enonce:"Triangle rectangle en $A$. $AB=9$, $AC=12$. Calcule $BC$.",
+           type:"libre", correction:"$BC^2=9^2+12^2=225 \\Rightarrow BC=15$", points:4},
         ],
         indices:["$c^2=a^2+b^2$ où $c$ est l'hypoténuse (en face de l'angle droit)"]
       },
       {
-        id:"geo_5_3", titre:"Géométrie dans le plan — approfondissement", niveau:"Difficile", points_total:12,
+        id:"geo_5_3", titre:"Géométrie dans le plan — approfondissement", niveau:"Difficile", points_total:19,
         questions:[
           {label:"a)", enonce:"Un losange a un angle de $70°$. Donne ses $4$ angles.",
            type:"libre", correction:"$70°, 110°, 70°, 110°$ (angles opposés égaux, consécutifs supplémentaires)", points:3},
@@ -5583,11 +5591,15 @@ const EXERCICES = {
            type:"libre", correction:"$h^2=6^2-3^2=27 \\Rightarrow h=3\\sqrt{3}\\approx5{,}2$ cm", points:4},
           {label:"c)", enonce:"Diagonale d'un rectangle $5$ × $12$ cm.",
            type:"libre", correction:"$d^2=5^2+12^2=169 \\Rightarrow d=13$ cm", points:5},
+          {label:"d)", enonce:"Un losange a un angle de $55°$. Quel est l'angle consécutif (adjacent) à celui-ci ?",
+           type:"libre", correction:"$180°-55°=125°$", points:3},
+          {label:"e)", enonce:"Hauteur d'un triangle équilatéral de côté $10$ cm (valeur exacte).",
+           type:"libre", correction:"$h^2=10^2-5^2=75 \\Rightarrow h=5\\sqrt{3}$", points:4},
         ],
         indices:["Dans un losange, angles consécutifs sont supplémentaires (somme $=180°$)"]
       },
       {
-        id:"geo_5_4", titre:"Fractions & Proportionnalité", niveau:"Moyen", points_total:10,
+        id:"geo_5_4", titre:"Fractions & Proportionnalité", niveau:"Moyen", points_total:17,
         questions:[
           {label:"a)", enonce:"Calcule et simplifie : $\\dfrac{3}{5} \\times \\dfrac{10}{9}$",
            type:"libre", correction:"$\\dfrac{30}{45}=\\dfrac{2}{3}$", points:3},
@@ -5595,11 +5607,15 @@ const EXERCICES = {
            type:"libre", correction:"$\\dfrac{4}{7}\\times\\dfrac{3}{2}=\\dfrac{12}{14}=\\dfrac{6}{7}$", points:3},
           {label:"c)", enonce:"Un cycliste roule à $18$ km/h. Distance en $2{,}5$ h ?",
            type:"libre", correction:"$d=18\\times2{,}5=45$ km", points:4},
+          {label:"d)", enonce:"Calcule et simplifie : $\\dfrac{2}{3} \\times \\dfrac{9}{4}$",
+           type:"libre", correction:"$\\dfrac{18}{12}=\\dfrac{3}{2}$", points:3},
+          {label:"e)", enonce:"Calcule : $\\dfrac{5}{6} \\div \\dfrac{5}{3}$",
+           type:"libre", correction:"$\\dfrac{5}{6}\\times\\dfrac{3}{5}=\\dfrac{15}{30}=\\dfrac{1}{2}$", points:4},
         ],
         indices:["$\\dfrac{a}{b}\\div\\dfrac{c}{d}=\\dfrac{a}{b}\\times\\dfrac{d}{c}$"]
       },
       {
-        id:"geo_5_5", titre:"Géométrie — brevet 5ème", niveau:"Difficile", points_total:12,
+        id:"geo_5_5", titre:"Géométrie — brevet 5ème", niveau:"Difficile", points_total:19,
         questions:[
           {label:"1.", enonce:"Un terrain a la forme d'un triangle rectangle de cathètes $30$ m et $40$ m. Périmètre ?",
            type:"libre", correction:"Hypoténuse $=\\sqrt{900+1600}=50$ m. Périmètre $=30+40+50=120$ m.", points:4},
@@ -5607,6 +5623,10 @@ const EXERCICES = {
            type:"libre", correction:"Demi-diagonales : $4$ et $3$. Côté $=\\sqrt{16+9}=5$ cm. Périmètre $=20$ cm.", points:4},
           {label:"3.", enonce:"Angle d'inclinaison d'un escalier : marches de $18$ cm de hauteur et $24$ cm de profondeur.",
            type:"libre", correction:"$\\tan\\theta=\\dfrac{18}{24}=0{,}75 \\Rightarrow \\theta\\approx36{,}9°$", points:4},
+          {label:"4.", enonce:"Un terrain a la forme d'un triangle rectangle de cathètes $9$ m et $12$ m. Périmètre ?",
+           type:"libre", correction:"Hypoténuse $=\\sqrt{81+144}=15$ m. Périmètre $=9+12+15=36$ m.", points:4},
+          {label:"5.", enonce:"Un losange de diagonales $10$ cm et $24$ cm. Périmètre ?",
+           type:"libre", correction:"Demi-diagonales : $5$ et $12$. Côté $=\\sqrt{25+144}=13$ cm. Périmètre $=52$ cm.", points:3},
         ],
         indices:["Périmètre = somme de tous les côtés ; utilise Pythagore pour les côtés inconnus"]
       },
