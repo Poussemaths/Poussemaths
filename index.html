@@ -9841,6 +9841,11 @@ function verifierReponse(userRaw, correctionRaw) {
     // le fallback texte (check 4), faute de correspondance "²" vs "^2".
     .replace(/²/g, '^2')
     .replace(/³/g, '^3')
+    // Le bouton "√" du clavier virtuel insere le symbole unicode, alors que
+    // corrClean (check 4) ne fait que retirer les backslashs des corrections
+    // LaTeX ("\sqrt{2}" -> "sqrt2"), laissant le mot "sqrt" en texte brut —
+    // sans cette conversion, "7√2" tape par l'eleve ne matchait jamais "7sqrt2".
+    .replace(/√/g, 'sqrt')
     .toLowerCase();
 
   const user = clean(userNorm);
@@ -9912,7 +9917,13 @@ function verifierReponse(userRaw, correctionRaw) {
         // du type "5x+13") se retrouve à tort désactivé pour les exercices
         // de type développer/factoriser/simplifier.
         const avantNombre = pClean.slice(0, matchFin.index);
-        if(!/[a-zA-Z]/.test(avantNombre)) resultats.push(parseFloat(matchFin[1]));
+        // Idem pour une racine carree non evaluee ("7\sqrt{2}") : le "2" final
+        // est le radicande, pas la valeur du resultat (7√2≈9,9). Sans ce garde,
+        // le chapitre "Racines carrees" (simplifier/rationaliser/developper)
+        // se retrouvait avec un resultatFinal errone (le radicande seul),
+        // desactivant a tort le fallback texte (check 4) qui est le seul a
+        // pouvoir valider ce type de reponse symbolique.
+        if(!/[a-zA-Z]/.test(avantNombre) && !/\\sqrt/i.test(p)) resultats.push(parseFloat(matchFin[1]));
         continue;
       }
 
