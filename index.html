@@ -3837,7 +3837,7 @@ const EXERCICES = {
         indices:["cos = adjacent ÷ hypoténuse ; sin = opposé ÷ hypoténuse"]
       },
       {
-        id:"trigo_3_1", titre:"Trigonométrie — SOH CAH TOA", niveau:"Facile", points_total:8,
+        id:"trigo_3_1", titre:"Trigonométrie — SOH CAH TOA", niveau:"Facile", points_total:10,
         questions:[
           {label:"1.", enonce:"Dans un triangle rectangle, $\\sin(\\hat{B})$ est égal à :",
            type:"qcm",
@@ -3853,11 +3853,14 @@ const EXERCICES = {
           {label:"4.", enonce:"$\\sin(30°)=0{,}5$. Dans un triangle rect. en $A$, $\\hat{B}=30°$, $BC=12$. Calcule $AC$.",
            type:"libre",
            correction:"$\\sin(30°)=\\dfrac{AC}{BC} \\Rightarrow AC=12\\times0{,}5=6$ cm", points:2},
+          {label:"5.", enonce:"Triangle rect. en $A$, $BC=15$, $AB=9$. Calcule $\\sin(\\hat{B})$.",
+           type:"libre",
+           correction:"$AC=\\sqrt{225-81}=12$. $\\sin(\\hat{B})=\\dfrac{12}{15} \\Rightarrow 0{,}8$", points:2},
         ],
         indices:["SOH CAH TOA — apprendre ce mnémotechnique par cœur !"]
       },
       {
-        id:"trigo_3_2", titre:"Trigonométrie — calculer un côté", niveau:"Facile", points_total:10,
+        id:"trigo_3_2", titre:"Trigonométrie — calculer un côté", niveau:"Facile", points_total:17,
         questions:[
           {label:"a)", enonce:"Triangle rect. en $A$, $\\hat{B}=35°$, $BC=12$ cm. Calcule $AB$ et $AC$.",
            type:"libre",
@@ -3868,11 +3871,17 @@ const EXERCICES = {
           {label:"c)", enonce:"Triangle rect. en $B$, $\\hat{A}=40°$, $AB=15$ cm. Calcule $BC$.",
            type:"libre",
            correction:"$\\tan(40°)=\\dfrac{BC}{AB} \\Rightarrow BC=15\\times\\tan(40°)\\approx15\\times0{,}839\\approx12{,}6$ cm", points:3},
+          {label:"d)", enonce:"Triangle rect. en $A$, $\\hat{B}=42°$, $AB=10$ cm. Calcule $AC$.",
+           type:"libre",
+           correction:"$\\tan(42°)=\\dfrac{AC}{AB} \\Rightarrow AC=10\\times\\tan(42°)\\approx10\\times0{,}9\\approx9$ cm", points:3},
+          {label:"e)", enonce:"Triangle rect. en $B$, $\\hat{A}=55°$, $AB=9$ cm. Calcule $BC$.",
+           type:"libre",
+           correction:"$\\tan(55°)=\\dfrac{BC}{AB} \\Rightarrow BC=9\\times\\tan(55°)\\approx9\\times1{,}428\\approx12{,}9$ cm", points:4},
         ],
         indices:["Choisis sin, cos ou tan selon les côtés connus et inconnus"]
       },
       {
-        id:"trigo_3_3", titre:"Trigonométrie — calculer un angle", niveau:"Moyen", points_total:12,
+        id:"trigo_3_3", titre:"Trigonométrie — calculer un angle", niveau:"Moyen", points_total:15,
         questions:[
           {label:"a)", enonce:"Triangle rect. en $A$, $AB=5$, $BC=13$. Calcule $\\hat{B}$.",
            type:"libre",
@@ -3888,11 +3897,14 @@ const EXERCICES = {
            choix:["$30°$","$45°$","$60°$","$90°$"],
            bonneReponseIdx:0, bonneReponse:"$30°$",
            correction:"$\\cos(30°)=\\dfrac{\\sqrt{3}}{2}\\approx0{,}866$. Valeur à connaître par cœur.", points:3},
+          {label:"e)", enonce:"Triangle rect. en $A$, $AB=8$, $BC=17$. Calcule $\\hat{B}$ (arrondi au dixième).",
+           type:"libre",
+           correction:"$\\cos(\\hat{B})=\\dfrac{8}{17}\\approx0{,}471 \\Rightarrow \\hat{B}=\\cos^{-1}(0{,}471)\\approx71{,}9°$", points:3},
         ],
         indices:["Utilise $\\cos^{-1}$, $\\sin^{-1}$ ou $\\tan^{-1}$ (arccos, arcsin, arctan) sur la calculatrice"]
       },
       {
-        id:"trigo_3_4", titre:"Trigonométrie — applications", niveau:"Difficile", points_total:12,
+        id:"trigo_3_4", titre:"Trigonométrie — applications", niveau:"Difficile", points_total:19,
         questions:[
           {label:"a)", enonce:"Un toboggan de $6$ m fait un angle de $25°$ avec l'horizontale. Hauteur du toboggan ?",
            type:"libre",
@@ -3903,33 +3915,49 @@ const EXERCICES = {
           {label:"c)", enonce:"Un escalier a des marches de hauteur $18$ cm et de profondeur $25$ cm. Quel est l'angle d'inclinaison ?",
            type:"libre",
            correction:"$\\tan\\theta=\\dfrac{18}{25}=0{,}72 \\Rightarrow \\theta=\\tan^{-1}(0{,}72)\\approx35{,}8°$", points:5},
+          {label:"d)", enonce:"Un toboggan de $5$ m fait un angle de $30°$ avec l'horizontale. Hauteur du toboggan ?",
+           type:"libre",
+           correction:"$h=5\\sin(30°)=5\\times0{,}5 \\Rightarrow 2{,}5$", points:3},
+          {label:"e)", enonce:"Du sommet d'une tour de $25$ m, on voit un point au sol sous un angle de dépression de $35°$. Distance du point à la base (arrondie au dixième) ?",
+           type:"libre",
+           correction:"$\\tan(35°)=\\dfrac{25}{d} \\Rightarrow d=\\dfrac{25}{\\tan(35°)}\\approx\\dfrac{25}{0{,}7} \\Rightarrow 35{,}7$", points:4},
         ],
         indices:["Fais un schéma, identifie le triangle rectangle et les côtés connus/inconnus"]
       },
       {
-        id:"trigo_3_5", titre:"Trigonométrie — brevet", niveau:"Difficile", points_total:12,
+        id:"trigo_3_5", titre:"Trigonométrie — brevet", niveau:"Difficile", points_total:19,
         questions:[
           {label:"1.", enonce:"Un bateau voit le sommet d'une falaise de $80$ m sous un angle d'élévation de $20°$. Distance du bateau à la falaise ?",
            type:"libre",
            correction:"$\\tan(20°)=\\dfrac{80}{d} \\Rightarrow d=\\dfrac{80}{\\tan(20°)}\\approx\\dfrac{80}{0{,}364}\\approx220$ m", points:4},
-          {label:"2.", enonce:"Triangle $ABC$ rectangle en $C$. $AC=7$, $BC=7\\sqrt{3}$. Calcule $\\hat{A}$ et $AB$.",
+          {label:"2.", enonce:"Triangle $ABC$ rectangle en $C$. $AC=7$, $BC=7\\sqrt{3}$. Calcule $\\hat{A}$.",
            type:"libre",
-           correction:"$\\tan(\\hat{A})=\\dfrac{BC}{AC}=\\dfrac{7\\sqrt{3}}{7}=\\sqrt{3} \\Rightarrow \\hat{A}=60°$. $AB=\\sqrt{49+147}=\\sqrt{196}=14$.", points:4},
+           correction:"$\\tan(\\hat{A})=\\dfrac{BC}{AC}=\\dfrac{7\\sqrt{3}}{7}=\\sqrt{3} \\Rightarrow \\hat{A}=60°$", points:4},
           {label:"3.", enonce:"Dans le triangle $ABC$ : $\\hat{A}=35°$, $\\hat{B}=55°$, $AB=10$ cm. Calcule $BC$.",
            type:"libre",
            correction:"$\\hat{C}=180-35-55=90°$. Triangle rect. en $C$. $\\cos(\\hat{B})=\\dfrac{BC}{AB} \\Rightarrow BC=10\\cos(55°)\\approx5{,}74$ cm", points:4},
+          {label:"4.", enonce:"Un bateau voit le sommet d'un phare de $60$ m sous un angle d'élévation de $15°$. Distance du bateau au phare (arrondie à l'unité) ?",
+           type:"libre",
+           correction:"$\\tan(15°)=\\dfrac{60}{d} \\Rightarrow d=\\dfrac{60}{\\tan(15°)}\\approx\\dfrac{60}{0{,}268} \\Rightarrow 224$", points:4},
+          {label:"5.", enonce:"Triangle $DEF$ rectangle en $F$. $\\hat{D}=50°$, $DF=8$ cm. Calcule $EF$ (arrondi au centième).",
+           type:"libre",
+           correction:"$\\tan(\\hat{D})=\\dfrac{EF}{DF} \\Rightarrow EF=8\\times\\tan(50°)\\approx8\\times1{,}19 \\Rightarrow 9{,}52$", points:3},
         ],
         indices:["Angle d'élévation = angle depuis l'horizontal vers le haut ; dépression = vers le bas"]
       },
       {
-        id:"trigo_3_6", titre:"Trigonométrie — Objectif Brevet I", niveau:"Difficile", points_total:10,
+        id:"trigo_3_6", titre:"Trigonométrie — Objectif Brevet I", niveau:"Difficile", points_total:17,
         questions:[
-          {label:"1.", enonce:"Triangle rect. en $A$. $AB=5{,}2$ cm, $\\hat{B}=53°$. Calcule $BC$ et $AC$.",
-           type:"libre", correction:"$BC=\\dfrac{5{,}2}{\\cos(53°)}\\approx\\dfrac{5{,}2}{0{,}602}\\approx8{,}6$ cm. $AC=5{,}2\\tan(53°)\\approx6{,}9$ cm.", points:4},
-          {label:"2.", enonce:"Skieur sur une piste inclinée à $25°$. Longueur $=800$ m. Dénivelé vertical ?",
-           type:"libre", correction:"$h=800\\sin(25°)\\approx800\\times0{,}423\\approx338$ m.", points:3},
-          {label:"3.", enonce:"Du sommet d'une tour de $45$ m, angle de dépression d'un bateau $=15°$. Distance du bateau ?",
-           type:"libre", correction:"$\\tan(15°)=\\dfrac{45}{d} \\Rightarrow d=\\dfrac{45}{0{,}268}\\approx168$ m.", points:3},
+          {label:"1.", enonce:"Triangle rect. en $A$. $AB=5{,}2$ cm, $\\hat{B}=53°$. Calcule $BC$.",
+           type:"libre", correction:"$BC=\\dfrac{5{,}2}{\\cos(53°)}\\approx\\dfrac{5{,}2}{0{,}602} \\Rightarrow 8{,}6$", points:4},
+          {label:"2.", enonce:"Skieur sur une piste inclinée à $25°$. Longueur $=800$ m. Dénivelé vertical (arrondi à l'unité) ?",
+           type:"libre", correction:"$h=800\\sin(25°)\\approx800\\times0{,}423 \\Rightarrow 338$", points:3},
+          {label:"3.", enonce:"Du sommet d'une tour de $45$ m, angle de dépression d'un bateau $=15°$. Distance du bateau (arrondie à l'unité) ?",
+           type:"libre", correction:"$\\tan(15°)=\\dfrac{45}{d} \\Rightarrow d=\\dfrac{45}{0{,}268} \\Rightarrow 168$", points:3},
+          {label:"4.", enonce:"Triangle rect. en $A$. $AB=6{,}5$ cm, $\\hat{B}=48°$. Calcule $AC$ (arrondi au dixième).",
+           type:"libre", correction:"$AC=6{,}5\\tan(48°)\\approx6{,}5\\times1{,}111 \\Rightarrow 7{,}2$", points:3},
+          {label:"5.", enonce:"Skieur sur une piste inclinée à $30°$. Longueur $=500$ m. Dénivelé vertical ?",
+           type:"libre", correction:"$h=500\\sin(30°)=500\\times0{,}5 \\Rightarrow 250$", points:4},
         ],
         indices:["D'après DNB — SOH CAH TOA dans un contexte réel"]
       },
