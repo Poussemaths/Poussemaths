@@ -11004,8 +11004,62 @@ function verifierReponse(userRaw, correctionRaw) {
       .replace(/Rightarrow/gi, '')
     );
 
-    // Texte exact
-    if(user.length >= 2 && corrClean.includes(user)) return true;
+    // Texte exact — SAUF pour une expression algebrique a plusieurs termes
+    // (developpement/reduction), ou l'inclusion de sous-chaine est trop
+    // permissive : un fragment tronque de la bonne reponse ("x-18" au lieu de
+    // "x^2+3x-18") se retrouvait accepte des lors qu'il apparaissait quelque
+    // part dans le texte de la correction, meme en oubliant le terme de plus
+    // haut degre. Trouve par Jamal le 28/07/2026 sur "Developpe (x-3)(x+6)"
+    // (reponse fausse "x-18" acceptee comme bonne). Dans ce cas (2+ termes
+    // additifs de haut niveau, hors parentheses), on compare par ENSEMBLE DE
+    // TERMES (insensible a l'ordre, respecte les parentheses/produits) plutot
+    // que par sous-chaine — sinon, comportement substring inchange (utilise
+    // par ex. pour les reponses "coordonnee seule" du type "(6;2)" sans
+    // repeter le nom du point, ou un terme factorise/produit unique).
+    const extraireSegmentFinalAlgebrique = (correction) => {
+      const seg = correction
+        .replace(/\$([^$]+)\$/g, ' $1 ')
+        .replace(/\{,\}/g, '.')
+        .replace(/\\,/g, '')
+        .replace(/[−–]/g, '-')
+        .replace(/\\approx|\\Rightarrow|\\rightarrow|\\Leftrightarrow|\\Longrightarrow|\\to(?![a-zA-Z])/gi, '=');
+      const parties = seg.split(/[=≈→]/);
+      return (parties[parties.length - 1] || '')
+        .replace(/\\times/gi, '*')
+        .replace(/\\div/gi, '/')
+        .replace(/[\\{}]/g, '')
+        .trim();
+    };
+    const decouperTermes = (expr) => {
+      const termes = [];
+      let depth = 0, cur = '';
+      for (let i = 0; i < expr.length; i++) {
+        const c = expr[i];
+        if (c === '(') depth++;
+        if (c === ')') depth--;
+        if (depth === 0 && (c === '+' || c === '-') && cur.length > 0) {
+          termes.push(cur);
+          cur = c;
+        } else {
+          cur += c;
+        }
+      }
+      if (cur.length > 0) termes.push(cur);
+      return termes
+        .map(t => t.trim())
+        .filter(t => t.length > 0)
+        .map(t => (t[0] === '+' || t[0] === '-') ? t : '+' + t)
+        .sort();
+    };
+    const corrTermes = decouperTermes(clean(extraireSegmentFinalAlgebrique(correctionRaw)));
+    if(corrTermes.length >= 2) {
+      const userTermes = decouperTermes(user);
+      if(corrTermes.length === userTermes.length && corrTermes.every((t, idx) => t === userTermes[idx])) {
+        return true;
+      }
+    } else if(user.length >= 2 && corrClean.includes(user)) {
+      return true;
+    }
 
     // ── 4b. Intervalles ──
     const normaliserIntervalle = s => s
