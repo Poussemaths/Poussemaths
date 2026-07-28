@@ -10690,7 +10690,7 @@ async function verifierQCMGenere(idx) {
 
   const correct = !!result.correcte;
   const bonIdx = result.bonIdx;
-  q.correction = result.correction || '';
+  q.correction = result.correction || 'Correction indisponible pour le moment — réessaie avec une nouvelle question.';
 
   document.querySelectorAll('.qcm-choix').forEach((btn, i) => {
     btn.disabled = true;
@@ -10742,7 +10742,16 @@ async function verifierExerciceGenere(val, q, inp) {
   });
 
   const correct = !!result.correcte;
-  q.correction = result.valeur !== undefined ? `$x = ${String(result.valeur).replace('.', '{,}')}$` : '';
+  // "$x = ...$" supposait que l'inconnue s'appelle toujours x, ce qui n'est
+  // vrai que pour equation_1er_degre_v1 -- pour les 27 autres templates
+  // (racine carree, PGCD, aire, volume...) le libelle etait faux/confus, et
+  // si le serveur ne renvoyait pas "valeur" pour une raison quelconque
+  // (reponse d'erreur, timeout), la correction restait silencieusement vide
+  // ("Correction : " sans rien apres) -- trouve par Jamal le 28/07/2026.
+  // Formulation neutre + filet de secours explicite dans tous les cas.
+  q.correction = result.valeur !== undefined
+    ? `La bonne réponse était $${String(result.valeur).replace('.', '{,}')}$`
+    : 'Correction indisponible pour le moment — réessaie avec une nouvelle question.';
 
   inp.classList.add(correct ? 'correct' : 'wrong');
   afficherCorrection(correct, q);
