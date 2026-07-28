@@ -10556,6 +10556,24 @@ function renderQuestion() {
 
   // ── MODE QCM ──
   if(q.type === 'qcm' && q.choix) {
+    // Melanger l'ordre des choix une seule fois par question (persiste tant que
+    // l'exercice reste ouvert, via le flag _qcmShuffled sur l'objet question) :
+    // sans ca, la bonne reponse est toujours a la meme place que dans le
+    // fichier source (56% des QCM statiques ont leur bonne reponse en position
+    // A), un biais qu'un eleve peut exploiter en tapant toujours la meme
+    // lettre — trouve par Jamal le 28/07/2026 en testant.
+    if(!q._qcmShuffled && !ex.genere) {
+      const bonIdxOrig = q.bonneReponseIdx !== undefined ? q.bonneReponseIdx : q.choix.indexOf(q.bonneReponse);
+      const original = q.choix;
+      const ordre = original.map((_, i) => i);
+      for(let i = ordre.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [ordre[i], ordre[j]] = [ordre[j], ordre[i]];
+      }
+      q.choix = ordre.map(i => original[i]);
+      q.bonneReponseIdx = ordre.indexOf(bonIdxOrig);
+      q._qcmShuffled = true;
+    }
     const choixHtml = q.choix.map((c, i) => `
       <button class="qcm-choix" id="qcm-${i}" onclick="verifierQCM(${i})">
         <span class="qcm-lettre">${String.fromCharCode(65+i)}</span>
