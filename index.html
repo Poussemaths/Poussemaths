@@ -11069,7 +11069,16 @@ function verifierReponse(userRaw, correctionRaw) {
         .map(t => (t[0] === '+' || t[0] === '-') ? t : '+' + t)
         .sort();
     };
-    const corrTermes = decouperTermes(clean(extraireSegmentFinalAlgebrique(correctionRaw)));
+    const segFinalClean = clean(extraireSegmentFinalAlgebrique(correctionRaw));
+    // Un "mot" de 3 lettres ou plus (hors variable isolee comme x/y) trahit du
+    // texte explicatif colle a la valeur ("sens inverse)", "valeur centrale)")
+    // plutot qu'une expression purement algebrique -- la comparaison stricte
+    // par termes ne sait pas isoler la vraie reponse de ce texte, et rejetait
+    // a tort des reponses justes (ex: "x<-3" pour une correction se terminant
+    // par "x<-3 (division par -3, sens inverse)"). Dans ce cas, retour au
+    // comportement substring existant.
+    const segEstProse = /[a-z]{3,}/i.test(segFinalClean);
+    const corrTermes = segEstProse ? [] : decouperTermes(segFinalClean);
     if(corrTermes.length >= 2) {
       const userTermes = decouperTermes(user);
       if(corrTermes.length === userTermes.length && corrTermes.every((t, idx) => t === userTermes[idx])) {
