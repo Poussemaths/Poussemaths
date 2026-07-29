@@ -8112,6 +8112,18 @@ const EXERCICES = {
 
     "Convexité": [
       {
+        id:"convex_t_genere", titre:"Point d'inflexion d'une cubique — entraînement infini", niveau:"Moyen", points_total:5,
+        genere: true, templateId: "convexite_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["Le point d'inflexion est en $f''(x)=0$"]
+      },
+      {
         id:"convex_t_1", titre:"Dérivée seconde et point d'inflexion", niveau:"Moyen", points_total:10,
         questions:[
           {label:"a)", enonce:"$f(x)=x^3-3x$, $f'(x)=3x^2-3$. Sachant $f''(x)=6x$, calcule $f''(2)$.",
@@ -8211,6 +8223,18 @@ const EXERCICES = {
     ],
 
     "Fonctions sinus et cosinus": [
+      {
+        id:"sincos_t_genere", titre:"Évaluer $a\\sin(x)+b\\cos(x)$ — entraînement infini", niveau:"Moyen", points_total:5,
+        genere: true, templateId: "fonction_trig_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["Utilise les valeurs remarquables de $\\sin$ et $\\cos$ pour l'angle donné"]
+      },
       {
         id:"sincos_t_1", titre:"Dérivées des fonctions sinus et cosinus", niveau:"Facile", points_total:10,
         questions:[
@@ -10561,6 +10585,8 @@ const TEMPLATES_GENERATEUR = {
   derivee_composee_v1: 'exo-derivee-composee-generer',
   limite_fonction_v1: 'exo-limite-fonction-generer',
   variance_somme_v1: 'exo-variance-somme-generer',
+  convexite_v1: 'exo-convexite-generer',
+  fonction_trig_v1: 'exo-fonction-trig-generer',
 };
 const TEMPLATES_VALIDATEUR = {
   equation_1er_degre_v1: 'exo-equation-valider',
@@ -10607,6 +10633,8 @@ const TEMPLATES_VALIDATEUR = {
   derivee_composee_v1: 'exo-derivee-composee-valider',
   limite_fonction_v1: 'exo-limite-fonction-valider',
   variance_somme_v1: 'exo-variance-somme-valider',
+  convexite_v1: 'exo-convexite-valider',
+  fonction_trig_v1: 'exo-fonction-trig-valider',
 };
 let currentGenTokens = [];
 
