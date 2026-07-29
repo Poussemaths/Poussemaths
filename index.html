@@ -7811,6 +7811,18 @@ const EXERCICES = {
 
     "Limites de suites": [
       {
+        id:"limsu_t_genere", titre:"Limite d'une suite rationnelle — entraînement infini", niveau:"Moyen", points_total:5,
+        genere: true, templateId: "limite_suite_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["Quand $n\\to+\\infty$, seuls les termes de plus haut degré comptent : $\\dfrac{an+b}{cn+d}\\to\\dfrac{a}{c}$"]
+      },
+      {
         id:"limsu_t_1", titre:"Limites de suites — définitions", niveau:"Facile", points_total:10,
         questions:[
           {label:"a)", enonce:"« La suite $(u_n)$ admet pour limite $+\\infty$ » signifie que :",
@@ -8315,6 +8327,18 @@ const EXERCICES = {
     ],
 
     "Dérivée de fonction composée": [
+      {
+        id:"compderiv_t_genere", titre:"Dérivée de $(ax+b)^n$ en un point — entraînement infini", niveau:"Moyen", points_total:5,
+        genere: true, templateId: "derivee_composee_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["Si $f(x)=u(x)^n$ alors $f'(x)=n\\times u'(x)\\times u(x)^{n-1}$"]
+      },
       {
         id:"compderiv_t_1", titre:"Dérivée d'une fonction composée", niveau:"Difficile", points_total:10,
         questions:[
@@ -10509,6 +10533,8 @@ const TEMPLATES_GENERATEUR = {
   probas_totales_v1: 'exo-probas-totales-generer',
   combinaison_v1: 'exo-combinaison-generer',
   logarithme_v1: 'exo-logarithme-generer',
+  limite_suite_v1: 'exo-limite-suite-generer',
+  derivee_composee_v1: 'exo-derivee-composee-generer',
 };
 const TEMPLATES_VALIDATEUR = {
   equation_1er_degre_v1: 'exo-equation-valider',
@@ -10551,6 +10577,8 @@ const TEMPLATES_VALIDATEUR = {
   probas_totales_v1: 'exo-probas-totales-valider',
   combinaison_v1: 'exo-combinaison-valider',
   logarithme_v1: 'exo-logarithme-valider',
+  limite_suite_v1: 'exo-limite-suite-valider',
+  derivee_composee_v1: 'exo-derivee-composee-valider',
 };
 let currentGenTokens = [];
 
