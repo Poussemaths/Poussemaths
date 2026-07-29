@@ -7696,6 +7696,18 @@ const EXERCICES = {
 
     "Variables aléatoires": [
       {
+        id:"var_1_genere", titre:"Espérance d'une variable aléatoire — entraînement infini", niveau:"Moyen", points_total:5,
+        genere: true, templateId: "esperance_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["$E(X)=\\sum x_i \\times P(X=x_i)$"]
+      },
+      {
         id:"var_1_1", titre:"Loi de probabilité d'une variable aléatoire", niveau:"Facile", points_total:13,
         questions:[
           {label:"a)", enonce:"On lance un dé équilibré à $6$ faces. $X$ = gain en euros : si le résultat est pair, on gagne $2$€ ; si le résultat est impair, on perd $1$€. Quelles sont les valeurs possibles prises par $X$ ?",
@@ -10457,6 +10469,7 @@ const TEMPLATES_GENERATEUR = {
   loi_binomiale_v1: 'exo-loi-binomiale-generer',
   primitive_integrale_v1: 'exo-primitive-integrale-generer',
   radian_v1: 'exo-radian-generer',
+  esperance_v1: 'exo-esperance-generer',
 };
 const TEMPLATES_VALIDATEUR = {
   equation_1er_degre_v1: 'exo-equation-valider',
@@ -10495,6 +10508,7 @@ const TEMPLATES_VALIDATEUR = {
   loi_binomiale_v1: 'exo-loi-binomiale-valider',
   primitive_integrale_v1: 'exo-primitive-integrale-valider',
   radian_v1: 'exo-radian-valider',
+  esperance_v1: 'exo-esperance-valider',
 };
 let currentGenTokens = [];
 
