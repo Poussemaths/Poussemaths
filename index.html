@@ -7847,6 +7847,18 @@ const EXERCICES = {
 
     "Primitives et calcul intégral": [
       {
+        id:"int_t_genere", titre:"Intégrale d'un trinôme — entraînement infini", niveau:"Moyen", points_total:5,
+        genere: true, templateId: "primitive_integrale_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["Trouve la primitive $F$ de $f$, puis calcule $F(b)-F(a)$"]
+      },
+      {
         id:"int_t_1", titre:"Primitives", niveau:"Facile", points_total:12,
         questions:[
           {label:"a)", enonce:"Une primitive de $f(x)=x^2$ est :",
@@ -10431,6 +10443,7 @@ const TEMPLATES_GENERATEUR = {
   produit_scalaire_v1: 'exo-produit-scalaire-generer',
   exponentielle_v1: 'exo-exponentielle-generer',
   loi_binomiale_v1: 'exo-loi-binomiale-generer',
+  primitive_integrale_v1: 'exo-primitive-integrale-generer',
 };
 const TEMPLATES_VALIDATEUR = {
   equation_1er_degre_v1: 'exo-equation-valider',
@@ -10467,6 +10480,7 @@ const TEMPLATES_VALIDATEUR = {
   produit_scalaire_v1: 'exo-produit-scalaire-valider',
   exponentielle_v1: 'exo-exponentielle-valider',
   loi_binomiale_v1: 'exo-loi-binomiale-valider',
+  primitive_integrale_v1: 'exo-primitive-integrale-valider',
 };
 let currentGenTokens = [];
 
