@@ -71,28 +71,33 @@ Deno.serve(async (req) => {
       headers: { apikey: serviceKey!, Authorization: `Bearer ${serviceKey}` },
     });
     const eleves = await eleveResp.json();
-    if (!Array.isArray(eleves) || eleves.length === 0) return new Response(JSON.stringify({ error: "eleve introuvable" }), { status: 404, headers: corsHeaders });
-    const eleveId = eleves[0].id;
+    const eleveId = Array.isArray(eleves) && eleves.length > 0 ? eleves[0].id : null;
 
-    const writeResp = await fetch(`${supabaseUrl}/rest/v1/progression?on_conflict=eleve_id,exercice_id`, {
-      method: "POST",
-      headers: { apikey: serviceKey!, Authorization: `Bearer ${serviceKey}`, "Content-Type": "application/json", Prefer: "resolution=merge-duplicates" },
-      body: JSON.stringify({
-        eleve_id: eleveId,
-        exercice_id: exercice_id ?? "limite_fonction_v1",
-        chapitre: chapitre ?? "Limites de fonctions",
-        niveau: niveau ?? "terminale",
-        score, points_obtenus: correcte ? 1 : 0, points_total: 1,
-        completed_at: new Date().toISOString(),
-          enonce: enonce ?? null,
-          reponse_donnee: String(reponse),
-          reponse_attendue: String(payload.x),
-      }),
-    });
+    // Compte sans ligne eleves (ex: prof qui teste un exercice) : on garde la
+    // correction, on saute juste le suivi de progression au lieu de bloquer
+    // la validation avec un 404 (trouve par Jamal le 29/07/2026).
+    if (eleveId) {
 
-    if (!writeResp.ok) {
-      const errText = await writeResp.text();
-      return new Response(JSON.stringify({ error: "ecriture progression echouee", detail: errText }), { status: 500, headers: corsHeaders });
+      const writeResp = await fetch(`${supabaseUrl}/rest/v1/progression?on_conflict=eleve_id,exercice_id`, {
+        method: "POST",
+        headers: { apikey: serviceKey!, Authorization: `Bearer ${serviceKey}`, "Content-Type": "application/json", Prefer: "resolution=merge-duplicates" },
+        body: JSON.stringify({
+          eleve_id: eleveId,
+          exercice_id: exercice_id ?? "limite_fonction_v1",
+          chapitre: chapitre ?? "Limites de fonctions",
+          niveau: niveau ?? "terminale",
+          score, points_obtenus: correcte ? 1 : 0, points_total: 1,
+          completed_at: new Date().toISOString(),
+            enonce: enonce ?? null,
+            reponse_donnee: String(reponse),
+            reponse_attendue: String(payload.x),
+        }),
+      });
+
+      if (!writeResp.ok) {
+        const errText = await writeResp.text();
+        return new Response(JSON.stringify({ error: "ecriture progression echouee", detail: errText }), { status: 500, headers: corsHeaders });
+      }
     }
 
     return new Response(JSON.stringify({ correcte, score, valeur: payload.x }), { headers: { ...corsHeaders, "Content-Type": "application/json" } });
