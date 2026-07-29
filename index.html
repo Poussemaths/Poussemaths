@@ -2779,12 +2779,12 @@ const EXERCICES = {
            type:"qcm", choix:["À partir de $3$ km","À partir de $10$ km","Jamais, Taxi A est toujours plus cher","Ils sont toujours égaux"],
            bonneReponseIdx:2, bonneReponse:"Jamais, Taxi A est toujours plus cher",
            correction:"$1{,}5x+2<0{,}8x \\Rightarrow 0{,}7x<-2$ — impossible pour $x\\geq0$. Taxi A est toujours plus cher.", points:4},
-          {label:"2.", enonce:"La somme de deux nombres est $45$ et leur produit est $500$. Trouve-les.",
-           type:"libre", correction:"$x+y=45$ et $xy=500$. $y=45-x$ et $x(45-x)=500 \\Rightarrow x^2-45x+500=0 \\Rightarrow (x-20)(x-25)=0$. Nombres : $20$ et $25$.", points:3},
+          {label:"2.", enonce:"La somme de deux nombres est $45$ et leur produit est $500$. Trouve le plus grand des deux.",
+           type:"libre", correction:"$x+y=45$ et $xy=500$. $y=45-x$ et $x(45-x)=500 \\Rightarrow x^2-45x+500=0 \\Rightarrow (x-20)(x-25)=0$. Les nombres sont $20$ et $25$, le plus grand $\\Rightarrow 25$", points:3},
           {label:"3.", enonce:"$4$ pommes et $3$ oranges coûtent $3{,}10$€. $2$ pommes et $5$ oranges coûtent $3{,}30$€. Prix d'une pomme ?",
            type:"libre", correction:"$4p+3o=3{,}1$ et $2p+5o=3{,}3$. $(1)-(2)\\times2$ : $-7o=-3{,}5 \\Rightarrow o=0{,}50$€, $p=0{,}40$€.", points:3},
-          {label:"4.", enonce:"La somme de deux nombres est $50$ et leur produit est $600$. Trouve-les.",
-           type:"libre", correction:"$x+y=50$ et $xy=600$. $y=50-x$ et $x(50-x)=600 \\Rightarrow x^2-50x+600=0 \\Rightarrow (x-20)(x-30)=0$. Nombres : $20$ et $30$.", points:3},
+          {label:"4.", enonce:"La somme de deux nombres est $50$ et leur produit est $600$. Trouve le plus grand des deux.",
+           type:"libre", correction:"$x+y=50$ et $xy=600$. $y=50-x$ et $x(50-x)=600 \\Rightarrow x^2-50x+600=0 \\Rightarrow (x-20)(x-30)=0$. Les nombres sont $20$ et $30$, le plus grand $\\Rightarrow 30$", points:3},
           {label:"5.", enonce:"$3$ crayons et $2$ gommes coûtent $2{,}20$€. $5$ crayons et $1$ gomme coûtent $2{,}90$€. Prix d'un crayon ?",
            type:"libre", correction:"$3c+2g=2{,}2$ et $5c+g=2{,}9$. $(2)\\times2-(1)$ : $7c=3{,}6 \\Rightarrow c\\approx0{,}51$€", points:4},
         ],
@@ -4388,10 +4388,10 @@ const EXERCICES = {
            correction:"$1{,}20\\times0{,}80 \\Rightarrow 0{,}96$", points:3},
           {label:"b)", enonce:"Coefficient multiplicateur de deux évolutions successives : $+15\\%$ puis $+10\\%$.",
            type:"libre",
-           correction:"$1{,}15\\times1{,}10=1{,}265$ soit $+26{,}5\\%$.", points:3},
+           correction:"$1{,}15\\times1{,}10=1{,}265$", points:3},
           {label:"c)", enonce:"Pour annuler une hausse de $25\\%$, quel taux de baisse faut-il appliquer ?",
            type:"libre",
-           correction:"$1{,}25\\times(1+t)=1 \\Rightarrow 1+t=0{,}8 \\Rightarrow t=-0{,}2$ soit $-20\\%$.", points:3},
+           correction:"$1{,}25\\times(1+t)=1 \\Rightarrow 1+t=0{,}8 \\Rightarrow t=-0{,}2$", points:3},
           {label:"d)", enonce:"Salaire : $2\\,000$€. Hausse de $3\\%$/an pendant $3$ ans. Salaire final ?",
            type:"libre",
            correction:"$2000\\times(1{,}03)^3=2000\\times1{,}0927\\approx2\\,185{,}5$€", points:3},
@@ -6252,7 +6252,7 @@ const EXERCICES = {
           {label:"d)", enonce:"Un losange a un angle de $55°$. Quel est l'angle consécutif (adjacent) à celui-ci ?",
            type:"libre", correction:"$180°-55°=125°$", points:3},
           {label:"e)", enonce:"Hauteur d'un triangle équilatéral de côté $10$ cm (valeur exacte).",
-           type:"libre", correction:"$h^2=10^2-5^2=75 \\Rightarrow h=5\\sqrt{3}$", points:4},
+           type:"libre", correction:"$h^2=10^2-5^2=75$, valeur intermédiaire : $h=\\sqrt{75}=5\\sqrt{3}$ cm", points:4},
         ],
         indices:["Dans un losange, angles consécutifs sont supplémentaires (somme $=180°$)"]
       },
@@ -6748,13 +6748,13 @@ const EXERCICES = {
         id:"prop_4_1", titre:"Évolutions successives", niveau:"Difficile", points_total:16,
         questions:[
           {label:"a)", enonce:"Hausse de $5\\%$ puis hausse de $3\\%$. Taux global ?",
-           type:"libre", correction:"$1{,}05\\times1{,}03=1{,}0815$ soit $+8{,}15\\%$", points:3},
+           type:"libre", correction:"$1{,}05\\times1{,}03=1{,}0815$", points:3},
           {label:"b)", enonce:"Pour annuler une hausse de $20\\%$, quel taux de baisse faut-il ?",
            type:"libre", correction:"$1{,}20\\times(1+t)=1 \\Rightarrow t=-\\dfrac{1}{6}\\approx-16{,}7\\%$", points:4},
           {label:"c)", enonce:"Capital de $5\\,000$€ placé à $4\\%$/an. Valeur après $3$ ans ?",
            type:"libre", correction:"$5000\\times(1{,}04)^3\\approx5000\\times1{,}1249\\approx5\\,625$€", points:3},
           {label:"d)", enonce:"Baisse de $10\\%$ puis baisse de $5\\%$. Taux global ?",
-           type:"libre", correction:"$0{,}90\\times0{,}95=0{,}855$ soit $-14{,}5\\%$", points:3},
+           type:"libre", correction:"$0{,}90\\times0{,}95=0{,}855$", points:3},
           {label:"e)", enonce:"Capital de $3\\,000$€ placé à $2\\%$/an. Valeur après $2$ ans ?",
            type:"libre", correction:"$3000\\times(1{,}02)^2\\approx3000\\times1{,}0404\\approx3\\,121$€", points:3},
         ],
@@ -10942,7 +10942,25 @@ function verifierReponse(userRaw, correctionRaw) {
         // c'est juste la puissance de 10 -- sans ce garde, les questions
         // "ecris en notation scientifique" (reponse attendue sous cette forme,
         // pas en decimal) etaient invalidables (resultatFinal errone = l'exposant).
-        if(!/[a-zA-Z]/.test(avantNombre) && !/\\sqrt/i.test(p) && !/\\times\s*10\^/i.test(p)) resultats.push(parseFloat(matchFin[1]));
+        // Idem pour un \dfrac{...}{...} dont le numerateur/denominateur n'est
+        // PAS un simple entier (ex: "\dfrac{4-(-2)}{3-0}", une formule de
+        // pente non evaluee) : le retrait generique des accolades juxtapose
+        // les deux groupes sans separateur ("4-(-2)3-0"), exposant a tort un
+        // chiffre de la formule (ex: le "0" du denominateur) comme "resultat"
+        // -- trouve sur une equation de droite (aff_3_5) ou ce "0" bloquait
+        // le fallback texte, empechant TOUTE reponse ("y=2x-2", pourtant
+        // juste) de valider.
+        const hasFrac = /\\d?frac\{/i.test(p);
+        const hasFracSimple = /\\d?frac\{-?\d+\}\{-?\d+\}/i.test(p);
+        // Idem pour une puissance non evaluee en toute fin de segment
+        // ("...=10^2-5^2" avant le vrai resultat) : le "2" final est
+        // l'EXPOSANT du dernier terme, pas une valeur calculee -- version
+        // generale du garde notation-scientifique ci-dessus (qui ne visait
+        // que "\times10^n"), trouve sur un calcul de hauteur de triangle
+        // equilateral ou "5^2" (jamais evalue puisque Rightarrow menait
+        // ensuite au vrai calcul) exposait a tort son exposant "2".
+        const hasTrailingCaret = /\^\s*$/.test(avantNombre);
+        if(!/[a-zA-Z]/.test(avantNombre) && !/\\sqrt/i.test(p) && !/\\times\s*10\^/i.test(p) && !(hasFrac && !hasFracSimple) && !hasTrailingCaret) resultats.push(parseFloat(matchFin[1]));
         continue;
       }
 
