@@ -10906,7 +10906,21 @@ function verifierReponse(userRaw, correctionRaw) {
         // Ponctuation de fin de phrase après l'unité ("...=13,5 cL.") sinon
         // l'unité n'est plus en toute fin de chaîne et n'est pas retirée.
         .replace(/[.,;:]+\s*$/, '')
-        .replace(new RegExp(`\\s*(?:${UNITE_RE})\\s*$`, 'i'), '');
+        .replace(new RegExp(`\\s*(?:${UNITE_RE})\\s*$`, 'i'), '')
+        .replace(/[.,;:]+\s*$/, '')
+        // Filet de secours pour un mot non repertorie dans UNITE_RE apres le
+        // nombre ("...=12$ élèves", "...=21$ pages", "...=6$ exécutions") :
+        // n'importe quel mot d'au moins 3 lettres separe du nombre par une
+        // espace est descriptif, jamais la valeur elle-meme (une reponse
+        // "libre" numerique se termine toujours par un nombre nu selon la
+        // convention du fichier) — sans ce filet, ces corrections retombaient
+        // sur le fallback texte permissif au lieu du chemin numerique exact
+        // avec tolerance (ex: "24,50÷3,50=7 magazines" extrayait a tort 3,50,
+        // le diviseur, au lieu du vrai resultat 7). Seuil de 3 lettres (pas 1)
+        // pour ne jamais confondre avec une variable isolee ("... à k=10") --
+        // sinon "de k=0 à k=10" perdait son "à k" et exposait a tort le "0"
+        // de l'indice de depart comme s'il etait le resultat final.
+        .replace(/\s+(?:[a-zàâäéèêëïîôöùûüç]{1,2}\s+)*[a-zàâäéèêëïîôöùûüç]{3,}\s*$/i, '');
       const matchFin = pClean.match(/(-?\d+(?:\.\d+)?)\s*$/);
       if(matchFin) {
         // Si le segment contient encore une lettre AVANT ce nombre final
