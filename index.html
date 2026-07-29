@@ -7870,6 +7870,18 @@ const EXERCICES = {
 
     "Limites de fonctions": [
       {
+        id:"limfo_t_genere", titre:"Lever une forme indéterminée 0/0 — entraînement infini", niveau:"Moyen", points_total:5,
+        genere: true, templateId: "limite_fonction_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["Factorise $x^2-a^2=(x-a)(x+a)$ pour simplifier par $x-a$"]
+      },
+      {
         id:"limfo_t_1", titre:"Limites de fonctions et asymptotes", niveau:"Moyen", points_total:15,
         questions:[
           {label:"a)", enonce:"$\\lim\\limits_{x\\to+\\infty}\\dfrac{1}{x}=$",
@@ -10535,6 +10547,7 @@ const TEMPLATES_GENERATEUR = {
   logarithme_v1: 'exo-logarithme-generer',
   limite_suite_v1: 'exo-limite-suite-generer',
   derivee_composee_v1: 'exo-derivee-composee-generer',
+  limite_fonction_v1: 'exo-limite-fonction-generer',
 };
 const TEMPLATES_VALIDATEUR = {
   equation_1er_degre_v1: 'exo-equation-valider',
@@ -10579,6 +10592,7 @@ const TEMPLATES_VALIDATEUR = {
   logarithme_v1: 'exo-logarithme-valider',
   limite_suite_v1: 'exo-limite-suite-valider',
   derivee_composee_v1: 'exo-derivee-composee-valider',
+  limite_fonction_v1: 'exo-limite-fonction-valider',
 };
 let currentGenTokens = [];
 
