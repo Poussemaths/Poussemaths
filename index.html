@@ -8006,6 +8006,18 @@ const EXERCICES = {
 
     "Logarithme népérien": [
       {
+        id:"log_t_genere", titre:"Résoudre $e^x=k$ — entraînement infini", niveau:"Moyen", points_total:5,
+        genere: true, templateId: "logarithme_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["$e^x=k \\iff x=\\ln(k)$"]
+      },
+      {
         id:"log_t_1", titre:"Logarithme népérien — définition et propriétés", niveau:"Facile", points_total:10,
         questions:[
           {label:"a)", enonce:"$\\ln(1)$ vaut :",
@@ -8122,6 +8134,18 @@ const EXERCICES = {
     ],
 
     "Combinatoire et dénombrement": [
+      {
+        id:"combi_t_genere", titre:"Calcul de coefficient binomial — entraînement infini", niveau:"Moyen", points_total:5,
+        genere: true, templateId: "combinaison_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["$\\binom{n}{k}=\\dfrac{n!}{k!(n-k)!}$"]
+      },
       {
         id:"combi_t_1", titre:"Principes de dénombrement et factorielle", niveau:"Facile", points_total:10,
         questions:[
@@ -10483,6 +10507,8 @@ const TEMPLATES_GENERATEUR = {
   radian_v1: 'exo-radian-generer',
   esperance_v1: 'exo-esperance-generer',
   probas_totales_v1: 'exo-probas-totales-generer',
+  combinaison_v1: 'exo-combinaison-generer',
+  logarithme_v1: 'exo-logarithme-generer',
 };
 const TEMPLATES_VALIDATEUR = {
   equation_1er_degre_v1: 'exo-equation-valider',
@@ -10523,6 +10549,8 @@ const TEMPLATES_VALIDATEUR = {
   radian_v1: 'exo-radian-valider',
   esperance_v1: 'exo-esperance-valider',
   probas_totales_v1: 'exo-probas-totales-valider',
+  combinaison_v1: 'exo-combinaison-valider',
+  logarithme_v1: 'exo-logarithme-valider',
 };
 let currentGenTokens = [];
 
