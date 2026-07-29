@@ -7404,6 +7404,18 @@ const EXERCICES = {
 
     "Probabilités conditionnelles et indépendance": [
       {
+        id:"cond_1_genere", titre:"Probabilités totales — entraînement infini", niveau:"Moyen", points_total:5,
+        genere: true, templateId: "probas_totales_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["$P(B)=P(A)\\times P_A(B)+P(\\bar{A})\\times P_{\\bar{A}}(B)$"]
+      },
+      {
         id:"cond_1_1", titre:"Indépendance de deux événements", niveau:"Facile", points_total:13,
         questions:[
           {label:"a)", enonce:"$A$ et $B$ sont indépendants si et seulement si :",
@@ -10470,6 +10482,7 @@ const TEMPLATES_GENERATEUR = {
   primitive_integrale_v1: 'exo-primitive-integrale-generer',
   radian_v1: 'exo-radian-generer',
   esperance_v1: 'exo-esperance-generer',
+  probas_totales_v1: 'exo-probas-totales-generer',
 };
 const TEMPLATES_VALIDATEUR = {
   equation_1er_degre_v1: 'exo-equation-valider',
@@ -10509,6 +10522,7 @@ const TEMPLATES_VALIDATEUR = {
   primitive_integrale_v1: 'exo-primitive-integrale-valider',
   radian_v1: 'exo-radian-valider',
   esperance_v1: 'exo-esperance-valider',
+  probas_totales_v1: 'exo-probas-totales-valider',
 };
 let currentGenTokens = [];
 
