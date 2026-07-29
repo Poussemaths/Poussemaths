@@ -8280,6 +8280,18 @@ const EXERCICES = {
 
     "Sommes de variables aléatoires": [
       {
+        id:"sommevar_t_genere", titre:"Variance d'une combinaison linéaire — entraînement infini", niveau:"Moyen", points_total:5,
+        genere: true, templateId: "variance_somme_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["Pour $X,Y$ indépendantes : $V(aX+bY)=a^2V(X)+b^2V(Y)$"]
+      },
+      {
         id:"sommevar_t_1", titre:"Linéarité et additivité", niveau:"Moyen", points_total:10,
         questions:[
           {label:"a)", enonce:"$E(X)=5$ et $E(Y)=8$. Calcule $E(X+Y)$.",
@@ -10548,6 +10560,7 @@ const TEMPLATES_GENERATEUR = {
   limite_suite_v1: 'exo-limite-suite-generer',
   derivee_composee_v1: 'exo-derivee-composee-generer',
   limite_fonction_v1: 'exo-limite-fonction-generer',
+  variance_somme_v1: 'exo-variance-somme-generer',
 };
 const TEMPLATES_VALIDATEUR = {
   equation_1er_degre_v1: 'exo-equation-valider',
@@ -10593,6 +10606,7 @@ const TEMPLATES_VALIDATEUR = {
   limite_suite_v1: 'exo-limite-suite-valider',
   derivee_composee_v1: 'exo-derivee-composee-valider',
   limite_fonction_v1: 'exo-limite-fonction-valider',
+  variance_somme_v1: 'exo-variance-somme-valider',
 };
 let currentGenTokens = [];
 
