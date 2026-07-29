@@ -7548,6 +7548,18 @@ const EXERCICES = {
 
     "Trigonométrie — cercle trigonométrique": [
       {
+        id:"trig_1_genere", titre:"Conversion degrés/radians — entraînement infini", niveau:"Facile", points_total:5,
+        genere: true, templateId: "radian_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["$180°=\\pi$ rad, donc $x°=\\dfrac{x\\times\\pi}{180}$ rad"]
+      },
+      {
         id:"trig_1_1", titre:"Radians et cercle trigonométrique", niveau:"Facile", points_total:10,
         questions:[
           {label:"a)", enonce:"Un tour complet du cercle trigonométrique correspond à :",
@@ -10444,6 +10456,7 @@ const TEMPLATES_GENERATEUR = {
   exponentielle_v1: 'exo-exponentielle-generer',
   loi_binomiale_v1: 'exo-loi-binomiale-generer',
   primitive_integrale_v1: 'exo-primitive-integrale-generer',
+  radian_v1: 'exo-radian-generer',
 };
 const TEMPLATES_VALIDATEUR = {
   equation_1er_degre_v1: 'exo-equation-valider',
@@ -10481,6 +10494,7 @@ const TEMPLATES_VALIDATEUR = {
   exponentielle_v1: 'exo-exponentielle-valider',
   loi_binomiale_v1: 'exo-loi-binomiale-valider',
   primitive_integrale_v1: 'exo-primitive-integrale-valider',
+  radian_v1: 'exo-radian-valider',
 };
 let currentGenTokens = [];
 
