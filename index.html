@@ -8009,6 +8009,18 @@ const EXERCICES = {
 
     "Géométrie dans l'espace": [
       {
+        id:"espace_t_genere", titre:"Produit scalaire dans l'espace — entraînement infini", niveau:"Moyen", points_total:5,
+        genere: true, templateId: "geometrie_espace_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["$\\vec{u}\\cdot\\vec{v}=x_ux_v+y_uy_v+z_uz_v$"]
+      },
+      {
         id:"espace_t_1", titre:"Produit scalaire et distances dans l'espace", niveau:"Moyen", points_total:10,
         questions:[
           {label:"a)", enonce:"$\\vec{u}(1\\,;\\,2\\,;\\,3)$ et $\\vec{v}(4\\,;\\,-1\\,;\\,2)$ dans une base orthonormée de l'espace. Calcule $\\vec{u}\\cdot\\vec{v}=xx'+yy'+zz'$.",
@@ -8281,6 +8293,18 @@ const EXERCICES = {
 
     "Équations différentielles": [
       {
+        id:"diffeq_t_genere", titre:"Résoudre y'=ay — entraînement infini", niveau:"Moyen", points_total:5,
+        genere: true, templateId: "equadiff_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["Les solutions de $y'=ay$ sont $y(x)=Ce^{ax}$, avec $C=y(0)$"]
+      },
+      {
         id:"diffeq_t_1", titre:"Équations différentielles y'=ay et y'=ay+b", niveau:"Moyen", points_total:10,
         questions:[
           {label:"a)", enonce:"Les solutions de l'équation différentielle $y'=ay$ (avec $a$ réel) sont de la forme :",
@@ -8353,6 +8377,18 @@ const EXERCICES = {
 
     "Droites et plans de l'espace": [
       {
+        id:"droitesplans_t_genere", titre:"Appartenance d'un point à un plan — entraînement infini", niveau:"Moyen", points_total:5,
+        genere: true, templateId: "appartenance_plan_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["$M(x_M;y_M;z_M)\\in P$ ssi $ax_M+by_M+cz_M=d$"]
+      },
+      {
         id:"droitesplans_t_1", titre:"Représentations paramétriques et équations cartésiennes", niveau:"Difficile", points_total:10,
         questions:[
           {label:"a)", enonce:"Une droite de l'espace passant par $A(x_A;y_A;z_A)$ de vecteur directeur $\\vec{u}(a;b;c)$ a pour représentation paramétrique :",
@@ -8410,6 +8446,18 @@ const EXERCICES = {
     ],
 
     "Concentration et loi des grands nombres": [
+      {
+        id:"concentr_t_genere", titre:"Inégalité de Bienaymé-Tchebychev — entraînement infini", niveau:"Moyen", points_total:5,
+        genere: true, templateId: "concentration_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["$P(|X-E(X)|\\geq a)\\leq \\dfrac{V(X)}{a^2}$"]
+      },
       {
         id:"concentr_t_1", titre:"Inégalité de Bienaymé-Tchebychev et loi des grands nombres", niveau:"Difficile", points_total:10,
         questions:[
@@ -10587,6 +10635,10 @@ const TEMPLATES_GENERATEUR = {
   variance_somme_v1: 'exo-variance-somme-generer',
   convexite_v1: 'exo-convexite-generer',
   fonction_trig_v1: 'exo-fonction-trig-generer',
+  geometrie_espace_v1: 'exo-geometrie-espace-generer',
+  appartenance_plan_v1: 'exo-appartenance-plan-generer',
+  concentration_v1: 'exo-concentration-generer',
+  equadiff_v1: 'exo-equadiff-generer',
 };
 const TEMPLATES_VALIDATEUR = {
   equation_1er_degre_v1: 'exo-equation-valider',
@@ -10635,6 +10687,10 @@ const TEMPLATES_VALIDATEUR = {
   variance_somme_v1: 'exo-variance-somme-valider',
   convexite_v1: 'exo-convexite-valider',
   fonction_trig_v1: 'exo-fonction-trig-valider',
+  geometrie_espace_v1: 'exo-geometrie-espace-valider',
+  appartenance_plan_v1: 'exo-appartenance-plan-valider',
+  concentration_v1: 'exo-concentration-valider',
+  equadiff_v1: 'exo-equadiff-valider',
 };
 let currentGenTokens = [];
 
