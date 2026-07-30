@@ -10590,16 +10590,16 @@ function texToHtml(str) {
 const EDGE_FUNCTIONS_BASE = SUPABASE_URL + '/functions/v1';
 const TEMPLATES_GENERATEUR = {
   equation_1er_degre_v1: 'exo-equation-generer',
-  pourcentage_v1: 'exo-pourcentage-generer',
+  pourcentage_v1: 'exo-4eme-generer',
   priorites_v1: 'exo-priorites-generer',
   puissance_v1: 'exo-puissance-generer',
   racine_carree_v1: 'exo-racine-generer',
   evaluation_fonction_v1: 'exo-fonction-generer',
-  pythagore_v1: 'exo-pythagore-generer',
-  moyenne_v1: 'exo-moyenne-generer',
+  pythagore_v1: 'exo-4eme-generer',
+  moyenne_v1: 'exo-4eme-generer',
   volume_pave_v1: 'exo-volume-generer',
-  relatifs_v1: 'exo-relatifs-generer',
-  probabilite_v1: 'exo-probabilite-generer',
+  relatifs_v1: 'exo-4eme-generer',
+  probabilite_v1: 'exo-4eme-generer',
   pgcd_v1: 'exo-pgcd-generer',
   discriminant_v1: 'exo-discriminant-generer',
   fraction_addition_v1: 'exo-fraction-add-generer',
@@ -10642,16 +10642,16 @@ const TEMPLATES_GENERATEUR = {
 };
 const TEMPLATES_VALIDATEUR = {
   equation_1er_degre_v1: 'exo-equation-valider',
-  pourcentage_v1: 'exo-pourcentage-valider',
+  pourcentage_v1: 'exo-4eme-valider',
   priorites_v1: 'exo-priorites-valider',
   puissance_v1: 'exo-puissance-valider',
   racine_carree_v1: 'exo-racine-valider',
   evaluation_fonction_v1: 'exo-fonction-valider',
-  pythagore_v1: 'exo-pythagore-valider',
-  moyenne_v1: 'exo-moyenne-valider',
+  pythagore_v1: 'exo-4eme-valider',
+  moyenne_v1: 'exo-4eme-valider',
   volume_pave_v1: 'exo-volume-valider',
-  relatifs_v1: 'exo-relatifs-valider',
-  probabilite_v1: 'exo-probabilite-valider',
+  relatifs_v1: 'exo-4eme-valider',
+  probabilite_v1: 'exo-4eme-valider',
   pgcd_v1: 'exo-pgcd-valider',
   discriminant_v1: 'exo-discriminant-valider',
   fraction_addition_v1: 'exo-fraction-add-valider',
@@ -10711,7 +10711,7 @@ async function appelEdgeFunction(slug, method, body) {
 
 async function chargerInstanceGeneree(index) {
   const slug = TEMPLATES_GENERATEUR[currentExercice.templateId];
-  const instance = await appelEdgeFunction(slug, 'POST');
+  const instance = await appelEdgeFunction(slug, 'POST', { template_id: currentExercice.templateId });
   currentGenTokens[index] = instance.token;
   const q = currentExercice.questions[index];
   q.enonce = instance.enonce;
@@ -10907,6 +10907,7 @@ async function verifierQCMGenere(idx) {
   const niveau = detecterNiveauDepuisId(currentExercice.id);
 
   const result = await appelEdgeFunction(slug, 'POST', {
+    template_id: currentExercice.templateId,
     token: currentGenTokens[currentQuestion],
     reponse: idx,
     exercice_id: `${currentExercice.id}_${currentQuestion + 1}`,
@@ -10960,6 +10961,7 @@ async function verifierExerciceGenere(val, q, inp) {
   const niveau = detecterNiveauDepuisId(currentExercice.id);
 
   const result = await appelEdgeFunction(slug, 'POST', {
+    template_id: currentExercice.templateId,
     token: currentGenTokens[currentQuestion],
     reponse: val,
     exercice_id: `${currentExercice.id}_${currentQuestion + 1}`,

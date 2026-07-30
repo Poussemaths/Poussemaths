@@ -1,4 +1,8 @@
-// Valide la reponse d'un eleve pour le template relatifs_v1.
+// Fonction consolidee : valide tous les templates generatifs de 4e, routee par
+// template_id (chantier de consolidation du 30/07/2026). Logique de parsing et
+// de fallback "compte sans ligne eleves" identiques a chaque ancien fichier
+// exo-<template>-valider (fix du 29/07/2026 preserve). Seule la tolerance de
+// comparaison et les valeurs par defaut (chapitre/niveau) varient par template.
 
 async function getKey(): Promise<CryptoKey> {
   const raw = Uint8Array.from(atob(Deno.env.get("EXO_KEY")!), (c) => c.charCodeAt(0));
@@ -43,6 +47,14 @@ const corsHeaders = {
   "Access-Control-Allow-Methods": "POST, OPTIONS",
 };
 
+const DEFAULTS: Record<string, { tolerance: number; chapitre: string; niveau: string }> = {
+  relatifs_v1: { tolerance: 0.001, chapitre: "Nombres relatifs", niveau: "4eme" },
+  pythagore_v1: { tolerance: 0.001, chapitre: "Théorème de Pythagore", niveau: "4eme" },
+  pourcentage_v1: { tolerance: 0.001, chapitre: "pourcentages", niveau: "4eme" },
+  probabilite_v1: { tolerance: 0.006, chapitre: "Probabilités 4ème", niveau: "4eme" },
+  moyenne_v1: { tolerance: 0.001, chapitre: "Statistiques 4ème", niveau: "4eme" },
+};
+
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response(null, { headers: corsHeaders });
   try {
@@ -50,8 +62,11 @@ Deno.serve(async (req) => {
     const userId = decodeJwtSub(jwt);
     if (!userId) return new Response(JSON.stringify({ error: "utilisateur non authentifie" }), { status: 401, headers: corsHeaders });
 
-    const { token, reponse, exercice_id, chapitre, niveau, enonce } = await req.json();
+    const { template_id, token, reponse, exercice_id, chapitre, niveau, enonce } = await req.json();
     if (!token || reponse === undefined) return new Response(JSON.stringify({ error: "token et reponse requis" }), { status: 400, headers: corsHeaders });
+
+    const defaults = DEFAULTS[template_id];
+    if (!defaults) return new Response(JSON.stringify({ error: "template_id inconnu" }), { status: 400, headers: corsHeaders });
 
     let payload;
     try {
@@ -61,7 +76,7 @@ Deno.serve(async (req) => {
     }
 
     const donnee = parseReponse(String(reponse));
-    const correcte = donnee !== null && Math.abs(donnee - payload.x) < 0.001;
+    const correcte = donnee !== null && Math.abs(donnee - payload.x) < defaults.tolerance;
     const score = correcte ? 100 : 0;
 
     const supabaseUrl = Deno.env.get("SUPABASE_URL");
@@ -77,20 +92,19 @@ Deno.serve(async (req) => {
     // correction, on saute juste le suivi de progression au lieu de bloquer
     // la validation avec un 404 (trouve par Jamal le 29/07/2026).
     if (eleveId) {
-
       const writeResp = await fetch(`${supabaseUrl}/rest/v1/progression?on_conflict=eleve_id,exercice_id`, {
         method: "POST",
         headers: { apikey: serviceKey!, Authorization: `Bearer ${serviceKey}`, "Content-Type": "application/json", Prefer: "resolution=merge-duplicates" },
         body: JSON.stringify({
           eleve_id: eleveId,
-          exercice_id: exercice_id ?? "relatifs_v1",
-          chapitre: chapitre ?? "Nombres relatifs",
-          niveau: niveau ?? "5eme",
+          exercice_id: exercice_id ?? template_id,
+          chapitre: chapitre ?? defaults.chapitre,
+          niveau: niveau ?? defaults.niveau,
           score, points_obtenus: correcte ? 1 : 0, points_total: 1,
           completed_at: new Date().toISOString(),
-            enonce: enonce ?? null,
-            reponse_donnee: String(reponse),
-            reponse_attendue: String(payload.x),
+          enonce: enonce ?? null,
+          reponse_donnee: String(reponse),
+          reponse_attendue: String(payload.x),
         }),
       });
 
