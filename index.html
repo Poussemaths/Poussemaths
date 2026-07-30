@@ -8385,6 +8385,18 @@ const EXERCICES = {
 
     "Continuité et théorème des valeurs intermédiaires": [
       {
+        id:"tvi_t_genere", titre:"Évaluation d'une fonction cubique — entraînement infini", niveau:"Moyen", points_total:5,
+        genere: true, templateId: "continuite_tvi_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["Remplace $x$ par la valeur donnée dans $f(x)=x^3+ax+b$ et calcule"]
+      },
+      {
         id:"tvi_t_1", titre:"Théorème des valeurs intermédiaires", niveau:"Moyen", points_total:10,
         questions:[
           {label:"a)", enonce:"$f$ est continue sur $[a\\,;\\,b]$, $f(a)=-2$ et $f(b)=5$. D'après le théorème des valeurs intermédiaires, l'équation $f(x)=0$ admet, sur $[a\\,;\\,b]$ :",
@@ -10977,6 +10989,7 @@ const TEMPLATES_GENERATEUR = {
   appartenance_plan_v1: 'exo-terminale-generer',
   concentration_v1: 'exo-terminale-generer',
   equadiff_v1: 'exo-terminale-generer',
+  continuite_tvi_v1: 'exo-terminale-generer',
 };
 const TEMPLATES_VALIDATEUR = {
   equation_1er_degre_v1: 'exo-3eme-valider',
@@ -11029,6 +11042,7 @@ const TEMPLATES_VALIDATEUR = {
   appartenance_plan_v1: 'exo-terminale-valider',
   concentration_v1: 'exo-terminale-valider',
   equadiff_v1: 'exo-terminale-valider',
+  continuite_tvi_v1: 'exo-terminale-valider',
 };
 let currentGenTokens = [];
 
