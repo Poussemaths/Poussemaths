@@ -276,13 +276,18 @@ function verifierReponse(userRaw: string, correctionRaw: string): boolean {
   return false;
 }
 
-function verifierQuestion(q: any, reponse: string): { correcte: boolean; correction: string; bonIdx?: number } {
+function verifierQuestion(q: any, reponse: string): { correcte: boolean; correction: string; bonneReponse?: string } {
   if (q.type === 'qcm') {
-    const bonIdx = q.bonneReponseIdx !== undefined && q.bonneReponseIdx !== null
-      ? q.bonneReponseIdx
-      : (q.choix || []).indexOf(q.bonneReponse);
-    const correcte = parseInt(String(reponse), 10) === bonIdx;
-    return { correcte, correction: q.correction ?? '', bonIdx };
+    // Comparaison par TEXTE, jamais par position : le client melange l'ordre
+    // d'affichage des choix (Fisher-Yates, anti-biais "toujours en A") sans
+    // que le serveur en soit informe -- comparer un index reviendrait a
+    // comparer une position mélangée a la position originale non mélangée
+    // stockee en base, faussant la correction pour toute question melangee.
+    const bonneReponseTexte = q.bonneReponse !== undefined && q.bonneReponse !== null
+      ? q.bonneReponse
+      : (q.choix || [])[q.bonneReponseIdx];
+    const correcte = String(reponse) === String(bonneReponseTexte);
+    return { correcte, correction: q.correction ?? '', bonneReponse: bonneReponseTexte };
   }
   const correcte = verifierReponse(String(reponse), q.correction ?? '');
   return { correcte, correction: q.correction ?? '' };
@@ -291,9 +296,12 @@ function verifierQuestion(q: any, reponse: string): { correcte: boolean; correct
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response(null, { headers: corsHeaders });
   try {
+    // Pas d'authentification exigee ici : l'exercice reste essayable par un
+    // visiteur non connecte (comme avant, la verification locale ne demandait
+    // aucun compte) -- seule l'action "terminer" (ecriture progression) a
+    // besoin de savoir qui est l'eleve, verifie plus bas au moment voulu.
     const jwt = (req.headers.get("Authorization") ?? "").replace("Bearer ", "");
     const userId = decodeJwtSub(jwt);
-    if (!userId) return new Response(JSON.stringify({ error: "utilisateur non authentifie" }), { status: 401, headers: corsHeaders });
 
     const body = await req.json();
     const { action, exercice_id } = body;
@@ -319,8 +327,8 @@ Deno.serve(async (req) => {
       const q = questions[question_index];
       if (!q) return new Response(JSON.stringify({ error: "question introuvable" }), { status: 404, headers: corsHeaders });
 
-      const { correcte, correction, bonIdx } = verifierQuestion(q, reponse);
-      return new Response(JSON.stringify({ correcte, correction, bonIdx }), {
+      const { correcte, correction, bonneReponse } = verifierQuestion(q, reponse);
+      return new Response(JSON.stringify({ correcte, correction, bonneReponse }), {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
