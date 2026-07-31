@@ -1336,8 +1336,8 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
           <span class="nc-badge-new">Nouveau</span>
           <div class="nc-icon">Tle C.</div>
           <div class="nc-name">Terminale Complémentaire</div>
-          <p class="nc-desc">Option maths complémentaires — lois à densité, loi normale, statistiques à deux variables.</p>
-          <div class="nc-tags"><span class="nc-tag">Loi normale</span><span class="nc-tag">Corrélation</span></div>
+          <p class="nc-desc">Option maths complémentaires — lois à densité, statistiques à deux variables.</p>
+          <div class="nc-tags"><span class="nc-tag">Loi exponentielle</span><span class="nc-tag">Corrélation</span></div>
         </div>
       </div>
 
@@ -8866,7 +8866,7 @@ const EXERCICES = {
   },
 
   "terminale_complementaire": {
-    "Lois à densité et loi normale": [
+    "Lois à densité": [
       {
         id:"densite_tc_1", titre:"Lois à densité — uniforme et exponentielle", niveau:"Moyen", points_total:10,
         questions:[
@@ -8891,27 +8891,27 @@ const EXERCICES = {
         indices:["Loi uniforme sur $[a;b]$ : $P(X\\leq c)=\\dfrac{c-a}{b-a}$ ; loi exponentielle : $P(X\\leq t)=1-e^{-\\lambda t}$, $P(X\\geq t)=e^{-\\lambda t}$"]
       },
       {
-        id:"densite_tc_2", titre:"Loi normale — symétrie et valeurs remarquables", niveau:"Moyen", points_total:10,
+        id:"densite_tc_2", titre:"Espérance et fonction de répartition d'une loi à densité", niveau:"Moyen", points_total:10,
         questions:[
-          {label:"a)", enonce:"La courbe de densité de la loi normale $\\mathcal{N}(\\mu,\\sigma^2)$ est symétrique par rapport à :",
+          {label:"a)", enonce:"Pour une variable aléatoire $X$ à densité, la fonction de répartition $F$ est définie par :",
            type:"qcm",
-           choix:["La droite $x=\\mu$","La droite $x=\\sigma$","L'axe des ordonnées","Elle n'est jamais symétrique"],
-           bonneReponseIdx:0, bonneReponse:"La droite $x=\\mu$",
-           correction:"La courbe en cloche de la loi normale est toujours symétrique par rapport à la moyenne $\\mu$.", points:2},
-          {label:"b)", enonce:"$X$ suit la loi $\\mathcal{N}(100\\,;\\,15^2)$. Calcule $P(X\\leq100)$.",
+           choix:["$F(x)=P(X\\leq x)$","$F(x)=P(X=x)$","$F(x)=P(X\\geq x)$","$F(x)=P(X\\ne x)$"],
+           bonneReponseIdx:0, bonneReponse:"$F(x)=P(X\\leq x)$",
+           correction:"La fonction de répartition d'une variable à densité est $F(x)=P(X\\leq x)$, par définition.", points:2},
+          {label:"b)", enonce:"$X$ suit la loi uniforme sur $[0\\,;\\,1]$. Son espérance est $E(X)=\\dfrac{a+b}{2}$. Calcule $E(X)$.",
            type:"libre",
-           correction:"Par symétrie autour de $\\mu=100$, $P(X\\leq100)=0{,}5$", points:2},
-          {label:"c)", enonce:"$Z$ suit la loi normale centrée réduite $\\mathcal{N}(0,1)$. Sachant $P(Z\\leq1{,}96)=0{,}975$, calcule $P(Z\\geq1{,}96)$.",
+           correction:"$E(X)=\\dfrac{0+1}{2}=0{,}5$", points:2},
+          {label:"c)", enonce:"$X$ suit la loi uniforme sur $[2\\,;\\,8]$. Calcule son espérance $E(X)=\\dfrac{a+b}{2}$.",
            type:"libre",
-           correction:"$P(Z\\geq1{,}96)=1-P(Z\\leq1{,}96)=1-0{,}975=0{,}025$", points:2},
-          {label:"d)", enonce:"Avec $P(Z\\leq1{,}96)=0{,}975$ et la symétrie de la loi ($P(Z\\leq-1{,}96)=1-0{,}975=0{,}025$), calcule $P(-1{,}96\\leq Z\\leq1{,}96)$.",
+           correction:"$E(X)=\\dfrac{2+8}{2}=\\dfrac{10}{2}=5$", points:2},
+          {label:"d)", enonce:"$X$ suit la loi exponentielle de paramètre $\\lambda=0{,}25$. Son espérance est $E(X)=\\dfrac{1}{\\lambda}$. Calcule $E(X)$.",
            type:"libre",
-           correction:"$P(-1{,}96\\leq Z\\leq1{,}96)=0{,}975-0{,}025=0{,}95$", points:2},
-          {label:"e)", enonce:"$X$ suit $\\mathcal{N}(50\\,;\\,4^2)$. On sait que $P(42\\leq X\\leq58)\\approx0{,}95$ (règle empirique à $2\\sigma$). Calcule $P(X<42 \\text{ ou } X>58)$.",
+           correction:"$E(X)=\\dfrac{1}{0{,}25}=4$", points:2},
+          {label:"e)", enonce:"$X$ suit la loi exponentielle de paramètre $\\lambda=0{,}4$. Calcule $P(X\\leq2)$ (arrondie au centième), sachant $P(X\\leq t)=1-e^{-\\lambda t}$.",
            type:"libre",
-           correction:"$P(X<42 \\text{ ou } X>58)=1-0{,}95=0{,}05$", points:2},
+           correction:"$P(X\\leq2)=1-e^{-0{,}4\\times2}=1-e^{-0{,}8}\\approx1-0{,}449\\approx0{,}55$", points:2},
         ],
-        indices:["Symétrie autour de $\\mu$ : $P(X\\leq\\mu)=0{,}5$ ; $P(Z\\geq k)=1-P(Z\\leq k)$ ; règle empirique : $P(\\mu-2\\sigma\\leq X\\leq\\mu+2\\sigma)\\approx0{,}95$"]
+        indices:["Loi uniforme sur $[a;b]$ : $E(X)=\\dfrac{a+b}{2}$ ; loi exponentielle : $E(X)=\\dfrac{1}{\\lambda}$ et $P(X\\leq t)=1-e^{-\\lambda t}$"]
       },
     ],
     "Statistiques à deux variables": [
