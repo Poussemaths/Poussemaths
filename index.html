@@ -11818,7 +11818,15 @@ function verifierReponse(userRaw, correctionRaw) {
     }
 
     // ── 4b. Intervalles ──
+    // "\," (espace fine LaTeX, tres frequente dans les corrections du type
+    // "]-\infty\,;\,4[") n'etait jamais retiree ici -- seules extraireResultatFinal/
+    // extraireTousNombres avaient recu ce fix le 27/07/2026, pas cette fonction.
+    // Sans ce retrait, la comparaison de substring echouait TOUJOURS des qu'une
+    // correction ecrivait un intervalle avec cette notation (les backslashs
+    // restants cassaient le match), quelle que soit la justesse de la reponse de
+    // l'eleve -- trouve le 31/07/2026 en testant le portage serveur anti-triche.
     const normaliserIntervalle = s => s
+      .replace(/\\,/g, '')
       .replace(/\s/g, '')
       .replace(/\+∞|\+\\infty|\+infty|\+inf/gi, '+inf')
       .replace(/−∞|-∞|-\\infty|-infty|-inf/gi, '-inf')
