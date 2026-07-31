@@ -1326,12 +1326,18 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
           <p class="nc-desc">Spécialité maths — dérivation, exponentielle, produit scalaire, probabilités.</p>
           <div class="nc-tags"><span class="nc-tag">Dérivation</span><span class="nc-tag">Suites</span></div>
         </div>
-        <div class="niveau-card soon reveal">
-          <span class="nc-badge-soon">Bientôt</span>
+        <div class="niveau-card reveal" onclick="showPage('exercices','terminale')">
           <div class="nc-icon">Tle</div>
           <div class="nc-name">Terminale</div>
-          <p class="nc-desc">Spécialité maths — en cours d'intégration.</p>
+          <p class="nc-desc">Spécialité maths — limites, intégrales, probabilités, géométrie dans l'espace.</p>
           <div class="nc-tags"><span class="nc-tag">Limites</span><span class="nc-tag">Intégrales</span></div>
+        </div>
+        <div class="niveau-card reveal" onclick="showPage('exercices','terminale_complementaire')">
+          <span class="nc-badge-new">Nouveau</span>
+          <div class="nc-icon">Tle C.</div>
+          <div class="nc-name">Terminale Complémentaire</div>
+          <p class="nc-desc">Option maths complémentaires — lois à densité, loi normale, statistiques à deux variables.</p>
+          <div class="nc-tags"><span class="nc-tag">Loi normale</span><span class="nc-tag">Corrélation</span></div>
         </div>
       </div>
 
@@ -8859,6 +8865,105 @@ const EXERCICES = {
 
   },
 
+  "terminale_complementaire": {
+    "Lois à densité et loi normale": [
+      {
+        id:"densite_tc_1", titre:"Lois à densité — uniforme et exponentielle", niveau:"Moyen", points_total:10,
+        questions:[
+          {label:"a)", enonce:"Pour qu'une fonction $f$ soit une densité de probabilité sur $[a\\,;\\,b]$, elle doit vérifier :",
+           type:"qcm",
+           choix:["$f$ positive et $\\displaystyle\\int_a^b f(x)\\,dx=1$","$f$ décroissante sur $[a\\,;\\,b]$","$f(a)=f(b)$","$f$ positive et $\\displaystyle\\int_a^b f(x)\\,dx=0$"],
+           bonneReponseIdx:0, bonneReponse:"$f$ positive et $\\displaystyle\\int_a^b f(x)\\,dx=1$",
+           correction:"Une densité doit être positive sur l'intervalle, et l'aire totale sous la courbe (probabilité totale) doit valoir $1$.", points:2},
+          {label:"b)", enonce:"$X$ suit la loi uniforme sur $[2\\,;\\,10]$. Calcule $P(X\\leq6)$.",
+           type:"libre",
+           correction:"$P(X\\leq6)=\\dfrac{6-2}{10-2}=\\dfrac{4}{8}=0{,}5$", points:2},
+          {label:"c)", enonce:"$X$ suit la loi uniforme sur $[0\\,;\\,20]$. Calcule $P(5\\leq X\\leq15)$.",
+           type:"libre",
+           correction:"$P(5\\leq X\\leq15)=\\dfrac{15-5}{20-0}=\\dfrac{10}{20}=0{,}5$", points:2},
+          {label:"d)", enonce:"$X$ suit la loi exponentielle de paramètre $\\lambda=0{,}5$. Calcule $P(X\\leq2)$ (arrondi au centième).",
+           type:"libre",
+           correction:"$P(X\\leq2)=1-e^{-0{,}5\\times2}=1-e^{-1}\\approx1-0{,}368\\approx0{,}63$", points:2},
+          {label:"e)", enonce:"Une ampoule a une durée de vie $X$ (en années) qui suit la loi exponentielle de paramètre $\\lambda=0{,}1$. Calcule $P(X\\geq10)$ (arrondie au centième).",
+           type:"libre",
+           correction:"$P(X\\geq10)=e^{-0{,}1\\times10}=e^{-1}\\approx0{,}37$", points:2},
+        ],
+        indices:["Loi uniforme sur $[a;b]$ : $P(X\\leq c)=\\dfrac{c-a}{b-a}$ ; loi exponentielle : $P(X\\leq t)=1-e^{-\\lambda t}$, $P(X\\geq t)=e^{-\\lambda t}$"]
+      },
+      {
+        id:"densite_tc_2", titre:"Loi normale — symétrie et valeurs remarquables", niveau:"Moyen", points_total:10,
+        questions:[
+          {label:"a)", enonce:"La courbe de densité de la loi normale $\\mathcal{N}(\\mu,\\sigma^2)$ est symétrique par rapport à :",
+           type:"qcm",
+           choix:["La droite $x=\\mu$","La droite $x=\\sigma$","L'axe des ordonnées","Elle n'est jamais symétrique"],
+           bonneReponseIdx:0, bonneReponse:"La droite $x=\\mu$",
+           correction:"La courbe en cloche de la loi normale est toujours symétrique par rapport à la moyenne $\\mu$.", points:2},
+          {label:"b)", enonce:"$X$ suit la loi $\\mathcal{N}(100\\,;\\,15^2)$. Calcule $P(X\\leq100)$.",
+           type:"libre",
+           correction:"Par symétrie autour de $\\mu=100$, $P(X\\leq100)=0{,}5$", points:2},
+          {label:"c)", enonce:"$Z$ suit la loi normale centrée réduite $\\mathcal{N}(0,1)$. Sachant $P(Z\\leq1{,}96)=0{,}975$, calcule $P(Z\\geq1{,}96)$.",
+           type:"libre",
+           correction:"$P(Z\\geq1{,}96)=1-P(Z\\leq1{,}96)=1-0{,}975=0{,}025$", points:2},
+          {label:"d)", enonce:"Avec $P(Z\\leq1{,}96)=0{,}975$ et la symétrie de la loi ($P(Z\\leq-1{,}96)=1-0{,}975=0{,}025$), calcule $P(-1{,}96\\leq Z\\leq1{,}96)$.",
+           type:"libre",
+           correction:"$P(-1{,}96\\leq Z\\leq1{,}96)=0{,}975-0{,}025=0{,}95$", points:2},
+          {label:"e)", enonce:"$X$ suit $\\mathcal{N}(50\\,;\\,4^2)$. On sait que $P(42\\leq X\\leq58)\\approx0{,}95$ (règle empirique à $2\\sigma$). Calcule $P(X<42 \\text{ ou } X>58)$.",
+           type:"libre",
+           correction:"$P(X<42 \\text{ ou } X>58)=1-0{,}95=0{,}05$", points:2},
+        ],
+        indices:["Symétrie autour de $\\mu$ : $P(X\\leq\\mu)=0{,}5$ ; $P(Z\\geq k)=1-P(Z\\leq k)$ ; règle empirique : $P(\\mu-2\\sigma\\leq X\\leq\\mu+2\\sigma)\\approx0{,}95$"]
+      },
+    ],
+    "Statistiques à deux variables": [
+      {
+        id:"stat2v_tc_1", titre:"Ajustement affine — calcul des coefficients", niveau:"Moyen", points_total:10,
+        questions:[
+          {label:"a)", enonce:"Un tableau statistique donne $x$ : $1,2,3,4,5$ et $y$ : $2,3,4,5,6$. Calcule $\\bar{x}$ (moyenne des $x$).",
+           type:"libre",
+           correction:"$\\bar{x}=\\dfrac{1+2+3+4+5}{5}=\\dfrac{15}{5}=3$", points:2},
+          {label:"b)", enonce:"Avec les mêmes données, calcule $\\bar{y}$ (moyenne des $y$).",
+           type:"libre",
+           correction:"$\\bar{y}=\\dfrac{2+3+4+5+6}{5}=\\dfrac{20}{5}=4$", points:2},
+          {label:"c)", enonce:"Sachant que $\\sum x_iy_i=70$, calcule $\\sum x_iy_i-5\\bar{x}\\bar{y}$.",
+           type:"libre",
+           correction:"$70-5\\times3\\times4=70-60=10$", points:2},
+          {label:"d)", enonce:"Sachant que $\\sum x_i^2=55$, calcule $\\sum x_i^2-5\\bar{x}^2$.",
+           type:"libre",
+           correction:"$55-5\\times3^2=55-45=10$", points:2},
+          {label:"e)", enonce:"Le coefficient directeur de la droite de régression est $a=\\dfrac{\\sum x_iy_i-5\\bar{x}\\bar{y}}{\\sum x_i^2-5\\bar{x}^2}$. Calcule $a$.",
+           type:"libre",
+           correction:"$a=\\dfrac{10}{10}=1$", points:2},
+        ],
+        indices:["Droite de régression $y=ax+b$ : $a=\\dfrac{\\sum x_iy_i-n\\bar{x}\\bar{y}}{\\sum x_i^2-n\\bar{x}^2}$, puis $b=\\bar{y}-a\\bar{x}$"]
+      },
+      {
+        id:"stat2v_tc_2", titre:"Coefficient de corrélation et interprétation", niveau:"Moyen", points_total:10,
+        questions:[
+          {label:"a)", enonce:"Un coefficient de corrélation $r=0{,}98$ indique :",
+           type:"qcm",
+           choix:["Une corrélation linéaire positive très forte","Une corrélation linéaire négative très forte","Aucune corrélation","Une corrélation parfaite mais négative"],
+           bonneReponseIdx:0, bonneReponse:"Une corrélation linéaire positive très forte",
+           correction:"$r$ proche de $1$ (positif) indique une forte corrélation linéaire positive entre les deux variables.", points:2},
+          {label:"b)", enonce:"Un coefficient $r=-0{,}05$ indique :",
+           type:"qcm",
+           choix:["Une absence quasi totale de corrélation linéaire","Une forte corrélation positive","Une forte corrélation négative","Une relation exacte"],
+           bonneReponseIdx:0, bonneReponse:"Une absence quasi totale de corrélation linéaire",
+           correction:"$r$ proche de $0$ indique qu'il n'y a quasiment pas de lien linéaire entre les deux variables.", points:2},
+          {label:"c)", enonce:"Pour une série, $\\sum(x_i-\\bar{x})(y_i-\\bar{y})=8$, $\\sum(x_i-\\bar{x})^2=10$ et $\\sum(y_i-\\bar{y})^2=10$. Calcule $\\sum(x_i-\\bar{x})^2\\times\\sum(y_i-\\bar{y})^2$.",
+           type:"libre",
+           correction:"$10\\times10=100$", points:2},
+          {label:"d)", enonce:"Avec les mêmes données, calcule $\\sqrt{100}$ (dénominateur du coefficient de corrélation).",
+           type:"libre",
+           correction:"$\\sqrt{100}=10$", points:2},
+          {label:"e)", enonce:"Calcule le coefficient de corrélation $r=\\dfrac{\\sum(x_i-\\bar{x})(y_i-\\bar{y})}{\\sqrt{\\sum(x_i-\\bar{x})^2\\times\\sum(y_i-\\bar{y})^2}}$.",
+           type:"libre",
+           correction:"$r=\\dfrac{8}{10}=0{,}8$", points:2},
+        ],
+        indices:["$r$ proche de $\\pm1$ : forte corrélation ; $r$ proche de $0$ : faible corrélation ; $r=\\dfrac{\\sum(x_i-\\bar x)(y_i-\\bar y)}{\\sqrt{\\sum(x_i-\\bar x)^2\\sum(y_i-\\bar y)^2}}$"]
+      },
+    ],
+  },
+
 };
 
 // ═══════════════════════════════════════
@@ -8995,6 +9100,7 @@ function ouvrirModalConnexion(mode = 'connexion') {
             <option value="4eme">4ème</option><option value="3eme">3ème</option>
             <option value="2nde" selected>2nde</option><option value="1ere">1ère</option>
             <option value="terminale">Terminale</option>
+            <option value="terminale_complementaire">Terminale Complémentaire</option>
           </select>
         </div>
         <div id="auth-error-ins" class="auth-error" style="display:none"></div>
@@ -10740,7 +10846,7 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
-const LABELS_CLASSES = {'6eme':'6ème','5eme':'5ème','4eme':'4ème','3eme':'3ème','2nde':'2nde','1ere':'1ère','terminale':'Terminale'};
+const LABELS_CLASSES = {'6eme':'6ème','5eme':'5ème','4eme':'4ème','3eme':'3ème','2nde':'2nde','1ere':'1ère','terminale':'Terminale','terminale_complementaire':'Terminale Complémentaire'};
 
 const CHAPITRES_EMOJI = {
   'Puissances & Notation scientifique':'⚡','Racines carrées':'√','Calcul littéral':'✏️',
@@ -10765,7 +10871,7 @@ function renderExercices() {
 }
 
 function setFilter(f) {
-  if(['6eme','5eme','4eme','3eme','2nde','1ere','terminale'].includes(f)) allerChapitres(f);
+  if(['6eme','5eme','4eme','3eme','2nde','1ere','terminale','terminale_complementaire'].includes(f)) allerChapitres(f);
   else renderNiveaux();
 }
 
@@ -10786,6 +10892,7 @@ function renderNiveaux() {
     {id:'2nde',label:'2nde',desc:'Nouveau programme BO 2026',badge:'BO 2026'},
     {id:'1ere',label:'1ère',desc:'Spécialité Maths — Épreuve anticipée',badge:'Spé'},
     {id:'terminale',label:'Terminale',desc:'Spécialité Maths — Épreuve finale',badge:'Spé'},
+    {id:'terminale_complementaire',label:'Tle Complémentaire',desc:'Option maths complémentaires',badge:'Nouveau'},
   ];
   const content = document.getElementById('ex-content');
   content.innerHTML = `<div class="niveaux-nav-grid">
@@ -11084,6 +11191,7 @@ function detecterNiveauDepuisId(id) {
     : id.includes('_5_') ? '5eme'
     : id.includes('_4_') ? '4eme'
     : id.includes('_1_') ? '1ere'
+    : id.includes('_tc_') ? 'terminale_complementaire'
     : id.includes('_t_') ? 'terminale' : '';
 }
 
