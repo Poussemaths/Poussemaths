@@ -1788,6 +1788,30 @@ const EXERCICES = {
         indices:["$a^n = a\\times a\\times ... \\times a$ ($n$ fois)"]
       },
       {
+        id:"puisregles_3_genere", titre:"Règles de calcul sur les puissances — entraînement infini", niveau:"Moyen", points_total:5, competences:["Multiplier et diviser des puissances"],
+        genere: true, templateId: "regles_puissances_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["$a^m\\times a^n = a^{m+n}$, $\\dfrac{a^m}{a^n} = a^{m-n}$, $(a^m)^n = a^{m\\times n}$"]
+      },
+      {
+        id:"notasci_3_genere", titre:"Notation scientifique — entraînement infini", niveau:"Moyen", points_total:5, competences:["Déterminer la notation scientifique d'un nombre"],
+        genere: true, templateId: "notation_scientifique_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["$(a\\times10^p)\\times(b\\times10^q) = (a\\times b)\\times10^{p+q}$"]
+      },
+      {
         id:"puis_3_1", titre:"Puissances — reconnaître et calculer", niveau:"Facile", points_total:10, competences:["Multiplier et diviser des puissances"],
         questions:[
           {label:"1.", enonce:"Que vaut $2^5$ ?",
@@ -3075,6 +3099,18 @@ const EXERCICES = {
           {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
         ],
         indices:["Moyenne = somme des valeurs ÷ nombre de valeurs"]
+      },
+      {
+        id:"quart_3_genere", titre:"Quartiles et médiane — entraînement infini", niveau:"Moyen", points_total:5, competences:["Donner les quartiles et la médiane d'une série"],
+        genere: true, templateId: "quartiles_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["Pour 12 valeurs triées : $Q_1$ = 3e valeur, médiane = moyenne des 6e et 7e, $Q_3$ = 9e valeur"]
       },
       {
         id:"stat_3_1", titre:"Statistiques — comprendre les indicateurs", niveau:"Facile", points_total:10, competences:["Comprendre et interpréter des données statistiques"],
@@ -9907,6 +9943,9 @@ const TEMPLATES_GENERATEUR = {
   relatifs_v1: 'exo-4eme-generer',
   probabilite_v1: 'exo-4eme-generer',
   pgcd_v1: 'exo-3eme-generer',
+  notation_scientifique_v1: 'exo-3eme-generer',
+  regles_puissances_v1: 'exo-3eme-generer',
+  quartiles_v1: 'exo-3eme-generer',
   discriminant_v1: 'exo-1ere-generer',
   fraction_addition_v1: 'exo-6eme-generer',
   thales_v1: 'exo-3eme-generer',
@@ -9960,6 +9999,9 @@ const TEMPLATES_VALIDATEUR = {
   relatifs_v1: 'exo-4eme-valider',
   probabilite_v1: 'exo-4eme-valider',
   pgcd_v1: 'exo-3eme-valider',
+  notation_scientifique_v1: 'exo-3eme-valider',
+  regles_puissances_v1: 'exo-3eme-valider',
+  quartiles_v1: 'exo-3eme-valider',
   discriminant_v1: 'exo-1ere-valider',
   fraction_addition_v1: 'exo-6eme-valider',
   thales_v1: 'exo-3eme-valider',

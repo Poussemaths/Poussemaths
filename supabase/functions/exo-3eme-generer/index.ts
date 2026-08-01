@@ -185,6 +185,63 @@ function pgcdCalc(a: number, b: number): number {
   return a;
 }
 
+function genererNotationScientifique() {
+  const estMultiplication = Math.random() < 0.5;
+  const p = randInt(2, 6);
+  let q = p + (Math.random() < 0.5 ? 1 : -1) * randInt(0, 2);
+  q = Math.max(2, Math.min(6, q));
+  let reponse: number, enonce: string;
+  if (estMultiplication) {
+    const a = randInt(1, 9);
+    const b = randInt(1, 9);
+    reponse = a * b * Math.pow(10, p + q);
+    enonce = `Calcule : $(${a} \\times 10^{${p}}) \\times (${b} \\times 10^{${q}})$ (résultat développé)`;
+  } else {
+    const b = randInt(1, 9);
+    const k = randInt(1, 9);
+    const a = b * k;
+    reponse = k * Math.pow(10, p - q);
+    enonce = `Calcule : $(${a} \\times 10^{${p}}) \\div (${b} \\times 10^{${q}})$ (résultat développé)`;
+  }
+  return { enonce, x: reponse };
+}
+
+function genererReglesPuissances() {
+  const a = randInt(2, 5);
+  const type = randInt(0, 2);
+  let m: number, n: number, reponse: number, enonce: string;
+  if (type === 0) {
+    m = randInt(1, 4); n = randInt(1, 4);
+    reponse = Math.pow(a, m + n);
+    enonce = `Calcule (donne le résultat sous forme d'un nombre) : $${a}^{${m}} \\times ${a}^{${n}}$`;
+  } else if (type === 1) {
+    m = randInt(2, 6); n = randInt(1, m - 1);
+    reponse = Math.pow(a, m - n);
+    enonce = `Calcule : $\\dfrac{${a}^{${m}}}{${a}^{${n}}}$`;
+  } else {
+    m = randInt(1, 3); n = randInt(1, 3);
+    reponse = Math.pow(a, m * n);
+    enonce = `Calcule : $(${a}^{${m}})^{${n}}$`;
+  }
+  return { enonce, x: reponse };
+}
+
+function genererQuartiles() {
+  const vals: number[] = [];
+  while (vals.length < 12) {
+    const v = randInt(1, 50);
+    if (!vals.includes(v)) vals.push(v);
+  }
+  vals.sort((a, b) => a - b);
+  const mode = randInt(0, 2);
+  let reponse: number, label: string;
+  if (mode === 0) { reponse = vals[2]; label = "le premier quartile $Q_1$"; }
+  else if (mode === 1) { reponse = (vals[5] + vals[6]) / 2; label = "la médiane"; }
+  else { reponse = vals[8]; label = "le troisième quartile $Q_3$"; }
+  const enonce = `Voici une série de $12$ valeurs, déjà triées dans l'ordre croissant : $${vals.join("\\,;\\,")}$. Détermine ${label} de cette série.`;
+  return { enonce, x: reponse };
+}
+
 function genererPgcd() {
   const k = randInt(2, 12);
   const a = k * randInt(2, 10);
@@ -318,6 +375,9 @@ Deno.serve(async (req) => {
       case "transformation_v1": result = genererTransformation(); break;
       case "volume_pave_v1": result = genererVolumePave(); break;
       case "pgcd_v1": result = genererPgcd(); break;
+      case "notation_scientifique_v1": result = genererNotationScientifique(); break;
+      case "regles_puissances_v1": result = genererReglesPuissances(); break;
+      case "quartiles_v1": result = genererQuartiles(); break;
       default:
         return new Response(JSON.stringify({ error: "template_id inconnu" }), { status: 400, headers: corsHeaders });
     }
