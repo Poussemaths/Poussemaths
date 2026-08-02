@@ -49,6 +49,12 @@ const DEFAULTS: Record<string, { tolerance: number; chapitre: string; niveau: st
   fonction_reference_v1: { tolerance: 0.006, chapitre: "Fonctions de référence", niveau: "2nde" },
   distance_v1: { tolerance: 0.001, chapitre: "Géométrie repérée", niveau: "2nde" },
   valeur_absolue_v1: { tolerance: 0.001, chapitre: "Intervalles & Valeur absolue", niveau: "2nde" },
+  vecteurs_coordonnees_v1: { tolerance: 0.001, chapitre: "Géométrie repérée", niveau: "2nde" },
+  equation_droite_v1: { tolerance: 0.001, chapitre: "Géométrie repérée", niveau: "2nde" },
+  proba_conditionnelle_v1: { tolerance: 0.006, chapitre: "Probabilités", niveau: "2nde" },
+  arbre_pondere_v1: { tolerance: 0.006, chapitre: "Probabilités", niveau: "2nde" },
+  taux_evolution_v1: { tolerance: 0.01, chapitre: "Statistiques descriptives", niveau: "2nde" },
+  equation_carre_v1: { tolerance: 0.001, chapitre: "Intervalles & Valeur absolue", niveau: "2nde" },
 };
 
 Deno.serve(async (req) => {

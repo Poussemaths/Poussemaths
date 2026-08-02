@@ -91,6 +91,99 @@ function genererValeurAbsolue() {
   return { enonce, x: reponse };
 }
 
+function genererVecteursCoordonnees() {
+  const mode = randInt(0, 2);
+  let reponse: number, enonce: string;
+  if (mode === 0) {
+    const xa = randInt(-8, 8), ya = randInt(-8, 8);
+    let xb = randInt(-8, 8), yb = randInt(-8, 8);
+    while (xb === xa && yb === ya) { xb = randInt(-8, 8); yb = randInt(-8, 8); }
+    const demandeX = Math.random() < 0.5;
+    reponse = demandeX ? xb - xa : yb - ya;
+    enonce = `On donne $A(${xa}\\,;\\,${ya})$ et $B(${xb}\\,;\\,${yb})$. Donne la coordonnée ${demandeX ? "$x$" : "$y$"} du vecteur $\\vec{AB}$.`;
+  } else if (mode === 1) {
+    const ux = randInt(-8, 8), uy = randInt(-8, 8);
+    const vx = randInt(-8, 8), vy = randInt(-8, 8);
+    const demandeX = Math.random() < 0.5;
+    reponse = demandeX ? ux + vx : uy + vy;
+    enonce = `On donne $\\vec{u}(${ux}\\,;\\,${uy})$ et $\\vec{v}(${vx}\\,;\\,${vy})$. Donne la coordonnée ${demandeX ? "$x$" : "$y$"} du vecteur $\\vec{u}+\\vec{v}$.`;
+  } else {
+    const k = nonZero(-4, 4);
+    const ux = randInt(-8, 8), uy = randInt(-8, 8);
+    const demandeX = Math.random() < 0.5;
+    reponse = demandeX ? k * ux : k * uy;
+    enonce = `On donne $\\vec{u}(${ux}\\,;\\,${uy})$ et $k=${k}$. Donne la coordonnée ${demandeX ? "$x$" : "$y$"} du vecteur $k\\vec{u}$.`;
+  }
+  return { enonce, x: reponse };
+}
+
+function genererEquationDroite() {
+  const m = nonZero(-5, 5);
+  const p = randInt(-8, 8);
+  const xa = randInt(-6, 6);
+  const d = nonZero(-5, 5);
+  const xb = xa + d;
+  const ya = m * xa + p;
+  const yb = m * xb + p;
+  const demandeCoeff = Math.random() < 0.5;
+  const reponse = demandeCoeff ? m : p;
+  const enonce = `Une droite passe par les points $A(${xa}\\,;\\,${ya})$ et $B(${xb}\\,;\\,${yb})$. Donne ${demandeCoeff ? "son coefficient directeur" : "son ordonnée à l'origine"}.`;
+  return { enonce, x: reponse };
+}
+
+function genererProbaConditionnelle() {
+  const total = 100;
+  const nB = randInt(2, 9) * 10;
+  const nAinterB = randInt(1, nB - 1);
+  const reponse = Math.round((nAinterB / nB) * 100) / 100;
+  const enonce = `Dans une population de $${total}$ personnes, $${nB}$ vérifient l'évènement $B$. Parmi elles, $${nAinterB}$ vérifient aussi l'évènement $A$. Calcule $P_B(A)$, la probabilité de $A$ sachant $B$ (arrondis au centième si besoin).`;
+  return { enonce, x: reponse };
+}
+
+function genererArbrePondere() {
+  const p1t = randInt(1, 9);
+  const p2t = 10 - p1t;
+  const q1t = randInt(1, 9);
+  const q2t = randInt(1, 9);
+  const fmt = (t: number) => `0{,}${t}`;
+  const mode = randInt(0, 1);
+  let reponse: number, enonce: string;
+  if (mode === 0) {
+    reponse = (p1t * q1t) / 100;
+    enonce = `Un arbre pondéré a deux branches au premier niveau : $P(B_1)=${fmt(p1t)}$ et $P(B_2)=${fmt(p2t)}$. Au second niveau, $P_{B_1}(S)=${fmt(q1t)}$ et $P_{B_2}(S)=${fmt(q2t)}$. Calcule $P(B_1\\cap S)$.`;
+  } else {
+    reponse = (p1t * q1t + p2t * q2t) / 100;
+    enonce = `Un arbre pondéré a deux branches au premier niveau : $P(B_1)=${fmt(p1t)}$ et $P(B_2)=${fmt(p2t)}$. Au second niveau, $P_{B_1}(S)=${fmt(q1t)}$ et $P_{B_2}(S)=${fmt(q2t)}$. Calcule $P(S)$ (arrondis au centième si besoin).`;
+  }
+  return { enonce, x: reponse };
+}
+
+function genererTauxEvolution() {
+  const v0unit = randInt(2, 20);
+  const v0 = v0unit * 20;
+  const tUnit = nonZero(-8, 12);
+  const t = tUnit * 5;
+  const v1 = v0 + (v0 * t) / 100;
+  const enonce = `Une grandeur passe de $${v0}$ à $${v1}$. Calcule son taux d'évolution en pourcentage (donne un nombre, positif si augmentation, négatif si diminution).`;
+  return { enonce, x: t };
+}
+
+function genererEquationCarre() {
+  const mode = randInt(0, 1);
+  let reponse: number, enonce: string;
+  if (mode === 0) {
+    const k = randInt(2, 12);
+    const a = k * k;
+    enonce = `Résous l'équation $x^2 = ${a}$ et donne la solution positive.`;
+    reponse = k;
+  } else {
+    const a = randInt(-20, 20);
+    reponse = a > 0 ? 2 : a === 0 ? 1 : 0;
+    enonce = `Combien de solutions réelles admet l'équation $x^2 = ${a}$ ?`;
+  }
+  return { enonce, x: reponse };
+}
+
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response(null, { headers: corsHeaders });
   try {
@@ -101,6 +194,12 @@ Deno.serve(async (req) => {
       case "fonction_reference_v1": result = genererFonctionReference(); break;
       case "distance_v1": result = genererDistance(); break;
       case "valeur_absolue_v1": result = genererValeurAbsolue(); break;
+      case "vecteurs_coordonnees_v1": result = genererVecteursCoordonnees(); break;
+      case "equation_droite_v1": result = genererEquationDroite(); break;
+      case "proba_conditionnelle_v1": result = genererProbaConditionnelle(); break;
+      case "arbre_pondere_v1": result = genererArbrePondere(); break;
+      case "taux_evolution_v1": result = genererTauxEvolution(); break;
+      case "equation_carre_v1": result = genererEquationCarre(); break;
       default:
         return new Response(JSON.stringify({ error: "template_id inconnu" }), { status: 400, headers: corsHeaders });
     }

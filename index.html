@@ -4367,6 +4367,18 @@ const EXERCICES = {
         indices:["Moyenne = somme des valeurs ÷ nombre de valeurs"]
       },
       {
+        id:"tauxevol_2_genere", titre:"Taux d'évolution — entraînement infini", niveau:"Moyen", points_total:5, competences:["Calculer un taux d'évolution"],
+        genere: true, templateId: "taux_evolution_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["Taux d'évolution (%) $=\\dfrac{valeur_{finale}-valeur_{initiale}}{valeur_{initiale}}\\times100$"]
+      },
+      {
         id:"stat_2_A", titre:"Moyenne, médiane et quartiles", niveau:"Facile", points_total:15, competences:["Calculer et interpréter moyenne, médiane et quartiles"],
         questions:[
           {label:"a)", enonce:"Série de 7 valeurs : $12, 15, 8, 20, 14, 10, 17$. Calcule la moyenne (arrondie au dixième).", points:2},
@@ -4447,6 +4459,30 @@ const EXERCICES = {
         indices:["Probabilité = nombre de cas favorables ÷ nombre de cas possibles"]
       },
       {
+        id:"probacond_2_genere", titre:"Probabilité conditionnelle — entraînement infini", niveau:"Moyen", points_total:5, competences:["Calculer une probabilité conditionnelle et étudier l'indépendance de deux évènements"],
+        genere: true, templateId: "proba_conditionnelle_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["$P_B(A) = \\dfrac{P(A\\cap B)}{P(B)}$"]
+      },
+      {
+        id:"arbre_2_genere", titre:"Arbre pondéré — entraînement infini", niveau:"Moyen", points_total:5, competences:["Utiliser un arbre pondéré pour calculer une probabilité"],
+        genere: true, templateId: "arbre_pondere_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["Le long d'un chemin, on multiplie. Pour un évènement final, on additionne les chemins qui y mènent"]
+      },
+      {
         id:"proba_2_A", titre:"Probabilités classiques", niveau:"Facile", points_total:14, competences:["Calculer une probabilité dans un cas d'équiprobabilité"],
         questions:[
           {label:"a)", enonce:"On tire au hasard une carte dans un jeu de 52 cartes. Quelle est la probabilité d'obtenir un as ?", points:2},
@@ -4498,6 +4534,30 @@ const EXERCICES = {
           {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
         ],
         indices:["$AB = \\sqrt{(x_B-x_A)^2 + (y_B-y_A)^2}$"]
+      },
+      {
+        id:"vect_2_genere", titre:"Vecteurs — coordonnées et opérations — entraînement infini", niveau:"Facile", points_total:5, competences:["Calculer les coordonnées et effectuer des opérations sur des vecteurs"],
+        genere: true, templateId: "vecteurs_coordonnees_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["$\\vec{AB}(x_B-x_A\\,;\\,y_B-y_A)$"]
+      },
+      {
+        id:"eqdroite_2_genere", titre:"Équations de droites — entraînement infini", niveau:"Moyen", points_total:5, competences:["Déterminer une équation de droite"],
+        genere: true, templateId: "equation_droite_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["$y = mx + p$ avec $m = \\dfrac{y_B-y_A}{x_B-x_A}$"]
       },
       {
         id:"georep_2_A", titre:"Vecteurs — coordonnées et opérations", niveau:"Facile", points_total:15, competences:["Calculer les coordonnées et effectuer des opérations sur des vecteurs"],
@@ -4582,6 +4642,18 @@ const EXERCICES = {
           {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
         ],
         indices:["$|a - b|$ = distance entre $a$ et $b$ sur la droite graduée"]
+      },
+      {
+        id:"eqcarre_2_genere", titre:"Équation x²=a — entraînement infini", niveau:"Moyen", points_total:5, competences:["Résoudre une équation du type x² = a"],
+        genere: true, templateId: "equation_carre_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["$x^2=a$ : si $a>0$, 2 solutions ($\\pm\\sqrt{a}$) · si $a=0$, 1 solution · si $a<0$, 0 solution"]
       },
       {
         id:"interv_2_A", titre:"Intervalles et inéquations", niveau:"Facile", points_total:14, competences:["Utiliser la notation des intervalles pour résoudre une inéquation"],
@@ -9989,6 +10061,12 @@ const TEMPLATES_GENERATEUR = {
   thales_v1: 'exo-3eme-generer',
   trigonometrie_v1: 'exo-3eme-generer',
   valeur_absolue_v1: 'exo-2nde-generer',
+  vecteurs_coordonnees_v1: 'exo-2nde-generer',
+  equation_droite_v1: 'exo-2nde-generer',
+  proba_conditionnelle_v1: 'exo-2nde-generer',
+  arbre_pondere_v1: 'exo-2nde-generer',
+  taux_evolution_v1: 'exo-2nde-generer',
+  equation_carre_v1: 'exo-2nde-generer',
   coefficient_directeur_v1: 'exo-3eme-generer',
   distance_v1: 'exo-2nde-generer',
   angle_triangle_v1: 'exo-6eme-generer',
@@ -10047,6 +10125,12 @@ const TEMPLATES_VALIDATEUR = {
   thales_v1: 'exo-3eme-valider',
   trigonometrie_v1: 'exo-3eme-valider',
   valeur_absolue_v1: 'exo-2nde-valider',
+  vecteurs_coordonnees_v1: 'exo-2nde-valider',
+  equation_droite_v1: 'exo-2nde-valider',
+  proba_conditionnelle_v1: 'exo-2nde-valider',
+  arbre_pondere_v1: 'exo-2nde-valider',
+  taux_evolution_v1: 'exo-2nde-valider',
+  equation_carre_v1: 'exo-2nde-valider',
   coefficient_directeur_v1: 'exo-3eme-valider',
   distance_v1: 'exo-2nde-valider',
   angle_triangle_v1: 'exo-6eme-valider',
