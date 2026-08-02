@@ -125,7 +125,12 @@ function genererLogarithme() {
 }
 
 function genererConvexite() {
-  const a = randNonZero(-9, 9);
+  // a doit etre un multiple de 3 : l'abscisse d'inflexion x=-a/3 doit rester
+  // exacte, l'enonce ne demandant aucun arrondi (meme piege que
+  // exponentielle_v1 -- un a non multiple de 3 donnerait un tiers/sixieme
+  // periodique rejetant a tort une reponse d'eleve arrondie a 2 decimales).
+  const aMultiples = [-9, -6, -3, 3, 6, 9];
+  const a = aMultiples[randInt(0, aMultiples.length - 1)];
   const b = randInt(-6, 6);
   const c = randInt(-6, 6);
   const reponse = -a / 3;

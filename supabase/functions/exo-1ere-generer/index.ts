@@ -133,14 +133,18 @@ function genererProbasTotales() {
 }
 
 function genererExponentielle() {
+  // x tire d'abord puis c derive (x=(c-b)/a garanti exact) -- generer a,b,c
+  // independamment donnerait un x en tiers/sixiemes des que a=3 ou a=6 sans
+  // que l'enonce ne demande d'arrondi, rejetant a tort une reponse d'eleve
+  // arrondie a 2 decimales (ex: 0,33 au lieu de 0,3333...) hors tolerance.
   const a = nonZero(-6, 6);
   const b = randInt(-9, 9);
-  const c = randInt(-9, 9);
-  const reponse = (c - b) / a;
+  const x = randInt(-9, 9);
+  const c = a * x + b;
   const bTerm = b === 0 ? "" : b > 0 ? `+${fmtNum(b)}` : fmtNum(b);
   const aTerm = Math.abs(a) === 1 ? (a === 1 ? "x" : "-x") : `${fmtNum(a)}x`;
   const enonce = `Résous l'équation $e^{${aTerm}${bTerm}}=e^{${fmtNum(c)}}$ (utilise l'injectivité de la fonction exponentielle).`;
-  return { enonce, x: reponse };
+  return { enonce, x };
 }
 
 function genererRadian() {
