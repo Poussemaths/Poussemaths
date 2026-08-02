@@ -6907,6 +6907,18 @@ const EXERCICES = {
         indices:["$P(B)=P(A)\\times P_A(B)+P(\\bar{A})\\times P_{\\bar{A}}(B)$"]
       },
       {
+        id:"indep_1_genere", titre:"Indépendance de deux événements — entraînement infini", niveau:"Facile", points_total:5, competences:["Calculer une probabilité conditionnelle, étudier l'indépendance de deux évènements"],
+        genere: true, templateId: "independance_evenements_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["$A$ et $B$ indépendants $\\iff P(A\\cap B)=P(A)\\times P(B)$"]
+      },
+      {
         id:"cond_1_1", titre:"Indépendance de deux événements", niveau:"Facile", points_total:13, competences:["Calculer une probabilité conditionnelle, étudier l'indépendance de deux évènements"],
         questions:[
           {label:"a)", enonce:"$A$ et $B$ sont indépendants si et seulement si :",
@@ -10186,6 +10198,7 @@ const TEMPLATES_GENERATEUR = {
   radian_v1: 'exo-1ere-generer',
   esperance_v1: 'exo-1ere-generer',
   probas_totales_v1: 'exo-1ere-generer',
+  independance_evenements_v1: 'exo-1ere-generer',
   combinaison_v1: 'exo-terminale-generer',
   logarithme_v1: 'exo-terminale-generer',
   limite_suite_v1: 'exo-terminale-generer',
@@ -10256,6 +10269,7 @@ const TEMPLATES_VALIDATEUR = {
   radian_v1: 'exo-1ere-valider',
   esperance_v1: 'exo-1ere-valider',
   probas_totales_v1: 'exo-1ere-valider',
+  independance_evenements_v1: 'exo-1ere-valider',
   combinaison_v1: 'exo-terminale-valider',
   logarithme_v1: 'exo-terminale-valider',
   limite_suite_v1: 'exo-terminale-valider',

@@ -53,6 +53,7 @@ const DEFAULTS: Record<string, { tolerance: number; chapitre: string; niveau: st
   discriminant_v1: { tolerance: 0.001, chapitre: "Second degré", niveau: "1ere" },
   derivation_v1: { tolerance: 0.001, chapitre: "Dérivation", niveau: "1ere" },
   probas_totales_v1: { tolerance: 0.005, chapitre: "Probabilités conditionnelles et indépendance", niveau: "1ere" },
+  independance_evenements_v1: { tolerance: 0.001, chapitre: "Probabilités conditionnelles et indépendance", niveau: "1ere" },
   exponentielle_v1: { tolerance: 0.001, chapitre: "Fonction exponentielle", niveau: "1ere" },
   radian_v1: { tolerance: 0.005, chapitre: "Trigonométrie — cercle trigonométrique", niveau: "1ere" },
   produit_scalaire_v1: { tolerance: 0.001, chapitre: "Produit scalaire", niveau: "1ere" },

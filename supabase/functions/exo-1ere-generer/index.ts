@@ -132,6 +132,36 @@ function genererProbasTotales() {
   return { enonce, x: reponse };
 }
 
+function fmtCentiemes(n: number): string {
+  return `0{,}${String(n).padStart(2, "0")}`;
+}
+
+function genererIndependance() {
+  const pAt = randInt(1, 9);
+  const pBt = randInt(1, 9);
+  const mode = randInt(0, 1);
+  let reponse: number, enonce: string;
+  if (mode === 0) {
+    reponse = (pAt * pBt) / 100;
+    enonce = `$P(A)=0{,}${pAt}$ et $P(B)=0{,}${pBt}$. $A$ et $B$ sont indépendants. Calcule $P(A\\cap B)$.`;
+  } else {
+    const estIndependant = Math.random() < 0.5;
+    const produitExact = pAt * pBt;
+    const maxInter = Math.min(pAt, pBt) * 10 - 1;
+    let pInterCent: number;
+    if (estIndependant || maxInter < 1) {
+      pInterCent = produitExact;
+    } else {
+      do {
+        pInterCent = randInt(1, maxInter);
+      } while (pInterCent === produitExact);
+    }
+    reponse = pInterCent === produitExact ? 1 : 0;
+    enonce = `$P(A)=0{,}${pAt}$, $P(B)=0{,}${pBt}$ et $P(A\\cap B)=${fmtCentiemes(pInterCent)}$. $A$ et $B$ sont-ils indépendants ? Réponds par $1$ si oui, $0$ si non.`;
+  }
+  return { enonce, x: reponse };
+}
+
 function genererExponentielle() {
   // x tire d'abord puis c derive (x=(c-b)/a garanti exact) -- generer a,b,c
   // independamment donnerait un x en tiers/sixiemes des que a=3 ou a=6 sans
@@ -191,6 +221,7 @@ Deno.serve(async (req) => {
       case "discriminant_v1": result = genererDiscriminant(); break;
       case "derivation_v1": result = genererDerivation(); break;
       case "probas_totales_v1": result = genererProbasTotales(); break;
+      case "independance_evenements_v1": result = genererIndependance(); break;
       case "exponentielle_v1": result = genererExponentielle(); break;
       case "radian_v1": result = genererRadian(); break;
       case "produit_scalaire_v1": result = genererProduitScalaire(); break;
