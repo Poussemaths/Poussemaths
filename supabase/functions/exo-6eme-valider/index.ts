@@ -49,6 +49,8 @@ const DEFAULTS: Record<string, { tolerance: number; chapitre: string; niveau: st
   priorites_v1: { tolerance: 0.001, chapitre: "priorites", niveau: "6eme" },
   fraction_addition_v1: { tolerance: 0.006, chapitre: "Fractions", niveau: "6eme" },
   angle_triangle_v1: { tolerance: 0.001, chapitre: "Angles & Géométrie", niveau: "6eme" },
+  multiples_diviseurs_v1: { tolerance: 0.001, chapitre: "Multiples et diviseurs", niveau: "6eme" },
+  volume_cube_v1: { tolerance: 0.001, chapitre: "Volumes", niveau: "6eme" },
 };
 
 Deno.serve(async (req) => {

@@ -9,6 +9,10 @@ function randInt(min: number, max: number): number {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+function choice<T>(arr: T[]): T {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
 async function getKey(): Promise<CryptoKey> {
   const raw = Uint8Array.from(atob(Deno.env.get("EXO_KEY")!), (c) => c.charCodeAt(0));
   return crypto.subtle.importKey("raw", raw, { name: "AES-GCM" }, false, ["encrypt"]);
@@ -68,6 +72,21 @@ function genererAngleTriangle() {
   return { enonce, x: reponse };
 }
 
+function genererMultiplesDiviseurs() {
+  const d = choice([2, 3, 4, 5, 6, 8, 9, 10]);
+  const n = randInt(10, 300);
+  const reponse = n % d;
+  const enonce = `Quel est le reste de la division euclidienne de $${n}$ par $${d}$ ? (un reste de $0$ signifie que $${n}$ est un multiple de $${d}$)`;
+  return { enonce, x: reponse };
+}
+
+function genererVolumeCube() {
+  const c = randInt(2, 12);
+  const reponse = c * c * c;
+  const enonce = `Un cube a une arête de $${c}$ cm. Calcule son volume (en cm³).`;
+  return { enonce, x: reponse };
+}
+
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response(null, { headers: corsHeaders });
   try {
@@ -78,6 +97,8 @@ Deno.serve(async (req) => {
       case "priorites_v1": result = genererPriorites(); break;
       case "fraction_addition_v1": result = genererFractionAddition(); break;
       case "angle_triangle_v1": result = genererAngleTriangle(); break;
+      case "multiples_diviseurs_v1": result = genererMultiplesDiviseurs(); break;
+      case "volume_cube_v1": result = genererVolumeCube(); break;
       default:
         return new Response(JSON.stringify({ error: "template_id inconnu" }), { status: 400, headers: corsHeaders });
     }

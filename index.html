@@ -5262,6 +5262,18 @@ const EXERCICES = {
 
     "Multiples et diviseurs": [
       {
+        id:"div_6_genere", titre:"Multiples et diviseurs — entraînement infini", niveau:"Facile", points_total:5, competences:["Utiliser les notions de multiples et de diviseurs"],
+        genere: true, templateId: "multiples_diviseurs_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["Un reste de $0$ signifie que le nombre est un multiple du diviseur"]
+      },
+      {
         id:"div_6_1", titre:"Multiples et diviseurs", niveau:"Facile", points_total:12, competences:["Utiliser les notions de multiples et de diviseurs"],
         questions:[
           {label:"1.", enonce:"$24$ est-il divisible par $3$ ?",
@@ -5327,6 +5339,30 @@ const EXERCICES = {
     ],
 
     "Volumes": [
+      {
+        id:"volcube_6_genere", titre:"Volume du cube — entraînement infini", niveau:"Facile", points_total:5, competences:["Calculer le volume d'un cube ou d'un pavé droit"],
+        genere: true, templateId: "volume_cube_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["Volume du cube $=$ arête$^3$"]
+      },
+      {
+        id:"volpave_6_genere", titre:"Volume du pavé droit — entraînement infini", niveau:"Facile", points_total:5, competences:["Calculer le volume d'un cube ou d'un pavé droit"],
+        genere: true, templateId: "volume_pave_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["Volume du pavé droit $=$ longueur $\\times$ largeur $\\times$ hauteur"]
+      },
       {
         id:"vol_6_1", titre:"Volumes — cube et pavé droit", niveau:"Facile", points_total:14, competences:["Calculer le volume d'un cube ou d'un pavé droit"],
         questions:[
@@ -6078,6 +6114,18 @@ const EXERCICES = {
   "4eme": {
 
     "Calcul littéral": [
+      {
+        id:"lit_4_genere", titre:"Équations du premier degré — entraînement infini", niveau:"Facile", points_total:5, competences:["Résoudre une équation du premier degré du type ax + b = c"],
+        genere: true, templateId: "equation_1er_degre_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["Isole $x$ : passe les nombres d'un côté, les termes en $x$ de l'autre"]
+      },
       {
         id:"lit_4_3", titre:"Équations du premier degré — 4ème", niveau:"Moyen", points_total:16, competences:["Résoudre une équation du premier degré du type ax + b = c"],
         questions:[
@@ -10070,6 +10118,8 @@ const TEMPLATES_GENERATEUR = {
   coefficient_directeur_v1: 'exo-3eme-generer',
   distance_v1: 'exo-2nde-generer',
   angle_triangle_v1: 'exo-6eme-generer',
+  multiples_diviseurs_v1: 'exo-6eme-generer',
+  volume_cube_v1: 'exo-6eme-generer',
   suite_arithmetique_v1: 'exo-1ere-generer',
   systeme_v1: 'exo-3eme-generer',
   transformation_v1: 'exo-3eme-generer',
@@ -10134,6 +10184,8 @@ const TEMPLATES_VALIDATEUR = {
   coefficient_directeur_v1: 'exo-3eme-valider',
   distance_v1: 'exo-2nde-valider',
   angle_triangle_v1: 'exo-6eme-valider',
+  multiples_diviseurs_v1: 'exo-6eme-valider',
+  volume_cube_v1: 'exo-6eme-valider',
   suite_arithmetique_v1: 'exo-1ere-valider',
   systeme_v1: 'exo-3eme-valider',
   transformation_v1: 'exo-3eme-valider',
