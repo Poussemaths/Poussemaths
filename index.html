@@ -7931,6 +7931,42 @@ const EXERCICES = {
   "terminale_complementaire": {
     "Lois à densité": [
       {
+        id:"loiuni_tc_genere", titre:"Loi uniforme — entraînement infini", niveau:"Moyen", points_total:5, competences:["Calculer une probabilité avec une loi uniforme ou exponentielle"],
+        genere: true, templateId: "loi_uniforme_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["Loi uniforme sur $[a;b]$ : $P(X\\leq c)=\\dfrac{c-a}{b-a}$"]
+      },
+      {
+        id:"loiexp_tc_genere", titre:"Loi exponentielle — entraînement infini", niveau:"Moyen", points_total:5, competences:["Calculer une probabilité avec une loi uniforme ou exponentielle"],
+        genere: true, templateId: "loi_exponentielle_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["Loi exponentielle : $P(X\\leq t)=1-e^{-\\lambda t}$, $P(X\\geq t)=e^{-\\lambda t}$"]
+      },
+      {
+        id:"esperdens_tc_genere", titre:"Espérance d'une loi à densité — entraînement infini", niveau:"Moyen", points_total:5, competences:["Calculer l'espérance et la fonction de répartition d'une loi à densité"],
+        genere: true, templateId: "esperance_densite_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["Uniforme : $E(X)=\\dfrac{a+b}{2}$ · Exponentielle : $E(X)=\\dfrac{1}{\\lambda}$"]
+      },
+      {
         id:"densite_tc_1", titre:"Lois à densité — uniforme et exponentielle", niveau:"Moyen", points_total:10, competences:["Calculer une probabilité avec une loi uniforme ou exponentielle"],
         questions:[
           {label:"a)", enonce:"Pour qu'une fonction $f$ soit une densité de probabilité sur $[a\\,;\\,b]$, elle doit vérifier :",
@@ -7966,6 +8002,18 @@ const EXERCICES = {
       },
     ],
     "Statistiques à deux variables": [
+      {
+        id:"regr_tc_genere", titre:"Droite de régression — entraînement infini", niveau:"Moyen", points_total:5, competences:["Déterminer une droite de régression et un coefficient de corrélation"],
+        genere: true, templateId: "droite_regression_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["Droite $y=ax+b$ : ici les points sont parfaitement alignés, $a$ est la variation de $y$ pour $x+1$"]
+      },
       {
         id:"stat2v_tc_1", titre:"Ajustement affine — calcul des coefficients", niveau:"Moyen", points_total:10, competences:["Déterminer une droite de régression et un coefficient de corrélation"],
         questions:[
@@ -10151,6 +10199,10 @@ const TEMPLATES_GENERATEUR = {
   concentration_v1: 'exo-terminale-generer',
   equadiff_v1: 'exo-terminale-generer',
   continuite_tvi_v1: 'exo-terminale-generer',
+  loi_uniforme_v1: 'exo-terminale-complementaire-generer',
+  loi_exponentielle_v1: 'exo-terminale-complementaire-generer',
+  esperance_densite_v1: 'exo-terminale-complementaire-generer',
+  droite_regression_v1: 'exo-terminale-complementaire-generer',
 };
 const TEMPLATES_VALIDATEUR = {
   equation_1er_degre_v1: 'exo-3eme-valider',
@@ -10217,6 +10269,10 @@ const TEMPLATES_VALIDATEUR = {
   concentration_v1: 'exo-terminale-valider',
   equadiff_v1: 'exo-terminale-valider',
   continuite_tvi_v1: 'exo-terminale-valider',
+  loi_uniforme_v1: 'exo-terminale-complementaire-valider',
+  loi_exponentielle_v1: 'exo-terminale-complementaire-valider',
+  esperance_densite_v1: 'exo-terminale-complementaire-valider',
+  droite_regression_v1: 'exo-terminale-complementaire-valider',
 };
 let currentGenTokens = [];
 // Reponses brutes de l'eleve pour l'exercice fixe en cours (cle = index de
