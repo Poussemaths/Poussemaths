@@ -84,8 +84,8 @@ Deno.serve(async (req) => {
         body: JSON.stringify({
           eleve_id: eleveId,
           exercice_id: exercice_id ?? "identite_remarquable_v1",
-          chapitre: chapitre ?? "Calcul littéral & Identités",
-          niveau: niveau ?? "4eme",
+          chapitre: chapitre ?? "Calcul littéral",
+          niveau: niveau ?? "3eme",
           score, points_obtenus: correcte ? 1 : 0, points_total: 1,
           completed_at: new Date().toISOString(),
             enonce: enonce ?? null,

@@ -62,6 +62,8 @@ const DEFAULTS: Record<string, { tolerance: number; chapitre: string; niveau: st
   notation_scientifique_v1: { tolerance: 0.001, chapitre: "Puissances & Notation scientifique", niveau: "3eme" },
   regles_puissances_v1: { tolerance: 0.001, chapitre: "Puissances & Notation scientifique", niveau: "3eme" },
   quartiles_v1: { tolerance: 0.001, chapitre: "Statistiques descriptives", niveau: "3eme" },
+  decomposition_facteurs_v1: { tolerance: 0.001, chapitre: "Divisibilité & Nombres premiers", niveau: "3eme" },
+  volumes_solides_v1: { tolerance: 0.06, chapitre: "Volumes de solides", niveau: "3eme" },
   inequation_v1: { tolerance: 0, chapitre: "Inéquations", niveau: "3eme" },
   fonction_generalites_v1: { tolerance: 0, chapitre: "Fonctions — généralités", niveau: "3eme" },
 };

@@ -39,7 +39,8 @@ Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response(null, { headers: corsHeaders });
   try {
     const a = nonZero(-9, 9);
-    const b = nonZero(-9, 9);
+    let b = nonZero(-9, 9);
+    while (b === a) b = nonZero(-9, 9);
     const type = choice(["somme", "difference", "produit"]);
 
     let reponse: number, enonce: string;

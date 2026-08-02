@@ -2063,6 +2063,18 @@ const EXERCICES = {
         indices:["Remplace $x$ par la valeur donnée, puis calcule"]
       },
       {
+        id:"identrem_3_genere", titre:"Identités remarquables — entraînement infini", niveau:"Moyen", points_total:5, competences:["Manipuler les trois identités remarquables pour développer et factoriser"],
+        genere: true, templateId: "identite_remarquable_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["$(x+y)^2=x^2+2xy+y^2$ · $(x-y)^2=x^2-2xy+y^2$ · $(x+y)(x-y)=x^2-y^2$"]
+      },
+      {
         id:"lit_3_1", titre:"Calcul littéral — reconnaître développer factoriser", niveau:"Facile", points_total:10, competences:["Utiliser la double distributivité pour développer et factoriser une expression dont le facteur est apparent"],
         questions:[
           {label:"1.", enonce:"Laquelle de ces expressions est factorisée ?",
@@ -3772,6 +3784,18 @@ const EXERCICES = {
         indices:["Volume = longueur $\\times$ largeur $\\times$ hauteur"]
       },
       {
+        id:"volpcs_3_genere", titre:"Volumes pyramide, cône, sphère — entraînement infini", niveau:"Moyen", points_total:5, competences:["Connaître et utiliser les formules du volume d'une pyramide ou d'un cône","Connaître et utiliser la formule du volume d'une boule de rayon donné"],
+        genere: true, templateId: "volumes_solides_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["Pyramide : $V=\\dfrac{1}{3}\\times aire_{base}\\times h$ · Cône : $V=\\dfrac{1}{3}\\pi r^2 h$ · Sphère : $V=\\dfrac{4}{3}\\pi r^3$"]
+      },
+      {
         id:"vol_3_1", titre:"Volumes — formules et reconnaissance", niveau:"Facile", points_total:10, competences:["Connaître et utiliser la formule du volume d'une boule de rayon donné"],
         questions:[
           {label:"1.", enonce:"Quelle est la formule du volume d'un cylindre de rayon $r$ et hauteur $h$ ?",
@@ -4030,6 +4054,18 @@ const EXERCICES = {
           {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
         ],
         indices:["Utilise l'algorithme d'Euclide : divisions successives jusqu'au reste nul"]
+      },
+      {
+        id:"decomp_3_genere", titre:"Décomposition en facteurs premiers — entraînement infini", niveau:"Moyen", points_total:5, competences:["Factoriser un nombre entier positif"],
+        genere: true, templateId: "decomposition_facteurs_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["Divise successivement par 2, 3, 5, 7, 11... jusqu'à obtenir 1"]
       },
       {
         id:"div_3_1", titre:"Divisibilité — critères et définitions", niveau:"Facile", points_total:10, competences:["Appliquer les critères de divisibilité par 2, 3, 5, 9"],
@@ -9946,6 +9982,8 @@ const TEMPLATES_GENERATEUR = {
   notation_scientifique_v1: 'exo-3eme-generer',
   regles_puissances_v1: 'exo-3eme-generer',
   quartiles_v1: 'exo-3eme-generer',
+  decomposition_facteurs_v1: 'exo-3eme-generer',
+  volumes_solides_v1: 'exo-3eme-generer',
   discriminant_v1: 'exo-1ere-generer',
   fraction_addition_v1: 'exo-6eme-generer',
   thales_v1: 'exo-3eme-generer',
@@ -10002,6 +10040,8 @@ const TEMPLATES_VALIDATEUR = {
   notation_scientifique_v1: 'exo-3eme-valider',
   regles_puissances_v1: 'exo-3eme-valider',
   quartiles_v1: 'exo-3eme-valider',
+  decomposition_facteurs_v1: 'exo-3eme-valider',
+  volumes_solides_v1: 'exo-3eme-valider',
   discriminant_v1: 'exo-1ere-valider',
   fraction_addition_v1: 'exo-6eme-valider',
   thales_v1: 'exo-3eme-valider',

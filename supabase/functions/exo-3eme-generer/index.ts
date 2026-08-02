@@ -242,6 +242,55 @@ function genererQuartiles() {
   return { enonce, x: reponse };
 }
 
+const SMALL_PRIMES = [2, 3, 5, 7, 11, 13];
+
+function genererDecompositionFacteurs() {
+  const nbFacteurs = randInt(2, 3);
+  const primesChoisis = shuffle([...SMALL_PRIMES]).slice(0, nbFacteurs);
+  const factors: Record<number, number> = {};
+  let n = 1;
+  for (const p of primesChoisis) {
+    const e = randInt(1, p <= 3 ? 3 : 2);
+    factors[p] = e;
+    n *= Math.pow(p, e);
+  }
+  const mode = randInt(0, 1);
+  let reponse: number, enonce: string;
+  if (mode === 0) {
+    reponse = Object.values(factors).reduce((a, b) => a + b, 0);
+    enonce = `Décompose $${n}$ en produit de facteurs premiers, puis donne le nombre total de facteurs premiers de cette décomposition (comptés avec leur multiplicité).`;
+  } else {
+    reponse = Math.max(...Object.keys(factors).map(Number));
+    enonce = `Décompose $${n}$ en produit de facteurs premiers, puis donne le plus grand facteur premier de $${n}$.`;
+  }
+  return { enonce, x: reponse };
+}
+
+function genererVolumesSolides() {
+  const type = randInt(0, 2);
+  let reponse: number, enonce: string;
+  if (type === 0) {
+    const c = randInt(3, 12);
+    const h = randInt(3, 15);
+    reponse = Math.round(((1 / 3) * c * c * h) * 10) / 10;
+    enonce = `Une pyramide a une base carrée de côté $${c}$ cm et une hauteur de $${h}$ cm. Calcule son volume en cm³ (arrondis au dixième si besoin).`;
+  } else if (type === 1) {
+    const r = randInt(2, 10);
+    const h = randInt(3, 15);
+    // On calcule la reponse de reference avec 3.14 (et pas Math.PI) car c'est
+    // exactement l'approximation demandee a l'eleve dans l'enonce -- sinon
+    // l'ecart peut depasser 0.25 sur un arrondi au dixieme et rejeter a tort
+    // une reponse d'eleve pourtant correcte (trouve en testant ce template).
+    reponse = Math.round(((1 / 3) * 3.14 * r * r * h) * 10) / 10;
+    enonce = `Un cône a un rayon de base $${r}$ cm et une hauteur de $${h}$ cm. Calcule son volume en cm³ (arrondis au dixième, prends $\\pi \\approx 3{,}14$).`;
+  } else {
+    const r = randInt(2, 10);
+    reponse = Math.round(((4 / 3) * 3.14 * r * r * r) * 10) / 10;
+    enonce = `Une sphère a un rayon de $${r}$ cm. Calcule son volume en cm³ (arrondis au dixième, prends $\\pi \\approx 3{,}14$).`;
+  }
+  return { enonce, x: reponse };
+}
+
 function genererPgcd() {
   const k = randInt(2, 12);
   const a = k * randInt(2, 10);
@@ -378,6 +427,8 @@ Deno.serve(async (req) => {
       case "notation_scientifique_v1": result = genererNotationScientifique(); break;
       case "regles_puissances_v1": result = genererReglesPuissances(); break;
       case "quartiles_v1": result = genererQuartiles(); break;
+      case "decomposition_facteurs_v1": result = genererDecompositionFacteurs(); break;
+      case "volumes_solides_v1": result = genererVolumesSolides(); break;
       default:
         return new Response(JSON.stringify({ error: "template_id inconnu" }), { status: 400, headers: corsHeaders });
     }
