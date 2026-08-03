@@ -1112,6 +1112,10 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
   .features-inner,.comp-inner { grid-template-columns:1fr; }
   .tarifs-grid { grid-template-columns:1fr; max-width:400px; }
   .eleve-grid { grid-template-columns:1fr; }
+  .eleve-header { flex-wrap:wrap; }
+  .eleve-header > div:not(.eleve-stats-mini) { min-width:0; }
+  .eleve-avatar { flex-shrink:0; }
+  .eleve-stats-mini { margin-left:0; width:100%; justify-content:space-between; }
   .badges-grid { grid-template-columns:repeat(2,1fr); }
   .train-grid { grid-template-columns:repeat(2,1fr); }
   .footer-inner { grid-template-columns:1fr 1fr; }
