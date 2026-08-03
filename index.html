@@ -1405,6 +1405,7 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
           <li><a onclick="showPage('exercices','2nde')">Exercices 2nde</a></li>
           <li><a onclick="showPage('eleve')">Espace élève</a></li>
           <li><a onclick="showPage('prof')">Espace prof</a></li>
+          <li><a onclick="showPage('parent')">Espace parent</a></li>
         </ul>
       </div>
       <div>
@@ -1445,6 +1446,15 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
   <div class="eleve-page" id="eleve-page-content">
     <!-- Contenu chargé dynamiquement par renderEspaceEleve() -->
     <div style="text-align:center;padding:4rem;color:var(--muted)">Chargement...</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     PAGE : ESPACE PARENT (consultation par code, sans compte)
+════════════════════════════════════════ -->
+<div class="page" id="page-parent" style="padding-top:64px">
+  <div class="eleve-page" id="parent-page-content" style="max-width:900px;margin:0 auto;padding:2rem">
+    <!-- Contenu chargé dynamiquement par renderEspaceParent() -->
   </div>
 </div>
 
@@ -1604,11 +1614,11 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
           <div class="poc-desc">Télécharge les résultats de la classe au format Pronote</div>
           <div class="poc-badge">🌟 Wow moment</div>
         </div>
-        <div class="prof-outil-card" onclick="alert('Espace parent — bientôt disponible 🌱')">
+        <div class="prof-outil-card" onclick="alert('Espace Parent disponible : chaque élève génère son propre lien de consultation depuis Mon Espace → « Partager avec mes parents ». Lecture seule, sans mot de passe, rien à faire côté prof.')">
           <div class="poc-icon">👨‍👩‍👧</div>
           <div class="poc-titre">Espace Parent</div>
-          <div class="poc-desc">Rapport hebdo automatique, alertes, suivi lecture seule</div>
-          <div class="poc-badge soon">🌱 Bientôt</div>
+          <div class="poc-desc">Chaque élève génère son lien de suivi lecture seule pour ses parents</div>
+          <div class="poc-badge">🌟 Nouveau</div>
         </div>
       </div>
     </div>
@@ -8102,6 +8112,7 @@ function showPage(page, filter) {
   if(page === 'parcours') initParcours();
   if(page === 'prof') { setTimeout(renderTableauBord, 100); }
   if(page === 'eleve') { setTimeout(renderEspaceEleve, 100); }
+  if(page === 'parent') { setTimeout(renderEspaceParent, 100); }
 
   window.scrollTo({top:0, behavior:'smooth'});
 }
@@ -8620,8 +8631,151 @@ async function renderEspaceEleve() {
           <button class="auth-btn-secondary" onclick="deconnexion()">Se déconnecter</button>
         </div>
       </div>
+
+      <div class="eleve-card">
+        <div class="eleve-card-title">🔗 Partager avec mes parents</div>
+        <div style="font-size:13px;color:var(--muted);margin-bottom:12px">Génère un lien de consultation en lecture seule (pas de mot de passe, ta progression uniquement).</div>
+        <div id="parent-link-zone">
+          <button class="auth-btn-secondary" onclick="genererLienParent()">Générer le lien</button>
+        </div>
+      </div>
     </div>
   `;
+}
+
+async function genererLienParent() {
+  const zone = document.getElementById('parent-link-zone');
+  zone.innerHTML = '<div style="font-size:13px;color:var(--muted)">Génération…</div>';
+  const result = await appelEdgeFunction('exo-parent-consultation', 'POST', { action: 'generer' });
+  if (!result.code) {
+    zone.innerHTML = '<div style="font-size:13px;color:var(--rouge)">Erreur, réessaie plus tard.</div>';
+    return;
+  }
+  const lien = `${window.location.origin}${window.location.pathname}?parent=${result.code}`;
+  zone.innerHTML = `
+    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+      <input readonly value="${lien}" id="parent-link-input" style="flex:1;min-width:200px;padding:8px 10px;border:1px solid var(--bordure);border-radius:8px;font-size:12px;color:var(--texte2)">
+      <button class="auth-btn-secondary" style="width:auto;padding:8px 16px" onclick="copierLienParent()">Copier</button>
+    </div>
+  `;
+}
+
+function copierLienParent() {
+  const input = document.getElementById('parent-link-input');
+  input.select();
+  navigator.clipboard?.writeText(input.value);
+  showToast('Lien copié 📋');
+}
+
+// ═══════════════════════════════════════
+//  ESPACE PARENT — CONSULTATION PAR CODE (sans compte)
+// ═══════════════════════════════════════
+async function renderEspaceParent() {
+  const container = document.getElementById('parent-page-content');
+  if (!container) return;
+
+  const params = new URLSearchParams(window.location.search);
+  const code = params.get('parent');
+
+  if (!code) {
+    container.innerHTML = `
+      <div class="eleve-card">
+        <div class="eleve-card-title">👨‍👩‍👧 Espace Parent</div>
+        <div style="font-size:13px;color:var(--muted);margin-bottom:16px">Entre le code transmis par ton enfant pour consulter sa progression.</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <input id="parent-code-input" placeholder="Code (ex: V3A7PWGF22)" style="flex:1;min-width:180px;padding:10px;border:1px solid var(--bordure);border-radius:8px;font-size:14px;text-transform:uppercase">
+          <button class="auth-btn" style="width:auto;padding:10px 20px" onclick="consulterParCode()">Consulter</button>
+        </div>
+        <div id="parent-code-error" style="display:none;color:var(--rouge);font-size:13px;margin-top:10px"></div>
+      </div>
+    `;
+    return;
+  }
+
+  container.innerHTML = `<div style="text-align:center;padding:4rem;color:var(--muted)">Chargement…</div>`;
+  const result = await appelEdgeFunction('exo-parent-consultation', 'POST', { action: 'consulter', code });
+  if (result.error) {
+    container.innerHTML = `
+      <div class="eleve-card">
+        <div class="eleve-card-title">👨‍👩‍👧 Espace Parent</div>
+        <div style="color:var(--rouge);font-size:14px">Code invalide ou expiré. Demande un nouveau lien à ton enfant.</div>
+      </div>
+    `;
+    return;
+  }
+
+  const chapitresHtml = result.progressionParChapitre.length > 0
+    ? result.progressionParChapitre.map(c => {
+        const barColor = c.moyenne>=70?'linear-gradient(90deg,var(--vert),#22C55E)':c.moyenne>=50?'linear-gradient(90deg,var(--amber),#F59E0B)':'linear-gradient(90deg,var(--rouge),#F87171)';
+        return `
+          <div class="chap-item">
+            <div class="chap-top">
+              <span class="chap-name">${c.chapitre}</span>
+              <span class="chap-pct">${c.moyenne}%</span>
+            </div>
+            <div class="chap-bar"><div class="chap-bar-fill" style="width:${c.moyenne}%;background:${barColor}"></div></div>
+          </div>
+        `;
+      }).join('')
+    : '<div style="color:var(--muted);font-size:13px;text-align:center;padding:1rem">Aucun exercice terminé encore.</div>';
+
+  const badgesHtml = result.badges.length > 0
+    ? result.badges.map(b => {
+        const emoji = b.badge_type==='or'?'🥇':b.badge_type==='argent'?'🥈':'🥉';
+        const dateObtenu = b.obtenu_at ? new Date(b.obtenu_at).toLocaleDateString('fr-FR') : '';
+        return `<div class="badge-card unlocked"><div class="badge-icon">${emoji}</div><div class="badge-name">${b.chapitre}</div><div class="badge-status">✅ ${dateObtenu}</div></div>`;
+      }).join('')
+    : '<div style="color:var(--muted);font-size:13px;text-align:center;padding:1rem;grid-column:1/-1">Aucun badge encore.</div>';
+
+  container.innerHTML = `
+    <div class="eleve-header">
+      <div class="eleve-avatar" style="background:#4A90D9">${(result.prenom?.[0]||'')}${(result.nom?.[0]||'')}</div>
+      <div>
+        <div class="eleve-name">${result.prenom} ${result.nom}</div>
+        <div class="eleve-meta">${result.classe || result.niveau || ''} · Consultation lecture seule</div>
+      </div>
+      <div class="eleve-stats-mini">
+        <div class="esm-item"><span class="esm-num">${result.totalPoints}</span><div class="esm-label">Points</div></div>
+        <div class="esm-item"><span class="esm-num">${result.nbExercices}</span><div class="esm-label">Exercices</div></div>
+        <div class="esm-item"><span class="esm-num">${result.moyenneGlobale}%</span><div class="esm-label">Moyenne</div></div>
+      </div>
+    </div>
+    <div class="eleve-grid">
+      <div class="eleve-card">
+        <div class="eleve-card-title">📊 Progression par chapitre</div>
+        ${chapitresHtml}
+      </div>
+      <div class="eleve-card">
+        <div class="eleve-card-title">🏅 Badges (${result.badges.length})</div>
+        <div class="badges-grid">${badgesHtml}</div>
+      </div>
+      <div class="eleve-card">
+        <div class="eleve-card-title">📋 Derniers exercices</div>
+        ${result.derniersExercices.map(p => `
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--bordure);font-size:13px">
+            <span style="color:var(--texte);font-weight:500">${p.chapitre}</span>
+            <span style="font-weight:700;color:${p.score>=70?'var(--vert)':p.score>=50?'var(--amber)':'var(--rouge)'}">${p.score}%</span>
+          </div>
+        `).join('') || '<div style="color:var(--muted);font-size:13px;padding:1rem;text-align:center">Aucun exercice encore.</div>'}
+      </div>
+    </div>
+  `;
+}
+
+async function consulterParCode() {
+  const input = document.getElementById('parent-code-input');
+  const code = input.value.trim().toUpperCase();
+  const errEl = document.getElementById('parent-code-error');
+  errEl.style.display = 'none';
+  if (!code) {
+    errEl.textContent = 'Entre un code.';
+    errEl.style.display = 'block';
+    return;
+  }
+  const url = new URL(window.location.href);
+  url.searchParams.set('parent', code);
+  window.history.replaceState({}, '', url);
+  renderEspaceParent();
 }
 
 // ── Accès Espace Prof protégé par mot de passe ──
@@ -8721,6 +8875,14 @@ document.addEventListener('keydown', e => {
 });
 
 window.addEventListener('load', initSupabase);
+
+// Lien de partage parent (?parent=CODE) : atterrissage direct sur le
+// rapport, sans navigation manuelle -- un parent qui clique le lien reçu
+// doit voir la progression immédiatement.
+window.addEventListener('load', () => {
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('parent')) showPage('parent');
+});
 
 // ═══════════════════════════════════════
 //  TABLEAU DE BORD PROF — DONNÉES RÉELLES SUPABASE
