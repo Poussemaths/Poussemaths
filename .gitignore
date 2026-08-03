@@ -17,3 +17,4 @@ poussemaths_index*.html
 # OS
 .DS_Store
 Thumbs.db
+.playwright-mcp/
