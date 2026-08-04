@@ -8388,15 +8388,19 @@ function showToast(msg) {
 // n'existe plus que du côté serveur, qui re-vérifie chaque réponse brute
 // indépendamment (jamais de confiance dans un score calculé côté client) —
 // voir exo-fixe-valider (action "terminer") et ROADMAP.md.
-async function sauvegarderProgressionFixe(exerciceId, chapitre, niveau) {
-  if(!supabaseClient || !currentEleve) return;
-  await appelEdgeFunction('exo-fixe-valider', 'POST', {
+async function sauvegarderProgressionFixe(exerciceId, chapitre, niveau, parcoursId) {
+  if(!supabaseClient || !currentEleve) return null;
+  const result = await appelEdgeFunction('exo-fixe-valider', 'POST', {
     action: 'terminer',
     exercice_id: exerciceId,
     chapitre, niveau,
     reponses: reponsesFixe,
+    parcours_id: parcoursId || null,
   });
-  await verifierBadges(chapitre, niveau);
+  if(!result || !result.verrouille) {
+    await verifierBadges(chapitre, niveau);
+  }
+  return result;
 }
 
 async function verifierBadges(chapitre, niveau) {
@@ -8578,6 +8582,14 @@ async function renderEspaceEleve() {
     badges = bdg || [];
   }
 
+  // Parcours-Notation (04/08/2026) : parcours assignes par le prof a la
+  // classe de l'eleve (RLS parcours_eleve_select, cf. migration du 04/08).
+  let parcoursEleve = [];
+  if(supabaseClient && currentEleve && currentEleve.code_classe) {
+    const {data: pcs} = await supabaseClient.from('parcours').select('*').eq('code_classe', currentEleve.code_classe).order('created_at', {ascending:false});
+    parcoursEleve = pcs || [];
+  }
+
   // Calculer les stats
   const totalPoints = progressions.reduce((s,p) => s + (p.points_obtenus || 0), 0);
   const nbExercices = progressions.length;
@@ -8637,6 +8649,49 @@ async function renderEspaceEleve() {
         <span style="font-size:12px">40% des exercices d'un chapitre à 60% minimum pour le premier badge.</span>
        </div>`;
 
+  // Rendu "Mes parcours" — un exercice fixe est verrouille des qu'une ligne
+  // de progression existe pour ce (parcours, exercice) en mode evaluation ;
+  // un exercice genere n'est jamais verrouille cote client (le verrou reel
+  // est applique par question cote serveur, cf. exo-<niveau>-valider), on
+  // affiche juste combien de questions ont deja ete faites dans ce parcours.
+  const parcoursHtml = parcoursEleve.length > 0 ? parcoursEleve.map(p => {
+    const exosDetail = (p.exercices || []).map(ex => {
+      const infoLocal = getAllExercices(p.niveau).find(e => e.id === ex.id);
+      const titre = infoLocal ? infoLocal.titre : ex.id;
+      let statutTxt, verrouille = false;
+      if(ex.genere) {
+        const lignes = progressions.filter(pr => pr.parcours_id === p.id && pr.exercice_id && pr.exercice_id.startsWith(ex.id + '_'));
+        statutTxt = lignes.length > 0 ? `${lignes.length} question${lignes.length>1?'s':''} faite${lignes.length>1?'s':''}` : 'À faire';
+      } else {
+        const ligneProg = progressions.find(pr => pr.parcours_id === p.id && pr.exercice_id === ex.id);
+        if(ligneProg) {
+          verrouille = p.mode === 'evaluation';
+          const noteTxt = (p.mode === 'evaluation' && ligneProg.points_total > 0) ? ` · ${(ligneProg.points_obtenus/ligneProg.points_total*20).toFixed(1)}/20` : '';
+          statutTxt = `Terminé${noteTxt}`;
+        } else {
+          statutTxt = 'À faire';
+        }
+      }
+      return `
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--bordure);font-size:13px;gap:8px">
+          <span>${titre}</span>
+          <span style="display:flex;align-items:center;gap:8px;flex-shrink:0">
+            <span style="color:var(--muted);white-space:nowrap">${statutTxt}</span>
+            <button class="auth-btn-secondary" style="width:auto;padding:4px 12px;font-size:12px" ${verrouille?'disabled':''} onclick="ouvrirExercice('${ex.id}','${p.id}')">${verrouille?'🔒':'Lancer'}</button>
+          </span>
+        </div>
+      `;
+    }).join('');
+    const modeLabel = p.mode === 'evaluation' ? '📝 Évaluation' : '🏋️ Entraînement';
+    return `
+      <div style="margin-bottom:16px">
+        <div style="font-weight:700;font-size:14px;margin-bottom:4px">${p.titre}</div>
+        <div style="font-size:12px;color:var(--muted);margin-bottom:4px">${modeLabel} · ${(p.exercices||[]).length} exercice${(p.exercices||[]).length>1?'s':''}</div>
+        ${exosDetail}
+      </div>
+    `;
+  }).join('') : '<div style="color:var(--muted);font-size:13px;text-align:center;padding:1rem">Aucun parcours assigné par ton professeur pour l\'instant.</div>';
+
   // Rendu final
   container.innerHTML = `
     <div class="eleve-header">
@@ -8670,6 +8725,11 @@ async function renderEspaceEleve() {
       <div class="eleve-card">
         <div class="eleve-card-title">🏅 Mes badges (${badges.length})</div>
         <div class="badges-grid">${badgesHtml}</div>
+      </div>
+
+      <div class="eleve-card">
+        <div class="eleve-card-title">🎓 Mes parcours</div>
+        ${parcoursHtml}
       </div>
 
       <div class="eleve-card">
@@ -10750,6 +10810,11 @@ let currentGenTokens = [];
 // les re-verifie independamment. Jamais un score precalcule cote client
 // n'est envoye : voir le chantier anti-triche du 31/07/2026.
 let reponsesFixe = {};
+// Parcours-Notation (04/08/2026) : id du parcours en cours quand l'exercice a
+// ete lance depuis "Mes parcours" (null = pratique libre, comportement
+// inchange). Threade dans tous les appels serveur pour que le verrou
+// "une tentative" en mode Evaluation s'applique.
+let currentParcoursId = null;
 
 async function appelEdgeFunction(slug, method, body) {
   const { data: { session } } = await supabaseClient.auth.getSession();
@@ -10798,10 +10863,11 @@ async function chargerExerciceGenere() {
   renderQuestion();
 }
 
-function ouvrirExercice(id) {
+function ouvrirExercice(id, parcoursId) {
   const all = getAllExercices();
   currentExercice = all.find(e => e.id === id);
   if(!currentExercice) return;
+  currentParcoursId = parcoursId || null;
 
   currentQuestion = 0;
   score = 0;
@@ -10995,7 +11061,14 @@ async function verifierQCMGenere(idx) {
     exercice_id: `${currentExercice.id}_${currentQuestion + 1}`,
     chapitre, niveau,
     enonce: q.enonce, choix: q.choix,
+    parcours_id: currentParcoursId,
   });
+
+  if(result && result.verrouille) {
+    document.querySelectorAll('.qcm-choix').forEach(btn => btn.disabled = true);
+    afficherVerrouille(result.error);
+    return;
+  }
 
   const correct = !!result.correcte;
   const bonIdx = result.bonIdx;
@@ -11067,7 +11140,13 @@ async function verifierExerciceGenere(val, q, inp) {
     exercice_id: `${currentExercice.id}_${currentQuestion + 1}`,
     chapitre, niveau,
     enonce: q.enonce,
+    parcours_id: currentParcoursId,
   });
+
+  if(result && result.verrouille) {
+    afficherVerrouille(result.error);
+    return;
+  }
 
   const correct = !!result.correcte;
   // "$x = ...$" supposait que l'inconnue s'appelle toujours x, ce qui n'est
@@ -11086,6 +11165,16 @@ async function verifierExerciceGenere(val, q, inp) {
   score += correct ? q.points : 0;
   if(correct) { pointsGlobal += 10; exFaits++; }
   updateEleveStats();
+}
+
+// ── AFFICHER VERROU (Parcours-Notation, question deja repondue en evaluation) ──
+function afficherVerrouille(msg) {
+  const corrBox = document.getElementById('correction-box');
+  const corrTitle = document.getElementById('corr-title');
+  const corrText = document.getElementById('corr-text');
+  corrBox.className = `correction-box show`;
+  corrTitle.textContent = '🔒 Déjà répondu';
+  corrText.innerHTML = texToHtml(msg || 'Tu as déjà répondu à cette question dans le cadre de cette évaluation.');
 }
 
 // ── AFFICHER CORRECTION ──
@@ -11129,7 +11218,7 @@ function prevQuestion() {
   }
 }
 
-function showResult() {
+async function showResult() {
   const pct = Math.round((score / totalPoints) * 100);
   let emoji = pct >= 80 ? '🏆' : pct >= 60 ? '👏' : '💪';
   let msg = pct >= 80 ? 'Excellent travail !' : pct >= 60 ? 'Bien joué !' : 'Continue tes efforts !';
@@ -11142,10 +11231,18 @@ function showResult() {
 
   // ── Sauvegarder dans Supabase si élève connecté ──
   // (les exercices générés sont déjà sauvegardés côté serveur par verifierExerciceGenere)
+  let sauvegardeHtml = currentEleve
+    ? `<div style="font-size:12px;color:var(--vert);margin-top:8px">✅ Progression sauvegardée</div>`
+    : `<div style="font-size:12px;color:var(--muted);margin-top:8px"><a href="#" onclick="ouvrirModalConnexion()" style="color:var(--bleu)">Connecte-toi</a> pour sauvegarder ta progression</div>`;
+
+  const parcoursIdCourant = currentParcoursId;
   if(currentEleve && currentExercice && !currentExercice.genere) {
     const chapitre = currentExercice.titre || '';
     const niveau = detecterNiveauDepuisId(currentExercice.id);
-    sauvegarderProgressionFixe(currentExercice.id, chapitre, niveau);
+    const res = await sauvegarderProgressionFixe(currentExercice.id, chapitre, niveau, parcoursIdCourant);
+    if(res && res.verrouille) {
+      sauvegardeHtml = `<div style="font-size:12px;color:var(--amber);margin-top:8px">🔒 Tu avais déjà répondu à cet exercice dans le cadre de cette évaluation — ta note d'origine reste enregistrée.</div>`;
+    }
   }
 
   document.getElementById('modal-content').innerHTML = `
@@ -11153,9 +11250,9 @@ function showResult() {
       <div class="result-emoji">${emoji}</div>
       <div class="result-title">${msg}</div>
       <div class="result-score">Score : <span class="result-pts">${score} / ${totalPoints}</span> points (${pct}%)</div>
-      ${currentEleve ? `<div style="font-size:12px;color:var(--vert);margin-top:8px">✅ Progression sauvegardée</div>` : `<div style="font-size:12px;color:var(--muted);margin-top:8px"><a href="#" onclick="ouvrirModalConnexion()" style="color:var(--bleu)">Connecte-toi</a> pour sauvegarder ta progression</div>`}
+      ${sauvegardeHtml}
       <div style="margin-top:1.5rem;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
-        <button class="btn-nav-modal primary" onclick="ouvrirExercice('${currentExercice.id}')">Recommencer</button>
+        <button class="btn-nav-modal primary" onclick="ouvrirExercice('${currentExercice.id}', ${parcoursIdCourant ? `'${parcoursIdCourant}'` : 'null'})">Recommencer</button>
         <button class="btn-nav-modal" onclick="fermerModal();showPage('exercices')">Autres exercices</button>
       </div>
     </div>
