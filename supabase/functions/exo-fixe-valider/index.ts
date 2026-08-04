@@ -297,6 +297,66 @@ function verifierQuestion(q: any, reponse: string): { correcte: boolean; correct
   return { correcte, correction: q.correction ?? '' };
 }
 
+// Ecrit une ligne de progression, avec verrou "une tentative" si l'exercice est
+// rattache a un parcours en mode evaluation (Parcours-Notation, 04/08/2026).
+// - Sans parcoursId : comportement strictement inchange (upsert sur eleve_id+
+//   exercice_id, la pratique libre garde une seule ligne par exercice).
+// - Avec parcoursId en mode entrainement : upsert scope a CE parcours precis
+//   (colonne generee parcours_key), ne touche jamais la ligne de pratique
+//   libre ni celle d'un autre parcours sur le meme exercice.
+// - Avec parcoursId en mode evaluation : verifie d'abord qu'aucune ligne
+//   n'existe deja pour (eleve, exercice, parcours) ; si si, rejette --
+//   c'est le verrou "une seule tentative" qui garantit une note definitive.
+async function ecrireProgression(
+  supabaseUrl: string,
+  serviceKey: string,
+  data: Record<string, unknown>,
+  parcoursId: string | null | undefined,
+): Promise<{ ok: boolean; error?: string; verrouille?: boolean }> {
+  if (parcoursId) {
+    const pResp = await fetch(`${supabaseUrl}/rest/v1/parcours?id=eq.${parcoursId}&select=mode`, {
+      headers: { apikey: serviceKey, Authorization: `Bearer ${serviceKey}` },
+    });
+    const pRows = await pResp.json();
+    const mode = Array.isArray(pRows) && pRows.length > 0 ? pRows[0].mode : null;
+    if (!mode) return { ok: false, error: "parcours introuvable" };
+
+    if (mode === "evaluation") {
+      const existResp = await fetch(
+        `${supabaseUrl}/rest/v1/progression?eleve_id=eq.${data.eleve_id}&exercice_id=eq.${data.exercice_id}&parcours_id=eq.${parcoursId}&select=id`,
+        { headers: { apikey: serviceKey, Authorization: `Bearer ${serviceKey}` } },
+      );
+      const existRows = await existResp.json();
+      if (Array.isArray(existRows) && existRows.length > 0) {
+        return { ok: false, verrouille: true, error: "Tu as déjà répondu à cette question dans le cadre de cette évaluation." };
+      }
+      const insResp = await fetch(`${supabaseUrl}/rest/v1/progression`, {
+        method: "POST",
+        headers: { apikey: serviceKey, Authorization: `Bearer ${serviceKey}`, "Content-Type": "application/json" },
+        body: JSON.stringify({ ...data, parcours_id: parcoursId }),
+      });
+      if (!insResp.ok) return { ok: false, error: await insResp.text() };
+      return { ok: true };
+    }
+
+    const writeResp = await fetch(`${supabaseUrl}/rest/v1/progression?on_conflict=eleve_id,exercice_id,parcours_key`, {
+      method: "POST",
+      headers: { apikey: serviceKey, Authorization: `Bearer ${serviceKey}`, "Content-Type": "application/json", Prefer: "resolution=merge-duplicates" },
+      body: JSON.stringify({ ...data, parcours_id: parcoursId }),
+    });
+    if (!writeResp.ok) return { ok: false, error: await writeResp.text() };
+    return { ok: true };
+  }
+
+  const writeResp = await fetch(`${supabaseUrl}/rest/v1/progression?on_conflict=eleve_id,exercice_id,parcours_key`, {
+    method: "POST",
+    headers: { apikey: serviceKey, Authorization: `Bearer ${serviceKey}`, "Content-Type": "application/json", Prefer: "resolution=merge-duplicates" },
+    body: JSON.stringify(data),
+  });
+  if (!writeResp.ok) return { ok: false, error: await writeResp.text() };
+  return { ok: true };
+}
+
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response(null, { headers: corsHeaders });
   try {
@@ -338,7 +398,7 @@ Deno.serve(async (req) => {
     }
 
     if (action === "terminer") {
-      const { chapitre, niveau, reponses } = body;
+      const { chapitre, niveau, reponses, parcours_id } = body;
       let pointsObtenus = 0;
       let pointsTotal = 0;
       for (let i = 0; i < questions.length; i++) {
@@ -361,23 +421,18 @@ Deno.serve(async (req) => {
       // score calcule, on saute juste le suivi de progression (meme pattern que
       // les templates generes, trouve par Jamal le 29/07/2026).
       if (eleveId) {
-        const writeResp = await fetch(`${supabaseUrl}/rest/v1/progression?on_conflict=eleve_id,exercice_id`, {
-          method: "POST",
-          headers: { apikey: serviceKey!, Authorization: `Bearer ${serviceKey}`, "Content-Type": "application/json", Prefer: "resolution=merge-duplicates" },
-          body: JSON.stringify({
-            eleve_id: eleveId,
-            exercice_id,
-            chapitre: chapitre ?? '',
-            niveau: niveau ?? '',
-            score,
-            points_obtenus: pointsObtenus,
-            points_total: pointsTotal,
-            completed_at: new Date().toISOString(),
-          }),
-        });
-        if (!writeResp.ok) {
-          const errText = await writeResp.text();
-          return new Response(JSON.stringify({ error: "ecriture progression echouee", detail: errText }), { status: 500, headers: corsHeaders });
+        const result = await ecrireProgression(supabaseUrl!, serviceKey!, {
+          eleve_id: eleveId,
+          exercice_id,
+          chapitre: chapitre ?? '',
+          niveau: niveau ?? '',
+          score,
+          points_obtenus: pointsObtenus,
+          points_total: pointsTotal,
+          completed_at: new Date().toISOString(),
+        }, parcours_id);
+        if (!result.ok) {
+          return new Response(JSON.stringify({ error: result.error, verrouille: !!result.verrouille }), { status: result.verrouille ? 409 : 500, headers: corsHeaders });
         }
       }
 

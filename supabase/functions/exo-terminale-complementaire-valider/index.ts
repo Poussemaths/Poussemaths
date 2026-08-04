@@ -56,6 +56,56 @@ const DEFAULTS: Record<string, { tolerance: number; chapitre: string; niveau: st
   droite_regression_v1: { tolerance: 0.001, chapitre: "Statistiques à deux variables", niveau: "terminale_complementaire" },
 };
 
+async function ecrireProgression(
+  supabaseUrl: string,
+  serviceKey: string,
+  data: Record<string, unknown>,
+  parcoursId: string | null | undefined,
+): Promise<{ ok: boolean; error?: string; verrouille?: boolean }> {
+  if (parcoursId) {
+    const pResp = await fetch(`${supabaseUrl}/rest/v1/parcours?id=eq.${parcoursId}&select=mode`, {
+      headers: { apikey: serviceKey, Authorization: `Bearer ${serviceKey}` },
+    });
+    const pRows = await pResp.json();
+    const mode = Array.isArray(pRows) && pRows.length > 0 ? pRows[0].mode : null;
+    if (!mode) return { ok: false, error: "parcours introuvable" };
+
+    if (mode === "evaluation") {
+      const existResp = await fetch(
+        `${supabaseUrl}/rest/v1/progression?eleve_id=eq.${data.eleve_id}&exercice_id=eq.${data.exercice_id}&parcours_id=eq.${parcoursId}&select=id`,
+        { headers: { apikey: serviceKey, Authorization: `Bearer ${serviceKey}` } },
+      );
+      const existRows = await existResp.json();
+      if (Array.isArray(existRows) && existRows.length > 0) {
+        return { ok: false, verrouille: true, error: "Tu as déjà répondu à cette question dans le cadre de cette évaluation." };
+      }
+      const insResp = await fetch(`${supabaseUrl}/rest/v1/progression`, {
+        method: "POST",
+        headers: { apikey: serviceKey, Authorization: `Bearer ${serviceKey}`, "Content-Type": "application/json" },
+        body: JSON.stringify({ ...data, parcours_id: parcoursId }),
+      });
+      if (!insResp.ok) return { ok: false, error: await insResp.text() };
+      return { ok: true };
+    }
+
+    const writeResp = await fetch(`${supabaseUrl}/rest/v1/progression?on_conflict=eleve_id,exercice_id,parcours_key`, {
+      method: "POST",
+      headers: { apikey: serviceKey, Authorization: `Bearer ${serviceKey}`, "Content-Type": "application/json", Prefer: "resolution=merge-duplicates" },
+      body: JSON.stringify({ ...data, parcours_id: parcoursId }),
+    });
+    if (!writeResp.ok) return { ok: false, error: await writeResp.text() };
+    return { ok: true };
+  }
+
+  const writeResp = await fetch(`${supabaseUrl}/rest/v1/progression?on_conflict=eleve_id,exercice_id,parcours_key`, {
+    method: "POST",
+    headers: { apikey: serviceKey, Authorization: `Bearer ${serviceKey}`, "Content-Type": "application/json", Prefer: "resolution=merge-duplicates" },
+    body: JSON.stringify(data),
+  });
+  if (!writeResp.ok) return { ok: false, error: await writeResp.text() };
+  return { ok: true };
+}
+
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response(null, { headers: corsHeaders });
   try {
@@ -63,7 +113,7 @@ Deno.serve(async (req) => {
     const userId = await verifierUtilisateur(jwt);
     if (!userId) return new Response(JSON.stringify({ error: "utilisateur non authentifie" }), { status: 401, headers: corsHeaders });
 
-    const { template_id, token, reponse, exercice_id, chapitre, niveau, enonce } = await req.json();
+    const { template_id, token, reponse, exercice_id, chapitre, niveau, enonce, parcours_id } = await req.json();
     if (!token || reponse === undefined) return new Response(JSON.stringify({ error: "token et reponse requis" }), { status: 400, headers: corsHeaders });
 
     const defaults = DEFAULTS[template_id];
@@ -93,25 +143,20 @@ Deno.serve(async (req) => {
     // correction, on saute juste le suivi de progression au lieu de bloquer
     // la validation avec un 404.
     if (eleveId) {
-      const writeResp = await fetch(`${supabaseUrl}/rest/v1/progression?on_conflict=eleve_id,exercice_id`, {
-        method: "POST",
-        headers: { apikey: serviceKey!, Authorization: `Bearer ${serviceKey}`, "Content-Type": "application/json", Prefer: "resolution=merge-duplicates" },
-        body: JSON.stringify({
-          eleve_id: eleveId,
-          exercice_id: exercice_id ?? template_id,
-          chapitre: chapitre ?? defaults.chapitre,
-          niveau: niveau ?? defaults.niveau,
-          score, points_obtenus: correcte ? 1 : 0, points_total: 1,
-          completed_at: new Date().toISOString(),
-          enonce: enonce ?? null,
-          reponse_donnee: String(reponse),
-          reponse_attendue: String(payload.x),
-        }),
-      });
+      const result = await ecrireProgression(supabaseUrl!, serviceKey!, {
+        eleve_id: eleveId,
+        exercice_id: exercice_id ?? template_id,
+        chapitre: chapitre ?? defaults.chapitre,
+        niveau: niveau ?? defaults.niveau,
+        score, points_obtenus: correcte ? 1 : 0, points_total: 1,
+        completed_at: new Date().toISOString(),
+        enonce: enonce ?? null,
+        reponse_donnee: String(reponse),
+        reponse_attendue: String(payload.x),
+      }, parcours_id);
 
-      if (!writeResp.ok) {
-        const errText = await writeResp.text();
-        return new Response(JSON.stringify({ error: "ecriture progression echouee", detail: errText }), { status: 500, headers: corsHeaders });
+      if (!result.ok) {
+        return new Response(JSON.stringify({ error: result.error, verrouille: !!result.verrouille }), { status: result.verrouille ? 409 : 500, headers: corsHeaders });
       }
     }
 
