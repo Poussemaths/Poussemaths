@@ -1531,6 +1531,7 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
     <div class="prof-tabs" id="prof-tabs">
       <button class="prof-tab active" onclick="switchProfTab('dashboard')">📊 Tableau de bord</button>
       <button class="prof-tab" onclick="switchProfTab('outils')">🛠️ Outils</button>
+      <button class="prof-tab" onclick="switchProfTab('parcours')">📝 Parcours</button>
     </div>
 
     <!-- VUE : TABLEAU DE BORD -->
@@ -1627,6 +1628,33 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
       </div>
     </div>
 
+    <!-- VUE : PARCOURS-NOTATION -->
+    <div id="prof-parcours" class="prof-view" style="display:none">
+      <div class="db-section">
+        <div class="db-section-header">
+          <div class="db-section-titre">📝 Mes parcours</div>
+          <button class="btn-prof-action primary" onclick="ouvrirParcoursModal()">+ Créer un parcours</button>
+        </div>
+        <div id="parcours-liste">
+          <div style="color:var(--muted);font-size:13px;padding:8px">Chargement…</div>
+        </div>
+      </div>
+      <div class="db-section" id="parcours-detail-section" style="display:none">
+        <div class="db-section-header">
+          <div class="db-section-titre" id="parcours-detail-titre">Détail du parcours</div>
+          <button class="btn-prof-action" onclick="exporterParcoursCSV(parcoursDetailCourant)">📤 Exporter CSV</button>
+        </div>
+        <div class="db-table-wrap">
+          <table class="db-table">
+            <thead>
+              <tr><th>Élève</th><th>Note</th><th>Statut</th><th>Date</th></tr>
+            </thead>
+            <tbody id="parcours-detail-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 
@@ -1651,6 +1679,19 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
       <button class="modal-close" onclick="closeCMModal()">✕</button>
     </div>
     <div class="modal-body" id="cm-modal-body">
+      <!-- contenu généré par JS -->
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MODAL CRÉER UN PARCOURS ═══ -->
+<div class="modal-overlay" id="parcours-overlay" onclick="closeParcoursModal(event)">
+  <div class="modal" id="parcours-modal" style="max-width:720px">
+    <div class="modal-header">
+      <span class="modal-header-title">📝 Créer un parcours</span>
+      <button class="modal-close" onclick="closeParcoursModal()">✕</button>
+    </div>
+    <div class="modal-body" id="parcours-modal-body">
       <!-- contenu généré par JS -->
     </div>
   </div>
@@ -8990,7 +9031,9 @@ function switchProfTab(tab) {
   document.querySelectorAll('.prof-tab').forEach(t => t.classList.remove('active'));
   document.getElementById('prof-dashboard').style.display = tab === 'dashboard' ? '' : 'none';
   document.getElementById('prof-outils').style.display = tab === 'outils' ? '' : 'none';
+  document.getElementById('prof-parcours').style.display = tab === 'parcours' ? '' : 'none';
   event.target.classList.add('active');
+  if(tab === 'parcours') chargerMesParcours();
 }
 
 function showDashboard() {
@@ -9127,6 +9170,244 @@ function exportCSV() {
   const a = document.createElement('a');
   a.href = url;
   a.download = `poussemaths_${classeNom.replace(/\s+/g,'_')}.csv`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+// ═══════════════════════════════════════
+//  PARCOURS-NOTATION (prof) — 04/08/2026
+// ═══════════════════════════════════════
+
+let parcoursSelectionExercices = [];
+let parcoursCompetencesFiltre = [];
+let parcoursNiveauCourant = null;
+let mesParcours = [];
+let parcoursDetailCourant = null;
+
+function ouvrirParcoursModal() {
+  document.getElementById('parcours-overlay').style.display = 'flex';
+  parcoursSelectionExercices = [];
+  parcoursCompetencesFiltre = [];
+  renderParcoursModal();
+}
+
+function closeParcoursModal(e) {
+  if(!e || e.target === document.getElementById('parcours-overlay')) {
+    document.getElementById('parcours-overlay').style.display = 'none';
+  }
+}
+
+function renderParcoursModal() {
+  const body = document.getElementById('parcours-modal-body');
+  if(!profClasses.length) {
+    body.innerHTML = '<div style="color:var(--muted);font-size:14px">Crée d\'abord une classe depuis le tableau de bord avant de créer un parcours.</div>';
+    return;
+  }
+  body.innerHTML = `
+    <div class="pdf-section">
+      <div class="pdf-row">
+        <select class="pdf-input" id="parcours-classe" onchange="onParcoursClasseChange()">
+          ${profClasses.map(c => `<option value="${c.code}">${c.nom} (${LABELS_CLASSES[c.niveau]||c.niveau})</option>`).join('')}
+        </select>
+        <input class="pdf-input" id="parcours-titre" placeholder="Titre du parcours">
+      </div>
+      <div class="pdf-row">
+        <select class="pdf-input" id="parcours-mode">
+          <option value="entrainement">🏋️ Entraînement — tentatives illimitées, pas de note</option>
+          <option value="evaluation">📝 Évaluation — 1 tentative, note définitive</option>
+        </select>
+      </div>
+      <div class="pdf-row">
+        <input class="pdf-input" id="parcours-temps" type="number" min="1" placeholder="Temps indicatif en min (optionnel)">
+        <input class="pdf-input" id="parcours-date" type="date">
+      </div>
+    </div>
+    <div class="pdf-section">
+      <div class="pdf-section-title">🎯 Filtrer par compétence (optionnel)</div>
+      <div class="pdf-chapitres-grid" id="parcours-competences-grid"></div>
+    </div>
+    <div class="pdf-section">
+      <div class="pdf-section-title">📚 Choisir les exercices</div>
+      <div id="parcours-exercices-liste" style="max-height:280px;overflow-y:auto"></div>
+    </div>
+    <div id="parcours-erreur" style="color:var(--rouge);font-size:13px;margin-bottom:8px;display:none"></div>
+    <button class="pdf-generate-btn" onclick="creerParcours()">✅ Créer le parcours</button>
+  `;
+  onParcoursClasseChange();
+}
+
+function onParcoursClasseChange() {
+  const code = document.getElementById('parcours-classe').value;
+  const classe = profClasses.find(c => c.code === code);
+  parcoursNiveauCourant = classe ? classe.niveau : null;
+  parcoursSelectionExercices = [];
+  parcoursCompetencesFiltre = [];
+  renderParcoursCompetences();
+  renderParcoursExercices();
+}
+
+function renderParcoursCompetences() {
+  const grid = document.getElementById('parcours-competences-grid');
+  if(!parcoursNiveauCourant) { grid.innerHTML = ''; return; }
+  const exos = getAllExercices(parcoursNiveauCourant);
+  const competences = [...new Set(exos.flatMap(e => e.competences || []))].sort();
+  grid.innerHTML = competences.length
+    ? competences.map(c => `<button class="pdf-chap-btn" style="font-size:12px" onclick="toggleParcoursCompetence('${c.replace(/'/g,"\\'")}', this)">${c}</button>`).join('')
+    : '<div style="color:var(--muted);font-size:13px">Aucune compétence renseignée pour ce niveau.</div>';
+}
+
+function toggleParcoursCompetence(comp, btn) {
+  const idx = parcoursCompetencesFiltre.indexOf(comp);
+  if(idx >= 0) { parcoursCompetencesFiltre.splice(idx, 1); btn.classList.remove('selected'); }
+  else { parcoursCompetencesFiltre.push(comp); btn.classList.add('selected'); }
+  renderParcoursExercices();
+}
+
+function renderParcoursExercices() {
+  const liste = document.getElementById('parcours-exercices-liste');
+  if(!parcoursNiveauCourant) { liste.innerHTML = ''; return; }
+  let exos = getAllExercices(parcoursNiveauCourant);
+  if(parcoursCompetencesFiltre.length) {
+    exos = exos.filter(ex => (ex.competences || []).some(c => parcoursCompetencesFiltre.includes(c)));
+  }
+  liste.innerHTML = exos.length ? exos.map(ex => `
+    <label style="display:flex;align-items:center;gap:8px;padding:8px 4px;border-bottom:1px solid var(--bordure);font-size:13px;cursor:pointer">
+      <input type="checkbox" ${parcoursSelectionExercices.some(s => s.id === ex.id) ? 'checked' : ''} onchange="toggleParcoursExercice('${ex.id}', this.checked)">
+      <span style="flex:1">${ex.titre} <span style="color:var(--muted)">— ${ex.chapitre} · ${ex.points_total} pts${ex.genere ? ' · génératif' : ''}</span></span>
+    </label>
+  `).join('') : '<div style="color:var(--muted);font-size:13px">Aucun exercice pour ce filtre.</div>';
+}
+
+function toggleParcoursExercice(id, checked) {
+  const exos = getAllExercices(parcoursNiveauCourant);
+  const ex = exos.find(e => e.id === id);
+  if(!ex) return;
+  if(checked) {
+    if(!parcoursSelectionExercices.some(s => s.id === id)) {
+      parcoursSelectionExercices.push({ id: ex.id, chapitre: ex.chapitre, points_total: ex.points_total, genere: !!ex.genere, templateId: ex.templateId || null });
+    }
+  } else {
+    parcoursSelectionExercices = parcoursSelectionExercices.filter(s => s.id !== id);
+  }
+}
+
+async function creerParcours() {
+  const err = document.getElementById('parcours-erreur');
+  err.style.display = 'none';
+  const codeClasse = document.getElementById('parcours-classe').value;
+  const titre = document.getElementById('parcours-titre').value.trim();
+  const mode = document.getElementById('parcours-mode').value;
+  const tempsRaw = document.getElementById('parcours-temps').value;
+  const dateRaw = document.getElementById('parcours-date').value;
+
+  if(!titre) { err.textContent = 'Donne un titre au parcours.'; err.style.display = 'block'; return; }
+  if(parcoursSelectionExercices.length === 0) { err.textContent = 'Sélectionne au moins un exercice.'; err.style.display = 'block'; return; }
+
+  const profUserId = sessionStorage.getItem('prof_user_id');
+  const { error } = await supabaseClient.from('parcours').insert({
+    prof_id: profUserId,
+    code_classe: codeClasse,
+    titre,
+    mode,
+    niveau: parcoursNiveauCourant,
+    exercices: parcoursSelectionExercices,
+    temps_limite_min: tempsRaw ? parseInt(tempsRaw, 10) : null,
+    date_limite: dateRaw ? new Date(dateRaw).toISOString() : null,
+  });
+
+  if(error) { err.textContent = 'Erreur : ' + error.message; err.style.display = 'block'; return; }
+
+  closeParcoursModal();
+  showToast('Parcours créé ✅');
+  chargerMesParcours();
+}
+
+async function chargerMesParcours() {
+  const profUserId = sessionStorage.getItem('prof_user_id');
+  const listeEl = document.getElementById('parcours-liste');
+  document.getElementById('parcours-detail-section').style.display = 'none';
+  if(!supabaseClient || !profUserId) { listeEl.innerHTML = '<div style="color:var(--muted);font-size:13px">Non connecté.</div>'; return; }
+
+  const { data: parcours } = await supabaseClient.from('parcours').select('*').eq('prof_id', profUserId).order('created_at', { ascending: false });
+  mesParcours = parcours || [];
+  if(mesParcours.length === 0) {
+    listeEl.innerHTML = '<div style="color:var(--muted);font-size:13px;padding:8px">Aucun parcours créé pour l\'instant.</div>';
+    return;
+  }
+
+  const { data: eleves } = await supabaseClient.from('eleves').select('id,code_classe');
+  const nbElevesParClasse = {};
+  (eleves || []).forEach(e => { nbElevesParClasse[e.code_classe] = (nbElevesParClasse[e.code_classe] || 0) + 1; });
+
+  const parcoursIds = mesParcours.map(p => p.id);
+  const { data: progRows } = await supabaseClient.from('progression').select('parcours_id,eleve_id,score').in('parcours_id', parcoursIds);
+
+  listeEl.innerHTML = mesParcours.map(p => {
+    const lignes = (progRows || []).filter(r => r.parcours_id === p.id);
+    const elevesFait = new Set(lignes.map(r => r.eleve_id)).size;
+    const totalEleves = nbElevesParClasse[p.code_classe] || 0;
+    const moyenne = lignes.length ? Math.round(lignes.reduce((s, r) => s + r.score, 0) / lignes.length) : null;
+    const modeLabel = p.mode === 'evaluation' ? '📝 Évaluation' : '🏋️ Entraînement';
+    return `
+      <div class="prof-outil-card" style="cursor:pointer" onclick="voirDetailParcours('${p.id}')">
+        <div class="poc-titre">${p.titre}</div>
+        <div class="poc-desc">${modeLabel} · ${LABELS_CLASSES[p.niveau] || p.niveau} · ${p.exercices.length} exercice${p.exercices.length > 1 ? 's' : ''}</div>
+        <div class="poc-desc">${elevesFait}/${totalEleves} élève${totalEleves > 1 ? 's' : ''} · ${moyenne !== null ? `moyenne ${moyenne}%` : 'aucune donnée'}</div>
+      </div>
+    `;
+  }).join('');
+}
+
+async function voirDetailParcours(id) {
+  parcoursDetailCourant = id;
+  const p = mesParcours.find(x => x.id === id);
+  if(!p) return;
+  document.getElementById('parcours-detail-titre').textContent = `📝 ${p.titre}`;
+  document.getElementById('parcours-detail-section').style.display = '';
+
+  const { data: eleves } = await supabaseClient.from('eleves').select('id,nom,prenom').eq('code_classe', p.code_classe);
+  const { data: progRows } = await supabaseClient.from('progression').select('eleve_id,points_obtenus,points_total,completed_at').eq('parcours_id', id);
+
+  const tbody = document.getElementById('parcours-detail-tbody');
+  tbody.innerHTML = (eleves || []).map(e => {
+    const lignes = (progRows || []).filter(r => r.eleve_id === e.id);
+    const obtenus = lignes.reduce((s, r) => s + (r.points_obtenus || 0), 0);
+    const total = lignes.reduce((s, r) => s + (r.points_total || 0), 0);
+    const note = total > 0 ? (obtenus / total * 20).toFixed(1) : null;
+    const derniere = lignes.reduce((max, r) => (!max || r.completed_at > max.completed_at) ? r : max, null);
+    const statut = lignes.length === 0 ? 'À faire' : (p.mode === 'evaluation' ? 'Terminé' : `${lignes.length} tentative${lignes.length > 1 ? 's' : ''}`);
+    return `<tr>
+      <td>${e.prenom || ''} ${e.nom || ''}</td>
+      <td>${note !== null ? note + '/20' : '—'}</td>
+      <td>${statut}</td>
+      <td>${derniere ? new Date(derniere.completed_at).toLocaleDateString('fr-FR') : '—'}</td>
+    </tr>`;
+  }).join('');
+}
+
+async function exporterParcoursCSV(id) {
+  if(!id) return;
+  const p = mesParcours.find(x => x.id === id);
+  if(!p) return;
+  const { data: eleves } = await supabaseClient.from('eleves').select('id,nom,prenom').eq('code_classe', p.code_classe);
+  const { data: progRows } = await supabaseClient.from('progression').select('eleve_id,points_obtenus,points_total,completed_at').eq('parcours_id', id);
+
+  let csv = 'Nom,Note /20,Date\n';
+  (eleves || []).forEach(e => {
+    const lignes = (progRows || []).filter(r => r.eleve_id === e.id);
+    const obtenus = lignes.reduce((s, r) => s + (r.points_obtenus || 0), 0);
+    const total = lignes.reduce((s, r) => s + (r.points_total || 0), 0);
+    const note = total > 0 ? (obtenus / total * 20).toFixed(1) : '';
+    const derniere = lignes.reduce((max, r) => (!max || r.completed_at > max.completed_at) ? r : max, null);
+    const date = derniere ? new Date(derniere.completed_at).toLocaleDateString('fr-FR') : '';
+    csv += `"${(e.prenom || '') + ' ' + (e.nom || '')}",${note},"${date}"\n`;
+  });
+
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `poussemaths_${p.titre.replace(/\s+/g, '_')}.csv`;
   a.click();
   URL.revokeObjectURL(url);
 }
