@@ -7,11 +7,15 @@
 //   -- tout passe par ici avec la cle service-role, coherent avec le reste
 //   de l'architecture anti-triche du projet.
 
-function decodeJwtSub(jwt: string): string | null {
+async function verifierUtilisateur(jwt: string): Promise<string | null> {
+  if (!jwt) return null;
   try {
-    const payloadB64 = jwt.split(".")[1].replace(/-/g, "+").replace(/_/g, "/");
-    const payload = JSON.parse(atob(payloadB64));
-    return payload.sub ?? null;
+    const resp = await fetch(`${Deno.env.get("SUPABASE_URL")}/auth/v1/user`, {
+      headers: { Authorization: `Bearer ${jwt}`, apikey: "sb_publishable_z9cxUDLcFMFsb5w692JScg_VSzVvhp2" },
+    });
+    if (!resp.ok) return null;
+    const user = await resp.json();
+    return user.id ?? null;
   } catch {
     return null;
   }
@@ -41,7 +45,7 @@ Deno.serve(async (req) => {
 
     if (action === "generer") {
       const jwt = (req.headers.get("Authorization") ?? "").replace("Bearer ", "");
-      const userId = decodeJwtSub(jwt);
+      const userId = await verifierUtilisateur(jwt);
       if (!userId) return new Response(JSON.stringify({ error: "utilisateur non authentifie" }), { status: 401, headers: corsHeaders });
 
       const eleveResp = await fetch(`${supabaseUrl}/rest/v1/eleves?user_id=eq.${userId}&select=id,code_parent`, {

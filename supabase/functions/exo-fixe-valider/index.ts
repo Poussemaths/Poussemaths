@@ -17,11 +17,15 @@
 //   le client n'ecrit plus jamais directement dans la table progression pour
 //   ces exercices (cf. retrait de l'appel direct sauvegarderProgression()).
 
-function decodeJwtSub(jwt: string): string | null {
+async function verifierUtilisateur(jwt: string): Promise<string | null> {
+  if (!jwt) return null;
   try {
-    const payloadB64 = jwt.split(".")[1].replace(/-/g, "+").replace(/_/g, "/");
-    const payload = JSON.parse(atob(payloadB64));
-    return payload.sub ?? null;
+    const resp = await fetch(`${Deno.env.get("SUPABASE_URL")}/auth/v1/user`, {
+      headers: { Authorization: `Bearer ${jwt}`, apikey: "sb_publishable_z9cxUDLcFMFsb5w692JScg_VSzVvhp2" },
+    });
+    if (!resp.ok) return null;
+    const user = await resp.json();
+    return user.id ?? null;
   } catch {
     return null;
   }
@@ -301,7 +305,7 @@ Deno.serve(async (req) => {
     // aucun compte) -- seule l'action "terminer" (ecriture progression) a
     // besoin de savoir qui est l'eleve, verifie plus bas au moment voulu.
     const jwt = (req.headers.get("Authorization") ?? "").replace("Bearer ", "");
-    const userId = decodeJwtSub(jwt);
+    const userId = await verifierUtilisateur(jwt);
 
     const body = await req.json();
     const { action, exercice_id } = body;
