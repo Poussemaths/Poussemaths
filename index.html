@@ -1583,6 +1583,7 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
                 <th>Progression</th>
                 <th>Dernier chapitre</th>
                 <th>Activité</th>
+                <th></th>
               </tr>
             </thead>
             <tbody id="db-tbody"></tbody>
@@ -1601,6 +1602,12 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
     <!-- VUE : OUTILS -->
     <div id="prof-outils" class="prof-view" style="display:none">
       <div class="prof-outils-grid">
+        <div class="prof-outil-card" onclick="ouvrirInscriptionModal()">
+          <div class="poc-icon">🧑‍🎓</div>
+          <div class="poc-titre">Inscrire mes élèves</div>
+          <div class="poc-desc">Colle ta liste de classe, génère les comptes et les étiquettes à imprimer</div>
+          <div class="poc-badge">🌟 Nouveau</div>
+        </div>
         <div class="prof-outil-card" onclick="ouvrirGenerateurPDF()">
           <div class="poc-icon">📄</div>
           <div class="poc-titre">Générateur de devoir PDF</div>
@@ -1692,6 +1699,32 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
       <button class="modal-close" onclick="closeParcoursModal()">✕</button>
     </div>
     <div class="modal-body" id="parcours-modal-body">
+      <!-- contenu généré par JS -->
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MODAL INSCRIRE MES ÉLÈVES ═══ -->
+<div class="modal-overlay" id="inscription-overlay" onclick="closeInscriptionModal(event)">
+  <div class="modal" id="inscription-modal" style="max-width:760px">
+    <div class="modal-header">
+      <span class="modal-header-title">🧑‍🎓 Inscrire mes élèves</span>
+      <button class="modal-close" onclick="closeInscriptionModal()">✕</button>
+    </div>
+    <div class="modal-body" id="inscription-modal-body">
+      <!-- contenu généré par JS -->
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MODAL MOT DE PASSE RÉINITIALISÉ ═══ -->
+<div class="modal-overlay" id="reset-overlay" onclick="closeResetModal(event)">
+  <div class="modal" style="max-width:420px">
+    <div class="modal-header">
+      <span class="modal-header-title">🔑 Mot de passe réinitialisé</span>
+      <button class="modal-close" onclick="closeResetModal()">✕</button>
+    </div>
+    <div class="modal-body" id="reset-modal-body">
       <!-- contenu généré par JS -->
     </div>
   </div>
@@ -8253,7 +8286,7 @@ function ouvrirModalConnexion(mode = 'connexion') {
         <button class="auth-tab ${mode==='inscription'?'active':''}" onclick="switchAuthTab('inscription')">S'inscrire</button>
       </div>
       <div id="auth-connexion" style="display:${mode==='connexion'?'block':'none'}">
-        <div class="auth-field"><label>Email</label><input type="email" id="auth-email" placeholder="ton@email.com"></div>
+        <div class="auth-field"><label>Email ou identifiant</label><input type="text" id="auth-email" placeholder="ton@email.com ou ton identifiant"></div>
         <div class="auth-field"><label>Mot de passe</label><input type="password" id="auth-password" placeholder="••••••••"></div>
         <div id="auth-error" class="auth-error" style="display:none"></div>
         <button class="auth-btn" onclick="connexionEmail()">Se connecter →</button>
@@ -8311,12 +8344,17 @@ function switchAuthTab(tab) {
 
 async function connexionEmail() {
   if(!supabaseClient) return;
-  const email = document.getElementById('auth-email').value.trim();
+  const saisie = document.getElementById('auth-email').value.trim();
   const password = document.getElementById('auth-password').value;
   const errEl = document.getElementById('auth-error');
-  if(!email||!password){showAuthError(errEl,'Remplis tous les champs.');return;}
+  if(!saisie||!password){showAuthError(errEl,'Remplis tous les champs.');return;}
+  // Un eleve inscrit par le prof (07/08/2026) se connecte avec un identifiant
+  // court, pas un email -- le meme champ accepte les deux : si la saisie ne
+  // contient pas "@", on la traite comme un identifiant (email synthetique
+  // identique a celui genere par prof-inscrire-eleves).
+  const email = saisie.includes('@') ? saisie : `${saisie}@poussemaths.fr`;
   const {data,error} = await supabaseClient.auth.signInWithPassword({email,password});
-  if(error){showAuthError(errEl,'Email ou mot de passe incorrect.');return;}
+  if(error){showAuthError(errEl,'Identifiant/email ou mot de passe incorrect.');return;}
   await chargerProfilEleve(data.user.id);
   fermerModalConnexion(); updateNavEleve();
   showToast(`Bienvenue ${currentEleve?.prenom||''} ! 🌱`);
@@ -8386,6 +8424,23 @@ async function deconnexion() {
   if(btn) btn.textContent = '👤 Espace Élève';
   showPage('accueil');
   showToast('Déconnecté. À bientôt ! 🌱');
+}
+
+function ouvrirChangerMotDePasse() {
+  const zone = document.getElementById('changer-mdp-zone');
+  zone.style.display = zone.style.display === 'none' ? 'block' : 'none';
+}
+
+async function validerChangerMotDePasse() {
+  if(!supabaseClient) return;
+  const nouveauMdp = document.getElementById('nouveau-mdp-input').value;
+  const errEl = document.getElementById('changer-mdp-erreur');
+  if(nouveauMdp.length < 8) { errEl.textContent = '8 caractères minimum.'; errEl.style.display = 'block'; return; }
+  const { error } = await supabaseClient.auth.updateUser({ password: nouveauMdp });
+  if(error) { errEl.textContent = 'Erreur : ' + error.message; errEl.style.display = 'block'; return; }
+  document.getElementById('changer-mdp-zone').style.display = 'none';
+  document.getElementById('nouveau-mdp-input').value = '';
+  showToast('Mot de passe changé ✅');
 }
 
 function showAuthError(el, msg) {
@@ -8763,8 +8818,14 @@ async function renderEspaceEleve() {
             <span style="font-weight:700;color:${p.score>=70?'var(--vert)':p.score>=50?'var(--amber)':'var(--rouge)'}">${p.score}%</span>
           </div>
         `).join('') || '<div style="color:var(--muted);font-size:13px;padding:1rem;text-align:center">Aucun exercice encore.</div>'}
-        <div style="margin-top:12px">
+        <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
+          <button class="auth-btn-secondary" onclick="ouvrirChangerMotDePasse()">🔑 Changer mon mot de passe</button>
           <button class="auth-btn-secondary" onclick="deconnexion()">Se déconnecter</button>
+        </div>
+        <div id="changer-mdp-zone" style="display:none;margin-top:12px;padding-top:12px;border-top:1px solid var(--bordure)">
+          <input type="password" id="nouveau-mdp-input" placeholder="Nouveau mot de passe (8 caractères min.)" style="width:100%;padding:10px;border:1px solid var(--bordure);border-radius:8px;font-size:13px;margin-bottom:8px">
+          <div id="changer-mdp-erreur" style="color:var(--rouge);font-size:12px;margin-bottom:8px;display:none"></div>
+          <button class="auth-btn" style="width:auto;padding:8px 16px" onclick="validerChangerMotDePasse()">Valider</button>
         </div>
       </div>
 
@@ -9048,7 +9109,7 @@ async function chargerDonneesClasse() {
   const code = document.getElementById('db-classe-select')?.value;
   if(!code || !supabaseClient) { dbDonneesClasse = { eleves: [], chapitresStats: [] }; return; }
 
-  const { data: eleves } = await supabaseClient.from('eleves').select('id,nom,prenom').eq('code_classe', code);
+  const { data: eleves } = await supabaseClient.from('eleves').select('id,nom,prenom,identifiant').eq('code_classe', code);
   const eleveIds = (eleves || []).map(e => e.id);
 
   let progRows = [];
@@ -9072,6 +9133,8 @@ async function chargerDonneesClasse() {
     else if(ex >= 3 && score < 50) alerte = `En difficulté : score moyen de ${score}%.`;
 
     return {
+      id: e.id,
+      identifiant: e.identifiant,
       nom: `${e.prenom || ''} ${e.nom || ''}`.trim() || 'Élève',
       initiales: (e.prenom?.[0] || '') + (e.nom?.[0] || ''),
       couleur: couleurs[i % couleurs.length],
@@ -9167,7 +9230,7 @@ function renderTableauEleves() {
   if(!tbody) return;
 
   if(eleves.length === 0) {
-    tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;color:var(--muted);padding:2rem">Aucun élève inscrit dans cette classe pour l'instant.</td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="7" style="text-align:center;color:var(--muted);padding:2rem">Aucun élève inscrit dans cette classe pour l'instant.</td></tr>`;
     document.getElementById('db-nb-eleves').textContent = 0;
     document.getElementById('db-moyenne').textContent = '—';
     document.getElementById('db-ex-semaine').textContent = 0;
@@ -9200,6 +9263,7 @@ function renderTableauEleves() {
         </td>
         <td style="font-size:12px;color:var(--muted)">${e.dernier}</td>
         <td><span class="db-activite ${activiteClass}">${activiteTxt}</span></td>
+        <td>${e.identifiant ? `<button class="auth-btn-secondary" style="width:auto;padding:4px 10px;font-size:11px" onclick="reinitialiserMotDePasseEleve('${e.id}','${e.nom.replace(/'/g,"\\'")}')">🔑 Réinitialiser</button>` : ''}</td>
       </tr>
     `;
   }).join('');
@@ -9255,6 +9319,273 @@ function exportCSV() {
   a.download = `poussemaths_${classeNom.replace(/\s+/g,'_')}.csv`;
   a.click();
   URL.revokeObjectURL(url);
+}
+
+// ═══════════════════════════════════════
+//  INSCRIPTION DES ÉLÈVES PAR LE PROF — 07/08/2026
+// ═══════════════════════════════════════
+
+let inscriptionListe = [];
+
+function ouvrirInscriptionModal() {
+  document.getElementById('inscription-overlay').style.display = 'flex';
+  inscriptionListe = [];
+  renderInscriptionColle();
+}
+
+function closeInscriptionModal(e) {
+  if(!e || e.target === document.getElementById('inscription-overlay')) {
+    document.getElementById('inscription-overlay').style.display = 'none';
+  }
+}
+
+function renderInscriptionColle() {
+  const body = document.getElementById('inscription-modal-body');
+  if(!profClasses.length) {
+    body.innerHTML = '<div style="color:var(--muted);font-size:14px">Crée d\'abord une classe depuis le tableau de bord avant d\'inscrire des élèves.</div>';
+    return;
+  }
+  body.innerHTML = `
+    <div class="pdf-section">
+      <div class="pdf-row">
+        <select class="pdf-input" id="inscription-classe">
+          ${profClasses.map(c => `<option value="${c.code}">${c.nom} (${LABELS_CLASSES[c.niveau]||c.niveau})</option>`).join('')}
+        </select>
+      </div>
+    </div>
+    <div class="pdf-section">
+      <div class="pdf-section-title">📋 Colle la liste (un élève par ligne, copié depuis Pronote)</div>
+      <textarea id="inscription-textarea" rows="10" placeholder="Léa Martin
+Noé Bernard
+MARTIN Chloé
+..." style="width:100%;padding:12px;border:1.5px solid var(--bordure);border-radius:var(--r);font-size:14px;font-family:'DM Sans',sans-serif;resize:vertical"></textarea>
+    </div>
+    <div id="inscription-erreur" style="color:var(--rouge);font-size:13px;margin-bottom:8px;display:none"></div>
+    <button class="pdf-generate-btn" onclick="analyserListeEleves()">Analyser la liste →</button>
+  `;
+}
+
+// Heuristique Pronote : le copier-coller met le NOM en MAJUSCULES (ordre variable,
+// "MARTIN Léa" ou "Léa MARTIN"). Si aucun mot n'est en majuscules (liste deja au
+// format normal), on suppose "Prénom Nom" -- 1er mot = prenom, reste = nom (gere
+// les noms composes comme "El Fassi").
+function parseLigneEleve(ligne) {
+  const mots = ligne.trim().split(/\s+/).filter(Boolean);
+  if(mots.length === 0) return null;
+  if(mots.length === 1) return { prenom: mots[0], nom: '' };
+  const estMajuscule = (m) => m === m.toUpperCase() && m !== m.toLowerCase();
+  const maj = mots.map(estMajuscule);
+  if(maj.some(Boolean) && !maj.every(Boolean)) {
+    const nomMots = mots.filter((_, i) => maj[i]);
+    const prenomMots = mots.filter((_, i) => !maj[i]);
+    const capitaliser = (s) => s.charAt(0) + s.slice(1).toLowerCase();
+    return { prenom: prenomMots.join(' '), nom: nomMots.map(capitaliser).join(' ') };
+  }
+  return { prenom: mots[0], nom: mots.slice(1).join(' ') };
+}
+
+function analyserListeEleves() {
+  const texte = document.getElementById('inscription-textarea').value;
+  const lignes = texte.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+  if(lignes.length === 0) {
+    const err = document.getElementById('inscription-erreur');
+    err.textContent = 'Colle au moins un nom.';
+    err.style.display = 'block';
+    return;
+  }
+  inscriptionListe = lignes.map(parseLigneEleve).filter(Boolean);
+  renderInscriptionApercu();
+}
+
+function renderInscriptionApercu() {
+  const body = document.getElementById('inscription-modal-body');
+  const classeSelect = document.getElementById('inscription-classe');
+  const classeVal = classeSelect ? classeSelect.value : profClasses[0]?.code;
+
+  // Detecte les identifiants qui seraient identiques (avant meme suffixe serveur)
+  // pour attirer l'oeil du prof sur un vrai doublon a verifier.
+  const comptes = {};
+  inscriptionListe.forEach(e => {
+    const base = `${normaliserPourIdentifiant(e.prenom)}.${normaliserPourIdentifiant(e.nom)}`;
+    comptes[base] = (comptes[base] || 0) + 1;
+  });
+
+  body.innerHTML = `
+    <div class="pdf-section">
+      <div class="pdf-section-title">✏️ Vérifie et corrige avant de créer les comptes</div>
+      <div style="max-height:340px;overflow-y:auto">
+        <table style="width:100%;border-collapse:collapse;font-size:13px">
+          <thead>
+            <tr style="text-align:left;color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:0.04em">
+              <th style="padding:6px 4px">Prénom</th>
+              <th style="padding:6px 4px">Nom</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="inscription-apercu-tbody">
+            ${inscriptionListe.map((e, i) => {
+              const base = `${normaliserPourIdentifiant(e.prenom)}.${normaliserPourIdentifiant(e.nom)}`;
+              const dupliqueVolontaire = comptes[base] > 1;
+              return `
+              <tr style="${dupliqueVolontaire ? 'background:var(--amber-bg)' : ''}">
+                <td style="padding:4px"><input type="text" value="${e.prenom.replace(/"/g,'&quot;')}" oninput="inscriptionListe[${i}].prenom=this.value" style="width:100%;padding:6px 8px;border:1px solid var(--bordure);border-radius:6px;font-size:13px"></td>
+                <td style="padding:4px"><input type="text" value="${e.nom.replace(/"/g,'&quot;')}" oninput="inscriptionListe[${i}].nom=this.value" style="width:100%;padding:6px 8px;border:1px solid var(--bordure);border-radius:6px;font-size:13px"></td>
+                <td style="padding:4px"><button onclick="inscriptionListe.splice(${i},1);renderInscriptionApercu()" style="background:none;border:none;color:var(--rouge);cursor:pointer;font-size:16px" title="Retirer cette ligne">✕</button></td>
+              </tr>
+              ${dupliqueVolontaire ? `<tr><td colspan="3" style="padding:0 4px 6px;font-size:11px;color:var(--amber)">⚠️ Même prénom/nom qu'une autre ligne — vérifie que ce n'est pas une erreur de copier-coller (sinon, pas de souci, un identifiant distinct sera généré automatiquement).</td></tr>` : ''}
+            `;
+            }).join('')}
+          </tbody>
+        </table>
+      </div>
+      <button onclick="inscriptionListe.push({prenom:'',nom:''});renderInscriptionApercu()" style="margin-top:8px;background:none;border:1px dashed var(--bordure);border-radius:8px;padding:8px;width:100%;cursor:pointer;color:var(--muted);font-size:13px">+ Ajouter une ligne</button>
+    </div>
+    <div style="font-size:12px;color:var(--muted);margin-bottom:8px">${inscriptionListe.length} élève${inscriptionListe.length>1?'s':''} · classe : ${profClasses.find(c=>c.code===classeVal)?.nom || ''}</div>
+    <div id="inscription-erreur" style="color:var(--rouge);font-size:13px;margin-bottom:8px;display:none"></div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <button class="auth-btn-secondary" style="flex:0 0 auto" onclick="renderInscriptionColle()">← Retour</button>
+      <button class="pdf-generate-btn" style="flex:1;min-width:200px;width:auto;margin-top:0" onclick="creerComptesEleves('${classeVal}')">✅ Créer les comptes</button>
+    </div>
+  `;
+}
+
+async function creerComptesEleves(codeClasse) {
+  const err = document.getElementById('inscription-erreur');
+  err.style.display = 'none';
+  const liste = inscriptionListe.filter(e => e.prenom.trim() && e.nom.trim());
+  if(liste.length === 0) { err.textContent = 'Ajoute au moins un élève avec prénom et nom.'; err.style.display = 'block'; return; }
+
+  const body = document.getElementById('inscription-modal-body');
+  body.innerHTML = '<div style="padding:2rem;text-align:center;color:var(--muted)">Création des comptes en cours…</div>';
+
+  const result = await appelEdgeFunction('prof-inscrire-eleves', 'POST', { code_classe: codeClasse, eleves: liste });
+
+  if(result.error) {
+    renderInscriptionApercu();
+    const errEl = document.getElementById('inscription-erreur');
+    errEl.textContent = 'Erreur : ' + result.error;
+    errEl.style.display = 'block';
+    return;
+  }
+
+  renderInscriptionResultat(result);
+}
+
+function renderInscriptionResultat(result) {
+  const body = document.getElementById('inscription-modal-body');
+  const reussis = result.resultats.filter(r => r.ok);
+  const echecs = result.resultats.filter(r => !r.ok);
+
+  body.innerHTML = `
+    <div class="pdf-section">
+      <div class="pdf-section-title">✅ ${reussis.length} compte${reussis.length>1?'s':''} créé${reussis.length>1?'s':''} — ${result.classe}</div>
+      ${echecs.length > 0 ? `
+        <div style="background:var(--rouge-bg);border-radius:8px;padding:10px 12px;margin-bottom:12px;font-size:13px;color:var(--rouge)">
+          ${echecs.length} ligne${echecs.length>1?'s':''} n'${echecs.length>1?'ont':'a'} pas pu être créée${echecs.length>1?'s':''} :
+          ${echecs.map(e => `<div>• ${e.prenom} ${e.nom} — ${e.erreur}</div>`).join('')}
+        </div>
+      ` : ''}
+      <div style="max-height:280px;overflow-y:auto">
+        <table style="width:100%;border-collapse:collapse;font-size:13px">
+          <thead>
+            <tr style="text-align:left;color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:0.04em">
+              <th style="padding:6px 4px">Élève</th>
+              <th style="padding:6px 4px">Identifiant</th>
+              <th style="padding:6px 4px">Mot de passe</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${reussis.map(r => `
+              <tr>
+                <td style="padding:4px">${r.prenom} ${r.nom}</td>
+                <td style="padding:4px;font-family:monospace">${r.identifiant}</td>
+                <td style="padding:4px;font-family:monospace">${r.mot_de_passe}</td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <button class="auth-btn-secondary" style="flex:0 0 auto" onclick="closeInscriptionModal();chargerDonneesClasse().then(renderTableauEleves)">Fermer</button>
+      <button class="pdf-generate-btn" style="flex:1;min-width:200px;width:auto;margin-top:0" onclick='genererEtiquettesPDF(${JSON.stringify(reussis)}, ${JSON.stringify(result.classe)})'>📄 Télécharger les étiquettes PDF</button>
+    </div>
+  `;
+}
+
+function genererEtiquettesPDF(eleves, classeNom) {
+  const etiquetteHtml = (e) => `
+    <div class="etq">
+      <div class="etq-marque"><span class="etq-feuille">🌱</span><span class="etq-domaine">poussemaths.fr</span></div>
+      <div class="etq-phrase">Voici tes identifiants pour te connecter</div>
+      <div class="etq-nom">${e.prenom} ${e.nom}</div>
+      <div class="etq-donnees">
+        <div class="etq-champ"><span class="etq-label">Identifiant</span><span class="etq-valeur">${e.identifiant}</span></div>
+        <div class="etq-champ"><span class="etq-label">Mot de passe</span><span class="etq-valeur">${e.mot_de_passe}</span></div>
+        <div class="etq-nouveau"><span class="etq-label">Nouveau mot de passe</span><span class="etq-ligne"></span></div>
+      </div>
+      <div class="etq-classe">${classeNom}</div>
+    </div>
+  `;
+
+  const html = `<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Étiquettes — ${classeNom}</title>
+<style>
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:-apple-system,'Segoe UI',system-ui,sans-serif; color:#1C1E26; }
+  .page { padding:10mm 8mm; }
+  .grille { display:grid; grid-template-columns:repeat(4,1fr); gap:0; }
+  .etq { position:relative; border:1px dashed #E2E8F0; margin:-0.5px; padding:3.6mm 3.6mm 3mm; display:flex; flex-direction:column; gap:1.7mm; min-height:40mm; }
+  .etq-marque { display:flex; align-items:center; gap:5px; }
+  .etq-feuille { width:15px; height:15px; border-radius:4px; background:#4A90D9; color:white; display:flex; align-items:center; justify-content:center; font-size:10px; flex-shrink:0; }
+  .etq-domaine { font-size:11.5px; font-weight:700; color:#2B75C0; }
+  .etq-phrase { font-size:7.5px; color:#8A8E9A; line-height:1.35; }
+  .etq-nom { font-family:Georgia,'Iowan Old Style',Palatino,serif; font-size:12.5px; font-weight:600; color:#1C1E26; line-height:1.2; margin-top:1px; }
+  .etq-donnees { margin-top:auto; display:flex; flex-direction:column; gap:1.5mm; padding-top:1.8mm; border-top:1px solid #E2E8F0; }
+  .etq-champ { display:flex; align-items:baseline; gap:5px; }
+  .etq-label { font-size:6.8px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:#8A8E9A; width:15mm; flex-shrink:0; }
+  .etq-valeur { font-family:'SF Mono','Cascadia Code',Consolas,monospace; font-size:9.5px; font-weight:600; color:#1C1E26; letter-spacing:0.01em; }
+  .etq-nouveau { display:flex; align-items:baseline; gap:4px; margin-top:0.3mm; }
+  .etq-nouveau .etq-label { width:auto; white-space:nowrap; }
+  .etq-ligne { flex:1; border-bottom:0.75px dotted #8A8E9A; min-width:14mm; height:8.5px; }
+  .etq-classe { margin-top:1.6mm; text-align:right; font-size:7px; color:#8A8E9A; }
+  @media print { .page { padding:10mm 8mm; } }
+</style>
+</head>
+<body>
+  <div class="page"><div class="grille">${eleves.map(etiquetteHtml).join('')}</div></div>
+</body>
+</html>`;
+
+  const win = window.open('', '_blank');
+  win.document.write(html);
+  win.document.close();
+  setTimeout(() => win.print(), 800);
+}
+
+async function reinitialiserMotDePasseEleve(eleveId, nom) {
+  if(!confirm(`Réinitialiser le mot de passe de ${nom} ? L'ancien mot de passe cessera de fonctionner immédiatement.`)) return;
+  const result = await appelEdgeFunction('prof-reset-password-eleve', 'POST', { eleve_id: eleveId });
+  const modalBody = document.getElementById('reset-modal-body');
+  if(result.error) {
+    modalBody.innerHTML = `<div style="color:var(--rouge);font-size:14px">Erreur : ${result.error}</div>`;
+  } else {
+    modalBody.innerHTML = `
+      <div style="font-size:13px;color:var(--muted);margin-bottom:12px">Nouveau mot de passe pour <strong style="color:var(--texte)">${result.prenom} ${result.nom}</strong> (identifiant <span style="font-family:monospace">${result.identifiant}</span>) :</div>
+      <div style="font-family:monospace;font-size:20px;font-weight:700;text-align:center;background:var(--bleu-doux);color:var(--bleu-fort);padding:14px;border-radius:10px;letter-spacing:1px">${result.mot_de_passe}</div>
+      <div style="font-size:12px;color:var(--muted);margin-top:12px">Communique-le à l'élève — l'ancien mot de passe ne fonctionne plus.</div>
+    `;
+  }
+  document.getElementById('reset-overlay').style.display = 'flex';
+}
+
+function closeResetModal(e) {
+  if(!e || e.target === document.getElementById('reset-overlay')) {
+    document.getElementById('reset-overlay').style.display = 'none';
+  }
 }
 
 // ═══════════════════════════════════════
