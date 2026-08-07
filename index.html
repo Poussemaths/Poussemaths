@@ -8161,7 +8161,17 @@ function showPage(page, filter) {
   const tabBtns = document.querySelectorAll('.nav-tab');
   if(tabBtns[tabs[page]]) tabBtns[tabs[page]].classList.add('active');
 
-  if(page === 'exercices') { currentFilter = filter || 'all'; renderExercices(); }
+  if(page === 'exercices') {
+    currentFilter = filter || 'all';
+    // Un niveau explicite (carte niveau de l'accueil, ex: showPage('exercices','3eme'))
+    // ouvre directement ce niveau. Sans niveau explicite, un eleve rattache a une
+    // classe atterrit directement sur SES chapitres plutot que de re-choisir parmi
+    // les 8 niveaux a chaque fois -- il connait deja son niveau, le lui demander est
+    // une friction inutile (trouve en testant le parcours d'un nouvel eleve, 07/08/2026).
+    const niveauCible = currentFilter !== 'all' ? currentFilter : (currentEleve && currentEleve.niveau && EXERCICES[currentEleve.niveau] ? currentEleve.niveau : null);
+    if(niveauCible) allerChapitres(niveauCible);
+    else renderExercices();
+  }
   if(page === 'parcours') initParcours();
   if(page === 'prof') { setTimeout(renderTableauBord, 100); }
   if(page === 'eleve') { setTimeout(renderEspaceEleve, 100); }
@@ -8332,6 +8342,19 @@ async function inscriptionEmail() {
   showPage('eleve');
 }
 
+// Normalise un nom/prenom pour un usage dans un identifiant/email genere
+// (retire les accents et tout caractere non alphanumerique) -- sans ca, un
+// prenom accentue ("Léa") produit un email invalide aux yeux de Supabase
+// Auth ("format invalide"), qui echoue silencieusement au client (aucun
+// message d'erreur affiche a l'eleve). Meme fonction reutilisee par la
+// creation de comptes en masse cote prof.
+function normaliserPourIdentifiant(s) {
+  return (s || '')
+    .normalize('NFD').replace(/[̀-ͯ]/g, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]/g, '');
+}
+
 async function inscriptionCodeClasse() {
   if(!supabaseClient) return;
   const prenom = document.getElementById('auth-prenom-code').value.trim();
@@ -8345,9 +8368,9 @@ async function inscriptionCodeClasse() {
   const {data:classesTrouvees,error:errClasse} = await supabaseClient.rpc('verifier_code_classe',{p_code:code});
   const classe = classesTrouvees && classesTrouvees[0];
   if(errClasse||!classe){showAuthError(errEl,'Code invalide. Vérifie avec ton professeur.');return;}
-  const emailFinal = email||`${prenom.toLowerCase()}.${nom.toLowerCase()}.${code.toLowerCase()}@poussemaths.fr`;
+  const emailFinal = email||`${normaliserPourIdentifiant(prenom)}.${normaliserPourIdentifiant(nom)}.${normaliserPourIdentifiant(code)}@poussemaths.fr`;
   const {data,error} = await supabaseClient.auth.signUp({email:emailFinal,password});
-  if(error){showAuthError(errEl,'Erreur création compte.');return;}
+  if(error){showAuthError(errEl,'Erreur création compte : '+error.message);return;}
   await supabaseClient.from('eleves').insert({user_id:data.user.id,nom,prenom,niveau:classe.niveau,classe:classe.nom,code_classe:code});
   await chargerProfilEleve(data.user.id);
   fermerModalConnexion(); updateNavEleve();
