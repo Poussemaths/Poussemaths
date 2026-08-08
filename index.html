@@ -1571,6 +1571,7 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
             <select id="db-classe-select" onchange="changerClasseDashboard()">
               <option value="">Chargement…</option>
             </select>
+            <button class="auth-btn-secondary" style="width:auto;padding:6px 12px;font-size:13px;margin-left:8px" onclick="ouvrirCreationClasseModal()">+ Créer une classe</button>
           </div>
         </div>
         <div class="db-table-wrap">
@@ -1699,6 +1700,19 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
       <button class="modal-close" onclick="closeParcoursModal()">✕</button>
     </div>
     <div class="modal-body" id="parcours-modal-body">
+      <!-- contenu généré par JS -->
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MODAL CRÉER UNE CLASSE ═══ -->
+<div class="modal-overlay" id="creation-classe-overlay" onclick="closeCreationClasseModal(event)">
+  <div class="modal" style="max-width:480px">
+    <div class="modal-header">
+      <span class="modal-header-title">🏫 Créer une classe</span>
+      <button class="modal-close" onclick="closeCreationClasseModal()">✕</button>
+    </div>
+    <div class="modal-body" id="creation-classe-modal-body">
       <!-- contenu généré par JS -->
     </div>
   </div>
@@ -9322,6 +9336,118 @@ function exportCSV() {
 }
 
 // ═══════════════════════════════════════
+//  CRÉATION DE CLASSE PAR LE PROF — 08/08/2026
+// ═══════════════════════════════════════
+// Bug bloquant trouve par Jamal en testant l'inscription en masse : la table
+// classes existe et est utilisee partout (parcours, inscription en masse,
+// rejoindre par code...) mais rien ne permettait a un prof d'en creer une
+// depuis l'interface -- la seule classe existante avait ete creee a la main
+// en base. Sans ca, toutes ces fonctionnalites sont inaccessibles a un
+// nouveau prof.
+
+function ouvrirCreationClasseModal() {
+  document.getElementById('creation-classe-overlay').style.display = 'flex';
+  renderCreationClasseModal();
+}
+
+function closeCreationClasseModal(e) {
+  if(!e || e.target === document.getElementById('creation-classe-overlay')) {
+    document.getElementById('creation-classe-overlay').style.display = 'none';
+  }
+}
+
+// Annee scolaire par defaut : bascule sur la suivante a partir d'aout (avant
+// la rentree), plutot que de toujours proposer l'annee civile en cours.
+function anneeScolaireParDefaut() {
+  const maintenant = new Date();
+  const annee = maintenant.getFullYear();
+  const debut = maintenant.getMonth() >= 7 ? annee : annee - 1; // getMonth() : 7 = aout
+  return `${debut}-${debut + 1}`;
+}
+
+async function renderCreationClasseModal() {
+  const body = document.getElementById('creation-classe-modal-body');
+  const profUserId = sessionStorage.getItem('prof_user_id');
+  let etablissementDefaut = '';
+  if(supabaseClient && profUserId) {
+    const { data } = await supabaseClient.from('profs_autorises').select('etablissement').eq('user_id', profUserId).single();
+    if(data?.etablissement && data.etablissement !== 'À compléter') etablissementDefaut = data.etablissement;
+  }
+
+  body.innerHTML = `
+    <div class="pdf-section">
+      <div class="pdf-row">
+        <input class="pdf-input" id="classe-nom" placeholder="Nom de la classe (ex : 3ème B)">
+      </div>
+      <div class="pdf-row">
+        <select class="pdf-input" id="classe-niveau">
+          ${Object.entries(LABELS_CLASSES).map(([id, label]) => `<option value="${id}">${label}</option>`).join('')}
+        </select>
+      </div>
+      <div class="pdf-row">
+        <input class="pdf-input" id="classe-annee" value="${anneeScolaireParDefaut()}" placeholder="Année scolaire (ex : 2026-2027)">
+      </div>
+      <div class="pdf-row">
+        <input class="pdf-input" id="classe-etablissement" value="${etablissementDefaut.replace(/"/g,'&quot;')}" placeholder="Établissement">
+      </div>
+    </div>
+    <div style="font-size:12px;color:var(--muted);margin-bottom:8px">Le code de la classe (à partager avec tes élèves) sera généré automatiquement.</div>
+    <div id="classe-erreur" style="color:var(--rouge);font-size:13px;margin-bottom:8px;display:none"></div>
+    <button class="pdf-generate-btn" onclick="creerClasse()">✅ Créer la classe</button>
+  `;
+}
+
+function genererCodeClasseBase(nom, anneeScolaire) {
+  const base = normaliserPourIdentifiant(nom).toUpperCase() || 'CLASSE';
+  const anneeCourte = (anneeScolaire.match(/\d{4}/) || [])[0]?.slice(-2) || String(new Date().getFullYear()).slice(-2);
+  return `${base}-${anneeCourte}`;
+}
+
+async function creerClasse() {
+  const err = document.getElementById('classe-erreur');
+  err.style.display = 'none';
+  const nom = document.getElementById('classe-nom').value.trim();
+  const niveau = document.getElementById('classe-niveau').value;
+  const anneeScolaire = document.getElementById('classe-annee').value.trim();
+  const etablissement = document.getElementById('classe-etablissement').value.trim();
+  if(!nom) { err.textContent = 'Donne un nom à la classe.'; err.style.display = 'block'; return; }
+
+  const profUserId = sessionStorage.getItem('prof_user_id');
+  const baseCode = genererCodeClasseBase(nom, anneeScolaire);
+
+  // Le code doit etre unique (contrainte en base) -- on tente le code "naturel"
+  // d'abord, puis on ajoute un suffixe aleatoire de 2 caracteres en cas de
+  // collision (classe homonyme deja existante, meme annee).
+  let code = baseCode;
+  let derniereErreur = null;
+  for(let tentative = 0; tentative < 5; tentative++) {
+    const { error } = await supabaseClient.from('classes').insert({
+      prof_id: profUserId, code, nom, niveau, annee_scolaire: anneeScolaire || null, etablissement: etablissement || null,
+    });
+    if(!error) { derniereErreur = null; break; }
+    derniereErreur = error;
+    if(error.code === '23505') { // code deja pris, on retente avec un suffixe
+      const suffixe = Math.random().toString(36).slice(2, 4).toUpperCase();
+      code = `${baseCode}${suffixe}`;
+      continue;
+    }
+    break; // autre erreur, inutile de reessayer
+  }
+
+  if(derniereErreur) {
+    err.textContent = 'Erreur : ' + derniereErreur.message;
+    err.style.display = 'block';
+    return;
+  }
+
+  await chargerClassesProf();
+  const sel = document.getElementById('db-classe-select');
+  if(sel) sel.value = code;
+  closeCreationClasseModal();
+  showToast(`Classe créée — code : ${code} 🌱`);
+}
+
+// ═══════════════════════════════════════
 //  INSCRIPTION DES ÉLÈVES PAR LE PROF — 07/08/2026
 // ═══════════════════════════════════════
 
@@ -9342,7 +9468,10 @@ function closeInscriptionModal(e) {
 function renderInscriptionColle() {
   const body = document.getElementById('inscription-modal-body');
   if(!profClasses.length) {
-    body.innerHTML = '<div style="color:var(--muted);font-size:14px">Crée d\'abord une classe depuis le tableau de bord avant d\'inscrire des élèves.</div>';
+    body.innerHTML = `
+      <div style="color:var(--muted);font-size:14px;margin-bottom:12px">Crée d'abord une classe avant d'inscrire des élèves.</div>
+      <button class="pdf-generate-btn" onclick="closeInscriptionModal();ouvrirCreationClasseModal()">🏫 Créer une classe maintenant</button>
+    `;
     return;
   }
   body.innerHTML = `
@@ -9614,7 +9743,10 @@ function closeParcoursModal(e) {
 function renderParcoursModal() {
   const body = document.getElementById('parcours-modal-body');
   if(!profClasses.length) {
-    body.innerHTML = '<div style="color:var(--muted);font-size:14px">Crée d\'abord une classe depuis le tableau de bord avant de créer un parcours.</div>';
+    body.innerHTML = `
+      <div style="color:var(--muted);font-size:14px;margin-bottom:12px">Crée d'abord une classe avant de créer un parcours.</div>
+      <button class="pdf-generate-btn" onclick="closeParcoursModal();ouvrirCreationClasseModal()">🏫 Créer une classe maintenant</button>
+    `;
     return;
   }
   body.innerHTML = `
