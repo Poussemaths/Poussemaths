@@ -9681,10 +9681,20 @@ function genererEtiquettesPDF(eleves, classeNom) {
   .etq-nouveau .etq-label { width:auto; white-space:nowrap; }
   .etq-ligne { flex:1; border-bottom:0.75px dotted #8A8E9A; min-width:14mm; height:8.5px; }
   .etq-classe { margin-top:1.6mm; text-align:right; font-size:7px; color:#8A8E9A; }
-  @media print { .page { padding:10mm 8mm; } }
+  .toolbar { display:flex; gap:10px; align-items:center; padding:12px 8mm; background:#F7F9FC; border-bottom:1px solid #E2E8F0; position:sticky; top:0; }
+  .toolbar span { font-size:13px; color:#4A4E5C; margin-right:auto; }
+  .toolbar button { font-family:inherit; font-size:14px; font-weight:600; padding:9px 18px; border-radius:8px; border:none; cursor:pointer; }
+  .toolbar .btn-imprimer { background:#4A90D9; color:white; }
+  .toolbar .btn-pdf { background:white; color:#2B75C0; border:1.5px solid #4A90D9; }
+  @media print { .page { padding:10mm 8mm; } .toolbar { display:none; } }
 </style>
 </head>
 <body>
+  <div class="toolbar">
+    <span>${eleves.length} étiquette${eleves.length > 1 ? 's' : ''} — ${classeNom}</span>
+    <button class="btn-imprimer" onclick="window.print()">🖨️ Imprimer</button>
+    <button class="btn-pdf" onclick="window.print()">📄 Enregistrer en PDF</button>
+  </div>
   <div class="page"><div class="grille">${eleves.map(etiquetteHtml).join('')}</div></div>
 </body>
 </html>`;
@@ -9692,7 +9702,6 @@ function genererEtiquettesPDF(eleves, classeNom) {
   const win = window.open('', '_blank');
   win.document.write(html);
   win.document.close();
-  setTimeout(() => win.print(), 800);
 }
 
 async function reinitialiserMotDePasseEleve(eleveId, nom) {
