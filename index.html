@@ -9109,6 +9109,15 @@ async function chargerClassesProf() {
   const profUserId = sessionStorage.getItem('prof_user_id');
   if(!profUserId) { profClasses = []; if(sel) sel.innerHTML = '<option value="">Non connecté</option>'; return; }
 
+  // Garde la classe actuellement selectionnee si elle existe encore apres le
+  // rechargement -- sans ca, reconstruire le <select> revenait TOUJOURS a la
+  // premiere classe de la liste, y compris sur un simple refresh, faisant
+  // silencieusement basculer un prof qui travaillait sur sa 2e/3e classe
+  // (trouve par Jamal, 09/08/2026 : "impossible de creer une deuxieme
+  // classe" -- la vraie cause n'etait pas la creation elle-meme mais ce
+  // reset silencieux du selecteur a chaque rechargement de la liste).
+  const selectionPrecedente = sel?.value;
+
   const { data, error } = await supabaseClient.from('classes').select('*').eq('prof_id', profUserId);
   profClasses = data || [];
 
@@ -9116,6 +9125,9 @@ async function chargerClassesProf() {
     sel.innerHTML = profClasses.length
       ? profClasses.map(c => `<option value="${c.code}">${c.nom}</option>`).join('')
       : '<option value="">Aucune classe créée</option>';
+    if(selectionPrecedente && profClasses.some(c => c.code === selectionPrecedente)) {
+      sel.value = selectionPrecedente;
+    }
   }
 }
 
@@ -9377,7 +9389,7 @@ async function renderCreationClasseModal() {
   body.innerHTML = `
     <div class="pdf-section">
       <div class="pdf-row">
-        <input class="pdf-input" id="classe-nom" placeholder="Nom de la classe (ex : 3ème B)">
+        <input class="pdf-input" id="classe-nom" placeholder="Nom de la classe (ex : 3ème B)" autocomplete="off">
       </div>
       <div class="pdf-row">
         <select class="pdf-input" id="classe-niveau">
@@ -9385,10 +9397,10 @@ async function renderCreationClasseModal() {
         </select>
       </div>
       <div class="pdf-row">
-        <input class="pdf-input" id="classe-annee" value="${anneeScolaireParDefaut()}" placeholder="Année scolaire (ex : 2026-2027)">
+        <input class="pdf-input" id="classe-annee" value="${anneeScolaireParDefaut()}" placeholder="Année scolaire (ex : 2026-2027)" autocomplete="off">
       </div>
       <div class="pdf-row">
-        <input class="pdf-input" id="classe-etablissement" value="${etablissementDefaut.replace(/"/g,'&quot;')}" placeholder="Établissement">
+        <input class="pdf-input" id="classe-etablissement" value="${etablissementDefaut.replace(/"/g,'&quot;')}" placeholder="Établissement" autocomplete="off">
       </div>
     </div>
     <div style="font-size:12px;color:var(--muted);margin-bottom:8px">Le code de la classe (à partager avec tes élèves) sera généré automatiquement.</div>
@@ -9478,7 +9490,7 @@ function renderInscriptionColle() {
     <div class="pdf-section">
       <div class="pdf-row">
         <select class="pdf-input" id="inscription-classe">
-          ${profClasses.map(c => `<option value="${c.code}">${c.nom} (${LABELS_CLASSES[c.niveau]||c.niveau})</option>`).join('')}
+          ${profClasses.map(c => `<option value="${c.code}" ${c.code === document.getElementById('db-classe-select')?.value ? 'selected' : ''}>${c.nom} (${LABELS_CLASSES[c.niveau]||c.niveau})</option>`).join('')}
         </select>
       </div>
     </div>
@@ -9774,7 +9786,7 @@ function renderParcoursModal() {
     <div class="pdf-section">
       <div class="pdf-row">
         <select class="pdf-input" id="parcours-classe" onchange="onParcoursClasseChange()">
-          ${profClasses.map(c => `<option value="${c.code}">${c.nom} (${LABELS_CLASSES[c.niveau]||c.niveau})</option>`).join('')}
+          ${profClasses.map(c => `<option value="${c.code}" ${c.code === document.getElementById('db-classe-select')?.value ? 'selected' : ''}>${c.nom} (${LABELS_CLASSES[c.niveau]||c.niveau})</option>`).join('')}
         </select>
         <input class="pdf-input" id="parcours-titre" placeholder="Titre du parcours">
       </div>
