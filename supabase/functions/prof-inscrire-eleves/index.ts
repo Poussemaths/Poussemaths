@@ -34,6 +34,19 @@ function normaliserPourIdentifiant(s: string): string {
     .replace(/[^a-z0-9]/g, "");
 }
 
+// Ne garde que le PREMIER mot du prenom et le PREMIER mot du nom (regle
+// validee par Jamal le 08/08/2026, apres un identifiant de 26 caracteres
+// genere pour un eleve a prenoms multiples + nom compose -- injouable pour
+// un collegien). "Hector Sami Jacques Burgevin" -> hector.burgevin,
+// "Theo Fougeras Lavergnolle" -> theo.fougeras. C'est un identifiant de
+// connexion, pas un document officiel -- perdre le reste du nom compose est
+// un compromis assume, pas un oubli.
+function premierMot(s: string): string {
+  return (s || "").trim().split(/\s+/)[0] || "";
+}
+
+const LONGUEUR_MAX_IDENTIFIANT = 20;
+
 function genererMotDePasse(): string {
   const alphabet = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"; // sans 0/O/1/I ambigus
   let mdp = "";
@@ -88,7 +101,8 @@ Deno.serve(async (req) => {
     const identifiantsPris = new Set(existants);
 
     function identifiantLibre(prenom: string, nom: string): string {
-      const base = `${normaliserPourIdentifiant(prenom)}.${normaliserPourIdentifiant(nom)}`;
+      let base = `${normaliserPourIdentifiant(premierMot(prenom))}.${normaliserPourIdentifiant(premierMot(nom))}`;
+      if (base.length > LONGUEUR_MAX_IDENTIFIANT) base = base.slice(0, LONGUEUR_MAX_IDENTIFIANT);
       let candidat = base;
       let n = 2;
       while (identifiantsPris.has(candidat)) {

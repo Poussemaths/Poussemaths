@@ -9657,6 +9657,17 @@ function genererEtiquettesPDF(eleves, classeNom) {
     </div>
   `;
 
+  // 20 etiquettes par page (4x5, format valide) -- chaque page est un bloc
+  // HTML SEPARE avec un saut de page force entre chaque, plutot que de tout
+  // mettre dans une seule grille et laisser le moteur d'impression du
+  // navigateur decider ou couper : sans ca, une ligne d'etiquettes peut se
+  // retrouver coupee entre deux pages, la rendant inutilisable (trouve par
+  // Jamal en testant avec une vraie classe de 31 eleves, 08/08/2026).
+  const PAR_PAGE = 20;
+  const pages = [];
+  for(let i = 0; i < eleves.length; i += PAR_PAGE) pages.push(eleves.slice(i, i + PAR_PAGE));
+  const pagesHtml = pages.map(page => `<div class="page"><div class="grille">${page.map(etiquetteHtml).join('')}</div></div>`).join('');
+
   const html = `<!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -9665,18 +9676,19 @@ function genererEtiquettesPDF(eleves, classeNom) {
 <style>
   * { box-sizing:border-box; }
   body { margin:0; font-family:-apple-system,'Segoe UI',system-ui,sans-serif; color:#1C1E26; }
-  .page { padding:10mm 8mm; }
+  .page { padding:10mm 8mm; break-after:page; page-break-after:always; }
+  .page:last-child { break-after:auto; page-break-after:auto; }
   .grille { display:grid; grid-template-columns:repeat(4,1fr); gap:0; }
-  .etq { position:relative; border:1px dashed #E2E8F0; margin:-0.5px; padding:3.6mm 3.6mm 3mm; display:flex; flex-direction:column; gap:1.7mm; min-height:40mm; }
+  .etq { position:relative; border:1px dashed #E2E8F0; margin:-0.5px; padding:3.6mm 3.6mm 3mm; display:flex; flex-direction:column; gap:1.7mm; min-height:40mm; break-inside:avoid; page-break-inside:avoid; }
   .etq-marque { display:flex; align-items:center; gap:5px; }
   .etq-feuille { width:15px; height:15px; border-radius:4px; background:#4A90D9; color:white; display:flex; align-items:center; justify-content:center; font-size:10px; flex-shrink:0; }
   .etq-domaine { font-size:11.5px; font-weight:700; color:#2B75C0; }
   .etq-phrase { font-size:7.5px; color:#8A8E9A; line-height:1.35; }
-  .etq-nom { font-family:Georgia,'Iowan Old Style',Palatino,serif; font-size:12.5px; font-weight:600; color:#1C1E26; line-height:1.2; margin-top:1px; }
+  .etq-nom { font-family:Georgia,'Iowan Old Style',Palatino,serif; font-size:12.5px; font-weight:600; color:#1C1E26; line-height:1.2; margin-top:1px; overflow-wrap:break-word; }
   .etq-donnees { margin-top:auto; display:flex; flex-direction:column; gap:1.5mm; padding-top:1.8mm; border-top:1px solid #E2E8F0; }
   .etq-champ { display:flex; align-items:baseline; gap:5px; }
   .etq-label { font-size:6.8px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:#8A8E9A; width:15mm; flex-shrink:0; }
-  .etq-valeur { font-family:'SF Mono','Cascadia Code',Consolas,monospace; font-size:9.5px; font-weight:600; color:#1C1E26; letter-spacing:0.01em; }
+  .etq-valeur { flex:1; min-width:0; font-family:'SF Mono','Cascadia Code',Consolas,monospace; font-size:8.5px; font-weight:600; color:#1C1E26; letter-spacing:0.01em; line-height:1.25; overflow-wrap:anywhere; word-break:break-all; }
   .etq-nouveau { display:flex; align-items:baseline; gap:4px; margin-top:0.3mm; }
   .etq-nouveau .etq-label { width:auto; white-space:nowrap; }
   .etq-ligne { flex:1; border-bottom:0.75px dotted #8A8E9A; min-width:14mm; height:8.5px; }
@@ -9691,11 +9703,11 @@ function genererEtiquettesPDF(eleves, classeNom) {
 </head>
 <body>
   <div class="toolbar">
-    <span>${eleves.length} étiquette${eleves.length > 1 ? 's' : ''} — ${classeNom}</span>
+    <span>${eleves.length} étiquette${eleves.length > 1 ? 's' : ''} sur ${pages.length} page${pages.length > 1 ? 's' : ''} — ${classeNom}</span>
     <button class="btn-imprimer" onclick="window.print()">🖨️ Imprimer</button>
     <button class="btn-pdf" onclick="window.print()">📄 Enregistrer en PDF</button>
   </div>
-  <div class="page"><div class="grille">${eleves.map(etiquetteHtml).join('')}</div></div>
+  ${pagesHtml}
 </body>
 </html>`;
 
