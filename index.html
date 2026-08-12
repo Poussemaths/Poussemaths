@@ -1541,7 +1541,7 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
       <div class="prof-actions-top">
         <button class="btn-prof-action primary" onclick="ouvrirInscriptionModal()">🧑‍🎓 Inscrire mes classes</button>
         <button class="btn-prof-action" onclick="ouvrirCalcMental()">🔢 Calcul mental</button>
-        <button class="btn-prof-action" onclick="ouvrirIntrus()">🕵️ Intrus maths</button>
+        <button class="btn-prof-action" onclick="ouvrirCauseries()">🗣️ Causeries</button>
         <button class="btn-prof-action" onclick="ouvrirGenerateurPDF()">📄 Devoir PDF</button>
         <button class="btn-prof-action" onclick="showDashboard()">📊 Tableau de bord</button>
       </div>
@@ -1829,6 +1829,58 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
     <div id="cm-part-score" style="font-size:1.1rem;color:#5EEAD4"></div>
     <button class="cm-launch-btn" style="margin-top:1.5rem" onclick="quitterParticipationCM()">Fermer</button>
   </div>
+</div>
+
+<!-- ═══ MODAL CAUSERIES MATHÉMATIQUES (choix de famille) ═══ -->
+<div class="modal-overlay" id="causeries-overlay" onclick="closeCauseriesModal(event)">
+  <div class="modal" style="max-width:640px">
+    <div class="modal-header">
+      <span class="modal-header-title">🗣️ Causeries mathématiques</span>
+      <button class="modal-close" onclick="closeCauseriesModal()">✕</button>
+    </div>
+    <div class="modal-body" id="causeries-modal-body"></div>
+  </div>
+</div>
+
+<!-- ═══ MODAL INDICES PROGRESSIFS (config) ═══ -->
+<div class="modal-overlay" id="indices-overlay" onclick="closeIndicesModal(event)">
+  <div class="modal" style="max-width:640px">
+    <div class="modal-header">
+      <span class="modal-header-title">🔍 Indices progressifs</span>
+      <button class="modal-close" onclick="closeIndicesModal()">✕</button>
+    </div>
+    <div class="modal-body" id="indices-modal-body"></div>
+  </div>
+</div>
+
+<!-- ═══ PROJECTION INDICES PROGRESSIFS (plein écran) ═══ -->
+<div id="indices-projection" style="display:none;position:fixed;inset:0;background:#1C1E26;z-index:9999;flex-direction:column;align-items:center;justify-content:center;cursor:pointer" onclick="indicesProchain()">
+  <button onclick="event.stopPropagation();fermerProjectionIndices()" style="position:absolute;top:20px;right:24px;background:rgba(255,255,255,0.15);border:none;color:white;padding:8px 16px;border-radius:8px;cursor:pointer;font-size:14px">✕ Quitter</button>
+  <div id="indices-num" style="font-size:1.2rem;color:rgba(255,255,255,0.4);margin-bottom:1.5rem"></div>
+  <div style="font-size:1.6rem;color:white;font-weight:700;margin-bottom:2rem">🔢 Trouve le nombre mystère</div>
+  <div id="indices-liste" style="display:flex;flex-direction:column;gap:12px;max-width:560px;padding:0 1.5rem"></div>
+  <div id="indices-reponse" style="font-size:2rem;color:#5EEAD4;margin-top:2rem;font-weight:700;text-align:center;min-height:2.5rem"></div>
+  <div style="position:absolute;bottom:24px;color:rgba(255,255,255,0.3);font-size:13px">Clic ou espace → indice suivant, puis révéler la réponse · Clic à nouveau → nombre suivant</div>
+</div>
+
+<!-- ═══ MODAL QUESTION OUVERTE SUR IMAGE (config) ═══ -->
+<div class="modal-overlay" id="questimg-overlay" onclick="closeQuestImgModal(event)">
+  <div class="modal" style="max-width:640px">
+    <div class="modal-header">
+      <span class="modal-header-title">🖼️ Question ouverte sur image</span>
+      <button class="modal-close" onclick="closeQuestImgModal()">✕</button>
+    </div>
+    <div class="modal-body" id="questimg-modal-body"></div>
+  </div>
+</div>
+
+<!-- ═══ PROJECTION QUESTION SUR IMAGE (plein écran) ═══ -->
+<div id="questimg-projection" style="display:none;position:fixed;inset:0;background:#1C1E26;z-index:9999;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;padding:2rem" onclick="questImgProchaine()">
+  <button onclick="event.stopPropagation();fermerProjectionQuestImg()" style="position:absolute;top:20px;right:24px;background:rgba(255,255,255,0.15);border:none;color:white;padding:8px 16px;border-radius:8px;cursor:pointer;font-size:14px">✕ Quitter</button>
+  <img id="questimg-photo" style="max-width:min(80vw,900px);max-height:60vh;border-radius:12px;box-shadow:0 8px 40px rgba(0,0,0,0.4)">
+  <div style="font-size:1.5rem;color:white;font-weight:700;margin-top:2rem;text-align:center;padding:0 2rem">Quelle(s) mathématiques te poses-tu en regardant cette image ?</div>
+  <div id="questimg-pistes" style="font-size:1.1rem;color:#5EEAD4;margin-top:1.5rem;text-align:center;padding:0 2rem;min-height:1.6rem"></div>
+  <div style="position:absolute;bottom:24px;color:rgba(255,255,255,0.3);font-size:13px">Clic ou espace → pistes de discussion pour toi · Clic à nouveau → image suivante</div>
 </div>
 
 <!-- ═══ MODAL INTRUS MATHS (config) ═══ -->
@@ -11101,12 +11153,294 @@ function fermerProjectionIntrus() {
   document.getElementById('intrus-projection').style.display = 'none';
 }
 
+// ═══════════════════════════════════════
+//  CAUSERIES MATHÉMATIQUES — 12/08/2026
+// ═══════════════════════════════════════
+// Dispositif pedagogique distinct d'Intrus maths (formation suivie par Jamal,
+// Christophe Riviere/AEFE) : discussion de groupe a l'oral, 5-15 min, animee
+// par le prof -- PAS un exercice individuel note. Intrus maths (deja construit,
+// deja generatif) devient un mode parmi d'autres plutot qu'un outil a part :
+// meme famille pedagogique (support choisi par le prof, projection plein
+// ecran, avance manuelle, discussion orale). Aucune verification serveur
+// necessaire pour aucun mode : il n'y a pas de reponse individuelle a proteger
+// puisque personne n'est note -- le prof revele lui-meme la reponse a la classe.
+
+function ouvrirCauseries() {
+  document.getElementById('causeries-overlay').style.display = 'flex';
+  renderCauseriesChooser();
+}
+
+function closeCauseriesModal(e) {
+  if(!e || e.target === document.getElementById('causeries-overlay')) {
+    document.getElementById('causeries-overlay').style.display = 'none';
+  }
+}
+
+function lancerFamilleCauserie(famille) {
+  closeCauseriesModal();
+  if(famille === 'intrus') ouvrirIntrus();
+  else if(famille === 'indices') ouvrirIndices();
+  else if(famille === 'image') ouvrirQuestImg();
+}
+
+function renderCauseriesChooser() {
+  const body = document.getElementById('causeries-modal-body');
+  body.innerHTML = `
+    <div style="font-size:13px;color:var(--muted);margin-bottom:16px">Discussion de groupe à l'oral (5 à 15 min), animée par toi — pas d'exercice noté, pas de compte élève nécessaire.</div>
+    <div class="prof-outils-grid" style="grid-template-columns:1fr">
+      <div class="prof-outil-card" onclick="lancerFamilleCauserie('intrus')">
+        <div class="poc-icon">🕵️</div>
+        <div class="poc-titre">Intrus</div>
+        <div class="poc-desc">4 éléments, un seul n'a pas sa place — les élèves justifient leur choix</div>
+      </div>
+      <div class="prof-outil-card" onclick="lancerFamilleCauserie('indices')">
+        <div class="poc-icon">🔍</div>
+        <div class="poc-titre">Indices progressifs</div>
+        <div class="poc-desc">Un nombre mystère, des indices révélés un par un, on affine son estimation</div>
+      </div>
+      <div class="prof-outil-card" onclick="lancerFamilleCauserie('image')">
+        <div class="poc-icon">🖼️</div>
+        <div class="poc-titre">Question ouverte sur image</div>
+        <div class="poc-desc">Une photo, aucune question posée — les élèves inventent les leurs</div>
+      </div>
+    </div>
+  `;
+}
+
+// ── Indices progressifs ──────────────────────────────────────────────
+
+function genererNombreMystere(niveau) {
+  const plagesParNiveau = { '6eme':[10,60], '5eme':[15,90], '4eme':[20,150], '3eme':[30,200], '2nde':[30,300], '1ere':[30,300], 'terminale':[30,300], 'terminale_complementaire':[30,300] };
+  const [min, max] = plagesParNiveau[niveau] || [10,100];
+  const n = rand(min, max);
+
+  const candidats = [];
+  candidats.push(`Le nombre mystère est ${n % 2 === 0 ? 'pair' : 'impair'}.`);
+
+  const diviseurs = [3,4,5,6,7,8,9,10].filter(k => k !== n);
+  const div1 = melanger(diviseurs)[0];
+  candidats.push(n % div1 === 0 ? `Le nombre mystère est un multiple de ${div1}.` : `Le nombre mystère n'est PAS un multiple de ${div1}.`);
+
+  const div2 = melanger(diviseurs.filter(k => k !== div1))[0];
+  if(div2) candidats.push(n % div2 === 0 ? `Le nombre mystère est un multiple de ${div2}.` : `Le nombre mystère n'est PAS un multiple de ${div2}.`);
+
+  const chiffresPresents = new Set(String(n).split(''));
+  const chiffresAbsents = melanger(['0','1','2','3','4','5','6','7','8','9'].filter(c => !chiffresPresents.has(c))).slice(0,2);
+  if(chiffresAbsents.length === 2) candidats.push(`Le nombre mystère ne contient pas les chiffres ${chiffresAbsents[0]} et ${chiffresAbsents[1]}.`);
+
+  const div3 = melanger(diviseurs.filter(k => k !== div1 && k !== div2))[0];
+  if(div3) {
+    const reste = n % div3;
+    if(reste !== 0) candidats.push(`Le nombre mystère est ${reste} de plus qu'un multiple de ${div3}.`);
+  }
+
+  const sommeChiffres = String(n).split('').reduce((s,c) => s + parseInt(c), 0);
+  candidats.push(`La somme des chiffres du nombre mystère vaut ${sommeChiffres}.`);
+
+  const ecart = rand(5, Math.max(6, Math.floor((max-min)/4)));
+  const borneBasse = Math.max(min, n - ecart);
+  const borneHaute = Math.min(max, n + ecart);
+  // Si n tombe pile sur une borne de son niveau (ex: n=max), borneBasse/Haute
+  // se fait clipper exactement sur n -- l'indice revelerait alors la reponse
+  // avant l'heure. On ne l'ajoute que si n est strictement a l'interieur.
+  if(borneBasse < n && borneHaute > n) {
+    candidats.push(`Le nombre mystère est compris entre ${borneBasse} et ${borneHaute}.`);
+  }
+
+  return { nombre: n, indices: melanger(candidats).slice(0, 5) };
+}
+
+let indicesConfig = { niveau: null, nb: 5 };
+let indicesSeries = [];
+let indicesIndex = 0;
+let indicesClueIndex = 0;
+let indicesReponseRevelee = false;
+
+function ouvrirIndices() {
+  indicesConfig.niveau = null;
+  document.getElementById('indices-overlay').style.display = 'flex';
+  renderIndicesConfig();
+}
+
+function closeIndicesModal(e) {
+  if(!e || e.target === document.getElementById('indices-overlay')) {
+    document.getElementById('indices-overlay').style.display = 'none';
+  }
+}
+
+function choisirNiveauIndices(niveau) {
+  indicesConfig.niveau = niveau;
+  renderIndicesConfig();
+}
+
+function renderIndicesConfig() {
+  const body = document.getElementById('indices-modal-body');
+  if(!indicesConfig.niveau) {
+    body.innerHTML = `
+      <div class="pdf-section">
+        <div class="pdf-section-title">📚 Choisir un niveau</div>
+        <div class="cm-mode-grid" style="grid-template-columns:repeat(auto-fill,minmax(110px,1fr))">
+          ${Object.keys(LABELS_CLASSES).map(n => `
+            <div class="cm-mode-btn" style="text-align:center" onclick="choisirNiveauIndices('${n}')">
+              <div class="cm-mode-titre">${LABELS_CLASSES[n] || n}</div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `;
+    return;
+  }
+  body.innerHTML = `
+    <div class="pdf-section">
+      <div class="pdf-section-title">
+        🔍 ${LABELS_CLASSES[indicesConfig.niveau] || indicesConfig.niveau}
+        <span onclick="indicesConfig.niveau=null;renderIndicesConfig()" style="float:right;color:var(--bleu);font-weight:600;cursor:pointer;text-transform:none;letter-spacing:0">Changer de niveau</span>
+      </div>
+      <div style="font-size:13px;color:var(--muted);margin-bottom:12px">Les élèves écrivent une première estimation, puis l'affinent à chaque indice révélé.</div>
+    </div>
+    <div class="cm-settings" style="grid-template-columns:1fr">
+      <div class="cm-setting">
+        <label>🔢 Nombre de rounds</label>
+        <select id="indices-nb-select" onchange="indicesConfig.nb=parseInt(this.value)">
+          <option value="3" ${indicesConfig.nb===3?'selected':''}>3 rounds</option>
+          <option value="5" ${indicesConfig.nb===5?'selected':''}>5 rounds</option>
+          <option value="8" ${indicesConfig.nb===8?'selected':''}>8 rounds</option>
+        </select>
+      </div>
+    </div>
+    <button class="cm-launch-btn" onclick="lancerIndices()">🚀 Lancer et projeter</button>
+  `;
+}
+
+function lancerIndices() {
+  indicesSeries = Array.from({length: indicesConfig.nb}, () => genererNombreMystere(indicesConfig.niveau));
+  indicesIndex = 0;
+  document.getElementById('indices-overlay').style.display = 'none';
+  afficherRoundIndices();
+}
+
+function afficherRoundIndices() {
+  if(indicesIndex >= indicesSeries.length) { fermerProjectionIndices(); return; }
+  indicesClueIndex = 0;
+  indicesReponseRevelee = false;
+  document.getElementById('indices-projection').style.display = 'flex';
+  document.getElementById('indices-num').textContent = `Round ${indicesIndex+1} / ${indicesSeries.length}`;
+  document.getElementById('indices-liste').innerHTML = '';
+  document.getElementById('indices-reponse').textContent = '';
+}
+
+function indicesProchain() {
+  const s = indicesSeries[indicesIndex];
+  if(indicesClueIndex < s.indices.length) {
+    const liste = document.getElementById('indices-liste');
+    const li = document.createElement('div');
+    li.style.cssText = 'background:rgba(255,255,255,0.08);border-radius:10px;padding:14px 18px;color:white;font-size:1.1rem;text-align:center';
+    li.textContent = `Indice #${indicesClueIndex+1} — ${s.indices[indicesClueIndex]}`;
+    liste.appendChild(li);
+    indicesClueIndex++;
+  } else if(!indicesReponseRevelee) {
+    indicesReponseRevelee = true;
+    document.getElementById('indices-reponse').textContent = `La réponse : ${s.nombre}`;
+  } else {
+    indicesIndex++;
+    afficherRoundIndices();
+  }
+}
+
+function fermerProjectionIndices() {
+  document.getElementById('indices-projection').style.display = 'none';
+}
+
+// ── Question ouverte sur image ───────────────────────────────────────
+// Banque construite a la main (pas generative -- la valeur vient du choix de
+// la photo, pas d'un algorithme). Vide pour l'instant : Jamal valide les
+// candidats (recherche Pexels, licence libre) avant toute integration.
+const CAUSERIES_IMAGES = [
+  { url: 'images/causeries/01-motif-geometrique.jpg', theme: 'Géométrie / symétrie', pistes: 'Combien de sortes de motifs différents vois-tu ? Le motif a-t-il un axe de symétrie ? Peux-tu retrouver la figure de base qui se répète ?' },
+  { url: 'images/causeries/02-foule-concert.jpg', theme: 'Estimation / dénombrement', pistes: 'Combien de personnes vois-tu, à peu près ? Comment estimer sans compter une par une ?' },
+  { url: 'images/causeries/03-etal-fruits.jpg', theme: 'Proportionnalité / pourcentages', pistes: 'Si les prix affichés baissent de X%, combien ça coûte ? Comment comparer le prix au kilo entre deux étals ?' },
+  { url: 'images/causeries/04-facade-immeuble.jpg', theme: 'Dénombrement / aires', pistes: 'Combien de fenêtres au total ? Comment compter sans tout compter une par une (lignes × colonnes) ?' },
+  { url: 'images/causeries/05-eoliennes.jpg', theme: 'Proportion / échelle / angles', pistes: 'Pourquoi les éoliennes paraissent-elles plus petites au loin ? Quel lien avec la distance ?' },
+  { url: 'images/causeries/06-escalier-spirale.jpg', theme: 'Géométrie / suites', pistes: 'Quelle forme reconnais-tu (spirale) ? Comment décrirais-tu le trajet d\'une marche à l\'autre ?' },
+  { url: 'images/causeries/07-nid-abeille.jpg', theme: 'Pavage / hexagones', pistes: 'Pourquoi des hexagones et pas des carrés ou des triangles pour paver sans trou ni chevauchement ?' },
+];
+
+function ouvrirQuestImg() {
+  document.getElementById('questimg-overlay').style.display = 'flex';
+  renderQuestImgConfig();
+}
+
+function closeQuestImgModal(e) {
+  if(!e || e.target === document.getElementById('questimg-overlay')) {
+    document.getElementById('questimg-overlay').style.display = 'none';
+  }
+}
+
+function renderQuestImgConfig() {
+  const body = document.getElementById('questimg-modal-body');
+  if(CAUSERIES_IMAGES.length === 0) {
+    body.innerHTML = `<div style="color:var(--muted);font-size:14px;text-align:center;padding:1rem">Aucune image pour l'instant — cette banque arrive bientôt.</div>`;
+    return;
+  }
+  body.innerHTML = `
+    <div class="pdf-section">
+      <div class="pdf-section-title">🖼️ ${CAUSERIES_IMAGES.length} image${CAUSERIES_IMAGES.length>1?'s':''} disponible${CAUSERIES_IMAGES.length>1?'s':''}</div>
+    </div>
+    <button class="cm-launch-btn" onclick="lancerQuestImg()">🚀 Lancer et projeter</button>
+  `;
+}
+
+let questImgSeries = [];
+let questImgIndex = 0;
+let questImgPistesVisibles = false;
+
+function lancerQuestImg() {
+  questImgSeries = melanger(CAUSERIES_IMAGES);
+  questImgIndex = 0;
+  document.getElementById('questimg-overlay').style.display = 'none';
+  afficherImageQuestImg();
+}
+
+function afficherImageQuestImg() {
+  if(questImgIndex >= questImgSeries.length) { fermerProjectionQuestImg(); return; }
+  questImgPistesVisibles = false;
+  document.getElementById('questimg-projection').style.display = 'flex';
+  document.getElementById('questimg-photo').src = questImgSeries[questImgIndex].url;
+  document.getElementById('questimg-pistes').textContent = '';
+}
+
+function questImgProchaine() {
+  const s = questImgSeries[questImgIndex];
+  if(!questImgPistesVisibles) {
+    questImgPistesVisibles = true;
+    document.getElementById('questimg-pistes').textContent = s.pistes ? `💡 Pistes : ${s.pistes}` : '';
+  } else {
+    questImgIndex++;
+    afficherImageQuestImg();
+  }
+}
+
+function fermerProjectionQuestImg() {
+  document.getElementById('questimg-projection').style.display = 'none';
+}
+
 document.addEventListener('keydown', (e) => {
-  const proj = document.getElementById('intrus-projection');
-  if(proj && proj.style.display === 'flex') {
+  const projIntrus = document.getElementById('intrus-projection');
+  const projIndices = document.getElementById('indices-projection');
+  const projQuestImg = document.getElementById('questimg-projection');
+
+  if(projIntrus && projIntrus.style.display === 'flex') {
     if(e.key === 'Enter') reveleIntrus();
     if(e.key === ' ' || e.key === 'ArrowRight') intrusProchaine();
     if(e.key === 'Escape') fermerProjectionIntrus();
+    e.preventDefault();
+  } else if(projIndices && projIndices.style.display === 'flex') {
+    if(e.key === 'Enter' || e.key === ' ' || e.key === 'ArrowRight') indicesProchain();
+    if(e.key === 'Escape') fermerProjectionIndices();
+    e.preventDefault();
+  } else if(projQuestImg && projQuestImg.style.display === 'flex') {
+    if(e.key === 'Enter' || e.key === ' ' || e.key === 'ArrowRight') questImgProchaine();
+    if(e.key === 'Escape') fermerProjectionQuestImg();
     e.preventDefault();
   }
 });
