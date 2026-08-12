@@ -620,6 +620,10 @@ nav {
 .auth-field label { display:block;font-size:12px;font-weight:600;color:var(--muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px; }
 .auth-field input, .auth-field select { width:100%;padding:10px 12px;border:1.5px solid var(--bordure);border-radius:var(--r);font-size:14px;font-family:'DM Sans',sans-serif;box-sizing:border-box;transition:border-color 0.15s; }
 .auth-field input:focus, .auth-field select:focus { outline:none;border-color:var(--bleu); }
+.mdp-wrap { position:relative; }
+.mdp-wrap input { padding-right:40px !important; }
+.mdp-toggle { position:absolute; right:4px; top:50%; transform:translateY(-50%); background:none; border:none; cursor:pointer; font-size:16px; padding:6px 8px; line-height:1; color:var(--muted); }
+.mdp-toggle:hover { color:var(--texte); }
 .auth-row { display:grid;grid-template-columns:1fr 1fr;gap:10px; }
 .auth-btn { width:100%;padding:12px;background:var(--bleu);color:white;border:none;border-radius:var(--r);font-size:15px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background 0.15s; }
 .auth-btn:hover { background:var(--bleu-fort); }
@@ -1520,10 +1524,11 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
         <div class="prof-sous-titre">Lycée Victor Hugo · Marrakech · AEFE</div>
       </div>
       <div class="prof-actions-top">
+        <button class="btn-prof-action primary" onclick="ouvrirInscriptionModal()">🧑‍🎓 Inscrire mes classes</button>
         <button class="btn-prof-action" onclick="ouvrirCalcMental()">🔢 Calcul mental</button>
         <button class="btn-prof-action" onclick="ouvrirIntrus()">🕵️ Intrus maths</button>
         <button class="btn-prof-action" onclick="ouvrirGenerateurPDF()">📄 Devoir PDF</button>
-        <button class="btn-prof-action primary" onclick="showDashboard()">📊 Tableau de bord</button>
+        <button class="btn-prof-action" onclick="showDashboard()">📊 Tableau de bord</button>
       </div>
     </div>
 
@@ -1594,7 +1599,7 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
 
       <!-- Progression par chapitre -->
       <div class="db-section">
-        <div class="db-section-titre">📈 Progression par chapitre — classe 3ème B</div>
+        <div class="db-section-titre" id="db-chapitres-titre">📈 Progression par chapitre</div>
         <div id="db-chapitres-chart"></div>
       </div>
 
@@ -1603,12 +1608,6 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
     <!-- VUE : OUTILS -->
     <div id="prof-outils" class="prof-view" style="display:none">
       <div class="prof-outils-grid">
-        <div class="prof-outil-card" onclick="ouvrirInscriptionModal()">
-          <div class="poc-icon">🧑‍🎓</div>
-          <div class="poc-titre">Inscrire mes élèves</div>
-          <div class="poc-desc">Colle ta liste de classe, génère les comptes et les étiquettes à imprimer</div>
-          <div class="poc-badge">🌟 Nouveau</div>
-        </div>
         <div class="prof-outil-card" onclick="ouvrirGenerateurPDF()">
           <div class="poc-icon">📄</div>
           <div class="poc-titre">Générateur de devoir PDF</div>
@@ -1718,11 +1717,11 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
   </div>
 </div>
 
-<!-- ═══ MODAL INSCRIRE MES ÉLÈVES ═══ -->
+<!-- ═══ MODAL INSCRIRE MES CLASSES ═══ -->
 <div class="modal-overlay" id="inscription-overlay" onclick="closeInscriptionModal(event)">
   <div class="modal" id="inscription-modal" style="max-width:760px">
     <div class="modal-header">
-      <span class="modal-header-title">🧑‍🎓 Inscrire mes élèves</span>
+      <span class="modal-header-title">🧑‍🎓 Inscrire mes classes</span>
       <button class="modal-close" onclick="closeInscriptionModal()">✕</button>
     </div>
     <div class="modal-body" id="inscription-modal-body">
@@ -8301,7 +8300,7 @@ function ouvrirModalConnexion(mode = 'connexion') {
       </div>
       <div id="auth-connexion" style="display:${mode==='connexion'?'block':'none'}">
         <div class="auth-field"><label>Email ou identifiant</label><input type="text" id="auth-email" placeholder="ton@email.com ou ton identifiant"></div>
-        <div class="auth-field"><label>Mot de passe</label><input type="password" id="auth-password" placeholder="••••••••"></div>
+        <div class="auth-field"><label>Mot de passe</label><div class="mdp-wrap"><input type="password" id="auth-password" placeholder="••••••••"><button type="button" class="mdp-toggle" onclick="toggleMdpVisibilite(this)">👁️</button></div></div>
         <div id="auth-error" class="auth-error" style="display:none"></div>
         <button class="auth-btn" onclick="connexionEmail()">Se connecter →</button>
         <div class="auth-separator">ou</div>
@@ -8313,7 +8312,7 @@ function ouvrirModalConnexion(mode = 'connexion') {
           <div class="auth-field"><label>Nom</label><input type="text" id="auth-nom" placeholder="Nom"></div>
         </div>
         <div class="auth-field"><label>Email</label><input type="email" id="auth-email-ins" placeholder="ton@email.com"></div>
-        <div class="auth-field"><label>Mot de passe</label><input type="password" id="auth-password-ins" placeholder="8 caractères minimum"></div>
+        <div class="auth-field"><label>Mot de passe</label><div class="mdp-wrap"><input type="password" id="auth-password-ins" placeholder="8 caractères minimum"><button type="button" class="mdp-toggle" onclick="toggleMdpVisibilite(this)">👁️</button></div></div>
         <div class="auth-field"><label>Niveau</label>
           <select id="auth-niveau">
             <option value="6eme">6ème</option><option value="5eme">5ème</option>
@@ -8334,7 +8333,7 @@ function ouvrirModalConnexion(mode = 'connexion') {
         </div>
         <div class="auth-field"><label>Code de classe</label><input type="text" id="auth-code-classe" placeholder="Ex: 3B-VH-2026" style="text-transform:uppercase;letter-spacing:2px"></div>
         <div class="auth-field"><label>Email</label><input type="email" id="auth-email-code" placeholder="ton@email.com"></div>
-        <div class="auth-field"><label>Mot de passe</label><input type="password" id="auth-password-code" placeholder="8 caractères minimum"></div>
+        <div class="auth-field"><label>Mot de passe</label><div class="mdp-wrap"><input type="password" id="auth-password-code" placeholder="8 caractères minimum"><button type="button" class="mdp-toggle" onclick="toggleMdpVisibilite(this)">👁️</button></div></div>
         <div id="auth-error-code" class="auth-error" style="display:none"></div>
         <button class="auth-btn" onclick="inscriptionCodeClasse()">Rejoindre la classe →</button>
         <button class="auth-btn-secondary" onclick="switchAuthTab('connexion')" style="margin-top:8px">← Retour</button>
@@ -8400,6 +8399,12 @@ async function inscriptionEmail() {
 // Auth ("format invalide"), qui echoue silencieusement au client (aucun
 // message d'erreur affiche a l'eleve). Meme fonction reutilisee par la
 // creation de comptes en masse cote prof.
+function toggleMdpVisibilite(btn) {
+  const input = btn.previousElementSibling;
+  if(input.type === 'password') { input.type = 'text'; btn.textContent = '🙈'; }
+  else { input.type = 'password'; btn.textContent = '👁️'; }
+}
+
 function normaliserPourIdentifiant(s) {
   return (s || '')
     .normalize('NFD').replace(/[̀-ͯ]/g, '')
@@ -8837,7 +8842,10 @@ async function renderEspaceEleve() {
           <button class="auth-btn-secondary" onclick="deconnexion()">Se déconnecter</button>
         </div>
         <div id="changer-mdp-zone" style="display:none;margin-top:12px;padding-top:12px;border-top:1px solid var(--bordure)">
-          <input type="password" id="nouveau-mdp-input" placeholder="Nouveau mot de passe (8 caractères min.)" style="width:100%;padding:10px;border:1px solid var(--bordure);border-radius:8px;font-size:13px;margin-bottom:8px">
+          <div class="mdp-wrap" style="margin-bottom:8px">
+            <input type="password" id="nouveau-mdp-input" placeholder="Nouveau mot de passe (8 caractères min.)" style="width:100%;padding:10px;border:1px solid var(--bordure);border-radius:8px;font-size:13px">
+            <button type="button" class="mdp-toggle" onclick="toggleMdpVisibilite(this)">👁️</button>
+          </div>
           <div id="changer-mdp-erreur" style="color:var(--rouge);font-size:12px;margin-bottom:8px;display:none"></div>
           <button class="auth-btn" style="width:auto;padding:8px 16px" onclick="validerChangerMotDePasse()">Valider</button>
         </div>
@@ -9012,9 +9020,12 @@ async function accesProf() {
       </div>
       <div class="auth-field">
         <label>Mot de passe</label>
-        <input type="password" id="prof-login-pwd" placeholder="••••••••"
-          onkeydown="if(event.key==='Enter') validerLoginProf()"
-          autocomplete="current-password">
+        <div class="mdp-wrap">
+          <input type="password" id="prof-login-pwd" placeholder="••••••••"
+            onkeydown="if(event.key==='Enter') validerLoginProf()"
+            autocomplete="current-password">
+          <button type="button" class="mdp-toggle" onclick="toggleMdpVisibilite(this)">👁️</button>
+        </div>
       </div>
       <div id="prof-login-error" class="auth-error" style="display:none"></div>
       <button class="auth-btn" onclick="validerLoginProf()">Accéder →</button>
@@ -9311,6 +9322,17 @@ function renderTableauEleves() {
 function renderChapitresChart() {
   const el = document.getElementById('db-chapitres-chart');
   if(!el) return;
+
+  // Le titre affichait "classe 3ème B" en dur quelle que soit la classe
+  // reellement selectionnee -- incoherent des qu'un prof a plusieurs classes
+  // (trouve en corrigeant le multi-classe, 12/08/2026).
+  const titreEl = document.getElementById('db-chapitres-titre');
+  if(titreEl) {
+    const codeActif = document.getElementById('db-classe-select')?.value;
+    const classeActive = profClasses.find(c => c.code === codeActif);
+    titreEl.textContent = classeActive ? `📈 Progression par chapitre — classe ${classeActive.nom}` : '📈 Progression par chapitre';
+  }
+
   const stats = dbDonneesClasse.chapitresStats || [];
   if(stats.length === 0) {
     el.innerHTML = '<div style="color:var(--muted);font-size:13px;padding:8px">Aucune donnée pour l\'instant.</div>';
