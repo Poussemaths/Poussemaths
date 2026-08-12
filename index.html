@@ -1521,7 +1521,7 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
     <div class="prof-header">
       <div>
         <div class="prof-titre">👨‍🏫 Espace Professeur</div>
-        <div class="prof-sous-titre">Lycée Victor Hugo · Marrakech · AEFE</div>
+        <div class="prof-sous-titre" id="prof-sous-titre">Espace enseignant · AEFE</div>
       </div>
       <div class="prof-actions-top">
         <button class="btn-prof-action primary" onclick="ouvrirInscriptionModal()">🧑‍🎓 Inscrire mes classes</button>
@@ -1608,18 +1608,6 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
     <!-- VUE : OUTILS -->
     <div id="prof-outils" class="prof-view" style="display:none">
       <div class="prof-outils-grid">
-        <div class="prof-outil-card" onclick="ouvrirGenerateurPDF()">
-          <div class="poc-icon">📄</div>
-          <div class="poc-titre">Générateur de devoir PDF</div>
-          <div class="poc-desc">Sélectionne des exercices, personnalise l'en-tête, télécharge en 1 minute</div>
-          <div class="poc-badge">🌟 Wow moment</div>
-        </div>
-        <div class="prof-outil-card" onclick="ouvrirCalcMental()">
-          <div class="poc-icon">🔢</div>
-          <div class="poc-titre">Calcul mental</div>
-          <div class="poc-desc">Choisis un thème et un chrono — projette au vidéoprojecteur en classe</div>
-          <div class="poc-badge">🌟 Wow moment</div>
-        </div>
         <div class="prof-outil-card" onclick="exportCSV()">
           <div class="poc-icon">📤</div>
           <div class="poc-titre">Export Pronote CSV</div>
@@ -9234,6 +9222,12 @@ async function renderTableauBord() {
   renderAlertes();
   renderTableauEleves();
   renderChapitresChart();
+
+  const sousTitreEl = document.getElementById('prof-sous-titre');
+  if(sousTitreEl) {
+    const etab = await etablissementProfConnecte();
+    sousTitreEl.textContent = etab ? `${etab} · AEFE` : 'Espace enseignant · AEFE';
+  }
 }
 
 function renderAlertes() {
@@ -9399,14 +9393,20 @@ function anneeScolaireParDefaut() {
   return `${debut}-${debut + 1}`;
 }
 
+// Etablissement du prof connecte, reutilise partout ou "Lycée Victor Hugo"
+// etait code en dur (en-tete prof, formulaire de creation de classe,
+// generateur de devoir PDF) -- trouve en cherchant systematiquement les
+// autres endroits ou un nom de classe/etablissement etait fige, 12/08/2026.
+async function etablissementProfConnecte() {
+  const profUserId = sessionStorage.getItem('prof_user_id');
+  if(!supabaseClient || !profUserId) return '';
+  const { data } = await supabaseClient.from('profs_autorises').select('etablissement').eq('user_id', profUserId).single();
+  return (data?.etablissement && data.etablissement !== 'À compléter') ? data.etablissement : '';
+}
+
 async function renderCreationClasseModal() {
   const body = document.getElementById('creation-classe-modal-body');
-  const profUserId = sessionStorage.getItem('prof_user_id');
-  let etablissementDefaut = '';
-  if(supabaseClient && profUserId) {
-    const { data } = await supabaseClient.from('profs_autorises').select('etablissement').eq('user_id', profUserId).single();
-    if(data?.etablissement && data.etablissement !== 'À compléter') etablissementDefaut = data.etablissement;
-  }
+  const etablissementDefaut = await etablissementProfConnecte();
 
   body.innerHTML = `
     <div class="pdf-section">
@@ -10017,9 +10017,9 @@ async function exporterParcoursCSV(id) {
 
 let pdfExercicesSelectionnes = [];
 
-function ouvrirGenerateurPDF() {
+async function ouvrirGenerateurPDF() {
   document.getElementById('pdf-overlay').style.display = 'flex';
-  renderPDFModal();
+  await renderPDFModal();
 }
 
 function closePDFModal(e) {
@@ -10028,8 +10028,16 @@ function closePDFModal(e) {
   }
 }
 
-function renderPDFModal() {
+async function renderPDFModal() {
   const body = document.getElementById('pdf-modal-body');
+
+  // Prefill avec l'etablissement du prof connecte et la classe active du
+  // tableau de bord, plutot que des valeurs figees ("Lycée Victor Hugo",
+  // "3ème B") qui ne correspondaient a rien pour un prof avec une autre
+  // classe ou un autre etablissement (12/08/2026).
+  const etablissementDefaut = await etablissementProfConnecte();
+  const codeActif = document.getElementById('db-classe-select')?.value;
+  const classeActiveDefaut = profClasses.find(c => c.code === codeActif)?.nom || '';
 
   // Récupérer tous les chapitres
   const chapitres = {};
@@ -10044,8 +10052,8 @@ function renderPDFModal() {
     <div class="pdf-section">
       <div class="pdf-section-title">📋 En-tête du devoir</div>
       <div class="pdf-row">
-        <input class="pdf-input" id="pdf-etablissement" placeholder="Établissement" value="Lycée Victor Hugo — Marrakech">
-        <input class="pdf-input" id="pdf-classe" placeholder="Classe" value="3ème B">
+        <input class="pdf-input" id="pdf-etablissement" placeholder="Établissement" value="${etablissementDefaut.replace(/"/g,'&quot;')}">
+        <input class="pdf-input" id="pdf-classe" placeholder="Classe" value="${classeActiveDefaut.replace(/"/g,'&quot;')}">
       </div>
       <div class="pdf-row">
         <input class="pdf-input" id="pdf-matiere" placeholder="Matière" value="Mathématiques">
