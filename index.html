@@ -707,6 +707,21 @@ nav {
 .db-alerte-detail { font-size:12px; color:var(--rouge); margin-top:2px; }
 .db-alerte-badge { font-size:11px; font-weight:700; background:#FEE2E2; color:var(--rouge); padding:2px 8px; border-radius:20px; }
 
+/* Qui a besoin de moi */
+.db-attention-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.25rem; }
+.db-attention-col-titre { font-size:13px; font-weight:700; color:var(--texte); margin-bottom:0.75rem; }
+.db-attente-item { display:flex; align-items:center; gap:10px; padding:8px 12px; border-radius:var(--r); margin-bottom:6px; }
+.db-attente-item:last-child { margin-bottom:0; }
+.db-attente-item.rienfait { background:var(--amber-bg); border:1px solid #FDE68A; }
+.db-attente-item.decroche { background:#FEF2F2; border:1px solid #FECACA; }
+.db-attention-badge { font-size:11px; font-weight:700; padding:2px 8px; border-radius:20px; white-space:nowrap; }
+.db-attente-item.rienfait .db-attention-badge { background:#FEF3C7; color:var(--amber); }
+.db-attente-item.decroche .db-attention-badge { background:#FEE2E2; color:var(--rouge); }
+.db-voir-tout { display:block; width:100%; text-align:center; background:none; border:none; color:var(--bleu); font-size:12px; font-weight:600; cursor:pointer; padding:6px; font-family:'DM Sans',sans-serif; }
+.db-voir-tout:hover { text-decoration:underline; }
+.db-attention-vide { color:var(--vert); font-size:13px; padding:8px; }
+@media(max-width:900px) { .db-attention-grid { grid-template-columns:1fr; } }
+
 /* Table élèves */
 .db-table-wrap { overflow-x:auto; }
 .db-table { width:100%; border-collapse:collapse; font-size:13px; }
@@ -1542,30 +1557,51 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
     <!-- VUE : TABLEAU DE BORD -->
     <div id="prof-dashboard" class="prof-view">
 
-      <!-- Statistiques globales -->
-      <div class="db-stats-row">
-        <div class="db-stat-card">
-          <div class="db-stat-num" id="db-nb-eleves">28</div>
-          <div class="db-stat-label">Élèves actifs</div>
+      <!-- Qui a besoin de moi (remplace l'ancien bloc Alertes, 12/08/2026 :
+           Jamal, lundi matin, veut d'abord savoir qui n'a rien fait et qui
+           decroche -- pas la moyenne de classe. Deux listes separees car ce
+           sont deux problemes differents (relancer vs reprendre une notion),
+           periode reglable car "depuis la derniere seance" varie selon
+           l'emploi du temps (pas de systeme de planning, delibere). -->
+      <div class="db-section">
+        <div class="db-section-header">
+          <div class="db-section-titre">🎯 Qui a besoin de moi</div>
+          <select id="db-periode-select" onchange="changerPeriodeAttention()" style="padding:6px 12px;border:1.5px solid var(--bordure);border-radius:var(--r);font-size:13px;font-family:'DM Sans',sans-serif">
+            <option value="7" selected>7 jours</option>
+            <option value="15">15 jours</option>
+            <option value="0">Depuis le début</option>
+          </select>
         </div>
-        <div class="db-stat-card">
-          <div class="db-stat-num" id="db-moyenne">73%</div>
-          <div class="db-stat-label">Moyenne classe</div>
-        </div>
-        <div class="db-stat-card">
-          <div class="db-stat-num" id="db-ex-semaine">142</div>
-          <div class="db-stat-label">Exercices cette semaine</div>
-        </div>
-        <div class="db-stat-card alerte">
-          <div class="db-stat-num" id="db-alertes">3</div>
-          <div class="db-stat-label">Élèves en difficulté</div>
+        <div class="db-attention-grid">
+          <div class="db-attention-col">
+            <div class="db-attention-col-titre">😴 N'a rien fait <span id="db-rienfait-count"></span></div>
+            <div id="db-rienfait-liste"></div>
+          </div>
+          <div class="db-attention-col">
+            <div class="db-attention-col-titre">📉 Décroche <span id="db-decroche-count"></span></div>
+            <div id="db-decroche-liste"></div>
+          </div>
         </div>
       </div>
 
-      <!-- Alertes -->
-      <div class="db-section">
-        <div class="db-section-titre">⚠️ Alertes — élèves à surveiller</div>
-        <div id="db-alertes-list"></div>
+      <!-- Statistiques globales -->
+      <div class="db-stats-row">
+        <div class="db-stat-card">
+          <div class="db-stat-num" id="db-nb-eleves">—</div>
+          <div class="db-stat-label">Élèves actifs</div>
+        </div>
+        <div class="db-stat-card">
+          <div class="db-stat-num" id="db-moyenne">—</div>
+          <div class="db-stat-label">Moyenne classe</div>
+        </div>
+        <div class="db-stat-card">
+          <div class="db-stat-num" id="db-ex-semaine">—</div>
+          <div class="db-stat-label">Exercices cette semaine</div>
+        </div>
+        <div class="db-stat-card alerte">
+          <div class="db-stat-num" id="db-besoin-attention">—</div>
+          <div class="db-stat-label">Besoin d'attention</div>
+        </div>
       </div>
 
       <!-- Sélecteur de classe -->
@@ -9168,6 +9204,7 @@ async function chargerDonneesClasse() {
       jours,
       actif: jours !== null && jours <= 5,
       alerte,
+      lignes, // conserve pour recalculer "qui a besoin de moi" par periode sans nouvel appel Supabase
     };
   });
 
@@ -9193,7 +9230,8 @@ async function chargerDonneesClasse() {
 
 async function changerClasseDashboard() {
   await chargerDonneesClasse();
-  renderAlertes();
+  attentionEtendu = { rienfait: false, decroche: false };
+  renderAttentionLists();
   renderTableauEleves();
   renderChapitresChart();
 }
@@ -9219,7 +9257,7 @@ function showDashboard() {
 async function renderTableauBord() {
   await chargerClassesProf();
   await chargerDonneesClasse();
-  renderAlertes();
+  renderAttentionLists();
   renderTableauEleves();
   renderChapitresChart();
 
@@ -9230,29 +9268,94 @@ async function renderTableauBord() {
   }
 }
 
-function renderAlertes() {
-  const eleves = dbDonneesClasse.eleves || [];
-  const alertes = eleves.filter(e => e.alerte);
-  const el = document.getElementById('db-alertes-list');
-  if(!el) return;
+// ═══════════════════════════════════════
+//  QUI A BESOIN DE MOI (remplace l'ancien bloc Alertes, 12/08/2026)
+// ═══════════════════════════════════════
 
-  if(alertes.length === 0) {
-    el.innerHTML = '<div style="color:var(--vert);font-size:13px;padding:8px">✅ Aucune alerte — tous les élèves sont actifs.</div>';
+let periodeAttention = 7; // jours ; 0 = depuis le debut
+let attentionEtendu = { rienfait: false, decroche: false };
+
+// Recalcule, a partir des lignes de progression brutes d'un eleve, sa
+// categorie pour la periode choisie -- sans nouvel appel Supabase (les
+// lignes sont deja chargees par chargerDonneesClasse). "Rien fait" inclut
+// deliberement les eleves qui n'ont JAMAIS rien fait (l'ancienne logique
+// d'alerte les ignorait tant qu'aucune activite n'existait, ratant le cas
+// le plus urgent selon Jamal).
+function calculerCategoriePeriode(lignes, joursPeriode) {
+  const maintenant = new Date();
+  const seuil = joursPeriode > 0 ? new Date(maintenant - joursPeriode * 86400000) : null;
+  const lignesPeriode = seuil ? lignes.filter(p => new Date(p.completed_at) >= seuil) : lignes;
+
+  if(lignesPeriode.length === 0) {
+    const derniere = lignes.reduce((max,p) => (!max || p.completed_at > max.completed_at) ? p : max, null);
+    const jours = derniere ? Math.floor((maintenant - new Date(derniere.completed_at)) / 86400000) : null;
+    return { categorie: 'rien-fait', jours };
+  }
+  const score = Math.round(lignesPeriode.reduce((s,p) => s + p.score, 0) / lignesPeriode.length);
+  if(lignesPeriode.length >= 3 && score < 50) return { categorie: 'decroche', score, ex: lignesPeriode.length };
+  return { categorie: 'ok' };
+}
+
+function changerPeriodeAttention() {
+  periodeAttention = parseInt(document.getElementById('db-periode-select').value, 10);
+  renderAttentionLists();
+}
+
+function toggleAttentionEtendu(cle) {
+  attentionEtendu[cle] = !attentionEtendu[cle];
+  renderAttentionLists();
+}
+
+function renderListeAttention(listId, countId, liste, classe, badgeFn) {
+  const el = document.getElementById(listId);
+  const countEl = document.getElementById(countId);
+  if(!el) return;
+  if(countEl) countEl.textContent = liste.length ? `(${liste.length})` : '';
+
+  if(liste.length === 0) {
+    el.innerHTML = '<div class="db-attention-vide">✅ Personne dans cette liste.</div>';
     return;
   }
 
-  el.innerHTML = alertes.map(e => `
-    <div class="db-alerte-item">
-      <div class="db-alerte-avatar" style="background:${e.couleur}">${e.initiales}</div>
-      <div class="db-alerte-info">
-        <div class="db-alerte-nom">${e.nom}</div>
-        <div class="db-alerte-detail">⚠️ ${e.alerte}</div>
-      </div>
-      <span class="db-alerte-badge">${e.jours === null ? 'Aucune activité' : `Inactif ${e.jours}j`}</span>
-    </div>
-  `).join('');
+  const cle = classe === 'rienfait' ? 'rienfait' : 'decroche';
+  const etendu = attentionEtendu[cle];
+  const affiches = etendu ? liste : liste.slice(0, 5);
 
-  document.getElementById('db-alertes').textContent = alertes.length;
+  el.innerHTML = affiches.map(e => `
+    <div class="db-attente-item ${classe}">
+      <div class="db-alerte-avatar" style="background:${e.couleur}">${e.initiales}</div>
+      <div class="db-alerte-info"><div class="db-alerte-nom">${e.nom}</div></div>
+      ${badgeFn(e)}
+    </div>
+  `).join('') + (liste.length > 5
+    ? `<button class="db-voir-tout" onclick="toggleAttentionEtendu('${cle}')">${etendu ? 'Voir moins' : `Voir tout (${liste.length})`}</button>`
+    : '');
+}
+
+function renderAttentionLists() {
+  const eleves = dbDonneesClasse.eleves || [];
+  const rienFait = [];
+  const decroche = [];
+
+  eleves.forEach(e => {
+    const cat = calculerCategoriePeriode(e.lignes || [], periodeAttention);
+    if(cat.categorie === 'rien-fait') rienFait.push({ ...e, joursCalc: cat.jours });
+    else if(cat.categorie === 'decroche') decroche.push({ ...e, scorePeriode: cat.score, exPeriode: cat.ex });
+  });
+
+  // Jamais commence = le plus urgent, en tete ; puis inactif depuis le plus longtemps.
+  rienFait.sort((a,b) => (a.joursCalc === null ? -1 : b.joursCalc === null ? 1 : b.joursCalc - a.joursCalc));
+  decroche.sort((a,b) => a.scorePeriode - b.scorePeriode);
+
+  renderListeAttention('db-rienfait-liste', 'db-rienfait-count', rienFait, 'rienfait', e =>
+    `<span class="db-attention-badge">${e.joursCalc === null ? 'Jamais commencé' : `Inactif ${e.joursCalc}j`}</span>`
+  );
+  renderListeAttention('db-decroche-liste', 'db-decroche-count', decroche, 'decroche', e =>
+    `<span class="db-attention-badge">${e.scorePeriode}% sur ${e.exPeriode} ex.</span>`
+  );
+
+  const besoinEl = document.getElementById('db-besoin-attention');
+  if(besoinEl) besoinEl.textContent = rienFait.length + decroche.length;
 }
 
 function renderTableauEleves() {
@@ -9265,7 +9368,8 @@ function renderTableauEleves() {
     document.getElementById('db-nb-eleves').textContent = 0;
     document.getElementById('db-moyenne').textContent = '—';
     document.getElementById('db-ex-semaine').textContent = 0;
-    document.getElementById('db-alertes').textContent = 0;
+    document.getElementById('db-besoin-attention').textContent = 0;
+    renderAttentionLists();
     return;
   }
 
@@ -9303,14 +9407,10 @@ function renderTableauEleves() {
   const total = eleves.length;
   const moy = Math.round(eleves.reduce((s,e) => s+e.score, 0) / total);
   const exTotal = eleves.reduce((s,e) => s+e.ex, 0);
-  const alertes = eleves.filter(e => e.alerte).length;
 
   document.getElementById('db-nb-eleves').textContent = total;
   document.getElementById('db-moyenne').textContent = moy + '%';
   document.getElementById('db-ex-semaine').textContent = exTotal;
-  document.getElementById('db-alertes').textContent = alertes;
-
-  renderAlertes();
 }
 
 function renderChapitresChart() {
