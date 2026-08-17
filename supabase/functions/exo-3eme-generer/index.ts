@@ -89,28 +89,30 @@ function genererEquation1erDegre() {
 }
 
 function genererSysteme() {
+  // LOT 10 (16/08/2026) : l'ancien mecanisme (systeme de deux equations a
+  // deux inconnues, resolu par substitution/combinaison) n'est pas atteste
+  // dans le programme applicable en 3e (BO n°31 du 30/07/2020, cycle 4
+  // ancien) -- aucune des 5 thematiques du programme ne mentionne la
+  // resolution d'un systeme a deux inconnues. En revanche "resoudre
+  // algebriquement des equations du premier degre... du type ax+b=cx+d" et
+  // "resoudre des problemes modelises par des fonctions" le sont
+  // explicitement : l'intersection de deux fonctions affines f et g, via
+  // f(x)=g(x), est une authentique equation a UNE inconnue -- deja utilisee
+  // ailleurs dans le catalogue 3e (chapitre "Fonctions linéaires et
+  // affines"). Remplace l'ancien mecanisme hors-programme.
+  const a = nonZero(-6, 6);
+  let c = nonZero(-6, 6);
+  while (c === a) c = nonZero(-6, 6);
   const x0 = randInt(-9, 9);
-  const y0 = randInt(-9, 9);
-  let a1 = 0, b1 = 0, a2 = 0, b2 = 0, det = 0;
-  do {
-    a1 = nonZero(-6, 6); b1 = nonZero(-6, 6); a2 = nonZero(-6, 6); b2 = nonZero(-6, 6);
-    det = a1 * b2 - a2 * b1;
-  } while (det === 0);
-  const c1 = a1 * x0 + b1 * y0;
-  const c2 = a2 * x0 + b2 * y0;
+  const b = randInt(-12, 12);
+  const d = b + (a - c) * x0;
+  const y0 = a * x0 + b;
   const demanderX = Math.random() < 0.5;
-  const reponse = demanderX ? x0 : y0;
-  function formatTerme(coef: number, varName: string, estPremier: boolean): string {
-    const abs = Math.abs(coef);
-    const partieVar = abs === 1 ? varName : `${abs}${varName}`;
-    if (estPremier) return coef < 0 ? `-${partieVar}` : partieVar;
-    return coef < 0 ? `- ${partieVar}` : `+ ${partieVar}`;
+  function formatTerme(coef: number): string {
+    return coef >= 0 ? `+ ${fmtNum(coef)}` : `- ${fmtNum(-coef)}`;
   }
-  function formatEquation(a: number, b: number, c: number): string {
-    return `${formatTerme(a, "x", true)} ${formatTerme(b, "y", false)} = ${c}`;
-  }
-  const enonce = `Résous le système d'équations suivant :\n$\\begin{cases} ${formatEquation(a1, b1, c1)} \\\\ ${formatEquation(a2, b2, c2)} \\end{cases}$\nDonne la valeur de $${demanderX ? "x" : "y"}$.`;
-  return { enonce, x: reponse };
+  const enonce = `On considère les fonctions affines $f(x) = ${fmtNum(a)}x ${formatTerme(b)}$ et $g(x) = ${fmtNum(c)}x ${formatTerme(d)}$. Détermine ${demanderX ? "l'abscisse" : "l'ordonnée"} du point d'intersection de leurs représentations graphiques.`;
+  return { enonce, x: demanderX ? x0 : y0 };
 }
 
 function genererCoeffDirecteur() {

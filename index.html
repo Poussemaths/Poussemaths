@@ -2094,11 +2094,11 @@ const EXERCICES = {
            type:"libre", points:5},
           {label:"2.", enonce:"Un microscope a un grossissement de $2\\times10^5$. Le mimivirus a un diamètre de $4\\times10^{-7}$ m. Diamètre observé (en cm) ?",
            type:"libre", points:5},
-          {label:"3.", enonce:"Jupiter pèse $1{,}9\\times10^{27}$ kg et la Terre $6\\times10^{24}$ kg. Combien de fois Jupiter est-il plus lourd (arrondi à l'unité) ?",
+          {label:"3.", enonce:"Une clé USB stocke $6\\times10^{10}$ octets. Un disque dur externe stocke $1{,}2\\times10^{13}$ octets. Combien de fois le disque dur est-il plus grand que la clé USB ?",
            type:"libre", points:5},
           {label:"4.", enonce:"Un virus a un diamètre de $3\\times10^{-8}$ m. Un microscope grossit $5\\times10^4$ fois. Diamètre observé (en mm) ?",
            type:"libre", points:5},
-          {label:"5.", enonce:"Saturne pèse $5{,}7\\times10^{26}$ kg et la Terre $6\\times10^{24}$ kg. Combien de fois Saturne est-il plus lourd (arrondi à l'unité) ?",
+          {label:"5.", enonce:"Le corps humain contient environ $3{,}7\\times10^{13}$ cellules. Un yaourt contient environ $1\\times10^{9}$ bactéries. Combien de fois y a-t-il plus de cellules dans le corps humain que de bactéries dans le yaourt ?",
            type:"libre", points:5},
         ],
         indices:["D'après DNB — contexte scientifique réel"]
@@ -2636,21 +2636,22 @@ const EXERCICES = {
         indices:["Intersection de deux inéquations : les deux doivent être vérifiées simultanément"]
       },
       {
-        id:"ineq_3_8", titre:"Inéquations avec parenthèses et fractions", niveau:"Difficile", points_total:15, competences:["Résoudre analytiquement et graphiquement une inéquation du premier degré du type ax ≥ b"],
+        id:"ineq_3_8", titre:"Inéquations — encadrements et repérage d'erreurs", niveau:"Difficile", points_total:15, competences:["Résoudre analytiquement et graphiquement une inéquation du premier degré du type ax ≥ b"],
         questions:[
-          {label:"a)", enonce:"Résous : $3(x+2) < 2(x+5)$.",
+          {label:"a)", enonce:"Résous : $-5 < 3x-2 \\leq 10$",
            type:"libre", points:3},
-          {label:"b)", enonce:"Résous : $\\dfrac{x+1}{2} \\geq 3$.",
+          {label:"b)", enonce:"Résous : $1 \\leq \\dfrac{2x+1}{3} < 5$",
            type:"libre", points:3},
-          {label:"c)", enonce:"Résous : $\\dfrac{2x-3}{4} < \\dfrac{x+1}{2}$.",
-           type:"libre", points:3},
-          {label:"d)", enonce:"Quelle est la solution de $\\dfrac{x-1}{3} > \\dfrac{x+2}{4}$ ?",
+          {label:"c)", enonce:"Un élève résout $-2x+3>7$ ainsi : « $-2x>4$ donc $x>-2$ ». Quelle est son erreur ?",
            type:"qcm",
-           choix:["$x > 10$","$x < 10$","$x > -10$","$x < -10$"], points:3},
-          {label:"e)", enonce:"Résous : $2(x-3) < 3(x-1)$.",
+           choix:["Il a oublié d'inverser le sens de l'inégalité en divisant par un négatif","Il a mal calculé $-2x+3-3$","Le calcul $-2x>4$ est faux, il fallait trouver $-2x>10$","Il n'y a pas d'erreur, sa réponse est correcte"], points:3},
+          {label:"d)", enonce:"Quelle est la solution de $-4 \\leq 2x+2 < 8$ ?",
+           type:"qcm",
+           choix:["$[-3\\,;\\,3[$","$]-3\\,;\\,3]$","$[-1\\,;\\,3[$","$[-3\\,;\\,5[$"], points:3},
+          {label:"e)", enonce:"Résous : $-3(x-2) \\geq 2(x+8)$",
            type:"libre", points:3},
         ],
-        indices:["Multiplie par le PPCM pour éliminer les fractions avant de résoudre"]
+        indices:["Un encadrement se résout en appliquant la même opération aux trois membres à la fois"]
       },
       {
         id:"ineq_3_9", titre:"Inéquations — problèmes et applications", niveau:"Difficile", points_total:19, competences:["Résoudre analytiquement et graphiquement une inéquation du premier degré du type ax ≥ b"],
@@ -2673,10 +2674,26 @@ const EXERCICES = {
     ],
 
 
-    // ── 6. SYSTÈMES D'ÉQUATIONS ──
-    "Systèmes d'équations": [
+    // ── 6. INTERSECTIONS DE DROITES ET PROBLÈMES ──
+    // Chantier LOT 10 (16/08/2026) : chapitre reconverti depuis "Systèmes
+    // d'équations". La résolution formelle d'un système de deux équations à
+    // deux inconnues (substitution/combinaison) n'est pas attestée dans le
+    // programme applicable en 3e (BO n°31 du 30/07/2020, cycle 4 ancien,
+    // 2026-2027 et 2027-2028) : aucune des 5 thématiques ne mentionne un
+    // système à deux inconnues. En revanche "résoudre algébriquement des
+    // équations du premier degré... du type ax+b=cx+d" et "résoudre des
+    // problèmes modélisés par des fonctions" le sont explicitement :
+    // l'intersection de deux fonctions affines f et g, via f(x)=g(x), est
+    // une authentique équation à UNE inconnue (déjà utilisée dans le
+    // chapitre "Fonctions linéaires et affines"). Les exercices testant
+    // explicitement la notation système / les méthodes nommées ont été
+    // reconvertis vers ce mécanisme ; les problèmes concrets (déjà
+    // naturellement réductibles à une seule inconnue par substitution) ont
+    // conservé leurs nombres et réponses, seule la formulation a changé pour
+    // guider vers l'inconnue unique plutôt que vers un système formel.
+    "Intersections de droites et problèmes": [
       {
-        id:"syst_3_genere", titre:"Systèmes d'équations — entraînement infini", niveau:"Facile", points_total:5, competences:["Résoudre un problème conduisant à un système de deux équations du premier degré à deux inconnues"],
+        id:"syst_3_genere", titre:"Intersection de droites — entraînement infini", niveau:"Facile", points_total:5, competences:["Résoudre algébriquement une équation du premier degré du type ax+b=cx+d","Déterminer les coordonnées du point d'intersection de deux droites représentant des fonctions affines"],
         genere: true, templateId: "systeme_v1",
         questions:[
           {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
@@ -2685,160 +2702,158 @@ const EXERCICES = {
           {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
           {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
         ],
-        indices:["Isole une inconnue dans une équation, puis substitue-la dans l'autre"]
+        indices:["Pose $f(x)=g(x)$ : c'est une équation à une seule inconnue"]
       },
       {
-        id:"syst_3_1", titre:"Systèmes — comprendre et vérifier", niveau:"Facile", points_total:10, competences:["Résoudre un problème conduisant à un système de deux équations du premier degré à deux inconnues"],
+        id:"syst_3_1", titre:"Intersections de droites — comprendre et vérifier", niveau:"Facile", points_total:10, competences:["Déterminer les coordonnées du point d'intersection de deux droites représentant des fonctions affines"],
         questions:[
-          {label:"1.", enonce:"Quelle est la solution du système $\\begin{cases} x + y = 7 \\\\ x - y = 3 \\end{cases}$ ?",
+          {label:"1.", enonce:"Les droites d'équations $y=3x+2$ et $y=3x-5$ sont-elles sécantes ?",
            type:"qcm",
-           choix:["$x=3$, $y=4$","$x=5$, $y=2$","$x=4$, $y=3$","$x=2$, $y=5$"], points:2},
-          {label:"2.", enonce:"Quelle méthode est la plus adaptée si une équation donne directement $y = ...$  ?",
+           choix:["Oui, en un point","Non, elles sont parallèles (même coefficient directeur)","Oui, elles sont confondues","Impossible à savoir sans calcul"], points:2},
+          {label:"2.", enonce:"Pour trouver l'abscisse du point d'intersection de $f(x)=2x+1$ et $g(x)=x+4$, quelle équation faut-il résoudre ?",
            type:"qcm",
-           choix:["La combinaison linéaire","La substitution","Le graphique","La factorisation"], points:2},
-          {label:"3.", enonce:"Vérifie que $(x=3\\,;\\,y=1)$ est solution de $\\begin{cases} 2x+3y=9 \\\\ x-y=2 \\end{cases}$",
+           choix:["$2x+1=x+4$","$2x+1=x-4$","$x+1=2x+4$","$2x=x$"], points:2},
+          {label:"3.", enonce:"$f(x)=2x+1$ et $g(x)=x+4$. Résous $f(x)=g(x)$ pour trouver l'abscisse de leur point d'intersection.",
+           type:"libre", points:2},
+          {label:"4.", enonce:"Avec $x=3$ (question précédente), calcule l'ordonnée du point d'intersection : $f(3)$ avec $f(x)=2x+1$.",
+           type:"libre", points:2},
+          {label:"5.", enonce:"Vérifie que le point d'intersection $(3\\,;\\,7)$ appartient bien à $g(x)=x+4$ : calcule $g(3)$.",
            type:"qcm",
-           choix:["Oui, c'est une solution","Non, seule la première équation est vérifiée","Non, seule la deuxième est vérifiée","Non, aucune équation n'est vérifiée"], points:2},
-          {label:"4.", enonce:"Un système a pour solution $x=0$ et $y=5$. Lequel de ces systèmes correspond ?",
-           type:"qcm",
-           choix:["$\\begin{cases} x+y=5 \\\\ x-y=5 \\end{cases}$","$\\begin{cases} x+y=5 \\\\ 2x+y=5 \\end{cases}$","$\\begin{cases} x+y=5 \\\\ x-y=-5 \\end{cases}$","$\\begin{cases} 2x+y=5 \\\\ x+2y=5 \\end{cases}$"], points:2},
-          {label:"5.", enonce:"Vérifie que $(x=4\\,;\\,y=2)$ est solution de $\\begin{cases} x+2y=8 \\\\ 2x-y=6 \\end{cases}$",
-           type:"qcm",
-           choix:["Oui, c'est une solution","Non, seule la première équation est vérifiée","Non, seule la deuxième est vérifiée","Non, aucune équation n'est vérifiée"], points:2},
+           choix:["$g(3)=7$, le point appartient bien à $g$","$g(3)=3$, le point n'appartient pas à $g$","$g(3)=4$, le point n'appartient pas à $g$","Impossible à vérifier sans le graphique"], points:2},
         ],
-        indices:["Une solution d'un système doit vérifier les DEUX équations simultanément"]
+        indices:["Le point d'intersection vérifie $f(x)=g(x)$ : les deux fonctions y prennent la même valeur"]
       },
       {
-        id:"syst_3_2", titre:"Systèmes par substitution", niveau:"Facile", points_total:16, competences:["Résoudre un problème conduisant à un système de deux équations du premier degré à deux inconnues"],
+        id:"syst_3_2", titre:"Intersections de droites — méthode algébrique", niveau:"Facile", points_total:16, competences:["Résoudre algébriquement une équation du premier degré du type ax+b=cx+d"],
         questions:[
-          {label:"a)", enonce:"Résous par substitution : $\\begin{cases} y = 2x + 1 \\\\ 3x + y = 11 \\end{cases}$ Donne $x$.",
+          {label:"a)", enonce:"$f(x)=3x+1$ et $g(x)=x+9$. Résous $f(x)=g(x)$ pour trouver l'abscisse du point d'intersection.",
            type:"libre", points:3},
-          {label:"b)", enonce:"Résous : $\\begin{cases} x = y - 3 \\\\ 2x + y = 9 \\end{cases}$ Donne $y$.",
+          {label:"b)", enonce:"$f(x)=2x-3$ et $g(x)=-x+6$. Résous $f(x)=g(x)$ pour trouver l'abscisse du point d'intersection.",
            type:"libre", points:3},
-          {label:"c)", enonce:"Résous : $\\begin{cases} y = 3x - 1 \\\\ 2x + y = 9 \\end{cases}$ Donne $x$.",
+          {label:"c)", enonce:"$f(x)=4x-1$ et $g(x)=x+8$. Résous $f(x)=g(x)$, puis donne l'ordonnée du point d'intersection.",
            type:"libre", points:4},
-          {label:"d)", enonce:"Résous : $\\begin{cases} y = 2x - 3 \\\\ 3x + y = 12 \\end{cases}$ Donne $x$.",
+          {label:"d)", enonce:"$f(x)=-2x+5$ et $g(x)=x-4$. Résous $f(x)=g(x)$ pour trouver l'abscisse du point d'intersection.",
            type:"libre", points:3},
-          {label:"e)", enonce:"Résous : $\\begin{cases} x = y + 2 \\\\ 2x + 3y = 19 \\end{cases}$ Donne $y$.",
+          {label:"e)", enonce:"$f(x)=3x-2$ et $g(x)=-2x+8$. Résous $f(x)=g(x)$ pour trouver l'abscisse du point d'intersection.",
            type:"libre", points:3},
         ],
-        indices:["Substitution : remplace la variable isolée dans l'autre équation"]
+        indices:["Pose $f(x)=g(x)$, résous cette équation à une inconnue"]
       },
       {
-        id:"syst_3_3", titre:"Systèmes par combinaison linéaire", niveau:"Moyen", points_total:16, competences:["Résoudre un problème conduisant à un système de deux équations du premier degré à deux inconnues"],
+        id:"syst_3_3", titre:"Intersections de droites — coefficients et réduction", niveau:"Moyen", points_total:16, competences:["Résoudre algébriquement une équation du premier degré du type ax+b=cx+d"],
         questions:[
-          {label:"a)", enonce:"Résous par combinaison : $\\begin{cases} 2x+y=7 \\\\ 2x-y=1 \\end{cases}$ Donne $y$.",
+          {label:"a)", enonce:"$f(x)=5x+3$ et $g(x)=2x+15$. Résous $f(x)=g(x)$ pour trouver l'abscisse du point d'intersection.",
            type:"libre", points:3},
-          {label:"b)", enonce:"Pour éliminer $x$ dans $\\begin{cases} 3x+2y=13 \\\\ x-y=1 \\end{cases}$, que faut-il faire ?",
+          {label:"b)", enonce:"Avant de résoudre $4x+7=x+16-3x+9$, il faut réduire le membre de droite. Quelle est la forme réduite de $x+16-3x+9$ ?",
            type:"qcm",
-           choix:["Multiplier (1) par $3$","Multiplier (2) par $3$ puis soustraire","Additionner les deux équations directement","Multiplier (2) par $-3$ puis ajouter à (1)"], points:3},
-          {label:"c)", enonce:"Résous : $\\begin{cases} 4x+3y=18 \\\\ 2x-y=4 \\end{cases}$ Donne $x$.",
+           choix:["$-2x+25$","$4x+25$","$-2x+7$","$2x+25$"], points:3},
+          {label:"c)", enonce:"En utilisant cette forme réduite, résous $4x+7=-2x+25$. Donne $x$.",
            type:"libre", points:3},
-          {label:"d)", enonce:"Résous : $\\begin{cases} 3x+2y=12 \\\\ 5x-2y=4 \\end{cases}$ Donne $x$.",
+          {label:"d)", enonce:"$f(x)=6x-5$ et $g(x)=2x+11$. Résous $f(x)=g(x)$ pour trouver l'abscisse du point d'intersection.",
            type:"libre", points:3},
-          {label:"e)", enonce:"Résous : $\\begin{cases} 2x+3y=13 \\\\ 4x-3y=5 \\end{cases}$ Donne $x$.",
+          {label:"e)", enonce:"$f(x)=3x+8$ et $g(x)=-x+24$. Résous $f(x)=g(x)$, puis donne l'ordonnée du point d'intersection.",
            type:"libre", points:4},
         ],
-        indices:["Combinaison : multiplier pour avoir des coefficients opposés sur une variable, puis additionner"]
+        indices:["Réduis d'abord chaque membre, puis résous $f(x)=g(x)$"]
       },
       {
-        id:"syst_3_4", titre:"Systèmes avec fractions et décimaux", niveau:"Difficile", points_total:19, competences:["Résoudre un problème conduisant à un système de deux équations du premier degré à deux inconnues"],
+        id:"syst_3_4", titre:"Intersections de droites — fractions et décimaux", niveau:"Difficile", points_total:19, competences:["Résoudre algébriquement une équation du premier degré du type ax+b=cx+d"],
         questions:[
-          {label:"a)", enonce:"Résous : $\\begin{cases} \\dfrac{x}{2}+y=8 \\\\ x-y=1 \\end{cases}$ Donne $x$.",
+          {label:"a)", enonce:"$f(x)=\\dfrac{x}{2}+3$ et $g(x)=x-1$. Résous $f(x)=g(x)$ pour trouver l'abscisse du point d'intersection.",
            type:"libre", points:4},
-          {label:"b)", enonce:"Le système $\\begin{cases} 0{,}5x+y=4 \\\\ x+0{,}5y=5 \\end{cases}$ a pour solution :",
+          {label:"b)", enonce:"$f(x)=0{,}5x+4$ et $g(x)=x+1$. Le point d'intersection a pour abscisse :",
            type:"qcm",
-           choix:["$x=4$, $y=2$","$x=2$, $y=3$","$x=6$, $y=1$","$x=3$, $y=2{,}5$"], points:4},
-          {label:"c)", enonce:"Résous : $\\begin{cases} 2(x+1)+3y=21 \\\\ x-2(y-1)=1 \\end{cases}$ Donne $y$.",
+           choix:["$x=6$","$x=2$","$x=8$","$x=3$"], points:4},
+          {label:"c)", enonce:"$f(x)=\\dfrac{2x+1}{3}$ et $g(x)=x-3$ (mets d'abord $f(x)=g(x)$ sur le même dénominateur). Résous pour trouver l'abscisse du point d'intersection.",
            type:"libre", points:4},
-          {label:"d)", enonce:"Résous : $\\begin{cases} \\dfrac{x}{3}+y=5 \\\\ x-y=1 \\end{cases}$ Donne $x$.",
+          {label:"d)", enonce:"$f(x)=\\dfrac{x}{3}+5$ et $g(x)=x+1$. Résous $f(x)=g(x)$ pour trouver l'abscisse du point d'intersection.",
            type:"libre", points:3},
-          {label:"e)", enonce:"Le système $\\begin{cases} 0{,}5x+y=6 \\\\ x+0{,}5y=6 \\end{cases}$ a pour solution :",
+          {label:"e)", enonce:"$f(x)=0{,}5x+6$ et $g(x)=x+2$. Le point d'intersection a pour abscisse :",
            type:"qcm",
-           choix:["$x=4$, $y=4$","$x=6$, $y=3$","$x=2$, $y=5$","$x=8$, $y=2$"], points:4},
+           choix:["$x=8$","$x=4$","$x=6$","$x=2$"], points:4},
         ],
-        indices:["Commence par éliminer les fractions en multipliant chaque équation par le bon entier"]
+        indices:["Élimine d'abord les fractions ou les décimaux, puis résous $f(x)=g(x)$"]
       },
       {
-        id:"syst_3_5", titre:"Systèmes — problèmes concrets", niveau:"Difficile", points_total:19, competences:["Résoudre un problème conduisant à un système de deux équations du premier degré à deux inconnues"],
+        id:"syst_3_5", titre:"Problèmes à une inconnue — cas concrets", niveau:"Difficile", points_total:19, competences:["Mettre un problème en équation à l'aide d'une inconnue unique et le résoudre"],
         questions:[
-          {label:"1.", enonce:"La somme de deux nombres est $31$ et leur différence est $7$. Quel est le plus grand ?",
+          {label:"1.", enonce:"La somme de deux nombres est $31$ et leur différence est $7$. En notant $x$ le plus grand des deux nombres, le second vaut $x-7$. Résous $x+(x-7)=31$ pour trouver $x$ (le plus grand des deux nombres).",
            type:"libre", points:3},
-          {label:"2.", enonce:"$3$ croissants et $2$ cafés coûtent $8{,}50$€. $1$ croissant et $4$ cafés coûtent $7{,}50$€. Quel est le prix d'un croissant ?",
+          {label:"2.", enonce:"$3$ croissants et $2$ cafés coûtent $8{,}50$€. $1$ croissant et $4$ cafés coûtent $7{,}50$€, donc un croissant coûte $(7{,}50-4c)$€ si $c$ est le prix d'un café. En substituant dans la première égalité, résous $3(7{,}50-4c)+2c=8{,}50$ pour trouver $c$, puis calcule le prix d'un croissant : $7{,}50-4c$.",
            type:"libre", points:4},
           {label:"3.", enonce:"Un train part de A vers B à $120$ km/h. Un autre part de B vers A à $80$ km/h. Ils se croisent après $1{,}5$ h. Quelle est la distance AB ?",
            type:"qcm",
            choix:["$200$ km","$240$ km","$280$ km","$300$ km"], points:5},
-          {label:"4.", enonce:"La somme de deux nombres est $42$ et leur différence est $8$. Quel est le plus petit ?",
+          {label:"4.", enonce:"La somme de deux nombres est $42$ et leur différence est $8$. En notant $y$ le plus petit des deux nombres, le plus grand vaut $y+8$. Résous $(y+8)+y=42$ pour trouver $y$ (le plus petit des deux nombres).",
            type:"libre", points:3},
-          {label:"5.", enonce:"$2$ sandwichs et $3$ jus coûtent $13$€. $4$ sandwichs et $1$ jus coûtent $17$€. Quel est le prix d'un sandwich ?",
+          {label:"5.", enonce:"$2$ sandwichs et $3$ jus coûtent $13$€. $4$ sandwichs et $1$ jus coûtent $17$€, donc un jus coûte $(17-4s)$€ si $s$ est le prix d'un sandwich. En substituant dans la première égalité, résous $2s+3(17-4s)=13$ pour trouver $s$ (le prix d'un sandwich, en €).",
            type:"libre", points:4},
         ],
-        indices:["Pose deux inconnues, traduis chaque condition en équation, forme le système"]
+        indices:["Choisis une seule inconnue et exprime l'autre quantité en fonction d'elle"]
       },
       {
-        id:"syst_3_8", titre:"Systèmes — méthode de comparaison", niveau:"Difficile", points_total:16, competences:["Résoudre un problème conduisant à un système de deux équations du premier degré à deux inconnues"],
+        id:"syst_3_8", titre:"Intersections de droites — cas déjà réduits", niveau:"Difficile", points_total:16, competences:["Résoudre algébriquement une équation du premier degré du type ax+b=cx+d"],
         questions:[
-          {label:"a)", enonce:"Résous par comparaison : $\\begin{cases}y=2x+1\\\\y=x+4\\end{cases}$ Donne $y$.",
+          {label:"a)", enonce:"$f(x)=2x+1$ et $g(x)=x+6$. Résous $f(x)=g(x)$ pour trouver l'abscisse du point d'intersection.",
            type:"libre", points:3},
-          {label:"b)", enonce:"Résous : $\\begin{cases}y=3-x\\\\y=x-1\\end{cases}$ Donne $y$.",
+          {label:"b)", enonce:"$f(x)=3-x$ et $g(x)=x-1$. Résous $f(x)=g(x)$ pour trouver l'abscisse du point d'intersection.",
            type:"libre", points:3},
-          {label:"c)", enonce:"Résous : $\\begin{cases}\\dfrac{x+y}{2}=5\\\\x-y=4\\end{cases}$ Donne $y$.",
+          {label:"c)", enonce:"$f(x)=\\dfrac{x+6}{2}$ et $g(x)=x-1$. Résous $f(x)=g(x)$ pour trouver l'abscisse du point d'intersection.",
            type:"libre", points:3},
-          {label:"d.", enonce:"Quel système a pour solution $(x=2\,;\,y=-1)$ ?",
-           type:"qcm", choix:["$\\begin{cases}x+y=1\\\\x-y=3\\end{cases}$","$\\begin{cases}2x+y=3\\\\x+y=1\\end{cases}$","$\\begin{cases}x+y=3\\\\x-y=1\\end{cases}$","$\\begin{cases}x+2y=4\\\\x-y=1\\end{cases}$"], points:3},
-          {label:"e)", enonce:"Résous par comparaison : $\\begin{cases}y=3x-2\\\\y=x+2\\end{cases}$ Donne $y$.",
+          {label:"d)", enonce:"Deux droites $f(x)=ax+3$ et $g(x)=x-1$ se coupent au point d'abscisse $x=2$. Calcule $a$ sachant que $f(2)=g(2)$.",
+           type:"libre", points:3},
+          {label:"e)", enonce:"$f(x)=3x-2$ et $g(x)=x+2$. Résous $f(x)=g(x)$ pour trouver l'abscisse du point d'intersection.",
            type:"libre", points:4},
         ],
-        indices:["Comparaison : si les deux équations donnent $y=...$, on les égalise"]
+        indices:["Si $f(x)=ax+b$ et $g(x)=cx+d$, résous $ax+b=cx+d$"]
       },
       {
-        id:"syst_3_9", titre:"Systèmes — brevet 3ème", niveau:"Difficile", points_total:19, competences:["Résoudre un problème conduisant à un système de deux équations du premier degré à deux inconnues"],
+        id:"syst_3_9", titre:"Problèmes et intersections — brevet 3ème", niveau:"Difficile", points_total:19, competences:["Mettre un problème en équation à l'aide d'une inconnue unique et le résoudre"],
         questions:[
           {label:"1.", enonce:"Un train A roule à $160$ km/h et B à $120$ km/h en sens inverse. Distance AB $= 400$ km. Dans combien de temps (en heures, arrondi au centième) se croisent-ils ?",
            type:"libre", points:5},
-          {label:"2.", enonce:"$3$ adultes et $5$ enfants : $65$€. $2$ adultes et $8$ enfants : $62$€. Prix adulte et enfant ?",
+          {label:"2.", enonce:"$3$ adultes et $5$ enfants : $65$€. $2$ adultes et $8$ enfants : $62$€, donc un adulte coûte $\\left(\\dfrac{62-8e}{2}\\right)$€ si $e$ est le prix d'une entrée enfant. En substituant dans la première égalité, résous $3\\times\\dfrac{62-8e}{2}+5e=65$ pour trouver $e$ (le prix d'une entrée enfant, en €).",
            type:"libre", points:4},
-          {label:"3.", enonce:"Résous : $\\begin{cases}0{,}5x+y=4\\\\x+0{,}5y=5\\end{cases}$",
+          {label:"3.", enonce:"$f(x)=0{,}5x+4$ et $g(x)=-0{,}5x+8$. Résous $f(x)=g(x)$ pour trouver l'abscisse du point d'intersection.",
            type:"libre", points:3},
           {label:"4.", enonce:"Un train A roule à $140$ km/h et B à $100$ km/h en sens inverse. Distance AB $= 360$ km. Dans combien de temps (en heures, arrondi au centième) se croisent-ils ?",
            type:"libre", points:4},
-          {label:"5.", enonce:"$4$ adultes et $3$ enfants : $71$€. $2$ adultes et $6$ enfants : $58$€. Prix d'un adulte et d'un enfant ?",
+          {label:"5.", enonce:"$4$ adultes et $3$ enfants : $71$€. $2$ adultes et $6$ enfants : $58$€, donc un adulte coûte $\\left(\\dfrac{58-6e}{2}\\right)$€ si $e$ est le prix d'une entrée enfant. En substituant dans la première égalité, résous $4\\times\\dfrac{58-6e}{2}+3e=71$ pour trouver $e$ (le prix d'une entrée enfant, en €).",
            type:"libre", points:3},
         ],
-        indices:["Pour le rattrapage : distance$_1$ + distance$_2$ = distance totale"]
+        indices:["Pour le rattrapage : distance$_1$ + distance$_2$ = distance totale ; sinon, choisis une seule inconnue"]
       },
       {
-        id:"syst_3_6", titre:"Systèmes — Objectif Brevet I", niveau:"Difficile", points_total:17, competences:["Résoudre un problème conduisant à un système de deux équations du premier degré à deux inconnues"],
+        id:"syst_3_6", titre:"Problèmes à une inconnue — Objectif Brevet I", niveau:"Difficile", points_total:17, competences:["Mettre un problème en équation à l'aide d'une inconnue unique et le résoudre"],
         questions:[
           {label:"1.", enonce:"Deux tarifs de taxi : Taxi A $= 2$€ + $1{,}50$€/km ; Taxi B $= 0{,}80$€/km. À partir de quel km Taxi A est-il moins cher que Taxi B ?",
            type:"qcm", choix:["À partir de $3$ km","À partir de $10$ km","Jamais, Taxi A est toujours plus cher","Ils sont toujours égaux"], points:4},
-          {label:"2.", enonce:"La somme de deux nombres est $45$ et leur produit est $500$. Trouve le plus grand des deux.",
+          {label:"2.", enonce:"La somme de deux nombres est $38$ et leur différence est $12$. En notant $x$ le plus grand, le second vaut $x-12$. Résous $x+(x-12)=38$ pour trouver $x$.",
            type:"libre", points:3},
-          {label:"3.", enonce:"$4$ pommes et $3$ oranges coûtent $3{,}10$€. $2$ pommes et $5$ oranges coûtent $3{,}30$€. Prix d'une pomme ?",
+          {label:"3.", enonce:"$4$ pommes et $3$ oranges coûtent $3{,}10$€. $2$ pommes et $5$ oranges coûtent $3{,}30$€, donc une pomme coûte $\\left(\\dfrac{3{,}30-5o}{2}\\right)$€ si $o$ est le prix d'une orange. En substituant dans la première égalité, résous $4\\times\\dfrac{3{,}30-5o}{2}+3o=3{,}10$ pour trouver $o$ (le prix d'une orange, en €).",
            type:"libre", points:3},
-          {label:"4.", enonce:"La somme de deux nombres est $50$ et leur produit est $600$. Trouve le plus grand des deux.",
+          {label:"4.", enonce:"La somme de deux nombres est $63$ et leur différence est $15$. En notant $x$ le plus grand, le second vaut $x-15$. Résous $x+(x-15)=63$ pour trouver $x$.",
            type:"libre", points:3},
-          {label:"5.", enonce:"$3$ crayons et $2$ gommes coûtent $2{,}20$€. $5$ crayons et $1$ gomme coûtent $2{,}90$€. Prix d'un crayon ?",
+          {label:"5.", enonce:"$3$ crayons et $2$ gommes coûtent $2{,}20$€. $5$ crayons et $1$ gomme coûtent $2{,}90$€, donc une gomme coûte $(2{,}90-5c)$€ si $c$ est le prix d'un crayon. En substituant dans la première égalité, résous $3c+2(2{,}90-5c)=2{,}20$ pour trouver $c$ (le prix d'un crayon, en €, arrondi au centime).",
            type:"libre", points:4},
         ],
-        indices:["D'après DNB — modéliser avec deux inconnues"]
+        indices:["D'après DNB — choisis une seule inconnue, exprime l'autre en fonction d'elle"]
       },
       {
-        id:"syst_3_7", titre:"Systèmes — Objectif Brevet II", niveau:"Difficile", points_total:23, competences:["Résoudre un problème conduisant à un système de deux équations du premier degré à deux inconnues"],
+        id:"syst_3_7", titre:"Problèmes à une inconnue — Objectif Brevet II", niveau:"Difficile", points_total:23, competences:["Mettre un problème en équation à l'aide d'une inconnue unique et le résoudre"],
         questions:[
           {label:"1.", enonce:"Un car à $90$ km/h part de A. $30$ min plus tard, une voiture à $120$ km/h part du même point. Dans combien de temps (en heures) après son départ la voiture rattrape-t-elle le car ?",
            type:"libre", points:5},
-          {label:"2.", enonce:"Une classe de $30$ élèves : filles et garçons. $\\dfrac{2}{3}$ des filles et $\\dfrac{1}{2}$ des garçons font du sport, soit $17$ sportifs. Combien de filles ?",
+          {label:"2.", enonce:"Une classe de $30$ élèves : filles et garçons. Le nombre de garçons vaut $(30-f)$ si $f$ est le nombre de filles. $\\dfrac{2}{3}$ des filles et $\\dfrac{1}{2}$ des garçons font du sport, soit $17$ sportifs. En substituant, résous $\\dfrac{2f}{3}+\\dfrac{30-f}{2}=17$ pour trouver $f$ (le nombre de filles).",
            type:"libre", points:5},
           {label:"3.", enonce:"Un bus à $80$ km/h part de A. $15$ min plus tard, une voiture à $100$ km/h part du même point. Dans combien de temps (en heures) après son départ la voiture rattrape-t-elle le bus ?",
            type:"libre", points:4},
-          {label:"4.", enonce:"Une classe de $28$ élèves : filles et garçons. $\\dfrac{1}{2}$ des filles et $\\dfrac{1}{3}$ des garçons font du sport, soit $12$ sportifs. Combien de filles ?",
+          {label:"4.", enonce:"Une classe de $28$ élèves : filles et garçons. Le nombre de garçons vaut $(28-f)$ si $f$ est le nombre de filles. $\\dfrac{1}{2}$ des filles et $\\dfrac{1}{3}$ des garçons font du sport, soit $12$ sportifs. En substituant, résous $\\dfrac{f}{2}+\\dfrac{28-f}{3}=12$ pour trouver $f$ (le nombre de filles).",
            type:"libre", points:4},
-          {label:"5.", enonce:"$5$ stylos et $2$ cahiers coûtent $9$€. $2$ stylos et $3$ cahiers coûtent $8$€. Prix d'un stylo ?",
+          {label:"5.", enonce:"$5$ stylos et $2$ cahiers coûtent $9$€. $2$ stylos et $3$ cahiers coûtent $8$€, donc un cahier coûte $\\left(\\dfrac{8-2s}{3}\\right)$€ si $s$ est le prix d'un stylo. En substituant dans la première égalité, résous $5s+2\\times\\dfrac{8-2s}{3}=9$ pour trouver $s$ (le prix d'un stylo, en €).",
            type:"libre", points:5},
         ],
-        indices:["D'après DNB — traduire chaque condition en équation"]
+        indices:["D'après DNB — choisis une seule inconnue, exprime l'autre en fonction d'elle"]
       },
     ],
 
@@ -4622,6 +4637,21 @@ const EXERCICES = {
       },
     ],
 
+    "Croisement de deux variables qualitatives": [
+      {
+        id:"tableaucroise_2_genere", titre:"Tableau croisé d'effectifs — entraînement infini", niveau:"Moyen", points_total:5, competences:["Calculer des fréquences conditionnelles et des fréquences marginales à partir d'un tableau croisé"],
+        genere: true, templateId: "tableau_croise_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["Fréquence marginale : effectif de la marge ÷ population totale. Fréquence conditionnelle : effectif de l'intersection ÷ effectif de la SOUS-population (pas le total)"]
+      },
+    ],
+
     "Probabilités": [
       {
         id:"proba_2_genere", titre:"Probabilités — entraînement infini", niveau:"Facile", points_total:5, competences:["Calculer une probabilité dans un cas d'équiprobabilité"],
@@ -4688,14 +4718,14 @@ const EXERCICES = {
            type:"libre", points:3},
           {label:"b)", enonce:"En suivant le second chemin (verte puis brillante), calcule $P(\\text{verte}\\cap\\text{brillante})$.",
            type:"libre", points:3},
-          {label:"c)", enonce:"En additionnant les deux chemins de l'arbre qui mènent à une boule brillante, calcule $P(\\text{brillante})$.",
+          {label:"c)", enonce:"En suivant le chemin verte puis non brillante, calcule $P(\\text{verte}\\cap\\text{non brillante})$.",
            type:"libre", points:3},
-          {label:"d)", enonce:"En déduis $P(\\text{non brillante})$.",
+          {label:"d)", enonce:"Sachant qu'une boule est verte, quelle est la probabilité qu'elle ne soit pas brillante ? (donne $P_{\\text{verte}}(\\text{non brillante})$)",
            type:"libre", points:3},
           {label:"e)", enonce:"Parmi les rouges ($40\\%$ du total, dont $25\\%$ brillantes), calcule $P(\\text{rouge}\\cap\\text{non brillante})$.",
            type:"libre", points:3},
         ],
-        indices:["Sur un arbre pondéré : on multiplie les probabilités le long d'un chemin, on additionne les chemins qui mènent au même résultat final"]
+        indices:["Sur un arbre pondéré : la probabilité d'un chemin s'obtient en multipliant les probabilités le long du chemin"]
       },
     ],
 
@@ -4760,10 +4790,10 @@ const EXERCICES = {
            type:"qcm", choix:["Parallèles","Perpendiculaires","Ni l'un ni l'autre","Confondues"], points:3},
           {label:"c)", enonce:"Trouve l'abscisse du point d'intersection de $y = x + 1$ et $y = -2x + 7$.", points:3},
           {label:"d)", enonce:"Donne le coefficient directeur de la droite passant par $C(2\\,;\\,-1)$ et $D(5\\,;\\,8)$.", points:3},
-          {label:"e)", enonce:"Les droites $y = 3x + 2$ et $y = -\\dfrac{1}{3}x - 1$ sont-elles perpendiculaires ?",
-           type:"qcm", choix:["Oui","Non","Parallèles","Confondues"], points:4},
+          {label:"e)", enonce:"Les droites $y = 4x - 2$ et $y = 4x + 5$ sont-elles parallèles, sécantes, ou confondues ?",
+           type:"qcm", choix:["Parallèles","Sécantes","Confondues","Perpendiculaires"], points:4},
         ],
-        indices:["Deux droites parallèles ont le même coefficient directeur ; perpendiculaires si $a_1 \\times a_2 = -1$"]
+        indices:["Deux droites parallèles ont le même coefficient directeur ; sinon elles sont sécantes en un unique point"]
       },
       {
         id:"georep_2_C", titre:"Distance et cercles", niveau:"Difficile", points_total:17, competences:["Calculer une distance entre deux points, étudier un cercle"],
@@ -5028,38 +5058,6 @@ const EXERCICES = {
         ],
         indices:["Ordre : Parenthèses → × et ÷ → + et −"]
       },
-      {
-        id:"nb_6_4", titre:"Fractions — comprendre et calculer", niveau:"Moyen", points_total:12, competences:["Utiliser des fractions simples"],
-        questions:[
-          {label:"a)", enonce:"Écris $\\dfrac{3}{4}$ en nombre décimal.",
-           type:"libre", points:2},
-          {label:"b)", enonce:"Calcule : $\\dfrac{1}{2} + \\dfrac{1}{3}$",
-           type:"libre", points:3},
-          {label:"c.", enonce:"Range dans l'ordre croissant : $\\dfrac{3}{4}$ ; $0{,}7$ ; $\\dfrac{2}{3}$",
-           type:"qcm", choix:["$\\dfrac{2}{3} < 0{,}7 < \\dfrac{3}{4}$","$\\dfrac{3}{4} < 0{,}7 < \\dfrac{2}{3}$","$0{,}7 < \\dfrac{2}{3} < \\dfrac{3}{4}$","$\\dfrac{2}{3} < \\dfrac{3}{4} < 0{,}7$"], points:3},
-          {label:"d)", enonce:"Quelle fraction est égale à $0{,}25$ ?",
-           type:"qcm", choix:["$\\dfrac{1}{2}$","$\\dfrac{1}{4}$","$\\dfrac{2}{5}$","$\\dfrac{1}{3}$"], points:2},
-          {label:"e)", enonce:"Calcule : $\\dfrac{3}{5} - \\dfrac{1}{5}$",
-           type:"libre", points:2},
-        ],
-        indices:["Pour comparer des fractions, convertis-les en décimaux"]
-      },
-      {
-        id:"nb_6_5", titre:"Proportionnalité — problèmes combinés", niveau:"Difficile", points_total:19, competences:["Reconnaître et traiter une situation de proportionnalité"],
-        questions:[
-          {label:"1.", enonce:"$3$ stylos coûtent $4{,}50$€. Combien coûtent $7$ stylos ?",
-           type:"libre", points:3},
-          {label:"2.", enonce:"Une voiture roule à $90$ km/h pendant $2{,}5$ h. Quelle distance a-t-elle parcourue ?",
-           type:"libre", points:4},
-          {label:"3.", enonce:"Dans une classe de $30$ élèves, $18$ sont des filles. Quel pourcentage de filles ?",
-           type:"libre", points:5},
-          {label:"4.", enonce:"Une recette pour $4$ personnes utilise $250$ g de farine. Quelle quantité de farine faut-il pour $6$ personnes ?",
-           type:"libre", points:3},
-          {label:"5.", enonce:"Un robinet remplit $15$ L en $3$ minutes. Combien de litres remplit-il en $8$ minutes ?",
-           type:"libre", points:4},
-        ],
-        indices:["Dans un tableau de proportionnalité, on multiplie ou divise par le même nombre"]
-      },
     ],
 
     "Géométrie plane": [
@@ -5096,7 +5094,7 @@ const EXERCICES = {
         questions:[
           {label:"a)", enonce:"Aire d'un rectangle $8$ cm × $5$ cm ?",
            type:"libre", points:2},
-          {label:"b)", enonce:"Aire d'un triangle de base $6$ cm et hauteur $4$ cm ?",
+          {label:"b)", enonce:"Aire d'un rectangle $10$ cm × $4$ cm ?",
            type:"libre", points:2},
           {label:"c)", enonce:"Aire d'un carré de côté $9$ cm ?",
            type:"libre", points:2},
@@ -5112,16 +5110,16 @@ const EXERCICES = {
         questions:[
           {label:"1.", enonce:"Combien d'axes de symétrie a un rectangle (non carré) ?",
            type:"qcm", choix:["$0$","$1$","$2$","$4$"], points:2},
-          {label:"2.", enonce:"Symétrique de $A(3\\,;\\,2)$ par rapport à l'axe des ordonnées $(Oy)$.",
+          {label:"2.", enonce:"Sur un quadrillage, un point $M$ est situé à $4$ carreaux à droite d'une droite verticale $d$. À combien de carreaux de $d$ se trouve son symétrique par rapport à $d$ ?",
            type:"libre", points:3},
-          {label:"3.", enonce:"Symétrique de $B(4\\,;\\,-1)$ par rapport à l'axe des abscisses $(Ox)$.",
+          {label:"3.", enonce:"Sur un quadrillage, un segment $[AB]$ mesure $6$ carreaux de long. Quelle est la longueur (en carreaux) du segment symétrique $[A'B']$ par rapport à une droite $d$ ?",
            type:"libre", points:3},
           {label:"4.", enonce:"Combien d'axes de symétrie a un cercle ?",
            type:"qcm", choix:["$0$","$2$","$4$","Une infinité"], points:2},
           {label:"5.", enonce:"Combien d'axes de symétrie a un triangle équilatéral ?",
            type:"qcm", choix:["$0$","$1$","$3$","Une infinité"], points:2},
         ],
-        indices:["Axe $(Oy)$ : change le signe de $x$ ; Axe $(Ox)$ : change le signe de $y$"]
+        indices:["La symétrie axiale conserve les distances et les longueurs ; un point et son symétrique sont à la même distance de l'axe, de part et d'autre"]
       },
       {
         id:"geo_6_4", titre:"Figures usuelles — triangles et quadrilatères", niveau:"Moyen", points_total:12, competences:["Reconnaître et nommer les figures planes usuelles"],
@@ -5203,20 +5201,20 @@ const EXERCICES = {
         indices:["$p\\%$ de $x = x \\times \\dfrac{p}{100}$"]
       },
       {
-        id:"prop_6_3", titre:"Vitesse et proportionnalité", niveau:"Moyen", points_total:13, competences:["Résoudre un problème de vitesse par proportionnalité"],
+        id:"prop_6_3", titre:"Proportionnalité — achats et quantités", niveau:"Moyen", points_total:13, competences:["Résoudre un problème de proportionnalité en choisissant une procédure adaptée : linéarité, retour à l'unité"],
         questions:[
-          {label:"a)", enonce:"$d=v\\times t$. Un cycliste roule à $15$ km/h pendant $3$ h. Distance ?",
+          {label:"a)", enonce:"$4$ kg de pommes de terre coûtent $6$€. Combien coûtent $10$ kg de pommes de terre ?",
+           type:"libre", points:3},
+          {label:"b)", enonce:"Un pot de peinture permet de couvrir $15$ m² de mur. Combien de pots faut-il pour couvrir $60$ m² ?",
+           type:"libre", points:3},
+          {label:"c)", enonce:"$9$ tickets de manège coûtent $18$€. Quel est le prix d'un seul ticket ?",
            type:"libre", points:2},
-          {label:"b)", enonce:"$420$ km en $6$ h. Vitesse moyenne ?",
-           type:"libre", points:3},
-          {label:"c)", enonce:"Durée pour $200$ km à $80$ km/h ?",
-           type:"libre", points:3},
-          {label:"d.", enonce:"Quelle formule donne la durée $t$ en fonction de $d$ et $v$ ?",
-           type:"qcm", choix:["$t=d\\times v$","$t=\\dfrac{d}{v}$","$t=\\dfrac{v}{d}$","$t=d+v$"], points:2},
-          {label:"e.", enonce:"Un train roule à $120$ km/h pendant $2{,}5$ h. Distance parcourue ?",
+          {label:"d.", enonce:"Avec ce prix ($2$€ le ticket), combien coûtent $15$ tickets ?",
+           type:"libre", points:2},
+          {label:"e.", enonce:"Un sac contient $8$ kg de riz pour $12$ personnes (portions égales). Quelle quantité de riz faut-il pour $18$ personnes ?",
            type:"libre", points:3},
         ],
-        indices:["$d = v \\times t$ ; $v = \\dfrac{d}{t}$ ; $t = \\dfrac{d}{v}$"]
+        indices:["Retour à l'unité : trouve d'abord la valeur pour $1$, puis multiplie"]
       },
       {
         id:"prop_6_4", titre:"Échelles et agrandissements", niveau:"Moyen", points_total:16, competences:["Utiliser une échelle dans un contexte de proportionnalité"],
@@ -5249,6 +5247,22 @@ const EXERCICES = {
            type:"libre", points:3},
         ],
         indices:["Passage par l'unité : trouve d'abord la valeur pour $1$, puis multiplie"]
+      },
+      {
+        id:"nb_6_5", titre:"Proportionnalité — problèmes variés", niveau:"Difficile", points_total:19, competences:["Reconnaître et traiter une situation de proportionnalité"],
+        questions:[
+          {label:"1.", enonce:"$3$ stylos coûtent $4{,}50$€. Combien coûtent $7$ stylos ?",
+           type:"libre", points:3},
+          {label:"2.", enonce:"Un tailleur utilise $3$ m de tissu pour confectionner $2$ vestes identiques. Quelle quantité de tissu faut-il pour $8$ vestes ?",
+           type:"libre", points:4},
+          {label:"3.", enonce:"Dans une classe de $30$ élèves, $18$ sont des filles. Quel pourcentage de filles ?",
+           type:"libre", points:5},
+          {label:"4.", enonce:"Une machine produit $9$ boîtes identiques en utilisant $54$ vis. Combien de vis faut-il pour produire $15$ boîtes ?",
+           type:"libre", points:3},
+          {label:"5.", enonce:"Il faut $80$ carreaux pour carreler $4$ m² de sol. Combien de carreaux faut-il pour carreler $18$ m² ?",
+           type:"libre", points:4},
+        ],
+        indices:["Dans un tableau de proportionnalité, on multiplie ou divise par le même nombre"]
       },
     ],
 
@@ -5395,13 +5409,13 @@ const EXERCICES = {
       {
         id:"frac_6_3", titre:"Fractions — multiplier", niveau:"Moyen", points_total:16, competences:["Multiplier une fraction simple par un entier"],
         questions:[
-          {label:"a)", enonce:"Calcule : $\\dfrac{3}{4}\\times\\dfrac{8}{9}$",
+          {label:"a)", enonce:"$\\dfrac{3}{4}$ de $84$ œufs",
            type:"libre", points:3},
           {label:"b)", enonce:"$\\dfrac{2}{3}$ de $150$€",
            type:"libre", points:3},
-          {label:"c)", enonce:"Simplifie avant de calculer : $\\dfrac{4}{7}\\times\\dfrac{14}{8}$",
+          {label:"c)", enonce:"$\\dfrac{5}{6}$ de $42$ billes",
            type:"libre", points:4},
-          {label:"d)", enonce:"Calcule : $\\dfrac{5}{6}\\times\\dfrac{3}{10}$",
+          {label:"d)", enonce:"$\\dfrac{2}{9}$ de $72$ billets",
            type:"libre", points:3},
           {label:"e)", enonce:"$\\dfrac{3}{5}$ de $200$ élèves",
            type:"libre", points:3},
@@ -5431,14 +5445,30 @@ const EXERCICES = {
            type:"libre", points:3},
           {label:"2.", enonce:"Un réservoir contient $\\dfrac{5}{8}$ de sa capacité, soit $350$ L. Capacité totale ?",
            type:"libre", points:4},
-          {label:"3.", enonce:"Calcule et simplifie : $\\dfrac{2}{3}\\times\\dfrac{9}{4}+\\dfrac{1}{2}$",
+          {label:"3.", enonce:"Calcule et simplifie : $\\dfrac{5}{6}+\\dfrac{2}{3}-\\dfrac{1}{4}$",
            type:"libre", points:5},
           {label:"4.", enonce:"Une citerne contient $\\dfrac{3}{5}$ de sa capacité, soit $420$ L. Capacité totale ?",
            type:"libre", points:4},
-          {label:"5.", enonce:"Calcule et simplifie : $\\dfrac{3}{4}\\times\\dfrac{2}{3}-\\dfrac{1}{4}$",
+          {label:"5.", enonce:"$\\dfrac{4}{9}$ de $63$ billets",
            type:"libre", points:3},
         ],
         indices:["Priorité aux multiplications avant les additions"]
+      },
+      {
+        id:"nb_6_4", titre:"Fractions — comprendre et calculer", niveau:"Moyen", points_total:12, competences:["Utiliser des fractions simples"],
+        questions:[
+          {label:"a)", enonce:"Écris $\\dfrac{3}{4}$ en nombre décimal.",
+           type:"libre", points:2},
+          {label:"b)", enonce:"Calcule : $\\dfrac{1}{2} + \\dfrac{1}{3}$",
+           type:"libre", points:3},
+          {label:"c.", enonce:"Range dans l'ordre croissant : $\\dfrac{3}{4}$ ; $0{,}7$ ; $\\dfrac{2}{3}$",
+           type:"qcm", choix:["$\\dfrac{2}{3} < 0{,}7 < \\dfrac{3}{4}$","$\\dfrac{3}{4} < 0{,}7 < \\dfrac{2}{3}$","$0{,}7 < \\dfrac{2}{3} < \\dfrac{3}{4}$","$\\dfrac{2}{3} < \\dfrac{3}{4} < 0{,}7$"], points:3},
+          {label:"d)", enonce:"Quelle fraction est égale à $0{,}25$ ?",
+           type:"qcm", choix:["$\\dfrac{1}{2}$","$\\dfrac{1}{4}$","$\\dfrac{2}{5}$","$\\dfrac{1}{3}$"], points:2},
+          {label:"e)", enonce:"Calcule : $\\dfrac{3}{5} - \\dfrac{1}{5}$",
+           type:"libre", points:2},
+        ],
+        indices:["Pour comparer des fractions, convertis-les en décimaux"]
       },
     ],
 
@@ -5458,18 +5488,18 @@ const EXERCICES = {
       {
         id:"div_6_1", titre:"Multiples et diviseurs", niveau:"Facile", points_total:12, competences:["Utiliser les notions de multiples et de diviseurs"],
         questions:[
-          {label:"1.", enonce:"$24$ est-il divisible par $3$ ?",
-           type:"qcm", choix:["Oui, car $2+4=6$","Non","Oui, car $24$ est pair","Non, car $24>3$"], points:2},
+          {label:"1.", enonce:"$24$ est-il divisible par $2$ ?",
+           type:"qcm", choix:["Oui, car $24$ est pair","Non","Oui, car $2+4=6$","Non, car $24>2$"], points:2},
           {label:"2.", enonce:"Donne tous les diviseurs de $36$.",
            type:"qcm", choix:["$1, 2, 3, 4, 6, 9, 12, 18, 36$","$1, 2, 3, 6, 9, 12, 18, 36$","$1, 2, 4, 6, 9, 12, 18, 36$","$1, 2, 3, 4, 6, 8, 9, 12, 18, 36$"], points:3},
-          {label:"3.", enonce:"$378$ est-il divisible par $2$ ?",
+          {label:"3.", enonce:"$735$ est-il divisible par $2$ ?",
            type:"qcm", choix:["Oui","Non"], points:2},
-          {label:"3b.", enonce:"$378$ est-il divisible par $3$ ?",
+          {label:"3b.", enonce:"$735$ est-il divisible par $5$ ?",
            type:"qcm", choix:["Oui","Non"], points:2},
-          {label:"3c.", enonce:"$378$ est-il divisible par $9$ ?",
+          {label:"3c.", enonce:"$735$ est-il divisible par $10$ ?",
            type:"qcm", choix:["Oui","Non"], points:3},
         ],
-        indices:["Divisible par 9 si somme des chiffres divisible par 9 ; par 6 si divisible par 2 ET 3"]
+        indices:["Divisible par 2 si le dernier chiffre est pair ; par 5 si le dernier chiffre est 0 ou 5 ; par 10 si le dernier chiffre est 0"]
       },
     ],
 
@@ -5609,52 +5639,52 @@ const EXERCICES = {
         indices:["Somme des angles d'un triangle $= 180°$"]
       },
       {
-        id:"ang_6_2", titre:"Droites parallèles et perpendiculaires", niveau:"Moyen", points_total:12, competences:["Reconnaître des droites parallèles ou perpendiculaires"],
+        id:"ang_6_2", titre:"Droites parallèles et perpendiculaires", niveau:"Moyen", points_total:12, competences:["Reconnaître des droites parallèles ou perpendiculaires","Connaître et utiliser la propriété caractéristique de la médiatrice"],
         questions:[
           {label:"1.", enonce:"Deux droites perpendiculaires forment un angle de ?",
            type:"qcm", choix:["$45°$","$60°$","$90°$","$180°$"], points:2},
-          {label:"2.", enonce:"Une droite coupe deux parallèles. Les angles alternes-internes sont…",
-           type:"qcm", choix:["Supplémentaires","Égaux","Complémentaires","Quelconques"], points:3},
+          {label:"2.", enonce:"Deux droites parallèles à une même troisième droite sont…",
+           type:"qcm", choix:["Parallèles entre elles","Perpendiculaires entre elles","Sécantes","On ne peut pas savoir"], points:3},
           {label:"3.", enonce:"Un carré a $4$ angles droits. Somme de ses angles internes ?",
            type:"libre", points:3},
           {label:"d)", enonce:"La médiatrice d'un segment est la droite qui le coupe en son milieu…",
            type:"qcm", choix:["à $45°$","à $90°$","à $60°$","parallèlement"], points:2},
-          {label:"e)", enonce:"Une droite coupe deux parallèles. Les angles correspondants sont…",
-           type:"qcm", choix:["Supplémentaires","Égaux","Complémentaires","Quelconques"], points:2},
+          {label:"e)", enonce:"Un point de la médiatrice d'un segment $[AB]$ est…",
+           type:"qcm", choix:["Plus proche de $A$ que de $B$","Toujours équidistant de $A$ et de $B$","Toujours au milieu de $[AB]$","Plus proche de $B$ que de $A$"], points:2},
         ],
-        indices:["Médiatrice : perpendiculaire passant par le milieu du segment"]
+        indices:["Médiatrice : perpendiculaire passant par le milieu du segment, dont tous les points sont équidistants des extrémités"]
       },
       {
-        id:"ang_6_3", titre:"Symétrie axiale", niveau:"Moyen", points_total:12, competences:["Reconnaître et construire la symétrie axiale d'une figure"],
+        id:"ang_6_3", titre:"Angles opposés, adjacents et supplémentaires", niveau:"Moyen", points_total:12, competences:["Connaître et utiliser les angles ainsi que le lexique qui s'y rapporte : angles opposés par le sommet, angles adjacents, angles supplémentaires"],
         questions:[
-          {label:"1.", enonce:"Combien d'axes de symétrie a un triangle équilatéral ?",
-           type:"qcm", choix:["$1$","$2$","$3$","$6$"], points:2},
-          {label:"2.", enonce:"Symétrique de $A(3\,;\,2)$ par rapport à l'axe $(Oy)$.",
+          {label:"1.", enonce:"Deux angles opposés par le sommet sont formés par deux droites sécantes. Que peut-on dire de leurs mesures ?",
+           type:"qcm", choix:["Elles sont toujours égales","Leur somme vaut $180°$","Leur somme vaut $90°$","On ne peut rien dire"], points:2},
+          {label:"2.", enonce:"Deux droites sécantes forment un angle de $70°$. Quelle est la mesure de l'angle opposé par le sommet ?",
            type:"libre", points:3},
-          {label:"3.", enonce:"Symétrique de $B(-1\,;\,4)$ par rapport à l'axe $(Ox)$.",
+          {label:"3.", enonce:"Deux angles adjacents partagent un sommet et un côté commun $[OB)$, sans se chevaucher : $\\widehat{AOB}=35°$ et $\\widehat{BOC}=50°$. Quelle est la mesure de l'angle $\\widehat{AOC}$ ?",
            type:"libre", points:3},
-          {label:"4.", enonce:"Un rectangle non carré a combien d'axes de symétrie ?",
-           type:"qcm", choix:["$1$","$2$","$4$","Aucun"], points:2},
-          {label:"5.", enonce:"Combien d'axes de symétrie a un losange (non carré) ?",
-           type:"qcm", choix:["$0$","$1$","$2$","$4$"], points:2},
+          {label:"4.", enonce:"Quelle est la mesure d'un angle plat ?",
+           type:"qcm", choix:["$90°$","$180°$","$360°$","$0°$"], points:2},
+          {label:"5.", enonce:"Deux angles supplémentaires ont pour somme…",
+           type:"qcm", choix:["$90°$","$180°$","$360°$","Cela dépend"], points:2},
         ],
-        indices:["Axe $(Oy)$ : change le signe de $x$ ; Axe $(Ox)$ : change le signe de $y$"]
+        indices:["Deux angles opposés par le sommet ont toujours la même mesure ; deux angles adjacents partagent un sommet et un côté sans se chevaucher"]
       },
       {
         id:"ang_6_4", titre:"Cercle et figures usuelles", niveau:"Moyen", points_total:13, competences:["Reconnaître et construire un cercle"],
         questions:[
           {label:"a)", enonce:"Périmètre d'un cercle de rayon $5$ cm.",
            type:"libre", points:2},
-          {label:"b)", enonce:"Aire d'un cercle de diamètre $8$ cm.",
+          {label:"b)", enonce:"Périmètre d'un cercle de diamètre $10$ cm ($\\pi\\approx3{,}14$).",
            type:"libre", points:3},
-          {label:"c)", enonce:"Un disque a une aire de $28{,}26$ cm². Quel est son rayon ? ($\\pi\\approx3{,}14$)",
+          {label:"c)", enonce:"Un cercle a un périmètre de $18{,}84$ cm. Quel est son diamètre ? ($\\pi\\approx3{,}14$)",
            type:"libre", points:3},
           {label:"d)", enonce:"Quelle est la somme des angles d'un quadrilatère quelconque ?",
            type:"qcm", choix:["$180°$","$270°$","$360°$","$540°$"], points:2},
           {label:"e)", enonce:"Périmètre d'un cercle de diamètre $14$ cm ($\\pi\\approx3{,}14$).",
            type:"libre", points:3},
         ],
-        indices:["Cercle : $C=2\\pi r$ ; $A=\\pi r^2$"]
+        indices:["Cercle : $C=2\\pi r=\\pi d$ ; le périmètre du disque est proportionnel à son diamètre"]
       },
       {
         id:"ang_6_5", titre:"Angles et cercles — problèmes combinés", niveau:"Difficile", points_total:19, competences:["Mesurer et construire un angle","Reconnaître et construire un cercle"],
@@ -5671,6 +5701,42 @@ const EXERCICES = {
            type:"libre", points:5},
         ],
         indices:["Combine plusieurs formules de géométrie dans un même problème"]
+      },
+      {
+        id:"bissectrice_6_genere", titre:"Bissectrice d'un angle — entraînement infini", niveau:"Facile", points_total:5, competences:["Connaître la définition de la bissectrice d'un angle saillant","Utiliser la définition de la bissectrice d'un angle pour effectuer des constructions et résoudre des problèmes"],
+        genere: true, templateId: "bissectrice_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["La bissectrice d'un angle le partage en deux angles égaux"]
+      },
+      {
+        id:"cerclecirconscrit_6_genere", titre:"Médiatrices d'un triangle et cercle circonscrit — entraînement infini", niveau:"Moyen", points_total:5, competences:["Savoir que les médiatrices d'un triangle sont concourantes","Connaître et construire le cercle circonscrit à un triangle"],
+        genere: true, templateId: "cercle_circonscrit_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["Le centre du cercle circonscrit à un triangle est le point de concours des trois médiatrices : il est équidistant des trois sommets"]
+      },
+      {
+        id:"inegalitetriangulaire_6_genere", titre:"Peut-on construire ce triangle ? — entraînement infini", niveau:"Moyen", points_total:5, competences:["Reconnaître, à l'aide du compas, que la donnée de trois longueurs ne permet pas toujours de construire un triangle"],
+        genere: true, templateId: "inegalite_triangulaire_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["Un triangle de côtés $a\\le b\\le c$ est constructible si et seulement si $a+b>c$"]
       },
     ],
 
@@ -5744,6 +5810,30 @@ const EXERCICES = {
           {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
         ],
         indices:["Additionner un nombre négatif revient à soustraire sa valeur absolue"]
+      },
+      {
+        id:"puiss_5_genere", titre:"Carrés et cubes — entraînement infini", niveau:"Facile", points_total:5, competences:["Découvrir la notion de puissance d'un nombre et sa notation dans le cas du carré et du cube"],
+        genere: true, templateId: "puissances_5e_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["$n^2=n\\times n$ ; $n^3=n\\times n\\times n$"]
+      },
+      {
+        id:"diviseurs_5_genere", titre:"Multiples, diviseurs et critères de divisibilité — entraînement infini", niveau:"Facile", points_total:5, competences:["Utiliser les notions de multiples et de diviseurs","Connaître et utiliser les critères de divisibilité par 3 et par 9"],
+        genere: true, templateId: "multiples_diviseurs_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["Un nombre est divisible par 3 (ou 9) si la somme de ses chiffres est divisible par 3 (ou 9)"]
       },
       {
         id:"rel_5_1", titre:"Nombres relatifs — comprendre", niveau:"Facile", points_total:12, competences:["Définir les nombres relatifs","Définir l'opposé et la valeur absolue d'un nombre"],
@@ -5907,18 +5997,18 @@ const EXERCICES = {
       {
         id:"lit_5_5", titre:"Calcul littéral — problèmes combinés", niveau:"Difficile", points_total:19, competences:["Exploiter les relations k(a + b) = ka + kb ou k(a − b) = ka − kb pour factoriser, ou développer une expression littérale","Modéliser des problèmes relevant des opérations à trous par des équations du type ax = c ou x + b = c"],
         questions:[
-          {label:"1.", enonce:"Développe et réduis : $(2x-1)^2 - (2x+1)(2x-1)$",
-           type:"libre", points:5},
-          {label:"2.", enonce:"$f(x)=x^2-4x+3$. Calcule $f(0)$.",
-           type:"libre", points:3},
-          {label:"2b.", enonce:"Même fonction $f(x)=x^2-4x+3$. Pour quelle valeur positive de $x$ a-t-on $f(x)=0$, sachant que $x=1$ est aussi solution ?",
+          {label:"1.", enonce:"Développe et réduis : $4(x+3) - 2(x-5)$",
            type:"libre", points:4},
-          {label:"3.", enonce:"Résous : $4(x-2)+3=2x+5$",
+          {label:"2.", enonce:"$g(x)=3x^2-2x+4$. Calcule $g(2)$.",
            type:"libre", points:3},
-          {label:"4.", enonce:"Développe et réduis : $(3x+2)^2-(3x-2)(3x+2)$",
+          {label:"3.", enonce:"Teste si l'égalité $2(x+5)=2x+5$ est vraie pour $x=3$. Réponds $1$ si elle est vraie, $0$ si elle est fausse.",
+           type:"libre", points:3},
+          {label:"4.", enonce:"La somme de trois nombres entiers consécutifs est $72$. Quel est le plus petit des trois ?",
+           type:"libre", points:5},
+          {label:"5.", enonce:"Résous : $4x-7=21$",
            type:"libre", points:4},
         ],
-        indices:["$(a+b)^2=a^2+2ab+b^2$ ; $(a-b)(a+b)=a^2-b^2$"]
+        indices:["Développer avant de réduire ; pour tester une égalité, remplace $x$ par la valeur donnée des deux côtés et compare"]
       },
     ],
 
@@ -5984,20 +6074,20 @@ const EXERCICES = {
         indices:["Dans un losange, angles consécutifs sont supplémentaires (somme $=180°$)"]
       },
       {
-        id:"geo_5_4", titre:"Fractions & Proportionnalité", niveau:"Moyen", points_total:17, competences:["Résoudre des problèmes faisant appel à des conversions d'unités de longueur et d'unités d'aires"],
+        id:"geo_5_4", titre:"Conversions d'unités et aires", niveau:"Moyen", points_total:17, competences:["Résoudre des problèmes faisant appel à des conversions d'unités de longueur et d'unités d'aires"],
         questions:[
-          {label:"a)", enonce:"Calcule et simplifie : $\\dfrac{3}{5} \\times \\dfrac{10}{9}$",
+          {label:"a)", enonce:"Un rectangle mesure $3$ m sur $250$ cm. Calcule son aire en m² (convertis d'abord les longueurs dans la même unité).",
            type:"libre", points:3},
-          {label:"b)", enonce:"Calcule : $\\dfrac{4}{7} \\div \\dfrac{2}{3}$",
+          {label:"b)", enonce:"Convertis $45\\,000$ cm² en m².",
            type:"libre", points:3},
-          {label:"c)", enonce:"Un cycliste roule à $18$ km/h. Distance en $2{,}5$ h ?",
+          {label:"c)", enonce:"Un jardin rectangulaire mesure $8$ m sur $6$ m. Calcule son périmètre en cm.",
            type:"libre", points:4},
-          {label:"d)", enonce:"Calcule et simplifie : $\\dfrac{2}{3} \\times \\dfrac{9}{4}$",
-           type:"libre", points:3},
-          {label:"e)", enonce:"Calcule : $\\dfrac{5}{6} \\div \\dfrac{5}{3}$",
+          {label:"d)", enonce:"Un champ rectangulaire mesure $0{,}5$ km sur $200$ m. Calcule son aire en m² (convertis d'abord).",
            type:"libre", points:4},
+          {label:"e)", enonce:"Convertis $2{,}4$ m² en cm².",
+           type:"libre", points:3},
         ],
-        indices:["$\\dfrac{a}{b}\\div\\dfrac{c}{d}=\\dfrac{a}{b}\\times\\dfrac{d}{c}$"]
+        indices:["$1$ m² $=10\\,000$ cm² ; $1$ km $=1\\,000$ m ; convertis toujours dans la même unité avant de calculer"]
       },
       {
         id:"geo_5_5", titre:"Géométrie — problèmes combinés", niveau:"Difficile", points_total:19, competences:["Savoir calculer l'aire d'un parallélogramme et de figures complexes","Résoudre des problèmes faisant appel à des conversions d'unités de longueur et d'unités d'aires"],
@@ -6309,6 +6399,18 @@ const EXERCICES = {
         indices:["Isole $x$ : passe les nombres d'un côté, les termes en $x$ de l'autre"]
       },
       {
+        id:"lit_4_genere2", titre:"Développer et factoriser — entraînement infini", niveau:"Moyen", points_total:5, competences:["Développer et factoriser des expressions algébriques dans des cas très simples"],
+        genere: true, templateId: "developper_factoriser_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["$k(x+a)=kx+ka$ ; pour factoriser $Bx+C$, cherche le plus grand diviseur commun de $B$ et $C$"]
+      },
+      {
         id:"lit_4_3", titre:"Équations du premier degré — 4ème", niveau:"Moyen", points_total:16, competences:["Résoudre une équation du premier degré du type ax + b = c"],
         questions:[
           {label:"a)", enonce:"Résous : $5x-3=2x+9$",
@@ -6388,36 +6490,20 @@ const EXERCICES = {
         indices:["Même dénominateur pour additionner ; inverser pour diviser"]
       },
       {
-        id:"rel_4_3", titre:"Puissances et notation scientifique", niveau:"Moyen", points_total:16, competences:["Définir les puissances d'exposant positif d'un nombre a","Multiplier des puissances d'exposant entier naturel d'un même nombre entre elles"],
+        id:"rel_4_4", titre:"Probabilités et fractions", niveau:"Moyen", points_total:17, competences:["Calculer la probabilité d'un évènement et de l'évènement contraire","Exprimer une probabilité sous forme fractionnaire, décimale ou de pourcentage"],
         questions:[
-          {label:"a)", enonce:"Écris en notation scientifique : $0{,}000035$",
-           type:"libre", points:2},
-          {label:"a2)", enonce:"Écris en notation scientifique : $7\\,200\\,000$",
-           type:"libre", points:2},
-          {label:"b)", enonce:"Calcule : $(4\\times10^3)\\times(5\\times10^{-1})$",
-           type:"libre", points:3},
-          {label:"c)", enonce:"Simplifie : $\\dfrac{6^4\\times6^{-2}}{6^3}$",
+          {label:"a)", enonce:"Une urne contient $12$ boules : $5$ rouges, $4$ bleues, $3$ vertes. Donne $P(\\text{rouge})$ sous forme de fraction irréductible.",
            type:"libre", points:4},
-          {label:"d)", enonce:"Calcule : $(3\\times10^{-2})\\times(2\\times10^4)$",
-           type:"libre", points:5},
-        ],
-        indices:["Notation scientifique : $a\\times10^n$ avec $1\\leq a<10$"]
-      },
-      {
-        id:"rel_4_4", titre:"Probabilités — événements et indépendance", niveau:"Moyen", points_total:17, competences:["Calculer la probabilité d'un évènement et de l'évènement contraire","Exemples simples d'expériences aléatoires à deux épreuves"],
-        questions:[
-          {label:"a)", enonce:"Urne : $6$ rouges, $4$ bleues, $5$ vertes. Calcule $P(\\text{rouge ou bleue})$.",
-           type:"libre", points:4},
-          {label:"b)", enonce:"On lance $3$ fois une pièce. $P(\\text{exactement 2 piles})$ ?",
+          {label:"b)", enonce:"On lance un dé à $6$ faces. Donne $P(\\text{nombre pair})$ sous forme décimale.",
            type:"libre", points:3},
-          {label:"c)", enonce:"$P(A)=0{,}3$ et $P(B)=0{,}4$, événements indépendants. $P(A\\cap B)$ ?",
+          {label:"c)", enonce:"Un sac contient $20$ billes dont $8$ vertes. Donne $P(\\text{pas verte})$ sous forme de pourcentage.",
            type:"libre", points:3},
-          {label:"d)", enonce:"$P(A)=0{,}6$ et $P(B)=0{,}5$, événements indépendants. $P(A\\cap B)$ ?",
+          {label:"d)", enonce:"$P(\\text{gagner})=\\dfrac{3}{8}$. Exprime cette probabilité sous forme décimale.",
            type:"libre", points:3},
-          {label:"e)", enonce:"On lance $2$ dés à $6$ faces. $P(\\text{obtenir un double 6})$ ?",
+          {label:"e)", enonce:"Une urne contient $15$ jetons dont $9$ numérotés par un nombre pair. Donne $P(\\text{jeton pair})$ sous forme de fraction irréductible.",
            type:"libre", points:4},
         ],
-        indices:["Indépendants : $P(A\\cap B)=P(A)\\times P(B)$"]
+        indices:["Simplifie toujours une fraction de probabilité par le PGCD ; pourcentage $=$ fraction $\\times100$"]
       },
       {
         id:"rel_4_5", titre:"Statistiques — caractéristiques", niveau:"Moyen", points_total:15, competences:["Calculer une moyenne pondérée dans le cas d'une série discrète de petits effectifs","Déterminer une médiane et l'interpréter"],
@@ -6778,7 +6864,7 @@ const EXERCICES = {
         indices:["Méthode quotient (termes $> 0$) : quotient $> 1$ → croissante ; $0 <$ quotient $< 1$ → décroissante"]
       },
       {
-        id:"suite_1_6", titre:"Suites bornées et suite de Fibonacci", niveau:"Difficile", points_total:10, competences:["Étudier le sens de variation d'une suite"],
+        id:"suite_1_6", titre:"Suites — limite intuitive et suite de Fibonacci", niveau:"Difficile", points_total:10, competences:["Étudier le sens de variation d'une suite"],
         questions:[
           {label:"1a.", enonce:"$u_n = \\dfrac{3n-1}{n+2}$. Calcule $u_0$.",
            type:"libre", points:2},
@@ -6788,26 +6874,26 @@ const EXERCICES = {
            type:"libre", points:2},
           {label:"2b.", enonce:"Suite de Fibonacci. Calcule $u_3$.",
            type:"libre", points:2},
-          {label:"3.", enonce:"La suite de Fibonacci est-elle bornée ?",
-           type:"qcm", choix:["Oui, elle est bornée","Non, elle tend vers $+\\infty$","Elle oscille entre deux valeurs","On ne peut pas savoir"], points:2},
+          {label:"3.", enonce:"La suite de Fibonacci croît-elle indéfiniment vers $+\\infty$, ou se stabilise-t-elle vers une valeur finie ?",
+           type:"qcm", choix:["Elle croît indéfiniment vers $+\\infty$","Elle se stabilise vers une valeur finie","Elle oscille entre deux valeurs fixes","Elle devient constante"], points:2},
         ],
-        indices:["Suite bornée : il existe $M$ et $m$ tels que $m \\leq u_n \\leq M$ pour tout $n$"]
+        indices:["Sur des exemples, on peut conjecturer si une suite tend vers une limite finie, vers l'infini, ou n'a pas de limite"]
       },
       {
         id:"suite_1_7", titre:"Suites — Vrai/Faux et synthèse", niveau:"Difficile", points_total:15, competences:["Étudier le sens de variation d'une suite"],
         questions:[
-          {label:"1.", enonce:"Vrai ou Faux : toute suite croissante est minorée.",
+          {label:"1.", enonce:"Vrai ou Faux : une suite arithmétique de raison négative est décroissante.",
            type:"qcm", choix:["Vrai","Faux"], points:3},
           {label:"2.", enonce:"Vrai ou Faux : si $u_{n+1} - u_n > 0$ pour tout $n$, alors $(u_n)$ est strictement croissante.",
            type:"qcm", choix:["Vrai","Faux"], points:3},
-          {label:"3.", enonce:"Vrai ou Faux : une suite bornée est toujours convergente.",
+          {label:"3.", enonce:"Vrai ou Faux : une suite géométrique de raison $q\\in\\,]0\\,;\\,1[$ et de premier terme positif est décroissante.",
            type:"qcm", choix:["Vrai","Faux"], points:3},
-          {label:"4.", enonce:"Vrai ou Faux : la suite $u_n = (-1)^n$ est bornée.",
+          {label:"4.", enonce:"Vrai ou Faux : la suite $u_n = (-1)^n$ est périodique.",
            type:"qcm", choix:["Vrai","Faux"], points:3},
-          {label:"5.", enonce:"Vrai ou Faux : une suite croissante et majorée converge.",
+          {label:"5.", enonce:"Vrai ou Faux : sur l'exemple $u_n=\\dfrac{3n-1}{n+2}$, les valeurs de $u_n$ semblent se rapprocher de $3$ quand $n$ devient grand.",
            type:"qcm", choix:["Vrai","Faux"], points:3},
         ],
-        indices:["Bornée $\\neq$ convergente. Croissante et majorée $\\Rightarrow$ convergente (admis en 1ère)."]
+        indices:["Suite arithmétique de raison $r$ : croissante si $r>0$, décroissante si $r<0$. Suite géométrique de raison $q$ et de premier terme positif : croissante si $q>1$, décroissante si $0<q<1$."]
       },
     ],
 
@@ -6906,20 +6992,20 @@ const EXERCICES = {
         indices:["$u_n = u_0 \\times q^n$. Pour trouver $q$ : $q = \\sqrt[p]{\\dfrac{u_p}{u_0}}$"]
       },
       {
-        id:"suite_1_12", titre:"Suites — problème financier", niveau:"Difficile", points_total:11, competences:["Reconnaître une suite géométrique et calculer son terme général"],
+        id:"suite_1_12", titre:"Suites — croissance exponentielle", niveau:"Difficile", points_total:11, competences:["Reconnaître une suite géométrique et calculer son terme général"],
         questions:[
-          {label:"1.", enonce:"Marie place $10\\,000$€ à $3\\%$/an et ajoute $1\\,000$€ chaque année. $u_0 = 10\\,000$. Calcule $u_1$.",
+          {label:"1.", enonce:"Une population de bactéries compte $500$ individus et augmente de $8\\%$ chaque heure. Combien y en a-t-il après $1$ heure ?",
            type:"libre", points:2},
-          {label:"2.", enonce:"$u_{n+1} = 1{,}03u_n + 1000$. La suite $v_n = u_n + \\dfrac{1000}{0{,}03}$ est-elle géométrique ?",
-           type:"qcm", choix:["Oui, de raison $1{,}03$","Oui, de raison $1000$","Non","Oui, de raison $0{,}03$"], points:3},
-          {label:"3.", enonce:"$\\dfrac{1000}{0{,}03} \\approx 33\\,333$€. Calcule $v_0 = u_0 + 33\\,333$ avec $u_0 = 10\\,000$.",
+          {label:"2.", enonce:"Cette population suit une suite géométrique de raison $q$. Quelle est la valeur de $q$ ?",
+           type:"libre", points:3},
+          {label:"3.", enonce:"Après $3$ heures, combien de bactéries y a-t-il (arrondi à l'unité) ?",
            type:"libre", points:2},
-          {label:"4.", enonce:"$(v_n)$ géométrique, $q = 1{,}03$, $v_0 = 43\\,333$. Calcule $v_{10}$. ($(1{,}03)^{10} \\approx 1{,}344$)",
+          {label:"4.", enonce:"Calcule $1+1{,}08+1{,}08^2$ (somme des trois premiers termes de la suite géométrique de raison $1{,}08$ et de premier terme $1$), arrondi au centième.",
            type:"libre", points:2},
-          {label:"5.", enonce:"Quelle somme Marie a-t-elle après $10$ ans ? ($u_{10} = v_{10} - 33\\,333$)",
-           type:"libre", points:2},
+          {label:"5.", enonce:"La suite $(u_n)$ avec $u_n=500\\times1{,}08^n$ est-elle croissante ou décroissante ?",
+           type:"qcm", choix:["Croissante","Décroissante"], points:2},
         ],
-        indices:["Pour linéariser : poser $v_n = u_n + k$ et trouver $k$ tel que $(v_n)$ soit géométrique."]
+        indices:["Une évolution à taux fixe se modélise par une suite géométrique de raison $q=1+\\dfrac{t}{100}$"]
       },
     ],
 
@@ -7472,6 +7558,96 @@ const EXERCICES = {
       },
     ],
 
+    "Vocabulaire ensembliste et logique": [
+      {
+        id:"ens_1_genere", titre:"Ensembles et opérations — entraînement infini", niveau:"Facile", points_total:5, competences:["Connaître les notions d'élément, sous-ensemble, réunion, intersection, complémentaire ; utiliser la notation Card(A)"],
+        genere: true, templateId: "ensembles_operations_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["Card($A\\cap B$) : éléments communs. Card($A\\cup B$) : éléments dans l'un ou l'autre. Card($A\\setminus B$) : éléments de $A$ absents de $B$"]
+      },
+      {
+        id:"int_1_genere", titre:"Intervalles — entraînement infini", niveau:"Facile", points_total:5, competences:["Utiliser la notation des intervalles"],
+        genere: true, templateId: "intervalles_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["Une borne fermée ($[$ ou $]$) est incluse dans l'intervalle ; une borne ouverte ($]$ ou $[$) ne l'est pas"]
+      },
+      {
+        id:"impl_1_genere", titre:"Implication, réciproque, contraposée — entraînement infini", niveau:"Moyen", points_total:5, competences:["Formuler une implication, une équivalence logique et les mobiliser dans un raisonnement simple","Formuler la réciproque d'une implication, la contraposée","Employer les expressions condition nécessaire, condition suffisante"],
+        genere: true, templateId: "implication_logique_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["($x>a$) $\\Rightarrow$ ($x>b$) est vraie si et seulement si $a\\geq b$ ; la réciproque échange les rôles de $a$ et $b$"]
+      },
+      {
+        id:"cexemple_1_genere", titre:"Contre-exemple et quantificateurs — entraînement infini", niveau:"Moyen", points_total:5, competences:["Mobiliser un contre-exemple pour montrer qu'une proposition est fausse","Utiliser les quantificateurs et repérer les quantifications implicites","Formuler la négation de propositions quantifiées"],
+        genere: true, templateId: "contre_exemple_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["Un contre-exemple à « pour tout $n$, si $P(n)$ alors $Q(n)$ » est une valeur de $n$ qui vérifie $P(n)$ mais pas $Q(n)$"]
+      },
+    ],
+
+    "Géométrie repérée": [
+      {
+        id:"drn_1_genere", titre:"Équation d'une droite par point et vecteur normal — entraînement infini", niveau:"Moyen", points_total:5, competences:["Déterminer une équation cartésienne d'une droite connaissant un point et un vecteur normal"],
+        genere: true, templateId: "equation_droite_normale_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["Si $\\vec n(a\\,;\\,b)$ est normal à $d$ et $A(x_0\\,;\\,y_0)\\in d$, alors $d$ : $ax+by+c=0$ avec $c=-(ax_0+by_0)$"]
+      },
+      {
+        id:"proj_1_genere", titre:"Projeté orthogonal — entraînement infini", niveau:"Moyen", points_total:5, competences:["Déterminer les coordonnées du projeté orthogonal d'un point sur une droite"],
+        genere: true, templateId: "projete_orthogonal_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["Le projeté orthogonal sur une droite horizontale $y=k$ garde l'abscisse de $M$ et prend l'ordonnée $k$ (et inversement pour une droite verticale)"]
+      },
+      {
+        id:"cerc_1_genere", titre:"Équation d'un cercle — entraînement infini", niveau:"Facile", points_total:5, competences:["Déterminer et utiliser l'équation d'un cercle donné par son centre et son rayon","Reconnaître une équation de cercle, déterminer centre et rayon"],
+        genere: true, templateId: "equation_cercle_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["Le cercle de centre $\\Omega(a\\,;\\,b)$ et de rayon $r$ a pour équation $(x-a)^2+(y-b)^2=r^2$"]
+      },
+    ],
+
   },
 
   // ═══════════════════════════════════════
@@ -7554,6 +7730,38 @@ const EXERCICES = {
            type:"libre", points:4},
         ],
         indices:["Pour une limite en $\\pm\\infty$, factoriser par le terme de plus haut degré ; pour une forme $\\dfrac{0}{0}$, simplifier avant de passer à la limite ; asymptote horizontale $y=\\ell$ $\\Leftrightarrow$ $\\lim f(x)=\\ell$"]
+      },
+      {
+        id:"limfo_t_2", titre:"Croissances comparées — limites classiques", niveau:"Difficile", points_total:15, competences:["Déterminer la limite d'une fonction"],
+        questions:[
+          {label:"a)", enonce:"$\\lim\\limits_{x\\to+\\infty} xe^{-x} = ?$",
+           type:"qcm", choix:["$0$","$+\\infty$","$1$","N'existe pas"], points:3},
+          {label:"b)", enonce:"$\\lim\\limits_{x\\to+\\infty} \\dfrac{\\ln x}{x} = ?$",
+           type:"qcm", choix:["$0$","$+\\infty$","$1$","$-\\infty$"], points:3},
+          {label:"c)", enonce:"$\\lim\\limits_{x\\to+\\infty} x^2e^{-x} = ?$",
+           type:"qcm", choix:["$0$","$+\\infty$","$2$","N'existe pas"], points:3},
+          {label:"d)", enonce:"$\\lim\\limits_{x\\to0^+} x\\ln x = ?$",
+           type:"qcm", choix:["$0$","$-\\infty$","$+\\infty$","$1$"], points:3},
+          {label:"e)", enonce:"En $+\\infty$, laquelle de ces fonctions l'emporte sur les autres (croît le plus vite) ?",
+           type:"qcm", choix:["$e^x$","$x^{100}$","$\\ln x$","$x$"], points:3},
+        ],
+        indices:["En $+\\infty$, l'exponentielle l'emporte sur toute puissance de $x$, qui l'emporte elle-même sur le logarithme"]
+      },
+      {
+        id:"limfo_t_3", titre:"Croissances comparées — application et régimes", niveau:"Difficile", points_total:15, competences:["Déterminer la limite d'une fonction"],
+        questions:[
+          {label:"a)", enonce:"$\\lim\\limits_{x\\to+\\infty} x^2e^{-x} = ?$",
+           type:"qcm", choix:["$0$","$+\\infty$","$3$","N'existe pas"], points:3},
+          {label:"b)", enonce:"On considère $f(x)=x^2e^{-x}+3$. D'après la question précédente, quelle est $\\lim\\limits_{x\\to+\\infty}f(x)$ ?",
+           type:"libre", points:3},
+          {label:"c)", enonce:"Quelle droite est asymptote horizontale à la courbe de $f$ en $+\\infty$ ?",
+           type:"qcm", choix:["$y=3$","$y=0$","$x=3$","$y=x+3$"], points:3},
+          {label:"d)", enonce:"Calcule $\\lim\\limits_{x\\to-\\infty} x^2e^{-x}$ (attention, ce n'est plus la même limite que vers $+\\infty$).",
+           type:"qcm", choix:["$+\\infty$","$-\\infty$","$0$","$3$"], points:3},
+          {label:"e)", enonce:"Parmi ces limites en $+\\infty$, laquelle vaut $+\\infty$ ?",
+           type:"qcm", choix:["$e^x-x^{10}$","$x^{10}e^{-x}$","$\\ln(x)-x$","$\\dfrac{x^{10}}{e^x}$"], points:3},
+        ],
+        indices:["En $-\\infty$, $x^2\\to+\\infty$ ET $e^{-x}\\to+\\infty$ : les deux facteurs poussent dans le même sens, contrairement au cas $+\\infty$"]
       },
     ],
 
@@ -7915,6 +8123,18 @@ const EXERCICES = {
         indices:["Les solutions de $y'=ay$ sont $y(x)=Ce^{ax}$, avec $C=y(0)$"]
       },
       {
+        id:"diffeq_t_genere2", titre:"Résoudre y'=ay+b — entraînement infini", niveau:"Difficile", points_total:5, competences:["Résoudre une équation différentielle"],
+        genere: true, templateId: "equadiff_affine_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["Cherche d'abord la solution particulière constante $k=-b/a$, puis $y(x)=Ce^{ax}+k$ avec $C=y(0)-k$"]
+      },
+      {
         id:"diffeq_t_1", titre:"Équations différentielles y'=ay et y'=ay+b", niveau:"Moyen", points_total:10, competences:["Résoudre une équation différentielle"],
         questions:[
           {label:"a)", enonce:"Les solutions de l'équation différentielle $y'=ay$ (avec $a$ réel) sont de la forme :",
@@ -7993,6 +8213,18 @@ const EXERCICES = {
         indices:["$M(x_M;y_M;z_M)\\in P$ ssi $ax_M+by_M+cz_M=d$"]
       },
       {
+        id:"droitesplans_t_genere2", titre:"Droite paramétrée : coordonnées et appartenance — entraînement infini", niveau:"Difficile", points_total:5, competences:["Déterminer une représentation paramétrique, une équation cartésienne, ou l'appartenance d'un point à un plan"],
+        genere: true, templateId: "droite_parametree_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["$M(t)=A+t\\vec{u}$ ; pour tester l'appartenance, cherche s'il existe un $t$ commun aux 3 coordonnées"]
+      },
+      {
         id:"droitesplans_t_1", titre:"Représentations paramétriques et équations cartésiennes", niveau:"Difficile", points_total:10, competences:["Déterminer une représentation paramétrique, une équation cartésienne, ou l'appartenance d'un point à un plan"],
         questions:[
           {label:"a)", enonce:"Une droite de l'espace passant par $A(x_A;y_A;z_A)$ de vecteur directeur $\\vec{u}(a;b;c)$ a pour représentation paramétrique :",
@@ -8053,6 +8285,18 @@ const EXERCICES = {
           {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
         ],
         indices:["$P(|X-E(X)|\\geq a)\\leq \\dfrac{V(X)}{a^2}$"]
+      },
+      {
+        id:"concentr_t_genere2", titre:"Taille d'échantillon minimale — entraînement infini", niveau:"Difficile", points_total:5, competences:["Appliquer l'inégalité de concentration de Bienaymé-Tchebychev"],
+        genere: true, templateId: "concentration_echantillon_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["$\\dfrac{V(X)}{n\\delta^2}\\leq\\alpha \\Leftrightarrow n\\geq\\dfrac{V(X)}{\\delta^2\\alpha}$ — arrondis toujours à l'entier supérieur"]
       },
       {
         id:"concentr_t_1", titre:"Inégalité de Bienaymé-Tchebychev et loi des grands nombres", niveau:"Difficile", points_total:10, competences:["Appliquer l'inégalité de concentration de Bienaymé-Tchebychev"],
@@ -8120,6 +8364,21 @@ const EXERCICES = {
            type:"qcm", choix:["$4$","$22$","$2$","$25$"], points:2},
         ],
         indices:["Une fonction imbriquée dans un appel s'exécute d'abord (la plus intérieure), puis son résultat est transmis à la fonction englobante ; une variable locale n'existe que dans sa fonction"]
+      },
+    ],
+
+    "Raisonnement par récurrence": [
+      {
+        id:"recur_t_genere", titre:"Initialisation et hérédité — entraînement infini", niveau:"Difficile", points_total:5, competences:["Raisonner par récurrence pour établir une propriété d'une suite","Démontrer une propriété par récurrence"],
+        genere: true, templateId: "recurrence_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["Une preuve par récurrence a deux piliers : l'initialisation (vérifier la propriété au premier rang) et l'hérédité (montrer que si elle est vraie à un rang, elle l'est au rang suivant)"]
       },
     ],
 
@@ -11457,9 +11716,9 @@ const LABELS_CLASSES = {'6eme':'6ème','5eme':'5ème','4eme':'4ème','3eme':'3è
 
 const CHAPITRES_EMOJI = {
   'Puissances & Notation scientifique':'⚡','Racines carrées':'√','Calcul littéral':'✏️',
-  'Équations du premier degré':'⚖️','Inéquations':'📊',"Systèmes d'équations":'🔗',
+  'Équations du premier degré':'⚖️','Inéquations':'📊',"Intersections de droites et problèmes":'🔗',
   'Fonctions — généralités':'📈','Fonctions linéaires et affines':'📉',
-  'Probabilités':'🎲','Statistiques descriptives':'📋',
+  'Probabilités':'🎲','Statistiques descriptives':'📋','Croisement de deux variables qualitatives':'📇',
   'Théorème de Pythagore':'📐','Théorème de Thalès':'🔺','Trigonométrie':'📡',
   'Transformations géométriques':'🔄','Volumes de solides':'🧊',
   'Proportionnalité & Pourcentages':'💯','Divisibilité & Nombres premiers':'🔢',
@@ -11661,6 +11920,7 @@ const TEMPLATES_GENERATEUR = {
   evaluation_fonction_v1: 'exo-5eme-generer',
   pythagore_v1: 'exo-4eme-generer',
   moyenne_v1: 'exo-4eme-generer',
+  developper_factoriser_v1: 'exo-4eme-generer',
   volume_pave_v1: 'exo-3eme-generer',
   relatifs_v1: 'exo-4eme-generer',
   probabilite_v1: 'exo-4eme-generer',
@@ -11681,16 +11941,21 @@ const TEMPLATES_GENERATEUR = {
   arbre_pondere_v1: 'exo-2nde-generer',
   taux_evolution_v1: 'exo-2nde-generer',
   equation_carre_v1: 'exo-2nde-generer',
+  tableau_croise_v1: 'exo-2nde-generer',
   coefficient_directeur_v1: 'exo-3eme-generer',
   distance_v1: 'exo-2nde-generer',
   angle_triangle_v1: 'exo-6eme-generer',
   multiples_diviseurs_v1: 'exo-6eme-generer',
   volume_cube_v1: 'exo-6eme-generer',
+  bissectrice_v1: 'exo-6eme-generer',
+  cercle_circonscrit_v1: 'exo-6eme-generer',
+  inegalite_triangulaire_v1: 'exo-6eme-generer',
   suite_arithmetique_v1: 'exo-1ere-generer',
   systeme_v1: 'exo-3eme-generer',
   transformation_v1: 'exo-3eme-generer',
   fonction_reference_v1: 'exo-2nde-generer',
   aire_perimetre_v1: 'exo-5eme-generer',
+  puissances_5e_v1: 'exo-5eme-generer',
   identite_remarquable_v1: 'exo-identite-remarquable-generer',
   suite_geometrique_v1: 'exo-1ere-generer',
   suite_premiers_termes_v1: 'exo-1ere-generer',
@@ -11705,6 +11970,13 @@ const TEMPLATES_GENERATEUR = {
   esperance_v1: 'exo-1ere-generer',
   probas_totales_v1: 'exo-1ere-generer',
   independance_evenements_v1: 'exo-1ere-generer',
+  ensembles_operations_v1: 'exo-1ere-generer',
+  intervalles_v1: 'exo-1ere-generer',
+  implication_logique_v1: 'exo-1ere-generer',
+  contre_exemple_v1: 'exo-1ere-generer',
+  equation_droite_normale_v1: 'exo-1ere-generer',
+  projete_orthogonal_v1: 'exo-1ere-generer',
+  equation_cercle_v1: 'exo-1ere-generer',
   combinaison_v1: 'exo-terminale-generer',
   logarithme_v1: 'exo-terminale-generer',
   limite_suite_v1: 'exo-terminale-generer',
@@ -11718,6 +11990,10 @@ const TEMPLATES_GENERATEUR = {
   concentration_v1: 'exo-terminale-generer',
   equadiff_v1: 'exo-terminale-generer',
   continuite_tvi_v1: 'exo-terminale-generer',
+  equadiff_affine_v1: 'exo-terminale-generer',
+  droite_parametree_v1: 'exo-terminale-generer',
+  concentration_echantillon_v1: 'exo-terminale-generer',
+  recurrence_v1: 'exo-terminale-generer',
   loi_uniforme_v1: 'exo-terminale-complementaire-generer',
   loi_exponentielle_v1: 'exo-terminale-complementaire-generer',
   esperance_densite_v1: 'exo-terminale-complementaire-generer',
@@ -11732,6 +12008,7 @@ const TEMPLATES_VALIDATEUR = {
   evaluation_fonction_v1: 'exo-5eme-valider',
   pythagore_v1: 'exo-4eme-valider',
   moyenne_v1: 'exo-4eme-valider',
+  developper_factoriser_v1: 'exo-4eme-valider',
   volume_pave_v1: 'exo-3eme-valider',
   relatifs_v1: 'exo-4eme-valider',
   probabilite_v1: 'exo-4eme-valider',
@@ -11752,16 +12029,21 @@ const TEMPLATES_VALIDATEUR = {
   arbre_pondere_v1: 'exo-2nde-valider',
   taux_evolution_v1: 'exo-2nde-valider',
   equation_carre_v1: 'exo-2nde-valider',
+  tableau_croise_v1: 'exo-2nde-valider',
   coefficient_directeur_v1: 'exo-3eme-valider',
   distance_v1: 'exo-2nde-valider',
   angle_triangle_v1: 'exo-6eme-valider',
   multiples_diviseurs_v1: 'exo-6eme-valider',
   volume_cube_v1: 'exo-6eme-valider',
+  bissectrice_v1: 'exo-6eme-valider',
+  cercle_circonscrit_v1: 'exo-6eme-valider',
+  inegalite_triangulaire_v1: 'exo-6eme-valider',
   suite_arithmetique_v1: 'exo-1ere-valider',
   systeme_v1: 'exo-3eme-valider',
   transformation_v1: 'exo-3eme-valider',
   fonction_reference_v1: 'exo-2nde-valider',
   aire_perimetre_v1: 'exo-5eme-valider',
+  puissances_5e_v1: 'exo-5eme-valider',
   identite_remarquable_v1: 'exo-identite-remarquable-valider',
   suite_geometrique_v1: 'exo-1ere-valider',
   suite_premiers_termes_v1: 'exo-1ere-valider',
@@ -11776,6 +12058,13 @@ const TEMPLATES_VALIDATEUR = {
   esperance_v1: 'exo-1ere-valider',
   probas_totales_v1: 'exo-1ere-valider',
   independance_evenements_v1: 'exo-1ere-valider',
+  ensembles_operations_v1: 'exo-1ere-valider',
+  intervalles_v1: 'exo-1ere-valider',
+  implication_logique_v1: 'exo-1ere-valider',
+  contre_exemple_v1: 'exo-1ere-valider',
+  equation_droite_normale_v1: 'exo-1ere-valider',
+  projete_orthogonal_v1: 'exo-1ere-valider',
+  equation_cercle_v1: 'exo-1ere-valider',
   combinaison_v1: 'exo-terminale-valider',
   logarithme_v1: 'exo-terminale-valider',
   limite_suite_v1: 'exo-terminale-valider',
@@ -11789,6 +12078,10 @@ const TEMPLATES_VALIDATEUR = {
   concentration_v1: 'exo-terminale-valider',
   equadiff_v1: 'exo-terminale-valider',
   continuite_tvi_v1: 'exo-terminale-valider',
+  equadiff_affine_v1: 'exo-terminale-valider',
+  droite_parametree_v1: 'exo-terminale-valider',
+  concentration_echantillon_v1: 'exo-terminale-valider',
+  recurrence_v1: 'exo-terminale-valider',
   loi_uniforme_v1: 'exo-terminale-complementaire-valider',
   loi_exponentielle_v1: 'exo-terminale-complementaire-valider',
   esperance_densite_v1: 'exo-terminale-complementaire-valider',
@@ -11824,7 +12117,7 @@ async function appelEdgeFunction(slug, method, body) {
 
 async function chargerInstanceGeneree(index) {
   const slug = TEMPLATES_GENERATEUR[currentExercice.templateId];
-  const instance = await appelEdgeFunction(slug, 'POST', { template_id: currentExercice.templateId });
+  const instance = await appelEdgeFunction(slug, 'POST', { template_id: currentExercice.templateId, niveau: detecterNiveauDepuisId(currentExercice.id) });
   currentGenTokens[index] = instance.token;
   const q = currentExercice.questions[index];
   q.enonce = instance.enonce;
@@ -12501,18 +12794,39 @@ const GENERATEURS = {
     }
   },
 
-  "Systèmes d'équations": {
+  "Intersection de droites": {
+    // LOT 11 (16/08/2026) : remplace "Systèmes d'équations" -- le mécanisme
+    // d'origine (système 2x2 général résolu par élimination) n'est attesté
+    // ni au programme 2nde 2026 (BO n°14 du 2/04/2026) ni au programme 3e
+    // applicable (cf. LOT 10). Le BO 2nde nomme en revanche explicitement
+    // "Déterminer le point d'intersection de deux droites sécantes données
+    // par leur équation réduite" (partie Géométrie, Droites du plan).
     emoji: "🔗",
     classe: "2nde",
     generer(diff) {
-      const x = rand(1,6), y = rand(1,6);
-      const a1=rand(1,4), b1=rand(1,3), a2=rand(1,3), b2=rand(1,4);
-      const c1 = a1*x + b1*y, c2 = a2*x - b2*y;
+      let a = rand(-6,6); while(a===0) a = rand(-6,6);
+      let c = rand(-6,6); while(c===0 || c===a) c = rand(-6,6);
+      const x0 = rand(-8,8);
+      const b = rand(-10,10);
+      const d = b + (a-c)*x0;
+      const y0 = a*x0 + b;
+      const bStr = b>=0 ? `+${b}` : `${b}`;
+      const dStr = d>=0 ? `+${d}` : `${d}`;
+      const aStr = a===1?'':a===-1?'-':a;
+      const cStr = c===1?'':c===-1?'-':c;
+      if(diff === 'difficile') {
+        return {
+          enonce: `Droites $f(x) = ${aStr}x${bStr}$ et $g(x) = ${cStr}x${dStr}$. Donne l'ordonnée de leur point d'intersection.`,
+          reponse: y0,
+          correction: `$${aStr}x${bStr} = ${cStr}x${dStr} \\Rightarrow x = ${x0}$, puis $f(${x0}) = ${y0}$`,
+          type: 'nombre'
+        };
+      }
       return {
-        enonce: `Résous : $\\begin{cases} ${a1}x + ${b1}y = ${c1} \\\\ ${a2}x - ${b2}y = ${c2} \\end{cases}$ — Donne $x$ puis $y$.`,
-        reponse: `${x},${y}`,
-        correction: `$x = ${x}$, $y = ${y}$ (vérif : $${a1}\\times${x}+${b1}\\times${y}=${c1}$ ✓)`,
-        type: 'xy'
+        enonce: `Droites $f(x) = ${aStr}x${bStr}$ et $g(x) = ${cStr}x${dStr}$. Donne l'abscisse de leur point d'intersection.`,
+        reponse: x0,
+        correction: `$${aStr}x${bStr} = ${cStr}x${dStr} \\Rightarrow ${a-c}x = ${d-b} \\Rightarrow x = ${x0}$`,
+        type: 'nombre'
       };
     }
   },
@@ -12547,41 +12861,52 @@ const GENERATEURS = {
     }
   },
 
-  "Second degré": {
+  "Équations — cas particuliers": {
+    // LOT 11 (16/08/2026) : remplace "Second degré" -- discriminant et
+    // sommet de parabole sont un contenu de 1ère Spé (chapitre "Second
+    // degré"), absent du programme 2nde 2026 (BO n°14 du 2/04/2026), qui ne
+    // couvre que l'équation $x^2=a$ et la fonction carré comme fonction de
+    // référence (forme, pas trinôme général). Les 3 modes ci-dessous sont
+    // chacun nommés explicitement au programme : "équation du type x²=a" ;
+    // "équation de la forme A(x)B(x)=0" ; "relation du premier degré
+    // ax+by=c, exprimer une variable en fonction des autres".
     emoji: "x²",
     classe: "2nde",
     generer(diff) {
       if(diff === 'facile') {
-        // Racines entières faciles
-        const x1 = rand(1,5), x2 = rand(1,5);
-        const b = -(x1+x2), c = x1*x2;
-        const bStr = b >= 0 ? `+${b}` : `${b}`;
-        const cStr = c >= 0 ? `+${c}` : `${c}`;
+        const k = rand(2,12);
         return {
-          enonce: `Résous : $x^2${bStr}x${cStr} = 0$. Donne la plus grande racine.`,
-          reponse: Math.max(x1, x2),
-          correction: `$\\Delta = ${b*b}-4\\times${c} = ${b*b-4*c}$ ; $x_1=${x1}$, $x_2=${x2}$`,
+          enonce: `Résous : $x^2 = ${k*k}$. Donne la solution positive.`,
+          reponse: k,
+          correction: `$x^2 = ${k*k} \\Rightarrow x = ${k}$ (solution positive)`,
           type: 'nombre'
         };
       }
       if(diff === 'moyen') {
-        const x1 = rand(-4,4)||1, x2 = rand(-4,4)||2;
-        const b = -(x1+x2), c = x1*x2;
-        const h = (x1+x2)/2, k = -(x1-x2)*(x1-x2)/4;
+        let p = rand(-8,8); while(p===0) p = rand(-8,8);
+        let q = rand(-8,8); while(q===0 || q===p) q = rand(-8,8);
+        const pStr = p>=0 ? `-${p}` : `+${-p}`;
+        const qStr = q>=0 ? `-${q}` : `+${-q}`;
         return {
-          enonce: `$f(x) = x^2${b>=0?'+'+b:b}x${c>=0?'+'+c:c}$. Ordonnée du sommet ?`,
-          reponse: k,
-          correction: `Sommet : $h=${h}$, $k=f(${h})=${k}$`,
+          enonce: `Résous : $(x${pStr})(x${qStr}) = 0$. Donne la plus grande solution.`,
+          reponse: Math.max(p,q),
+          correction: `Produit nul : $x=${p}$ ou $x=${q}$, la plus grande est $${Math.max(p,q)}$`,
           type: 'nombre'
         };
       }
-      // difficile : discriminant
-      const a = rand(1,3), b = rand(-6,6)||1, c = rand(-8,8)||1;
-      const delta = b*b - 4*a*c;
+      // difficile : relation du premier degre ax+by=c, isoler une variable
+      let a = rand(2,6); let b = rand(2,6);
+      const x0 = rand(-6,6), y0 = rand(-6,6);
+      const c = a*x0 + b*y0;
+      const connuX = Math.random() < 0.5;
       return {
-        enonce: `$${a}x^2${b>=0?'+'+b:b}x${c>=0?'+'+c:c}=0$. Valeur du discriminant $\\Delta$ ?`,
-        reponse: delta,
-        correction: `$\\Delta = ${b}^2 - 4\\times${a}\\times${c} = ${b*b} - ${4*a*c} = ${delta}$`,
+        enonce: connuX
+          ? `$${a}x+${b}y=${c}$. Sachant $x=${x0}$, calcule $y$.`
+          : `$${a}x+${b}y=${c}$. Sachant $y=${y0}$, calcule $x$.`,
+        reponse: connuX ? y0 : x0,
+        correction: connuX
+          ? `$y = \\dfrac{${c}-${a}\\times${x0}}{${b}} = ${y0}$`
+          : `$x = \\dfrac{${c}-${b}\\times${y0}}{${a}} = ${x0}$`,
         type: 'nombre'
       };
     }

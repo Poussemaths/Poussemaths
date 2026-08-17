@@ -53,6 +53,7 @@ const corsHeaders = {
 const DEFAULTS: Record<string, { tolerance: number; chapitre: string; niveau: string }> = {
   evaluation_fonction_v1: { tolerance: 0.001, chapitre: "Calcul littéral", niveau: "5eme" },
   aire_perimetre_v1: { tolerance: 0.001, chapitre: "Géométrie", niveau: "5eme" },
+  puissances_5e_v1: { tolerance: 0.001, chapitre: "Nombres relatifs", niveau: "5eme" },
 };
 
 async function ecrireProgression(

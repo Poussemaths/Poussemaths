@@ -55,6 +55,9 @@ const DEFAULTS: Record<string, { tolerance: number; chapitre: string; niveau: st
   angle_triangle_v1: { tolerance: 0.001, chapitre: "Angles & Géométrie", niveau: "6eme" },
   multiples_diviseurs_v1: { tolerance: 0.001, chapitre: "Multiples et diviseurs", niveau: "6eme" },
   volume_cube_v1: { tolerance: 0.001, chapitre: "Volumes", niveau: "6eme" },
+  bissectrice_v1: { tolerance: 0.001, chapitre: "Angles & Géométrie", niveau: "6eme" },
+  cercle_circonscrit_v1: { tolerance: 0.001, chapitre: "Angles & Géométrie", niveau: "6eme" },
+  inegalite_triangulaire_v1: { tolerance: 0.001, chapitre: "Angles & Géométrie", niveau: "6eme" },
 };
 
 // Ecrit une ligne de progression, avec verrou "une tentative" si l'exercice est

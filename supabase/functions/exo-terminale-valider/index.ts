@@ -72,7 +72,11 @@ const DEFAULTS: Record<string, { tolerance: (x: number) => number; chapitre: str
   appartenance_plan_v1: { tolerance: () => 0.001, chapitre: "Droites et plans de l'espace" },
   derivee_composee_v1: { tolerance: () => 0.001, chapitre: "Dérivée de fonction composée" },
   concentration_v1: { tolerance: () => 0.001, chapitre: "Concentration et loi des grands nombres" },
-  continuite_tvi_v1: { tolerance: () => 0.001, chapitre: "Continuité et théorème des valeurs intermédiaires" },
+  continuite_tvi_v1: { tolerance: () => 0.5, chapitre: "Continuité et théorème des valeurs intermédiaires" },
+  concentration_echantillon_v1: { tolerance: () => 0.5, chapitre: "Concentration et loi des grands nombres" },
+  equadiff_affine_v1: { tolerance: toleranceEchelle, chapitre: "Équations différentielles" },
+  droite_parametree_v1: { tolerance: () => 0.5, chapitre: "Droites et plans de l'espace" },
+  recurrence_v1: { tolerance: toleranceEchelle, chapitre: "Raisonnement par récurrence" },
 };
 
 async function ecrireProgression(

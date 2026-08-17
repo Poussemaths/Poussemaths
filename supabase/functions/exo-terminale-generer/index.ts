@@ -217,12 +217,49 @@ function genererDeriveeComposee() {
   return { enonce, x: reponse };
 }
 
+function fmtPolyTvi(a: number, b: number): string {
+  const aTerm = a === 0 ? "" : ` ${fmtSigned(a)}x`;
+  return `x^3${aTerm} ${fmtSigned(b)}`;
+}
+
+// Remplace l'ancienne genererContinuiteTvi (evaluait seulement f(x0), ne
+// travaillait jamais le raisonnement TVI -- trouve par l'audit Chantier 1.5).
+// 4 modes tires aleatoirement pour une vraie diversite pedagogique : existence
+// bornes donnees, bornes a calculer, existence+unicite (nombre de solutions),
+// et un cas piege a signes identiques (le TVI ne permet alors rien conclure).
+// a >= 0 garantit f'(x)=3x^2+a >= 0 partout, donc f strictement croissante sur
+// R -- elimine tout risque de monotonie locale mal maitrisee.
 function genererContinuiteTvi() {
-  const a = randNonZero(-6, 6);
-  const b = randInt(-8, 8);
-  const x0 = randInt(-3, 3);
-  const reponse = Math.pow(x0, 3) + a * x0 + b;
-  const enonce = `On considère $f(x) = x^3 ${fmtSigned(a)}x ${fmtSigned(b)}$. Calcule $f(${x0})$.`;
+  const modes = ["bornesDonnees", "bornesACalculer", "existenceUnicite", "piege"];
+  const mode = modes[randInt(0, 3)];
+  const a = randInt(0, 6);
+  const veutOpposes = mode !== "piege";
+  let b = 0, p = 0, q = 0, fp = 0, fq = 0, tentatives = 0;
+  do {
+    b = randInt(-15, 15);
+    p = randInt(-4, 3);
+    q = randInt(p + 1, p + 5);
+    fp = Math.pow(p, 3) + a * p + b;
+    fq = Math.pow(q, 3) + a * q + b;
+    tentatives++;
+    if (tentatives > 500) throw new Error("tvi: trop de tentatives");
+  } while (fp === 0 || fq === 0 || (veutOpposes ? fp * fq >= 0 : fp * fq <= 0));
+
+  const poly = fmtPolyTvi(a, b);
+  let enonce: string, reponse: number;
+  if (mode === "bornesDonnees") {
+    enonce = `On considère $f(x)=${poly}$ sur $[${p}\\,;\\,${q}]$, avec $f(${p})=${fp}$ et $f(${q})=${fq}$. Le théorème des valeurs intermédiaires permet-il d'affirmer l'existence d'une solution à $f(x)=0$ sur $[${p}\\,;\\,${q}]$ ? (réponds 1 pour oui, 0 pour non)`;
+    reponse = 1;
+  } else if (mode === "bornesACalculer") {
+    enonce = `On considère $f(x)=${poly}$. Calcule $f(${p})$ et $f(${q})$, puis dis si le TVI permet d'affirmer l'existence d'une solution à $f(x)=0$ sur $[${p}\\,;\\,${q}]$ (1 pour oui, 0 pour non).`;
+    reponse = 1;
+  } else if (mode === "existenceUnicite") {
+    enonce = `$f(x)=${poly}$ est strictement croissante sur $\\mathbb{R}$. Sachant que $f(${p})=${fp}$ et $f(${q})=${fq}$, combien l'équation $f(x)=0$ admet-elle de solutions sur $[${p}\\,;\\,${q}]$ ?`;
+    reponse = 1;
+  } else {
+    enonce = `On considère $f(x)=${poly}$. On donne $f(${p})=${fp}$ et $f(${q})=${fq}$. Le TVI permet-il de conclure à l'existence d'une solution de $f(x)=0$ sur $[${p}\\,;\\,${q}]$ ? (1 pour oui, 0 pour non)`;
+    reponse = 0;
+  }
   return { enonce, x: reponse };
 }
 
@@ -233,6 +270,116 @@ function genererConcentration() {
   const reponse = Math.round((variance / (a * a)) * 10000) / 10000;
   const enonce = `$X$ est une variable aléatoire d'espérance $E(X)=${esperance}$ et de variance $V(X)=${variance}$. D'après l'inégalité de Bienaymé-Tchebychev, calcule le majorant $\\dfrac{V(X)}{a^2}$ de $P(|X-E(X)|\\geq ${a})$ (arrondi au dix-millième si besoin).`;
   return { enonce, x: reponse };
+}
+
+// Cas echantillon (n variable) de l'inegalite de concentration -- distinct de
+// concentration_v1 (variable simple, majorant direct). Ici on inverse le sens
+// du calcul : etant donnes une precision et un risque cibles, determiner la
+// TAILLE D'ECHANTILLON minimale n qui les garantit (capacite BO explicite :
+// "definir une taille d'echantillon en fonction de la precision et du
+// risque choisi"), pas juste rejouer la meme formule avec un n en plus.
+function genererConcentrationEchantillon() {
+  const V = randInt(2, 25);
+  const delta = randInt(2, 8);
+  const alphaOptions = [0.01, 0.05, 0.1, 0.2];
+  const alpha = alphaOptions[randInt(0, alphaOptions.length - 1)];
+  const raw = Math.round((V / (delta * delta * alpha)) * 1e6) / 1e6;
+  const nMin = Math.ceil(raw);
+  const enonce = `On veut estimer l'espérance $\\mu$ d'une variable aléatoire de variance $V(X)=${V}$ à partir de la moyenne $M_n$ d'un échantillon de taille $n$. D'après l'inégalité de concentration, quelle taille d'échantillon minimale $n$ garantit $P(|M_n-\\mu|\\geq ${delta})\\leq ${alpha}$ ?`;
+  return { enonce, x: nMin };
+}
+
+// Cas affine y'=ay+b (b != 0) de l'equation differentielle -- distinct de
+// equadiff_v1 (cas homogene y'=ay seul). Raisonnement en 2 etapes explicite
+// dans le BO : solution particuliere constante k=-b/a, puis solution
+// generale y=Ce^{ax}+k avec C determine par la condition initiale.
+function genererEquadiffAffine() {
+  const aOptions = [-2, -1, 1, 2];
+  let a = 0, b = 0, y0 = 0, C = 0, k = 0, tentatives = 0;
+  do {
+    a = aOptions[randInt(0, aOptions.length - 1)];
+    b = randNonZero(-8, 8);
+    y0 = randNonZero(-6, 6);
+    k = -b / a;
+    C = y0 - k;
+    tentatives++;
+    if (tentatives > 1000) throw new Error("equadiff_affine: trop de tentatives");
+  } while (Math.abs(C) < 0.01);
+  const x1 = randInt(1, 3);
+  const reponse = roundSmart(C * Math.exp(a * x1) + k);
+  const aCoeff = Math.abs(a) === 1 ? (a < 0 ? "-" : "") : String(a);
+  const enonce = `$f$ est solution de l'équation différentielle $y'=${aCoeff}y ${fmtSigned(b)}$ avec $f(0)=${y0}$. Calcule $f(${x1})$ (arrondi si besoin).`;
+  return { enonce, x: reponse };
+}
+
+// Paramétrage de droite dans l'espace -- distinct de appartenance_plan_v1
+// (qui ne teste que l'appartenance a un PLAN). 2 modes pour eviter une
+// operation unique repetitive : calcul de coordonnees pour un t donne, ou
+// test d'appartenance d'un point (construit sur la droite via un vrai t, ou
+// hors droite par une perturbation d'une composante mathematiquement
+// irrecuperable par un autre t -- voir preuve dans le rapport de conception).
+function genererDroiteParametree() {
+  let u: number[];
+  do {
+    u = [randInt(-5, 5), randInt(-5, 5), randInt(-5, 5)];
+  } while (u[0] === 0 && u[1] === 0 && u[2] === 0);
+  const A = [randInt(-6, 6), randInt(-6, 6), randInt(-6, 6)];
+
+  if (Math.random() < 0.5) {
+    let t0 = 0;
+    while (t0 === 0) t0 = randInt(-4, 4);
+    const M = [A[0] + t0 * u[0], A[1] + t0 * u[1], A[2] + t0 * u[2]];
+    const reponse = M[0] + M[1] + M[2];
+    const enonce = `La droite $D$ passe par $A(${A[0]}\\,;\\,${A[1]}\\,;\\,${A[2]})$ et a pour vecteur directeur $\\vec{u}(${u[0]}\\,;\\,${u[1]}\\,;\\,${u[2]})$, soit $M(t)=A+t\\vec{u}$. Calcule la somme des coordonnées du point de $D$ obtenu pour $t=${t0}$.`;
+    return { enonce, x: reponse };
+  } else {
+    const surLaDroite = Math.random() < 0.5;
+    const tReal = randInt(-4, 4);
+    const M = [A[0] + tReal * u[0], A[1] + tReal * u[1], A[2] + tReal * u[2]];
+    if (!surLaDroite) {
+      let idx = u.findIndex((v) => v === 0);
+      if (idx === -1) idx = 0;
+      let delta = 0;
+      while (delta === 0) delta = randInt(-3, 3);
+      M[idx] += delta;
+    }
+    const reponse = surLaDroite ? 1 : 0;
+    const enonce = `La droite $D$ passe par $A(${A[0]}\\,;\\,${A[1]}\\,;\\,${A[2]})$ et a pour vecteur directeur $\\vec{u}(${u[0]}\\,;\\,${u[1]}\\,;\\,${u[2]})$. Le point $M(${M[0]}\\,;\\,${M[1]}\\,;\\,${M[2]})$ appartient-il à $D$ ? (réponds 1 pour oui, 0 pour non)`;
+    return { enonce, x: reponse };
+  }
+}
+
+// LOT 9 (Terminale, 16/08/2026) : le raisonnement par recurrence est cite
+// explicitement 3 fois dans le BO 2019 (Suites -- "raisonner par recurrence
+// pour etablir une propriete d'une suite" ; Algebre et geometrie -- objectif
+// introductif ; Vocabulaire ensembliste et logique -- "demontrer une
+// propriete par recurrence") et n'etait teste nulle part dans le catalogue.
+// 2 modes couvrant les deux piliers d'une preuve par recurrence (le
+// raisonnement complet n'est pas gradable automatiquement, seule sa
+// mecanique l'est) :
+//  - initialisation : verifier si u0 respecte la propriete visee (0/1,
+//    equilibre 50/50 comme les autres templates vrai/faux du projet) ;
+//  - heredite : a partir de l'hypothese de recurrence u_n<=M, calculer la
+//    valeur aM+b qui majore u_{n+1} d'apres la relation de recurrence
+//    (mecanique centrale du pas d'heredite, sans exiger la redaction
+//    complete de l'implication logique).
+function genererRecurrence() {
+  const mode = randInt(0, 1);
+  const aOptions = [0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8];
+  const a = aOptions[randInt(0, aOptions.length - 1)];
+  const b = randInt(1, 10);
+  if (mode === 0) {
+    const vraie = Math.random() < 0.5;
+    const u0 = randInt(0, 10);
+    const M = vraie ? u0 + randInt(1, 10) : u0 - randNonZero(1, 5);
+    const enonce = `On définit une suite par $u_0=${u0}$ et, pour tout $n$, $u_{n+1}=${fmtNum(a)}u_n+${b}$. On veut démontrer par récurrence que, pour tout $n$, $u_n\\leq ${M}$. L'étape d'initialisation (vérifier que $u_0\\leq ${M}$) est-elle vérifiée ? Réponds $1$ si oui, $0$ si non.`;
+    return { enonce, x: vraie ? 1 : 0 };
+  } else {
+    const M = randInt(5, 20);
+    const reponse = roundSmart(a * M + b);
+    const enonce = `Une suite vérifie, pour tout $n$, $u_{n+1}=${fmtNum(a)}u_n+${b}$ (avec $${fmtNum(a)}\\in\\,]0\\,;\\,1[$). Dans une démonstration par récurrence, on suppose qu'à un rang $n$, $u_n\\leq ${M}$ (hypothèse de récurrence). D'après la relation de récurrence, calcule la valeur $${fmtNum(a)}\\times${M}+${b}$ qui majore alors $u_{n+1}$.`;
+    return { enonce, x: reponse };
+  }
 }
 
 Deno.serve(async (req) => {
@@ -257,6 +404,10 @@ Deno.serve(async (req) => {
       case "derivee_composee_v1": result = genererDeriveeComposee(); break;
       case "concentration_v1": result = genererConcentration(); break;
       case "continuite_tvi_v1": result = genererContinuiteTvi(); break;
+      case "concentration_echantillon_v1": result = genererConcentrationEchantillon(); break;
+      case "equadiff_affine_v1": result = genererEquadiffAffine(); break;
+      case "droite_parametree_v1": result = genererDroiteParametree(); break;
+      case "recurrence_v1": result = genererRecurrence(); break;
       default:
         return new Response(JSON.stringify({ error: "template_id inconnu" }), { status: 400, headers: corsHeaders });
     }

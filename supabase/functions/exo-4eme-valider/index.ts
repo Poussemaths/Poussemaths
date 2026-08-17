@@ -57,6 +57,7 @@ const DEFAULTS: Record<string, { tolerance: number; chapitre: string; niveau: st
   pourcentage_v1: { tolerance: 0.001, chapitre: "pourcentages", niveau: "4eme" },
   probabilite_v1: { tolerance: 0.006, chapitre: "Probabilités 4ème", niveau: "4eme" },
   moyenne_v1: { tolerance: 0.001, chapitre: "Statistiques 4ème", niveau: "4eme" },
+  developper_factoriser_v1: { tolerance: 0.001, chapitre: "Calcul littéral", niveau: "4eme" },
 };
 
 async function ecrireProgression(

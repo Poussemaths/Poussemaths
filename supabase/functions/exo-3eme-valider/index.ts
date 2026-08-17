@@ -56,7 +56,7 @@ const DEFAULTS: Record<string, { tolerance: number; chapitre: string; niveau: st
   puissance_v1: { tolerance: 0.001, chapitre: "Puissances & Notation scientifique", niveau: "3eme" },
   racine_carree_v1: { tolerance: 0.001, chapitre: "Racines carrées", niveau: "3eme" },
   equation_1er_degre_v1: { tolerance: 0.001, chapitre: "equations", niveau: "3eme" },
-  systeme_v1: { tolerance: 0.001, chapitre: "Systèmes d'équations", niveau: "3eme" },
+  systeme_v1: { tolerance: 0.001, chapitre: "Intersections de droites et problèmes", niveau: "3eme" },
   coefficient_directeur_v1: { tolerance: 0.001, chapitre: "Fonctions linéaires et affines", niveau: "3eme" },
   thales_v1: { tolerance: 0.001, chapitre: "Théorème de Thalès", niveau: "3eme" },
   trigonometrie_v1: { tolerance: 0.006, chapitre: "Trigonométrie", niveau: "3eme" },

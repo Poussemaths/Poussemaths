@@ -95,6 +95,41 @@ function genererMoyenne() {
   return { enonce, x: moyenne };
 }
 
+function fmtSignedTerme(n: number): string {
+  return n < 0 ? `- ${Math.abs(n)}` : `+ ${n}`;
+}
+
+// developper_factoriser_v1 -- double distributivite simple k(x+a), jamais une
+// identite remarquable (hors-programme 4e). 3 modes tires aleatoirement, tous
+// portent sur la STRUCTURE de la transformation (jamais une evaluation
+// numerique en un point) :
+// 0 = developper k(x+a), donner le terme constant c=k*a (le coefficient de x
+//     est deja visible dans l'enonce, donc jamais redemande -- eviterait une
+//     question triviale) ;
+// 1 = factoriser Bx+C, donner le facteur commun k. Construit par k(1) et
+//     k(a) : pgcd(B,C)=pgcd(k*1,k*a)=k*pgcd(1,a)=k TOUJOURS, quel que soit a
+//     -- aucune ambiguite possible sur "le" facteur commun ;
+// 2 = factoriser Bx+C, k donne explicitement dans l'enonce, donner le second
+//     facteur a=C/k.
+function genererDeveloppeFactorise() {
+  const mode = randInt(0, 2);
+  const k = randInt(2, 9);
+  const a = nonZero(-12, 12);
+  const B = k;
+  const C = k * a;
+
+  if (mode === 0) {
+    const enonce = `Développe l'expression $${k}(x ${a < 0 ? "-" : "+"} ${Math.abs(a)})$ sous la forme $bx+c$. Donne la valeur de $c$ (le terme constant).`;
+    return { enonce, x: C };
+  }
+  if (mode === 1) {
+    const enonce = `On donne l'expression $${B}x ${fmtSignedTerme(C)}$. Elle se factorise sous la forme $k(x+a)$ avec $k,a$ entiers. Donne la valeur de $k$ (le facteur commun).`;
+    return { enonce, x: k };
+  }
+  const enonce = `On donne l'expression $${B}x ${fmtSignedTerme(C)}$. Sachant que le facteur commun est $${k}$, donne la valeur de $a$ telle que l'expression factorisée soit $${k}(x+a)$.`;
+  return { enonce, x: a };
+}
+
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response(null, { headers: corsHeaders });
   try {
@@ -107,6 +142,7 @@ Deno.serve(async (req) => {
       case "pourcentage_v1": result = genererPourcentage(); break;
       case "probabilite_v1": result = genererProbabilite(); break;
       case "moyenne_v1": result = genererMoyenne(); break;
+      case "developper_factoriser_v1": result = genererDeveloppeFactorise(); break;
       default:
         return new Response(JSON.stringify({ error: "template_id inconnu" }), { status: 400, headers: corsHeaders });
     }

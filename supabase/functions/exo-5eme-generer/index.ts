@@ -8,6 +8,12 @@ function randInt(min: number, max: number): number {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+function nonZero(min: number, max: number): number {
+  let v = 0;
+  while (v === 0) v = randInt(min, max);
+  return v;
+}
+
 function fmtNum(n: number): string {
   if (Number.isInteger(n)) return String(n);
   return n.toString().replace(".", ",");
@@ -45,8 +51,14 @@ function genererEvaluationFonction() {
   return { enonce, x: reponse };
 }
 
-function genererAirePerimetre() {
-  const estRectangle = Math.random() < 0.6;
+// LOT 7 (audit aire_perimetre_v1, 16/08/2026) : "Calculer l'aire d'un
+// triangle" est une competence explicitement 5e (Cycle 4 nouveau programme,
+// section Cinquieme > Triangles), absente du Cycle 3 (6e) qui ne couvre que
+// l'aire du carre/rectangle. Le mode triangle est donc reserve a la 5e ;
+// comportement 5e strictement inchange (meme expression Math.random()<0.6),
+// 6e (ou tout autre niveau) force au mode rectangle uniquement.
+function genererAirePerimetre(niveau?: string) {
+  const estRectangle = niveau === "5eme" ? Math.random() < 0.6 : true;
   let enonce: string, reponse: number;
 
   if (estRectangle) {
@@ -70,15 +82,49 @@ function genererAirePerimetre() {
   return { enonce, x: reponse };
 }
 
+// puissances_5e_v1 -- carre/cube uniquement (jamais puissances de 10 / notation
+// scientifique, qui relevent d'un autre registre deja couvert en 3e). 3 modes :
+// 0=carre (n in [2,12], bornes exactes du BO 5e "connaitre les carres des
+// entiers de 0 a 12"), 1=cube (n in [2,10]), 2=expression combinee (carre ou
+// cube avec une operation simple +/-/x), conforme a la capacite BO "calculer
+// la valeur numerique d'expressions contenant des puissances simples,
+// additions, soustractions et produits".
+function genererPuissances5e() {
+  const mode = randInt(0, 2);
+  if (mode === 0) {
+    const n = randInt(2, 12);
+    return { enonce: `Calcule $${n}^2$.`, x: n * n };
+  }
+  if (mode === 1) {
+    const n = randInt(2, 10);
+    return { enonce: `Calcule $${n}^3$.`, x: n * n * n };
+  }
+  const carre = Math.random() < 0.5;
+  if (carre) {
+    const n = randInt(2, 9);
+    const a = randInt(2, 5);
+    const b = nonZero(-10, 10);
+    const reponse = a * n * n + b;
+    const enonce = `Calcule : $${a}\\times${n}^2 ${b < 0 ? "-" : "+"} ${Math.abs(b)}$`;
+    return { enonce, x: reponse };
+  }
+  const n = randInt(2, 8);
+  const c = randInt(1, 20);
+  const reponse = n * n * n - c;
+  const enonce = `Calcule : $${n}^3 - ${c}$`;
+  return { enonce, x: reponse };
+}
+
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response(null, { headers: corsHeaders });
   try {
-    const { template_id } = await req.json();
+    const { template_id, niveau } = await req.json();
 
     let result: { enonce: string; x: number } | null = null;
     switch (template_id) {
       case "evaluation_fonction_v1": result = genererEvaluationFonction(); break;
-      case "aire_perimetre_v1": result = genererAirePerimetre(); break;
+      case "aire_perimetre_v1": result = genererAirePerimetre(niveau); break;
+      case "puissances_5e_v1": result = genererPuissances5e(); break;
       default:
         return new Response(JSON.stringify({ error: "template_id inconnu" }), { status: 400, headers: corsHeaders });
     }

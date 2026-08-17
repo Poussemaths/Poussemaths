@@ -62,6 +62,13 @@ const DEFAULTS: Record<string, { tolerance: number; chapitre: string; niveau: st
   radian_v1: { tolerance: 0.005, chapitre: "Trigonométrie — cercle trigonométrique", niveau: "1ere" },
   produit_scalaire_v1: { tolerance: 0.001, chapitre: "Produit scalaire", niveau: "1ere" },
   esperance_v1: { tolerance: 0.005, chapitre: "Variables aléatoires", niveau: "1ere" },
+  ensembles_operations_v1: { tolerance: 0.001, chapitre: "Vocabulaire ensembliste et logique", niveau: "1ere" },
+  intervalles_v1: { tolerance: 0.001, chapitre: "Vocabulaire ensembliste et logique", niveau: "1ere" },
+  implication_logique_v1: { tolerance: 0.001, chapitre: "Vocabulaire ensembliste et logique", niveau: "1ere" },
+  contre_exemple_v1: { tolerance: 0.001, chapitre: "Vocabulaire ensembliste et logique", niveau: "1ere" },
+  equation_droite_normale_v1: { tolerance: 0.001, chapitre: "Géométrie repérée", niveau: "1ere" },
+  projete_orthogonal_v1: { tolerance: 0.001, chapitre: "Géométrie repérée", niveau: "1ere" },
+  equation_cercle_v1: { tolerance: 0.001, chapitre: "Géométrie repérée", niveau: "1ere" },
 };
 
 async function ecrireProgression(

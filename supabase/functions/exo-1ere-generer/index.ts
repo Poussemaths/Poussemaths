@@ -208,6 +208,204 @@ function genererEsperance() {
   return { enonce, x: reponse };
 }
 
+// LOT 7 (1ere, 16/08/2026) : vrais manques BO identifies lors de l'audit --
+// vocabulaire ensembliste et logique (theme transversal jamais couvert) et
+// geometrie reperee (sous-partie de Geometrie jamais couverte, distincte du
+// calcul vectoriel/produit scalaire deja en place).
+
+function genererEnsembles() {
+  const univers = Array.from({ length: 20 }, (_, i) => i + 1);
+  function tirerEnsemble(taille: number): number[] {
+    const pool = [...univers];
+    const res: number[] = [];
+    for (let i = 0; i < taille; i++) {
+      const idx = randInt(0, pool.length - 1);
+      res.push(pool[idx]);
+      pool.splice(idx, 1);
+    }
+    return res.sort((a, b) => a - b);
+  }
+  let A: number[], B: number[];
+  do {
+    A = tirerEnsemble(randInt(4, 7));
+    B = tirerEnsemble(randInt(4, 7));
+  } while (A.join(",") === B.join(","));
+  const inter = A.filter((x) => B.includes(x));
+  const union = [...new Set([...A, ...B])];
+  const diff = A.filter((x) => !B.includes(x));
+  const mode = randInt(0, 2);
+  const AStr = `\\{${A.join("\\,;\\,")}\\}`;
+  const BStr = `\\{${B.join("\\,;\\,")}\\}`;
+  if (mode === 0) {
+    return { enonce: `On donne $A=${AStr}$ et $B=${BStr}$. Calcule $\\text{Card}(A\\cap B)$.`, x: inter.length };
+  } else if (mode === 1) {
+    return { enonce: `On donne $A=${AStr}$ et $B=${BStr}$. Calcule $\\text{Card}(A\\cup B)$.`, x: union.length };
+  } else {
+    return { enonce: `On donne $A=${AStr}$ et $B=${BStr}$. Calcule $\\text{Card}(A\\setminus B)$ (les éléments de $A$ qui ne sont pas dans $B$).`, x: diff.length };
+  }
+}
+
+function genererIntervalles() {
+  const mode = randInt(0, 2);
+  if (mode === 0) {
+    const a = randInt(-10, 5);
+    const b = a + randInt(3, 10);
+    const ouvertGauche = Math.random() < 0.5;
+    const ouvertDroite = Math.random() < 0.5;
+    const bracketG = ouvertGauche ? "]" : "[";
+    const bracketD = ouvertDroite ? "[" : "]";
+    const casTest = randInt(0, 3);
+    let x: number, appartient: boolean;
+    if (casTest === 0) { x = a; appartient = !ouvertGauche; }
+    else if (casTest === 1) { x = b; appartient = !ouvertDroite; }
+    else if (casTest === 2) { x = randInt(a + 1, b - 1); appartient = true; }
+    else { x = Math.random() < 0.5 ? a - randInt(1, 5) : b + randInt(1, 5); appartient = false; }
+    const enonce = `On considère l'intervalle $I=${bracketG}${a}\\,;\\,${b}${bracketD}$. Le nombre $x=${x}$ appartient-il à $I$ ? Réponds $1$ si oui, $0$ si non.`;
+    return { enonce, x: appartient ? 1 : 0 };
+  } else {
+    const a = randInt(-10, 0);
+    const c = a + randInt(1, 5);
+    const b = c + randInt(1, 5);
+    const d = b + randInt(1, 5);
+    if (mode === 1) {
+      return { enonce: `On donne $I_1=[${a}\\,;\\,${b}]$ et $I_2=[${c}\\,;\\,${d}]$. Quelle est la borne inférieure de $I_1\\cap I_2$ ?`, x: c };
+    } else {
+      return { enonce: `On donne $I_1=[${a}\\,;\\,${b}]$ et $I_2=[${c}\\,;\\,${d}]$. Quelle est la borne supérieure de $I_1\\cup I_2$ ?`, x: d };
+    }
+  }
+}
+
+function genererImplicationLogique() {
+  const mode = randInt(0, 2);
+  if (mode <= 1) {
+    let a = 0, b = 0;
+    do { a = randInt(-10, 10); b = randInt(-10, 10); } while (a === b);
+    if (mode === 0) {
+      const vraie = a >= b;
+      const enonce = `On considère les propositions $P$ : « $x>${a}$ » et $Q$ : « $x>${b}$ ». L'implication $P\\Rightarrow Q$ (« pour tout réel $x$, si $x>${a}$ alors $x>${b}$ ») est-elle vraie ? Réponds $1$ si oui, $0$ si non.`;
+      return { enonce, x: vraie ? 1 : 0 };
+    } else {
+      const vraie = b >= a;
+      const enonce = `On considère les propositions $P$ : « $x>${a}$ » et $Q$ : « $x>${b}$ ». La réciproque $Q\\Rightarrow P$ (« pour tout réel $x$, si $x>${b}$ alors $x>${a}$ ») est-elle vraie ? Réponds $1$ si oui, $0$ si non.`;
+      return { enonce, x: vraie ? 1 : 0 };
+    }
+  } else {
+    const b = randInt(-10, 5);
+    const a = b + nonZero(1, 10);
+    const claim = randInt(0, 3);
+    const claims = [
+      { txt: `« $x>${a}$ » est une condition suffisante pour « $x>${b}$ »`, vraie: true },
+      { txt: `« $x>${b}$ » est une condition nécessaire pour « $x>${a}$ »`, vraie: true },
+      { txt: `« $x>${b}$ » est une condition suffisante pour « $x>${a}$ »`, vraie: false },
+      { txt: `« $x>${a}$ » est une condition nécessaire pour « $x>${b}$ »`, vraie: false },
+    ];
+    const c = claims[claim];
+    const enonce = `On sait que, pour tout réel $x$ : ($x>${a}$) $\\Rightarrow$ ($x>${b}$) est une implication vraie. L'affirmation suivante est-elle vraie ? ${c.txt}. Réponds $1$ si oui, $0$ si non.`;
+    return { enonce, x: c.vraie ? 1 : 0 };
+  }
+}
+
+function genererContreExemple() {
+  const mode = randInt(0, 2);
+  const paires: [number, number][] = [[2, 4], [2, 6], [2, 8], [3, 6], [3, 9], [4, 8], [5, 10]];
+  const [p, q] = choice(paires);
+  const N = 60;
+  if (mode === 0) {
+    const candidatsValides: number[] = [];
+    const candidatsInvalides: number[] = [];
+    for (let n = 1; n <= N; n++) {
+      const divP = n % p === 0;
+      const divQ = n % q === 0;
+      if (divP && !divQ) candidatsValides.push(n);
+      else candidatsInvalides.push(n);
+    }
+    const estContreExemple = Math.random() < 0.5;
+    const pool = estContreExemple ? candidatsValides : candidatsInvalides;
+    const n0 = choice(pool);
+    const enonce = `On affirme (à tort) : « pour tout entier $n$ compris entre $1$ et $${N}$, si $n$ est divisible par $${p}$, alors $n$ est divisible par $${q}$ ». Le nombre $n=${n0}$ est-il un contre-exemple valide à cette affirmation ? Réponds $1$ si oui, $0$ si non.`;
+    return { enonce, x: estContreExemple ? 1 : 0 };
+  } else if (mode === 1) {
+    let count = 0;
+    for (let n = 1; n <= N; n++) if (n % p === 0) count++;
+    const enonce = `Combien d'entiers $n$ compris entre $1$ et $${N}$ vérifient « $n$ est divisible par $${p}$ » ?`;
+    return { enonce, x: count };
+  } else {
+    let count = 0;
+    for (let n = 1; n <= N; n++) if (n % p !== 0) count++;
+    const enonce = `Soit la proposition « pour tout entier $n$ compris entre $1$ et $${N}$, $n$ est divisible par $${p}$ » (elle est fausse). Sa négation est « il existe $n$ compris entre $1$ et $${N}$ tel que $n$ n'est pas divisible par $${p}$ ». Combien de valeurs de $n$ rendent cette négation vraie ?`;
+    return { enonce, x: count };
+  }
+}
+
+function genererEquationDroiteNormale() {
+  const mode = randInt(0, 1);
+  const a = nonZero(-6, 6);
+  const b = nonZero(-6, 6);
+  const x0 = randInt(-8, 8);
+  const y0 = randInt(-8, 8);
+  const c = -(a * x0 + b * y0);
+  const bTermEq = b >= 0 ? `+${b}y` : `${b}y`;
+  if (mode === 0) {
+    const enonce = `La droite $d$ passe par le point $A(${x0}\\,;\\,${y0})$ et admet pour vecteur normal $\\vec{n}(${a}\\,;\\,${b})$. Son équation cartésienne s'écrit $${a}x${bTermEq}+c=0$. Détermine la valeur de $c$.`;
+    return { enonce, x: c };
+  } else {
+    const surLaDroite = Math.random() < 0.5;
+    const t = nonZero(-3, 3);
+    let xt = x0 - b * t;
+    const yt = y0 + a * t;
+    if (!surLaDroite) xt += nonZero(-2, 2);
+    const surLaDroiteReel = a * xt + b * yt + c === 0;
+    const cTerm = c >= 0 ? `+${c}` : `${c}`;
+    const enonce = `La droite $d$ a pour équation $${a}x${bTermEq}${cTerm}=0$. Le point $M(${xt}\\,;\\,${yt})$ appartient-il à $d$ ? Réponds $1$ si oui, $0$ si non.`;
+    return { enonce, x: surLaDroiteReel ? 1 : 0 };
+  }
+}
+
+function genererProjeteOrthogonal() {
+  const horizontale = Math.random() < 0.5;
+  const k = randInt(-8, 8);
+  let xm = randInt(-8, 8), ym = randInt(-8, 8);
+  if (horizontale) {
+    while (ym === k) ym = randInt(-8, 8);
+    const enonce = `La droite $d$ a pour équation $y=${k}$. Le point $M(${xm}\\,;\\,${ym})$ se projette orthogonalement sur $d$ en un point $H$. Quelle est l'ordonnée de $H$ ?`;
+    return { enonce, x: k };
+  } else {
+    while (xm === k) xm = randInt(-8, 8);
+    const enonce = `La droite $d$ a pour équation $x=${k}$. Le point $M(${xm}\\,;\\,${ym})$ se projette orthogonalement sur $d$ en un point $H$. Quelle est l'abscisse de $H$ ?`;
+    return { enonce, x: k };
+  }
+}
+
+function genererEquationCercle() {
+  const mode = randInt(0, 2);
+  const a = randInt(-8, 8);
+  const b = randInt(-8, 8);
+  const r = randInt(1, 10);
+  const r2 = r * r;
+  if (mode === 0) {
+    const enonce = `Le cercle $\\mathcal{C}$ a pour centre $\\Omega(${a}\\,;\\,${b})$ et pour rayon $r=${r}$. Son équation s'écrit $(x-${a})^2+(y-${b})^2=k$. Détermine la valeur de $k$.`;
+    return { enonce, x: r2 };
+  } else if (mode === 1) {
+    const enonce = `Le cercle $\\mathcal{C}$ a pour équation $(x-${a})^2+(y-${b})^2=${r2}$. Quel est son rayon ?`;
+    return { enonce, x: r };
+  } else {
+    const surLeCercle = Math.random() < 0.5;
+    let xt: number, yt: number;
+    if (surLeCercle) {
+      const [dx, dy] = choice([[r, 0], [-r, 0], [0, r], [0, -r]]);
+      xt = a + dx;
+      yt = b + dy;
+    } else {
+      xt = a + r + nonZero(1, 4);
+      yt = b;
+    }
+    const distCarre = (xt - a) * (xt - a) + (yt - b) * (yt - b);
+    const appartient = distCarre === r2;
+    const enonce = `Le cercle $\\mathcal{C}$ a pour équation $(x-${a})^2+(y-${b})^2=${r2}$. Le point $M(${xt}\\,;\\,${yt})$ appartient-il à $\\mathcal{C}$ ? Réponds $1$ si oui, $0$ si non.`;
+    return { enonce, x: appartient ? 1 : 0 };
+  }
+}
+
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response(null, { headers: corsHeaders });
   try {
@@ -226,6 +424,13 @@ Deno.serve(async (req) => {
       case "radian_v1": result = genererRadian(); break;
       case "produit_scalaire_v1": result = genererProduitScalaire(); break;
       case "esperance_v1": result = genererEsperance(); break;
+      case "ensembles_operations_v1": result = genererEnsembles(); break;
+      case "intervalles_v1": result = genererIntervalles(); break;
+      case "implication_logique_v1": result = genererImplicationLogique(); break;
+      case "contre_exemple_v1": result = genererContreExemple(); break;
+      case "equation_droite_normale_v1": result = genererEquationDroiteNormale(); break;
+      case "projete_orthogonal_v1": result = genererProjeteOrthogonal(); break;
+      case "equation_cercle_v1": result = genererEquationCercle(); break;
       default:
         return new Response(JSON.stringify({ error: "template_id inconnu" }), { status: 400, headers: corsHeaders });
     }

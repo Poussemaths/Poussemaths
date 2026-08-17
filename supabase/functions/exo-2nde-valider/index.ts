@@ -59,6 +59,7 @@ const DEFAULTS: Record<string, { tolerance: number; chapitre: string; niveau: st
   arbre_pondere_v1: { tolerance: 0.006, chapitre: "Probabilités", niveau: "2nde" },
   taux_evolution_v1: { tolerance: 0.01, chapitre: "Statistiques descriptives", niveau: "2nde" },
   equation_carre_v1: { tolerance: 0.001, chapitre: "Intervalles & Valeur absolue", niveau: "2nde" },
+  tableau_croise_v1: { tolerance: 0.006, chapitre: "Croisement de deux variables qualitatives", niveau: "2nde" },
 };
 
 async function ecrireProgression(
