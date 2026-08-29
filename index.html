@@ -1214,7 +1214,7 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
   <ul class="nav-tabs">
     <li><button class="nav-tab active" onclick="showPage('accueil')">Accueil</button></li>
     <li><button class="nav-tab" onclick="showPage('exercices')">Exercices</button></li>
-    <li><button class="nav-tab" onclick="showPage('parcours')">Parcours</button></li>
+    <li><button class="nav-tab" onclick="showPage('parcours')">Entraînement libre</button></li>
     <li><button id="btn-espace-eleve" class="nav-tab" onclick="showPage('eleve')">Espace Élève</button></li>
     <li><button class="nav-tab" onclick="accesProf()" id="btn-nav-prof">Espace Prof</button></li>
   </ul>
@@ -1233,7 +1233,7 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
   <button onclick="ouvrirRejoindreCM();toggleMenu()">📱 Rejoindre un calcul mental</button>
   <button onclick="showPage('accueil');toggleMenu()">🏠 Accueil</button>
   <button onclick="showPage('exercices');toggleMenu()">📝 Exercices</button>
-  <button onclick="showPage('parcours');toggleMenu()">🎯 Parcours noté</button>
+  <button onclick="showPage('parcours');toggleMenu()">🎯 Entraînement libre</button>
   <button onclick="showPage('eleve');toggleMenu()">🏆 Espace Élève</button>
   <button onclick="accesProf();toggleMenu()">👨‍🏫 Espace Prof</button>
 </div>
@@ -1265,9 +1265,9 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
           <button class="btn-lg-ghost" onclick="document.getElementById('tarifs').scrollIntoView({behavior:'smooth'})">Pour les établissements</button>
         </div>
         <div class="hero-stats">
-          <div><span class="hero-stat-num">150+</span><div class="hero-stat-label">Exercices</div></div>
+          <div><span class="hero-stat-num">400+</span><div class="hero-stat-label">Exercices</div></div>
           <div class="hero-stat-sep"></div>
-          <div><span class="hero-stat-num">6</span><div class="hero-stat-label">Niveaux</div></div>
+          <div><span class="hero-stat-num">8</span><div class="hero-stat-label">Niveaux</div></div>
           <div class="hero-stat-sep"></div>
           <div><span class="hero-stat-num">BO 2026</span><div class="hero-stat-label">À jour</div></div>
         </div>
@@ -1366,7 +1366,7 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
 
       <!-- Wow moments prof -->
       <div class="wow-strip reveal">
-        <div class="wow-item" onclick="showPage('prof');setTimeout(ouvrirGenerateurPDF,300)">
+        <div class="wow-item" onclick="accesProf()">
           <div class="wow-icon">📄</div>
           <div class="wow-info">
             <div class="wow-titre">Générateur de devoir PDF</div>
@@ -1375,7 +1375,7 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
           <div class="wow-arrow">→</div>
         </div>
         <div class="wow-sep"></div>
-        <div class="wow-item" onclick="showPage('prof');setTimeout(ouvrirCalcMental,300)">
+        <div class="wow-item" onclick="accesProf()">
           <div class="wow-icon">🔢</div>
           <div class="wow-info">
             <div class="wow-titre">Calcul mental</div>
@@ -1384,7 +1384,7 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
           <div class="wow-arrow">→</div>
         </div>
         <div class="wow-sep"></div>
-        <div class="wow-item" onclick="showPage('prof')">
+        <div class="wow-item" onclick="accesProf()">
           <div class="wow-icon">📊</div>
           <div class="wow-info">
             <div class="wow-titre">Tableau de bord</div>
@@ -1427,7 +1427,7 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
           <li><a onclick="showPage('exercices')">Exercices 3ème</a></li>
           <li><a onclick="showPage('exercices','2nde')">Exercices 2nde</a></li>
           <li><a onclick="showPage('eleve')">Espace élève</a></li>
-          <li><a onclick="showPage('prof')">Espace prof</a></li>
+          <li><a onclick="accesProf()">Espace prof</a></li>
           <li><a onclick="showPage('parent')">Espace parent</a></li>
         </ul>
       </div>
@@ -1487,8 +1487,8 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
 <div class="page" id="page-parcours" style="padding-top:64px">
   <div style="max-width:900px;margin:0 auto;padding:2rem 2rem 4rem">
     <div style="margin-bottom:2rem">
-      <div class="s-label">Entraînement</div>
-      <h2 style="font-family:'Fraunces',serif;font-size:2rem;font-weight:700;color:var(--texte);letter-spacing:-1px;margin-bottom:0.4rem">Parcours <em style="font-style:italic;color:var(--bleu)">noté</em></h2>
+      <div class="s-label">Solo</div>
+      <h2 style="font-family:'Fraunces',serif;font-size:2rem;font-weight:700;color:var(--texte);letter-spacing:-1px;margin-bottom:0.4rem">Entraînement <em style="font-style:italic;color:var(--bleu)">libre</em></h2>
       <p style="font-size:14px;color:var(--muted);font-weight:300">Choisis un thème, configure ton parcours et entraîne-toi. Chaque question est générée aléatoirement.</p>
     </div>
     <div style="background:white;border:1px solid var(--bordure);border-radius:var(--r-lg);padding:2rem;margin-bottom:2rem">
@@ -1906,11 +1906,11 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
 <!-- ═══════════════════════════════════════
      MODAL PARCOURS
 ════════════════════════════════════════ -->
-<div style="display:none;position:fixed;inset:0;background:rgba(28,30,38,0.55);z-index:500;align-items:center;justify-content:center;padding:1rem" id="parcours-overlay" onclick="closeParcours(event)">
+<div style="display:none;position:fixed;inset:0;background:rgba(28,30,38,0.55);z-index:500;align-items:center;justify-content:center;padding:1rem" id="parcours-solo-overlay" onclick="closeParcours(event)">
   <div class="modal" style="max-width:640px">
     <div class="modal-header" style="flex-direction:column;align-items:flex-start;gap:3px">
       <div style="display:flex;align-items:center;justify-content:space-between;width:100%">
-        <span class="modal-header-title" id="parcours-titre">Parcours</span>
+        <span class="modal-header-title" id="parcours-solo-titre">Parcours</span>
         <button class="modal-close" onclick="fermerParcours()">✕</button>
       </div>
       <div style="font-size:11px;color:rgba(255,255,255,0.55)" id="parcours-sous-titre"></div>
@@ -8519,8 +8519,6 @@ let currentQuestion = 0;
 let reponseDonnee = false;
 let score = 0;
 let totalPoints = 0;
-let pointsGlobal = 298;
-let exFaits = 12;
 
 // ═══════════════════════════════════════
 //  NAVIGATION
@@ -8981,7 +8979,7 @@ async function renderEspaceEleve() {
           <div class="eleve-card-title">⚡ Commencer maintenant</div>
           <div class="train-grid">
             <div class="train-card" onclick="showPage('exercices')"><div class="train-icon">🎯</div><div class="train-title">Exercices</div><div class="train-desc">Choisis ton niveau et entraîne-toi</div></div>
-            <div class="train-card" onclick="showPage('parcours')"><div class="train-icon">🔥</div><div class="train-title">Parcours</div><div class="train-desc">Série d'exercices avec score final</div></div>
+            <div class="train-card" onclick="showPage('parcours')"><div class="train-icon">🔥</div><div class="train-title">Entraînement libre</div><div class="train-desc">Série d'exercices avec score final</div></div>
             <div class="train-card" onclick="ouvrirCalcMental()"><div class="train-icon">🧮</div><div class="train-title">Calcul mental</div><div class="train-desc">Entraînement express chrono</div></div>
           </div>
         </div>
@@ -9149,7 +9147,7 @@ async function renderEspaceEleve() {
         <div class="eleve-card-title">⚡ Modes d'entraînement</div>
         <div class="train-grid">
           <div class="train-card" onclick="showPage('exercices')"><div class="train-icon">🎯</div><div class="train-title">Exercice rapide</div><div class="train-desc">Choisis un chapitre et entraîne-toi</div></div>
-          <div class="train-card" onclick="showPage('parcours')"><div class="train-icon">🔥</div><div class="train-title">Parcours noté</div><div class="train-desc">Série d'exercices avec score final</div></div>
+          <div class="train-card" onclick="showPage('parcours')"><div class="train-icon">🔥</div><div class="train-title">Entraînement libre</div><div class="train-desc">Série d'exercices avec score final</div></div>
           <div class="train-card" onclick="alert('Défi ami — bientôt disponible 🌱')"><div class="train-icon">🤝</div><div class="train-title">Défi ami</div><div class="train-desc">Bientôt disponible 🌱</div></div>
         </div>
       </div>
@@ -12327,8 +12325,7 @@ async function verifierQCMFixe(idx) {
   });
 
   afficherCorrection(correct, q);
-  if(correct) { score += q.points; pointsGlobal += 10; exFaits++; }
-  updateEleveStats();
+  if(correct) { score += q.points; }
 }
 
 // ── VÉRIFICATION QCM (EXERCICE GÉNÉRÉ, validation serveur) ──
@@ -12366,8 +12363,6 @@ async function verifierQCMGenere(idx) {
 
   afficherCorrection(correct, q);
   score += correct ? q.points : 0;
-  if(correct) { pointsGlobal += 10; exFaits++; }
-  updateEleveStats();
 }
 
 // ── VÉRIFICATION SAISIE LIBRE ──
@@ -12407,8 +12402,7 @@ async function verifierQuestionFixe(val, q, inp) {
 
   inp.classList.add(correct ? 'correct' : 'wrong');
   afficherCorrection(correct, q);
-  if(correct) { score += q.points; pointsGlobal += 10; exFaits++; }
-  updateEleveStats();
+  if(correct) { score += q.points; }
 }
 
 // ── VÉRIFICATION SAISIE LIBRE (EXERCICE GÉNÉRÉ, validation serveur) ──
@@ -12447,8 +12441,6 @@ async function verifierExerciceGenere(val, q, inp) {
   inp.classList.add(correct ? 'correct' : 'wrong');
   afficherCorrection(correct, q);
   score += correct ? q.points : 0;
-  if(correct) { pointsGlobal += 10; exFaits++; }
-  updateEleveStats();
 }
 
 // ── AFFICHER VERROU (Parcours-Notation, question deja repondue en evaluation) ──
@@ -12552,14 +12544,6 @@ function closeModal(e) {
   if(e.target === document.getElementById('modal-overlay')) fermerModal();
 }
 
-function updateEleveStats() {
-  const sg = document.getElementById('score-global');
-  const ef = document.getElementById('ex-faits');
-  const mp = document.getElementById('mes-pts');
-  if(sg) sg.textContent = pointsGlobal;
-  if(ef) ef.textContent = exFaits;
-  if(mp) mp.textContent = pointsGlobal + ' pts';
-}
 
 // ═══════════════════════════════════════
 //  MOTEUR PARCOURS ALÉATOIRES
@@ -12984,7 +12968,7 @@ function lancerParcours() {
   parcoursRepondu = false;
 
   // Ouvrir modal
-  const overlay = document.getElementById('parcours-overlay');
+  const overlay = document.getElementById('parcours-solo-overlay');
   if(overlay) {
     overlay.style.display = 'flex';
     renderParcoursQuestion();
@@ -12998,7 +12982,7 @@ function renderParcoursQuestion() {
   const prog = document.getElementById('parcours-progress');
   if(prog) prog.style.width = pct + '%';
 
-  const titreEl = document.getElementById('parcours-titre');
+  const titreEl = document.getElementById('parcours-solo-titre');
   if(titreEl) titreEl.textContent = `${GENERATEURS[parcoursConfig.theme].emoji} ${parcoursConfig.theme}`;
 
   const sousEl = document.getElementById('parcours-sous-titre');
@@ -13151,9 +13135,6 @@ function parcoursNext() {
 function showParcoursResultat() {
   const pct = Math.round(parcoursScore/parcoursTotal*100);
   const pts = parcoursScore * 10;
-  pointsGlobal += pts;
-  exFaits += parcoursTotal;
-  updateEleveStats();
 
   // Emoji et message
   let emoji = pct >= 80 ? '🏆' : pct >= 60 ? '👏' : pct >= 40 ? '💪' : '📚';
@@ -13192,7 +13173,7 @@ function showParcoursResultat() {
 }
 
 function fermerParcours() {
-  const overlay = document.getElementById('parcours-overlay');
+  const overlay = document.getElementById('parcours-solo-overlay');
   if(overlay) overlay.style.display = 'none';
   const nav = document.getElementById('parcours-nav');
   if(nav) nav.style.display = 'flex';
@@ -13200,7 +13181,7 @@ function fermerParcours() {
 }
 
 function closeParcours(e) {
-  if(e.target === document.getElementById('parcours-overlay')) fermerParcours();
+  if(e.target === document.getElementById('parcours-solo-overlay')) fermerParcours();
 }
 
 function renderHistorique() {
@@ -13236,8 +13217,6 @@ setTimeout(() => {
   });
 }, 300);
 
-// Init
-updateEleveStats();
 </script>
 </body>
 </html>

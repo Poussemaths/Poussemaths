@@ -84,7 +84,7 @@ function genererEquation1erDegre() {
   const c = a * x + b;
   const bTerm = b === 0 ? "" : b > 0 ? ` + ${fmtNum(b)}` : ` - ${fmtNum(Math.abs(b))}`;
   const aTerm = Math.abs(a) === 1 ? (a === 1 ? "x" : "-x") : `${fmtNum(a)}x`;
-  const enonce = `Resoudre l'equation : $${aTerm}${bTerm} = ${fmtNum(c)}$`;
+  const enonce = `Résoudre l'équation : $${aTerm}${bTerm} = ${fmtNum(c)}$`;
   return { enonce, x };
 }
 
