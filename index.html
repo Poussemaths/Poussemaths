@@ -12588,14 +12588,25 @@ async function showResult() {
     }
   }
 
+  // "Recommencer" donnait deja 5 questions generees a neuf pour un exercice
+  // genere (nouvel appel serveur, valeurs aleatoires fraiches) -- mais le label
+  // sonne comme "refaire la meme chose", donc personne ne le reclique en
+  // pratique. Trouve le 22/09/2026 suite au test reel de 2nde ("le site se
+  // vide en 5 minutes") : le probleme etait le libelle, pas le moteur.
+  const relancerLabel = currentExercice.genere ? 'Nouvelles questions →' : 'Recommencer';
+  const relanceInfo = currentExercice.genere
+    ? `<div style="font-size:12px;color:var(--muted);margin-top:4px">🔄 Entraînement infini — de nouvelles questions à chaque fois</div>`
+    : '';
+
   document.getElementById('modal-content').innerHTML = `
     <div class="result-screen">
       <div class="result-emoji">${emoji}</div>
       <div class="result-title">${msg}</div>
       <div class="result-score">Score : <span class="result-pts">${score} / ${totalPoints}</span> points (${pct}%)</div>
       ${sauvegardeHtml}
+      ${relanceInfo}
       <div style="margin-top:1.5rem;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
-        <button class="btn-nav-modal primary" onclick="ouvrirExercice('${currentExercice.id}', ${parcoursIdCourant ? `'${parcoursIdCourant}'` : 'null'})">Recommencer</button>
+        <button class="btn-nav-modal primary" onclick="ouvrirExercice('${currentExercice.id}', ${parcoursIdCourant ? `'${parcoursIdCourant}'` : 'null'})">${relancerLabel}</button>
         <button class="btn-nav-modal" onclick="fermerModal();showPage('exercices')">Autres exercices</button>
       </div>
     </div>
