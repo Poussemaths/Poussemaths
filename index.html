@@ -8729,6 +8729,7 @@ function ouvrirModalLegal(page) {
   const overlay = document.createElement('div');
   overlay.id = 'modal-legal-overlay';
   overlay.className = 'modal-overlay open';
+  overlay.style.zIndex = '2000'; // au-dessus de la modale connexion/inscription (z-index 1001)
   overlay.onclick = (e) => { if(e.target === overlay) fermerModalLegal(); };
   const titre = page === 'confidentialite' ? 'Politique de confidentialité' : 'Mentions légales';
   const contenu = page === 'confidentialite' ? TEXTE_CONFIDENTIALITE : TEXTE_MENTIONS_LEGALES;
