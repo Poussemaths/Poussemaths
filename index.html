@@ -1075,6 +1075,8 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
 .footer-links a:hover { color:white; }
 .footer-bottom { max-width:1160px; margin:0 auto; display:flex; justify-content:space-between; }
 .footer-copy,.footer-aefe { font-size:12px; color:rgba(255,255,255,0.2); }
+.footer-legal a { color:rgba(255,255,255,0.35); text-decoration:none; cursor:pointer; }
+.footer-legal a:hover { color:white; }
 
 /* ══ PARCOURS ══ */
 .parcours-nb-btn {
@@ -1441,6 +1443,7 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
     </div>
     <div class="footer-bottom">
       <span class="footer-copy">© 2026 Poussemaths — Tous droits réservés</span>
+      <span class="footer-legal"><a onclick="ouvrirModalLegal('mentions')">Mentions légales</a> · <a onclick="ouvrirModalLegal('confidentialite')">Politique de confidentialité</a></span>
       <span class="footer-aefe">Réseau AEFE · poussemaths.fr</span>
     </div>
   </footer>
@@ -8656,6 +8659,7 @@ function ouvrirModalConnexion(mode = 'connexion') {
           </select>
         </div>
         <div id="auth-error-ins" class="auth-error" style="display:none"></div>
+        <div style="font-size:11.5px;color:var(--muted);margin-bottom:10px">En créant un compte, tu acceptes nos <a onclick="ouvrirModalLegal('mentions')" style="cursor:pointer;color:inherit;text-decoration:underline">mentions légales</a> et notre <a onclick="ouvrirModalLegal('confidentialite')" style="cursor:pointer;color:inherit;text-decoration:underline">politique de confidentialité</a>.</div>
         <button class="auth-btn" onclick="inscriptionEmail()">Créer mon compte →</button>
       </div>
       <div id="auth-code" style="display:none">
@@ -8668,6 +8672,7 @@ function ouvrirModalConnexion(mode = 'connexion') {
         <div class="auth-field"><label>Email</label><input type="email" id="auth-email-code" placeholder="ton@email.com"></div>
         <div class="auth-field"><label>Mot de passe</label><div class="mdp-wrap"><input type="password" id="auth-password-code" placeholder="8 caractères minimum"><button type="button" class="mdp-toggle" onclick="toggleMdpVisibilite(this)">👁️</button></div></div>
         <div id="auth-error-code" class="auth-error" style="display:none"></div>
+        <div style="font-size:11.5px;color:var(--muted);margin-bottom:10px">En rejoignant la classe, tu acceptes nos <a onclick="ouvrirModalLegal('mentions')" style="cursor:pointer;color:inherit;text-decoration:underline">mentions légales</a> et notre <a onclick="ouvrirModalLegal('confidentialite')" style="cursor:pointer;color:inherit;text-decoration:underline">politique de confidentialité</a>.</div>
         <button class="auth-btn" onclick="inscriptionCodeClasse()">Rejoindre la classe →</button>
         <button class="auth-btn-secondary" onclick="switchAuthTab('connexion')" style="margin-top:8px">← Retour</button>
       </div>
@@ -8678,6 +8683,67 @@ function ouvrirModalConnexion(mode = 'connexion') {
 }
 
 function fermerModalConnexion() { document.getElementById('modal-auth')?.remove(); }
+
+// ═══════════════════════════════════════
+//  MENTIONS LÉGALES / POLITIQUE DE CONFIDENTIALITÉ
+// ═══════════════════════════════════════
+const TEXTE_MENTIONS_LEGALES = `
+  <p><strong>Éditeur du site</strong><br>
+  Le site poussemaths.fr est édité par Jamal Rahel, enseignant de mathématiques, à titre individuel.<br>
+  Contact : <a href="mailto:contact@poussemaths.fr">contact@poussemaths.fr</a></p>
+  <p><strong>Directeur de la publication</strong><br>
+  Jamal Rahel</p>
+  <p><strong>Hébergement</strong><br>
+  Hébergement du site : Vercel Inc.<br>
+  Hébergement de la base de données et de l'authentification : Supabase Inc.</p>
+  <p><strong>Propriété intellectuelle</strong><br>
+  L'ensemble des contenus pédagogiques (exercices, corrections, énoncés) présents sur ce site est la propriété de l'éditeur. Toute reproduction ou diffusion sans autorisation est interdite.</p>
+  <p><strong>Contact</strong><br>
+  Pour toute question concernant le site : <a href="mailto:contact@poussemaths.fr">contact@poussemaths.fr</a></p>
+`;
+const TEXTE_CONFIDENTIALITE = `
+  <p><strong>Qui est responsable des données ?</strong><br>
+  Jamal Rahel, éditeur du site poussemaths.fr, est responsable du traitement des données collectées sur cette plateforme. Contact : <a href="mailto:contact@poussemaths.fr">contact@poussemaths.fr</a></p>
+  <p><strong>Quelles données sont collectées ?</strong><br>
+  Lors de la création d'un compte : prénom, nom, adresse email, niveau scolaire ou classe.<br>
+  Lors de l'utilisation de la plateforme : résultats aux exercices, progression, historique de connexion.<br>
+  Aucune donnée sensible n'est collectée (pas de données de santé, d'origine, d'opinions, etc.).</p>
+  <p><strong>Pourquoi ces données sont-elles collectées ?</strong><br>
+  Ces données servent uniquement à fournir le service pédagogique : afficher les exercices adaptés au niveau de l'élève, suivre sa progression, et permettre à son ou ses professeur(s) de suivre le travail de leur classe.</p>
+  <p><strong>Qui a accès à ces données ?</strong><br>
+  L'élève lui-même, le ou les professeur(s) de la ou des classes auxquelles il est rattaché, et l'éditeur du site pour la maintenance technique. Ces données ne sont ni vendues, ni partagées avec des tiers à des fins commerciales ou publicitaires.</p>
+  <p><strong>Où sont hébergées ces données ?</strong><br>
+  Les données sont hébergées par Supabase Inc. (base de données et authentification) et Vercel Inc. (site). Ces prestataires peuvent être amenés à traiter des données en dehors de l'Union européenne, dans le cadre de garanties contractuelles conformes au RGPD.</p>
+  <p><strong>Combien de temps ces données sont-elles conservées ?</strong><br>
+  Les données sont conservées pendant la durée d'utilisation du compte. Un compte peut être supprimé à tout moment sur simple demande.</p>
+  <p><strong>Quels sont vos droits ?</strong><br>
+  Conformément au RGPD, vous disposez d'un droit d'accès, de rectification et de suppression des données vous concernant. Pour un élève mineur, ces droits peuvent être exercés par son représentant légal. Pour exercer ces droits, contactez : <a href="mailto:contact@poussemaths.fr">contact@poussemaths.fr</a></p>
+  <p><strong>Sécurité</strong><br>
+  Les mots de passe ne sont jamais stockés en clair. Les connexions au site sont chiffrées (HTTPS).</p>
+  <p><strong>Mise à jour</strong><br>
+  Cette politique de confidentialité peut être mise à jour. Dernière mise à jour : 22 septembre 2026.</p>
+`;
+
+function ouvrirModalLegal(page) {
+  document.getElementById('modal-legal-overlay')?.remove();
+  const overlay = document.createElement('div');
+  overlay.id = 'modal-legal-overlay';
+  overlay.className = 'modal-overlay open';
+  overlay.onclick = (e) => { if(e.target === overlay) fermerModalLegal(); };
+  const titre = page === 'confidentialite' ? 'Politique de confidentialité' : 'Mentions légales';
+  const contenu = page === 'confidentialite' ? TEXTE_CONFIDENTIALITE : TEXTE_MENTIONS_LEGALES;
+  overlay.innerHTML = `
+    <div class="modal" style="max-width:640px">
+      <div class="modal-header">
+        <div class="modal-header-title">${titre}</div>
+        <button class="modal-close" onclick="fermerModalLegal()">✕</button>
+      </div>
+      <div class="modal-body" style="font-size:13px;line-height:1.7;color:var(--texte2)">${contenu}</div>
+    </div>
+  `;
+  document.body.appendChild(overlay);
+}
+function fermerModalLegal() { document.getElementById('modal-legal-overlay')?.remove(); }
 
 function switchAuthTab(tab) {
   ['connexion','inscription','code'].forEach(t => {
