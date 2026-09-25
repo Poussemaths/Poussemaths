@@ -12489,6 +12489,17 @@ async function verifierQCMGenere(idx) {
     return;
   }
 
+  // Les validateurs generatifs exigent un compte connecte (401 "utilisateur
+  // non authentifie" sinon) -- sans ca, result n'a ni .correcte ni .correction,
+  // et on affichait avant "Correction indisponible" en rouge comme si la
+  // reponse etait fausse, alors qu'on n'en sait rien. Trouve par Jamal le
+  // 25/09/2026 (meme famille de bug que le 22/09 sur les intervalles).
+  if(result && result.error === 'utilisateur non authentifie') {
+    document.querySelectorAll('.qcm-choix').forEach(btn => btn.disabled = true);
+    afficherNonConnecte();
+    return;
+  }
+
   const correct = !!result.correcte;
   const bonIdx = result.bonIdx;
   q.correction = result.correction || 'Correction indisponible pour le moment — réessaie avec une nouvelle question.';
@@ -12564,6 +12575,11 @@ async function verifierExerciceGenere(val, q, inp) {
     return;
   }
 
+  if(result && result.error === 'utilisateur non authentifie') {
+    afficherNonConnecte();
+    return;
+  }
+
   const correct = !!result.correcte;
   // "$x = ...$" supposait que l'inconnue s'appelle toujours x, ce qui n'est
   // vrai que pour equation_1er_degre_v1 -- pour les 27 autres templates
@@ -12589,6 +12605,19 @@ function afficherVerrouille(msg) {
   corrBox.className = `correction-box show`;
   corrTitle.textContent = '🔒 Déjà répondu';
   corrText.innerHTML = texToHtml(msg || 'Tu as déjà répondu à cette question dans le cadre de cette évaluation.');
+}
+
+// ── AFFICHER MESSAGE "NON CONNECTÉ" (exercice génératif, correction serveur
+// exigeant un compte -- honnete plutot que de dire "indisponible" comme si
+// c'etait une panne, et surtout ne pas marquer la reponse comme fausse alors
+// qu'on ne l'a jamais verifiee) ──
+function afficherNonConnecte() {
+  const corrBox = document.getElementById('correction-box');
+  const corrTitle = document.getElementById('corr-title');
+  const corrText = document.getElementById('corr-text');
+  corrBox.className = `correction-box show`;
+  corrTitle.textContent = '🔒 Corrigé disponible pour les élèves connectés';
+  corrText.innerHTML = texToHtml('Connecte-toi (ou rejoins ta classe avec un code) pour voir si ta réponse est juste et accéder à la correction.');
 }
 
 // ── AFFICHER CORRECTION ──
