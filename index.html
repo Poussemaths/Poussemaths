@@ -1555,12 +1555,22 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
     <div style="margin-bottom:2rem">
       <div class="s-label">Ressources</div>
       <h2 style="font-family:'Fraunces',serif;font-size:2rem;font-weight:700;color:var(--texte);letter-spacing:-1px;margin-bottom:0.4rem">Cahiers <em style="font-style:italic;color:var(--bleu)">d'exercices</em></h2>
-      <p style="font-size:14px;color:var(--muted);font-weight:300">Des cahiers complets par niveau, à consulter en ligne. Premier cahier disponible, d'autres arrivent progressivement.</p>
+      <p style="font-size:14px;color:var(--muted);font-weight:300">Des cahiers complets par niveau, à consulter en ligne. D'autres niveaux et d'autres fiches arrivent progressivement.</p>
     </div>
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem">
       <div style="background:white;border:1px solid var(--bordure);border-radius:var(--r-lg);padding:1.5rem;cursor:pointer" onclick="ouvrirRessourcePDF('/ressources/2nde/cahier-exercices.pdf','2nde — Cahier d\'exercices')">
         <div style="font-size:28px;margin-bottom:8px">📘</div>
         <div style="font-family:'Fraunces',serif;font-weight:600;color:var(--texte);margin-bottom:4px">2nde — Cahier d'exercices</div>
+        <div style="font-size:13px;color:var(--muted)">Programme complet, toutes notions</div>
+      </div>
+      <div style="background:white;border:1px solid var(--bordure);border-radius:var(--r-lg);padding:1.5rem;cursor:pointer" onclick="ouvrirRessourcePDF('/ressources/1ere/cahier-exercices.pdf','1ère Spécialité — Cahier d\'exercices')">
+        <div style="font-size:28px;margin-bottom:8px">📘</div>
+        <div style="font-family:'Fraunces',serif;font-weight:600;color:var(--texte);margin-bottom:4px">1ère Spécialité — Cahier d'exercices</div>
+        <div style="font-size:13px;color:var(--muted)">Programme complet, toutes notions</div>
+      </div>
+      <div style="background:white;border:1px solid var(--bordure);border-radius:var(--r-lg);padding:1.5rem;cursor:pointer" onclick="ouvrirRessourcePDF('/ressources/terminale/cahier-exercices.pdf','Terminale Spécialité — Cahier d\'exercices')">
+        <div style="font-size:28px;margin-bottom:8px">📘</div>
+        <div style="font-family:'Fraunces',serif;font-weight:600;color:var(--texte);margin-bottom:4px">Terminale Spécialité — Cahier d'exercices</div>
         <div style="font-size:13px;color:var(--muted)">Programme complet, toutes notions</div>
       </div>
     </div>
@@ -8987,7 +8997,7 @@ async function ouvrirRessourcePDF(url, titre) {
   overlay.style.zIndex = '600';
   overlay.onclick = (e) => { if(e.target === overlay) fermerRessourcePDF(); };
   overlay.innerHTML = `
-    <div class="modal" style="max-width:740px">
+    <div class="modal" style="max-width:960px">
       <div class="modal-header">
         <div class="modal-header-title">${titre}</div>
         <button class="modal-close" onclick="fermerRessourcePDF()">✕</button>
@@ -9028,7 +9038,7 @@ async function renderPdfViewerPage() {
   // haute densite (Retina, Windows en 125%/150%...) -- sans ca, le canvas
   // est dessine a 1 pixel physique par pixel CSS puis etire par le navigateur
   // pour remplir l'ecran, d'ou le flou remonte par Jamal le 28/10/2026.
-  const cssScale = 1.4;
+  const cssScale = 1.8;
   const dpr = window.devicePixelRatio || 1;
   const viewport = page.getViewport({ scale: cssScale * dpr });
   canvas.width = viewport.width;
