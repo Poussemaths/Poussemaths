@@ -9,6 +9,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <!-- ── SUPABASE ── -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<!-- ── PDF.JS (visionneuse ressources, lecture seule) ── -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
@@ -1232,6 +1234,7 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
     <li><button class="nav-tab active" onclick="showPage('accueil')">Accueil</button></li>
     <li><button class="nav-tab" onclick="showPage('exercices')">Exercices</button></li>
     <li><button class="nav-tab" onclick="showPage('parcours')">Entraînement libre</button></li>
+    <li><button class="nav-tab" onclick="showPage('ressources')">Ressources</button></li>
     <li><button id="btn-espace-eleve" class="nav-tab" onclick="showPage('eleve')">Espace Élève</button></li>
     <li><button class="nav-tab" onclick="accesProf()" id="btn-nav-prof">Espace Prof</button></li>
   </ul>
@@ -1539,6 +1542,26 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
       <div style="font-family:'Fraunces',serif;font-size:1rem;font-weight:600;color:var(--texte);margin-bottom:1rem">📋 Mes derniers parcours</div>
       <div id="parcours-historique">
         <div style="text-align:center;padding:2rem;color:var(--muted);font-size:14px;font-weight:300">Aucun parcours effectué pour l'instant.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     PAGE : RESSOURCES (cours/fiches en PDF, lecture seule)
+════════════════════════════════════════ -->
+<div class="page" id="page-ressources" style="padding-top:64px">
+  <div style="max-width:900px;margin:0 auto;padding:2rem 2rem 4rem">
+    <div style="margin-bottom:2rem">
+      <div class="s-label">Ressources</div>
+      <h2 style="font-family:'Fraunces',serif;font-size:2rem;font-weight:700;color:var(--texte);letter-spacing:-1px;margin-bottom:0.4rem">Cahiers <em style="font-style:italic;color:var(--bleu)">d'exercices</em></h2>
+      <p style="font-size:14px;color:var(--muted);font-weight:300">Des cahiers complets par niveau, à consulter en ligne. Premier cahier disponible, d'autres arrivent progressivement.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem">
+      <div style="background:white;border:1px solid var(--bordure);border-radius:var(--r-lg);padding:1.5rem;cursor:pointer" onclick="ouvrirRessourcePDF('/ressources/2nde/cahier-exercices.pdf','2nde — Cahier d\'exercices')">
+        <div style="font-size:28px;margin-bottom:8px">📘</div>
+        <div style="font-family:'Fraunces',serif;font-weight:600;color:var(--texte);margin-bottom:4px">2nde — Cahier d'exercices</div>
+        <div style="font-size:13px;color:var(--muted)">Programme complet, toutes notions</div>
       </div>
     </div>
   </div>
@@ -8739,7 +8762,7 @@ function showPage(page, filter) {
   const pageEl = document.getElementById('page-' + page);
   if(pageEl) pageEl.classList.add('active');
 
-  const tabs = { 'accueil':0, 'exercices':1, 'parcours':2, 'eleve':3, 'prof':4 };
+  const tabs = { 'accueil':0, 'exercices':1, 'parcours':2, 'ressources':3, 'eleve':4, 'prof':5 };
   const tabBtns = document.querySelectorAll('.nav-tab');
   if(tabBtns[tabs[page]]) tabBtns[tabs[page]].classList.add('active');
 
@@ -8945,6 +8968,85 @@ function ouvrirModalLegal(page) {
   document.body.appendChild(overlay);
 }
 function fermerModalLegal() { document.getElementById('modal-legal-overlay')?.remove(); }
+
+// ═══════════════════════════════════════
+//  VISIONNEUSE RESSOURCES (PDF.js, lecture seule -- pas de lien de
+//  telechargement, decision prise avec Jamal le 28/10/2026 : garder
+//  l'usage sur le site plutot qu'un fichier partageable en un clic. Le
+//  clic droit "enregistrer l'image" reste possible page par page -- friction
+//  assumee, pas une protection absolue.)
+// ═══════════════════════════════════════
+let pdfViewerDoc = null;
+let pdfViewerPage = 1;
+
+async function ouvrirRessourcePDF(url, titre) {
+  document.getElementById('modal-pdf-overlay')?.remove();
+  const overlay = document.createElement('div');
+  overlay.id = 'modal-pdf-overlay';
+  overlay.className = 'modal-overlay open';
+  overlay.style.zIndex = '600';
+  overlay.onclick = (e) => { if(e.target === overlay) fermerRessourcePDF(); };
+  overlay.innerHTML = `
+    <div class="modal" style="max-width:740px">
+      <div class="modal-header">
+        <div class="modal-header-title">${titre}</div>
+        <button class="modal-close" onclick="fermerRessourcePDF()">✕</button>
+      </div>
+      <div class="modal-body" style="padding:1rem;text-align:center">
+        <div style="display:flex;justify-content:center;gap:10px;align-items:center;margin-bottom:1rem">
+          <button class="btn-nav-modal" onclick="pdfViewerPagePrecedente()">← Précédent</button>
+          <span id="pdf-viewer-page-info" style="font-size:13px;color:var(--muted);min-width:90px">Chargement…</span>
+          <button class="btn-nav-modal" onclick="pdfViewerPageSuivante()">Suivant →</button>
+        </div>
+        <div id="pdf-viewer-canvas-wrap" style="overflow:auto;max-height:70vh;background:#f0f0f0;border-radius:8px;padding:8px">
+          <canvas id="pdf-viewer-canvas" style="max-width:100%;box-shadow:0 2px 10px rgba(0,0,0,0.12)"></canvas>
+        </div>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(overlay);
+
+  if(!window.pdfjsLib) {
+    document.getElementById('pdf-viewer-page-info').textContent = 'Visionneuse indisponible pour le moment.';
+    return;
+  }
+  window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+  try {
+    pdfViewerPage = 1;
+    pdfViewerDoc = await window.pdfjsLib.getDocument(url).promise;
+    renderPdfViewerPage();
+  } catch(e) {
+    document.getElementById('pdf-viewer-page-info').textContent = 'Erreur de chargement du document.';
+  }
+}
+
+async function renderPdfViewerPage() {
+  const canvas = document.getElementById('pdf-viewer-canvas');
+  if(!canvas || !pdfViewerDoc) return;
+  const page = await pdfViewerDoc.getPage(pdfViewerPage);
+  const viewport = page.getViewport({ scale: 1.4 });
+  canvas.width = viewport.width;
+  canvas.height = viewport.height;
+  const ctx = canvas.getContext('2d');
+  await page.render({ canvasContext: ctx, viewport }).promise;
+  const info = document.getElementById('pdf-viewer-page-info');
+  if(info) info.textContent = `Page ${pdfViewerPage} / ${pdfViewerDoc.numPages}`;
+}
+
+function pdfViewerPageSuivante() {
+  if(!pdfViewerDoc || pdfViewerPage >= pdfViewerDoc.numPages) return;
+  pdfViewerPage++;
+  renderPdfViewerPage();
+}
+function pdfViewerPagePrecedente() {
+  if(!pdfViewerDoc || pdfViewerPage <= 1) return;
+  pdfViewerPage--;
+  renderPdfViewerPage();
+}
+function fermerRessourcePDF() {
+  document.getElementById('modal-pdf-overlay')?.remove();
+  pdfViewerDoc = null;
+}
 
 function switchAuthTab(tab) {
   ['connexion','inscription','code'].forEach(t => {
