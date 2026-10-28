@@ -9024,9 +9024,17 @@ async function renderPdfViewerPage() {
   const canvas = document.getElementById('pdf-viewer-canvas');
   if(!canvas || !pdfViewerDoc) return;
   const page = await pdfViewerDoc.getPage(pdfViewerPage);
-  const viewport = page.getViewport({ scale: 1.4 });
+  // Rendu au ratio de pixels de l'ecran (dpr) pour rester net sur les ecrans
+  // haute densite (Retina, Windows en 125%/150%...) -- sans ca, le canvas
+  // est dessine a 1 pixel physique par pixel CSS puis etire par le navigateur
+  // pour remplir l'ecran, d'ou le flou remonte par Jamal le 28/10/2026.
+  const cssScale = 1.4;
+  const dpr = window.devicePixelRatio || 1;
+  const viewport = page.getViewport({ scale: cssScale * dpr });
   canvas.width = viewport.width;
   canvas.height = viewport.height;
+  canvas.style.width = (viewport.width / dpr) + 'px';
+  canvas.style.height = (viewport.height / dpr) + 'px';
   const ctx = canvas.getContext('2d');
   await page.render({ canvasContext: ctx, viewport }).promise;
   const info = document.getElementById('pdf-viewer-page-info');
