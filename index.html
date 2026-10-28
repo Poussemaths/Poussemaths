@@ -8453,6 +8453,86 @@ const EXERCICES = {
         ],
         indices:["Une preuve par récurrence a deux piliers : l'initialisation (vérifier la propriété au premier rang) et l'hérédité (montrer que si elle est vraie à un rang, elle l'est au rang suivant)"]
       },
+      {
+        id:"recur_t_A", titre:"Comprendre la structure d'une récurrence", niveau:"Facile", points_total:10, competences:["Raisonner par récurrence pour établir une propriété d'une suite"],
+        questions:[
+          {label:"a)", enonce:"Pour démontrer par récurrence qu'une propriété $P(n)$ est vraie pour tout $n\\geq n_0$, il faut d'abord établir :",
+           type:"qcm", choix:["Que $P(n_0)$ est vraie (initialisation)","Que $P(n)$ est vraie pour un $n$ quelconque","Que $P(n+1)$ est vraie","Que la suite est croissante"], points:2},
+          {label:"b)", enonce:"L'étape d'hérédité consiste à montrer que :",
+           type:"qcm", choix:["Si $P(n)$ est vraie alors $P(n+1)$ est vraie","$P(n)$ est vraie pour tout $n$","$P(0)$ est vraie","La suite converge"], points:2},
+          {label:"c)", enonce:"Un élève démontre seulement que $P(0)$ est vraie et que $P(n)\\Rightarrow P(n+1)$, sans jamais écrire de conclusion. Que peut-on dire de sa démonstration ?",
+           type:"qcm", choix:["Elle est incomplète : il manque la conclusion explicite","Elle est fausse","Elle est complète","Il manque l'hérédité"], points:2},
+          {label:"d)", enonce:"Pour prouver par récurrence que $u_n\\leq 5$ pour tout $n$ (avec $u_{n+1}=f(u_n)$), l'étape d'hérédité consiste à supposer :",
+           type:"qcm", choix:["$u_n\\leq 5$ et en déduire $u_{n+1}\\leq 5$","$u_{n+1}\\leq 5$ et en déduire $u_n\\leq 5$","$u_0\\leq 5$","$u_n=5$"], points:2},
+          {label:"e)", enonce:"Une récurrence où l'hérédité est vraie mais où l'initialisation est fausse permet-elle de conclure que $P(n)$ est vraie pour tout $n$ ?",
+           type:"qcm", choix:["Faux : sans initialisation vraie, on ne peut rien conclure","Vrai","Vrai seulement si $n\\geq 1$","Vrai seulement pour $n$ pair"], points:2},
+        ],
+        indices:["Une récurrence a besoin des deux piliers ET d'une conclusion rédigée : initialisation, hérédité, puis « donc P(n) est vraie pour tout n »"]
+      },
+      {
+        id:"recur_t_B", titre:"Calculer les premiers termes d'une suite récurrente", niveau:"Facile", points_total:10, competences:["Calculer les termes d'une suite définie par récurrence"],
+        questions:[
+          {label:"a)", enonce:"Soit $(u_n)$ définie par $u_0=1$ et $u_{n+1}=3u_n-1$. Calcule $u_1$.",
+           type:"libre", points:2},
+          {label:"b)", enonce:"Avec la même suite, calcule $u_2$.",
+           type:"libre", points:2},
+          {label:"c)", enonce:"Avec la même suite, calcule $u_3$.",
+           type:"libre", points:2},
+          {label:"d)", enonce:"Avec la même suite, calcule $u_4$.",
+           type:"libre", points:2},
+          {label:"e)", enonce:"Avec la même suite, calcule $u_5$.",
+           type:"libre", points:2},
+        ],
+        indices:["Remplace $u_n$ par sa valeur dans $u_{n+1}=3u_n-1$ à chaque étape"]
+      },
+      {
+        id:"recur_t_C", titre:"Trouver l'étape d'hérédité", niveau:"Difficile", points_total:10, competences:["Démontrer une propriété par récurrence"],
+        questions:[
+          {label:"a)", enonce:"Soit $u_{n+1}=3u_n-1$. On suppose (hypothèse de récurrence) $u_n\\leq 3^n$. En appliquant cette hypothèse dans la relation, on obtient $u_{n+1}\\leq 3^{n+1}+k$. Donne la valeur de $k$.",
+           type:"libre", points:2},
+          {label:"b)", enonce:"Soit $v_{n+1}=v_n+2n+1$. On suppose $v_n\\geq n^2$. En appliquant cette hypothèse, on obtient $v_{n+1}\\geq (n+1)^2+k$. Donne la valeur de $k$.",
+           type:"libre", points:2},
+          {label:"c)", enonce:"Soit $w_{n+1}=2w_n+3$. On suppose $w_n\\leq 5\\times 2^n-3$. En appliquant cette hypothèse, on obtient $w_{n+1}\\leq 5\\times 2^{n+1}+k$. Donne la valeur de $k$.",
+           type:"libre", points:2},
+          {label:"d)", enonce:"Soit $t_{n+1}=t_n+4n+4$. On suppose $t_n\\geq 2n^2$. En appliquant cette hypothèse, on obtient $t_{n+1}\\geq 2(n+1)^2+k$. Donne la valeur de $k$.",
+           type:"libre", points:2},
+          {label:"e)", enonce:"Soit $s_{n+1}=4s_n-10$. On suppose $s_n\\leq 2\\times 4^n+2$. En appliquant cette hypothèse, on obtient $s_{n+1}\\leq 2\\times 4^{n+1}+k$. Donne la valeur de $k$.",
+           type:"libre", points:2},
+        ],
+        indices:["Remplace $u_n$ (ou $v_n$, $w_n$...) par le majorant/minorant de l'hypothèse dans la relation de récurrence, puis réécris le résultat sous la forme demandée pour identifier $k$"]
+      },
+      {
+        id:"recur_t_D", titre:"Récurrence, comparaison et monotonie", niveau:"Difficile", points_total:10, competences:["Raisonner par récurrence pour établir une propriété d'une suite"],
+        questions:[
+          {label:"a)", enonce:"$(u_n)$ vérifie $u_0=0$ et $u_{n+1}=\\sqrt{u_n+2}$. La fonction $f(x)=\\sqrt{x+2}$ est croissante sur $[0\\,;\\,+\\infty[$. Pour montrer par récurrence que $(u_n)$ est croissante, l'étape d'hérédité consiste à utiliser :",
+           type:"qcm", choix:["La croissance de $f$ : si $u_n\\leq u_{n+1}$ alors $f(u_n)\\leq f(u_{n+1})$","Le signe de $u_n$","La limite de la suite","La valeur de $u_0$"], points:2},
+          {label:"b)", enonce:"Pour prouver qu'une suite croissante et majorée converge, quel théorème utilise-t-on (différent d'une récurrence) ?",
+           type:"qcm", choix:["Le théorème de la limite monotone","Le théorème des gendarmes","Le théorème des valeurs intermédiaires","La formule du binôme"], points:2},
+          {label:"c)", enonce:"Une suite $(u_n)$ vérifie $u_n<u_{n+1}$ pour tout $n$ (hérédité) et $u_0<u_1$ (initialisation). Que peut-on conclure ?",
+           type:"qcm", choix:["$(u_n)$ est strictement croissante","$(u_n)$ est bornée","$(u_n)$ converge","$(u_n)$ est constante"], points:2},
+          {label:"d)", enonce:"Pour une récurrence double (la relation dépend de $u_n$ ET $u_{n-1}$), combien de termes initiaux faut-il vérifier à l'initialisation ?",
+           type:"qcm", choix:["$2$ (u_0 et u_1)","$1$ (u_0 seulement)","$3$","Aucun"], points:2},
+          {label:"e)", enonce:"Dans une récurrence forte, l'hypothèse de récurrence porte sur :",
+           type:"qcm", choix:["Tous les termes de $u_0$ à $u_n$","Seulement $u_n$","Seulement $u_0$","Seulement $u_{n-1}$"], points:2},
+        ],
+        indices:["La monotonie se prouve souvent en appliquant la croissance (ou décroissance) de la fonction définissant la relation de récurrence à l'hypothèse de rang n"]
+      },
+      {
+        id:"recur_t_E", titre:"Problème guidé — suite et récurrence", niveau:"Difficile", points_total:10, competences:["Raisonner par récurrence pour établir une propriété d'une suite","Calculer les termes d'une suite définie par récurrence"],
+        questions:[
+          {label:"a)", enonce:"Soit $(u_n)$ définie par $u_0=0$ et $u_{n+1}=\\dfrac{u_n+6}{2}$. Calcule $u_1$.",
+           type:"libre", points:2},
+          {label:"b)", enonce:"Avec la même suite, calcule $u_2$.",
+           type:"libre", points:2},
+          {label:"c)", enonce:"Avec la même suite, calcule $u_3$.",
+           type:"libre", points:2},
+          {label:"d)", enonce:"On veut démontrer par récurrence que $u_n<6$ pour tout $n$. En supposant $u_n<6$ (hypothèse de récurrence), quel majorant entier obtient-on pour $u_{n+1}=\\dfrac{u_n+6}{2}$ ?",
+           type:"libre", points:2},
+          {label:"e)", enonce:"Calcule $u_2-u_1$ pour observer le sens de variation de la suite.",
+           type:"libre", points:2},
+        ],
+        indices:["Le majorant de $u_{n+1}$ s'obtient en remplaçant $u_n$ par $6$ (sa borne supposée) dans la relation de récurrence"]
+      },
     ],
 
   },
