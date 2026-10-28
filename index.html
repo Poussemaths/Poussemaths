@@ -1678,6 +1678,7 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
               <option value="">Chargement…</option>
             </select>
             <button class="auth-btn-secondary" style="width:auto;padding:6px 12px;font-size:13px;margin-left:8px" onclick="ouvrirCreationClasseModal()">+ Créer une classe</button>
+            <button class="auth-btn-secondary" style="width:auto;padding:6px 12px;font-size:13px;margin-left:8px" onclick="ouvrirChapitresActifsModal()">⚙️ Chapitres actifs</button>
           </div>
         </div>
         <div class="db-table-wrap">
@@ -8854,9 +8855,22 @@ async function checkSession() {
   }
 }
 
+// Chapitres actifs de la classe de l'eleve connecte -- null = tout visible
+// (comportement par defaut, inchange pour un eleve sans classe ou dont
+// l'etablissement n'est pas inscrit). Charge une seule fois a la connexion,
+// pas a chaque rendu de page.
+let chapitresActifsEleve = null;
+
 async function chargerProfilEleve(userId) {
   const { data } = await supabaseClient.from('eleves').select('*').eq('user_id', userId).single();
-  if(data) { currentEleve = data; }
+  if(data) {
+    currentEleve = data;
+    chapitresActifsEleve = null;
+    if(data.code_classe) {
+      const { data: classe } = await supabaseClient.from('classes').select('chapitres_actifs').eq('code', data.code_classe).single();
+      if(classe && Array.isArray(classe.chapitres_actifs)) chapitresActifsEleve = classe.chapitres_actifs;
+    }
+  }
 }
 
 function updateNavEleve() {
@@ -10215,6 +10229,112 @@ function exportCSV() {
 function ouvrirCreationClasseModal() {
   document.getElementById('creation-classe-overlay').style.display = 'flex';
   renderCreationClasseModal();
+}
+
+// ═══════════════════════════════════════
+//  CHAPITRES ACTIFS PAR CLASSE — 28/10/2026
+// ═══════════════════════════════════════
+// Permet a un prof de restreindre les chapitres visibles par une classe sur
+// la page Exercices (ex: ne pas montrer "Racines carrees" avant de l'avoir
+// fait en cours). Repond au probleme vecu lors d'un test reel ou un eleve
+// tombait sur une notion pas encore enseignee. chapitres_actifs = null en
+// base (valeur par defaut) : rien ne change, tous les chapitres restent
+// visibles -- y compris pour un eleve sans classe ou dont l'etablissement
+// n'est pas inscrit, qui n'a jamais cette restriction.
+
+let chapitresActifsSelection = [];
+
+function ouvrirChapitresActifsModal() {
+  const code = document.getElementById('db-classe-select')?.value;
+  const classe = profClasses.find(c => c.code === code);
+  if(!classe) { showToast('Choisis d\'abord une classe'); return; }
+
+  document.getElementById('modal-chapactifs-overlay')?.remove();
+  const overlay = document.createElement('div');
+  overlay.id = 'modal-chapactifs-overlay';
+  overlay.className = 'modal-overlay open';
+  overlay.style.zIndex = '600';
+  overlay.onclick = (e) => { if(e.target === overlay) fermerChapitresActifsModal(); };
+
+  const exs = getAllExercices(classe.niveau);
+  const chapitres = [...new Set(exs.map(e => e.chapitre))];
+  chapitresActifsSelection = Array.isArray(classe.chapitres_actifs) ? [...classe.chapitres_actifs] : [...chapitres];
+
+  overlay.innerHTML = `
+    <div class="modal" style="max-width:600px">
+      <div class="modal-header">
+        <div class="modal-header-title">Chapitres actifs — ${classe.nom}</div>
+        <button class="modal-close" onclick="fermerChapitresActifsModal()">✕</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size:13px;color:var(--muted);margin-bottom:1rem">Décoche un chapitre pas encore vu en cours : tes élèves ne le verront plus dans leurs exercices tant qu'il reste décoché. Tout coché par défaut.</p>
+        <div id="chapactifs-liste" style="display:flex;flex-direction:column;gap:6px;max-height:50vh;overflow-y:auto;margin-bottom:1rem">
+          ${chapitres.map(chap => `
+            <label style="display:flex;align-items:center;gap:8px;padding:6px 4px;border-bottom:1px solid var(--bordure);font-size:14px;cursor:pointer">
+              <input type="checkbox" ${chapitresActifsSelection.includes(chap) ? 'checked' : ''} onchange="toggleChapitreActif('${chap.replace(/'/g,"\\'")}', this.checked)">
+              <span>${chap}</span>
+            </label>
+          `).join('')}
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <button class="pdf-generate-btn" onclick="enregistrerChapitresActifs('${code}')">✅ Enregistrer</button>
+          <button class="btn-nav-modal" onclick="apercuVueEleve('${classe.niveau}')">👁️ Aperçu vue élève</button>
+        </div>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(overlay);
+}
+
+function fermerChapitresActifsModal() { document.getElementById('modal-chapactifs-overlay')?.remove(); }
+
+function toggleChapitreActif(chap, checked) {
+  if(checked) { if(!chapitresActifsSelection.includes(chap)) chapitresActifsSelection.push(chap); }
+  else { chapitresActifsSelection = chapitresActifsSelection.filter(c => c !== chap); }
+}
+
+async function enregistrerChapitresActifs(code) {
+  const classe = profClasses.find(c => c.code === code);
+  if(!classe) return;
+  const exs = getAllExercices(classe.niveau);
+  const tousLesChapitres = [...new Set(exs.map(e => e.chapitre))];
+  // Si tout est coche, on enregistre null plutot que la liste complete : un
+  // futur nouveau chapitre reste visible par defaut au lieu d'etre
+  // silencieusement cache parce qu'il n'etait pas dans une liste figee au
+  // moment de l'enregistrement.
+  const valeur = chapitresActifsSelection.length === tousLesChapitres.length ? null : [...chapitresActifsSelection];
+  const { error } = await supabaseClient.from('classes').update({ chapitres_actifs: valeur }).eq('code', code);
+  if(error) { showToast('Erreur : ' + error.message); return; }
+  classe.chapitres_actifs = valeur;
+  fermerChapitresActifsModal();
+  showToast('Chapitres actifs enregistrés ✅');
+}
+
+// Apercu de ce qui serait visible par un eleve de cette classe si on
+// enregistrait maintenant -- pas besoin d'un vrai compte eleve pour
+// verifier avant de s'en servir en cours.
+function apercuVueEleve(niveau) {
+  const exs = getAllExercices(niveau);
+  const tousLesChapitres = [...new Set(exs.map(e => e.chapitre))];
+  const valeur = chapitresActifsSelection.length === tousLesChapitres.length ? null : [...chapitresActifsSelection];
+  fermerChapitresActifsModal();
+  window._apercuEleveSauvegarde = currentEleve;
+  currentEleve = { niveau };
+  chapitresActifsEleve = valeur;
+  showPage('exercices', niveau);
+  document.getElementById('apercu-eleve-banniere')?.remove();
+  const banniere = document.createElement('div');
+  banniere.id = 'apercu-eleve-banniere';
+  banniere.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:700;background:#f4c430;color:#1C1E26;text-align:center;padding:10px;font-weight:700;font-size:14px';
+  banniere.innerHTML = `👁️ Aperçu — vue élève (navigation restreinte) &nbsp; <button onclick="fermerApercuVueEleve()" style="margin-left:12px;padding:4px 12px;border-radius:6px;border:none;cursor:pointer;background:#1C1E26;color:white;font-weight:700">Fermer l'aperçu</button>`;
+  document.body.appendChild(banniere);
+}
+
+function fermerApercuVueEleve() {
+  document.getElementById('apercu-eleve-banniere')?.remove();
+  currentEleve = window._apercuEleveSauvegarde || null;
+  chapitresActifsEleve = null;
+  showPage('prof');
 }
 
 function closeCreationClasseModal(e) {
@@ -12221,6 +12341,15 @@ function renderChapitres(niveauId) {
   const exs = getAllExercices(niveauId);
   const chapMap = {};
   exs.forEach(ex => { if(!chapMap[ex.chapitre]) chapMap[ex.chapitre]=[]; chapMap[ex.chapitre].push(ex); });
+  // Restriction par classe (28/10/2026) : uniquement sur le niveau propre de
+  // l'eleve -- jamais s'il consulte un autre niveau par curiosite/revision,
+  // jamais pour un prof, jamais pour un eleve sans classe ou dont la classe
+  // n'a pas configure de restriction (chapitresActifsEleve reste null).
+  if(chapitresActifsEleve && currentEleve && currentEleve.niveau === niveauId) {
+    for(const chap in chapMap) {
+      if(!chapitresActifsEleve.includes(chap)) delete chapMap[chap];
+    }
+  }
   const content = document.getElementById('ex-content');
   let num = 1;
   content.innerHTML = `<div class="chapitres-grid">
