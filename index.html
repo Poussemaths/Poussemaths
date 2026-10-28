@@ -636,6 +636,19 @@ nav {
 .toast-notif { position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);opacity:0;background:var(--texte);color:white;padding:10px 20px;border-radius:30px;font-size:14px;font-weight:600;z-index:9999;transition:all 0.3s;white-space:nowrap; }
 .toast-notif.show { opacity:1;transform:translateX(-50%) translateY(0); }
 
+/* Assistant Pousse -- bouton flottant, lien simple vers poussemaths.com en
+   attendant l'integration iframe (bloquee le 28/10/2026 en attente de
+   validation de Jamal sur l'assouplissement du CSP de poussemaths.com) */
+.pousse-fab {
+  position:fixed; bottom:24px; right:24px; z-index:300;
+  display:flex; align-items:center; gap:8px;
+  background:var(--bleu); color:white; text-decoration:none;
+  padding:12px 18px; border-radius:30px; font-size:14px; font-weight:600;
+  box-shadow:0 8px 24px rgba(0,0,0,0.18); transition:transform 0.15s;
+}
+.pousse-fab:hover { transform:translateY(-2px); }
+@media (max-width:480px) { .pousse-fab span { display:none; } .pousse-fab { padding:14px; } }
+
 /* ══ CLAVIER VIRTUEL MATH ══ */
 .clavier-math {
   display:flex; flex-wrap:wrap; gap:5px;
@@ -1200,6 +1213,8 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
 </style>
 </head>
 <body>
+
+<a class="pousse-fab" href="https://poussemaths.com/assistant.html" target="_blank" rel="noopener">💬 <span>Demander à Pousse</span></a>
 
 <!-- ── BANNIÈRE BETA ── -->
 <div id="banniere-beta" style="background:linear-gradient(90deg,var(--bleu),#7B4FE9);color:white;text-align:center;padding:8px 16px;font-size:13px;font-weight:600;font-family:'DM Sans',sans-serif;position:relative;z-index:200;">
