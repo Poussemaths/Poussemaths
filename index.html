@@ -9041,14 +9041,26 @@ async function renderPdfViewerPage() {
   // est dessine a 1 pixel physique par pixel CSS puis etire par le navigateur
   // pour remplir l'ecran, d'ou le flou remonte par Jamal le 28/10/2026.
   const cssScale = 1.8;
-  const dpr = window.devicePixelRatio || 1;
+  // Plafonne a 2 : au-dela, sur un telephone a tres haute densite (dpr 3
+  // n'est pas rare), le canvas resultant depasse la taille maximale que
+  // certains navigateurs mobiles acceptent et reste vide sans erreur
+  // visible -- signale par Jamal le 28/10/2026 ("affichage invisible").
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
   const viewport = page.getViewport({ scale: cssScale * dpr });
   canvas.width = viewport.width;
   canvas.height = viewport.height;
   canvas.style.width = (viewport.width / dpr) + 'px';
   canvas.style.height = (viewport.height / dpr) + 'px';
   const ctx = canvas.getContext('2d');
-  await page.render({ canvasContext: ctx, viewport }).promise;
+  try {
+    await page.render({ canvasContext: ctx, viewport }).promise;
+  } catch(e) {
+    // Filet de securite : si le rendu echoue quand meme (appareil trop
+    // limite), on le dit au lieu de laisser un canvas vide sans explication.
+    const info = document.getElementById('pdf-viewer-page-info');
+    if(info) info.textContent = 'Affichage impossible sur cet appareil.';
+    return;
+  }
   const info = document.getElementById('pdf-viewer-page-info');
   if(info) info.textContent = `Page ${pdfViewerPage} / ${pdfViewerDoc.numPages}`;
 }
