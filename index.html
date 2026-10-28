@@ -9568,6 +9568,23 @@ document.addEventListener('keydown', e => {
 
 window.addEventListener('load', initSupabase);
 
+// ── LIEN DIRECT VERS UN CHAPITRE (ex: description YouTube) ──
+// Sans ca, un lien externe ne peut emmener qu'a la page d'accueil et
+// l'eleve doit retrouver seul le bon niveau puis le bon chapitre -- friction
+// identifiee le 24/10/2026 avec le lancement de la chaine YouTube
+// @poussemaths. Usage : poussemaths.fr/?niveau=3eme&chapitre=Th%C3%A9or%C3%A8me%20de%20Thal%C3%A8s
+function routerDepuisURL() {
+  const params = new URLSearchParams(window.location.search);
+  const niveau = params.get('niveau');
+  const chapitre = params.get('chapitre');
+  if(!niveau || !EXERCICES[niveau]) return;
+  showPage('exercices', niveau);
+  if(chapitre && EXERCICES[niveau][chapitre]) {
+    allerExercices(niveau, chapitre);
+  }
+}
+window.addEventListener('load', routerDepuisURL);
+
 // Lien de partage parent (?parent=CODE) : atterrissage direct sur le
 // rapport, sans navigation manuelle -- un parent qui clique le lien reçu
 // doit voir la progression immédiatement.
