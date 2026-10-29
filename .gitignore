@@ -15,6 +15,12 @@ A corriger.rtf
 poussemaths_final*.html
 poussemaths_index*.html
 
+# Progressions d'établissement (noms de collègues) et documents de référence
+# BO de travail — pas destinés au dépôt public
+progression_26-27/
+Nouveaux Programmes/
+reference/
+
 # OS
 .DS_Store
 Thumbs.db

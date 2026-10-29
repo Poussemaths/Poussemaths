@@ -6965,6 +6965,181 @@ const EXERCICES = {
       },
     ],
 
+    "Théorème de Thalès": [
+      {
+        id:"thales_4_1", titre:"Thalès — comprendre la configuration", niveau:"Facile", points_total:13, competences:["Connaître les trois théorèmes relatifs à la droite des milieux dans un triangle"],
+        questions:[
+          {label:"a)", enonce:"Dans la configuration de Thalès (triangle $ABC$, $D$ sur $[AB]$, $E$ sur $[AC]$), quelles droites doivent être parallèles ?",
+           type:"qcm", choix:["$(DE)$ et $(BC)$","$(AB)$ et $(AC)$","$(AD)$ et $(AE)$","$(BD)$ et $(CE)$"], points:2},
+          {label:"b)", enonce:"$DE\\parallel BC$, $AD=3$, $AB=9$, $AE=4$. Calcule $AC$.",
+           type:"libre", points:3},
+          {label:"c)", enonce:"$DE\\parallel BC$, $AD=2$, $DB=6$, $DE=3$. Calcule $BC$.",
+           type:"libre", points:3},
+          {label:"d)", enonce:"$DE\\parallel BC$ dans le triangle $ABC$. Quelle égalité traduit le théorème de Thalès ?",
+           type:"qcm", choix:["$\\dfrac{AD}{AB}=\\dfrac{AE}{AC}=\\dfrac{DE}{BC}$","$\\dfrac{AD}{AB}=\\dfrac{BC}{DE}$","$AD+AB=AE+AC$","$\\dfrac{AD}{AE}=\\dfrac{DB}{BC}$"], points:2},
+          {label:"e)", enonce:"$DE\\parallel BC$, $AD=4$, $AB=10$, $DE=6$. Calcule $BC$.",
+           type:"libre", points:3},
+        ],
+        indices:["Si $DE\\parallel BC$ : $\\dfrac{AD}{AB}=\\dfrac{AE}{AC}=\\dfrac{DE}{BC}$"]
+      },
+      {
+        id:"thales_4_2", titre:"Thalès — calculs et applications", niveau:"Moyen", points_total:19, competences:["Connaître les trois théorèmes relatifs à la droite des milieux dans un triangle"],
+        questions:[
+          {label:"a)", enonce:"$DE\\parallel BC$, $AD=5$, $DB=3$, $AC=12$. Calcule $AE$.",
+           type:"libre", points:4},
+          {label:"b)", enonce:"Un poteau de $2\\,$m projette une ombre de $1{,}5\\,$m. Au même moment, un arbre projette une ombre de $6\\,$m. Quelle est la hauteur de l'arbre (en m) ?",
+           type:"libre", points:4},
+          {label:"c)", enonce:"$DE\\parallel BC$, $AD=6$, $AB=8$, $BC=10$. Calcule $DE$.",
+           type:"libre", points:4},
+          {label:"d)", enonce:"Sur un plan à l'échelle $1:200$, une pièce mesure $3\\,$cm. Quelle est sa longueur réelle (en m) ?",
+           type:"libre", points:3},
+          {label:"e)", enonce:"$DE\\parallel BC$, $AD=3$, $DB=9$, $DE=2$. Calcule $BC$.",
+           type:"libre", points:4},
+        ],
+        indices:["Dessine la situation, identifie $A$ (sommet commun) et écris les rapports dans le bon ordre"]
+      },
+    ],
+
+    "Transformations géométriques": [
+      {
+        id:"transfo_4_1", titre:"Transformations géométriques — comprendre les effets", niveau:"Facile", points_total:12, competences:["Comprendre l'effet d'une translation","Connaître les propriétés de conservations des translations"],
+        questions:[
+          {label:"a)", enonce:"Quelles propriétés une translation conserve-t-elle toujours ?",
+           type:"qcm", choix:["Les longueurs et les angles","Seulement les longueurs","Seulement les angles","Rien n'est conservé"], points:2},
+          {label:"b)", enonce:"L'image d'un segment $[AB]$ par une translation est un segment $[A'B']$ tel que :",
+           type:"qcm", choix:["$(AA')\\parallel(BB')$ et $AA'=BB'$","$(A'B')$ est perpendiculaire à $(AB)$","$A'B'$ est plus court que $AB$","$A'$ et $B'$ sont confondus"], points:2},
+          {label:"c)", enonce:"Lors d'un demi-tour de centre $O$, $OA=5\\,$cm. Quelle est la longueur $OA'$ ($A'$ image de $A$) ?",
+           type:"libre", points:2},
+          {label:"d)", enonce:"$EFGH$ est un parallélogramme. Son image $ABCD$ par une translation est :",
+           type:"qcm", choix:["Un parallélogramme aussi","Un rectangle obligatoirement","Un losange obligatoirement","Pas forcément un parallélogramme"], points:2},
+          {label:"e)", enonce:"Un triangle a un périmètre de $18\\,$cm. Quel est le périmètre de son image par une translation (en cm) ?",
+           type:"libre", points:4},
+        ],
+        indices:["Une translation conserve toujours les longueurs, les angles, le parallélisme — donc les périmètres et les aires aussi"]
+      },
+      {
+        id:"transfo_4_2", titre:"Translations, parallélogrammes et demi-tour", niveau:"Moyen", points_total:16, competences:["Comprendre l'effet d'une translation","Faire le lien avec les parallélogrammes, les angles"],
+        questions:[
+          {label:"a)", enonce:"$ABCD$ est un parallélogramme de centre $O$. $O$ est le milieu de :",
+           type:"qcm", choix:["$[AC]$ et $[BD]$","$[AC]$ seulement","$[BD]$ seulement","Aucun des deux"], points:3},
+          {label:"b)", enonce:"Dans le parallélogramme $ABCD$ de centre $O$, quelle transformation de centre $O$ transforme $A$ en $C$ ?",
+           type:"qcm", choix:["Un demi-tour (symétrie centrale)","Une translation","Une symétrie axiale","Une rotation de $90°$"], points:3},
+          {label:"c)", enonce:"Dans le parallélogramme $ABCD$, $AB=7\\,$cm. Quelle est la longueur du côté opposé $DC$ (en cm) ?",
+           type:"libre", points:3},
+          {label:"d)", enonce:"Par le demi-tour de centre $O$, l'image d'une droite $(d)$ est une droite $(d')$. Que peut-on dire de $(d)$ et $(d')$ ?",
+           type:"qcm", choix:["Elles sont parallèles","Elles sont perpendiculaires","Elles sont confondues","On ne peut rien dire"], points:4},
+          {label:"e)", enonce:"Un angle mesure $42°$. Quelle est la mesure (en degrés) de son image par une translation ?",
+           type:"libre", points:3},
+        ],
+        indices:["Dans un parallélogramme, les diagonales se coupent en leur milieu : c'est le centre du demi-tour qui échange les sommets opposés"]
+      },
+    ],
+
+    "Espace": [
+      {
+        id:"espace_4_1", titre:"Espace — pyramides et cônes", niveau:"Facile", points_total:13, competences:["Reconnaître des solides (pyramide, cône de révolution)","Connaître le volume de la pyramide et du cône de révolution"],
+        questions:[
+          {label:"a)", enonce:"Une pyramide a une base carrée. Combien de faces latérales triangulaires possède-t-elle ?",
+           type:"libre", points:2},
+          {label:"b)", enonce:"Calcule le volume d'une pyramide de base carrée de côté $6\\,$cm et de hauteur $9\\,$cm (en cm³).",
+           type:"libre", points:3},
+          {label:"c)", enonce:"Quelle est la formule du volume d'un cône de rayon $r$ et de hauteur $h$ ?",
+           type:"qcm", choix:["$V=\\dfrac{1}{3}\\pi r^2 h$","$V=\\pi r^2 h$","$V=\\dfrac{4}{3}\\pi r^3$","$V=2\\pi r h$"], points:2},
+          {label:"d)", enonce:"Calcule le volume d'un cône de rayon $3\\,$cm et de hauteur $7\\,$cm (en cm³, arrondi à l'unité, $\\pi\\approx3{,}14$).",
+           type:"libre", points:3},
+          {label:"e)", enonce:"Quelle vue permet de voir la base d'une pyramide posée sur sa base ?",
+           type:"qcm", choix:["La vue de dessus","La vue de face","La vue de côté","Aucune vue ne la montre"], points:3},
+        ],
+        indices:["Pyramide : $V=\\dfrac{1}{3}\\times aire_{base}\\times h$ · Cône : $V=\\dfrac{1}{3}\\pi r^2 h$"]
+      },
+      {
+        id:"espace_4_2", titre:"Espace — problèmes de volumes", niveau:"Moyen", points_total:16, competences:["Connaître le volume de la pyramide et du cône de révolution"],
+        questions:[
+          {label:"a)", enonce:"Une pyramide a un volume de $60\\,$cm³ et une hauteur de $5\\,$cm. Quelle est l'aire de sa base (en cm²) ?",
+           type:"libre", points:3},
+          {label:"b)", enonce:"Un cône a un volume de $100\\pi\\,$cm³ et un rayon de $5\\,$cm. Quelle est sa hauteur (en cm) ?",
+           type:"libre", points:4},
+          {label:"c)", enonce:"Une pyramide de base rectangulaire $4\\,$cm $\\times$ $5\\,$cm a une hauteur de $6\\,$cm. Calcule son volume (en cm³).",
+           type:"libre", points:3},
+          {label:"d)", enonce:"Pour calculer le volume d'une pyramide, il faut connaître :",
+           type:"qcm", choix:["L'aire de la base et la hauteur","Seulement la hauteur","Le périmètre de la base","L'aire totale de toutes les faces"], points:2},
+          {label:"e)", enonce:"Un cône a un rayon de $6\\,$cm et une hauteur de $10\\,$cm. Calcule son volume (en cm³, arrondi à l'unité, $\\pi\\approx3{,}14$).",
+           type:"libre", points:4},
+        ],
+        indices:["Dans $V=\\dfrac{1}{3}\\times aire_{base}\\times h$, on peut isoler n'importe quelle variable si on connaît les deux autres"]
+      },
+    ],
+
+    "Divisibilité & Nombres premiers": [
+      {
+        id:"div_4_1", titre:"Divisibilité — multiples, diviseurs et division euclidienne", niveau:"Facile", points_total:13, competences:["Déterminer si un entier est ou n'est pas multiple ou diviseur d'un autre entier","Appliquer les critères de divisibilité par 2, 3, 5, 9"],
+        questions:[
+          {label:"a)", enonce:"$48$ est-il un multiple de $6$ ?",
+           type:"qcm", choix:["Oui","Non"], points:2},
+          {label:"b)", enonce:"Dans la division euclidienne de $47$ par $6$, quel est le quotient ?",
+           type:"libre", points:3},
+          {label:"c)", enonce:"Dans la division euclidienne de $47$ par $6$, quel est le reste ?",
+           type:"libre", points:3},
+          {label:"d)", enonce:"$153$ est-il divisible par $3$ ? (Indice : $1+5+3=9$)",
+           type:"qcm", choix:["Oui","Non"], points:2},
+          {label:"e)", enonce:"$17$ est-il un diviseur de $85$ ?",
+           type:"qcm", choix:["Oui","Non"], points:3},
+        ],
+        indices:["Division euclidienne de $a$ par $b$ : $a=b\\times q+r$ avec $0\\leq r<b$. Divisible par $3$ si la somme des chiffres est divisible par $3$"]
+      },
+      {
+        id:"div_4_2", titre:"Divisibilité — nombres premiers", niveau:"Moyen", points_total:15, competences:["Définir un nombre premier ; liste des nombres premiers inférieurs ou égaux à 30"],
+        questions:[
+          {label:"a)", enonce:"Lequel de ces nombres est premier ?",
+           type:"qcm", choix:["$21$","$29$","$33$","$35$"], points:3},
+          {label:"b)", enonce:"$2$ est-il un nombre premier ?",
+           type:"qcm", choix:["Oui","Non"], points:2},
+          {label:"c)", enonce:"$91=7\\times13$. Combien $91$ a-t-il de diviseurs parmi $\\{7\\,;\\,11\\,;\\,13\\}$ ?",
+           type:"libre", points:3},
+          {label:"d)", enonce:"$1$ est-il un nombre premier ?",
+           type:"qcm", choix:["Oui","Non"], points:3},
+          {label:"e)", enonce:"Quel est le plus petit diviseur premier de $51$ ?",
+           type:"libre", points:4},
+        ],
+        indices:["Un nombre premier a exactement deux diviseurs : $1$ et lui-même"]
+      },
+    ],
+
+    "Triangles égaux": [
+      {
+        id:"triseg_4_1", titre:"Triangles égaux — cas d'isométrie", niveau:"Facile", points_total:13, competences:["Mener des raisonnements et s'initier à la démonstration en utilisant les propriétés des figures"],
+        questions:[
+          {label:"a)", enonce:"Deux triangles ayant leurs trois côtés deux à deux égaux sont :",
+           type:"qcm", choix:["Toujours isométriques (égaux)","Jamais égaux","Égaux seulement s'ils sont équilatéraux","Semblables mais pas égaux"], points:2},
+          {label:"b)", enonce:"Pour utiliser le cas « deux côtés et l'angle compris » (CAC), l'angle égal doit être :",
+           type:"qcm", choix:["Entre les deux côtés égaux","N'importe où dans le triangle","Opposé au plus grand côté","Toujours un angle droit"], points:2},
+          {label:"c)", enonce:"Deux triangles sont isométriques. Le premier a pour côtés $5\\,$cm, $7\\,$cm, $9\\,$cm. Quelle est la longueur (en cm) du côté correspondant au côté de $7\\,$cm ?",
+           type:"libre", points:3},
+          {label:"d)", enonce:"Si deux triangles ont un côté égal et les deux angles adjacents à ce côté égaux chacun à chacun, ils sont :",
+           type:"qcm", choix:["Isométriques (cas ACA)","Seulement semblables","Pas forcément égaux","Toujours rectangles"], points:2},
+          {label:"e)", enonce:"$ABC$ et $DEF$ sont isométriques ($A\\leftrightarrow D$, $B\\leftrightarrow E$, $C\\leftrightarrow F$). L'angle en $A$ mesure $52°$. Quelle est la mesure (en degrés) de l'angle en $D$ ?",
+           type:"libre", points:4},
+        ],
+        indices:["Trois cas d'isométrie : CCC (3 côtés), CAC (2 côtés et l'angle compris), ACA (1 côté et 2 angles adjacents)"]
+      },
+      {
+        id:"triseg_4_2", titre:"Triangles égaux — démontrer et appliquer", niveau:"Moyen", points_total:15, competences:["Mener des raisonnements et s'initier à la démonstration en utilisant les propriétés des figures"],
+        questions:[
+          {label:"a)", enonce:"Dans un triangle isocèle $ABC$ de sommet $A$ ($AB=AC$), la médiane issue de $A$ coupe $[BC]$ en $M$. Les triangles $ABM$ et $ACM$ sont isométriques par le cas :",
+           type:"qcm", choix:["CCC (trois côtés)","CAC (deux côtés et l'angle compris)","ACA (un côté et deux angles)","Ils ne sont pas isométriques"], points:3},
+          {label:"b)", enonce:"Deux triangles isométriques : le premier a un périmètre de $24\\,$cm. Quel est le périmètre du second (en cm) ?",
+           type:"libre", points:3},
+          {label:"c)", enonce:"Pour démontrer que deux segments sont égaux, une méthode possible est de montrer qu'ils sont des côtés correspondants de deux triangles :",
+           type:"qcm", choix:["Isométriques","De périmètres différents","Qui ne se touchent pas","Rectangles"], points:3},
+          {label:"d)", enonce:"$ABC$ isométrique à $DEF$ avec $AB=DE$, $BC=EF$, $CA=FD$. Si $BC=6{,}5\\,$cm, quelle est la longueur de $EF$ (en cm) ?",
+           type:"libre", points:3},
+          {label:"e)", enonce:"Le cas d'isométrie « CAC » nécessite de connaître :",
+           type:"qcm", choix:["Deux côtés et l'angle qu'ils forment","Trois angles","Un seul côté","Deux angles seulement"], points:3},
+        ],
+        indices:["Dans une médiane d'un triangle isocèle : les 2 côtés égaux + la médiane commune donnent le cas CCC"]
+      },
+    ],
+
   },
 
   // ═══════════════════════════════════════
@@ -12300,7 +12475,7 @@ const CHAPITRES_EMOJI = {
   'Fonctions — généralités':'📈','Fonctions linéaires et affines':'📉',
   'Probabilités':'🎲','Statistiques descriptives':'📋','Croisement de deux variables qualitatives':'📇',
   'Théorème de Pythagore':'📐','Théorème de Thalès':'🔺','Trigonométrie':'📡',
-  'Transformations géométriques':'🔄','Volumes de solides':'🧊',
+  'Transformations géométriques':'🔄','Volumes de solides':'🧊','Espace':'🧊','Triangles égaux':'🔺',
   'Proportionnalité & Pourcentages':'💯','Divisibilité & Nombres premiers':'🔢',
   'Fonctions de référence':'🌀','Second degré':'²','Géométrie repérée':'📍',
   'Intervalles & Valeur absolue':'↔️','Nombres & Calculs':'🔢',
