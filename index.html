@@ -4701,6 +4701,22 @@ const EXERCICES = {
         ],
         indices:["Lecture d'une boîte : min | $Q_1$ | $Q_2$ | $Q_3$ | max"]
       },
+      {
+        id:"stat_2_F", titre:"Information chiffrée — proportion de proportion", niveau:"Moyen", points_total:16, competences:["Comprendre et utiliser des pourcentages de pourcentages dans des ensembles de référence inclus les uns dans les autres"],
+        questions:[
+          {label:"a)", enonce:"$20\\%$ des $50\\%$ d'une population représentent quel pourcentage (%) de la population totale ?",
+           type:"libre", points:3},
+          {label:"b)", enonce:"Dans un lycée de $400$ élèves, $60\\%$ sont des filles, et parmi elles $25\\%$ font des maths spé. Combien de filles font des maths spé (effectif) ?",
+           type:"libre", points:3},
+          {label:"c)", enonce:"Un pourcentage qui exprime une évolution décrit :",
+           type:"qcm", choix:["Une variation entre deux valeurs (avant/après)","Une part d'un ensemble à un instant donné","Toujours une hausse","Toujours une baisse"], points:3},
+          {label:"d)", enonce:"Un pourcentage qui exprime une proportion décrit :",
+           type:"qcm", choix:["Une part d'un ensemble à un instant donné","Une variation entre deux valeurs","Un coefficient multiplicateur d'évolution","Un taux d'évolution"], points:3},
+          {label:"e)", enonce:"Le coefficient multiplicateur d'une évolution est $1{,}25$. Quel est le coefficient multiplicateur de l'évolution réciproque (celle qui ramène à la valeur de départ), arrondi au centième ?",
+           type:"libre", points:4},
+        ],
+        indices:["Proportion de proportion : on multiplie les coefficients. Évolution réciproque : on prend l'inverse du coefficient multiplicateur"]
+      },
     ],
 
     "Croisement de deux variables qualitatives": [
@@ -4905,6 +4921,38 @@ const EXERCICES = {
            type:"qcm", choix:["Oui","Non","Impossible à savoir","Seulement si x change"], points:4},
         ],
         indices:["Distance $AB=\\sqrt{(x_B-x_A)^2+(y_B-y_A)^2}$"]
+      },
+      {
+        id:"georep_2_F", titre:"Colinéarité et alignement", niveau:"Moyen", points_total:17, competences:["Caractériser alignement et parallélisme par la colinéarité de vecteurs"],
+        questions:[
+          {label:"a)", enonce:"$\\vec{u}(2\\,;\\,3)$ et $\\vec{v}(4\\,;\\,6)$. Calcule le déterminant $x_u y_v - y_u x_v$.",
+           type:"libre", points:3},
+          {label:"b)", enonce:"D'après le calcul précédent, $\\vec{u}$ et $\\vec{v}$ sont-ils colinéaires ?",
+           type:"qcm", choix:["Oui","Non"], points:3},
+          {label:"c)", enonce:"$\\vec{u}(3\\,;\\,5)$ et $\\vec{v}(6\\,;\\,9)$. Calcule leur déterminant $x_u y_v - y_u x_v$.",
+           type:"libre", points:4},
+          {label:"d)", enonce:"D'après le calcul précédent, les droites dirigées par $\\vec{u}$ et $\\vec{v}$ sont-elles parallèles ?",
+           type:"qcm", choix:["Oui","Non"], points:3},
+          {label:"e)", enonce:"$A(1\\,;\\,1)$, $B(3\\,;\\,5)$, $C(5\\,;\\,9)$. En utilisant $\\overrightarrow{AB}$ et $\\overrightarrow{AC}$, ces trois points sont-ils alignés ?",
+           type:"qcm", choix:["Oui","Non"], points:4},
+        ],
+        indices:["$\\vec{u}(x_u;y_u)$ et $\\vec{v}(x_v;y_v)$ colinéaires $\\iff x_u y_v - y_u x_v = 0$"]
+      },
+      {
+        id:"georep_2_G", titre:"Construire une équation de droite", niveau:"Moyen", points_total:17, competences:["Déterminer une équation de droite à partir de deux points, un point et un vecteur directeur ou un point et la pente"],
+        questions:[
+          {label:"a)", enonce:"La droite $(d)$ passe par $A(1\\,;\\,5)$ et a une pente de $3$. Quelle est son ordonnée à l'origine ?",
+           type:"libre", points:3},
+          {label:"b)", enonce:"La droite $(d)$ passe par $A(2\\,;\\,-1)$ et a une pente de $-2$. Quelle est son ordonnée à l'origine ?",
+           type:"libre", points:3},
+          {label:"c)", enonce:"$A(1\\,;\\,2)$, $B(4\\,;\\,11)$. Quelle est l'ordonnée à l'origine de la droite $(AB)$ ?",
+           type:"libre", points:4},
+          {label:"d)", enonce:"La droite $(d)$ a pour vecteur directeur $\\vec{u}(2\\,;\\,6)$. Quelle est sa pente (coefficient directeur) ?",
+           type:"libre", points:3},
+          {label:"e)", enonce:"$A(-1\\,;\\,4)$, $B(2\\,;\\,-2)$. Quelle est l'ordonnée à l'origine de la droite $(AB)$ ?",
+           type:"libre", points:4},
+        ],
+        indices:["Équation réduite $y=mx+p$ : calcule $m$ (pente) puis utilise un point connu pour trouver $p$"]
       },
     ],
 
