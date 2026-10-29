@@ -968,6 +968,12 @@ nav {
 .corr-text { font-size:13px; color:var(--texte2); line-height:1.6; }
 
 .indice-box { background:var(--or-pale); border:1px solid #FDE68A; border-radius:var(--r); padding:10px 14px; margin-bottom:1rem; font-size:13px; color:#92400E; }
+.rappel-cours { border:1.5px solid var(--bordure); border-radius:var(--r); margin-bottom:1.5rem; background:var(--bg); overflow:hidden; }
+.rappel-cours summary { padding:12px 16px; font-weight:700; font-size:14px; color:var(--texte); cursor:pointer; list-style:none; display:flex; align-items:center; gap:8px; }
+.rappel-cours summary::-webkit-details-marker { display:none; }
+.rappel-cours summary::after { content:'▸'; margin-left:auto; color:var(--muted); transition:transform 0.15s; }
+.rappel-cours[open] summary::after { transform:rotate(90deg); }
+.rappel-cours-corps { padding:0 16px 16px; font-size:14px; color:var(--texte); line-height:1.6; border-top:1px solid var(--bordure); padding-top:12px; }
 
 .modal-nav { display:flex; align-items:center; justify-content:space-between; margin-top:1.5rem; padding-top:1rem; border-top:1px solid var(--bordure); }
 .btn-nav-modal {
@@ -12656,6 +12662,29 @@ const CHAPITRES_EMOJI = {
   'Lecture graphique de fonctions':'📉',
 };
 
+// Rappels de cours courts (3-5 lignes + un exemple traité), affichés en haut de
+// la liste d'exercices d'un chapitre (29/10/2026). Objet separe des exercices :
+// n'affecte jamais la correction/la notation, juste un repere avant de s'entrainer.
+// Cle = niveau puis chapitre EXACT (meme orthographe que dans EXERCICES). Absence
+// de cle = pas de carte affichee, aucun comportement casse pour les chapitres pas
+// encore remplis.
+const RAPPELS_CHAPITRE = {
+  "4eme": {
+    "Théorème de Thalès": "Si $(DE)\\parallel(BC)$ dans le triangle $ABC$ ($D$ sur $[AB]$, $E$ sur $[AC]$), alors $\\dfrac{AD}{AB}=\\dfrac{AE}{AC}=\\dfrac{DE}{BC}$.<br><br><strong>Exemple :</strong> $AD=3$, $AB=9$, $AE=4$. Alors $AC=\\dfrac{AE\\times AB}{AD}=\\dfrac{4\\times9}{3}=12$.",
+    "Transformations géométriques": "Une translation et un demi-tour (symétrie centrale) conservent toujours les longueurs, les angles et le parallélisme — donc aussi les périmètres et les aires.<br><br><strong>Exemple :</strong> dans un parallélogramme $ABCD$ de centre $O$, le demi-tour de centre $O$ échange $A$ et $C$, ainsi que $B$ et $D$ : $O$ est le milieu de $[AC]$ et de $[BD]$.",
+    "Espace": "Volume d'une pyramide : $V=\\dfrac{1}{3}\\times aire_{base}\\times h$. Volume d'un cône : $V=\\dfrac{1}{3}\\pi r^2 h$.<br><br><strong>Exemple :</strong> pyramide de base carrée de $6\\,$cm de côté, hauteur $9\\,$cm : $V=\\dfrac{1}{3}\\times36\\times9=108\\,$cm³.",
+    "Divisibilité & Nombres premiers": "Un nombre premier a exactement deux diviseurs : $1$ et lui-même ($2,3,5,7,11,13...$). La division euclidienne de $a$ par $b$ s'écrit $a=b\\times q+r$ avec $0\\leq r<b$.<br><br><strong>Exemple :</strong> $47=6\\times7+5$, donc le quotient est $7$ et le reste est $5$.",
+    "Triangles égaux": "Deux triangles sont isométriques (égaux) si l'un des trois cas est vérifié : <strong>CCC</strong> (3 côtés égaux), <strong>CAC</strong> (2 côtés et l'angle compris égaux), <strong>ACA</strong> (1 côté et les 2 angles adjacents égaux).<br><br>Si les triangles sont isométriques, tous leurs côtés et angles correspondants sont égaux deux à deux.",
+  },
+  "5eme": {
+    "Fractions": "Un même nombre peut s'écrire sous forme décimale, fractionnaire ou en pourcentage : $1{,}2=\\dfrac{6}{5}=120\\%$.<br><br><strong>Exemple :</strong> pour additionner ou soustraire deux fractions, mets-les d'abord au même dénominateur : $\\dfrac{1}{3}-\\dfrac{2}{7}=\\dfrac{7}{21}-\\dfrac{6}{21}=\\dfrac{1}{21}$.",
+    "Solides de l'espace": "Volume du pavé droit $=$ longueur $\\times$ largeur $\\times$ hauteur ; volume du cube $=$ arête³. Volume d'un prisme droit $=$ aire de la base $\\times$ hauteur.<br><br>Aire d'un disque $=\\pi r^2$ ; volume d'un cylindre $=\\pi r^2 h$.",
+  },
+  "6eme": {
+    "Algèbre": "Pour trouver un nombre inconnu, repère la régularité ou reviens en arrière étape par étape.<br><br><strong>Exemple :</strong> « Le double d'un nombre est $26$ » → ce nombre est $26\\div2=13$. Dans un motif évolutif, repère de combien il augmente à chaque étape pour prédire un rang sans tout dessiner.",
+  },
+};
+
 let navEtat = { niveau: null, chapitre: null };
 
 function renderExercices() {
@@ -12769,6 +12798,7 @@ function allerExercices(niveauId, chapitre) {
   const exsGeneres = tousExs.filter(e => e.genere);
   const ETIQ = ['Découverte','Application','Méthode','Approfondissement','Brevet'];
   const CLR = ['n1','n2','n3','n4','n5'];
+  const rappel = (RAPPELS_CHAPITRE[niveauId] || {})[chapitre];
   const content = document.getElementById('ex-content');
   content.innerHTML = `
     <div class="ex-fil-header">
@@ -12778,6 +12808,11 @@ function allerExercices(niveauId, chapitre) {
         <div class="ex-fil-desc">${label} · ${exs.length} exercice${exs.length>1?'s':''} · du plus facile au plus difficile</div>
       </div>
     </div>
+    ${rappel ? `
+    <details class="rappel-cours">
+      <summary>📖 Rappel de cours</summary>
+      <div class="rappel-cours-corps">${rappel}</div>
+    </details>` : ''}
     <div class="exercices-chapitre-grid">
       ${exs.map((ex,i) => `
         <div class="ex-ligne" onclick="ouvrirExercice('${ex.id}')">
