@@ -6010,6 +6010,41 @@ const EXERCICES = {
       },
     ],
 
+    "Algèbre": [
+      {
+        id:"algebre_6_1", titre:"Algèbre — nombres inconnus et motifs", niveau:"Facile", points_total:13, competences:["Utiliser des modèles pré-algébriques pour résoudre des problèmes algébriques","Identifier la structure d'un motif évolutif en repérant une régularité"],
+        questions:[
+          {label:"a)", enonce:"Un motif de points forme des carrés : $1$ point au rang $1$, $4$ points au rang $2$, $9$ points au rang $3$. Combien de points y aura-t-il au rang $5$ ?",
+           type:"libre", points:3},
+          {label:"b)", enonce:"Une suite de triangles utilise $3$ allumettes pour le $1$er triangle, $5$ pour le $2$ème, $7$ pour le $3$ème. Combien d'allumettes pour le $6$ème triangle ?",
+           type:"libre", points:3},
+          {label:"c)", enonce:"Je pense à un nombre. Si je lui ajoute $7$, j'obtiens $15$. Quel est ce nombre ?",
+           type:"libre", points:2},
+          {label:"d)", enonce:"Léa a des billes. Si elle en donne $5$ à son frère, elle en a $12$. Combien de billes avait-elle au départ ?",
+           type:"libre", points:2},
+          {label:"e)", enonce:"Dans un motif évolutif, pour trouver le nombre d'éléments à un rang donné sans le dessiner, on peut :",
+           type:"qcm", choix:["Identifier la régularité (combien d'éléments s'ajoutent à chaque étape)","Deviner au hasard","Toujours compter à partir de 1","Mesurer la figure avec une règle"], points:3},
+        ],
+        indices:["Cherche d'abord de combien le motif augmente à chaque étape, puis applique cette régularité"]
+      },
+      {
+        id:"algebre_6_2", titre:"Algèbre — problèmes avec nombres inconnus", niveau:"Moyen", points_total:15, competences:["Utiliser des modèles pré-algébriques pour résoudre des problèmes algébriques"],
+        questions:[
+          {label:"a)", enonce:"Le double d'un nombre est $26$. Quel est ce nombre ?",
+           type:"libre", points:3},
+          {label:"b)", enonce:"J'ajoute $4$ au triple d'un nombre et j'obtiens $19$. Quel est ce nombre ?",
+           type:"libre", points:4},
+          {label:"c)", enonce:"Dans une boîte, il y a $8$ billes rouges, et il y a $3$ billes de plus bleues que rouges. Combien y a-t-il de billes bleues ?",
+           type:"libre", points:2},
+          {label:"d)", enonce:"Un motif de carreaux a $2$ carreaux au rang $1$ et ajoute $4$ carreaux à chaque rang suivant. Combien de carreaux au rang $4$ ?",
+           type:"libre", points:3},
+          {label:"e)", enonce:"Trois amis se partagent équitablement des bonbons. Chacun en reçoit $9$. Combien de bonbons y avait-il en tout ?",
+           type:"libre", points:3},
+        ],
+        indices:["Essaie plusieurs valeurs, ou reviens en arrière étape par étape depuis le résultat connu"]
+      },
+    ],
+
   },
 
   // ═══════════════════════════════
@@ -12615,7 +12650,7 @@ const CHAPITRES_EMOJI = {
   'Intervalles & Valeur absolue':'↔️','Nombres & Calculs':'🔢',
   'Géométrie plane':'📐','Proportionnalité':'💯','Statistiques & Données':'📊',
   'Nombres relatifs':'±','Fractions & Proportionnalité':'½','Fractions':'½','Géométrie':'📐',
-  'Solides de l\'espace':'🧊',
+  'Solides de l\'espace':'🧊','Algèbre':'🔤',
   'Statistiques':'📋','Calcul littéral & Équations':'✏️','Puissances':'⚡',
   'Ensembles de nombres':'ℝ','Racines carrées & Puissances':'√',
   'Lecture graphique de fonctions':'📉',
