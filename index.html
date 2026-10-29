@@ -6324,6 +6324,22 @@ const EXERCICES = {
         ],
         indices:["Combine plusieurs propriétés géométriques dans un même problème"]
       },
+      {
+        id:"geo_5_6", titre:"Médiatrices et cercle circonscrit", niveau:"Moyen", points_total:16, competences:["Connaître la notion de médiatrice, de cercle circonscrit"],
+        questions:[
+          {label:"a)", enonce:"La médiatrice d'un segment $[AB]$ est l'ensemble des points :",
+           type:"qcm", choix:["Équidistants de $A$ et $B$","Alignés avec $A$ et $B$","Qui appartiennent à $[AB]$","Perpendiculaires à $[AB]$"], points:3},
+          {label:"b)", enonce:"Le centre du cercle circonscrit à un triangle est le point d'intersection de ses :",
+           type:"qcm", choix:["Médiatrices","Médianes","Hauteurs","Bissectrices"], points:3},
+          {label:"c)", enonce:"Dans un triangle rectangle, le centre du cercle circonscrit est :",
+           type:"qcm", choix:["Le milieu de l'hypoténuse","Un sommet du triangle","Le centre de gravité","Hors du triangle"], points:3},
+          {label:"d)", enonce:"Un triangle est inscrit dans un cercle de rayon $5\\,$cm. Quelle est la distance (en cm) entre le centre du cercle et chaque sommet du triangle ?",
+           type:"libre", points:3},
+          {label:"e)", enonce:"Pour construire la médiatrice d'un segment à la règle et au compas, on trace deux arcs de cercle de même rayon centrés en :",
+           type:"qcm", choix:["Les deux extrémités du segment","Le milieu du segment","Un seul point","N'importe où"], points:4},
+        ],
+        indices:["Tout point de la médiatrice de $[AB]$ est à la même distance de $A$ et de $B$ ; le centre du cercle circonscrit est équidistant des 3 sommets"]
+      },
     ],
 
     "Statistiques": [
@@ -6595,6 +6611,76 @@ const EXERCICES = {
            type:"qcm", choix:["$6$","$0$","$1$","$5$"], points:2},
         ],
         indices:["« variable = expression » calcule d'abord l'expression avec les anciennes valeurs, puis stocke le résultat dans la variable"]
+      },
+    ],
+
+    "Fractions": [
+      {
+        id:"frac_5_1", titre:"Fractions — comprendre et comparer", niveau:"Facile", points_total:13, competences:["Comparer des fractions"],
+        questions:[
+          {label:"a)", enonce:"Lequel est le plus grand : $\\dfrac{2}{5}$ ou $\\dfrac{3}{5}$ ?",
+           type:"qcm", choix:["$\\dfrac{2}{5}$","$\\dfrac{3}{5}$","Ils sont égaux","Impossible de savoir"], points:2},
+          {label:"b)", enonce:"Écris $\\dfrac{17}{5}$ sous la forme d'un nombre mixte (entier $+$ fraction). Donne la partie entière.",
+           type:"libre", points:3},
+          {label:"c)", enonce:"Calcule $\\dfrac{1}{3}$ de $18$.",
+           type:"libre", points:3},
+          {label:"d)", enonce:"Calcule $50\\%$ de $84$.",
+           type:"libre", points:2},
+          {label:"e)", enonce:"Lequel de ces nombres est égal à $1{,}2$ ?",
+           type:"qcm", choix:["$\\dfrac{6}{5}$","$\\dfrac{5}{6}$","$\\dfrac{12}{5}$","$\\dfrac{1}{2}$"], points:3},
+        ],
+        indices:["Un même nombre peut s'écrire sous forme décimale, fractionnaire ou en pourcentage : $1{,}2=\\dfrac{6}{5}=120\\%$"]
+      },
+      {
+        id:"frac_5_2", titre:"Fractions — addition et soustraction", niveau:"Moyen", points_total:16, competences:["Additionner et soustraire des fractions de dénominateurs quelconques","Résoudre des problèmes avec des additions et soustractions de fractions"],
+        questions:[
+          {label:"a)", enonce:"Calcule $\\dfrac{3}{5}+\\dfrac{4}{5}$ (réponds sous forme de fraction, par exemple $7/5$).",
+           type:"libre", points:3},
+          {label:"b)", enonce:"Calcule $\\dfrac{1}{3}-\\dfrac{2}{7}$ (réponds sous forme de fraction).",
+           type:"libre", points:4},
+          {label:"c)", enonce:"Calcule $\\dfrac{3}{7}+\\dfrac{2}{21}$ (réponds sous forme de fraction).",
+           type:"libre", points:4},
+          {label:"d)", enonce:"Un gâteau est partagé en $8$ parts égales. Léa en mange $\\dfrac{3}{8}$ et Tom en mange $\\dfrac{2}{8}$. Quelle fraction du gâteau ont-ils mangée ensemble ?",
+           type:"libre", points:3},
+          {label:"e)", enonce:"Calcule $\\dfrac{5}{4}-\\dfrac{1}{4}$ (réponds sous forme simplifiée).",
+           type:"libre", points:2},
+        ],
+        indices:["Pour additionner ou soustraire des fractions, mets-les d'abord au même dénominateur"]
+      },
+    ],
+
+    "Solides de l'espace": [
+      {
+        id:"espace_5_1", titre:"Solides de l'espace — reconnaître et représenter", niveau:"Facile", points_total:13, competences:["Construire et mettre en relation différentes représentations en perspectives cavalières des solides"],
+        questions:[
+          {label:"a)", enonce:"Combien de faces a un pavé droit ?",
+           type:"libre", points:2},
+          {label:"b)", enonce:"Quelle est la forme de la base d'un prisme droit à base triangulaire ?",
+           type:"qcm", choix:["Un triangle","Un carré","Un cercle","Un rectangle"], points:2},
+          {label:"c)", enonce:"Calcule le volume d'un cube d'arête $5\\,$cm (en cm³).",
+           type:"libre", points:3},
+          {label:"d)", enonce:"Calcule le volume d'un pavé droit de dimensions $4\\,$cm $\\times$ $3\\,$cm $\\times$ $6\\,$cm (en cm³).",
+           type:"libre", points:3},
+          {label:"e)", enonce:"Convertis $2\\,$L en cm³ (indice : $1\\,$L $=1\\,000\\,$cm³).",
+           type:"libre", points:3},
+        ],
+        indices:["Volume du pavé droit = longueur $\\times$ largeur $\\times$ hauteur. Volume du cube = arête³"]
+      },
+      {
+        id:"espace_5_2", titre:"Solides de l'espace — prisme et cylindre", niveau:"Moyen", points_total:16, competences:["Calculer le volume du cube, du pavé droit, du prisme droit","Calculer l'aire du disque, le volume du cylindre de révolution"],
+        questions:[
+          {label:"a)", enonce:"Un prisme droit a une base triangulaire d'aire $12\\,$cm² et une hauteur de $7\\,$cm. Calcule son volume (en cm³).",
+           type:"libre", points:3},
+          {label:"b)", enonce:"Calcule l'aire d'un disque de rayon $4\\,$cm (en cm², arrondi à l'unité, $\\pi\\approx3{,}14$).",
+           type:"libre", points:3},
+          {label:"c)", enonce:"Calcule le volume d'un cylindre de révolution de rayon $3\\,$cm et de hauteur $10\\,$cm (en cm³, arrondi à l'unité, $\\pi\\approx3{,}14$).",
+           type:"libre", points:4},
+          {label:"d)", enonce:"La perspective cavalière d'un cube représente les faces avant et arrière comme :",
+           type:"qcm", choix:["Deux carrés superposés avec un décalage","Deux cercles","Un seul carré","Un triangle"], points:3},
+          {label:"e)", enonce:"Un prisme droit a un volume de $150\\,$cm³ et une hauteur de $10\\,$cm. Quelle est l'aire de sa base (en cm²) ?",
+           type:"libre", points:3},
+        ],
+        indices:["Volume du prisme = aire de la base $\\times$ hauteur. Aire du disque $=\\pi r^2$. Volume du cylindre $=\\pi r^2 h$"]
       },
     ],
   },
@@ -12528,7 +12614,8 @@ const CHAPITRES_EMOJI = {
   'Fonctions de référence':'🌀','Second degré':'²','Géométrie repérée':'📍',
   'Intervalles & Valeur absolue':'↔️','Nombres & Calculs':'🔢',
   'Géométrie plane':'📐','Proportionnalité':'💯','Statistiques & Données':'📊',
-  'Nombres relatifs':'±','Fractions & Proportionnalité':'½','Géométrie':'📐',
+  'Nombres relatifs':'±','Fractions & Proportionnalité':'½','Fractions':'½','Géométrie':'📐',
+  'Solides de l\'espace':'🧊',
   'Statistiques':'📋','Calcul littéral & Équations':'✏️','Puissances':'⚡',
   'Ensembles de nombres':'ℝ','Racines carrées & Puissances':'√',
   'Lecture graphique de fonctions':'📉',
