@@ -11708,7 +11708,7 @@ const CM_THEMES = {
     }
   },
   'Racines carrées': {
-    emoji: '√', niveau: '4eme',
+    emoji: '√', niveau: '3eme',
     gen: () => {
       const n = rand(1,15);
       return { q: `√${n*n} = ?`, r: n };
@@ -12159,6 +12159,183 @@ const CM_THEMES = {
     gen: () => {
       const t = [5,10,15,20,25,30,40,50,75][rand(0,8)], hausse = rand(0,1)===1;
       return { q: `Coefficient multiplicateur d'une ${hausse?'hausse':'baisse'} de ${t}% ?`, r: hausse ? 1+t/100 : 1-t/100 };
+    }
+  },
+
+  // ── 4e : complements 2 (30/10/2026, croise avec mathsmentales.net 4e, 198 items --
+  //  MAIS cette liste "Items de 4e (2027)" est celle du NOUVEAU programme, qui ne
+  //  s'applique a la 4e qu'a partir de la rentree 2027-2028 (voir memoire
+  //  poussemaths_bo_ancien_vs_nouveau_programme). Pour 2026-2027, la 4e reste sur
+  //  l'ancien programme (BO 2020) : items exclus ici en consequence -- racine
+  //  carree (confirmee 3e-only ce matin, cf. 'Racines carrees' retague plus haut),
+  //  double distributivite (reste 3e), trigonometrie (absente de la vraie
+  //  progression 4e de l'etablissement, presente seulement en 3e). Les items
+  //  gardes ci-dessous sont soit confirmes par la vraie progression 4e de Jamal
+  //  (Pythagore, Thales, Transformations, Espace/volumes, Proportionnalite), soit
+  //  du contenu generique stable present dans les deux versions du programme. ──
+  'Arrondir un décimal (4e)': {
+    emoji: '≈', niveau: '4eme',
+    gen: () => {
+      const e = rand(0,999), d1 = rand(0,9), d2 = rand(0,9);
+      const n = Math.round((e + d1/10 + d2/100)*100)/100;
+      return { q: `Arrondis ${String(n).replace('.',',')} au dixième.`, r: Math.round(n*10)/10 };
+    }
+  },
+  'Comparer des décimaux relatifs (4e)': {
+    emoji: '><', niveau: '4eme',
+    gen: () => {
+      const a = Math.round((rand(-30,30)+rand(0,99)/100)*100)/100;
+      let b = Math.round((rand(-30,30)+rand(0,99)/100)*100)/100;
+      if(a===b) b += 0.5;
+      return { q: `Quel est le plus grand : ${String(a).replace('.',',')} ou ${String(b).replace('.',',')} ?`, r: Math.max(a,b) };
+    }
+  },
+  "Inverse d'un nombre (4e)": {
+    emoji: '1/n', niveau: '4eme',
+    gen: () => {
+      const options = [2,4,5,8,10,20,25,50];
+      const n = options[rand(0,options.length-1)];
+      return { q: `Inverse de ${n} ? (réponds en décimal)`, r: 1/n };
+    }
+  },
+  "Opposé d'un nombre (4e)": {
+    emoji: '-n', niveau: '4eme',
+    gen: () => {
+      let n = rand(-50,50); if(n===0) n=9;
+      return { q: `Opposé de ${cmFmt(n)} ?`, r: -n };
+    }
+  },
+  'Puissance de relatif (4e)': {
+    emoji: '(-n)^k', niveau: '4eme',
+    gen: () => {
+      let base = rand(2,5); if(rand(0,1)===0) base = -base;
+      const exp = rand(2,3);
+      return { q: `$(${base})^${exp} = ?$`, r: Math.pow(base,exp) };
+    }
+  },
+  'Développer avec la distributivité (4e)': {
+    emoji: 'k(ax+b)', niveau: '4eme',
+    gen: () => {
+      const k = rand(2,8), a = rand(1,8), b = rand(1,9);
+      return { q: `Développe $${k}(${a}x+${b})$ : coefficient de $x$ ?`, r: k*a };
+    }
+  },
+  'Réduire une expression (4e)': {
+    emoji: 'ax±bx', niveau: '4eme',
+    gen: () => {
+      const a = rand(3,9), b = rand(1,a-1);
+      if(rand(0,1)===0) return { q: `Réduis $${a}x+${b}x$ : coefficient de $x$ ?`, r: a+b };
+      return { q: `Réduis $${a}x-${b}x$ : coefficient de $x$ ?`, r: a-b };
+    }
+  },
+  'Résoudre une équation simple (4e)': {
+    emoji: 'ax=b', niveau: '4eme',
+    gen: () => {
+      if(rand(0,1)===0) { const a = rand(2,9); let x = rand(-10,10); if(x===0) x=4; return { q: `Résous : $${a}x = ${a*x}$`, r: x }; }
+      const a = rand(-20,20), x = rand(-15,15);
+      return { q: `Résous : $x + ${cmFmt(a)} = ${x+a}$`, r: x };
+    }
+  },
+  'Résoudre une équation du premier degré (4e)': {
+    emoji: 'ax+b=c', niveau: '4eme',
+    gen: () => {
+      const a = rand(2,9), b = rand(-15,15); let x = rand(-10,10); if(x===0) x=3;
+      const c = a*x+b;
+      return { q: `Résous : $${a}x ${b>=0?'+':'−'} ${Math.abs(b)} = ${c}$`, r: x };
+    }
+  },
+  'Tester une égalité (4e)': {
+    emoji: '=?', niveau: '4eme',
+    gen: () => {
+      const a = rand(2,9), b = rand(-15,15), xTest = rand(-10,10);
+      const cVrai = a*xTest+b;
+      const estVrai = rand(0,1)===1;
+      const c = estVrai ? cVrai : cVrai + (rand(1,5)*(rand(0,1)===0?1:-1));
+      return { q: `$x=${xTest}$ est-il solution de $${a}x ${b>=0?'+':'−'} ${Math.abs(b)} = ${c}$ ? (1=oui, 0=non)`, r: estVrai?1:0 };
+    }
+  },
+  'Quatrième proportionnelle (4e)': {
+    emoji: 'a/b=c/d', niveau: '4eme',
+    gen: () => {
+      const a = rand(2,9), b = rand(2,9), c = rand(2,9);
+      return { q: `Dans un tableau de proportionnalité, $${a}$ correspond à $${b}$. Que correspond à $${c}$ ?`, r: Math.round(c*b/a*100)/100 };
+    }
+  },
+  'Partage proportionnel (4e)': {
+    emoji: 'ratio', niveau: '4eme',
+    gen: () => {
+      const p = rand(1,6), q = rand(p+1,9), total = (p+q)*rand(2,15);
+      return { q: `Partage $${total}$€ selon le ratio $${p}:${q}$. Quelle est la plus grande part (en €) ?`, r: total/(p+q)*q };
+    }
+  },
+  'Évolutions successives (4e)': {
+    emoji: '×1,2×0,9', niveau: '4eme',
+    gen: () => {
+      const t1 = [10,20,25,50][rand(0,3)], t2 = [10,20,25,50][rand(0,3)];
+      const h1 = rand(0,1)===1, h2 = rand(0,1)===1;
+      const c1 = h1?1+t1/100:1-t1/100, c2 = h2?1+t2/100:1-t2/100;
+      return { q: `${h1?'Hausse':'Baisse'} de ${t1}\\% puis ${h2?'hausse':'baisse'} de ${t2}\\%. Coefficient multiplicateur global ?`, r: Math.round(c1*c2*10000)/10000 };
+    }
+  },
+  'Grandeurs composées — vitesse (4e)': {
+    emoji: 'km/h', niveau: '4eme',
+    gen: () => {
+      const t = rand(1,5), v = rand(10,80), d = v*t;
+      return { q: `Distance $${d}\\,$km en $${t}\\,$h. Vitesse moyenne (km/h) ?`, r: v };
+    }
+  },
+  'Volumes de pyramides et cônes (4e)': {
+    emoji: '🔺', niveau: '4eme',
+    gen: () => {
+      if(rand(0,1)===0) { const aireB = rand(2,10)*3, h = rand(2,9); return { q: `Pyramide : aire de la base $${aireB}\\,$cm², hauteur $${h}\\,$cm. Volume (cm³) ?`, r: (aireB*h)/3 }; }
+      const r0 = rand(2,6), h = rand(3,9);
+      return { q: `Cône : rayon $${r0}\\,$cm, hauteur $${h}\\,$cm. Volume (cm³, arrondi à l'unité, $\\pi\\approx3{,}14$) ?`, r: Math.round((1/3)*3.14*r0*r0*h) };
+    }
+  },
+  'Théorème de Pythagore (4e)': {
+    emoji: '📐', niveau: '4eme',
+    gen: () => {
+      const triples = [[3,4,5],[6,8,10],[5,12,13],[8,15,17],[9,12,15]];
+      const [a,b,c] = triples[rand(0,triples.length-1)];
+      return { q: `Triangle rectangle, côtés $${a}$ et $${b}$. Longueur de l'hypoténuse ?`, r: c };
+    }
+  },
+  'Pythagore — triangle rectangle ou non (4e)': {
+    emoji: '△?', niveau: '4eme',
+    gen: () => {
+      const triples = [[3,4,5],[6,8,10],[5,12,13],[8,15,17],[9,12,15]];
+      const [a,b,c] = triples[rand(0,triples.length-1)];
+      if(rand(0,1)===0) return { q: `Côtés $${a}$, $${b}$, $${c}$. Triangle rectangle ? (1=oui, 0=non)`, r: 1 };
+      return { q: `Côtés $${a}$, $${b}$, $${c+rand(1,3)}$. Triangle rectangle ? (1=oui, 0=non)`, r: 0 };
+    }
+  },
+  'Théorème de Thalès — calculer une longueur (4e)': {
+    emoji: '📐', niveau: '4eme',
+    gen: () => {
+      const AD = rand(2,9), s = rand(2,4), AB = AD*s, AE = rand(2,9);
+      return { q: `$DE\\parallel BC$. $AD=${AD}$, $AB=${AB}$, $AE=${AE}$. Calcule $AC$.`, r: AE*s };
+    }
+  },
+  'Thalès — droites parallèles ? (4e)': {
+    emoji: '∥?', niveau: '4eme',
+    gen: () => {
+      const AD = rand(2,9), s = rand(2,4), AB = AD*s, AE = rand(2,9), ACvrai = AE*s;
+      if(rand(0,1)===0) return { q: `$AD=${AD}$, $AB=${AB}$, $AE=${AE}$, $AC=${ACvrai}$. $(DE)\\parallel(BC)$ ? (1=oui, 0=non)`, r: 1 };
+      return { q: `$AD=${AD}$, $AB=${AB}$, $AE=${AE}$, $AC=${ACvrai+rand(1,3)}$. $(DE)\\parallel(BC)$ ? (1=oui, 0=non)`, r: 0 };
+    }
+  },
+  'Transformations géométriques (4e)': {
+    emoji: '🔄', niveau: '4eme',
+    gen: () => {
+      const a = rand(-8,8), b = rand(-8,8), x = rand(-8,8), y = rand(-8,8);
+      return { q: `Symétrique de $M(${x}\\,;\\,${y})$ par rapport à $I(${a}\\,;\\,${b})$ (demi-tour) : abscisse du point image ?`, r: 2*a-x };
+    }
+  },
+  'Repérage dans le plan (relatifs, 4e)': {
+    emoji: '(x;y)', niveau: '4eme',
+    gen: () => {
+      const x = rand(-10,10), y = rand(-10,10);
+      return { q: `Point $M(${x}\\,;\\,${y})$ dans un repère. Quelle est son abscisse ?`, r: x };
     }
   },
 
