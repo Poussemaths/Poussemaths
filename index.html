@@ -9849,20 +9849,40 @@ async function renderEspaceEleve() {
   const couleurs = ['#4A90D9','#E84040','#16A34A','#F59E0B','#7C3AED','#D97706'];
   const couleur = couleurs[initiales.charCodeAt(0) % couleurs.length];
 
-  // Rendu progression par chapitre
-  const chapitresHtml = Object.values(parChapitre).length > 0
-    ? Object.values(parChapitre).map(({chapitre: chap, niveau: niv, scores}) => {
-        const moy = Math.round(scores.reduce((a,b)=>a+b,0)/scores.length);
-        const barColor = moy>=70?'linear-gradient(90deg,var(--vert),#22C55E)':moy>=50?'linear-gradient(90deg,var(--amber),#F59E0B)':'linear-gradient(90deg,var(--rouge),#F87171)';
-        const badge = badges.find(b => b.chapitre === chap && b.niveau === niv);
+  // Checklist complete des chapitres du niveau (29-30/10/2026) : avant, seuls
+  // les chapitres deja tentes apparaissaient ici -- un eleve qui revise avant
+  // un controle ne voyait jamais "il me reste 4 chapitres jamais ouverts".
+  // On fusionne desormais la progression reelle avec la liste complete des
+  // chapitres du niveau de l'eleve (en respectant le verrou de chapitres par
+  // classe s'il existe), avec 3 statuts : maitrise / a consolider / pas commence.
+  const tousLesChapitresNiveau = [...new Set(getAllExercices(currentEleve.niveau).map(e => e.chapitre))]
+    .filter(chap => !chapitresActifsEleve || !chapitresActifsEleve.length || chapitresActifsEleve.includes(chap));
+
+  const chapitresChecklist = tousLesChapitresNiveau.map(chap => {
+    const cle = `${currentEleve.niveau}::${chap}`;
+    const entry = parChapitre[cle];
+    if(!entry) return { chap, statut: 'non_commence', moy: 0 };
+    const moy = Math.round(entry.scores.reduce((a,b)=>a+b,0)/entry.scores.length);
+    return { chap, statut: moy>=70?'maitrise':'a_consolider', moy };
+  }).sort((a,b) => {
+    const ordre = { a_consolider:0, non_commence:1, maitrise:2 };
+    return ordre[a.statut]-ordre[b.statut];
+  });
+
+  const chapitresHtml = chapitresChecklist.length > 0
+    ? chapitresChecklist.map(({chap, statut, moy}) => {
+        const barColor = statut==='maitrise'?'linear-gradient(90deg,var(--vert),#22C55E)':statut==='a_consolider'?'linear-gradient(90deg,var(--amber),#F59E0B)':'var(--bordure)';
+        const badge = badges.find(b => b.chapitre === chap && b.niveau === currentEleve.niveau);
         const badgeEmoji = badge ? (badge.badge_type==='or'?'🥇':badge.badge_type==='argent'?'🥈':'🥉') : '';
+        const statutLabel = statut==='maitrise' ? `${moy}%` : statut==='a_consolider' ? `${moy}%` : '⚪ pas commencé';
+        const statutClass = statut==='non_commence' ? 'style="opacity:0.55"' : '';
         return `
-          <div class="chap-item">
+          <div class="chap-item" ${statutClass}>
             <div class="chap-top">
               <span class="chap-name">${badgeEmoji} ${chap}</span>
-              <span class="chap-pct">${moy}%</span>
+              <span class="chap-pct">${statutLabel}</span>
             </div>
-            <div class="chap-bar"><div class="chap-bar-fill" style="width:${moy}%;background:${barColor}"></div></div>
+            <div class="chap-bar"><div class="chap-bar-fill" style="width:${statut==='non_commence'?3:moy}%;background:${barColor}"></div></div>
           </div>
         `;
       }).join('')
