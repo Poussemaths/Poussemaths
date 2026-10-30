@@ -12662,6 +12662,104 @@ const CM_THEMES = {
     }
   },
 
+  // ── 1ere Spe : complements (30/10/2026, croise avec mathsmentales.net 1re Gen, 22 items) ──
+  "Nature d'une suite": {
+    emoji: 'arith/géo', niveau: '1ere',
+    gen: () => {
+      if(rand(0,1)===0) { const r = rand(2,9); return { q: `$u_{n+1}=u_n+${r}$. Cette suite est-elle arithmétique ? (1=oui, 0=non)`, r: 1 }; }
+      const q = rand(2,4);
+      return { q: `$u_{n+1}=${q}\\times u_n$. Cette suite est-elle arithmétique ? (1=oui, 0=non — elle est géométrique)`, r: 0 };
+    }
+  },
+  'Dérivée de fonction composée g(ax+b)²': {
+    emoji: "(u²)'", niveau: '1ere',
+    gen: () => {
+      const a = rand(2,6), b = rand(1,9);
+      return { q: `$f(x)=(${a}x+${b})^2$. $f'(0) = ?$`, r: 2*a*b };
+    }
+  },
+  'Dérivée de fonction composée g(sin(ax))': {
+    emoji: "sin'", niveau: '1ere',
+    gen: () => {
+      const a = rand(2,9);
+      return { q: `$f(x)=\\sin(${a}x)$. $f'(0) = ?$`, r: a };
+    }
+  },
+  'Dérivée de fonction polynomiale (1ère)': {
+    emoji: "f'", niveau: '1ere',
+    gen: () => {
+      const a = rand(1,9), b = rand(-9,9);
+      return { q: `$f(x)=${a}x^2${b>=0?'+':'−'}${Math.abs(b)}x+1$. $f'(0) = ?$`, r: b };
+    }
+  },
+  'Dérivée de fonction produit': {
+    emoji: "(uv)'", niveau: '1ere',
+    gen: () => {
+      const a = rand(1,9), b = rand(1,9);
+      return { q: `$f(x)=(x+${a})(x+${b})$. $f'(0) = ?$`, r: a+b };
+    }
+  },
+  'Dérivée de fonction quotient': {
+    emoji: "(1/u)'", niveau: '1ere',
+    gen: () => {
+      const b = [1,2,3][rand(0,2)], k = rand(1,5), a = k*b*b;
+      return { q: `$f(x)=\\dfrac{1}{${a}x+${b}}$. $f'(0) = ?$`, r: -k };
+    }
+  },
+  'Calculer delta (second degré)': {
+    emoji: 'Δ', niveau: '1ere',
+    gen: () => {
+      const a = rand(1,5), b = rand(-9,9), c = rand(-9,9);
+      return { q: `$f(x)=${a}x^2${b>=0?'+':'−'}${Math.abs(b)}x${c>=0?'+':'−'}${Math.abs(c)}$. Calcule $\\Delta=b^2-4ac$.`, r: b*b-4*a*c };
+    }
+  },
+  'Mettre sous forme canonique — abscisse du sommet': {
+    emoji: '(x-α)²', niveau: '1ere',
+    gen: () => {
+      const a = rand(1,5), k = rand(-8,8), b = -2*a*k;
+      return { q: `$f(x)=${a}x^2${b>=0?'+':'−'}${Math.abs(b)}x+1$. Abscisse $\\alpha$ du sommet de la parabole ?`, r: k };
+    }
+  },
+  'Coefficient binomial (1ère)': {
+    emoji: 'C(n,k)', niveau: '1ere',
+    gen: () => {
+      const triples = [[4,2,6],[5,2,10],[3,1,3],[4,1,4],[5,1,5],[4,0,1],[5,0,1]];
+      const [n,k,val] = triples[rand(0,triples.length-1)];
+      return { q: `Combien de façons de choisir ${k} éléments parmi ${n} ?`, r: val };
+    }
+  },
+  'Produit scalaire (1ère)': {
+    emoji: 'u·v', niveau: '1ere',
+    gen: () => {
+      let a = rand(-7,7); if(a===0) a=2;
+      let b = rand(-7,7); if(b===0) b=3;
+      let c = rand(-7,7); if(c===0) c=1;
+      let d = rand(-7,7); if(d===0) d=4;
+      return { q: `$\\vec{u}(${a}\\,;\\,${b})$, $\\vec{v}(${c}\\,;\\,${d})$. $\\vec{u}\\cdot\\vec{v}$ ?`, r: a*c+b*d };
+    }
+  },
+  "Norme d'un vecteur (1ère)": {
+    emoji: '‖u‖', niveau: '1ere',
+    gen: () => {
+      const triples = [[3,4,5],[6,8,10],[5,12,13],[8,15,17],[9,12,15]];
+      const [a,b,norme] = triples[rand(0,triples.length-1)];
+      const sa = rand(0,1)===0?1:-1, sb = rand(0,1)===0?1:-1;
+      return { q: `$\\vec{u}(${a*sa}\\,;\\,${b*sb})$. $\\|\\vec{u}\\|$ ?`, r: norme };
+    }
+  },
+  'Vecteurs orthogonaux ? (1ère)': {
+    emoji: '⊥?', niveau: '1ere',
+    gen: () => {
+      let a = rand(-7,7); if(a===0) a=2;
+      let b = rand(-7,7); if(b===0) b=3;
+      if(rand(0,1)===0) return { q: `$\\vec{u}(${a}\\,;\\,${b})$, $\\vec{v}(${-b}\\,;\\,${a})$. Orthogonaux ? (1=oui, 0=non)`, r: 1 };
+      let c = rand(-7,7); if(c===0) c=1;
+      let d = rand(-7,7); if(d===0) d=5;
+      if(a*c+b*d===0) d += 1;
+      return { q: `$\\vec{u}(${a}\\,;\\,${b})$, $\\vec{v}(${c}\\,;\\,${d})$. Orthogonaux ? (1=oui, 0=non)`, r: 0 };
+    }
+  },
+
   // ── Terminale Spe : nouveau niveau dedie ──
   'Valeurs remarquables (ln/exp)': {
     emoji: 'ln/e', niveau: 'terminale',
