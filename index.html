@@ -11699,14 +11699,14 @@ const CM_THEMES = {
   'Puissances de 10': {
     emoji: '⚡', niveau: '4eme',
     gen: () => {
-      const exp = rand(1,6);
+      const exp = rand(1,9);
       return { q: `10^${exp} = ?`, r: Math.pow(10,exp) };
     }
   },
   'Racines carrées': {
     emoji: '√', niveau: '4eme',
     gen: () => {
-      const n = rand(1,12);
+      const n = rand(1,15);
       return { q: `√${n*n} = ?`, r: n };
     }
   },
@@ -11816,7 +11816,7 @@ const CM_THEMES = {
   'Puissances simples': {
     emoji: '^', niveau: '4eme',
     gen: () => {
-      const opts = [[2,2],[2,3],[2,4],[2,5],[2,6],[3,2],[3,3],[3,4],[5,2],[5,3]];
+      const opts = [[2,2],[2,3],[2,4],[2,5],[2,6],[2,7],[3,2],[3,3],[3,4],[3,5],[5,2],[5,3],[5,4],[4,2],[4,3],[10,2],[10,3]];
       const [base,exp] = opts[rand(0,opts.length-1)];
       return { q: `${base}^${exp} = ?`, r: Math.pow(base,exp) };
     }
@@ -11831,7 +11831,7 @@ const CM_THEMES = {
   'Coefficient multiplicateur': {
     emoji: '×(1+t)', niveau: '4eme',
     gen: () => {
-      const t = [5,10,20,25,50][rand(0,4)], hausse = rand(0,1)===1;
+      const t = [5,10,15,20,25,30,40,50,75][rand(0,8)], hausse = rand(0,1)===1;
       return { q: `Coefficient multiplicateur d'une ${hausse?'hausse':'baisse'} de ${t}% ?`, r: hausse ? 1+t/100 : 1-t/100 };
     }
   },
@@ -11840,7 +11840,7 @@ const CM_THEMES = {
   'Théorème de Pythagore': {
     emoji: '📐', niveau: '3eme',
     gen: () => {
-      const triples = [[3,4,5],[6,8,10],[5,12,13],[8,15,17],[9,12,15]];
+      const triples = [[3,4,5],[6,8,10],[5,12,13],[8,15,17],[9,12,15],[7,24,25],[20,21,29],[9,40,41],[12,16,20],[10,24,26],[15,20,25]];
       const [a,b,c] = triples[rand(0,triples.length-1)];
       return { q: `Triangle rectangle, côtés ${a} et ${b}. Longueur de l'hypoténuse ?`, r: c };
     }
@@ -11848,7 +11848,7 @@ const CM_THEMES = {
   'Identités remarquables': {
     emoji: '(a+b)²', niveau: '3eme',
     gen: () => {
-      const a = rand(2,9);
+      const a = rand(2,15);
       return { q: `Développe $(x+${a})^2$ : coefficient devant $x$ ?`, r: 2*a };
     }
   },
@@ -11871,7 +11871,7 @@ const CM_THEMES = {
   'PGCD rapide': {
     emoji: 'PGCD', niveau: '3eme',
     gen: () => {
-      const pairs = [[12,18,6],[15,20,5],[8,12,4],[21,14,7],[9,6,3],[16,24,8]];
+      const pairs = [[12,18,6],[15,20,5],[8,12,4],[21,14,7],[9,6,3],[16,24,8],[10,15,5],[20,30,10],[14,21,7],[18,27,9],[24,36,12],[25,10,5]];
       const [a,b,g] = pairs[rand(0,pairs.length-1)];
       return { q: `PGCD de ${a} et ${b} ?`, r: g };
     }
@@ -11904,9 +11904,9 @@ const CM_THEMES = {
   'Fonction inverse — évaluer': {
     emoji: '1/x', niveau: '2nde',
     gen: () => {
-      const divs = [1,2,3,4,6,12,-1,-2,-3,-4,-6,-12];
+      const divs = [1,2,3,4,6,8,12,24,-1,-2,-3,-4,-6,-8,-12,-24];
       const x = divs[rand(0,divs.length-1)];
-      return { q: `$f(x)=\\dfrac{12}{x}$. $f(${x}) = ?$`, r: 12/x };
+      return { q: `$f(x)=\\dfrac{24}{x}$. $f(${x}) = ?$`, r: 24/x };
     }
   },
   'Distance sur une droite graduée': {
@@ -11935,14 +11935,15 @@ const CM_THEMES = {
   'Dérivée de x² en un point': {
     emoji: "f'", niveau: '1ere',
     gen: () => {
-      const a = rand(1,10);
+      const a = rand(1,15);
       return { q: `$f(x)=x^2$. $f'(${a}) = ?$`, r: 2*a };
     }
   },
   'Valeurs remarquables (trigo)': {
     emoji: 'cos/sin', niveau: '1ere',
     gen: () => {
-      const pts = [['\\cos(0)',1],['\\sin(0)',0],['\\cos(\\pi)',-1],['\\sin(\\pi)',0],['\\cos(\\pi/2)',0],['\\sin(\\pi/2)',1]];
+      const pts = [['\\cos(0)',1],['\\sin(0)',0],['\\cos(\\pi)',-1],['\\sin(\\pi)',0],['\\cos(\\pi/2)',0],['\\sin(\\pi/2)',1],
+        ['\\cos(2\\pi)',1],['\\sin(2\\pi)',0],['\\cos(3\\pi/2)',0],['\\sin(3\\pi/2)',-1],['\\sin(-\\pi/2)',-1],['\\cos(-\\pi)',-1]];
       const [label,val] = pts[rand(0,pts.length-1)];
       return { q: `$${label} = ?$`, r: val };
     }
@@ -11960,9 +11961,17 @@ const CM_THEMES = {
   'Valeurs remarquables (ln/exp)': {
     emoji: 'ln/e', niveau: 'terminale',
     gen: () => {
-      const pts = [['\\ln(1)',0],['\\ln(e)',1],['e^0',1],['\\ln(e^2)',2]];
-      const [label,val] = pts[rand(0,pts.length-1)];
-      return { q: `$${label} = ?$`, r: val };
+      // "ln(e^n) = n" pour n entier quelconque (grand reservoir de questions
+      // distinctes, 30/10/2026 -- la version a liste figee de 4 valeurs
+      // produisait des series avec "e^0 = ?" repete jusqu'a 4 fois sur 10,
+      // signale par Jamal) + deux cas particuliers a connaitre par coeur.
+      if(rand(0,3)===0) {
+        const special = [['\\ln(1)',0],['e^0',1]];
+        const [label,val] = special[rand(0,1)];
+        return { q: `$${label} = ?$`, r: val };
+      }
+      let n = rand(-6,6);
+      return { q: `$\\ln(e^{${n}}) = ?$`, r: n };
     }
   },
   'Primitive — coefficient': {
@@ -11975,7 +11984,7 @@ const CM_THEMES = {
   "Dérivée de e^(ax) en 0": {
     emoji: 'e^x', niveau: 'terminale',
     gen: () => {
-      const a = rand(2,9);
+      const a = rand(2,15);
       return { q: `$f(x)=e^{${a}x}$. $f'(0) = ?$`, r: a };
     }
   },
@@ -11989,7 +11998,7 @@ const CM_THEMES = {
   'Combinaisons simples': {
     emoji: 'C(n,k)', niveau: 'terminale',
     gen: () => {
-      const triples = [[4,2,6],[5,2,10],[6,2,15],[4,1,4],[5,1,5],[3,1,3],[4,3,4],[5,3,10]];
+      const triples = [[4,2,6],[5,2,10],[6,2,15],[4,1,4],[5,1,5],[3,1,3],[4,3,4],[5,3,10],[6,3,20],[6,1,6],[6,4,15],[6,5,6],[7,1,7],[7,2,21],[3,2,3],[4,0,1]];
       const [n,k,val] = triples[rand(0,triples.length-1)];
       return { q: `Combien de façons de choisir ${k} éléments parmi ${n} ?`, r: val };
     }
@@ -12121,7 +12130,22 @@ function genererQuestionCM() {
 
 async function lancerCalcMental() {
   if(!cmConfig.themes.length) { alert('Choisis au moins un thème d\'abord'); return; }
-  cmQuestions = Array.from({length: cmConfig.nb}, () => genererQuestionCM());
+  // Anti-repetition (30/10/2026) : certains automatismes tirent dans une
+  // petite liste fixe de valeurs (ex. "Valeurs remarquables (ln/exp)" n'a que
+  // 4 questions possibles) -- un tirage aleatoire independant pour chaque
+  // question de la serie pouvait alors redonner la meme question plusieurs
+  // fois (vu par Jamal : "e^0 = ?" 4 fois sur 10). On regenere tant que la
+  // question (texte exact) a deja ete tiree dans cette serie, avec un plafond
+  // de tentatives pour ne jamais boucler indefiniment si le total de
+  // questions demandees depasse ce que les themes choisis peuvent produire.
+  cmQuestions = [];
+  const dejaVues = new Set();
+  for(let i = 0; i < cmConfig.nb; i++) {
+    let q, tentatives = 0;
+    do { q = genererQuestionCM(); tentatives++; } while(dejaVues.has(q.q) && tentatives < 40);
+    dejaVues.add(q.q);
+    cmQuestions.push(q);
+  }
   cmIndex = 0;
   cmReponseVisible = false;
   cmDashboard = {};
