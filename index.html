@@ -11760,6 +11760,178 @@ const CM_THEMES = {
     }
   },
 
+  // ── 6e : complements 2 (30/10/2026, croise avec mathsmentales.net 6e, 208 items, programme 2025) ──
+  'Encadrer un entier entre deux dizaines': {
+    emoji: '[..]', niveau: '6eme',
+    gen: () => {
+      const n = rand(100,999);
+      return { q: `Encadre ${n} entre deux dizaines consécutives : donne la dizaine inférieure.`, r: Math.floor(n/10)*10 };
+    }
+  },
+  'Chiffre des unités, dizaines, centaines': {
+    emoji: '#', niveau: '6eme',
+    gen: () => {
+      const n = rand(1000,99999);
+      const positions = [['unités',1],['dizaines',10],['centaines',100],['milliers',1000]];
+      const [nom,div] = positions[rand(0,3)];
+      return { q: `Quel est le chiffre des ${nom} dans ${n} ?`, r: Math.floor(n/div)%10 };
+    }
+  },
+  'Complément à 10, 100 ou 1000': {
+    emoji: '→10', niveau: '6eme',
+    gen: () => {
+      const base = [10,100,1000][rand(0,2)];
+      const n = rand(1,base-1);
+      return { q: `Complément de ${n} à ${base} ?`, r: base-n };
+    }
+  },
+  "Carrés parfaits (6e)": {
+    emoji: 'n²', niveau: '6eme',
+    gen: () => {
+      const n = rand(1,12);
+      return { q: `${n}² = ?`, r: n*n };
+    }
+  },
+  "Double, triple, quadruple, cube d'un entier": {
+    emoji: '×2×3×4', niveau: '6eme',
+    gen: () => {
+      const n = rand(1,12);
+      const ops = [['double',n*2],['triple',n*3],['quadruple',n*4],['cube',n**3]];
+      const [nom,val] = ops[rand(0,3)];
+      return { q: `Le ${nom} de ${n} ?`, r: val };
+    }
+  },
+  'Multiplications astucieuses (×11, ×9, ×19, ×21)': {
+    emoji: '×11', niveau: '6eme',
+    gen: () => {
+      const n = rand(2,50);
+      const m = [9,11,19,21,101][rand(0,4)];
+      return { q: `${n} × ${m} = ?`, r: n*m };
+    }
+  },
+  'Multiplier/diviser par 2, 5, 20, 50, 4, 25': {
+    emoji: '×5÷4', niveau: '6eme',
+    gen: () => {
+      const facteurs = [2,5,20,50,4,25];
+      const f = facteurs[rand(0,facteurs.length-1)];
+      if(rand(0,1)===0) { const n = rand(2,80); return { q: `${n} × ${f} = ?`, r: n*f }; }
+      const n = rand(2,40)*f;
+      return { q: `${n} ÷ ${f} = ?`, r: n/f };
+    }
+  },
+  'Division euclidienne (6e)': {
+    emoji: 'q,r', niveau: '6eme',
+    gen: () => {
+      const a = rand(10,99), b = rand(2,9);
+      if(rand(0,1)===0) return { q: `Division euclidienne de ${a} par ${b} : quotient ?`, r: Math.floor(a/b) };
+      return { q: `Division euclidienne de ${a} par ${b} : reste ?`, r: a%b };
+    }
+  },
+  'Critères de divisibilité (6e)': {
+    emoji: '÷?', niveau: '6eme',
+    gen: () => {
+      const n = rand(10,99), d = [2,3,5,9,10][rand(0,4)];
+      return { q: `${n} est-il divisible par ${d} ? (1=oui, 0=non)`, r: (n%d===0)?1:0 };
+    }
+  },
+  'Comparer des fractions (6e)': {
+    emoji: 'a/b', niveau: '6eme',
+    gen: () => {
+      const d = [2,4,5,10][rand(0,3)];
+      let n1 = rand(1,d*2), n2 = rand(1,d*2);
+      if(n1===n2) n2 += 1;
+      return { q: `Lequel est le plus grand : $\\dfrac{${n1}}{${d}}$ ou $\\dfrac{${n2}}{${d}}$ ? (réponds en décimal)`, r: Math.max(n1,n2)/d };
+    }
+  },
+  "Fraction de quantité (6e)": {
+    emoji: 'p/q×N', niveau: '6eme',
+    gen: () => {
+      const q = [2,3,4,5][rand(0,3)], p = rand(1,q-1), N = rand(1,6)*q;
+      return { q: `Calcule $\\dfrac{${p}}{${q}}$ de ${N}.`, r: p*N/q };
+    }
+  },
+  'Valeur décimale de fraction simple (6e)': {
+    emoji: '=déc.', niveau: '6eme',
+    gen: () => {
+      const d = [2,4,5,10,20,25,50][rand(0,6)], n = rand(1,d*2);
+      return { q: `$\\dfrac{${n}}{${d}}$ en écriture décimale ?`, r: n/d };
+    }
+  },
+  'Trouver la fraction égale (6e)': {
+    emoji: '=', niveau: '6eme',
+    gen: () => {
+      const a = rand(1,6), b = rand(a+1,9), k = rand(2,5);
+      return { q: `$\\dfrac{${a}}{${b}} = \\dfrac{?}{${b*k}}$`, r: a*k };
+    }
+  },
+  'Simplifier une fraction (6e)': {
+    emoji: '/', niveau: '6eme',
+    gen: () => {
+      const pairs = [[1,2],[1,3],[2,3],[1,4],[3,4],[1,5],[2,5]];
+      const [p,q] = pairs[rand(0,pairs.length-1)], k = rand(2,5);
+      return { q: `Simplifie $\\dfrac{${p*k}}{${q*k}}$ : dénominateur simplifié ?`, r: q };
+    }
+  },
+  'Comparer des décimaux (6e)': {
+    emoji: '<>', niveau: '6eme',
+    gen: () => {
+      const a = Math.round((rand(0,50)+rand(0,99)/100)*100)/100;
+      let b = Math.round((rand(0,50)+rand(0,99)/100)*100)/100;
+      if(a===b) b += 0.1;
+      return { q: `Quel est le plus grand : ${String(a).replace('.',',')} ou ${String(b).replace('.',',')} ?`, r: Math.max(a,b) };
+    }
+  },
+  'Aires des figures usuelles (6e)': {
+    emoji: '□', niveau: '6eme',
+    gen: () => {
+      if(rand(0,1)===0) { const L = rand(2,12), l = rand(2,12); return { q: `Aire d'un rectangle $${L}\\,$cm $\\times$ $${l}\\,$cm ?`, r: L*l }; }
+      const c = rand(2,12);
+      return { q: `Aire d'un carré de côté $${c}\\,$cm ?`, r: c*c };
+    }
+  },
+  'Périmètre des figures usuelles (6e)': {
+    emoji: '⬭', niveau: '6eme',
+    gen: () => {
+      if(rand(0,1)===0) { const L = rand(2,15), l = rand(2,15); return { q: `Périmètre d'un rectangle $${L}\\,$cm $\\times$ $${l}\\,$cm ?`, r: 2*(L+l) }; }
+      const c = rand(2,20);
+      return { q: `Périmètre d'un carré de côté $${c}\\,$cm ?`, r: 4*c };
+    }
+  },
+  'Conversions de longueurs (6e)': {
+    emoji: 'm/cm', niveau: '6eme',
+    gen: () => {
+      const options = [
+        () => { const v = rand(1,30); return [`${v} m en cm`, v*100]; },
+        () => { const v = rand(1,30); return [`${v} cm en mm`, v*10]; },
+        () => { const v = rand(1,20); return [`${v} km en m`, v*1000]; },
+      ];
+      const [label, val] = options[rand(0,options.length-1)]();
+      return { q: `Convertis ${label}.`, r: val };
+    }
+  },
+  'Conversions de durées (6e)': {
+    emoji: '⏱', niveau: '6eme',
+    gen: () => {
+      if(rand(0,1)===0) { const h = rand(1,8); return { q: `Convertis ${h} heure${h>1?'s':''} en minutes.`, r: h*60 }; }
+      const min = rand(1,10);
+      return { q: `Convertis ${min} minute${min>1?'s':''} en secondes.`, r: min*60 };
+    }
+  },
+  "Calculer un angle (droit, plat, opposés)": {
+    emoji: '∠', niveau: '6eme',
+    gen: () => {
+      const base = [90,180][rand(0,1)], a = rand(10,base-10);
+      return { q: `Un angle de ${a}° complète un angle ${base===90?'droit':'plat'} ($${base}°$). Mesure de l'angle manquant ?`, r: base-a };
+    }
+  },
+  'Volume par comptage de cubes (6e)': {
+    emoji: '🧊', niveau: '6eme',
+    gen: () => {
+      const l = rand(2,6), larg = rand(2,6), h = rand(2,6);
+      return { q: `Assemblage de $${l}\\times${larg}\\times${h}$ cubes de $1\\,$cm³. Volume total (cm³) ?`, r: l*larg*h };
+    }
+  },
+
   // ── 5e : complements ──
   'Relatifs — addition': {
     emoji: '±', niveau: '5eme',
