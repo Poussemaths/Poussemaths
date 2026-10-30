@@ -11638,6 +11638,10 @@ let cmDashboard = {};
 
 const CM_NIVEAUX_ORDRE = ['6eme','5eme','4eme','3eme','2nde','1ere','terminale'];
 const cmFmt = x => x<0 ? `(${x})` : `${x}`;
+const cmGcd = (a,b) => b===0 ? a : cmGcd(b,a%b);
+const cmIsPrime = n => { if(n<2) return false; for(let i=2;i*i<=n;i++) if(n%i===0) return false; return true; };
+const cmLargestPrimeFactor = n => { let last=1; for(let d=2; d<=n; d++){ while(n%d===0){ last=d; n=Math.floor(n/d); } } return last; };
+const cmFmtRoot = r => r<0 ? `x + ${-r}` : `x - ${r}`;
 
 const CM_THEMES = {
   'Tables de multiplication': {
@@ -12001,6 +12005,399 @@ const CM_THEMES = {
       const triples = [[4,2,6],[5,2,10],[6,2,15],[4,1,4],[5,1,5],[3,1,3],[4,3,4],[5,3,10],[6,3,20],[6,1,6],[6,4,15],[6,5,6],[7,1,7],[7,2,21],[3,2,3],[4,0,1]];
       const [n,k,val] = triples[rand(0,triples.length-1)];
       return { q: `Combien de façons de choisir ${k} éléments parmi ${n} ?`, r: val };
+    }
+  },
+
+  // ─────────────────────────────────────────────────────────
+  //  3e : couverture complete (30/10/2026), construite a partir
+  //  du catalogue reel mathsmentales.net niveau 3e (205 items,
+  //  transmis par Jamal) -- chaque grande famille de competences
+  //  reprise ici au format "reponse numerique courte". Les items
+  //  visuels/algorithmiques (patrons, perspective cavaliere, code
+  //  a executer...) restent hors calcul mental, deja couverts par
+  //  le catalogue d'exercices classique.
+  // ─────────────────────────────────────────────────────────
+  'Comparer des relatifs': {
+    emoji: '><', niveau: '3eme',
+    gen: () => {
+      let a = rand(-30,30), b = rand(-30,30);
+      if(a===b) b += 1;
+      return { q: `Quel est le plus grand : ${cmFmt(a)} ou ${cmFmt(b)} ?`, r: Math.max(a,b) };
+    }
+  },
+  'Arrondir un décimal au dixième': {
+    emoji: '≈', niveau: '3eme',
+    gen: () => {
+      const e = rand(0,99), d1 = rand(0,9), d2 = rand(0,9);
+      const n = Math.round((e + d1/10 + d2/100)*100)/100;
+      return { q: `Arrondis ${String(n).replace('.',',')} au dixième.`, r: Math.round(n*10)/10 };
+    }
+  },
+  'Comparer des fractions': {
+    emoji: 'a/b', niveau: '3eme',
+    gen: () => {
+      let p1=rand(1,9), q1=rand(p1+1,12), p2=rand(1,9), q2=rand(p2+1,12);
+      if(q1===q2) q2 += 1;
+      let v1 = Math.round(p1/q1*100)/100, v2 = Math.round(p2/q2*100)/100;
+      if(v1===v2) { p2 += 1; v2 = Math.round(p2/q2*100)/100; }
+      return { q: `Lequel est le plus grand : $\\dfrac{${p1}}{${q1}}$ ou $\\dfrac{${p2}}{${q2}}$ ? (réponds en décimal)`, r: Math.max(v1,v2) };
+    }
+  },
+  'Multiple ou diviseur ?': {
+    emoji: '∣', niveau: '3eme',
+    gen: () => {
+      const b = rand(2,12), k = rand(2,15);
+      let a = b*k;
+      if(rand(0,1)===0) a += rand(1,b-1);
+      return { q: `${a} est-il un multiple de ${b} ? (1=oui, 0=non)`, r: (a%b===0)?1:0 };
+    }
+  },
+  'Écriture scientifique — exposant': {
+    emoji: '×10^', niveau: '3eme',
+    gen: () => {
+      const pts = [['45\\,000',4],['320',2],['7',0],['0{,}0032',-3],['1\\,500',3],['62',1],['9',0],['0{,}08',-2],['250\\,000',5],['0{,}00015',-4],['73',1],['4',0],['8\\,200',3],['0{,}006',-3]];
+      const [label,e] = pts[rand(0,pts.length-1)];
+      return { q: `$${label}$ s'écrit $m\\times10^n$ avec $1\\leq m<10$. Quel est $n$ ?`, r: e };
+    }
+  },
+  "Inverse d'un nombre": {
+    emoji: '1/n', niveau: '3eme',
+    gen: () => {
+      const options = [2,4,5,8,10,20,25,50];
+      const n = options[rand(0,options.length-1)];
+      return { q: `Quel est l'inverse de ${n} ? (réponds en décimal)`, r: 1/n };
+    }
+  },
+  "Opposé d'un nombre": {
+    emoji: '-n', niveau: '3eme',
+    gen: () => {
+      let n = rand(-50,50); if(n===0) n=7;
+      return { q: `Quel est l'opposé de ${cmFmt(n)} ?`, r: -n };
+    }
+  },
+  "Partie entière d'une fraction": {
+    emoji: '⌊⌋', niveau: '3eme',
+    gen: () => {
+      const q = rand(2,9), p = rand(q+1,q*5);
+      return { q: `Partie entière de $\\dfrac{${p}}{${q}}$ ?`, r: Math.floor(p/q) };
+    }
+  },
+  'Simplifier une fraction': {
+    emoji: '/', niveau: '3eme',
+    gen: () => {
+      const pairs = [[1,2],[2,3],[1,3],[3,4],[1,4],[2,5],[3,5],[1,5],[2,7],[3,7],[1,6],[5,6]];
+      const [p,q] = pairs[rand(0,pairs.length-1)];
+      const k = rand(2,6);
+      return { q: `Simplifie $\\dfrac{${p*k}}{${q*k}}$ : quel est le dénominateur simplifié ?`, r: q };
+    }
+  },
+  'Trouver la fraction égale': {
+    emoji: '=', niveau: '3eme',
+    gen: () => {
+      const a = rand(1,9), b = rand(a+1,12), k = rand(2,6);
+      return { q: `$\\dfrac{${a}}{${b}} = \\dfrac{?}{${b*k}}$`, r: a*k };
+    }
+  },
+  'Critères de divisibilité': {
+    emoji: '÷?', niveau: '3eme',
+    gen: () => {
+      const n = rand(100,999), d = [2,3,4,5,6,9,10][rand(0,6)];
+      return { q: `${n} est-il divisible par ${d} ? (1=oui, 0=non)`, r: (n%d===0)?1:0 };
+    }
+  },
+  'Décomposer en facteurs premiers': {
+    emoji: '×p', niveau: '3eme',
+    gen: () => {
+      const n = rand(12,99);
+      return { q: `Quel est le plus grand facteur premier de ${n} ?`, r: cmLargestPrimeFactor(n) };
+    }
+  },
+  'Nombre premier ?': {
+    emoji: 'p?', niveau: '3eme',
+    gen: () => {
+      const n = rand(2,97);
+      return { q: `${n} est-il un nombre premier ? (1=oui, 0=non)`, r: cmIsPrime(n)?1:0 };
+    }
+  },
+  "Cube d'un entier": {
+    emoji: 'n³', niveau: '3eme',
+    gen: () => {
+      const n = rand(1,10);
+      return { q: `${n}³ = ?`, r: n**3 };
+    }
+  },
+  "Fraction d'une quantité": {
+    emoji: 'p/q×N', niveau: '3eme',
+    gen: () => {
+      const p = rand(1,6), q = rand(p+1,10), N = rand(1,8)*q;
+      return { q: `Calcule $\\dfrac{${p}}{${q}}$ de ${N}.`, r: p*N/q };
+    }
+  },
+  'Produit de fractions': {
+    emoji: '×', niveau: '3eme',
+    gen: () => {
+      const p = rand(1,9), qd = rand(p+1,12), rr = rand(1,9);
+      return { q: `Calcule $\\dfrac{${p}}{${qd}}\\times\\dfrac{${qd}}{${rr}}$ (réponds en décimal).`, r: Math.round(p/rr*100)/100 };
+    }
+  },
+  'Quotient de fractions': {
+    emoji: '÷', niveau: '3eme',
+    gen: () => {
+      const p = rand(1,9), qd = rand(1,9), s = rand(p+1,12);
+      return { q: `Calcule $\\dfrac{${p}}{${qd}} \\div \\dfrac{${p}}{${s}}$ (réponds en décimal).`, r: Math.round(s/qd*100)/100 };
+    }
+  },
+  'Programme de calcul': {
+    emoji: '→f(x)', niveau: '3eme',
+    gen: () => {
+      const a = rand(2,9), b = rand(-10,10), x = rand(1,10);
+      return { q: `Programme : multiplier par ${a} puis ${b>=0?'ajouter':'soustraire'} ${Math.abs(b)}. Pour $x=${x}$, résultat ?`, r: a*x+b };
+    }
+  },
+  'Développer (distributivité)': {
+    emoji: 'k(x+a)', niveau: '3eme',
+    gen: () => {
+      const k = rand(2,9), a = rand(2,9), b = rand(1,9);
+      return { q: `Développe $${k}(${a}x+${b})$ : coefficient de $x$ ?`, r: k*a };
+    }
+  },
+  'Factoriser une somme': {
+    emoji: 'pgcd', niveau: '3eme',
+    gen: () => {
+      const k = rand(2,9), a = rand(1,9), b = rand(1,9);
+      return { q: `Factorise $${k*a}x+${k*b}$ : quel est le plus grand facteur commun ?`, r: cmGcd(k*a,k*b) };
+    }
+  },
+  'Réduire une expression': {
+    emoji: 'ax+bx', niveau: '3eme',
+    gen: () => {
+      const a = rand(3,9), b = rand(1,a-1);
+      if(rand(0,1)===0) return { q: `Réduis $${a}x+${b}x$ : coefficient de $x$ ?`, r: a+b };
+      return { q: `Réduis $${a}x-${b}x$ : coefficient de $x$ ?`, r: a-b };
+    }
+  },
+  'Résoudre une équation simple': {
+    emoji: 'ax=b', niveau: '3eme',
+    gen: () => {
+      if(rand(0,1)===0) {
+        const a = rand(2,9); let x = rand(-10,10); if(x===0) x=3;
+        return { q: `Résous : $${a}x = ${a*x}$`, r: x };
+      }
+      const a = rand(-20,20), x = rand(-15,15);
+      return { q: `Résous : $x + ${cmFmt(a)} = ${x+a}$`, r: x };
+    }
+  },
+  'Résoudre une équation du premier degré': {
+    emoji: 'ax+b=c', niveau: '3eme',
+    gen: () => {
+      const a = rand(2,9), b = rand(-20,20); let x = rand(-10,10); if(x===0) x=4;
+      const c = a*x+b;
+      return { q: `Résous : $${a}x ${b>=0?'+':'−'} ${Math.abs(b)} = ${c}$`, r: x };
+    }
+  },
+  'Équation produit nul ou x²=a': {
+    emoji: '(x-a)(x-b)', niveau: '3eme',
+    gen: () => {
+      if(rand(0,1)===0) {
+        const r1 = rand(-10,-1), r2 = rand(1,10);
+        return { q: `$(${cmFmtRoot(r1)})(${cmFmtRoot(r2)}) = 0$. Donne la plus grande solution.`, r: Math.max(r1,r2) };
+      }
+      const n = rand(2,12);
+      return { q: `$x^2 = ${n*n}$. Donne la solution positive.`, r: n };
+    }
+  },
+  'Tester une égalité (solution ?)': {
+    emoji: '=?', niveau: '3eme',
+    gen: () => {
+      const a = rand(2,9), b = rand(-15,15), xTest = rand(-10,10);
+      const cVrai = a*xTest+b;
+      const estVrai = rand(0,1)===1;
+      const c = estVrai ? cVrai : cVrai + (rand(1,5) * (rand(0,1)===0?1:-1));
+      return { q: `$x=${xTest}$ est-il solution de $${a}x ${b>=0?'+':'−'} ${Math.abs(b)} = ${c}$ ? (1=oui, 0=non)`, r: estVrai?1:0 };
+    }
+  },
+  "Moyenne d'une petite série": {
+    emoji: 'x̄', niveau: '3eme',
+    gen: () => {
+      const mean = rand(5,15);
+      if(rand(0,1)===0) {
+        const d = rand(1,5);
+        return { q: `Série : ${mean-d}, ${mean}, ${mean+d}. Moyenne ?`, r: mean };
+      }
+      const d1 = rand(1,5), d2 = rand(1,5);
+      const vals = [mean-d1, mean-d2, mean+d1, mean+d2];
+      return { q: `Série : ${vals.join(', ')}. Moyenne ?`, r: mean };
+    }
+  },
+  'Fréquence simple': {
+    emoji: 'f', niveau: '3eme',
+    gen: () => {
+      const total = [20,25,40,50][rand(0,3)], part = rand(1,total-1);
+      return { q: `Sur ${total} réponses, ${part} sont justes. Fréquence des bonnes réponses (décimal) ?`, r: Math.round(part/total*100)/100 };
+    }
+  },
+  'Exprimer une proportion (%)': {
+    emoji: '%', niveau: '3eme',
+    gen: () => {
+      const total = [4,5,10,20,25,50][rand(0,5)], a = rand(1,total-1);
+      return { q: `${a} sur ${total}, quel pourcentage ?`, r: a/total*100 };
+    }
+  },
+  'Antécédent par une fonction affine': {
+    emoji: 'f⁻¹', niveau: '3eme',
+    gen: () => {
+      const a = rand(2,9), b = rand(-10,10), x0 = rand(-10,10);
+      const y = a*x0+b;
+      return { q: `$f(x)=${a}x${b>=0?'+':'−'}${Math.abs(b)}$. Antécédent de $${y}$ par $f$ ?`, r: x0 };
+    }
+  },
+  "Coefficient d'une fonction affine": {
+    emoji: '/', niveau: '3eme',
+    gen: () => {
+      let m = rand(-9,9); if(m===0) m=3;
+      const x1 = rand(-5,5), y1 = rand(-10,10), dx = rand(1,4);
+      const x2 = x1+dx, y2 = y1+m*dx;
+      return { q: `A(${x1};${y1}), B(${x2};${y2}). Coefficient directeur de $(AB)$ ?`, r: m };
+    }
+  },
+  'Aires des figures usuelles': {
+    emoji: '□', niveau: '3eme',
+    gen: () => {
+      const branche = rand(0,2);
+      if(branche===0) { const L = rand(2,15), l = rand(2,15); return { q: `Aire d'un rectangle $${L}\\,$cm $\\times$ $${l}\\,$cm ?`, r: L*l }; }
+      if(branche===1) { const base = rand(2,15), h = 2*rand(1,10); return { q: `Aire d'un triangle de base $${base}\\,$cm et hauteur $${h}\\,$cm ?`, r: (base*h)/2 }; }
+      const ray = rand(2,10);
+      return { q: `Aire d'un disque de rayon $${ray}\\,$cm (arrondi à l'unité, $\\pi\\approx3{,}14$) ?`, r: Math.round(3.14*ray*ray) };
+    }
+  },
+  'Périmètre des figures usuelles': {
+    emoji: '⬭', niveau: '3eme',
+    gen: () => {
+      const branche = rand(0,2);
+      if(branche===0) { const L = rand(2,15), l = rand(2,15); return { q: `Périmètre d'un rectangle $${L}\\,$cm $\\times$ $${l}\\,$cm ?`, r: 2*(L+l) }; }
+      if(branche===1) { const c = rand(2,20); return { q: `Périmètre d'un carré de côté $${c}\\,$cm ?`, r: 4*c }; }
+      const ray = rand(2,10);
+      return { q: `Périmètre d'un cercle de rayon $${ray}\\,$cm (arrondi à l'unité, $\\pi\\approx3{,}14$) ?`, r: Math.round(2*3.14*ray) };
+    }
+  },
+  'Conversions de durées': {
+    emoji: '⏱', niveau: '3eme',
+    gen: () => {
+      const branche = rand(0,2);
+      if(branche===0) { const h = rand(1,10); return { q: `Convertis ${h} heure${h>1?'s':''} en minutes.`, r: h*60 }; }
+      if(branche===1) { const min = rand(1,15)*60; return { q: `Convertis ${min} minutes en heures.`, r: min/60 }; }
+      const min = rand(1,10);
+      return { q: `Convertis ${min} minute${min>1?'s':''} en secondes.`, r: min*60 };
+    }
+  },
+  'Grandeurs composées — vitesse': {
+    emoji: 'km/h', niveau: '3eme',
+    gen: () => {
+      const t = rand(1,5), v = rand(10,100), d = v*t;
+      return { q: `Distance $${d}\\,$km en $${t}\\,$h. Vitesse moyenne (km/h) ?`, r: v };
+    }
+  },
+  'Volumes de prismes et pyramides': {
+    emoji: '△', niveau: '3eme',
+    gen: () => {
+      if(rand(0,1)===0) { const aire = rand(5,30), h = rand(2,10); return { q: `Prisme droit : aire de la base $${aire}\\,$cm², hauteur $${h}\\,$cm. Volume (cm³) ?`, r: aire*h }; }
+      const aire = rand(2,10)*3, h = rand(2,9);
+      return { q: `Pyramide : aire de la base $${aire}\\,$cm², hauteur $${h}\\,$cm. Volume (cm³) ?`, r: (aire*h)/3 };
+    }
+  },
+  "Coefficient d'agrandissement ou de réduction": {
+    emoji: '×k', niveau: '3eme',
+    gen: () => {
+      const agr = [2,3,4,5,10][rand(0,4)];
+      const options = [[2,agr],[0.5,2],[0.25,4],[0.2,5],[0.1,10]];
+      const [k, mult] = rand(0,1)===0 ? [agr, 1] : options[rand(1,4)];
+      const L = rand(1,10)*mult;
+      return { q: `${k>=1?'Un agrandissement':'Une réduction'} de coefficient ${String(k).replace('.',',')}. Longueur initiale $${L}\\,$cm. Nouvelle longueur (cm) ?`, r: Math.round(L*k*100)/100 };
+    }
+  },
+  'Pythagore — triangle rectangle ou non': {
+    emoji: '△?', niveau: '3eme',
+    gen: () => {
+      const triples = [[3,4,5],[6,8,10],[5,12,13],[8,15,17],[9,12,15],[7,24,25]];
+      const [a,b,c] = triples[rand(0,triples.length-1)];
+      if(rand(0,1)===0) return { q: `Côtés $${a}$, $${b}$, $${c}$. Triangle rectangle ? (1=oui, 0=non)`, r: 1 };
+      const cFaux = c + rand(1,3);
+      return { q: `Côtés $${a}$, $${b}$, $${cFaux}$. Triangle rectangle ? (1=oui, 0=non)`, r: 0 };
+    }
+  },
+  "Mesure du 3e angle d'un triangle": {
+    emoji: '△°', niveau: '3eme',
+    gen: () => {
+      const a = rand(20,120), b = rand(20, 150-a);
+      return { q: `Un triangle a deux angles de $${a}°$ et $${b}°$. Troisième angle ?`, r: 180-a-b };
+    }
+  },
+  'Théorème de Thalès (calculer une longueur)': {
+    emoji: '📐', niveau: '3eme',
+    gen: () => {
+      const AD = rand(2,9), s = rand(2,5), AB = AD*s, AE = rand(2,9);
+      return { q: `$DE\\parallel BC$. $AD=${AD}$, $AB=${AB}$, $AE=${AE}$. Calcule $AC$.`, r: AE*s };
+    }
+  },
+  'Thalès — droites parallèles ?': {
+    emoji: '∥?', niveau: '3eme',
+    gen: () => {
+      const AD = rand(2,9), s = rand(2,5), AB = AD*s, AE = rand(2,9), ACvrai = AE*s;
+      if(rand(0,1)===0) return { q: `$AD=${AD}$, $AB=${AB}$, $AE=${AE}$, $AC=${ACvrai}$. $(DE)\\parallel(BC)$ ? (1=oui, 0=non)`, r: 1 };
+      return { q: `$AD=${AD}$, $AB=${AB}$, $AE=${AE}$, $AC=${ACvrai+rand(1,3)}$. $(DE)\\parallel(BC)$ ? (1=oui, 0=non)`, r: 0 };
+    }
+  },
+  'Trigonométrie — cosinus, sinus, tangente': {
+    emoji: 'cos/sin/tan', niveau: '3eme',
+    gen: () => {
+      const triples = [[3,4,5],[6,8,10],[5,12,13],[8,15,17],[9,12,15],[7,24,25]];
+      const [a,b,c] = triples[rand(0,triples.length-1)];
+      const type = rand(0,2);
+      if(type===0) return { q: `Triangle rectangle, côté adjacent $${a}$, hypoténuse $${c}$. $\\cos$ de l'angle (décimal) ?`, r: Math.round(a/c*100)/100 };
+      if(type===1) return { q: `Triangle rectangle, côté opposé $${b}$, hypoténuse $${c}$. $\\sin$ de l'angle (décimal) ?`, r: Math.round(b/c*100)/100 };
+      return { q: `Triangle rectangle, côté opposé $${b}$, côté adjacent $${a}$. $\\tan$ de l'angle (décimal) ?`, r: Math.round(b/a*100)/100 };
+    }
+  },
+  'Convertir des grandeurs simples': {
+    emoji: 'cm/m', niveau: '3eme',
+    gen: () => {
+      const options = [
+        () => { const v = rand(1,50); return [`${v} m en cm`, v*100]; },
+        () => { const v = rand(1,50); return [`${v} cm en mm`, v*10]; },
+        () => { const v = rand(1,20); return [`${v} kg en g`, v*1000]; },
+        () => { const v = rand(1,20); return [`${v} L en mL`, v*1000]; },
+        () => { const v = rand(1,20); return [`${v} km en m`, v*1000]; },
+      ];
+      const [label, val] = options[rand(0,options.length-1)]();
+      return { q: `Convertis ${label}.`, r: val };
+    }
+  },
+  'Convertir des aires et des volumes': {
+    emoji: 'cm²/m²', niveau: '3eme',
+    gen: () => {
+      const options = [
+        () => { const v = rand(1,50); return [`${v} cm² en mm²`, v*100]; },
+        () => { const v = rand(1,20); return [`${v} m² en cm²`, v*10000]; },
+        () => { const v = rand(1,20); return [`${v} m³ en L`, v*1000]; },
+        () => { const v = rand(1,30); return [`${v} cm³ en mL`, v]; },
+      ];
+      const [label, val] = options[rand(0,options.length-1)]();
+      return { q: `Convertis ${label}.`, r: val };
+    }
+  },
+  'Puissance de relatif': {
+    emoji: '(-n)^k', niveau: '3eme',
+    gen: () => {
+      let base = rand(2,5); if(rand(0,1)===0) base = -base;
+      const exp = rand(2,4);
+      return { q: `$(${base})^${exp} = ?$`, r: Math.pow(base,exp) };
+    }
+  },
+  'Puissances de 2': {
+    emoji: '2^n', niveau: '3eme',
+    gen: () => {
+      const exp = rand(0,10);
+      return { q: `$2^{${exp}} = ?$`, r: Math.pow(2,exp) };
     }
   },
 };
