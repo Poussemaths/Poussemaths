@@ -11704,7 +11704,7 @@ const CM_THEMES = {
     emoji: '⚡', niveau: '4eme',
     gen: () => {
       const exp = rand(1,9);
-      return { q: `10^${exp} = ?`, r: Math.pow(10,exp) };
+      return { q: `$10^{${exp}} = ?$`, r: Math.pow(10,exp) };
     }
   },
   'Racines carrées': {
@@ -12144,7 +12144,7 @@ const CM_THEMES = {
     gen: () => {
       const opts = [[2,2],[2,3],[2,4],[2,5],[2,6],[2,7],[3,2],[3,3],[3,4],[3,5],[5,2],[5,3],[5,4],[4,2],[4,3],[10,2],[10,3]];
       const [base,exp] = opts[rand(0,opts.length-1)];
-      return { q: `${base}^${exp} = ?`, r: Math.pow(base,exp) };
+      return { q: `$${base}^{${exp}} = ?$`, r: Math.pow(base,exp) };
     }
   },
   'Division euclidienne — quotient': {
