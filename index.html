@@ -11921,6 +11921,91 @@ const CM_THEMES = {
     }
   },
 
+  // ── 2nde : complements (30/10/2026, couverture programme officiel) ──
+  'Colinéarité de vecteurs — déterminant': {
+    emoji: 'det', niveau: '2nde',
+    gen: () => {
+      let a = rand(-6,6); if(a===0) a=2;
+      let b = rand(-6,6); if(b===0) b=3;
+      let c = rand(-6,6); if(c===0) c=1;
+      let d = rand(-6,6); if(d===0) d=4;
+      return { q: `$\\vec{u}(${a}\\,;\\,${b})$, $\\vec{v}(${c}\\,;\\,${d})$. Déterminant $ad-bc$ ?`, r: a*d-b*c };
+    }
+  },
+  "Milieu d'un segment — abscisse": {
+    emoji: 'M', niveau: '2nde',
+    gen: () => {
+      const xA = rand(-10,10), yA = rand(-10,10), xB = xA + 2*rand(-5,5), yB = rand(-10,10);
+      return { q: `A(${xA};${yA}), B(${xB};${yB}). Abscisse du milieu de $[AB]$ ?`, r: (xA+xB)/2 };
+    }
+  },
+  'Distance entre deux points': {
+    emoji: 'AB', niveau: '2nde',
+    gen: () => {
+      const triples = [[3,4,5],[6,8,10],[5,12,13],[8,15,17],[9,12,15]];
+      const [dx,dy,c] = triples[rand(0,triples.length-1)];
+      const xA = rand(-8,8), yA = rand(-8,8);
+      const sx = rand(0,1)===0?1:-1, sy = rand(0,1)===0?1:-1;
+      const xB = xA+dx*sx, yB = yA+dy*sy;
+      return { q: `A(${xA};${yA}), B(${xB};${yB}). Distance $AB$ ?`, r: c };
+    }
+  },
+  'Construire une équation de droite': {
+    emoji: 'y=mx+p', niveau: '2nde',
+    gen: () => {
+      let a = rand(-9,9); if(a===0) a=2;
+      const x0 = rand(-8,8), y0 = rand(-15,15);
+      return { q: `La droite passe par A(${x0};${y0}) et a une pente de ${a}. Ordonnée à l'origine ?`, r: y0-a*x0 };
+    }
+  },
+  'Intervalles — appartenance': {
+    emoji: '∈', niveau: '2nde',
+    gen: () => {
+      const bInf = rand(-15,5), bSup = bInf + rand(3,10);
+      let x = rand(bInf-5, bSup+5);
+      return { q: `$x\\in[${bInf}\\,;\\,${bSup}]$. $x=${x}$ appartient-il à cet intervalle ? (1=oui, 0=non)`, r: (x>=bInf && x<=bSup)?1:0 };
+    }
+  },
+  'Résoudre une inéquation simple': {
+    emoji: 'ax+b>c', niveau: '2nde',
+    gen: () => {
+      let a = rand(2,9); if(rand(0,1)===0) a=-a;
+      const b = rand(-15,15); let x0 = rand(-10,10); if(x0===0) x0=3;
+      const c = a*x0+b;
+      return { q: `Résous : $${a}x ${b>=0?'+':'−'} ${Math.abs(b)} > ${c}$. Donne la valeur-frontière (borne) de $x$.`, r: x0 };
+    }
+  },
+  'Fréquence conditionnelle (tableau croisé)': {
+    emoji: 'f|', niveau: '2nde',
+    gen: () => {
+      const total = 100, sousPop = rand(20,80), partiel = rand(1,sousPop);
+      return { q: `Sur ${total} personnes, ${sousPop} ont un caractère A, dont ${partiel} ont aussi le caractère B. Fréquence de B parmi A (décimal) ?`, r: Math.round(partiel/sousPop*100)/100 };
+    }
+  },
+  'Proportion de proportion': {
+    emoji: '%×%', niveau: '2nde',
+    gen: () => {
+      const p1 = [10,20,25,40,50,60,75,80][rand(0,7)], p2 = [10,20,25,40,50,60,75,80][rand(0,7)];
+      return { q: `${p1}\\% des ${p2}\\%$ d'une population représentent quel pourcentage de la population totale ?`, r: Math.round(p1*p2/100*100)/100 };
+    }
+  },
+  "Variations d'une fonction affine": {
+    emoji: '↗↘', niveau: '2nde',
+    gen: () => {
+      let a = rand(-9,9); if(a===0) a=3;
+      const b = rand(-10,10);
+      return { q: `$f(x)=${a}x${b>=0?'+':'−'}${Math.abs(b)}$. $f$ est-elle croissante ? (1=oui, 0=non)`, r: a>0?1:0 };
+    }
+  },
+  'Probabilités — réunion': {
+    emoji: '∪', niveau: '2nde',
+    gen: () => {
+      const pA = [0.2,0.3,0.4,0.5,0.6][rand(0,4)], pB = [0.1,0.2,0.3,0.4][rand(0,3)];
+      const pInter = Math.round(Math.min(pA,pB)*0.5*100)/100;
+      return { q: `$P(A)=${pA}$, $P(B)=${pB}$, $P(A\\cap B)=${pInter}$. $P(A\\cup B) = ?$`, r: Math.round((pA+pB-pInter)*100)/100 };
+    }
+  },
+
   // ── 1ere Spe : nouveau niveau dedie ──
   'Suites arithmétiques': {
     emoji: 'u+r', niveau: '1ere',
@@ -12005,6 +12090,76 @@ const CM_THEMES = {
       const triples = [[4,2,6],[5,2,10],[6,2,15],[4,1,4],[5,1,5],[3,1,3],[4,3,4],[5,3,10],[6,3,20],[6,1,6],[6,4,15],[6,5,6],[7,1,7],[7,2,21],[3,2,3],[4,0,1]];
       const [n,k,val] = triples[rand(0,triples.length-1)];
       return { q: `Combien de façons de choisir ${k} éléments parmi ${n} ?`, r: val };
+    }
+  },
+
+  // ── Terminale Spe : complements (30/10/2026, couverture programme) ──
+  'Limite de suite géométrique — convergence': {
+    emoji: 'qⁿ', niveau: 'terminale',
+    gen: () => {
+      const options = [0.2,0.5,0.8,-0.3,-0.6,1.2,1.5,-1.4,2,-2,0.9,-0.9];
+      const q = options[rand(0,options.length-1)];
+      return { q: `$(u_n)$ avec $u_n=${q}^n$. La suite converge-t-elle vers $0$ ? (1=oui, 0=non)`, r: Math.abs(q)<1 ? 1 : 0 };
+    }
+  },
+  'Dérivée de fonction composée (ax+b)²': {
+    emoji: "(u²)'", niveau: 'terminale',
+    gen: () => {
+      const a = rand(2,6), b = rand(1,9);
+      return { q: `$f(x)=(${a}x+${b})^2$. $f'(0) = ?$`, r: 2*a*b };
+    }
+  },
+  "Convexité — signe de f''": {
+    emoji: "f''", niveau: 'terminale',
+    gen: () => {
+      let a = rand(-6,6); if(a===0) a=2;
+      const b = rand(-10,10), x0 = rand(-10,10);
+      return { q: `$f''(x)=${a}x${b>=0?'+':'−'}${Math.abs(b)}$. $f$ est-elle convexe en $x=${x0}$ (c'est-à-dire $f''(${x0})>0$) ? (1=oui, 0=non)`, r: (a*x0+b)>0 ? 1 : 0 };
+    }
+  },
+  'Calcul intégral — aire triangulaire': {
+    emoji: '∫', niveau: 'terminale',
+    gen: () => {
+      const a = rand(1,6), b = rand(2,10);
+      return { q: `$f(x)=${a}x$ sur $[0\\,;\\,${b}]$. Aire sous la courbe ($\\int_0^{${b}} ${a}x\\,dx$) ?`, r: Math.round(0.5*a*b*b*100)/100 };
+    }
+  },
+  "Géométrie dans l'espace — coordonnées d'un vecteur": {
+    emoji: '3D', niveau: 'terminale',
+    gen: () => {
+      const xA = rand(-8,8), yA = rand(-8,8), zA = rand(-8,8);
+      const xB = rand(-8,8), yB = rand(-8,8), zB = rand(-8,8);
+      return { q: `$A(${xA}\\,;\\,${yA}\\,;\\,${zA})$, $B(${xB}\\,;\\,${yB}\\,;\\,${zB})$. Abscisse du vecteur $\\overrightarrow{AB}$ ?`, r: xB-xA };
+    }
+  },
+  'Suites — limite infinie (sens de variation)': {
+    emoji: '→∞', niveau: 'terminale',
+    gen: () => {
+      let a = rand(-9,9); if(a===0) a=3;
+      const b = rand(-10,10);
+      return { q: `$u_n=${a}n${b>=0?'+':'−'}${Math.abs(b)}$. $(u_n)$ tend-elle vers $+\\infty$ ? (1=oui, 0=non — vers $-\\infty$)`, r: a>0 ? 1 : 0 };
+    }
+  },
+  'Primitive — valeur en un point': {
+    emoji: '∫cos', niveau: 'terminale',
+    gen: () => {
+      const pts = [['\\sin(0)',0],['\\sin(\\pi/2)',1],['-\\cos(0)',-1],['-\\cos(\\pi)',1],['\\sin(\\pi)',0]];
+      const [label,val] = pts[rand(0,pts.length-1)];
+      return { q: `Une primitive de $\\cos(x)$ est $F(x)=\\sin(x)$. $${label} = ?$`, r: val };
+    }
+  },
+  'Dérivée de ln(ax+b) en 0': {
+    emoji: "ln'", niveau: 'terminale',
+    gen: () => {
+      const b = rand(1,9), k = rand(1,5), a = b*k;
+      return { q: `$f(x)=\\ln(${a}x+${b})$. $f'(0) = ?$`, r: k };
+    }
+  },
+  'Équation différentielle — solution constante': {
+    emoji: "y'=ay+b", niveau: 'terminale',
+    gen: () => {
+      const a = rand(2,6), k = rand(1,5), b = -a*k;
+      return { q: `$y'=${a}y${b>=0?'+':'−'}${Math.abs(b)}$. Quelle est la solution constante (qui ne dépend pas de $x$) ?`, r: k };
     }
   },
 
