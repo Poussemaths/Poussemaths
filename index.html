@@ -13677,7 +13677,7 @@ async function verifierQCMFixe(idx) {
 async function verifierQCMGenere(idx) {
   const q = currentExercice.questions[currentQuestion];
   const slug = TEMPLATES_VALIDATEUR[currentExercice.templateId];
-  const chapitre = currentExercice.titre || '';
+  const chapitre = currentExercice.chapitre || '';
   const niveau = detecterNiveauDepuisId(currentExercice.id);
 
   const result = await appelEdgeFunction(slug, 'POST', {
@@ -13764,7 +13764,7 @@ async function verifierQuestionFixe(val, q, inp) {
 // ── VÉRIFICATION SAISIE LIBRE (EXERCICE GÉNÉRÉ, validation serveur) ──
 async function verifierExerciceGenere(val, q, inp) {
   const slug = TEMPLATES_VALIDATEUR[currentExercice.templateId];
-  const chapitre = currentExercice.titre || '';
+  const chapitre = currentExercice.chapitre || '';
   const niveau = detecterNiveauDepuisId(currentExercice.id);
 
   const result = await appelEdgeFunction(slug, 'POST', {
@@ -13887,7 +13887,7 @@ async function showResult() {
 
   const parcoursIdCourant = currentParcoursId;
   if(currentEleve && currentExercice && !currentExercice.genere) {
-    const chapitre = currentExercice.titre || '';
+    const chapitre = currentExercice.chapitre || '';
     const niveau = detecterNiveauDepuisId(currentExercice.id);
     const res = await sauvegarderProgressionFixe(currentExercice.id, chapitre, niveau, parcoursIdCourant);
     if(res && res.verrouille) {
