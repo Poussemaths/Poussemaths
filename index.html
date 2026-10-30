@@ -11971,6 +11971,156 @@ const CM_THEMES = {
     }
   },
 
+  // ── 5e : complements 2 (30/10/2026, croise avec mathsmentales.net 5e, 187 items) ──
+  'Comparer des relatifs (5e)': {
+    emoji: '><', niveau: '5eme',
+    gen: () => {
+      let a = rand(-30,30), b = rand(-30,30);
+      if(a===b) b += 1;
+      return { q: `Quel est le plus grand : ${cmFmt(a)} ou ${cmFmt(b)} ?`, r: Math.max(a,b) };
+    }
+  },
+  'Carrés de relatifs': {
+    emoji: '(-n)²', niveau: '5eme',
+    gen: () => {
+      let n = rand(2,12); if(rand(0,1)===0) n = -n;
+      return { q: `$(${n})^2 = ?$`, r: n*n };
+    }
+  },
+  'Distance entre deux points (droite graduée)': {
+    emoji: '↔', niveau: '5eme',
+    gen: () => {
+      const a = rand(-20,20), b = rand(-20,20);
+      return { q: `Distance entre ${a} et ${b} sur une droite graduée ?`, r: Math.abs(a-b) };
+    }
+  },
+  "Opposé d'un nombre (5e)": {
+    emoji: '-n', niveau: '5eme',
+    gen: () => {
+      let n = rand(-40,40); if(n===0) n=5;
+      return { q: `Opposé de ${cmFmt(n)} ?`, r: -n };
+    }
+  },
+  'Multiplier un décimal par 10, 100, 1000': {
+    emoji: '×10', niveau: '5eme',
+    gen: () => {
+      const n = Math.round(rand(100,9999)/100*100)/100, m = [10,100,1000][rand(0,2)];
+      return { q: `${String(n).replace('.',',')} × ${m} = ?`, r: Math.round(n*m*100)/100 };
+    }
+  },
+  'Calculer une expression (substitution, 5e)': {
+    emoji: 'E(x)', niveau: '5eme',
+    gen: () => {
+      const a = rand(1,9), b = rand(0,20), x = rand(1,10);
+      return { q: `$E=${a}x+${b}$. Calcule $E$ pour $x=${x}$.`, r: a*x+b };
+    }
+  },
+  'Réduire une somme (coefficients positifs)': {
+    emoji: 'ax+bx', niveau: '5eme',
+    gen: () => {
+      const a = rand(2,9), b = rand(1,9);
+      return { q: `Réduis $${a}x+${b}x$ : coefficient de $x$ ?`, r: a+b };
+    }
+  },
+  'Tester une égalité (5e)': {
+    emoji: '=?', niveau: '5eme',
+    gen: () => {
+      const a = rand(1,9), b = rand(0,15), xTest = rand(1,9);
+      const cVrai = a*xTest+b;
+      const estVrai = rand(0,1)===1;
+      const c = estVrai ? cVrai : cVrai + rand(1,5);
+      return { q: `$x=${xTest}$ est-il solution de $${a}x+${b}=${c}$ ? (1=oui, 0=non)`, r: estVrai?1:0 };
+    }
+  },
+  'Suite de motifs (5e)': {
+    emoji: '→…', niveau: '5eme',
+    gen: () => {
+      const u0 = rand(1,10), diff = rand(1,6), n = rand(3,6);
+      return { q: `Suite : $${u0}, ${u0+diff}, ${u0+2*diff}, ...$ (ajoute $${diff}$ à chaque étape). Terme de rang ${n} (en partant du rang $0$) ?`, r: u0+n*diff };
+    }
+  },
+  'Fréquence simple (5e)': {
+    emoji: 'f', niveau: '5eme',
+    gen: () => {
+      const total = [10,20,25,50][rand(0,3)], part = rand(1,total-1);
+      return { q: `Sur ${total} réponses, ${part} sont justes. Fréquence des bonnes réponses (décimal) ?`, r: Math.round(part/total*100)/100 };
+    }
+  },
+  'Moyenne simple (5e)': {
+    emoji: 'x̄', niveau: '5eme',
+    gen: () => {
+      const mean = rand(5,15), d = rand(1,5);
+      return { q: `Série : ${mean-d}, ${mean}, ${mean+d}. Moyenne ?`, r: mean };
+    }
+  },
+  'Augmenter ou réduire en pourcentage (5e)': {
+    emoji: '%+/-', niveau: '5eme',
+    gen: () => {
+      const t = [10,20,25,50][rand(0,3)], n = rand(1,10)*20, hausse = rand(0,1)===1;
+      return { q: `${hausse?'Augmente':'Réduis'} ${n} de ${t}\\%.`, r: hausse ? n*(1+t/100) : n*(1-t/100) };
+    }
+  },
+  'Multiples, diviseurs, nombre premier (5e)': {
+    emoji: '∣p', niveau: '5eme',
+    gen: () => {
+      const choix = rand(0,1);
+      if(choix===0) { const b = rand(2,9), k = rand(2,10); return { q: `${b*k} est-il un multiple de ${b} ? (1=oui, 0=non)`, r: 1 }; }
+      const n = rand(2,50);
+      return { q: `${n} est-il un nombre premier ? (1=oui, 0=non)`, r: cmIsPrime(n)?1:0 };
+    }
+  },
+  'Aire d\'un parallélogramme': {
+    emoji: '▱', niveau: '5eme',
+    gen: () => {
+      const base = rand(3,15), h = rand(2,12);
+      return { q: `Aire d'un parallélogramme de base $${base}\\,$cm et hauteur $${h}\\,$cm ?`, r: base*h };
+    }
+  },
+  'Conversions de durées (5e)': {
+    emoji: '⏱', niveau: '5eme',
+    gen: () => {
+      if(rand(0,1)===0) { const min = rand(1,12)*60; return { q: `Convertis ${min} minutes en heures.`, r: min/60 }; }
+      const h = rand(1,5);
+      return { q: `Convertis ${h} heure${h>1?'s':''} en secondes.`, r: h*3600 };
+    }
+  },
+  "Conversions d'aires (5e)": {
+    emoji: 'cm²/m²', niveau: '5eme',
+    gen: () => {
+      if(rand(0,1)===0) { const v = rand(1,40); return { q: `Convertis ${v} cm² en mm².`, r: v*100 }; }
+      const v = rand(1,15);
+      return { q: `Convertis ${v} m² en cm².`, r: v*10000 };
+    }
+  },
+  'Volumes de prismes simples (5e)': {
+    emoji: '△', niveau: '5eme',
+    gen: () => {
+      const aire = rand(5,25), h = rand(2,10);
+      return { q: `Prisme droit : aire de la base $${aire}\\,$cm², hauteur $${h}\\,$cm. Volume (cm³) ?`, r: aire*h };
+    }
+  },
+  "Mesure d'un 3e angle (5e)": {
+    emoji: '△°', niveau: '5eme',
+    gen: () => {
+      const a = rand(20,100), b = rand(20,150-a);
+      return { q: `Un triangle a deux angles de $${a}°$ et $${b}°$. Troisième angle ?`, r: 180-a-b };
+    }
+  },
+  'Repérage dans le plan (positifs)': {
+    emoji: '(x;y)', niveau: '5eme',
+    gen: () => {
+      const x = rand(0,10), y = rand(0,10);
+      return { q: `Point $M(${x}\\,;\\,${y})$ dans un repère. Quelle est son ordonnée ?`, r: y };
+    }
+  },
+  'Symétrie centrale — coordonnées': {
+    emoji: 'M→M\'', niveau: '5eme',
+    gen: () => {
+      const a = rand(-8,8), b = rand(-8,8), x = rand(-8,8), y = rand(-8,8);
+      return { q: `Symétrique de $M(${x}\\,;\\,${y})$ par rapport à $I(${a}\\,;\\,${b})$ : abscisse du point image ?`, r: 2*a-x };
+    }
+  },
+
   // ── 4e : complements ──
   'Relatifs — multiplication': {
     emoji: '×', niveau: '4eme',
