@@ -12337,6 +12337,83 @@ const CM_THEMES = {
     }
   },
 
+  // ── Terminale Spe : complements 3 (30/10/2026, demande explicite Jamal) ──
+  'Limites de suites de référence': {
+    emoji: 'lim uₙ', niveau: 'terminale',
+    gen: () => {
+      const pts = [['n^2',0],['n^3',0],['\\sqrt{n}',0],['\\dfrac{1}{n}',1],['\\dfrac{1}{n^2}',1],['-5n',0],['\\dfrac{1}{\\sqrt{n}}',1],['2n^2-3',0]];
+      const [label,val] = pts[rand(0,pts.length-1)];
+      return { q: `$u_n=${label}$. $(u_n)$ a-t-elle une limite finie quand $n\\to+\\infty$ ? (1=oui, 0=non)`, r: val };
+    }
+  },
+  'Limite de fonction polynomiale en +∞': {
+    emoji: 'lim+∞', niveau: 'terminale',
+    gen: () => {
+      let a = rand(-9,9); if(a===0) a=3;
+      const n = rand(2,5);
+      return { q: `$f(x)=${a}x^${n}+...$ (terme dominant). La limite de $f$ en $+\\infty$ est-elle $+\\infty$ ? (1=oui, 0=non — c'est $-\\infty$)`, r: a>0?1:0 };
+    }
+  },
+  'Limites et factorisation (forme indéterminée)': {
+    emoji: '0/0', niveau: 'terminale',
+    gen: () => {
+      const k = rand(2,9);
+      if(rand(0,1)===0) return { q: `$\\lim_{x\\to${k}}\\dfrac{x^2-${k*k}}{x-${k}}$ ?`, r: 2*k };
+      return { q: `$\\lim_{x\\to-${k}}\\dfrac{x^2-${k*k}}{x+${k}}$ ?`, r: -2*k };
+    }
+  },
+  'Limite de fonction rationnelle en +∞': {
+    emoji: 'ax/cx', niveau: 'terminale',
+    gen: () => {
+      const c = rand(1,6), k = rand(1,5), a = c*k, b = rand(-10,10), d = rand(-10,10);
+      return { q: `$f(x)=\\dfrac{${a}x+${cmFmt(b)}}{${c}x+${cmFmt(d)}}$. Limite de $f$ en $+\\infty$ ?`, r: k };
+    }
+  },
+  "Dérivée seconde d'un polynôme": {
+    emoji: "f''", niveau: 'terminale',
+    gen: () => {
+      const a = rand(1,5), b = rand(1,9);
+      return { q: `$f(x)=${a}x^3+${b}x^2+x+1$. $f''(0) = ?$`, r: 2*b };
+    }
+  },
+  "Convexité — point d'inflexion": {
+    emoji: 'infl.', niveau: 'terminale',
+    gen: () => {
+      let a = rand(2,9); if(a===0) a=3;
+      const k = rand(-8,8), b = -a*k;
+      return { q: `$f''(x)=${a}x${b>=0?'+':'−'}${Math.abs(b)}$. Abscisse du point d'inflexion de $f$ ?`, r: k };
+    }
+  },
+  'Continuité et TVI': {
+    emoji: 'TVI', niveau: 'terminale',
+    gen: () => {
+      let fa = rand(-10,10); if(fa===0) fa=3;
+      let fb;
+      if(rand(0,1)===0) { fb = -fa + rand(-5,5)*(fa>0?-1:1); if(Math.sign(fb)===Math.sign(fa)) fb = -fb; }
+      else { fb = fa + rand(1,5)*(fa>0?1:-1); }
+      return { q: `$f$ continue sur $[a\\,;\\,b]$, $f(a)=${fa}$, $f(b)=${fb}$. Le TVI garantit-il une solution à $f(x)=0$ entre $a$ et $b$ ? (1=oui, 0=non)`, r: (Math.sign(fa)!==Math.sign(fb))?1:0 };
+    }
+  },
+  'Espace — positions relatives de droites': {
+    emoji: '∥3D?', niveau: 'terminale',
+    gen: () => {
+      let a = rand(-5,5); if(a===0) a=2;
+      let b = rand(-5,5); if(b===0) b=3;
+      let c = rand(-5,5); if(c===0) c=1;
+      if(rand(0,1)===0) { const k = rand(2,4); return { q: `$\\vec{u}(${a}\\,;\\,${b}\\,;\\,${c})$, $\\vec{v}(${a*k}\\,;\\,${b*k}\\,;\\,${c*k})$. Les droites dirigées par $\\vec{u}$ et $\\vec{v}$ sont-elles parallèles ? (1=oui, 0=non)`, r: 1 }; }
+      let d = rand(-5,5), e = rand(-5,5), f = rand(-5,5);
+      if(d*b===a*e && d*c===a*f) d += 1;
+      return { q: `$\\vec{u}(${a}\\,;\\,${b}\\,;\\,${c})$, $\\vec{v}(${d}\\,;\\,${e}\\,;\\,${f})$. Les droites dirigées par $\\vec{u}$ et $\\vec{v}$ sont-elles parallèles ? (1=oui, 0=non)`, r: 0 };
+    }
+  },
+  'Espace — équation paramétrique': {
+    emoji: 'x=x₀+at', niveau: 'terminale',
+    gen: () => {
+      const x0 = rand(-8,8); let a = rand(-5,5); if(a===0) a=2; let t = rand(-4,4); if(t===0) t=1;
+      return { q: `Droite par $A(${x0}\\,;\\,y_0\\,;\\,z_0)$, vecteur directeur $\\vec{u}(${a}\\,;\\,b\\,;\\,c)$. Représentation paramétrique $x=${x0}${a>=0?'+':'−'}${Math.abs(a)}t$. Valeur de $x$ pour $t=${t}$ ?`, r: x0+a*t };
+    }
+  },
+
   // ─────────────────────────────────────────────────────────
   //  3e : couverture complete (30/10/2026), construite a partir
   //  du catalogue reel mathsmentales.net niveau 3e (205 items,
