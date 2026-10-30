@@ -1847,7 +1847,7 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
     <button onclick="event.stopPropagation();fermerProjection()" style="background:rgba(255,255,255,0.15);border:none;color:white;padding:8px 16px;border-radius:8px;cursor:pointer;font-size:14px">✕ Quitter</button>
   </div>
   <div id="cm-num-question" style="font-size:1.2rem;color:rgba(255,255,255,0.4);margin-bottom:2rem"></div>
-  <div id="cm-enonce-proj" style="font-size:clamp(2rem,6vw,5rem);font-weight:800;color:white;text-align:center;padding:0 2rem;font-family:'Fraunces',serif;line-height:1.2"></div>
+  <div id="cm-enonce-proj" style="font-size:clamp(1.6rem,4vw,3.2rem);font-weight:700;color:white;text-align:center;padding:0 2rem;font-family:'DM Sans',sans-serif;line-height:1.35"></div>
   <div id="cm-reponse-proj" style="font-size:2rem;color:#4A90D9;margin-top:2rem;font-weight:700;min-height:3rem"></div>
   <div id="cm-dashboard-prof" style="position:absolute;bottom:56px;color:#5EEAD4;font-size:15px;font-weight:600"></div>
   <div style="position:absolute;bottom:24px;color:rgba(255,255,255,0.3);font-size:13px">Clic ou espace → question suivante · Entrée → afficher la réponse</div>
@@ -1888,7 +1888,7 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
   </div>
   <div id="cm-part-question" style="display:none;text-align:center;width:100%;max-width:480px">
     <div id="cm-part-num" style="font-size:1rem;color:rgba(255,255,255,0.4);margin-bottom:1.5rem"></div>
-    <div id="cm-part-enonce" style="font-size:clamp(1.6rem,7vw,2.8rem);font-weight:800;color:white;margin-bottom:2rem;font-family:'Fraunces',serif"></div>
+    <div id="cm-part-enonce" style="font-size:clamp(1.3rem,5vw,2rem);font-weight:700;color:white;margin-bottom:2rem;font-family:'DM Sans',sans-serif;line-height:1.35"></div>
     <input type="text" id="cm-part-input" inputmode="decimal" placeholder="Ta réponse..."
       style="width:100%;padding:16px;border-radius:var(--r);border:none;font-size:22px;text-align:center;margin-bottom:1rem"
       onkeydown="if(event.key==='Enter')soumettreReponseCM()">
@@ -12204,7 +12204,9 @@ function afficherQuestionCM() {
 
   const q = cmQuestions[cmIndex];
   document.getElementById('cm-num-question').textContent = `Question ${cmIndex+1} / ${cmQuestions.length} — ${q.theme}`;
-  document.getElementById('cm-enonce-proj').textContent = q.q;
+  const elEnonceProj = document.getElementById('cm-enonce-proj');
+  elEnonceProj.textContent = q.q;
+  renderMathSafe(elEnonceProj);
   document.getElementById('cm-reponse-proj').textContent = '';
   document.getElementById('cm-code-session').textContent = cmSessionCode ? `Code : ${cmSessionCode}` : '';
   document.getElementById('cm-dashboard-prof').textContent = '';
@@ -12357,7 +12359,9 @@ function traiterEtatCMParticipant(payload) {
     document.getElementById('cm-part-fin').style.display = 'none';
     document.getElementById('cm-part-question').style.display = 'block';
     document.getElementById('cm-part-num').textContent = `Question ${payload.index + 1}`;
-    document.getElementById('cm-part-enonce').textContent = payload.enonce;
+    const elEnonceParticipant = document.getElementById('cm-part-enonce');
+    elEnonceParticipant.textContent = payload.enonce;
+    renderMathSafe(elEnonceParticipant);
     document.getElementById('cm-part-input').value = '';
     document.getElementById('cm-part-input').disabled = false;
     document.getElementById('cm-part-btn').disabled = false;
