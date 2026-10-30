@@ -12006,6 +12006,123 @@ const CM_THEMES = {
     }
   },
 
+  // ── 2nde : complements 2 (30/10/2026, croise avec mathsmentales.net 2nde, 96 items) ──
+  'Équation avec valeur absolue': {
+    emoji: '|x-a|=b', niveau: '2nde',
+    gen: () => {
+      const a = rand(-15,15), b = rand(2,12);
+      return { q: `Résous $|${cmFmtRoot(a)}|=${b}$. Donne la plus grande solution.`, r: a+b };
+    }
+  },
+  'Manipuler les racines carrées — simplifier': {
+    emoji: '√', niveau: '2nde',
+    gen: () => {
+      const k = rand(2,6), n = [2,3,5,6,7,8,10,11][rand(0,7)];
+      return { q: `Simplifie $\\sqrt{${k*k*n}}$ sous la forme $k\\sqrt{${n}}$ : quel est $k$ ?`, r: k };
+    }
+  },
+  'Ajouter ou soustraire des fractions': {
+    emoji: '+/−', niveau: '2nde',
+    gen: () => {
+      const d = [4,5,8,10,12][rand(0,4)];
+      const a = rand(1,d-1), b = rand(1,d-1);
+      if(rand(0,1)===0) return { q: `Calcule $\\dfrac{${a}}{${d}}+\\dfrac{${b}}{${d}}$ (réponds en décimal).`, r: Math.round((a+b)/d*100)/100 };
+      const [p,q] = a>=b ? [a,b] : [b,a];
+      return { q: `Calcule $\\dfrac{${p}}{${d}}-\\dfrac{${q}}{${d}}$ (réponds en décimal).`, r: Math.round((p-q)/d*100)/100 };
+    }
+  },
+  "Combien de diviseurs ?": {
+    emoji: '#÷', niveau: '2nde',
+    gen: () => {
+      const options = [12,18,20,24,28,30,36,40,45,48,60];
+      const n = options[rand(0,options.length-1)];
+      let c = 0; for(let i=1;i<=n;i++) if(n%i===0) c++;
+      return { q: `Combien ${n} a-t-il de diviseurs (en tout) ?`, r: c };
+    }
+  },
+  'Médiane et étendue': {
+    emoji: 'Med', niveau: '2nde',
+    gen: () => {
+      const base = rand(5,15);
+      const d1 = rand(1,4), d2 = rand(1,4), d3 = rand(1,4);
+      const vals = [base-d1-d2, base-d1, base, base+d3, base+d3+1].sort((a,b)=>a-b);
+      if(rand(0,1)===0) return { q: `Série triée : ${vals.join(', ')}. Médiane ?`, r: vals[2] };
+      return { q: `Série triée : ${vals.join(', ')}. Étendue ?`, r: vals[4]-vals[0] };
+    }
+  },
+  'Évolutions successives — coefficient global': {
+    emoji: '×1,2×0,9', niveau: '2nde',
+    gen: () => {
+      const t1 = [5,10,20,25][rand(0,3)], t2 = [5,10,20,25][rand(0,3)];
+      const hausse1 = rand(0,1)===1, hausse2 = rand(0,1)===1;
+      const c1 = hausse1 ? 1+t1/100 : 1-t1/100, c2 = hausse2 ? 1+t2/100 : 1-t2/100;
+      return { q: `${hausse1?'Hausse':'Baisse'} de ${t1}\\% puis ${hausse2?'hausse':'baisse'} de ${t2}\\%. Coefficient multiplicateur global ?`, r: Math.round(c1*c2*10000)/10000 };
+    }
+  },
+  'Probabilité — intersection sur un arbre': {
+    emoji: '🌳∩', niveau: '2nde',
+    gen: () => {
+      const pA = [0.2,0.3,0.4,0.5,0.6,0.7,0.8][rand(0,6)], pAB = [0.2,0.25,0.4,0.5,0.6,0.75,0.8][rand(0,6)];
+      return { q: `Arbre : $P(A)=${pA}$, puis $P_A(B)=${pAB}$. $P(A\\cap B) = ?$`, r: Math.round(pA*pAB*10000)/10000 };
+    }
+  },
+  'Probabilité totale sur un arbre': {
+    emoji: '🌳Σ', niveau: '2nde',
+    gen: () => {
+      const pA = [0.2,0.3,0.4,0.5,0.6,0.7,0.8][rand(0,6)];
+      const pAB = [0.2,0.4,0.5,0.6,0.8][rand(0,4)], pAnotB = [0.1,0.2,0.3,0.4][rand(0,3)];
+      const r = pA*pAB + (1-pA)*pAnotB;
+      return { q: `Arbre : $P(A)=${pA}$, $P_A(B)=${pAB}$, $P_{\\bar{A}}(B)=${pAnotB}$. $P(B) = ?$`, r: Math.round(r*10000)/10000 };
+    }
+  },
+  "Norme d'un vecteur": {
+    emoji: '‖u‖', niveau: '2nde',
+    gen: () => {
+      const triples = [[3,4,5],[6,8,10],[5,12,13],[8,15,17],[9,12,15]];
+      const [a,b,norme] = triples[rand(0,triples.length-1)];
+      const sa = rand(0,1)===0?1:-1, sb = rand(0,1)===0?1:-1;
+      return { q: `$\\vec{u}(${a*sa}\\,;\\,${b*sb})$. Norme $\\|\\vec{u}\\|$ ?`, r: norme };
+    }
+  },
+  "Produit d'un vecteur par un nombre": {
+    emoji: 'k·u', niveau: '2nde',
+    gen: () => {
+      let a = rand(-8,8); if(a===0) a=2;
+      let b = rand(-8,8); if(b===0) b=3;
+      let k = rand(-5,5); if(k===0) k=2;
+      return { q: `$\\vec{u}(${a}\\,;\\,${b})$. Abscisse de $${k}\\vec{u}$ ?`, r: k*a };
+    }
+  },
+  'Somme de deux vecteurs': {
+    emoji: 'u+v', niveau: '2nde',
+    gen: () => {
+      const a = rand(-8,8), b = rand(-8,8), c = rand(-8,8), d = rand(-8,8);
+      return { q: `$\\vec{u}(${a}\\,;\\,${b})$, $\\vec{v}(${c}\\,;\\,${d})$. Abscisse de $\\vec{u}+\\vec{v}$ ?`, r: a+c };
+    }
+  },
+  "Signe d'une fonction affine (zéro)": {
+    emoji: 'f(x)=0', niveau: '2nde',
+    gen: () => {
+      let a = rand(-9,9); if(a===0) a=3;
+      const k = rand(-8,8), b = -a*k;
+      return { q: `$f(x)=${a}x${b>=0?'+':'−'}${Math.abs(b)}$. Pour quelle valeur de $x$ a-t-on $f(x)=0$ ?`, r: k };
+    }
+  },
+  'Double distributivité': {
+    emoji: '(x+a)(x+b)', niveau: '2nde',
+    gen: () => {
+      const a = rand(2,9), b = rand(2,9);
+      return { q: `Développe $(x+${a})(x+${b})$ : terme constant (sans $x$) ?`, r: a*b };
+    }
+  },
+  'Réduire un produit de monômes': {
+    emoji: 'ax×bx', niveau: '2nde',
+    gen: () => {
+      const a = rand(2,9), b = rand(2,9);
+      return { q: `Réduis $${a}x\\times${b}x$ : coefficient de $x^2$ ?`, r: a*b };
+    }
+  },
+
   // ── 1ere Spe : nouveau niveau dedie ──
   'Suites arithmétiques': {
     emoji: 'u+r', niveau: '1ere',
@@ -12160,6 +12277,63 @@ const CM_THEMES = {
     gen: () => {
       const a = rand(2,6), k = rand(1,5), b = -a*k;
       return { q: `$y'=${a}y${b>=0?'+':'−'}${Math.abs(b)}$. Quelle est la solution constante (qui ne dépend pas de $x$) ?`, r: k };
+    }
+  },
+
+  // ── Terminale Spe : complements 2 (30/10/2026, croise avec mathsmentales.net Tale) ──
+  'Nombres complexes — addition': {
+    emoji: 'z1+z2', niveau: 'terminale',
+    gen: () => {
+      const a = rand(-9,9), b = rand(-9,9), c = rand(-9,9), d = rand(-9,9);
+      const fmtZ = (re,im) => `${re}${im>=0?'+':'−'}${Math.abs(im)}i`;
+      if(rand(0,1)===0) return { q: `$z_1=${fmtZ(a,b)}$, $z_2=${fmtZ(c,d)}$. Partie réelle de $z_1+z_2$ ?`, r: a+c };
+      return { q: `$z_1=${fmtZ(a,b)}$, $z_2=${fmtZ(c,d)}$. Partie imaginaire de $z_1+z_2$ ?`, r: b+d };
+    }
+  },
+  'Nombres complexes — multiplication': {
+    emoji: 'z1×z2', niveau: 'terminale',
+    gen: () => {
+      const a = rand(-6,6), b = rand(-6,6), c = rand(-6,6), d = rand(-6,6);
+      const fmtZ = (re,im) => `${re}${im>=0?'+':'−'}${Math.abs(im)}i`;
+      return { q: `$z_1=${fmtZ(a,b)}$, $z_2=${fmtZ(c,d)}$. Partie réelle de $z_1\\times z_2$ ?`, r: a*c-b*d };
+    }
+  },
+  'Produit scalaire': {
+    emoji: 'u·v', niveau: 'terminale',
+    gen: () => {
+      let a = rand(-7,7); if(a===0) a=2;
+      let b = rand(-7,7); if(b===0) b=3;
+      let c = rand(-7,7); if(c===0) c=1;
+      let d = rand(-7,7); if(d===0) d=4;
+      return { q: `$\\vec{u}(${a}\\,;\\,${b})$, $\\vec{v}(${c}\\,;\\,${d})$. $\\vec{u}\\cdot\\vec{v}$ ?`, r: a*c+b*d };
+    }
+  },
+  "Norme d'un vecteur (Terminale)": {
+    emoji: '‖u‖', niveau: 'terminale',
+    gen: () => {
+      const triples = [[3,4,5],[6,8,10],[5,12,13],[8,15,17],[9,12,15]];
+      const [a,b,norme] = triples[rand(0,triples.length-1)];
+      const sa = rand(0,1)===0?1:-1, sb = rand(0,1)===0?1:-1;
+      return { q: `$\\vec{u}(${a*sa}\\,;\\,${b*sb})$. $\\|\\vec{u}\\|$ ?`, r: norme };
+    }
+  },
+  'Vecteurs orthogonaux ?': {
+    emoji: '⊥?', niveau: 'terminale',
+    gen: () => {
+      let a = rand(-7,7); if(a===0) a=2;
+      let b = rand(-7,7); if(b===0) b=3;
+      if(rand(0,1)===0) return { q: `$\\vec{u}(${a}\\,;\\,${b})$, $\\vec{v}(${-b}\\,;\\,${a})$. Orthogonaux ? (1=oui, 0=non)`, r: 1 };
+      let c = rand(-7,7); if(c===0) c=1;
+      let d = rand(-7,7); if(d===0) d=5;
+      if(a*c+b*d===0) d += 1;
+      return { q: `$\\vec{u}(${a}\\,;\\,${b})$, $\\vec{v}(${c}\\,;\\,${d})$. Orthogonaux ? (1=oui, 0=non)`, r: 0 };
+    }
+  },
+  "Somme des termes d'une suite arithmétique": {
+    emoji: 'Σu', niveau: 'terminale',
+    gen: () => {
+      const u1 = rand(1,10), r = rand(1,6), n = rand(3,8);
+      return { q: `Suite arithmétique : $u_1=${u1}$, raison $${r}$. Somme des $${n}$ premiers termes ?`, r: n*(2*u1+(n-1)*r)/2 };
     }
   },
 
