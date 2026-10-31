@@ -809,7 +809,16 @@ nav {
 .pdf-generate-btn:hover { background:var(--bleu-fort); }
 
 /* ══ CALCUL MENTAL ══ */
-.cm-themes-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:10px; margin-bottom:1.5rem; }
+.cm-themes-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:10px; }
+.cm-search-input { width:100%; box-sizing:border-box; padding:10px 14px; border:1.5px solid var(--bordure); border-radius:var(--r); font-size:14px; font-family:'DM Sans',sans-serif; margin-bottom:12px; background:var(--bg); color:var(--texte); }
+.cm-search-input:focus { outline:none; border-color:var(--bleu); }
+.cm-categorie { border:1.5px solid var(--bordure); border-radius:var(--r); margin-bottom:8px; overflow:hidden; }
+.cm-categorie summary { padding:10px 14px; font-weight:700; font-size:13px; color:var(--texte); cursor:pointer; list-style:none; display:flex; align-items:center; gap:6px; background:var(--bg); }
+.cm-categorie summary::-webkit-details-marker { display:none; }
+.cm-categorie summary::after { content:'▸'; margin-left:auto; color:var(--muted); transition:transform 0.15s; }
+.cm-categorie[open] summary::after { transform:rotate(90deg); }
+.cm-categorie-count { color:var(--muted); font-weight:500; font-size:12px; }
+.cm-categorie-corps { padding:12px; border-top:1px solid var(--bordure); }
 .cm-theme-btn { padding:12px; border:1.5px solid var(--bordure); border-radius:var(--r); cursor:pointer; background:var(--bg); transition:all 0.15s; text-align:center; font-family:'DM Sans',sans-serif; }
 .cm-theme-btn:hover { border-color:var(--bleu); background:var(--bleu-doux); }
 .cm-theme-btn.selected { border-color:var(--bleu); background:var(--bleu-doux); color:var(--bleu); font-weight:700; }
@@ -13405,6 +13414,224 @@ const CM_THEMES = {
   },
 };
 
+// Categorie de chaque theme, pour le regroupement en accordeon (31/10/2026).
+// Verifie programmatiquement (script jetable) que les 212 noms correspondent
+// exactement aux cles de CM_THEMES avant la mise en prod -- 0 manquant, 0 faute.
+const CM_CATEGORIES = {
+  "Tables de multiplication": "Nombres & calculs",
+  "Additions rapides": "Nombres & calculs",
+  "Soustractions": "Nombres & calculs",
+  "Priorités opératoires": "Nombres & calculs",
+  "Multiplier par 10, 100, 1000": "Nombres & calculs",
+  "Diviser par 10, 100, 1000": "Nombres & calculs",
+  "Doubles": "Nombres & calculs",
+  "Moitiés": "Nombres & calculs",
+  "Arrondir à l'unité": "Nombres & calculs",
+  "Encadrer un entier entre deux dizaines": "Nombres & calculs",
+  "Chiffre des unités, dizaines, centaines": "Nombres & calculs",
+  "Complément à 10, 100 ou 1000": "Nombres & calculs",
+  "Carrés parfaits (6e)": "Nombres & calculs",
+  "Double, triple, quadruple, cube d'un entier": "Nombres & calculs",
+  "Multiplications astucieuses (×11, ×9, ×19, ×21)": "Nombres & calculs",
+  "Multiplier/diviser par 2, 5, 20, 50, 4, 25": "Nombres & calculs",
+  "Division euclidienne (6e)": "Nombres & calculs",
+  "Critères de divisibilité (6e)": "Nombres & calculs",
+  "Comparer des fractions (6e)": "Fractions",
+  "Fraction de quantité (6e)": "Fractions",
+  "Valeur décimale de fraction simple (6e)": "Fractions",
+  "Trouver la fraction égale (6e)": "Fractions",
+  "Simplifier une fraction (6e)": "Fractions",
+  "Comparer des décimaux (6e)": "Nombres & calculs",
+  "Aires des figures usuelles (6e)": "Grandeurs & mesures",
+  "Périmètre des figures usuelles (6e)": "Grandeurs & mesures",
+  "Conversions de longueurs (6e)": "Grandeurs & mesures",
+  "Conversions de durées (6e)": "Grandeurs & mesures",
+  "Calculer un angle (droit, plat, opposés)": "Géométrie plane",
+  "Volume par comptage de cubes (6e)": "Géométrie dans l'espace",
+  "Fractions simples": "Fractions",
+  "Pourcentages": "Proportionnalité & Pourcentages",
+  "Carrés parfaits": "Nombres & calculs",
+  "Relatifs — addition": "Nombres & calculs",
+  "Relatifs — soustraction": "Nombres & calculs",
+  "Multiplier par 0,1 ou 0,01": "Nombres & calculs",
+  "Le triple": "Nombres & calculs",
+  "Le quart": "Nombres & calculs",
+  "Comparer des relatifs (5e)": "Nombres & calculs",
+  "Carrés de relatifs": "Nombres & calculs",
+  "Distance entre deux points (droite graduée)": "Nombres & calculs",
+  "Opposé d'un nombre (5e)": "Nombres & calculs",
+  "Multiplier un décimal par 10, 100, 1000": "Nombres & calculs",
+  "Calculer une expression (substitution, 5e)": "Calcul littéral & Équations",
+  "Réduire une somme (coefficients positifs)": "Calcul littéral & Équations",
+  "Tester une égalité (5e)": "Calcul littéral & Équations",
+  "Suite de motifs (5e)": "Algèbre (motifs)",
+  "Fréquence simple (5e)": "Statistiques & Probabilités",
+  "Moyenne simple (5e)": "Statistiques & Probabilités",
+  "Augmenter ou réduire en pourcentage (5e)": "Proportionnalité & Pourcentages",
+  "Multiples, diviseurs, nombre premier (5e)": "Nombres & calculs",
+  "Aire d'un parallélogramme": "Géométrie plane",
+  "Conversions de durées (5e)": "Grandeurs & mesures",
+  "Conversions d'aires (5e)": "Grandeurs & mesures",
+  "Volumes de prismes simples (5e)": "Géométrie dans l'espace",
+  "Mesure d'un 3e angle (5e)": "Géométrie plane",
+  "Repérage dans le plan (positifs)": "Vecteurs & Géométrie repérée",
+  "Symétrie centrale — coordonnées": "Géométrie plane",
+  "Puissances de 10": "Nombres & calculs",
+  "Relatifs — multiplication": "Nombres & calculs",
+  "Relatifs — division": "Nombres & calculs",
+  "Puissances simples": "Nombres & calculs",
+  "Division euclidienne — quotient": "Nombres & calculs",
+  "Coefficient multiplicateur": "Proportionnalité & Pourcentages",
+  "Arrondir un décimal (4e)": "Nombres & calculs",
+  "Comparer des décimaux relatifs (4e)": "Nombres & calculs",
+  "Inverse d'un nombre (4e)": "Nombres & calculs",
+  "Opposé d'un nombre (4e)": "Nombres & calculs",
+  "Puissance de relatif (4e)": "Nombres & calculs",
+  "Développer avec la distributivité (4e)": "Calcul littéral & Équations",
+  "Réduire une expression (4e)": "Calcul littéral & Équations",
+  "Résoudre une équation simple (4e)": "Calcul littéral & Équations",
+  "Résoudre une équation du premier degré (4e)": "Calcul littéral & Équations",
+  "Tester une égalité (4e)": "Calcul littéral & Équations",
+  "Quatrième proportionnelle (4e)": "Proportionnalité & Pourcentages",
+  "Partage proportionnel (4e)": "Proportionnalité & Pourcentages",
+  "Évolutions successives (4e)": "Proportionnalité & Pourcentages",
+  "Grandeurs composées — vitesse (4e)": "Grandeurs & mesures",
+  "Volumes de pyramides et cônes (4e)": "Géométrie dans l'espace",
+  "Théorème de Pythagore (4e)": "Géométrie plane",
+  "Pythagore — triangle rectangle ou non (4e)": "Géométrie plane",
+  "Théorème de Thalès — calculer une longueur (4e)": "Géométrie plane",
+  "Thalès — droites parallèles ? (4e)": "Géométrie plane",
+  "Transformations géométriques (4e)": "Géométrie plane",
+  "Repérage dans le plan (relatifs, 4e)": "Vecteurs & Géométrie repérée",
+  "Racines carrées": "Nombres & calculs",
+  "Calcul littéral": "Calcul littéral & Équations",
+  "Théorème de Pythagore": "Géométrie plane",
+  "Identités remarquables": "Calcul littéral & Équations",
+  "Encadrement de racine carrée": "Nombres & calculs",
+  "Puissances de 10 — produit": "Nombres & calculs",
+  "PGCD rapide": "Nombres & calculs",
+  "Comparer des relatifs": "Nombres & calculs",
+  "Arrondir un décimal au dixième": "Nombres & calculs",
+  "Comparer des fractions": "Fractions",
+  "Multiple ou diviseur ?": "Nombres & calculs",
+  "Écriture scientifique — exposant": "Nombres & calculs",
+  "Inverse d'un nombre": "Nombres & calculs",
+  "Opposé d'un nombre": "Nombres & calculs",
+  "Partie entière d'une fraction": "Fractions",
+  "Simplifier une fraction": "Fractions",
+  "Trouver la fraction égale": "Fractions",
+  "Critères de divisibilité": "Nombres & calculs",
+  "Décomposer en facteurs premiers": "Nombres & calculs",
+  "Nombre premier ?": "Nombres & calculs",
+  "Cube d'un entier": "Nombres & calculs",
+  "Fraction d'une quantité": "Fractions",
+  "Produit de fractions": "Fractions",
+  "Quotient de fractions": "Fractions",
+  "Programme de calcul": "Calcul littéral & Équations",
+  "Développer (distributivité)": "Calcul littéral & Équations",
+  "Factoriser une somme": "Calcul littéral & Équations",
+  "Réduire une expression": "Calcul littéral & Équations",
+  "Résoudre une équation simple": "Calcul littéral & Équations",
+  "Résoudre une équation du premier degré": "Calcul littéral & Équations",
+  "Équation produit nul ou x²=a": "Calcul littéral & Équations",
+  "Tester une égalité (solution ?)": "Calcul littéral & Équations",
+  "Moyenne d'une petite série": "Statistiques & Probabilités",
+  "Fréquence simple": "Statistiques & Probabilités",
+  "Exprimer une proportion (%)": "Proportionnalité & Pourcentages",
+  "Antécédent par une fonction affine": "Fonctions & Dérivation",
+  "Coefficient d'une fonction affine": "Fonctions & Dérivation",
+  "Aires des figures usuelles": "Grandeurs & mesures",
+  "Périmètre des figures usuelles": "Grandeurs & mesures",
+  "Conversions de durées": "Grandeurs & mesures",
+  "Grandeurs composées — vitesse": "Grandeurs & mesures",
+  "Volumes de prismes et pyramides": "Géométrie dans l'espace",
+  "Coefficient d'agrandissement ou de réduction": "Géométrie plane",
+  "Pythagore — triangle rectangle ou non": "Géométrie plane",
+  "Mesure du 3e angle d'un triangle": "Géométrie plane",
+  "Théorème de Thalès (calculer une longueur)": "Géométrie plane",
+  "Thalès — droites parallèles ?": "Géométrie plane",
+  "Trigonométrie — cosinus, sinus, tangente": "Géométrie plane",
+  "Convertir des grandeurs simples": "Grandeurs & mesures",
+  "Convertir des aires et des volumes": "Grandeurs & mesures",
+  "Puissance de relatif": "Nombres & calculs",
+  "Puissances de 2": "Nombres & calculs",
+  "Coefficient directeur": "Vecteurs & Géométrie repérée",
+  "Valeur absolue": "Nombres & calculs",
+  "Fonction carré — évaluer": "Fonctions & Dérivation",
+  "Fonction inverse — évaluer": "Fonctions & Dérivation",
+  "Distance sur une droite graduée": "Nombres & calculs",
+  "Colinéarité de vecteurs — déterminant": "Vecteurs & Géométrie repérée",
+  "Milieu d'un segment — abscisse": "Vecteurs & Géométrie repérée",
+  "Distance entre deux points": "Vecteurs & Géométrie repérée",
+  "Construire une équation de droite": "Vecteurs & Géométrie repérée",
+  "Intervalles — appartenance": "Nombres & calculs",
+  "Résoudre une inéquation simple": "Calcul littéral & Équations",
+  "Fréquence conditionnelle (tableau croisé)": "Statistiques & Probabilités",
+  "Proportion de proportion": "Proportionnalité & Pourcentages",
+  "Variations d'une fonction affine": "Fonctions & Dérivation",
+  "Probabilités — réunion": "Statistiques & Probabilités",
+  "Équation avec valeur absolue": "Calcul littéral & Équations",
+  "Manipuler les racines carrées — simplifier": "Nombres & calculs",
+  "Ajouter ou soustraire des fractions": "Fractions",
+  "Combien de diviseurs ?": "Nombres & calculs",
+  "Médiane et étendue": "Statistiques & Probabilités",
+  "Évolutions successives — coefficient global": "Proportionnalité & Pourcentages",
+  "Probabilité — intersection sur un arbre": "Statistiques & Probabilités",
+  "Probabilité totale sur un arbre": "Statistiques & Probabilités",
+  "Norme d'un vecteur": "Vecteurs & Géométrie repérée",
+  "Produit d'un vecteur par un nombre": "Vecteurs & Géométrie repérée",
+  "Somme de deux vecteurs": "Vecteurs & Géométrie repérée",
+  "Signe d'une fonction affine (zéro)": "Fonctions & Dérivation",
+  "Double distributivité": "Calcul littéral & Équations",
+  "Réduire un produit de monômes": "Calcul littéral & Équations",
+  "Suites arithmétiques": "Suites",
+  "Suites géométriques": "Suites",
+  "Dérivée de x² en un point": "Fonctions & Dérivation",
+  "Valeurs remarquables (trigo)": "Géométrie plane",
+  "Probabilité conditionnelle rapide": "Statistiques & Probabilités",
+  "Nature d'une suite": "Suites",
+  "Dérivée de fonction composée g(ax+b)²": "Fonctions & Dérivation",
+  "Dérivée de fonction composée g(sin(ax))": "Fonctions & Dérivation",
+  "Dérivée de fonction polynomiale (1ère)": "Fonctions & Dérivation",
+  "Dérivée de fonction produit": "Fonctions & Dérivation",
+  "Dérivée de fonction quotient": "Fonctions & Dérivation",
+  "Calculer delta (second degré)": "Calcul littéral & Équations",
+  "Mettre sous forme canonique — abscisse du sommet": "Calcul littéral & Équations",
+  "Coefficient binomial (1ère)": "Statistiques & Probabilités",
+  "Produit scalaire (1ère)": "Vecteurs & Géométrie repérée",
+  "Norme d'un vecteur (1ère)": "Vecteurs & Géométrie repérée",
+  "Vecteurs orthogonaux ? (1ère)": "Vecteurs & Géométrie repérée",
+  "Valeurs remarquables (ln/exp)": "Fonctions & Dérivation",
+  "Primitive — coefficient": "Primitives & Intégrales",
+  "Dérivée de e^(ax) en 0": "Fonctions & Dérivation",
+  "Loi binomiale — espérance": "Statistiques & Probabilités",
+  "Combinaisons simples": "Statistiques & Probabilités",
+  "Limite de suite géométrique — convergence": "Suites",
+  "Dérivée de fonction composée (ax+b)²": "Fonctions & Dérivation",
+  "Convexité — signe de f''": "Fonctions & Dérivation",
+  "Calcul intégral — aire triangulaire": "Primitives & Intégrales",
+  "Géométrie dans l'espace — coordonnées d'un vecteur": "Géométrie dans l'espace",
+  "Suites — limite infinie (sens de variation)": "Suites",
+  "Primitive — valeur en un point": "Primitives & Intégrales",
+  "Dérivée de ln(ax+b) en 0": "Fonctions & Dérivation",
+  "Équation différentielle — solution constante": "Primitives & Intégrales",
+  "Nombres complexes — addition": "Nombres complexes",
+  "Nombres complexes — multiplication": "Nombres complexes",
+  "Produit scalaire": "Vecteurs & Géométrie repérée",
+  "Norme d'un vecteur (Terminale)": "Vecteurs & Géométrie repérée",
+  "Vecteurs orthogonaux ?": "Vecteurs & Géométrie repérée",
+  "Somme des termes d'une suite arithmétique": "Suites",
+  "Limites de suites de référence": "Suites",
+  "Limite de fonction polynomiale en +∞": "Limites & Continuité",
+  "Limites et factorisation (forme indéterminée)": "Limites & Continuité",
+  "Limite de fonction rationnelle en +∞": "Limites & Continuité",
+  "Dérivée seconde d'un polynôme": "Fonctions & Dérivation",
+  "Convexité — point d'inflexion": "Fonctions & Dérivation",
+  "Continuité et TVI": "Limites & Continuité",
+  "Espace — positions relatives de droites": "Géométrie dans l'espace",
+  "Espace — équation paramétrique": "Géométrie dans l'espace",
+};
+
 function themesPourNiveau(niveau) {
   const limite = CM_NIVEAUX_ORDRE.indexOf(niveau);
   return Object.entries(CM_THEMES).filter(([, d]) => CM_NIVEAUX_ORDRE.indexOf(d.niveau) <= limite);
@@ -13455,20 +13682,43 @@ function renderCMConfig() {
   }
 
   const themesDispo = themesPourNiveau(cmConfig.niveau);
+  // Regroupement par categorie + recherche (31/10/2026) : avec 212 themes au
+  // total, une grille plate rendait un theme precis (ex. "TVI") impossible a
+  // retrouver rapidement -- signale par Jamal. CM_CATEGORIES (pres de
+  // CM_THEMES) range chaque theme dans l'une de 15 categories. Les categories
+  // contenant au moins un theme deja selectionne s'ouvrent par defaut.
+  const parCategorie = {};
+  themesDispo.forEach(([nom, data]) => {
+    const cat = CM_CATEGORIES[nom] || 'Autres';
+    (parCategorie[cat] = parCategorie[cat] || []).push([nom, data]);
+  });
+  const categoriesOrdonnees = Object.keys(parCategorie).sort((a,b) => parCategorie[b].length - parCategorie[a].length);
   body.innerHTML = `
     <div class="pdf-section">
       <div class="pdf-section-title">
         🎯 Thèmes — ${LABELS_CLASSES[cmConfig.niveau] || cmConfig.niveau}
         <span onclick="changerNiveauCM()" style="float:right;color:var(--bleu);font-weight:600;cursor:pointer;text-transform:none;letter-spacing:0">Changer de niveau</span>
       </div>
-      <div class="cm-themes-grid">
-        ${themesDispo.map(([nom, data]) => `
-          <div class="cm-theme-btn ${cmConfig.themes.includes(nom)?'selected':''}" onclick="toggleCMTheme('${nom}', this)">
-            <span class="cm-theme-emoji">${data.emoji}</span>
-            <span class="cm-theme-name">${nom}</span>
+      <input type="text" class="cm-search-input" id="cm-theme-search" placeholder="🔍 Rechercher un thème (ex. TVI, Pythagore, limites...)" oninput="filtrerThemesCM(this.value)">
+      ${cmConfig.themes.length ? `<div style="font-size:12px;color:var(--muted);margin-bottom:10px">${cmConfig.themes.length} thème${cmConfig.themes.length>1?'s':''} sélectionné${cmConfig.themes.length>1?'s':''}</div>` : ''}
+      ${categoriesOrdonnees.map(cat => {
+        const liste = parCategorie[cat];
+        const nbSelect = liste.filter(([nom]) => cmConfig.themes.includes(nom)).length;
+        return `
+        <details class="cm-categorie" ${nbSelect>0?'open':''}>
+          <summary>${cat} <span class="cm-categorie-count" data-count-for="${cat.replace(/"/g,'&quot;')}">(${liste.length}${nbSelect?` · ${nbSelect} sélectionné${nbSelect>1?'s':''}`:''})</span></summary>
+          <div class="cm-categorie-corps">
+            <div class="cm-themes-grid">
+              ${liste.map(([nom, data]) => `
+                <div class="cm-theme-btn ${cmConfig.themes.includes(nom)?'selected':''}" data-nom="${cmNormalize(nom)}" onclick="toggleCMTheme('${nom.replace(/'/g,"\\'")}', this)">
+                  <span class="cm-theme-emoji">${data.emoji}</span>
+                  <span class="cm-theme-name">${nom}</span>
+                </div>
+              `).join('')}
+            </div>
           </div>
-        `).join('')}
-      </div>
+        </details>`;
+      }).join('')}
     </div>
     <div class="pdf-section">
       <div class="pdf-section-title">📡 Mode</div>
@@ -13516,6 +13766,33 @@ function toggleCMTheme(nom, el) {
   if(idx === -1) cmConfig.themes.push(nom);
   else cmConfig.themes.splice(idx, 1);
   el.classList.toggle('selected');
+  // Met a jour le compteur de la categorie sans tout re-rendre (garde le focus
+  // sur la recherche si l'enseignant est en train de filtrer).
+  const details = el.closest('.cm-categorie');
+  if(details) {
+    const total = details.querySelectorAll('.cm-theme-btn').length;
+    const select = details.querySelectorAll('.cm-theme-btn.selected').length;
+    const countEl = details.querySelector('.cm-categorie-count');
+    if(countEl) countEl.textContent = `(${total}${select?` · ${select} sélectionné${select>1?'s':''}`:''})`;
+  }
+}
+
+// Recherche de theme (31/10/2026) : normalise accents + casse pour que
+// "theoreme" trouve aussi "Théorème", "equation" trouve "Équation", etc.
+const cmNormalize = s => s.normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();
+
+function filtrerThemesCM(query) {
+  const q = cmNormalize(query.trim());
+  document.querySelectorAll('.cm-categorie').forEach(details => {
+    let anyVisible = false;
+    details.querySelectorAll('.cm-theme-btn').forEach(btn => {
+      const match = !q || (btn.dataset.nom || '').includes(q);
+      btn.style.display = match ? '' : 'none';
+      if(match) anyVisible = true;
+    });
+    details.style.display = anyVisible ? '' : 'none';
+    if(q && anyVisible) details.open = true;
+  });
 }
 
 function setCMMode(mode) {
