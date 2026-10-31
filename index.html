@@ -811,6 +811,11 @@ nav {
 /* ══ CALCUL MENTAL ══ */
 .cm-themes-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:10px; }
 .cm-search-input { width:100%; box-sizing:border-box; padding:10px 14px; border:1.5px solid var(--bordure); border-radius:var(--r); font-size:14px; font-family:'DM Sans',sans-serif; margin-bottom:12px; background:var(--bg); color:var(--texte); }
+/* Empeche une formule rendue par KaTeX de se couper au milieu (ex. "f(x)="
+   en fin de ligne et le nombre seul juste apres) -- signale par Jamal.
+   Le saut de ligne reste possible ENTRE deux segments \$...\$ ou mots de
+   prose, juste pas a l'interieur d'une meme formule. */
+#cm-enonce-proj .katex, #cm-part-enonce .katex { white-space:nowrap; }
 .cm-search-input:focus { outline:none; border-color:var(--bleu); }
 .cm-categorie { border:1.5px solid var(--bordure); border-radius:var(--r); margin-bottom:8px; overflow:hidden; }
 .cm-categorie summary { padding:10px 14px; font-weight:700; font-size:13px; color:var(--texte); cursor:pointer; list-style:none; display:flex; align-items:center; gap:6px; background:var(--bg); }
@@ -13781,6 +13786,28 @@ function toggleCMTheme(nom, el) {
 // "theoreme" trouve aussi "Théorème", "equation" trouve "Équation", etc.
 const cmNormalize = s => s.normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();
 
+// Questions oui/non (31/10/2026) : enonce "Theoreme de ... ? (1=oui, 0=non)"
+// donnait a l'avance le format exact de la reponse attendue -- signale par
+// Jamal. On retire ce rappel de l'enonce affiche (la question se lit alors
+// naturellement) et on revele "Oui"/"Non" plutot que le 1/0 brut, tout en
+// gardant r=1/0 cote donnees pour la comparaison numerique en mode connecte.
+function cmFormatterQuestion(qRaw) {
+  const m = qRaw.match(/\s*\(1=oui,\s*0=non[^)]*\)/i);
+  if(m) return { texte: qRaw.replace(m[0], ''), estOuiNon: true };
+  return { texte: qRaw, estOuiNon: false };
+}
+// Accepte "oui"/"non" (ou vrai/faux) tapes au clavier comme equivalents de 1/0
+// en plus d'un nombre, pour le mode connecte -- l'enonce ne donne plus le
+// format attendu, l'eleve tape naturellement sa reponse.
+function cmParseReponse(raw) {
+  const val = parseFloat(String(raw).trim().replace(',', '.'));
+  if(!isNaN(val)) return val;
+  const mot = cmNormalize(String(raw).trim());
+  if(['oui','vrai','yes','o','v'].includes(mot)) return 1;
+  if(['non','faux','no','n','f'].includes(mot)) return 0;
+  return NaN;
+}
+
 function filtrerThemesCM(query) {
   const q = cmNormalize(query.trim());
   document.querySelectorAll('.cm-categorie').forEach(details => {
@@ -13867,7 +13894,7 @@ async function creerSessionCM() {
 function enregistrerReponseDashboard(row) {
   if(row.question_index !== cmIndex) return;
   const q = cmQuestions[cmIndex];
-  const val = parseFloat(String(row.reponse).trim().replace(',', '.'));
+  const val = cmParseReponse(row.reponse);
   const correct = !isNaN(val) && Math.abs(val - q.r) < 0.01;
   if(!cmDashboard[cmIndex]) cmDashboard[cmIndex] = { total: 0, correct: 0 };
   cmDashboard[cmIndex].total++;
@@ -13886,9 +13913,10 @@ function majAffichageDashboardCM() {
 async function diffuserEtatCM(statut) {
   if(!cmChannel || !cmSessionId) return;
   const q = cmQuestions[cmIndex];
+  const { texte, estOuiNon } = q ? cmFormatterQuestion(q.q) : { texte: null, estOuiNon: false };
   cmChannel.send({
     type: 'broadcast', event: 'etat',
-    payload: { index: cmIndex, statut, enonce: q ? q.q : null, reponse: statut === 'reponse_visible' ? q.r : null },
+    payload: { index: cmIndex, statut, enonce: texte, estOuiNon, reponse: statut === 'reponse_visible' ? q.r : null },
   });
   await supabaseClient.from('sessions_calcul_mental').update({ question_index: cmIndex, statut }).eq('id', cmSessionId);
 }
@@ -13906,7 +13934,7 @@ function afficherQuestionCM() {
   const q = cmQuestions[cmIndex];
   document.getElementById('cm-num-question').textContent = `Question ${cmIndex+1} / ${cmQuestions.length} — ${q.theme}`;
   const elEnonceProj = document.getElementById('cm-enonce-proj');
-  elEnonceProj.textContent = q.q;
+  elEnonceProj.textContent = cmFormatterQuestion(q.q).texte;
   renderMathSafe(elEnonceProj);
   document.getElementById('cm-reponse-proj').textContent = '';
   document.getElementById('cm-code-session').textContent = cmSessionCode ? `Code : ${cmSessionCode}` : '';
@@ -13933,7 +13961,9 @@ function afficherReponseCM() {
   cmReponseVisible = true;
   clearInterval(cmTimer);
   const q = cmQuestions[cmIndex];
-  document.getElementById('cm-reponse-proj').textContent = `→ ${String(q.r).replace('.',',')}`;
+  const { estOuiNon } = cmFormatterQuestion(q.q);
+  const label = estOuiNon ? (q.r===1 ? 'Oui' : 'Non') : String(q.r).replace('.',',');
+  document.getElementById('cm-reponse-proj').textContent = `→ ${label}`;
   document.getElementById('cm-chrono').textContent = '✓';
   if(cmConfig.mode === 'connecte') diffuserEtatCM('reponse_visible');
 }
@@ -14063,8 +14093,11 @@ function traiterEtatCMParticipant(payload) {
     const elEnonceParticipant = document.getElementById('cm-part-enonce');
     elEnonceParticipant.textContent = payload.enonce;
     renderMathSafe(elEnonceParticipant);
-    document.getElementById('cm-part-input').value = '';
-    document.getElementById('cm-part-input').disabled = false;
+    const inputPart = document.getElementById('cm-part-input');
+    inputPart.value = '';
+    inputPart.disabled = false;
+    inputPart.inputMode = payload.estOuiNon ? 'text' : 'decimal';
+    inputPart.placeholder = payload.estOuiNon ? 'Oui ou non ?' : 'Ta réponse...';
     document.getElementById('cm-part-btn').disabled = false;
     document.getElementById('cm-part-feedback').textContent = '';
     setTimeout(() => document.getElementById('cm-part-input').focus(), 50);
@@ -14075,15 +14108,16 @@ function traiterEtatCMParticipant(payload) {
     // relecture du champ au moment de la revelation : le champ n'etant plus
     // modifiable des la soumission, une relecture tardive pouvait donner une
     // valeur perimee/differente si l'eleve avait retouche le champ entre-temps.
-    const donnee = cmPartReponseSoumise !== null ? parseFloat(cmPartReponseSoumise.replace(',', '.')) : NaN;
+    const donnee = cmPartReponseSoumise !== null ? cmParseReponse(cmPartReponseSoumise) : NaN;
     const correct = !cmPartAnswered ? false : (!isNaN(donnee) && Math.abs(donnee - payload.reponse) < 0.01);
     cmPartHistorique.push({ index: payload.index, correct, repondu: cmPartAnswered });
     const feedback = document.getElementById('cm-part-feedback');
+    const labelReponse = payload.estOuiNon ? (payload.reponse===1 ? 'Oui' : 'Non') : payload.reponse;
     if(!cmPartAnswered) {
-      feedback.textContent = `⏱️ Temps écoulé — réponse : ${payload.reponse}`;
+      feedback.textContent = `⏱️ Temps écoulé — réponse : ${labelReponse}`;
       feedback.style.color = '#F59E0B';
     } else {
-      feedback.textContent = correct ? '✅ Bonne réponse !' : `❌ La bonne réponse était ${payload.reponse}`;
+      feedback.textContent = correct ? '✅ Bonne réponse !' : `❌ La bonne réponse était ${labelReponse}`;
       feedback.style.color = correct ? '#22C55E' : '#EF4444';
     }
   }
