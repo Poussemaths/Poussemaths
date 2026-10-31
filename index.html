@@ -849,6 +849,10 @@ nav {
 .cm-setting select { width:100%; padding:10px; border:1.5px solid var(--bordure); border-radius:var(--r); font-size:14px; background:var(--bg); font-family:'DM Sans',sans-serif; }
 .cm-launch-btn { width:100%; padding:16px; background:var(--bleu); color:white; border:none; border-radius:var(--r); font-size:16px; font-weight:700; cursor:pointer; font-family:'DM Sans',sans-serif; }
 .cm-launch-btn:hover { background:var(--bleu-fort); }
+.cm-correction-ligne { display:flex; justify-content:space-between; align-items:baseline; gap:1.2rem; background:rgba(255,255,255,0.06); border-radius:10px; padding:0.9rem 1.2rem; }
+.cm-correction-enonce { color:white; font-family:'DM Sans',sans-serif; font-size:1.05rem; line-height:1.4; }
+.cm-correction-reponse { color:#4A90D9; font-weight:700; font-size:1.05rem; white-space:nowrap; }
+.cm-correction-enonce .katex, .cm-correction-reponse .katex { white-space:nowrap; }
 
 /* Barre chrono projections */
 @keyframes chronoReduce { from{width:100%} to{width:0%} }
@@ -1864,7 +1868,14 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
   <div id="cm-enonce-proj" style="font-size:clamp(1.6rem,4vw,3.2rem);font-weight:700;color:white;text-align:center;padding:0 2rem;font-family:'DM Sans',sans-serif;line-height:1.35"></div>
   <div id="cm-reponse-proj" style="font-size:2rem;color:#4A90D9;margin-top:2rem;font-weight:700;min-height:3rem"></div>
   <div id="cm-dashboard-prof" style="position:absolute;bottom:56px;color:#5EEAD4;font-size:15px;font-weight:600"></div>
-  <div style="position:absolute;bottom:24px;color:rgba(255,255,255,0.3);font-size:13px">Clic ou espace → question suivante · Entrée → afficher la réponse</div>
+  <div id="cm-aide-clavier" style="position:absolute;bottom:24px;color:rgba(255,255,255,0.3);font-size:13px">Clic ou espace → question suivante · Entrée → afficher la réponse</div>
+</div>
+
+<!-- ═══ CORRECTION FINALE CALCUL MENTAL (mode "révéler à la fin") ═══ -->
+<div id="cm-correction-cm" style="display:none;position:fixed;inset:0;background:#1C1E26;z-index:9999;flex-direction:column;align-items:center;overflow-y:auto;padding:4rem 1.5rem 2rem">
+  <button onclick="fermerCorrectionCM()" style="position:absolute;top:20px;right:24px;background:rgba(255,255,255,0.15);border:none;color:white;padding:8px 16px;border-radius:8px;cursor:pointer;font-size:14px">✕ Fermer</button>
+  <div style="font-size:1.6rem;font-weight:800;color:white;font-family:'Fraunces',serif;margin-bottom:1.5rem">✅ Correction</div>
+  <div id="cm-correction-liste" style="width:100%;max-width:800px;display:flex;flex-direction:column;gap:0.9rem"></div>
 </div>
 
 <!-- ═══ REJOINDRE UN CALCUL MENTAL (élève) ═══ -->
@@ -11640,7 +11651,7 @@ function genererPDF() {
 //  CALCUL MENTAL
 // ═══════════════════════════════════════
 
-let cmConfig = { niveau: null, themes: [], chrono: 5, nb: 10, mode: 'projection' };
+let cmConfig = { niveau: null, themes: [], chrono: 5, nb: 10, mode: 'projection', revelation: 'immediat' };
 let cmQuestions = [];
 let cmIndex = 0;
 let cmTimer = null;
@@ -13738,6 +13749,19 @@ function renderCMConfig() {
         </div>
       </div>
     </div>
+    <div class="pdf-section">
+      <div class="pdf-section-title">👁️ Révélation des réponses</div>
+      <div class="cm-mode-grid">
+        <div class="cm-mode-btn ${cmConfig.revelation==='immediat'?'selected':''}" onclick="setCMRevelation('immediat')">
+          <div class="cm-mode-titre">⚡ Après chaque question</div>
+          <div class="cm-mode-desc">La réponse s'affiche dès que le temps est écoulé ou sur un clic.</div>
+        </div>
+        <div class="cm-mode-btn ${cmConfig.revelation==='fin'?'selected':''}" onclick="setCMRevelation('fin')">
+          <div class="cm-mode-titre">🏁 À la fin de la série</div>
+          <div class="cm-mode-desc">Les questions s'enchaînent sans réponse, puis une correction complète s'affiche à la fin.</div>
+        </div>
+      </div>
+    </div>
     <div class="cm-settings">
       <div class="cm-setting">
         <label>⏱️ Temps par question</label>
@@ -13824,6 +13848,11 @@ function filtrerThemesCM(query) {
 
 function setCMMode(mode) {
   cmConfig.mode = mode;
+  renderCMConfig();
+}
+
+function setCMRevelation(revelation) {
+  cmConfig.revelation = revelation;
   renderCMConfig();
 }
 
@@ -13931,6 +13960,10 @@ function afficherQuestionCM() {
   proj.style.display = 'flex';
   cmReponseVisible = false;
 
+  document.getElementById('cm-aide-clavier').textContent = cmConfig.revelation === 'fin'
+    ? 'Clic, espace ou le chrono → question suivante · Correction à la fin'
+    : 'Clic ou espace → question suivante · Entrée → afficher la réponse';
+
   const q = cmQuestions[cmIndex];
   document.getElementById('cm-num-question').textContent = `Question ${cmIndex+1} / ${cmQuestions.length} — ${q.theme}`;
   const elEnonceProj = document.getElementById('cm-enonce-proj');
@@ -13951,7 +13984,7 @@ function afficherQuestionCM() {
     document.getElementById('cm-chrono').textContent = timeLeft;
     if(timeLeft <= 0) {
       clearInterval(cmTimer);
-      afficherReponseCM();
+      if(cmConfig.revelation === 'fin') cmProchaine(); else afficherReponseCM();
     }
   }, 1000);
 }
@@ -13969,6 +14002,15 @@ function afficherReponseCM() {
 }
 
 function cmProchaine() {
+  // Mode "révéler à la fin" (31/10/2026) : jamais de réponse affichée pendant
+  // la série, on avance directement -- la correction complète n'arrive qu'au
+  // bout, comme demandé par Jamal (usage mathsmentales.net/annalesmaths.net).
+  if(cmConfig.revelation === 'fin') {
+    cmIndex++;
+    if(cmIndex >= cmQuestions.length) afficherCorrectionFinaleCM();
+    else afficherQuestionCM();
+    return;
+  }
   if(!cmReponseVisible) {
     afficherReponseCM();
   } else {
@@ -13987,11 +14029,53 @@ function fermerProjection() {
   }
 }
 
+// Correction complete en fin de serie (mode "reveler a la fin", 31/10/2026) :
+// remplace l'ecran question/reponse par la liste de toutes les questions avec
+// leur reponse, comme sur mathsmentales.net/annalesmaths.net -- utile pour
+// corriger au tableau en fin de seance sans avoir devoile les reponses avant.
+function afficherCorrectionFinaleCM() {
+  clearInterval(cmTimer);
+  document.getElementById('cm-projection').style.display = 'none';
+  const el = document.getElementById('cm-correction-liste');
+  el.innerHTML = '';
+  cmQuestions.forEach((q, i) => {
+    const { texte, estOuiNon } = cmFormatterQuestion(q.q);
+    const label = estOuiNon ? (q.r===1 ? 'Oui' : 'Non') : String(q.r).replace('.',',');
+    const ligne = document.createElement('div');
+    ligne.className = 'cm-correction-ligne';
+    const enonceEl = document.createElement('div');
+    enonceEl.className = 'cm-correction-enonce';
+    enonceEl.textContent = `${i+1}. ${texte}`;
+    const reponseEl = document.createElement('div');
+    reponseEl.className = 'cm-correction-reponse';
+    reponseEl.textContent = `→ ${label}`;
+    ligne.appendChild(enonceEl);
+    ligne.appendChild(reponseEl);
+    el.appendChild(ligne);
+  });
+  renderMathSafe(el);
+  document.getElementById('cm-correction-cm').style.display = 'flex';
+  if(cmConfig.mode === 'connecte' && cmSessionId) {
+    diffuserEtatCM('termine');
+    if(cmChannel) { supabaseClient.removeChannel(cmChannel); cmChannel = null; }
+    cmSessionId = null; cmSessionCode = null;
+  }
+}
+
+function fermerCorrectionCM() {
+  document.getElementById('cm-correction-cm').style.display = 'none';
+}
+
 // Raccourcis clavier pour la projection
 document.addEventListener('keydown', (e) => {
+  const correction = document.getElementById('cm-correction-cm');
+  if(correction.style.display === 'flex') {
+    if(e.key === 'Escape') fermerCorrectionCM();
+    return;
+  }
   const proj = document.getElementById('cm-projection');
   if(proj.style.display === 'flex') {
-    if(e.key === 'Enter') afficherReponseCM();
+    if(e.key === 'Enter') { if(cmConfig.revelation === 'fin') cmProchaine(); else afficherReponseCM(); }
     if(e.key === ' ' || e.key === 'ArrowRight') cmProchaine();
     if(e.key === 'Escape') fermerProjection();
     e.preventDefault();
