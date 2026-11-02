@@ -60,7 +60,8 @@ body {
    NAV
 ══════════════════════════════════ */
 nav {
-  position:fixed; top:0; left:0; right:0; z-index:200;
+  position:fixed; top:var(--banniere-h,0px); left:0; right:0; z-index:200;
+  transition:top 0.2s;
   height:64px;
   background:rgba(255,255,255,0.96);
   backdrop-filter:blur(16px);
@@ -136,8 +137,9 @@ nav {
 .bo-banner {
   background:var(--bleu);
   padding:9px 2rem;
-  margin-top:64px;
+  margin-top:calc(64px + var(--banniere-h,0px));
   text-align:center;
+  transition:margin-top 0.2s;
 }
 .bo-banner p {
   font-size:13px; font-weight:500; color:white;
@@ -1245,8 +1247,26 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
 <!-- ── BANNIÈRE BETA ── -->
 <div id="banniere-beta" style="background:linear-gradient(90deg,var(--bleu),#7B4FE9);color:white;text-align:center;padding:8px 16px;font-size:13px;font-weight:600;font-family:'DM Sans',sans-serif;position:relative;z-index:200;">
   🚧 Poussemaths est encore en construction — merci de ta patience, on ajoute du contenu et on corrige chaque semaine !
-  <button onclick="this.parentElement.style.display='none'" style="background:rgba(255,255,255,0.2);border:none;color:white;margin-left:12px;padding:2px 10px;border-radius:20px;cursor:pointer;font-size:12px;font-family:'DM Sans',sans-serif;">✕</button>
+  <button onclick="fermerBanniereBeta()" style="background:rgba(255,255,255,0.2);border:none;color:white;margin-left:12px;padding:2px 10px;border-radius:20px;cursor:pointer;font-size:12px;font-family:'DM Sans',sans-serif;">✕</button>
 </div>
+<script>
+  // La nav et les pages reservent de l'espace en haut via --banniere-h (voir
+  // nav{top:}, .bo-banner{margin-top:} et les pages{padding-top:}) --
+  // mesure reelle (pas une hauteur en dur) car le texte passe sur 2 lignes
+  // sur mobile/zoom reduit. Sans ca, la nav (position:fixed, meme z-index)
+  // recouvre entierement la banniere au lieu de se placer sous elle (trouve
+  // le 02/11/2026, la banniere n'etait tout simplement jamais visible).
+  (function(){
+    var b = document.getElementById('banniere-beta');
+    function maj(){ document.documentElement.style.setProperty('--banniere-h', b.offsetHeight + 'px'); }
+    maj();
+    window.addEventListener('resize', maj);
+    window.fermerBanniereBeta = function(){
+      b.style.display = 'none';
+      document.documentElement.style.setProperty('--banniere-h', '0px');
+    };
+  })();
+</script>
 
 <!-- ═══ NAV ═══ -->
 <nav>
@@ -1497,7 +1517,7 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
 <!-- ═══════════════════════════════════════
      PAGE : EXERCICES
 ════════════════════════════════════════ -->
-<div class="page" id="page-exercices" style="padding-top:64px">
+<div class="page" id="page-exercices" style="padding-top:calc(64px + var(--banniere-h,0px))">
   <div class="bo-banner"><p><span class="bo-pill">BO 2026</span>Exercices alignés sur les nouveaux programmes officiels</p></div>
   <div class="exercices-page">
     <div class="ex-header">
@@ -1512,7 +1532,7 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
 <!-- ═══════════════════════════════════════
      PAGE : ESPACE ÉLÈVE
 ════════════════════════════════════════ -->
-<div class="page" id="page-eleve" style="padding-top:64px">
+<div class="page" id="page-eleve" style="padding-top:calc(64px + var(--banniere-h,0px))">
   <div class="eleve-page" id="eleve-page-content">
     <!-- Contenu chargé dynamiquement par renderEspaceEleve() -->
     <div style="text-align:center;padding:4rem;color:var(--muted)">Chargement...</div>
@@ -1522,7 +1542,7 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
 <!-- ═══════════════════════════════════════
      PAGE : ESPACE PARENT (consultation par code, sans compte)
 ════════════════════════════════════════ -->
-<div class="page" id="page-parent" style="padding-top:64px">
+<div class="page" id="page-parent" style="padding-top:calc(64px + var(--banniere-h,0px))">
   <div class="eleve-page" id="parent-page-content" style="max-width:900px;margin:0 auto;padding:2rem">
     <!-- Contenu chargé dynamiquement par renderEspaceParent() -->
   </div>
@@ -1531,7 +1551,7 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
 <!-- ═══════════════════════════════════════
      PAGE : PARCOURS
 ════════════════════════════════════════ -->
-<div class="page" id="page-parcours" style="padding-top:64px">
+<div class="page" id="page-parcours" style="padding-top:calc(64px + var(--banniere-h,0px))">
   <div style="max-width:900px;margin:0 auto;padding:2rem 2rem 4rem">
     <div style="margin-bottom:2rem">
       <div class="s-label">Solo</div>
@@ -1576,7 +1596,7 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
 <!-- ═══════════════════════════════════════
      PAGE : RESSOURCES (cours/fiches en PDF, lecture seule)
 ════════════════════════════════════════ -->
-<div class="page" id="page-ressources" style="padding-top:64px">
+<div class="page" id="page-ressources" style="padding-top:calc(64px + var(--banniere-h,0px))">
   <div style="max-width:900px;margin:0 auto;padding:2rem 2rem 4rem">
     <div style="margin-bottom:2rem">
       <div class="s-label">Ressources</div>
@@ -1618,7 +1638,7 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
 <!-- ═══════════════════════════════════════
      PAGE : ESPACE PROF (placeholder)
 ════════════════════════════════════════ -->
-<div class="page" id="page-prof" style="padding-top:64px">
+<div class="page" id="page-prof" style="padding-top:calc(64px + var(--banniere-h,0px))">
   <div class="prof-page">
 
     <!-- HEADER PROF -->
