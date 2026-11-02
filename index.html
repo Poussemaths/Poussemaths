@@ -1765,6 +1765,7 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
           <div class="db-section-titre" id="parcours-detail-titre">Détail du parcours</div>
           <button class="btn-prof-action" onclick="exporterParcoursCSV(parcoursDetailCourant)">📤 Exporter CSV</button>
         </div>
+        <div id="parcours-detail-exercices" style="margin-bottom:14px"></div>
         <div class="db-table-wrap">
           <table class="db-table">
             <thead>
@@ -10847,6 +10848,30 @@ function parseLigneEleve(ligne) {
   return { prenom: mots[0], nom: mots.slice(1).join(' ') };
 }
 
+// Export Pronote complet (copier-coller du tableau eleves) : plusieurs
+// colonnes separees par tabulations (Nom, Prenom, date de naissance, sexe,
+// classe, groupes, options...), chaque valeur parfois entre guillemets quand
+// elle contient une virgule. Si la 1ere ligne a des tabulations et contient
+// des en-tetes "Nom"/"Prénom", on extrait uniquement ces deux colonnes et on
+// ignore tout le reste -- sinon le decoupage par mots de parseLigneEleve
+// mélangerait toutes les colonnes dans le nom (trouve le 02/11/2026 en testant
+// avec Jamal : copier-coller brut depuis Pronote, 12 colonnes).
+function parseExportPronote(lignes) {
+  if(!lignes[0].includes('\t')) return null;
+  const nettoyer = (v) => (v || '').trim().replace(/^"(.*)"$/, '$1').trim();
+  const entetes = lignes[0].split('\t').map(h => nettoyer(h).toLowerCase());
+  const idxNom = entetes.indexOf('nom');
+  const idxPrenom = entetes.indexOf('prénom');
+  if(idxNom === -1 || idxPrenom === -1) return null;
+  return lignes.slice(1).map(l => {
+    const cols = l.split('\t');
+    const nom = nettoyer(cols[idxNom]);
+    const prenom = nettoyer(cols[idxPrenom]);
+    if(!nom && !prenom) return null;
+    return { prenom, nom };
+  }).filter(Boolean);
+}
+
 function analyserListeEleves() {
   const texte = document.getElementById('inscription-textarea').value;
   const lignes = texte.split('\n').map(l => l.trim()).filter(l => l.length > 0);
@@ -10856,7 +10881,7 @@ function analyserListeEleves() {
     err.style.display = 'block';
     return;
   }
-  inscriptionListe = lignes.map(parseLigneEleve).filter(Boolean);
+  inscriptionListe = parseExportPronote(lignes) || lignes.map(parseLigneEleve).filter(Boolean);
   renderInscriptionApercu();
 }
 
@@ -11265,6 +11290,21 @@ async function voirDetailParcours(id) {
   if(!p) return;
   document.getElementById('parcours-detail-titre').textContent = `📝 ${p.titre}`;
   document.getElementById('parcours-detail-section').style.display = '';
+
+  const exosDuNiveau = getAllExercices(p.niveau);
+  const exercicesEl = document.getElementById('parcours-detail-exercices');
+  exercicesEl.innerHTML = `
+    <div style="font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:6px">
+      📚 ${p.exercices.length} exercice${p.exercices.length > 1 ? 's' : ''} assigné${p.exercices.length > 1 ? 's' : ''}
+    </div>
+    <div style="display:flex;flex-direction:column;gap:4px">
+      ${p.exercices.map(pe => {
+        const ex = exosDuNiveau.find(x => x.id === pe.id);
+        const titre = ex ? ex.titre : pe.id;
+        return `<div style="font-size:13px;padding:6px 10px;background:var(--bg);border-radius:6px">${titre} <span style="color:var(--muted)">— ${pe.chapitre} · ${pe.points_total} pts${pe.genere ? ' · génératif' : ''}</span></div>`;
+      }).join('')}
+    </div>
+  `;
 
   const { data: eleves } = await supabaseClient.from('eleves').select('id,nom,prenom').eq('code_classe', p.code_classe);
   const { data: progRows } = await supabaseClient.from('progression').select('eleve_id,points_obtenus,points_total,completed_at').eq('parcours_id', id);
@@ -15671,7 +15711,9 @@ async function showResult() {
       ${relanceInfo}
       <div style="margin-top:1.5rem;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
         <button class="btn-nav-modal primary" onclick="ouvrirExercice('${currentExercice.id}', ${parcoursIdCourant ? `'${parcoursIdCourant}'` : 'null'})">${relancerLabel}</button>
-        <button class="btn-nav-modal" onclick="fermerModal();showPage('exercices')">Autres exercices</button>
+        ${parcoursIdCourant
+          ? `<button class="btn-nav-modal" onclick="fermerModal();showPage('eleve')">↩ Retour à mon parcours</button>`
+          : `<button class="btn-nav-modal" onclick="fermerModal();showPage('exercices')">Autres exercices</button>`}
       </div>
     </div>
   `;
