@@ -11111,6 +11111,7 @@ function ouvrirParcoursModal() {
   document.getElementById('parcours-overlay').style.display = 'flex';
   parcoursSelectionExercices = [];
   parcoursCompetencesFiltre = [];
+  parcoursApercuOuvert = new Set();
   renderParcoursModal();
 }
 
@@ -11168,6 +11169,7 @@ function onParcoursClasseChange() {
   parcoursNiveauCourant = classe ? classe.niveau : null;
   parcoursSelectionExercices = [];
   parcoursCompetencesFiltre = [];
+  parcoursApercuOuvert = new Set();
   renderParcoursCompetences();
   renderParcoursExercices();
 }
@@ -11176,9 +11178,23 @@ function renderParcoursCompetences() {
   const grid = document.getElementById('parcours-competences-grid');
   if(!parcoursNiveauCourant) { grid.innerHTML = ''; return; }
   const exos = getAllExercices(parcoursNiveauCourant);
-  const competences = [...new Set(exos.flatMap(e => e.competences || []))].sort();
-  grid.innerHTML = competences.length
-    ? competences.map(c => `<button class="pdf-chap-btn" style="font-size:12px" onclick="toggleParcoursCompetence('${c.replace(/'/g,"\\'")}', this)">${c}</button>`).join('')
+  // Regroupees par chapitre plutot qu'en liste plate alphabetique -- en liste
+  // plate (49 competences de 3e), Jamal n'a pas retrouve une competence pourtant
+  // bien presente, juste rattachee a un autre chapitre que celui attendu
+  // (trouve en testant "creer un parcours" le 02/11/2026).
+  const parChapitre = {};
+  exos.forEach(e => {
+    (e.competences || []).forEach(c => {
+      if(!parChapitre[e.chapitre]) parChapitre[e.chapitre] = new Set();
+      parChapitre[e.chapitre].add(c);
+    });
+  });
+  const chapitres = Object.keys(parChapitre).sort();
+  grid.innerHTML = chapitres.length
+    ? chapitres.map(chap => `
+        <div style="grid-column:1/-1;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.04em;color:var(--muted);margin-top:8px">${chap}</div>
+        ${[...parChapitre[chap]].sort().map(c => `<button class="pdf-chap-btn" style="font-size:12px" onclick="toggleParcoursCompetence('${c.replace(/'/g,"\\'")}', this)">${c}</button>`).join('')}
+      `).join('')
     : '<div style="color:var(--muted);font-size:13px">Aucune compétence renseignée pour ce niveau.</div>';
 }
 
@@ -11189,6 +11205,11 @@ function toggleParcoursCompetence(comp, btn) {
   renderParcoursExercices();
 }
 
+// Exercices dont l'apercu (contenu complet) est deplie dans la liste de
+// creation de parcours -- permet de lire l'exercice avant de le cocher,
+// demande par Jamal le 02/11/2026 (comparaison avec Sacado).
+let parcoursApercuOuvert = new Set();
+
 function renderParcoursExercices() {
   const liste = document.getElementById('parcours-exercices-liste');
   if(!parcoursNiveauCourant) { liste.innerHTML = ''; return; }
@@ -11197,11 +11218,35 @@ function renderParcoursExercices() {
     exos = exos.filter(ex => (ex.competences || []).some(c => parcoursCompetencesFiltre.includes(c)));
   }
   liste.innerHTML = exos.length ? exos.map(ex => `
-    <label style="display:flex;align-items:center;gap:8px;padding:8px 4px;border-bottom:1px solid var(--bordure);font-size:13px;cursor:pointer">
-      <input type="checkbox" ${parcoursSelectionExercices.some(s => s.id === ex.id) ? 'checked' : ''} onchange="toggleParcoursExercice('${ex.id}', this.checked)">
-      <span style="flex:1">${ex.titre} <span style="color:var(--muted)">— ${ex.chapitre} · ${ex.points_total} pts${ex.genere ? ' · génératif' : ''}</span></span>
-    </label>
+    <div style="border-bottom:1px solid var(--bordure)">
+      <label style="display:flex;align-items:center;gap:8px;padding:8px 4px;font-size:13px;cursor:pointer">
+        <input type="checkbox" ${parcoursSelectionExercices.some(s => s.id === ex.id) ? 'checked' : ''} onchange="toggleParcoursExercice('${ex.id}', this.checked)">
+        <span style="flex:1">${ex.titre} <span style="color:var(--muted)">— ${ex.chapitre} · ${ex.points_total} pts${ex.genere ? ' · génératif' : ''}</span></span>
+        <button type="button" class="auth-btn-secondary" style="width:auto;padding:3px 10px;font-size:11px;flex-shrink:0" onclick="event.preventDefault();toggleApercuExercice('${ex.id}')">${parcoursApercuOuvert.has(ex.id) ? 'Masquer' : '👁 Aperçu'}</button>
+      </label>
+      ${parcoursApercuOuvert.has(ex.id) ? renderApercuExercice(ex) : ''}
+    </div>
   `).join('') : '<div style="color:var(--muted);font-size:13px">Aucun exercice pour ce filtre.</div>';
+}
+
+function toggleApercuExercice(id) {
+  if(parcoursApercuOuvert.has(id)) parcoursApercuOuvert.delete(id);
+  else parcoursApercuOuvert.add(id);
+  renderParcoursExercices();
+}
+
+function renderApercuExercice(ex) {
+  if(ex.genere) {
+    return `<div style="padding:4px 12px 12px;font-size:12px;color:var(--muted)">🔄 Exercice génératif — une nouvelle question différente est générée à chaque fois, pas d'aperçu figé possible (contenu déjà audité, voir le chantier Edge Functions).</div>`;
+  }
+  return `<div style="padding:0 12px 12px;display:flex;flex-direction:column;gap:6px">
+    ${ex.questions.map(q => `
+      <div style="font-size:12px;background:var(--bg);border-radius:6px;padding:8px 10px">
+        <div>${texToHtml(q.label + ' ' + q.enonce)}</div>
+        ${q.type === 'qcm' && q.choix ? `<ul style="margin:6px 0 0 18px;padding:0;color:var(--muted)">${q.choix.map(c => `<li>${texToHtml(c)}</li>`).join('')}</ul>` : ''}
+      </div>
+    `).join('')}
+  </div>`;
 }
 
 function toggleParcoursExercice(id, checked) {
