@@ -80,7 +80,8 @@ function verifierReponse(userRaw: string, correctionRaw: string): boolean {
     const parties = cPreserve.split(/[=≈→]/);
     const resultats: number[] = [];
 
-    for (const partie of parties) {
+    for (let idx = 0; idx < parties.length; idx++) {
+      const partie = parties[idx];
       const p = partie.trim();
 
       const matchDfrac = p.match(/(-)?\\d?frac\{(-?\d+)\}\{(-?\d+)\}\s*$/);
@@ -94,11 +95,27 @@ function verifierReponse(userRaw: string, correctionRaw: string): boolean {
       }
 
       const UNITE_RE = 'cm²|cm³|dm³|km\\/h|m\\/s|mL|cL|dL|hL|mg|min|rad|cm|dm|km|mm|kg|m²|m³|m|g|s|h|L|°|%|€';
-      const pClean = p.replace(/\\[a-zA-Z]+/g, ' ').replace(/\\[%$&_#]/g, ' ').replace(/[{}]/g, ' ')
+      let pClean = p.replace(/\\[a-zA-Z]+/g, ' ').replace(/\\[%$&_#]/g, ' ').replace(/[{}]/g, ' ')
         .replace(/[.,;:]+\s*$/, '')
         .replace(new RegExp(`\\s*(?:${UNITE_RE})\\s*$`, 'i'), '')
         .replace(/[.,;:]+\s*$/, '')
         .replace(/\s+(?:[a-zàâäéèêëïîôöùûüç]{1,2}\s+)*[a-zàâäéèêëïîôöùûüç]{3,}\s*$/i, '');
+      // FIX 04/11/2026 : retire une note explicative entre parentheses en fin de
+      // texte ("4 (mediane des 5 premieres valeurs)") avant de chercher le nombre
+      // final -- la ")" finale empechait toute extraction et basculait vers le
+      // fallback texte substring, bien trop permissif (trouve suite a un
+      // signalement de Jamal en classe sur le theoreme de Pythagore). Seulement
+      // sur la DERNIERE partie (la vraie reponse finale) : sur une partie
+      // intermediaire, une parenthese est presque toujours un argument de
+      // fonction ("cos(30°)"), pas une note -- la retirer casserait l'extraction
+      // legitime (regression trouvee en testant ce correctif).
+      if (idx === parties.length - 1) {
+        const pSansParenthese = pClean.replace(/\([^()]*\)\s*$/, '')
+          .replace(/[.,;:]+\s*$/, '')
+          .replace(new RegExp(`\\s*(?:${UNITE_RE})\\s*$`, 'i'), '')
+          .replace(/[.,;:]+\s*$/, '');
+        if (pSansParenthese !== pClean) pClean = pSansParenthese;
+      }
       const matchFin = pClean.match(/(-?\d+(?:\.\d+)?)\s*$/);
       if (matchFin) {
         const avantNombre = pClean.slice(0, matchFin.index);
@@ -247,8 +264,20 @@ function verifierReponse(userRaw: string, correctionRaw: string): boolean {
       if (corrTermes.length === userTermes.length && corrTermes.every((t, idx) => t === userTermes[idx])) {
         return true;
       }
-    } else if (user.length >= 2 && corrClean.includes(user)) {
-      return true;
+    } else {
+      // FIX 04/11/2026 : on ne compare plus a TOUTE la correction (corrClean,
+      // qui contient chaque etape intermediaire de calcul -- 81, 144, 225...
+      // -- et acceptait donc n'importe quel fragment pioche au hasard dedans,
+      // ex. une eleve qui tape une suite de chiffres au hasard et "tombe" sur
+      // un morceau d'un calcul intermediaire) mais seulement sur le DERNIER
+      // segment (apres le dernier "=" / "Rightarrow"), c'est a dire la reponse
+      // finale elle-meme. Reduit enormement la surface de hasard tout en
+      // gardant valides les reponses courtes legitimes ("6x", "x>40",
+      // "a'(6;2)"...) qui SONT ce dernier segment. On retire aussi les mots
+      // d'habillage ("intervalle", "solution") qui ne sont jamais la reponse
+      // attendue, juste une etiquette ecrite avant elle.
+      const segSansHabillage = segFinalClean.replace(/intervalle|solution/g, '');
+      if (user.length >= 2 && segSansHabillage.includes(user)) return true;
     }
 
     // 4b. Intervalles
