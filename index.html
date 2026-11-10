@@ -310,6 +310,13 @@ nav {
 .s-sub { font-size:1rem; color:var(--texte2); line-height:1.75; font-weight:300; max-width:540px; }
 .s-sub.center { margin:0 auto; }
 
+/* ══ VIDÉOS YOUTUBE (accueil) ══ */
+.yt-grid { display:grid; grid-template-columns:1.1fr 1fr; gap:3rem; align-items:center; }
+.yt-video-frame { position:relative; width:100%; aspect-ratio:16/9; border-radius:var(--r-lg); overflow:hidden; box-shadow:var(--shadow-lg); background:#000; }
+.yt-video-frame iframe { position:absolute; inset:0; width:100%; height:100%; border:0; }
+.yt-text .s-sub { margin-bottom:1.5rem; }
+@media(max-width:900px) { .yt-grid { grid-template-columns:1fr; gap:2rem; } }
+
 /* ══════════════════════════════════
    PAGE ACCUEIL — NIVEAUX
 ══════════════════════════════════ */
@@ -1461,6 +1468,23 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
     </div>
   </section>
 
+  <!-- ── SECTION 2bis : VIDÉOS YOUTUBE ── -->
+  <section class="section" style="background:var(--bg)">
+    <div class="container">
+      <div class="yt-grid reveal">
+        <div class="yt-video-frame">
+          <iframe src="https://www.youtube-nocookie.com/embed/videoseries?list=UUdPG3aU5-as5WzZEb56mhjQ" title="Vidéos PousseMaths sur YouTube" loading="lazy" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        </div>
+        <div class="yt-text">
+          <div class="s-label">Chaîne YouTube</div>
+          <h2 class="s-title">Des cours animés <em>gratuits</em>, chaque semaine</h2>
+          <p class="s-sub">Pythagore, Thalès, trigonométrie, récurrence... des cours animés courts et des exercices corrigés pas à pas, publiés par <strong>@PousseMaths</strong>.</p>
+          <a class="btn-lg-primary" href="https://www.youtube.com/@PousseMaths?sub_confirmation=1" target="_blank" rel="noopener">▶️ S'abonner sur YouTube</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ── SECTION 3 : CONTACT ── -->
   <section class="section" style="background:white" id="tarifs">
     <div class="container">
@@ -1502,6 +1526,7 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
         <ul class="footer-links">
           <li><a href="mailto:contact@poussemaths.fr">contact@poussemaths.fr</a></li>
           <li><a onclick="document.getElementById('tarifs').scrollIntoView({behavior:'smooth'})">Pour les établissements</a></li>
+          <li><a href="https://www.youtube.com/@PousseMaths" target="_blank" rel="noopener">🎥 YouTube</a></li>
         </ul>
       </div>
     </div>
