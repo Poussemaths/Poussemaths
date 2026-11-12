@@ -317,6 +317,33 @@ nav {
 .yt-text .s-sub { margin-bottom:1.5rem; }
 @media(max-width:900px) { .yt-grid { grid-template-columns:1fr; gap:2rem; } }
 
+/* ══ RESSOURCES — onglets niveau + 3 zones (fiches/approfondissement/olympiades) ══ */
+.ress-tabs { display:flex; gap:8px; margin-bottom:2rem; flex-wrap:wrap; }
+.ress-tab { padding:10px 20px; border-radius:50px; border:1.5px solid var(--bordure2); background:white; font-size:14px; font-weight:600; color:var(--texte2); cursor:pointer; font-family:'DM Sans',sans-serif; transition:all 0.18s; }
+.ress-tab:hover { border-color:var(--bleu); color:var(--bleu); }
+.ress-tab.active { background:var(--bleu); border-color:var(--bleu); color:white; }
+
+.ress-zone { border-radius:var(--r-lg); padding:1.5rem; margin-bottom:1.5rem; border:1.5px solid; }
+.ress-zone.tier-fiches { background:var(--bleu-pale,#EAF2FD); border-color:#CFE0F7; }
+.ress-zone.tier-appro { background:var(--or-pale); border-color:#F3E1B8; }
+.ress-zone.tier-olympiades { background:#F0FDF4; border-color:#BBF0CD; }
+.ress-zone-head { margin-bottom:1rem; }
+.ress-zone-titre { font-family:'Fraunces',serif; font-weight:700; letter-spacing:-0.3px; display:flex; align-items:center; gap:8px; }
+.ress-zone.tier-fiches .ress-zone-titre { font-size:1.4rem; color:var(--bleu-fort); }
+.ress-zone.tier-appro .ress-zone-titre { font-size:1.15rem; color:var(--or); }
+.ress-zone.tier-olympiades .ress-zone-titre { font-size:1.05rem; color:var(--vert); }
+.ress-zone-sub { font-size:13px; color:var(--texte2); font-weight:300; margin-top:4px; }
+.ress-cahier-btn { display:inline-flex; align-items:center; gap:8px; background:var(--bleu); color:white; padding:11px 22px; border-radius:var(--r); font-size:14px; font-weight:600; text-decoration:none; border:none; cursor:pointer; font-family:'DM Sans',sans-serif; margin-bottom:1.25rem; transition:all 0.2s; }
+.ress-cahier-btn:hover { background:var(--bleu-fort); }
+.ress-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:10px; }
+.ress-card { background:white; border:1px solid var(--bordure); border-radius:var(--r); padding:0.9rem 1.1rem; cursor:pointer; transition:all 0.15s; }
+.ress-card:hover { border-color:var(--bleu); box-shadow:var(--shadow); transform:translateY(-1px); }
+.ress-card-num { font-size:11px; font-weight:700; color:var(--muted); letter-spacing:0.04em; }
+.ress-card-titre { font-size:13px; font-weight:600; color:var(--texte); margin-top:2px; line-height:1.35; }
+.ress-zone.tier-appro .ress-card:hover { border-color:var(--or); }
+.ress-zone.tier-olympiades .ress-card:hover { border-color:var(--vert); }
+@media(max-width:600px) { .ress-grid { grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); } }
+
 /* ══════════════════════════════════
    PAGE ACCUEIL — NIVEAUX
 ══════════════════════════════════ */
@@ -1622,29 +1649,15 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
      PAGE : RESSOURCES (cours/fiches en PDF, lecture seule)
 ════════════════════════════════════════ -->
 <div class="page" id="page-ressources" style="padding-top:calc(64px + var(--banniere-h,0px))">
-  <div style="max-width:900px;margin:0 auto;padding:2rem 2rem 4rem">
-    <div style="margin-bottom:2rem">
+  <div style="max-width:1040px;margin:0 auto;padding:2rem 2rem 4rem">
+    <div style="margin-bottom:1.5rem">
       <div class="s-label">Ressources</div>
-      <h2 style="font-family:'Fraunces',serif;font-size:2rem;font-weight:700;color:var(--texte);letter-spacing:-1px;margin-bottom:0.4rem">Cahiers <em style="font-style:italic;color:var(--bleu)">d'exercices</em></h2>
-      <p style="font-size:14px;color:var(--muted);font-weight:300">Des cahiers complets par niveau, à consulter en ligne. D'autres niveaux et d'autres fiches arrivent progressivement.</p>
+      <h2 style="font-family:'Fraunces',serif;font-size:2rem;font-weight:700;color:var(--texte);letter-spacing:-1px;margin-bottom:0.4rem">Fiches <em style="font-style:italic;color:var(--bleu)">d'exercices</em></h2>
+      <p style="font-size:14px;color:var(--muted);font-weight:300">Choisis ton niveau. Les fiches normales suffisent pour progresser — approfondissement et olympiades sont là si tu veux aller plus loin.</p>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem">
-      <div style="background:white;border:1px solid var(--bordure);border-radius:var(--r-lg);padding:1.5rem;cursor:pointer" onclick="ouvrirRessourcePDF('/ressources/2nde/cahier-exercices.pdf','2nde — Cahier d\'exercices')">
-        <div style="font-size:28px;margin-bottom:8px">📘</div>
-        <div style="font-family:'Fraunces',serif;font-weight:600;color:var(--texte);margin-bottom:4px">2nde — Cahier d'exercices</div>
-        <div style="font-size:13px;color:var(--muted)">Programme complet, toutes notions</div>
-      </div>
-      <div style="background:white;border:1px solid var(--bordure);border-radius:var(--r-lg);padding:1.5rem;cursor:pointer" onclick="ouvrirRessourcePDF('/ressources/1ere/cahier-exercices.pdf','1ère Spécialité — Cahier d\'exercices')">
-        <div style="font-size:28px;margin-bottom:8px">📘</div>
-        <div style="font-family:'Fraunces',serif;font-weight:600;color:var(--texte);margin-bottom:4px">1ère Spécialité — Cahier d'exercices</div>
-        <div style="font-size:13px;color:var(--muted)">Programme complet, toutes notions</div>
-      </div>
-      <div style="background:white;border:1px solid var(--bordure);border-radius:var(--r-lg);padding:1.5rem;cursor:pointer" onclick="ouvrirRessourcePDF('/ressources/terminale/cahier-exercices.pdf','Terminale Spécialité — Cahier d\'exercices')">
-        <div style="font-size:28px;margin-bottom:8px">📘</div>
-        <div style="font-family:'Fraunces',serif;font-weight:600;color:var(--texte);margin-bottom:4px">Terminale Spécialité — Cahier d'exercices</div>
-        <div style="font-size:13px;color:var(--muted)">Programme complet, toutes notions</div>
-      </div>
-    </div>
+
+    <div class="ress-tabs" id="ress-tabs"></div>
+    <div id="ress-niveau-content"></div>
 
     <div style="margin:2.5rem 0 1.25rem">
       <h3 style="font-family:'Fraunces',serif;font-size:1.3rem;font-weight:600;color:var(--texte);margin-bottom:0.3rem">Fiches de <em style="font-style:italic;color:var(--bleu)">rappel</em></h3>
@@ -9259,6 +9272,7 @@ function showPage(page, filter) {
   if(page === 'prof') { setTimeout(renderTableauBord, 100); }
   if(page === 'eleve') { setTimeout(renderEspaceEleve, 100); }
   if(page === 'parent') { setTimeout(renderEspaceParent, 100); }
+  if(page === 'ressources') { setTimeout(() => renderRessourcesTabs(ressourcesNiveauActif), 100); }
 
   window.scrollTo({top:0, behavior:'smooth'});
 }
@@ -9459,6 +9473,110 @@ function ouvrirModalLegal(page) {
   document.body.appendChild(overlay);
 }
 function fermerModalLegal() { document.getElementById('modal-legal-overlay')?.remove(); }
+
+// ═══════════════════════════════════════
+//  RESSOURCES — fiches par niveau (refonte du 12/11/2026, une seule colonne
+//  / police plus grande / consignes corrigees, cf. memoire du chantier).
+//  3 zones par niveau : fiches normales (mises en avant, suffisent pour
+//  progresser), approfondissement (bons eleves), olympiades (encore plus
+//  loin) -- hierarchie demandee par Jamal pour qu'un eleve/prof/visiteur
+//  comprenne tout de suite l'offre. STMG, automatismes, geometrie reperee
+//  separee, bacs blancs et eval de rattrapage volontairement pas inclus ici
+//  (decision explicite, pas un oubli).
+// ═══════════════════════════════════════
+const RESSOURCES_NIVEAUX = {
+  '2nde': {
+    label: '2nde',
+    fiches: ['Nombres, ensembles et logique','Calcul littéral et valeur absolue','Équations et inéquations',"Droites et systèmes d'équations",'Fonctions : généralités et variations','Fonctions affines','Fonctions de référence','Géométrie : Pythagore, Thalès et trigonométrie','Transformations du plan','Vecteurs et colinéarité','Géométrie repérée','Statistiques descriptives','Probabilités et échantillonnage',"Proportions et taux d'évolution"],
+    approfondissement: ['Fonctions polynômes du second degré','Géométrie et vecteurs','Statistiques descriptives','Probabilités','Fonctions et variations'],
+    olympiades: ['Arithmétique et nombres parfaits','Vecteurs et configurations','Moyennes, inégalités et optimisation'],
+  },
+  '1ere': {
+    label: '1ère Spécialité',
+    fiches: ['Généralités sur les suites','Suites arithmétiques et géométriques','Suites : approfondissement','Fonctions : généralités','Fonctions polynômes du second degré','Dérivation','Fonction exponentielle','Trigonométrie','Probabilités conditionnelles','Variables aléatoires réelles','Loi binomiale','Statistiques descriptives','Produit scalaire','Géométrie repérée','Algorithmique et Python'],
+    approfondissement: ["Suites et modélisation d'un emprunt",'Dérivation et optimisation','Fonctions, équations et inéquations','Géométrie repérée','Probabilités et dénombrement','Trigonométrie'],
+    olympiades: ["La série harmonique et la constante d'Euler",'Droite et cercle d\'Euler',"Chemins dans une grille et nombres de Catalan"],
+  },
+  'terminale': {
+    label: 'Terminale Spécialité',
+    fiches: ['Suites numériques : généralités et récurrence','Limites de suites','Limites de fonctions','Continuité et théorème des valeurs intermédiaires','Dérivation : compléments et convexité','Fonction exponentielle','Fonction logarithme népérien','Fonctions sinus et cosinus','Primitives et équations différentielles','Calcul intégral','Dénombrement','Géométrie dans l\'espace : droites et plans','Géométrie : orthogonalité et distances','Loi binomiale et variables aléatoires','Concentration et loi des grands nombres','Algorithmique et Python'],
+    approfondissement: ['Suites et raisonnement par récurrence','Limites de fonctions et asymptotes','Dérivation et convexité','Fonctions exponentielle et logarithme','Équations différentielles et intégrales',"Géométrie dans l'espace",'Dénombrement et loi binomiale','Probabilités conditionnelles et loi des grands nombres'],
+    olympiades: ['Suite récurrente et vitesse de convergence','Tétraèdre régulier et sphères','Marche aléatoire et ruine du joueur'],
+  },
+};
+let ressourcesNiveauActif = '2nde';
+
+function renderRessourcesTabs(initial) {
+  if(initial) ressourcesNiveauActif = initial;
+  const tabs = document.getElementById('ress-tabs');
+  if(!tabs) return;
+  tabs.innerHTML = Object.keys(RESSOURCES_NIVEAUX).map(key => `
+    <button class="ress-tab ${key === ressourcesNiveauActif ? 'active' : ''}" onclick="switchRessourcesNiveau('${key}')">${RESSOURCES_NIVEAUX[key].label}</button>
+  `).join('');
+  renderRessourcesNiveau(ressourcesNiveauActif);
+}
+
+function switchRessourcesNiveau(key) {
+  ressourcesNiveauActif = key;
+  renderRessourcesTabs();
+}
+
+function renderRessourcesNiveau(key) {
+  const n = RESSOURCES_NIVEAUX[key];
+  const content = document.getElementById('ress-niveau-content');
+  if(!n || !content) return;
+
+  const carteFiche = (num, titre, url) => `
+    <div class="ress-card" onclick="ouvrirRessourcePDF('${url}','${n.label} — Fiche ${num} : ${titre.replace(/'/g, "\\'")}')">
+      <div class="ress-card-num">Fiche ${num}</div>
+      <div class="ress-card-titre">${titre}</div>
+    </div>
+  `;
+  const carteBonus = (code, titre, url, label) => `
+    <div class="ress-card" onclick="ouvrirRessourcePDF('${url}','${n.label} — ${label} ${code} : ${titre.replace(/'/g, "\\'")}')">
+      <div class="ress-card-num">${label} ${code}</div>
+      <div class="ress-card-titre">${titre}</div>
+    </div>
+  `;
+
+  const fichesHtml = n.fiches.map((titre, i) => {
+    const num = String(i + 1).padStart(2, '0');
+    return carteFiche(i + 1, titre, `/ressources/${key}/fiches/fiche${num}.pdf`);
+  }).join('');
+
+  const approHtml = n.approfondissement.map((titre, i) =>
+    carteBonus('A' + (i + 1), titre, `/ressources/${key}/approfondissement/a${i + 1}.pdf`, 'Approfondissement')
+  ).join('');
+
+  const olympHtml = n.olympiades.map((titre, i) =>
+    carteBonus('O' + (i + 1), titre, `/ressources/${key}/olympiades/o${i + 1}.pdf`, 'Olympiades')
+  ).join('');
+
+  content.innerHTML = `
+    <div class="ress-zone tier-fiches">
+      <div class="ress-zone-head">
+        <div class="ress-zone-titre">📘 Fiches — ${n.label}</div>
+        <div class="ress-zone-sub">Travaille ces fiches dans l'ordre : c'est le programme complet du niveau, ça suffit pour progresser.</div>
+      </div>
+      <button class="ress-cahier-btn" onclick="ouvrirRessourcePDF('/ressources/${key}/cahier-exercices.pdf','${n.label} — Cahier complet')">📖 Ouvrir le cahier complet (${n.fiches.length} fiches)</button>
+      <div class="ress-grid">${fichesHtml}</div>
+    </div>
+    <div class="ress-zone tier-appro">
+      <div class="ress-zone-head">
+        <div class="ress-zone-titre">🚀 Approfondissement</div>
+        <div class="ress-zone-sub">Pour aller plus loin, si tu es à l'aise avec les fiches normales.</div>
+      </div>
+      <div class="ress-grid">${approHtml}</div>
+    </div>
+    <div class="ress-zone tier-olympiades">
+      <div class="ress-zone-head">
+        <div class="ress-zone-titre">🏆 Olympiades</div>
+        <div class="ress-zone-sub">Pour les mordus de maths qui veulent un vrai défi.</div>
+      </div>
+      <div class="ress-grid">${olympHtml}</div>
+    </div>
+  `;
+}
 
 // ═══════════════════════════════════════
 //  VISIONNEUSE RESSOURCES (PDF.js, lecture seule -- pas de lien de
