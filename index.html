@@ -1217,7 +1217,6 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
   .footer-inner { grid-template-columns:1fr 1fr; }
   .nav-right .btn-nav-outline { display:none; }
   nav .nav-tabs { display:none; }
-  .nav-hamburger { display:flex; }
 }
 
 /* Menu mobile */
@@ -1236,6 +1235,17 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
   background:var(--texte);
   border-radius:2px;
   transition:all 0.2s;
+}
+/* FIX 12/11/2026 : cette regle doit venir APRES la regle de base ci-dessus
+   (display:none) pour gagner la cascade a specificite egale -- avant, elle
+   etait a l'interieur du bloc @media(max-width:900px) place plus haut dans
+   le fichier (ligne ~1204), donc la regle de base "display:none" definie
+   APRES dans le fichier l'ecrasait toujours : le hamburger etait invisible
+   sur TOUT mobile, pas juste "difficile a voir" comme rapporte par Jamal --
+   seul le bouton "Commencer" restait accessible dans la nav, Ressources
+   n'etait atteignable qu'en scrollant jusqu'au pied de page. */
+@media(max-width:900px) {
+  .nav-hamburger { display:flex; }
 }
 
 .mobile-menu {
