@@ -337,9 +337,16 @@ nav {
 .ress-cahier-btn:hover { background:var(--bleu-fort); }
 .ress-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:10px; }
 .ress-card { background:white; border:1px solid var(--bordure); border-radius:var(--r); padding:0.9rem 1.1rem; cursor:pointer; transition:all 0.15s; }
-.ress-card:hover { border-color:var(--bleu); box-shadow:var(--shadow); transform:translateY(-1px); }
+.ress-card:not(.has-corrige):hover { border-color:var(--bleu); box-shadow:var(--shadow); transform:translateY(-1px); }
 .ress-card-num { font-size:11px; font-weight:700; color:var(--muted); letter-spacing:0.04em; }
 .ress-card-titre { font-size:13px; font-weight:600; color:var(--texte); margin-top:2px; line-height:1.35; }
+.ress-card.has-corrige { cursor:default; }
+.ress-card-actions { display:flex; gap:6px; margin-top:10px; }
+.ress-action { flex:1; text-align:center; padding:7px 6px; border-radius:50px; font-size:11px; font-weight:700; cursor:pointer; font-family:'DM Sans',sans-serif; border:1.5px solid; transition:all 0.15s; }
+.ress-action.enonce { background:var(--bleu); color:white; border-color:var(--bleu); }
+.ress-action.enonce:hover { background:var(--bleu-fort); border-color:var(--bleu-fort); }
+.ress-action.corrige { background:white; color:var(--vert); border-color:#BBF0CD; }
+.ress-action.corrige:hover { background:var(--vert-bg,#F0FDF4); border-color:var(--vert); }
 .ress-zone.tier-appro .ress-card:hover { border-color:var(--or); }
 .ress-zone.tier-olympiades .ress-card:hover { border-color:var(--vert); }
 @media(max-width:600px) { .ress-grid { grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); } }
@@ -9516,6 +9523,14 @@ const RESSOURCES_NIVEAUX = {
 };
 let ressourcesNiveauActif = '2nde';
 
+// Corriges disponibles, ajoutes fiche par fiche au fur et a mesure qu'ils
+// sont rediges et verifies (chantier du 14/11/2026, decision de Jamal :
+// publies ouvertement comme sur annale2maths, pas reserves aux profs).
+// Cle = niveau, valeur = numeros de fiches "normales" avec un corrige pret.
+const RESSOURCES_CORRIGES = {
+  '2nde': [5],
+};
+
 function renderRessourcesTabs(initial) {
   if(initial) ressourcesNiveauActif = initial;
   const tabs = document.getElementById('ress-tabs');
@@ -9536,12 +9551,37 @@ function renderRessourcesNiveau(key) {
   const content = document.getElementById('ress-niveau-content');
   if(!n || !content) return;
 
-  const carteFiche = (num, titre, url) => `
-    <div class="ress-card" onclick="ouvrirRessourcePDF('${url}','${n.label} — Fiche ${num} : ${titre.replace(/'/g, "\\'")}')">
-      <div class="ress-card-num">Fiche ${num}</div>
-      <div class="ress-card-titre">${titre}</div>
-    </div>
-  `;
+  const corrigesNiveau = RESSOURCES_CORRIGES[key] || [];
+  const carteFiche = (num, titre, url) => {
+    const aCorrige = corrigesNiveau.includes(num);
+    const numPad = String(num).padStart(2, '0');
+    const titreEch = titre.replace(/'/g, "\\'");
+    // Quand un corrige existe, la carte n'est plus un seul gros bouton qui
+    // mene tout droit au corrige si on clique au mauvais endroit : deux
+    // actions explicites cote a cote, "Enonce" en premier et visuellement
+    // principal (plein, bleu), "Corrige" en second et secondaire (contour,
+    // vert) -- pour que le reflexe naturel reste d'essayer l'exercice
+    // d'abord. Demande par Jamal le 14/11/2026 ("la premiere impression...
+    // un eleve va cliquer directement sur le corrige").
+    if(aCorrige) {
+      return `
+        <div class="ress-card has-corrige">
+          <div class="ress-card-num">Fiche ${num}</div>
+          <div class="ress-card-titre">${titre}</div>
+          <div class="ress-card-actions">
+            <button class="ress-action enonce" onclick="ouvrirRessourcePDF('${url}','${n.label} — Fiche ${num} : ${titreEch}')">📄 Énoncé</button>
+            <button class="ress-action corrige" onclick="ouvrirRessourcePDF('/ressources/${key}/fiches/fiche${numPad}-corrige.pdf','${n.label} — Corrigé Fiche ${num} : ${titreEch}')">✅ Corrigé</button>
+          </div>
+        </div>
+      `;
+    }
+    return `
+      <div class="ress-card" onclick="ouvrirRessourcePDF('${url}','${n.label} — Fiche ${num} : ${titreEch}')">
+        <div class="ress-card-num">Fiche ${num}</div>
+        <div class="ress-card-titre">${titre}</div>
+      </div>
+    `;
+  };
   const carteBonus = (code, titre, url, label) => `
     <div class="ress-card" onclick="ouvrirRessourcePDF('${url}','${n.label} — ${label} ${code} : ${titre.replace(/'/g, "\\'")}')">
       <div class="ress-card-num">${label} ${code}</div>
