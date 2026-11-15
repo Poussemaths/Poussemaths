@@ -9513,6 +9513,7 @@ const RESSOURCES_NIVEAUX = {
     fiches: ['Généralités sur les suites','Suites arithmétiques et géométriques','Suites : approfondissement','Fonctions : généralités','Fonctions polynômes du second degré','Dérivation','Fonction exponentielle','Trigonométrie','Probabilités conditionnelles','Variables aléatoires réelles','Loi binomiale','Statistiques descriptives','Produit scalaire','Géométrie repérée','Algorithmique et Python'],
     approfondissement: ["Suites et modélisation d'un emprunt",'Dérivation et optimisation','Fonctions, équations et inéquations','Géométrie repérée','Probabilités et dénombrement','Trigonométrie'],
     olympiades: ["La série harmonique et la constante d'Euler",'Droite et cercle d\'Euler',"Chemins dans une grille et nombres de Catalan"],
+    automatismes: ['Automatismes : épreuve anticipée de mathématiques'],
   },
   'terminale': {
     label: 'Terminale Spécialité',
@@ -9604,6 +9605,13 @@ function renderRessourcesNiveau(key) {
     carteBonus('O' + (i + 1), titre, `/ressources/${key}/olympiades/o${i + 1}.pdf`, 'Olympiades')
   ).join('');
 
+  const automatismesHtml = (n.automatismes || []).map((titre) => `
+    <div class="ress-card" onclick="ouvrirRessourcePDF('/ressources/${key}/automatismes/eam.pdf','${n.label} — ${titre.replace(/'/g, "\\'")}')">
+      <div class="ress-card-num">⏱️ Fiche</div>
+      <div class="ress-card-titre">${titre}</div>
+    </div>
+  `).join('');
+
   content.innerHTML = `
     <div class="ress-zone tier-fiches">
       <div class="ress-zone-head">
@@ -9613,6 +9621,14 @@ function renderRessourcesNiveau(key) {
       <button class="ress-cahier-btn" onclick="ouvrirRessourcePDF('/ressources/${key}/cahier-exercices.pdf','${n.label} — Cahier complet')">📖 Ouvrir le cahier complet (${n.fiches.length} fiches)</button>
       <div class="ress-grid">${fichesHtml}</div>
     </div>
+    ${n.automatismes ? `
+    <div class="ress-zone tier-automatismes">
+      <div class="ress-zone-head">
+        <div class="ress-zone-titre">⏱️ Automatismes</div>
+        <div class="ress-zone-sub">Questions à réponses courtes, sans calculatrice — le format de la partie 1 de l'épreuve anticipée (6 points sur 20). Entraînement interactif chronométré aussi disponible dans Calcul mental, niveau 1ère.</div>
+      </div>
+      <div class="ress-grid">${automatismesHtml}</div>
+    </div>` : ''}
     <div class="ress-zone tier-appro">
       <div class="ress-zone-head">
         <div class="ress-zone-titre">🚀 Approfondissement</div>
@@ -12999,6 +13015,197 @@ const CM_THEMES = {
     }
   },
 
+  // ── 1ere Spe : automatismes de l'epreuve anticipee (14/11/2026) --
+  // complement cible sur les 14 themes officiels du BO special n4 du
+  // 17/09/2026 (QCM ecarte, questions a reponses courtes), cf
+  // AUTOMATISMES_EPREUVE_ANTICIPEE plus bas pour le mode dedie.
+  'Puissances — règles de calcul (1ère)': {
+    emoji: 'aᵐ×aⁿ', niveau: '1ere',
+    gen: () => {
+      const base = [2,3,5][rand(0,2)];
+      const type = rand(0,2);
+      if(type===0) {
+        const m = rand(2,6), n = rand(2,6);
+        return { q: `Écris $${base}^{${m}}\\times${base}^{${n}}$ sous la forme $${base}^{?}$ : quel est l'exposant ?`, r: m+n };
+      }
+      if(type===1) {
+        const n = rand(1,4), m = n + rand(1,5);
+        return { q: `Écris $\\dfrac{${base}^{${m}}}{${base}^{${n}}}$ sous la forme $${base}^{?}$ : quel est l'exposant ?`, r: m-n };
+      }
+      const m = rand(2,5), n = rand(2,4);
+      return { q: `Écris $\\left(${base}^{${m}}\\right)^{${n}}$ sous la forme $${base}^{?}$ : quel est l'exposant ?`, r: m*n };
+    }
+  },
+  'Résoudre une équation du second degré (racines entières)': {
+    emoji: 'x²+bx+c=0', niveau: '1ere',
+    gen: () => {
+      let r1 = rand(-8,8); if(r1===0) r1=1;
+      let r2 = rand(-8,8); if(r2===0) r2=-1;
+      while(r2===r1) r2 = rand(-8,8);
+      const b = -(r1+r2), c = r1*r2;
+      const termeB = b===0 ? '' : (b===1?'+x':(b===-1?'-x':(b>0?`+${b}x`:`${b}x`)));
+      const termeC = c>0?`+${c}`:`${c}`;
+      const grande = Math.max(r1,r2), petite = Math.min(r1,r2);
+      if(rand(0,1)===0) return { q: `Résous $x^2${termeB}${termeC}=0$. Plus grande solution ?`, r: grande };
+      return { q: `Résous $x^2${termeB}${termeC}=0$. Plus petite solution ?`, r: petite };
+    }
+  },
+  "Signe d'un produit de deux facteurs (1ère)": {
+    emoji: '(x-a)(x-b)', niveau: '1ere',
+    gen: () => {
+      let a = rand(-6,6); if(a===0) a=1;
+      let b = rand(-6,6); if(b===0) b=-1;
+      while(b===a) b = rand(-6,6);
+      const lo = Math.min(a,b), hi = Math.max(a,b);
+      let x = rand(lo-5, hi+5);
+      while(x===lo || x===hi) x = rand(lo-5, hi+5);
+      const val = (x-a)*(x-b);
+      const termeA = a>=0 ? `x-${a}` : `x+${-a}`;
+      const termeB = b>=0 ? `x-${b}` : `x+${-b}`;
+      return { q: `$(${termeA})(${termeB})$ est-il positif en $x=${x}$ ? (1=oui, 0=non)`, r: val>0?1:0 };
+    }
+  },
+  'Image et antécédent par une fonction polynôme (1ère)': {
+    emoji: 'f(x)=k', niveau: '1ere',
+    gen: () => {
+      if(rand(0,1)===0) {
+        let a = rand(-4,4); if(a===0) a=1;
+        const b = rand(-6,6), c = rand(-6,6), x = rand(-5,5);
+        const val = a*x*x+b*x+c;
+        const termeB = b===0?'':(b===1?'+x':(b===-1?'-x':(b>0?`+${b}x`:`${b}x`)));
+        const termeC = c===0?'':(c>0?`+${c}`:`${c}`);
+        const termeA = a===1?'x^2':(a===-1?'-x^2':`${a}x^2`);
+        return { q: `$f(x)=${termeA}${termeB}${termeC}$. $f(${x}) = ?$`, r: val };
+      }
+      let a = rand(-6,6); if(a===0) a=1;
+      const xSol = rand(-8,8), b = rand(-10,10);
+      const k = a*xSol+b;
+      const termeB = b===0?'':(b>0?`+${b}`:`${b}`);
+      const termeA = a===1?'':(a===-1?'-':a);
+      return { q: `$f(x)=${termeA}x${termeB}$. Antécédent de $${k}$ par $f$ ?`, r: xSol };
+    }
+  },
+  "Sommet d'une parabole (forme canonique, 1ère)": {
+    emoji: '(α;β)', niveau: '1ere',
+    gen: () => {
+      const a = [1,-1,2,-2,3,-3][rand(0,5)];
+      const p = rand(-6,6), q = rand(-8,8);
+      const termeP = p===0?'x^2':(p>0?`(x-${p})^2`:`(x+${-p})^2`);
+      const termeQ = q===0?'':(q>0?`+${q}`:`${q}`);
+      const coefA = a===1?'':(a===-1?'-':`${a}`);
+      if(rand(0,1)===0) return { q: `$f(x)=${coefA}${termeP}${termeQ}$. Abscisse du sommet de la parabole ?`, r: p };
+      return { q: `$f(x)=${coefA}${termeP}${termeQ}$. ${a>0?'Minimum':'Maximum'} de $f$ ?`, r: q };
+    }
+  },
+  "Monotonie et comparaison d'images (1ère)": {
+    emoji: 'f(x₁) vs f(x₂)', niveau: '1ere',
+    gen: () => {
+      const croissante = rand(0,1)===0;
+      const x1 = rand(-5,3), x2 = x1 + rand(1,6);
+      return { q: `$f$ est ${croissante?'croissante':'décroissante'} sur un intervalle contenant $${x1}$ et $${x2}$ ($${x1}<${x2}$). A-t-on $f(${x1}) < f(${x2})$ ? (1=oui, 0=non)`, r: croissante?1:0 };
+    }
+  },
+  'Trigonométrie — valeurs exactes (1ère)': {
+    emoji: 'cos π/6', niveau: '1ere',
+    gen: () => {
+      const R2 = 0.71, R3 = 0.87;
+      const pts = [
+        ['\\cos(\\pi/6)', R3], ['\\sin(\\pi/6)', 0.5],
+        ['\\cos(\\pi/4)', R2], ['\\sin(\\pi/4)', R2],
+        ['\\cos(\\pi/3)', 0.5], ['\\sin(\\pi/3)', R3],
+        ['\\cos(2\\pi/3)', -0.5], ['\\sin(2\\pi/3)', R3],
+        ['\\sin(5\\pi/6)', 0.5], ['\\cos(5\\pi/6)', -R3],
+        ['\\cos(-\\pi/4)', R2], ['\\sin(7\\pi/4)', -R2],
+        ['\\cos(-\\pi/3)', 0.5],
+      ];
+      const [label,val] = pts[rand(0,pts.length-1)];
+      return { q: `$${label} = ?$ (arrondis à $0{,}01$ près si besoin)`, r: val };
+    }
+  },
+  'Statistiques — quartiles (1ère)': {
+    emoji: 'Q1/Q3', niveau: '1ere',
+    gen: () => {
+      let v = rand(1,10);
+      const vals = [v];
+      for(let i=1;i<8;i++){ v += rand(1,5); vals.push(v); }
+      const q1 = vals[1], q3 = vals[5];
+      if(rand(0,1)===0) return { q: `Série triée ($8$ valeurs) : ${vals.join(', ')}. Premier quartile $Q_1$ ?`, r: q1 };
+      return { q: `Série triée ($8$ valeurs) : ${vals.join(', ')}. Troisième quartile $Q_3$ ?`, r: q3 };
+    }
+  },
+  'Statistiques — variance et écart type (1ère)': {
+    emoji: 'V(X), σ', niveau: '1ere',
+    gen: () => {
+      const m = rand(5,12), dd = rand(2,6);
+      const vals = [m-dd, m-dd, m+dd, m+dd];
+      if(rand(0,1)===0) return { q: `Série : ${vals.join(', ')}. Variance (moyenne des carrés des écarts à la moyenne) ?`, r: dd*dd };
+      return { q: `Série : ${vals.join(', ')}. Écart type (racine carrée de la variance) ?`, r: dd };
+    }
+  },
+  'Vecteurs — coordonnées et milieu (1ère)': {
+    emoji: 'AB / milieu', niveau: '1ere',
+    gen: () => {
+      const xA=rand(-8,8), yA=rand(-8,8), xB=rand(-8,8), yB=rand(-8,8);
+      const type = rand(0,3);
+      if(type===0) return { q: `$A(${xA}\\,;${yA})$, $B(${xB}\\,;${yB})$. Abscisse du vecteur $\\overrightarrow{AB}$ ?`, r: xB-xA };
+      if(type===1) return { q: `$A(${xA}\\,;${yA})$, $B(${xB}\\,;${yB})$. Ordonnée du vecteur $\\overrightarrow{AB}$ ?`, r: yB-yA };
+      if(rand(0,1)===0) return { q: `$A(${xA}\\,;${yA})$, $B(${xB}\\,;${yB})$. Abscisse du milieu de $[AB]$ ?`, r: (xA+xB)/2 };
+      return { q: `$A(${xA}\\,;${yA})$, $B(${xB}\\,;${yB})$. Ordonnée du milieu de $[AB]$ ?`, r: (yA+yB)/2 };
+    }
+  },
+  'Équation de droite — point et coefficient directeur (1ère)': {
+    emoji: 'y=ax+b', niveau: '1ere',
+    gen: () => {
+      let a = rand(-5,5); if(a===0) a=1;
+      const xP = rand(-6,6), yP = rand(-8,8);
+      const b = yP - a*xP;
+      return { q: `Droite de coefficient directeur $${a}$ passant par $(${xP}\\,;${yP})$. Ordonnée à l'origine $b$ ?`, r: b };
+    }
+  },
+  'Dérivées usuelles (1ère)': {
+    emoji: "f'(x)", niveau: '1ere',
+    gen: () => {
+      const type = rand(0,4);
+      const x0 = rand(1,8);
+      if(type===0) return { q: `$f(x)=x^3$. $f'(${x0}) = ?$`, r: 3*x0*x0 };
+      if(type===1) return { q: `$f(x)=\\dfrac1x$ (sur $]0;+\\infty[$). $f'(${x0}) = ?$`, r: Math.round((-1/(x0*x0))*10000)/10000 };
+      if(type===2) { const a=rand(2,9); return { q: `$f(x)=${a}x^3$. Coefficient de $x^2$ dans $f'(x)$ ?`, r: 3*a }; }
+      if(type===3) { const a=rand(2,9),b=rand(2,9); return { q: `$f(x)=${a}x^2+${b}x$. $f'(0) = ?$`, r: b }; }
+      const n = rand(2,5); return { q: `$f(x)=x^{${n}}$. Exposant de $x$ dans $f'(x)$ ?`, r: n-1 };
+    }
+  },
+  'Probabilités — bases (1ère)': {
+    emoji: 'P(Ā), P(A∩B)', niveau: '1ere',
+    gen: () => {
+      const type = rand(0,3);
+      if(type===0) { const p = [0.1,0.2,0.25,0.3,0.4,0.5,0.6,0.7,0.75,0.8,0.9][rand(0,10)]; return { q: `$P(A)=${p}$. $P(\\overline{A}) = ?$`, r: Math.round((1-p)*1000)/1000 }; }
+      if(type===1) { const pA=[0.2,0.3,0.4,0.5][rand(0,3)], pB=[0.2,0.25,0.4,0.5][rand(0,3)]; return { q: `$A$ et $B$ indépendants, $P(A)=${pA}$, $P(B)=${pB}$. $P(A\\cap B) = ?$`, r: Math.round(pA*pB*1000)/1000 }; }
+      if(type===2) return { q: `On lance deux dés équilibrés à $6$ faces (l'ordre compte). Combien de résultats possibles ?`, r: 36 };
+      return { q: `On lance une pièce équilibrée deux fois (l'ordre compte). Combien de résultats possibles ?`, r: 4 };
+    }
+  },
+  'Logique — négation et contraposée (1ère)': {
+    emoji: '¬P', niveau: '1ere',
+    gen: () => {
+      const cas = rand(0,3);
+      if(cas===0) { const k=rand(1,9); const correcte = rand(0,1)===0;
+        const prop = correcte ? `x\\leqslant${k}` : `x<${k}`;
+        return { q: `La négation de « $x>${k}$ » est-elle « $${prop}$ » ? (1=oui, 0=non)`, r: correcte?1:0 };
+      }
+      if(cas===1) { const correcte = rand(0,1)===0;
+        const prop = correcte ? `\\text{pour tout }x,\\ P(x)\\text{ est faux}` : `\\text{il existe }x,\\ P(x)\\text{ est faux}`;
+        return { q: `La négation de « il existe $x$ tel que $P(x)$ » est-elle « ${prop} » ? (1=oui, 0=non)`, r: correcte?1:0 };
+      }
+      if(cas===2) { const correcte = rand(0,1)===0;
+        const prop = correcte ? `\\text{non }B\\Rightarrow\\text{non }A` : `B\\Rightarrow A`;
+        return { q: `La contraposée de « $A\\Rightarrow B$ » est-elle « $${prop}$ » ? (1=oui, 0=non)`, r: correcte?1:0 };
+      }
+      const k=rand(1,9); const correcte = rand(0,1)===0;
+      const prop = correcte ? `x\\geqslant${k}` : `x>${k}`;
+      return { q: `La négation de « $x<${k}$ » est-elle « $${prop}$ » ? (1=oui, 0=non)`, r: correcte?1:0 };
+    }
+  },
+
   // ── Terminale Spe : nouveau niveau dedie ──
   'Valeurs remarquables (ln/exp)': {
     emoji: 'ln/e', niveau: 'terminale',
@@ -13860,6 +14067,20 @@ const CM_CATEGORIES = {
   "Continuité et TVI": "Limites & Continuité",
   "Espace — positions relatives de droites": "Géométrie dans l'espace",
   "Espace — équation paramétrique": "Géométrie dans l'espace",
+  "Puissances — règles de calcul (1ère)": "Nombres & calculs",
+  "Résoudre une équation du second degré (racines entières)": "Calcul littéral & Équations",
+  "Signe d'un produit de deux facteurs (1ère)": "Calcul littéral & Équations",
+  "Image et antécédent par une fonction polynôme (1ère)": "Fonctions & Dérivation",
+  "Sommet d'une parabole (forme canonique, 1ère)": "Calcul littéral & Équations",
+  "Monotonie et comparaison d'images (1ère)": "Fonctions & Dérivation",
+  "Trigonométrie — valeurs exactes (1ère)": "Géométrie plane",
+  "Statistiques — quartiles (1ère)": "Statistiques & Probabilités",
+  "Statistiques — variance et écart type (1ère)": "Statistiques & Probabilités",
+  "Vecteurs — coordonnées et milieu (1ère)": "Vecteurs & Géométrie repérée",
+  "Équation de droite — point et coefficient directeur (1ère)": "Vecteurs & Géométrie repérée",
+  "Dérivées usuelles (1ère)": "Fonctions & Dérivation",
+  "Probabilités — bases (1ère)": "Statistiques & Probabilités",
+  "Logique — négation et contraposée (1ère)": "Calcul littéral & Équations",
 };
 
 function themesPourNiveau(niveau) {
@@ -13890,6 +14111,36 @@ function changerNiveauCM() {
   cmConfig.niveau = null;
   cmConfig.themes = [];
   renderCMConfig();
+}
+
+// Mode "Epreuve anticipee" (14/11/2026) : un theme par categorie officielle
+// du BO special n4 du 17/09/2026 (partie 1, 6 points/20, questions a
+// reponses courtes, QCM ecarte). Lance directement une serie sans passer
+// par la selection manuelle de themes.
+const AUTOMATISMES_EPREUVE_ANTICIPEE = [
+  'Ajouter ou soustraire des fractions',
+  'Puissances — règles de calcul (1ère)',
+  'Évolutions successives — coefficient global',
+  'Identités remarquables',
+  'Résoudre une équation du second degré (racines entières)',
+  'Image et antécédent par une fonction polynôme (1ère)',
+  'Trigonométrie — valeurs exactes (1ère)',
+  'Statistiques — quartiles (1ère)',
+  'Proportion de proportion',
+  'Vecteurs — coordonnées et milieu (1ère)',
+  'Suites arithmétiques',
+  'Dérivées usuelles (1ère)',
+  'Probabilités — bases (1ère)',
+  "Logique — négation et contraposée (1ère)",
+];
+
+function lancerModeEpreuveAnticipee() {
+  cmConfig.niveau = '1ere';
+  cmConfig.themes = AUTOMATISMES_EPREUVE_ANTICIPEE.slice();
+  cmConfig.nb = 14;
+  cmConfig.chrono = 20;
+  cmConfig.mode = 'projection';
+  lancerCalcMental();
 }
 
 function renderCMConfig() {
@@ -13924,6 +14175,12 @@ function renderCMConfig() {
   });
   const categoriesOrdonnees = Object.keys(parCategorie).sort((a,b) => parCategorie[b].length - parCategorie[a].length);
   body.innerHTML = `
+    ${cmConfig.niveau === '1ere' ? `
+    <div class="pdf-section" style="background:var(--bleu-doux);border:1.5px solid var(--bleu);border-radius:var(--r-lg);padding:1rem;margin-bottom:1rem">
+      <div style="font-weight:700;font-size:14px;color:var(--bleu);margin-bottom:4px">📝 Mode Épreuve anticipée</div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:10px">14 questions, une par thème officiel du BO (partie 1, 6 points/20, sans calculatrice). Lancement direct, sans choisir les thèmes toi-même.</div>
+      <button class="auth-btn" style="width:auto;padding:8px 20px;font-size:13px" onclick="lancerModeEpreuveAnticipee()">Lancer le mode Épreuve anticipée →</button>
+    </div>` : ''}
     <div class="pdf-section">
       <div class="pdf-section-title">
         🎯 Thèmes — ${LABELS_CLASSES[cmConfig.niveau] || cmConfig.niveau}
