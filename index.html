@@ -1297,33 +1297,18 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
 
 <a class="pousse-fab" href="https://poussemaths.com/assistant.html" target="_blank" rel="noopener">💬 <span>Demander à Pousse</span></a>
 
-<!-- ── BANNIÈRE BETA ── -->
-<div id="banniere-beta" style="background:linear-gradient(90deg,var(--bleu),#7B4FE9);color:white;text-align:center;padding:8px 16px;font-size:13px;font-weight:600;font-family:'DM Sans',sans-serif;position:fixed;top:0;left:0;right:0;z-index:200;">
-  🚧 Poussemaths est encore en construction — merci de ta patience, on ajoute du contenu et on corrige chaque semaine !
-  <button onclick="fermerBanniereBeta()" style="background:rgba(255,255,255,0.2);border:none;color:white;margin-left:12px;padding:2px 10px;border-radius:20px;cursor:pointer;font-size:12px;font-family:'DM Sans',sans-serif;">✕</button>
-</div>
-<script>
-  // La nav et les pages reservent de l'espace en haut via --banniere-h (voir
-  // nav{top:}, .bo-banner{margin-top:} et les pages{padding-top:}) --
-  // mesure reelle (pas une hauteur en dur) car le texte passe sur 2 lignes
-  // sur mobile/zoom reduit. Sans ca, la nav (position:fixed, meme z-index)
-  // recouvre entierement la banniere au lieu de se placer sous elle (trouve
-  // le 02/11/2026, la banniere n'etait tout simplement jamais visible).
-  (function(){
-    var b = document.getElementById('banniere-beta');
-    function maj(){ document.documentElement.style.setProperty('--banniere-h', b.offsetHeight + 'px'); }
-    maj();
-    window.addEventListener('resize', maj);
-    window.fermerBanniereBeta = function(){
-      b.style.display = 'none';
-      document.documentElement.style.setProperty('--banniere-h', '0px');
-    };
-  })();
-</script>
+<!-- Banniere beta "en construction" retiree le 15/11/2026 (point 7, decision
+     deleguee par Jamal) : le site a largement depasse ce stade (420
+     exercices verifies, programmes BO integres, Espace Parent/Prof/Eleve
+     fonctionnels) ; la banniere "NOUVEAU" juste en dessous (.bo-banner)
+     communique deja l'amelioration continue sans le ton excuse. Les usages
+     de var(--banniere-h, 0px) dans nav{top:} et les pages{padding-top:}
+     retombent sur leur valeur par defaut 0px, aucun autre changement
+     necessaire. -->
 
 <!-- ═══ NAV ═══ -->
 <nav>
-  <a class="nav-logo" onclick="showPage('accueil')">
+  <a class="nav-logo" href="#" onclick="event.preventDefault();showPage('accueil')">
     <div class="nav-logo-icon">Pπ</div>
     <span class="nav-logo-text">Pousse<span>maths</span></span>
   </a>
@@ -1559,26 +1544,26 @@ footer { background:var(--texte); padding:3.5rem 2rem 2rem; }
       <div>
         <div class="footer-col-title">Plateforme</div>
         <ul class="footer-links">
-          <li><a onclick="showPage('exercices')">Exercices 3ème</a></li>
-          <li><a onclick="showPage('exercices','2nde')">Exercices 2nde</a></li>
-          <li><a onclick="showPage('ressources')">Ressources</a></li>
-          <li><a onclick="showPage('eleve')">Espace élève</a></li>
-          <li><a onclick="accesProf()">Espace prof</a></li>
-          <li><a onclick="showPage('parent')">Espace parent</a></li>
+          <li><a href="#" onclick="event.preventDefault();showPage('exercices')">Exercices 3ème</a></li>
+          <li><a href="#" onclick="event.preventDefault();showPage('exercices','2nde')">Exercices 2nde</a></li>
+          <li><a href="#" onclick="event.preventDefault();showPage('ressources')">Ressources</a></li>
+          <li><a href="#" onclick="event.preventDefault();showPage('eleve')">Espace élève</a></li>
+          <li><a href="#" onclick="event.preventDefault();accesProf()">Espace prof</a></li>
+          <li><a href="#" onclick="event.preventDefault();showPage('parent')">Espace parent</a></li>
         </ul>
       </div>
       <div>
         <div class="footer-col-title">Contact</div>
         <ul class="footer-links">
           <li><a href="mailto:contact@poussemaths.fr">contact@poussemaths.fr</a></li>
-          <li><a onclick="document.getElementById('tarifs').scrollIntoView({behavior:'smooth'})">Pour les établissements</a></li>
+          <li><a href="#" onclick="event.preventDefault();document.getElementById('tarifs').scrollIntoView({behavior:'smooth'})">Pour les établissements</a></li>
           <li><a href="https://www.youtube.com/@PousseMaths" target="_blank" rel="noopener">🎥 YouTube</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
       <span class="footer-copy">© 2026 Poussemaths — Tous droits réservés</span>
-      <span class="footer-legal"><a onclick="ouvrirModalLegal('mentions')">Mentions légales</a> · <a onclick="ouvrirModalLegal('confidentialite')">Politique de confidentialité</a></span>
+      <span class="footer-legal"><a href="#" onclick="event.preventDefault();ouvrirModalLegal('mentions')">Mentions légales</a> · <a href="#" onclick="event.preventDefault();ouvrirModalLegal('confidentialite')">Politique de confidentialité</a></span>
       <span class="footer-aefe">Réseau AEFE · poussemaths.fr</span>
     </div>
   </footer>
@@ -9406,7 +9391,7 @@ function ouvrirModalConnexion(mode = 'connexion') {
           </select>
         </div>
         <div id="auth-error-ins" class="auth-error" style="display:none"></div>
-        <div style="font-size:11.5px;color:var(--muted);margin-bottom:10px">En créant un compte, tu acceptes nos <a onclick="ouvrirModalLegal('mentions')" style="cursor:pointer;color:inherit;text-decoration:underline">mentions légales</a> et notre <a onclick="ouvrirModalLegal('confidentialite')" style="cursor:pointer;color:inherit;text-decoration:underline">politique de confidentialité</a>.</div>
+        <div style="font-size:11.5px;color:var(--muted);margin-bottom:10px">En créant un compte, tu acceptes nos <a href="#" onclick="event.preventDefault();ouvrirModalLegal('mentions')" style="cursor:pointer;color:inherit;text-decoration:underline">mentions légales</a> et notre <a href="#" onclick="event.preventDefault();ouvrirModalLegal('confidentialite')" style="cursor:pointer;color:inherit;text-decoration:underline">politique de confidentialité</a>.</div>
         <button class="auth-btn" onclick="inscriptionEmail()">Créer mon compte →</button>
       </div>
       <div id="auth-code" style="display:none">
@@ -9419,7 +9404,7 @@ function ouvrirModalConnexion(mode = 'connexion') {
         <div class="auth-field"><label>Email</label><input type="email" id="auth-email-code" placeholder="ton@email.com"></div>
         <div class="auth-field"><label>Mot de passe</label><div class="mdp-wrap"><input type="password" id="auth-password-code" placeholder="8 caractères minimum"><button type="button" class="mdp-toggle" onclick="toggleMdpVisibilite(this)">👁️</button></div></div>
         <div id="auth-error-code" class="auth-error" style="display:none"></div>
-        <div style="font-size:11.5px;color:var(--muted);margin-bottom:10px">En rejoignant la classe, tu acceptes nos <a onclick="ouvrirModalLegal('mentions')" style="cursor:pointer;color:inherit;text-decoration:underline">mentions légales</a> et notre <a onclick="ouvrirModalLegal('confidentialite')" style="cursor:pointer;color:inherit;text-decoration:underline">politique de confidentialité</a>.</div>
+        <div style="font-size:11.5px;color:var(--muted);margin-bottom:10px">En rejoignant la classe, tu acceptes nos <a href="#" onclick="event.preventDefault();ouvrirModalLegal('mentions')" style="cursor:pointer;color:inherit;text-decoration:underline">mentions légales</a> et notre <a href="#" onclick="event.preventDefault();ouvrirModalLegal('confidentialite')" style="cursor:pointer;color:inherit;text-decoration:underline">politique de confidentialité</a>.</div>
         <button class="auth-btn" onclick="inscriptionCodeClasse()">Rejoindre la classe →</button>
         <button class="auth-btn-secondary" onclick="switchAuthTab('connexion')" style="margin-top:8px">← Retour</button>
       </div>
@@ -10059,7 +10044,7 @@ async function renderEspaceEleve() {
           </div>
         `;
       }).join('')
-    : '<div style="color:var(--muted);font-size:13px;text-align:center;padding:1rem">Aucun exercice terminé encore.<br><a onclick="showPage(\'exercices\')" style="color:var(--bleu);cursor:pointer">Commencer maintenant →</a></div>';
+    : '<div style="color:var(--muted);font-size:13px;text-align:center;padding:1rem">Aucun exercice terminé encore.<br><a href="#" onclick="event.preventDefault();showPage(\'exercices\')" style="color:var(--bleu);cursor:pointer">Commencer maintenant →</a></div>';
 
   // Rendu badges — groupés par chapitre avec nom personnalisé
   const badgesHtml = badges.length > 0
@@ -16323,7 +16308,7 @@ async function showResult() {
   // (les exercices générés sont déjà sauvegardés côté serveur par verifierExerciceGenere)
   let sauvegardeHtml = currentEleve
     ? `<div style="font-size:12px;color:var(--vert);margin-top:8px">✅ Progression sauvegardée</div>`
-    : `<div style="font-size:12px;color:var(--muted);margin-top:8px"><a href="#" onclick="ouvrirModalConnexion()" style="color:var(--bleu)">Connecte-toi</a> pour sauvegarder ta progression</div>`;
+    : `<div style="font-size:12px;color:var(--muted);margin-top:8px"><a href="#" onclick="event.preventDefault();ouvrirModalConnexion()" style="color:var(--bleu)">Connecte-toi</a> pour sauvegarder ta progression</div>`;
 
   const parcoursIdCourant = currentParcoursId;
   if(currentEleve && currentExercice && !currentExercice.genere) {
