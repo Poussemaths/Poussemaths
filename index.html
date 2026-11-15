@@ -1029,6 +1029,8 @@ nav {
 .corr-text { font-size:13px; color:var(--texte2); line-height:1.6; }
 
 .indice-box { background:var(--or-pale); border:1px solid #FDE68A; border-radius:var(--r); padding:10px 14px; margin-bottom:1rem; font-size:13px; color:#92400E; }
+.indice-toggle-btn { background:transparent; border:1.5px dashed #FDE68A; color:#92400E; border-radius:var(--r); padding:8px 14px; margin-bottom:1rem; font-size:13px; font-weight:600; font-family:'DM Sans',sans-serif; cursor:pointer; display:block; transition:background 0.15s,border-style 0.15s; }
+.indice-toggle-btn:hover { background:var(--or-pale); border-style:solid; }
 .rappel-cours { border:1.5px solid var(--bordure); border-radius:var(--r); margin-bottom:1.5rem; background:var(--bg); overflow:hidden; }
 .rappel-cours summary { padding:12px 16px; font-weight:700; font-size:14px; color:var(--texte); cursor:pointer; list-style:none; display:flex; align-items:center; gap:8px; }
 .rappel-cours summary::-webkit-details-marker { display:none; }
@@ -15758,6 +15760,15 @@ let reponsesFixe = {};
 // Jamal en classe le 04/11/2026 ("certains eleves utilisent Precedent pour
 // avoir 10/10"). Remise a zero a chaque ouverture d'exercice (ouvrirExercice).
 let reponsesEtat = {};
+// Indice masque par defaut (15/11/2026) : l'indice est rattache a l'exercice
+// entier (ex.indices) et s'affichait jusque-la sur les 5 questions d'un coup,
+// y compris quand il repond carrement a une question (ex. "f(x)>=0 toujours"
+// pour une question "quel est le minimum de f ?"). Trouve par l'audit 4
+// personas du 14/11 + confirme sur les 450 exercices (tous ont un indice).
+// Un seul indice par exercice -> une fois revele, il reste visible pour
+// toutes les questions de cet exercice (pas la peine de re-cliquer), remis a
+// zero a chaque nouvelle ouverture d'exercice (ouvrirExercice).
+let indiceRevele = false;
 // Parcours-Notation (04/08/2026) : id du parcours en cours quand l'exercice a
 // ete lance depuis "Mes parcours" (null = pratique libre, comportement
 // inchange). Threade dans tous les appels serveur pour que le verrou
@@ -15824,6 +15835,7 @@ function ouvrirExercice(id, parcoursId) {
   currentGenTokens = [];
   reponsesFixe = {};
   reponsesEtat = {};
+  indiceRevele = false;
 
   document.getElementById('modal-title').textContent = currentExercice.titre;
   document.getElementById('modal-overlay').classList.add('open');
@@ -15834,6 +15846,11 @@ function ouvrirExercice(id, parcoursId) {
   } else {
     renderQuestion();
   }
+}
+
+function toggleIndice() {
+  indiceRevele = true;
+  renderQuestion();
 }
 
 function renderQuestion() {
@@ -15848,9 +15865,11 @@ function renderQuestion() {
   const isLast = currentQuestion === total - 1;
   document.getElementById('btn-next').textContent = isLast ? 'Terminer ✓' : 'Suivant →';
 
-  const indiceHtml = ex.indices && ex.indices.length ? `
-    <div class="indice-box">💡 <strong>Indice :</strong> ${texToHtml(ex.indices.join(' · '))}</div>
-  ` : '';
+  const indiceHtml = ex.indices && ex.indices.length ? (
+    indiceRevele
+      ? `<div class="indice-box">💡 <strong>Indice :</strong> ${texToHtml(ex.indices.join(' · '))}</div>`
+      : `<button type="button" class="indice-toggle-btn" onclick="toggleIndice()">💡 Afficher l'indice</button>`
+  ) : '';
 
   // ── RÉVISION (question déjà répondue, "Précédent" n'ouvre plus une saisie
   // vierge) : on réaffiche exactement ce que l'élève a répondu + le corrigé,
