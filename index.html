@@ -10088,7 +10088,9 @@ async function renderEspaceEleve() {
   // affiche juste combien de questions ont deja ete faites dans ce parcours.
   const parcoursHtml = parcoursEleve.length > 0 ? parcoursEleve.map(p => {
     const exosDetail = (p.exercices || []).map(ex => {
-      const infoLocal = getAllExercices(p.niveau).find(e => e.id === ex.id);
+      // 'all' (pas p.niveau) : un exercice du parcours peut venir d'un autre
+      // niveau que celui-ci via la recherche inter-niveaux (15/11/2026).
+      const infoLocal = getAllExercices('all').find(e => e.id === ex.id);
       const titre = infoLocal ? infoLocal.titre : ex.id;
       let statutTxt, verrouille = false;
       if(ex.genere) {
@@ -11384,6 +11386,8 @@ function renderParcoursModal() {
     </div>
     <div class="pdf-section">
       <div class="pdf-section-title">🎯 Filtrer par compétence (optionnel)</div>
+      <input type="text" class="pdf-input" id="parcours-comp-recherche" placeholder="🔍 Chercher une compétence, tous niveaux (ex. fractions, réinvestissement d'un niveau antérieur)" oninput="rechercherCompetencesTousNiveaux(this.value)" style="margin-bottom:8px">
+      <div id="parcours-comp-recherche-resultats"></div>
       <div class="pdf-chapitres-grid" id="parcours-competences-grid"></div>
     </div>
     <div class="pdf-section">
@@ -11438,6 +11442,39 @@ function toggleParcoursCompetence(comp, btn) {
   renderParcoursExercices();
 }
 
+// Recherche de competences tous niveaux confondus (15/11/2026) : la grille
+// ci-dessus ne montre que les competences du niveau choisi pour le parcours
+// -- une competence "reinvestie" d'un niveau anterieur (ex. "fractions" plus
+// autonome en 3e, traitee en 5e/4e) y est invisible, meme si un prof de 3e
+// voudrait l'assigner en revision. Trouve lors du test reel du 02/11/2026
+// ("je n'ai pas retrouve fractions"), option retenue avec Jamal le 15/11
+// apres comparaison avec Kwyk (qui ne resout pas non plus ce cas -- aucun
+// modele existant a copier, solution maison).
+function rechercherCompetencesTousNiveaux(query) {
+  const resultats = document.getElementById('parcours-comp-recherche-resultats');
+  const q = cmNormalize(query.trim());
+  if(!q) { resultats.innerHTML = ''; return; }
+  const parComp = new Map();
+  getAllExercices('all').forEach(e => {
+    (e.competences || []).forEach(c => {
+      if(!cmNormalize(c).includes(q)) return;
+      if(!parComp.has(c)) parComp.set(c, new Set());
+      parComp.get(c).add(e.classe);
+    });
+  });
+  if(!parComp.size) {
+    resultats.innerHTML = '<div style="color:var(--muted);font-size:12px;padding:4px 0 8px">Aucune compétence trouvée pour cette recherche.</div>';
+    return;
+  }
+  resultats.innerHTML = `<div style="display:flex;flex-wrap:wrap;gap:6px;padding:4px 0 8px">${
+    [...parComp.entries()].sort(([a],[b]) => a.localeCompare(b)).map(([c, niveaux]) => {
+      const niveauxLabel = [...niveaux].map(n => LABELS_CLASSES[n] || n).join(', ');
+      const selected = parcoursCompetencesFiltre.includes(c) ? 'selected' : '';
+      return `<button class="pdf-chap-btn ${selected}" style="font-size:12px" onclick="toggleParcoursCompetence('${c.replace(/'/g,"\\'")}', this)">${c} <span style="color:var(--muted);font-size:10px">(${niveauxLabel})</span></button>`;
+    }).join('')
+  }</div>`;
+}
+
 // Exercices dont l'apercu (contenu complet) est deplie dans la liste de
 // creation de parcours -- permet de lire l'exercice avant de le cocher,
 // demande par Jamal le 02/11/2026 (comparaison avec Sacado).
@@ -11446,15 +11483,21 @@ let parcoursApercuOuvert = new Set();
 function renderParcoursExercices() {
   const liste = document.getElementById('parcours-exercices-liste');
   if(!parcoursNiveauCourant) { liste.innerHTML = ''; return; }
-  let exos = getAllExercices(parcoursNiveauCourant);
+  let exos;
   if(parcoursCompetencesFiltre.length) {
-    exos = exos.filter(ex => (ex.competences || []).some(c => parcoursCompetencesFiltre.includes(c)));
+    // Recherche inter-niveaux (15/11/2026) : une competence selectionnee via
+    // la recherche peut venir d'un autre niveau (reinvestissement) -- des
+    // qu'un filtre de competence est actif, on cherche dans TOUS les
+    // niveaux plutot que de se limiter au niveau du parcours.
+    exos = getAllExercices('all').filter(ex => (ex.competences || []).some(c => parcoursCompetencesFiltre.includes(c)));
+  } else {
+    exos = getAllExercices(parcoursNiveauCourant);
   }
   liste.innerHTML = exos.length ? exos.map(ex => `
     <div style="border-bottom:1px solid var(--bordure)">
       <label style="display:flex;align-items:center;gap:8px;padding:8px 4px;font-size:13px;cursor:pointer">
         <input type="checkbox" ${parcoursSelectionExercices.some(s => s.id === ex.id) ? 'checked' : ''} onchange="toggleParcoursExercice('${ex.id}', this.checked)">
-        <span style="flex:1">${ex.titre} <span style="color:var(--muted)">— ${ex.chapitre} · ${ex.points_total} pts${ex.genere ? ' · génératif' : ''}</span></span>
+        <span style="flex:1">${ex.titre} <span style="color:var(--muted)">— ${ex.chapitre} · ${ex.points_total} pts${ex.genere ? ' · génératif' : ''}${ex.classe !== parcoursNiveauCourant ? ' · '+(LABELS_CLASSES[ex.classe]||ex.classe) : ''}</span></span>
         <button type="button" class="auth-btn-secondary" style="width:auto;padding:3px 10px;font-size:11px;flex-shrink:0" onclick="event.preventDefault();toggleApercuExercice('${ex.id}')">${parcoursApercuOuvert.has(ex.id) ? 'Masquer' : '👁 Aperçu'}</button>
       </label>
       ${parcoursApercuOuvert.has(ex.id) ? renderApercuExercice(ex) : ''}
@@ -11483,7 +11526,9 @@ function renderApercuExercice(ex) {
 }
 
 function toggleParcoursExercice(id, checked) {
-  const exos = getAllExercices(parcoursNiveauCourant);
+  // getAllExercices('all') (pas parcoursNiveauCourant) : un exercice coche
+  // peut venir d'un autre niveau via la recherche inter-niveaux (15/11/2026).
+  const exos = getAllExercices('all');
   const ex = exos.find(e => e.id === id);
   if(!ex) return;
   if(checked) {
@@ -11569,7 +11614,9 @@ async function voirDetailParcours(id) {
   document.getElementById('parcours-detail-titre').textContent = `📝 ${p.titre}`;
   document.getElementById('parcours-detail-section').style.display = '';
 
-  const exosDuNiveau = getAllExercices(p.niveau);
+  // 'all' (pas p.niveau) : un exercice du parcours peut venir d'un autre
+  // niveau via la recherche inter-niveaux (15/11/2026).
+  const exosDuNiveau = getAllExercices('all');
   const exercicesEl = document.getElementById('parcours-detail-exercices');
   exercicesEl.innerHTML = `
     <div style="font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:6px">
