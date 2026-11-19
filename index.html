@@ -6899,7 +6899,7 @@ const EXERCICES = {
       },
     ],
 
-    "Nombres relatifs & Fractions": [
+    "Nombres relatifs": [
       {
         id:"rel_4_genere", titre:"Addition et soustraction de relatifs — entraînement infini", niveau:"Facile", points_total:5, competences:["Additionner et soustraire deux nombres relatifs"],
         genere: true, templateId: "relatifs_v1",
@@ -6928,8 +6928,27 @@ const EXERCICES = {
         ],
         indices:["$(-) \\times (-) = (+)$ ; $(-) \\times (+) = (-)$"]
       },
+    ],
+
+    "Nombres rationnels": [
       {
-        id:"rel_4_2", titre:"Fractions — multiplier et diviser", niveau:"Facile", points_total:13, competences:["Diviser des fractions","Calculer la valeur d'expressions comportant plusieurs opérations avec des fractions"],
+        id:"rel_4_3", titre:"Nombres rationnels — addition et soustraction", niveau:"Facile", points_total:11, competences:["Additionner et soustraire deux nombres relatifs","Calculer la valeur d'expressions comportant plusieurs opérations avec des fractions"],
+        questions:[
+          {label:"a)", enonce:"Calcule : $\\dfrac{2}{3} + \\left(-\\dfrac{1}{4}\\right)$",
+           type:"libre", points:2},
+          {label:"b)", enonce:"Calcule : $-\\dfrac{3}{5} - \\dfrac{1}{10}$",
+           type:"libre", points:2},
+          {label:"c)", enonce:"Calcule : $\\dfrac{1}{2} - \\left(-\\dfrac{3}{8}\\right)$",
+           type:"libre", points:2},
+          {label:"d)", enonce:"Calcule : $-\\dfrac{5}{6} + \\dfrac{2}{3}$",
+           type:"libre", points:2},
+          {label:"e)", enonce:"Calcule : $-\\dfrac{1}{4} - \\dfrac{1}{3}$",
+           type:"libre", points:3},
+        ],
+        indices:["Mets au même dénominateur ; soustraire un négatif revient à ajouter son opposé"]
+      },
+      {
+        id:"rel_4_2", titre:"Nombres rationnels — multiplication et division", niveau:"Facile", points_total:13, competences:["Diviser des fractions","Calculer la valeur d'expressions comportant plusieurs opérations avec des fractions"],
         questions:[
           {label:"a)", enonce:"Calcule : $\\dfrac{3}{4} \\times \\dfrac{8}{9}$",
            type:"libre", points:2},
@@ -6943,38 +6962,6 @@ const EXERCICES = {
            type:"libre", points:3},
         ],
         indices:["Même dénominateur pour additionner ; inverser pour diviser"]
-      },
-      {
-        id:"rel_4_4", titre:"Probabilités et fractions", niveau:"Moyen", points_total:17, competences:["Calculer la probabilité d'un évènement et de l'évènement contraire","Exprimer une probabilité sous forme fractionnaire, décimale ou de pourcentage"],
-        questions:[
-          {label:"a)", enonce:"Une urne contient $12$ boules : $5$ rouges, $4$ bleues, $3$ vertes. Donne $P(\\text{rouge})$ sous forme de fraction irréductible.",
-           type:"libre", points:4},
-          {label:"b)", enonce:"On lance un dé à $6$ faces. Donne $P(\\text{nombre pair})$ sous forme décimale.",
-           type:"libre", points:3},
-          {label:"c)", enonce:"Un sac contient $20$ billes dont $8$ vertes. Donne $P(\\text{pas verte})$ sous forme de pourcentage.",
-           type:"libre", points:3},
-          {label:"d)", enonce:"$P(\\text{gagner})=\\dfrac{3}{8}$. Exprime cette probabilité sous forme décimale.",
-           type:"libre", points:3},
-          {label:"e)", enonce:"Une urne contient $15$ jetons dont $9$ numérotés par un nombre pair. Donne $P(\\text{jeton pair})$ sous forme de fraction irréductible.",
-           type:"libre", points:4},
-        ],
-        indices:["Simplifie toujours une fraction de probabilité par le PGCD ; pourcentage $=$ fraction $\\times100$"]
-      },
-      {
-        id:"rel_4_5", titre:"Statistiques — caractéristiques", niveau:"Moyen", points_total:15, competences:["Calculer une moyenne pondérée dans le cas d'une série discrète de petits effectifs","Déterminer une médiane et l'interpréter"],
-        questions:[
-          {label:"a)", enonce:"Notes : $8, 12, 15, 10, 14, 6, 13, 11$. Calcule la moyenne.",
-           type:"libre", points:3},
-          {label:"b)", enonce:"Série triée : $6,8,10,11,12,13,14,15$. Donne la médiane.",
-           type:"libre", points:2},
-          {label:"b2)", enonce:"Même série ($6,8,10,11,12,13,14,15$). Donne l'étendue.",
-           type:"libre", points:2},
-          {label:"c)", enonce:"Notes avec coefficients : $12$ (coeff $3$), $15$ (coeff $2$), $9$ (coeff $1$). Moyenne pondérée ?",
-           type:"libre", points:3},
-          {label:"d)", enonce:"Notes avec coefficients : $8$ (coeff $2$), $14$ (coeff $3$), $10$ (coeff $1$). Moyenne pondérée (arrondie au dixième) ?",
-           type:"libre", points:5},
-        ],
-        indices:["Moyenne pondérée $=\\dfrac{\\sum n_i x_i}{\\sum n_i}$"]
       },
     ],
 
@@ -7101,6 +7088,22 @@ const EXERCICES = {
         ],
         indices:["$P(A)+P(\\bar{A})=1$ ; probabilité $=$ cas favorables ÷ cas possibles"]
       },
+      {
+        id:"rel_4_4", titre:"Probabilités et fractions", niveau:"Moyen", points_total:17, competences:["Calculer la probabilité d'un évènement et de l'évènement contraire","Exprimer une probabilité sous forme fractionnaire, décimale ou de pourcentage"],
+        questions:[
+          {label:"a)", enonce:"Une urne contient $12$ boules : $5$ rouges, $4$ bleues, $3$ vertes. Donne $P(\\text{rouge})$ sous forme de fraction irréductible.",
+           type:"libre", points:4},
+          {label:"b)", enonce:"On lance un dé à $6$ faces. Donne $P(\\text{nombre pair})$ sous forme décimale.",
+           type:"libre", points:3},
+          {label:"c)", enonce:"Un sac contient $20$ billes dont $8$ vertes. Donne $P(\\text{pas verte})$ sous forme de pourcentage.",
+           type:"libre", points:3},
+          {label:"d)", enonce:"$P(\\text{gagner})=\\dfrac{3}{8}$. Exprime cette probabilité sous forme décimale.",
+           type:"libre", points:3},
+          {label:"e)", enonce:"Une urne contient $15$ jetons dont $9$ numérotés par un nombre pair. Donne $P(\\text{jeton pair})$ sous forme de fraction irréductible.",
+           type:"libre", points:4},
+        ],
+        indices:["Simplifie toujours une fraction de probabilité par le PGCD ; pourcentage $=$ fraction $\\times100$"]
+      },
     ],
 
     "Statistiques 4ème": [
@@ -7195,6 +7198,22 @@ const EXERCICES = {
            type:"libre", points:4},
         ],
         indices:["Analyser et interpréter des données statistiques"]
+      },
+      {
+        id:"rel_4_5", titre:"Statistiques — caractéristiques", niveau:"Moyen", points_total:15, competences:["Calculer une moyenne pondérée dans le cas d'une série discrète de petits effectifs","Déterminer une médiane et l'interpréter"],
+        questions:[
+          {label:"a)", enonce:"Notes : $8, 12, 15, 10, 14, 6, 13, 11$. Calcule la moyenne.",
+           type:"libre", points:3},
+          {label:"b)", enonce:"Série triée : $6,8,10,11,12,13,14,15$. Donne la médiane.",
+           type:"libre", points:2},
+          {label:"b2)", enonce:"Même série ($6,8,10,11,12,13,14,15$). Donne l'étendue.",
+           type:"libre", points:2},
+          {label:"c)", enonce:"Notes avec coefficients : $12$ (coeff $3$), $15$ (coeff $2$), $9$ (coeff $1$). Moyenne pondérée ?",
+           type:"libre", points:3},
+          {label:"d)", enonce:"Notes avec coefficients : $8$ (coeff $2$), $14$ (coeff $3$), $10$ (coeff $1$). Moyenne pondérée (arrondie au dixième) ?",
+           type:"libre", points:5},
+        ],
+        indices:["Moyenne pondérée $=\\dfrac{\\sum n_i x_i}{\\sum n_i}$"]
       },
     ],
 
@@ -15342,7 +15361,8 @@ const RAPPELS_CHAPITRE = {
   },
   "4eme": {
     "Calcul littéral": "Distributivité simple : $k(a+b)=ka+kb$. Pour résoudre $ax+b=c$, isole $x$ : soustrais $b$ puis divise par $a$.<br><br><strong>Exemple :</strong> $3x+5=20 \\Rightarrow 3x=15 \\Rightarrow x=5$.",
-    "Nombres relatifs & Fractions": "Pour multiplier deux relatifs : même signe $\\to$ résultat positif, signes différents $\\to$ résultat négatif. Pour diviser des fractions, multiplie par l'inverse de la deuxième.<br><br><strong>Exemple :</strong> $\\dfrac{2}{3}\\div\\dfrac{4}{5}=\\dfrac{2}{3}\\times\\dfrac{5}{4}=\\dfrac{5}{6}$.",
+    "Nombres relatifs": "Pour additionner deux relatifs de même signe, additionne les distances à zéro et garde le signe ; de signes différents, soustrais la plus petite distance à la plus grande. Pour multiplier : même signe $\\to$ résultat positif, signes différents $\\to$ résultat négatif.<br><br><strong>Exemple :</strong> $(-4)\\times(-6)\\div3=24\\div3=8$.",
+    "Nombres rationnels": "Un nombre rationnel est une fraction, positive ou négative. Pour additionner/soustraire, même dénominateur. Pour diviser, multiplie par l'inverse de la deuxième fraction.<br><br><strong>Exemple :</strong> $\\dfrac{2}{3}\\div\\dfrac{4}{5}=\\dfrac{2}{3}\\times\\dfrac{5}{4}=\\dfrac{5}{6}$.",
     "Théorème de Pythagore": "Dans un triangle rectangle, $hyp^2=c_1^2+c_2^2$. La réciproque : si cette égalité est vraie, le triangle est rectangle.<br><br><strong>Exemple :</strong> côtés $6,8,10$ : $10^2=100=6^2+8^2=36+64$, donc rectangle.",
     "Proportionnalité & Pourcentages": "Coefficient multiplicateur : $+t\\%\\Rightarrow\\times(1+\\frac{t}{100})$. Quatrième proportionnelle : produit en croix. Partage proportionnel : divise par la somme des coefficients, puis multiplie par chaque coefficient.<br><br><strong>Exemple :</strong> partager $360$€ selon le ratio $2:3$ : $360\\div5=72$, donc $144$€ et $216$€.",
     "Probabilités 4ème": "$P(A)+P(\\bar{A})=1$. Pour une expérience à deux épreuves, dénombre tous les cas possibles avant de compter les cas favorables.<br><br><strong>Exemple :</strong> deux pièces lancées : $4$ cas possibles (PP, PF, FP, FF), $P(\\text{au moins un pile})=\\dfrac{3}{4}$.",
