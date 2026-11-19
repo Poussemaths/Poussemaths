@@ -4698,18 +4698,6 @@ const EXERCICES = {
         indices:["$AB = \\sqrt{(x_B-x_A)^2 + (y_B-y_A)^2}$"]
       },
       {
-        id:"vect_2_genere", titre:"Vecteurs — coordonnées et opérations — entraînement infini", niveau:"Facile", points_total:5, competences:["Calculer les coordonnées et effectuer des opérations sur des vecteurs"],
-        genere: true, templateId: "vecteurs_coordonnees_v1",
-        questions:[
-          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
-          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
-          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
-          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
-          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
-        ],
-        indices:["$\\vec{AB}(x_B-x_A\\,;\\,y_B-y_A)$"]
-      },
-      {
         id:"eqdroite_2_genere", titre:"Équations de droites — entraînement infini", niveau:"Moyen", points_total:5, competences:["Déterminer une équation de droite"],
         genere: true, templateId: "equation_droite_v1",
         questions:[
@@ -4720,22 +4708,6 @@ const EXERCICES = {
           {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
         ],
         indices:["$y = mx + p$ avec $m = \\dfrac{y_B-y_A}{x_B-x_A}$"]
-      },
-      {
-        id:"georep_2_A", titre:"Vecteurs — coordonnées et opérations", niveau:"Facile", points_total:15, competences:["Calculer les coordonnées et effectuer des opérations sur des vecteurs"],
-        questions:[
-          {label:"a)", enonce:"$A(2\\,;\\,1)$ et $B(5\\,;\\,4)$. Donne les coordonnées du vecteur $\\overrightarrow{AB}$.",
-           type:"qcm", choix:["$\\binom{3}{3}$","$\\binom{-3}{-3}$","$\\binom{7}{5}$","$\\binom{3}{-3}$"], points:2},
-          {label:"b)", enonce:"$\\vec{u} = \\binom{2}{-1}$ et $\\vec{v} = \\binom{-1}{3}$. Calcule $\\vec{u} + \\vec{v}$.",
-           type:"qcm", choix:["$\\binom{1}{2}$","$\\binom{3}{-4}$","$\\binom{-1}{-2}$","$\\binom{1}{-2}$"], points:3},
-          {label:"c)", enonce:"$M$ est le milieu de $[AB]$ avec $A(-2\\,;\\,4)$ et $B(6\\,;\\,-2)$. Calcule les coordonnées de $M$.",
-           type:"qcm", choix:["$M(2\\,;\\,1)$","$M(4\\,;\\,2)$","$M(2\\,;\\,-1)$","$M(-2\\,;\\,1)$"], points:2},
-          {label:"d)", enonce:"$\\vec{u} = \\binom{2}{-1}$ et $\\vec{v} = \\binom{-1}{3}$. Calcule $2\\vec{u} - \\vec{v}$.",
-           type:"qcm", choix:["$\\binom{5}{-5}$","$\\binom{3}{-4}$","$\\binom{5}{1}$","$\\binom{3}{-1}$"], points:4},
-          {label:"e)", enonce:"$C(3\\,;\\,-1)$ et $D(7\\,;\\,5)$. Donne les coordonnées du vecteur $\\overrightarrow{CD}$.",
-           type:"qcm", choix:["$\\binom{4}{6}$","$\\binom{-4}{-6}$","$\\binom{10}{4}$","$\\binom{4}{-6}$"], points:4},
-        ],
-        indices:["$\\overrightarrow{AB} = \\binom{x_B-x_A}{y_B-y_A}$ ; Milieu $= \\left(\\dfrac{x_A+x_B}{2}\\,;\\,\\dfrac{y_A+y_B}{2}\\right)$"]
       },
       {
         id:"georep_2_B", titre:"Équations de droites", niveau:"Moyen", points_total:16, competences:["Déterminer une équation de droite"],
@@ -4764,22 +4736,6 @@ const EXERCICES = {
         indices:["$AB = \\sqrt{(x_B-x_A)^2+(y_B-y_A)^2}$ ; Cercle de centre $\\Omega(a,b)$ rayon $r$ : $(x-a)^2+(y-b)^2=r^2$"]
       },
       {
-        id:"georep_2_D", titre:"Géométrie repérée — vecteurs et translations", niveau:"Moyen", points_total:17, competences:["Calculer les coordonnées et effectuer des opérations sur des vecteurs"],
-        questions:[
-          {label:"a)", enonce:"$A(2\\,;\\,1)$, $B(5\\,;\\,4)$, $C(1\\,;\\,3)$. $D$ tel que $ABDC$ soit un parallélogramme. Quelle est l'abscisse de $D$ ?",
-           type:"libre", points:4},
-          {label:"b)", enonce:"Équation de la droite passant par $A(1\\,;\\,3)$ et $B(3\\,;\\,7)$. Donne son coefficient directeur.",
-           type:"libre", points:3},
-          {label:"c)", enonce:"Cercle de centre $O(0\\,;\\,0)$ et rayon $5$. Le point $P(3\\,;\\,4)$ est-il sur le cercle ?",
-           type:"qcm", choix:["Oui","Non","Impossible à savoir","Seulement si O est déplacé"], points:3},
-          {label:"d)", enonce:"$E(1\\,;\\,2)$, $F(4\\,;\\,6)$, $G(3\\,;\\,1)$. $H$ tel que $EFHG$ soit un parallélogramme. Quelle est l'ordonnée de $H$ ?",
-           type:"libre", points:4},
-          {label:"e)", enonce:"Cercle de centre $O(0\\,;\\,0)$ et rayon $10$. Le point $Q(6\\,;\\,8)$ est-il sur le cercle ?",
-           type:"qcm", choix:["Oui","Non","Impossible à savoir","Seulement si O est déplacé"], points:3},
-        ],
-        indices:["Parallélogramme : diagonales qui se coupent en leur milieu"]
-      },
-      {
         id:"georep_2_E", titre:"Géométrie repérée — problèmes combinés", niveau:"Difficile", points_total:19, competences:["Déterminer une équation de droite","Calculer une distance entre deux points, étudier un cercle"],
         questions:[
           {label:"1.", enonce:"$A(-2\\,;\\,1)$, $B(4\\,;\\,3)$, $C(2\\,;\\,-1)$. Ce triangle est-il isocèle ?",
@@ -4794,22 +4750,6 @@ const EXERCICES = {
            type:"qcm", choix:["Oui","Non","Impossible à savoir","Seulement si x change"], points:4},
         ],
         indices:["Distance $AB=\\sqrt{(x_B-x_A)^2+(y_B-y_A)^2}$"]
-      },
-      {
-        id:"georep_2_F", titre:"Colinéarité et alignement", niveau:"Moyen", points_total:17, competences:["Caractériser alignement et parallélisme par la colinéarité de vecteurs"],
-        questions:[
-          {label:"a)", enonce:"$\\vec{u}(2\\,;\\,3)$ et $\\vec{v}(4\\,;\\,6)$. Calcule le déterminant $x_u y_v - y_u x_v$.",
-           type:"libre", points:3},
-          {label:"b)", enonce:"D'après le calcul précédent, $\\vec{u}$ et $\\vec{v}$ sont-ils colinéaires ?",
-           type:"qcm", choix:["Oui","Non"], points:3},
-          {label:"c)", enonce:"$\\vec{u}(3\\,;\\,5)$ et $\\vec{v}(6\\,;\\,9)$. Calcule leur déterminant $x_u y_v - y_u x_v$.",
-           type:"libre", points:4},
-          {label:"d)", enonce:"D'après le calcul précédent, les droites dirigées par $\\vec{u}$ et $\\vec{v}$ sont-elles parallèles ?",
-           type:"qcm", choix:["Oui","Non"], points:3},
-          {label:"e)", enonce:"$A(1\\,;\\,1)$, $B(3\\,;\\,5)$, $C(5\\,;\\,9)$. En utilisant $\\overrightarrow{AB}$ et $\\overrightarrow{AC}$, ces trois points sont-ils alignés ?",
-           type:"qcm", choix:["Oui","Non"], points:4},
-        ],
-        indices:["$\\vec{u}(x_u;y_u)$ et $\\vec{v}(x_v;y_v)$ colinéaires $\\iff x_u y_v - y_u x_v = 0$"]
       },
       {
         id:"georep_2_G", titre:"Construire une équation de droite", niveau:"Moyen", points_total:17, competences:["Déterminer une équation de droite à partir de deux points, un point et un vecteur directeur ou un point et la pente"],
@@ -4923,6 +4863,85 @@ const EXERCICES = {
            type:"libre", points:4},
         ],
         indices:["Intersection $\\cap$ = valeurs dans les deux ; Union $\\cup$ = valeurs dans au moins un"]
+      },
+    ],
+
+    "Vecteurs": [
+      {
+        id:"vect_2_genere", titre:"Vecteurs — coordonnées et opérations — entraînement infini", niveau:"Facile", points_total:5, competences:["Calculer les coordonnées et effectuer des opérations sur des vecteurs"],
+        genere: true, templateId: "vecteurs_coordonnees_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["$\\vec{AB}(x_B-x_A\\,;\\,y_B-y_A)$"]
+      },
+      {
+        id:"vect_2_chasles", titre:"Vecteurs — relation de Chasles", niveau:"Facile", points_total:12, competences:["Définir et utiliser des vecteurs, la somme de deux vecteurs par enchaînement de deux translations","Découvrir et utiliser la relation de Chasles"],
+        questions:[
+          {label:"a)", enonce:"Simplifie $\\overrightarrow{AB}+\\overrightarrow{BC}$ (réponds par les deux lettres, par exemple $AC$).",
+           type:"libre", points:2},
+          {label:"b)", enonce:"Simplifie $\\overrightarrow{AB}+\\overrightarrow{BC}+\\overrightarrow{CD}$ (réponds par les deux lettres).",
+           type:"libre", points:3},
+          {label:"c)", enonce:"$ABCD$ est un parallélogramme. $\\overrightarrow{AB}$ est égal à quel vecteur (deux lettres, commençant par $D$) ?",
+           type:"libre", points:2},
+          {label:"d)", enonce:"Simplifie $\\overrightarrow{AB}+\\overrightarrow{CA}$ (réponds par les deux lettres).",
+           type:"libre", points:3},
+          {label:"e)", enonce:"Vrai ou faux : si $\\overrightarrow{AB}=\\overrightarrow{DC}$ alors $ABCD$ est un parallélogramme.",
+           type:"qcm", choix:["Vrai","Faux"], points:2},
+        ],
+        indices:["Relation de Chasles : $\\overrightarrow{AB}+\\overrightarrow{BC}=\\overrightarrow{AC}$, quel que soit le point intermédiaire choisi"]
+      },
+      {
+        id:"georep_2_A", titre:"Vecteurs — coordonnées et opérations", niveau:"Facile", points_total:15, competences:["Calculer les coordonnées et effectuer des opérations sur des vecteurs"],
+        questions:[
+          {label:"a)", enonce:"$A(2\\,;\\,1)$ et $B(5\\,;\\,4)$. Donne les coordonnées du vecteur $\\overrightarrow{AB}$.",
+           type:"qcm", choix:["$\\binom{3}{3}$","$\\binom{-3}{-3}$","$\\binom{7}{5}$","$\\binom{3}{-3}$"], points:2},
+          {label:"b)", enonce:"$\\vec{u} = \\binom{2}{-1}$ et $\\vec{v} = \\binom{-1}{3}$. Calcule $\\vec{u} + \\vec{v}$.",
+           type:"qcm", choix:["$\\binom{1}{2}$","$\\binom{3}{-4}$","$\\binom{-1}{-2}$","$\\binom{1}{-2}$"], points:3},
+          {label:"c)", enonce:"$M$ est le milieu de $[AB]$ avec $A(-2\\,;\\,4)$ et $B(6\\,;\\,-2)$. Calcule les coordonnées de $M$.",
+           type:"qcm", choix:["$M(2\\,;\\,1)$","$M(4\\,;\\,2)$","$M(2\\,;\\,-1)$","$M(-2\\,;\\,1)$"], points:2},
+          {label:"d)", enonce:"$\\vec{u} = \\binom{2}{-1}$ et $\\vec{v} = \\binom{-1}{3}$. Calcule $2\\vec{u} - \\vec{v}$.",
+           type:"qcm", choix:["$\\binom{5}{-5}$","$\\binom{3}{-4}$","$\\binom{5}{1}$","$\\binom{3}{-1}$"], points:4},
+          {label:"e)", enonce:"$C(3\\,;\\,-1)$ et $D(7\\,;\\,5)$. Donne les coordonnées du vecteur $\\overrightarrow{CD}$.",
+           type:"qcm", choix:["$\\binom{4}{6}$","$\\binom{-4}{-6}$","$\\binom{10}{4}$","$\\binom{4}{-6}$"], points:4},
+        ],
+        indices:["$\\overrightarrow{AB} = \\binom{x_B-x_A}{y_B-y_A}$ ; Milieu $= \\left(\\dfrac{x_A+x_B}{2}\\,;\\,\\dfrac{y_A+y_B}{2}\\right)$"]
+      },
+      {
+        id:"georep_2_D", titre:"Vecteurs et translations", niveau:"Moyen", points_total:17, competences:["Calculer les coordonnées et effectuer des opérations sur des vecteurs"],
+        questions:[
+          {label:"a)", enonce:"$A(2\\,;\\,1)$, $B(5\\,;\\,4)$, $C(1\\,;\\,3)$. $D$ tel que $ABDC$ soit un parallélogramme. Quelle est l'abscisse de $D$ ?",
+           type:"libre", points:4},
+          {label:"b)", enonce:"Équation de la droite passant par $A(1\\,;\\,3)$ et $B(3\\,;\\,7)$. Donne son coefficient directeur.",
+           type:"libre", points:3},
+          {label:"c)", enonce:"Cercle de centre $O(0\\,;\\,0)$ et rayon $5$. Le point $P(3\\,;\\,4)$ est-il sur le cercle ?",
+           type:"qcm", choix:["Oui","Non","Impossible à savoir","Seulement si O est déplacé"], points:3},
+          {label:"d)", enonce:"$E(1\\,;\\,2)$, $F(4\\,;\\,6)$, $G(3\\,;\\,1)$. $H$ tel que $EFHG$ soit un parallélogramme. Quelle est l'ordonnée de $H$ ?",
+           type:"libre", points:4},
+          {label:"e)", enonce:"Cercle de centre $O(0\\,;\\,0)$ et rayon $10$. Le point $Q(6\\,;\\,8)$ est-il sur le cercle ?",
+           type:"qcm", choix:["Oui","Non","Impossible à savoir","Seulement si O est déplacé"], points:3},
+        ],
+        indices:["Parallélogramme : diagonales qui se coupent en leur milieu"]
+      },
+      {
+        id:"georep_2_F", titre:"Colinéarité et alignement", niveau:"Moyen", points_total:17, competences:["Caractériser alignement et parallélisme par la colinéarité de vecteurs"],
+        questions:[
+          {label:"a)", enonce:"$\\vec{u}(2\\,;\\,3)$ et $\\vec{v}(4\\,;\\,6)$. Calcule le déterminant $x_u y_v - y_u x_v$.",
+           type:"libre", points:3},
+          {label:"b)", enonce:"D'après le calcul précédent, $\\vec{u}$ et $\\vec{v}$ sont-ils colinéaires ?",
+           type:"qcm", choix:["Oui","Non"], points:3},
+          {label:"c)", enonce:"$\\vec{u}(3\\,;\\,5)$ et $\\vec{v}(6\\,;\\,9)$. Calcule leur déterminant $x_u y_v - y_u x_v$.",
+           type:"libre", points:4},
+          {label:"d)", enonce:"D'après le calcul précédent, les droites dirigées par $\\vec{u}$ et $\\vec{v}$ sont-elles parallèles ?",
+           type:"qcm", choix:["Oui","Non"], points:3},
+          {label:"e)", enonce:"$A(1\\,;\\,1)$, $B(3\\,;\\,5)$, $C(5\\,;\\,9)$. En utilisant $\\overrightarrow{AB}$ et $\\overrightarrow{AC}$, ces trois points sont-ils alignés ?",
+           type:"qcm", choix:["Oui","Non"], points:4},
+        ],
+        indices:["$\\vec{u}(x_u;y_u)$ et $\\vec{v}(x_v;y_v)$ colinéaires $\\iff x_u y_v - y_u x_v = 0$"]
       },
     ],
 
@@ -7098,18 +7117,6 @@ const EXERCICES = {
 
     "Calcul littéral": [
       {
-        id:"lit_4_genere", titre:"Équations du premier degré — entraînement infini", niveau:"Facile", points_total:5, competences:["Résoudre une équation du premier degré du type ax + b = c"],
-        genere: true, templateId: "equation_1er_degre_v1",
-        questions:[
-          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
-          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
-          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
-          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
-          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
-        ],
-        indices:["Isole $x$ : passe les nombres d'un côté, les termes en $x$ de l'autre"]
-      },
-      {
         id:"lit_4_genere2", titre:"Développer et factoriser — entraînement infini", niveau:"Moyen", points_total:5, competences:["Développer et factoriser des expressions algébriques dans des cas très simples"],
         genere: true, templateId: "developper_factoriser_v1",
         questions:[
@@ -7120,22 +7127,6 @@ const EXERCICES = {
           {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
         ],
         indices:["$k(x+a)=kx+ka$ ; pour factoriser $Bx+C$, cherche le plus grand diviseur commun de $B$ et $C$"]
-      },
-      {
-        id:"lit_4_3", titre:"Équations du premier degré — 4ème", niveau:"Moyen", points_total:16, competences:["Résoudre une équation du premier degré du type ax + b = c"],
-        questions:[
-          {label:"a)", enonce:"Résous : $5x-3=2x+9$",
-           type:"libre", points:2},
-          {label:"b)", enonce:"Résous : $3(x+2)=2(x-1)+10$",
-           type:"libre", points:4},
-          {label:"c)", enonce:"Résous : $\\dfrac{2x+1}{3}=x-1$",
-           type:"libre", points:4},
-          {label:"d)", enonce:"Résous : $4x+5=x-4$",
-           type:"libre", points:3},
-          {label:"e)", enonce:"Résous : $\\dfrac{3x-2}{4}=x+1$",
-           type:"libre", points:3},
-        ],
-        indices:["Développe d'abord, puis rassemble les $x$ d'un côté"]
       },
       {
         id:"lit_4_4", titre:"Puissances et notation scientifique", niveau:"Moyen", points_total:16, competences:["Définir les puissances d'exposant positif d'un nombre a","Multiplier des puissances d'exposant entier naturel d'un même nombre entre elles"],
@@ -7273,6 +7264,37 @@ const EXERCICES = {
            type:"libre", points:4},
         ],
         indices:["Dans $V=\\dfrac{1}{3}\\times aire_{base}\\times h$, on peut isoler n'importe quelle variable si on connaît les deux autres"]
+      },
+    ],
+
+    "Équations": [
+      {
+        id:"lit_4_genere", titre:"Équations du premier degré — entraînement infini", niveau:"Facile", points_total:5, competences:["Résoudre une équation du premier degré du type ax + b = c"],
+        genere: true, templateId: "equation_1er_degre_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["Isole $x$ : passe les nombres d'un côté, les termes en $x$ de l'autre"]
+      },
+      {
+        id:"lit_4_3", titre:"Équations du premier degré — 4ème", niveau:"Moyen", points_total:16, competences:["Résoudre une équation du premier degré du type ax + b = c"],
+        questions:[
+          {label:"a)", enonce:"Résous : $5x-3=2x+9$",
+           type:"libre", points:2},
+          {label:"b)", enonce:"Résous : $3(x+2)=2(x-1)+10$",
+           type:"libre", points:4},
+          {label:"c)", enonce:"Résous : $\\dfrac{2x+1}{3}=x-1$",
+           type:"libre", points:4},
+          {label:"d)", enonce:"Résous : $4x+5=x-4$",
+           type:"libre", points:3},
+          {label:"e)", enonce:"Résous : $\\dfrac{3x-2}{4}=x+1$",
+           type:"libre", points:3},
+        ],
+        indices:["Développe d'abord, puis rassemble les $x$ d'un côté"]
       },
     ],
 
@@ -15305,7 +15327,8 @@ const RAPPELS_CHAPITRE = {
     "Solides de l'espace": "Volume du pavé droit $=$ longueur $\\times$ largeur $\\times$ hauteur ; volume du cube $=$ arête³. Volume d'un prisme droit $=$ aire de la base $\\times$ hauteur.<br><br>Aire d'un disque $=\\pi r^2$ ; volume d'un cylindre $=\\pi r^2 h$.",
   },
   "4eme": {
-    "Calcul littéral": "Distributivité simple : $k(a+b)=ka+kb$. Pour résoudre $ax+b=c$, isole $x$ : soustrais $b$ puis divise par $a$.<br><br><strong>Exemple :</strong> $3x+5=20 \\Rightarrow 3x=15 \\Rightarrow x=5$.",
+    "Calcul littéral": "Distributivité simple : $k(a+b)=ka+kb$.<br><br><strong>Exemple :</strong> $3(x+5)=3x+15$.",
+    "Équations": "Pour résoudre $ax+b=cx+d$, regroupe les termes en $x$ d'un côté, les nombres de l'autre, puis divise.<br><br><strong>Exemple :</strong> $5x-3=2x+9 \\Rightarrow 3x=12 \\Rightarrow x=4$.",
     "Nombres relatifs": "Pour additionner deux relatifs de même signe, additionne les distances à zéro et garde le signe ; de signes différents, soustrais la plus petite distance à la plus grande. Pour multiplier : même signe $\\to$ résultat positif, signes différents $\\to$ résultat négatif.<br><br><strong>Exemple :</strong> $(-4)\\times(-6)\\div3=24\\div3=8$.",
     "Nombres rationnels": "Un nombre rationnel est une fraction, positive ou négative. Pour additionner/soustraire, même dénominateur. Pour diviser, multiplie par l'inverse de la deuxième fraction.<br><br><strong>Exemple :</strong> $\\dfrac{2}{3}\\div\\dfrac{4}{5}=\\dfrac{2}{3}\\times\\dfrac{5}{4}=\\dfrac{5}{6}$.",
     "Théorème de Pythagore": "Dans un triangle rectangle, $hyp^2=c_1^2+c_2^2$. La réciproque : si cette égalité est vraie, le triangle est rectangle.<br><br><strong>Exemple :</strong> côtés $6,8,10$ : $10^2=100=6^2+8^2=36+64$, donc rectangle.",
@@ -15344,7 +15367,8 @@ const RAPPELS_CHAPITRE = {
     "Statistiques descriptives": "$Q_1$ sépare les $25\\%$ premières valeurs, $Q_3$ les $75\\%$ premières. Écart interquartile $=Q_3-Q_1$.<br><br><strong>Exemple :</strong> boîte min $4$, $Q_1=8$, médiane $13$, $Q_3=17$, max $22$ : écart interquartile $=17-8=9$.",
     "Croisement de deux variables qualitatives": "Fréquence marginale $=$ effectif de la marge $\\div$ population totale. Fréquence conditionnelle $=$ effectif de l'intersection $\\div$ effectif de la SOUS-population.<br><br><strong>Exemple :</strong> $15$ filles sur $60$ pratiquent un sport : fréquence conditionnelle $=\\dfrac{15}{60}=25\\%$ (pas $\\dfrac{15}{100}$).",
     "Probabilités": "$P(A\\cup B)=P(A)+P(B)-P(A\\cap B)$. Pour deux épreuves indépendantes, $P(A\\text{ et }B)=P(A)\\times P(B)$.<br><br><strong>Exemple :</strong> deux pièces lancées, $P(\\text{2 fois pile})=0{,}5\\times0{,}5=0{,}25$.",
-    "Géométrie repérée": "$\\overrightarrow{AB}(x_B-x_A\\,;\\,y_B-y_A)$. Distance $AB=\\sqrt{(x_B-x_A)^2+(y_B-y_A)^2}$. Milieu de $[AB]$ : $\\left(\\dfrac{x_A+x_B}{2}\\,;\\,\\dfrac{y_A+y_B}{2}\\right)$.<br><br><strong>Exemple :</strong> $A(1;2)$, $B(5;7)$ : $\\overrightarrow{AB}(4;5)$, $AB=\\sqrt{41}\\approx6{,}4$.",
+    "Géométrie repérée": "Distance $AB=\\sqrt{(x_B-x_A)^2+(y_B-y_A)^2}$. Milieu de $[AB]$ : $\\left(\\dfrac{x_A+x_B}{2}\\,;\\,\\dfrac{y_A+y_B}{2}\\right)$.<br><br><strong>Exemple :</strong> $A(1;2)$, $B(5;7)$ : $AB=\\sqrt{41}\\approx6{,}4$.",
+    "Vecteurs": "$\\overrightarrow{AB}(x_B-x_A\\,;\\,y_B-y_A)$. Relation de Chasles : $\\overrightarrow{AB}+\\overrightarrow{BC}=\\overrightarrow{AC}$, quel que soit le point intermédiaire. Deux vecteurs sont colinéaires si $x_u y_v - y_u x_v = 0$.<br><br><strong>Exemple :</strong> $A(1;2)$, $B(5;7)$ : $\\overrightarrow{AB}(4;5)$.",
     "Intervalles & Valeur absolue": "$|a-b|$ est la distance entre $a$ et $b$ sur la droite graduée. $[2;5[$ signifie $2\\leq x<5$.<br><br><strong>Exemple :</strong> $-3\\leq2x+1<7 \\Rightarrow -2\\leq x<3$, soit $[-2;3[$.",
     "Algorithmique et programmation (Python)": "`for i in range(n):` répète $n$ fois, avec $i$ allant de $0$ à $n-1$.<br><br><strong>Exemple :</strong> `for i in range(5): print(i)` affiche $0,1,2,3,4$.",
     "Ensembles de nombres": "$\\mathbb{N}\\subset\\mathbb{Z}\\subset\\mathbb{D}\\subset\\mathbb{Q}\\subset\\mathbb{R}$ : entiers naturels, relatifs, décimaux, rationnels, réels.<br><br><strong>Exemple :</strong> $\\dfrac{1}{3}$ est rationnel mais pas décimal (écriture décimale infinie).",
