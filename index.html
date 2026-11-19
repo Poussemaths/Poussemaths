@@ -2265,127 +2265,7 @@ const EXERCICES = {
       },
     ],
 
-    // ── 2. RACINES CARRÉES ──
-    "Racines carrées": [
-      {
-        id:"rac_3_genere", titre:"Racines carrées — entraînement infini", niveau:"Facile", points_total:5, competences:["Résoudre des problèmes utilisant la racine carrée"],
-        genere: true, templateId: "racine_carree_v1",
-        questions:[
-          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
-          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
-          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
-          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
-          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
-        ],
-        indices:["Cherche quel nombre, multiplié par lui-même, donne le résultat"]
-      },
-      {
-        id:"rac_3_1", titre:"Racines carrées — comprendre et calculer", niveau:"Facile", points_total:10, competences:["Résoudre analytiquement et graphiquement des équations de la forme x² = a"],
-        questions:[
-          {label:"1.", enonce:"Que vaut $\\sqrt{64}$ ?",
-           type:"qcm",
-           choix:["$6$","$7$","$8$","$9$"], points:2},
-          {label:"2.", enonce:"Laquelle de ces affirmations est vraie ?",
-           type:"qcm",
-           choix:["$\\sqrt{a+b}=\\sqrt{a}+\\sqrt{b}$","$\\sqrt{a\\times b}=\\sqrt{a}\\times\\sqrt{b}$","$\\sqrt{a^2}=-a$","$\\sqrt{-4}=2i$"], points:2},
-          {label:"3.", enonce:"Calcule $\\sqrt{49}$.",
-           type:"libre", points:2},
-          {label:"4.", enonce:"Simplifie $\\sqrt{72}$.",
-           type:"libre", points:2},
-          {label:"5.", enonce:"Simplifie $\\sqrt{45}$.",
-           type:"libre", points:2},
-        ],
-        indices:["$\\sqrt{a\\times b}=\\sqrt{a}\\times\\sqrt{b}$ ; cherche un carré parfait parmi les facteurs"]
-      },
-      {
-        id:"rac_3_A", titre:"Simplifier et calculer des racines carrées", niveau:"Facile", points_total:10, competences:["Résoudre des problèmes utilisant la racine carrée"],
-        questions:[
-          {label:"a)", enonce:"Calcule : $\\sqrt{121}$", points:2},
-          {label:"b)", enonce:"Calcule : $\\sqrt{0{,}25}$", points:2},
-          {label:"c)", enonce:"Simplifie : $\\sqrt{75}$", points:2},
-          {label:"d)", enonce:"Calcule : $(\\sqrt{7})^2$", points:2},
-          {label:"e)", enonce:"Simplifie : $\\sqrt{20}$", points:2},
-        ],
-        indices:["$\\sqrt{a \\times b}=\\sqrt{a}\\times\\sqrt{b}$ ; $(\\sqrt{a})^2=a$"]
-      },
-      {
-        id:"rac_3_B", titre:"Opérations sur les radicaux", niveau:"Moyen", points_total:12, competences:["Résoudre des problèmes utilisant la racine carrée"],
-        questions:[
-          {label:"a)", enonce:"Calcule : $3\\sqrt{5} + 7\\sqrt{5} - 2\\sqrt{5}$", points:2},
-          {label:"b)", enonce:"Développe : $(\\sqrt{3}+2)^2$", points:3},
-          {label:"c)", enonce:"Rationalise (multiplie numérateur et dénominateur par $\\sqrt{3}$) : $\\dfrac{6}{\\sqrt{3}}$", points:2},
-          {label:"d)", enonce:"Rationalise (multiplie numérateur et dénominateur par $\\sqrt{5}$) : $\\dfrac{10}{\\sqrt{5}}$", points:2},
-          {label:"e)", enonce:"Calcule : $4\\sqrt{2} + 5\\sqrt{2} - 3\\sqrt{2}$", points:3},
-        ],
-        indices:["Pour additionner des radicaux, il faut le même radicande ; $\\dfrac{a}{\\sqrt{b}}=\\dfrac{a\\sqrt{b}}{b}$"]
-      },
-      {
-        id:"rac_3_4", titre:"Racines carrées — simplifier et calculer", niveau:"Moyen", points_total:11, competences:["Résoudre analytiquement et graphiquement des équations de la forme x² = a"],
-        questions:[
-          {label:"a)", enonce:"Simplifie : $\\sqrt{48}$",
-           type:"libre", points:2},
-          {label:"a2)", enonce:"Simplifie : $\\sqrt{75}$",
-           type:"libre", points:2},
-          {label:"b)", enonce:"Calcule : $2\\sqrt{3}+5\\sqrt{3}$",
-           type:"libre", points:2},
-          {label:"c)", enonce:"Développe : $(\\sqrt{5}+2)(\\sqrt{5}-2)$",
-           type:"libre", points:3},
-          {label:"d)", enonce:"Résous : $\\sqrt{x+3}=5$",
-           type:"libre", points:2},
-        ],
-        indices:["$\\sqrt{a} \\times \\sqrt{b}=\\sqrt{ab}$ ; $(\\sqrt{a}+b)(\\sqrt{a}-b)=a-b^2$"]
-      },
-      {
-        id:"rac_3_5", titre:"Racines carrées — brevet", niveau:"Difficile", points_total:19, competences:["Résoudre analytiquement et graphiquement des équations de la forme x² = a","Résoudre des problèmes utilisant la racine carrée"],
-        questions:[
-          {label:"1.", enonce:"Que donne $\\dfrac{\\sqrt{3}}{\\sqrt{3}+1}$ après rationalisation (multiplication par $\\dfrac{\\sqrt{3}-1}{\\sqrt{3}-1}$) ?",
-           type:"qcm", choix:["$\\dfrac{3-\\sqrt{3}}{2}$","$\\dfrac{\\sqrt{3}}{2}$","$\\dfrac{3}{2}$","$1$"], points:5},
-          {label:"2.", enonce:"Simplifie et réduis : $3\\sqrt{2}+\\sqrt{18}-\\sqrt{8}$",
-           type:"libre", points:4},
-          {label:"3.", enonce:"Quelle est la longueur de la diagonale d'un carré de côté $1$ (valeur exacte) ?",
-           type:"libre", points:3},
-          {label:"4.", enonce:"Simplifie et réduis : $2\\sqrt{5}+\\sqrt{45}-\\sqrt{20}$",
-           type:"libre", points:4},
-          {label:"5.", enonce:"Quelle est la longueur de la diagonale d'un carré de côté $3$ (valeur exacte) ?",
-           type:"libre", points:3},
-        ],
-        indices:["Rationaliser : multiplier par la quantité conjuguée"]
-      },
-      {
-        id:"rac_3_6", titre:"Racines carrées — Objectif Brevet I", niveau:"Difficile", points_total:16, competences:["Résoudre analytiquement et graphiquement des équations de la forme x² = a","Résoudre des problèmes utilisant la racine carrée"],
-        questions:[
-          {label:"1.", enonce:"Simplifie : $\\sqrt{12}+\\sqrt{27}-\\sqrt{75}$",
-           type:"libre", points:4},
-          {label:"2.", enonce:"Un carré a un périmètre de $2^{19}$ cm. Exprime son côté en puissance de $2$.",
-           type:"libre", points:3},
-          {label:"3.", enonce:"Résous : $\\sqrt{2x+1}=3$",
-           type:"libre", points:3},
-          {label:"4.", enonce:"Simplifie : $\\sqrt{8}+\\sqrt{50}-\\sqrt{18}$",
-           type:"libre", points:3},
-          {label:"5.", enonce:"Résous : $\\sqrt{3x-2}=4$",
-           type:"libre", points:3},
-        ],
-        indices:["D'après DNB — $\\sqrt{ab}=\\sqrt{a}\\times\\sqrt{b}$"]
-      },
-      {
-        id:"rac_3_7", titre:"Racines carrées — Objectif Brevet II", niveau:"Difficile", points_total:16, competences:["Résoudre analytiquement et graphiquement des équations de la forme x² = a","Résoudre des problèmes utilisant la racine carrée"],
-        questions:[
-          {label:"1.", enonce:"Qu'est-ce qu'un nombre irrationnel comme $\\sqrt{3}$ ?",
-           type:"qcm", choix:["C'est un entier","Il ne peut pas s'écrire sous forme de fraction","$\\sqrt{3}\\approx1{,}732$","Il n'existe pas"], points:3},
-          {label:"2.", enonce:"Côté d'un carré d'aire $98$ cm². Exprime sous la forme $a\\sqrt{b}$.",
-           type:"libre", points:4},
-          {label:"3.", enonce:"$(\\sqrt{5}+\\sqrt{3})(\\sqrt{5}-\\sqrt{3})=?$",
-           type:"libre", points:3},
-          {label:"4.", enonce:"Côté d'un carré d'aire $32$ cm². Exprime sous la forme $a\\sqrt{b}$.",
-           type:"libre", points:3},
-          {label:"5.", enonce:"$(\\sqrt{7}+\\sqrt{2})(\\sqrt{7}-\\sqrt{2})=?$",
-           type:"libre", points:3},
-        ],
-        indices:["$(\\sqrt{a}+b)(\\sqrt{a}-b)=a-b^2$"]
-      },
-    ],
-
-    // ── 3. CALCUL LITTÉRAL ──
+    // ── 2. CALCUL LITTÉRAL ──
     "Calcul littéral": [
       {
         id:"lit_3_genere", titre:"Évaluation de fonction — entraînement infini", niveau:"Facile", points_total:5, competences:["Utiliser la double distributivité pour développer et factoriser une expression dont le facteur est apparent"],
@@ -5265,6 +5145,77 @@ const EXERCICES = {
            type:"libre", points:2},
         ],
         indices:["$\\sqrt{a^2}=|a|$ ; pour rationaliser $\\dfrac{1}{\\sqrt{a}}$, multiplie numérateur et dénominateur par $\\sqrt{a}$"]
+      },
+      {
+        id:"rac_3_genere", titre:"Racines carrées — entraînement infini", niveau:"Facile", points_total:5, competences:["Résoudre des problèmes utilisant la racine carrée"],
+        genere: true, templateId: "racine_carree_v1",
+        questions:[
+          {label:"1.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"2.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"3.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"4.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+          {label:"5.", enonce:"Génération en cours...", type:"libre", correction:"", points:1},
+        ],
+        indices:["Cherche quel nombre, multiplié par lui-même, donne le résultat"]
+      },
+      {
+        id:"rac_3_B", titre:"Opérations sur les radicaux", niveau:"Moyen", points_total:12, competences:["Résoudre des problèmes utilisant la racine carrée"],
+        questions:[
+          {label:"a)", enonce:"Calcule : $3\\sqrt{5} + 7\\sqrt{5} - 2\\sqrt{5}$", points:2},
+          {label:"b)", enonce:"Développe : $(\\sqrt{3}+2)^2$", points:3},
+          {label:"c)", enonce:"Rationalise (multiplie numérateur et dénominateur par $\\sqrt{3}$) : $\\dfrac{6}{\\sqrt{3}}$", points:2},
+          {label:"d)", enonce:"Rationalise (multiplie numérateur et dénominateur par $\\sqrt{5}$) : $\\dfrac{10}{\\sqrt{5}}$", points:2},
+          {label:"e)", enonce:"Calcule : $4\\sqrt{2} + 5\\sqrt{2} - 3\\sqrt{2}$", points:3},
+        ],
+        indices:["Pour additionner des radicaux, il faut le même radicande ; $\\dfrac{a}{\\sqrt{b}}=\\dfrac{a\\sqrt{b}}{b}$"]
+      },
+      {
+        id:"rac_3_5", titre:"Racines carrées — approfondissement I", niveau:"Difficile", points_total:19, competences:["Résoudre analytiquement et graphiquement des équations de la forme x² = a","Résoudre des problèmes utilisant la racine carrée"],
+        questions:[
+          {label:"1.", enonce:"Que donne $\\dfrac{\\sqrt{3}}{\\sqrt{3}+1}$ après rationalisation (multiplication par $\\dfrac{\\sqrt{3}-1}{\\sqrt{3}-1}$) ?",
+           type:"qcm", choix:["$\\dfrac{3-\\sqrt{3}}{2}$","$\\dfrac{\\sqrt{3}}{2}$","$\\dfrac{3}{2}$","$1$"], points:5},
+          {label:"2.", enonce:"Simplifie et réduis : $3\\sqrt{2}+\\sqrt{18}-\\sqrt{8}$",
+           type:"libre", points:4},
+          {label:"3.", enonce:"Quelle est la longueur de la diagonale d'un carré de côté $1$ (valeur exacte) ?",
+           type:"libre", points:3},
+          {label:"4.", enonce:"Simplifie et réduis : $2\\sqrt{5}+\\sqrt{45}-\\sqrt{20}$",
+           type:"libre", points:4},
+          {label:"5.", enonce:"Quelle est la longueur de la diagonale d'un carré de côté $3$ (valeur exacte) ?",
+           type:"libre", points:3},
+        ],
+        indices:["Rationaliser : multiplier par la quantité conjuguée"]
+      },
+      {
+        id:"rac_3_6", titre:"Racines carrées — approfondissement II", niveau:"Difficile", points_total:16, competences:["Résoudre analytiquement et graphiquement des équations de la forme x² = a","Résoudre des problèmes utilisant la racine carrée"],
+        questions:[
+          {label:"1.", enonce:"Simplifie : $\\sqrt{12}+\\sqrt{27}-\\sqrt{75}$",
+           type:"libre", points:4},
+          {label:"2.", enonce:"Un carré a un périmètre de $2^{19}$ cm. Exprime son côté en puissance de $2$.",
+           type:"libre", points:3},
+          {label:"3.", enonce:"Résous : $\\sqrt{2x+1}=3$",
+           type:"libre", points:3},
+          {label:"4.", enonce:"Simplifie : $\\sqrt{8}+\\sqrt{50}-\\sqrt{18}$",
+           type:"libre", points:3},
+          {label:"5.", enonce:"Résous : $\\sqrt{3x-2}=4$",
+           type:"libre", points:3},
+        ],
+        indices:["$\\sqrt{ab}=\\sqrt{a}\\times\\sqrt{b}$"]
+      },
+      {
+        id:"rac_3_7", titre:"Racines carrées — approfondissement III", niveau:"Difficile", points_total:16, competences:["Résoudre analytiquement et graphiquement des équations de la forme x² = a","Résoudre des problèmes utilisant la racine carrée"],
+        questions:[
+          {label:"1.", enonce:"Qu'est-ce qu'un nombre irrationnel comme $\\sqrt{3}$ ?",
+           type:"qcm", choix:["C'est un entier","Il ne peut pas s'écrire sous forme de fraction","$\\sqrt{3}\\approx1{,}732$","Il n'existe pas"], points:3},
+          {label:"2.", enonce:"Côté d'un carré d'aire $98$ cm². Exprime sous la forme $a\\sqrt{b}$.",
+           type:"libre", points:4},
+          {label:"3.", enonce:"$(\\sqrt{5}+\\sqrt{3})(\\sqrt{5}-\\sqrt{3})=?$",
+           type:"libre", points:3},
+          {label:"4.", enonce:"Côté d'un carré d'aire $32$ cm². Exprime sous la forme $a\\sqrt{b}$.",
+           type:"libre", points:3},
+          {label:"5.", enonce:"$(\\sqrt{7}+\\sqrt{2})(\\sqrt{7}-\\sqrt{2})=?$",
+           type:"libre", points:3},
+        ],
+        indices:["$(\\sqrt{a}+b)(\\sqrt{a}-b)=a-b^2$"]
       },
     ],
 
@@ -15335,7 +15286,6 @@ const RAPPELS_CHAPITRE = {
   },
   "3eme": {
     "Puissances & Notation scientifique": "Pour $a\\neq0$ et des entiers $m,n$ : $a^m\\times a^n=a^{m+n}$, $\\dfrac{a^m}{a^n}=a^{m-n}$, $(a^m)^n=a^{m\\times n}$, et $a^{-n}=\\dfrac{1}{a^n}$.<br><br><strong>Exemple :</strong> notation scientifique de $0{,}00045$ : $4{,}5\\times10^{-4}$.",
-    "Racines carrées": "$\\sqrt{a}$ est le nombre positif dont le carré vaut $a$. On simplifie en cherchant le plus grand carré parfait qui divise le nombre : $\\sqrt{75}=\\sqrt{25\\times3}=5\\sqrt{3}$.<br><br>Pour résoudre $x^2=a$ avec $a>0$ : deux solutions, $\\sqrt{a}$ et $-\\sqrt{a}$.",
     "Calcul littéral": "Double distributivité : $(a+b)(c+d)=ac+ad+bc+bd$. Identités remarquables : $(a+b)^2=a^2+2ab+b^2$, $(a-b)^2=a^2-2ab+b^2$, $(a-b)(a+b)=a^2-b^2$.<br><br><strong>Exemple :</strong> $(x+3)(x-3)=x^2-9$.",
     "Équations du premier degré": "Pour résoudre $ax+b=cx+d$, regroupe les termes en $x$ d'un côté, les nombres de l'autre, puis divise.<br><br><strong>Exemple :</strong> $3x+5=x+11 \\Rightarrow 2x=6 \\Rightarrow x=3$.",
     "Inéquations": "On résout une inéquation comme une équation, sauf qu'il faut inverser le sens de l'inégalité si on multiplie ou divise par un nombre négatif.<br><br><strong>Exemple :</strong> $-2x+3>7 \\Rightarrow -2x>4 \\Rightarrow x<-2$.",
@@ -15362,7 +15312,7 @@ const RAPPELS_CHAPITRE = {
     "Intervalles & Valeur absolue": "$|a-b|$ est la distance entre $a$ et $b$ sur la droite graduée. $[2;5[$ signifie $2\\leq x<5$.<br><br><strong>Exemple :</strong> $-3\\leq2x+1<7 \\Rightarrow -2\\leq x<3$, soit $[-2;3[$.",
     "Algorithmique et programmation (Python)": "`for i in range(n):` répète $n$ fois, avec $i$ allant de $0$ à $n-1$.<br><br><strong>Exemple :</strong> `for i in range(5): print(i)` affiche $0,1,2,3,4$.",
     "Ensembles de nombres": "$\\mathbb{N}\\subset\\mathbb{Z}\\subset\\mathbb{D}\\subset\\mathbb{Q}\\subset\\mathbb{R}$ : entiers naturels, relatifs, décimaux, rationnels, réels.<br><br><strong>Exemple :</strong> $\\dfrac{1}{3}$ est rationnel mais pas décimal (écriture décimale infinie).",
-    "Racines carrées & Puissances": "$\\sqrt{a\\times b}=\\sqrt{a}\\times\\sqrt{b}$ (pour $a,b\\geq0$). On simplifie en cherchant le plus grand carré parfait qui divise le nombre.<br><br><strong>Exemple :</strong> $\\sqrt{48}=\\sqrt{16\\times3}=4\\sqrt{3}$.",
+    "Racines carrées & Puissances": "$\\sqrt{a\\times b}=\\sqrt{a}\\times\\sqrt{b}$ (pour $a,b\\geq0$). On simplifie en cherchant le plus grand carré parfait qui divise le nombre. Pour rationaliser un dénominateur avec une somme ($\\sqrt{a}+b$), on multiplie par la quantité conjuguée $\\sqrt{a}-b$.<br><br><strong>Exemple :</strong> $\\sqrt{48}=\\sqrt{16\\times3}=4\\sqrt{3}$.",
     "Lecture graphique de fonctions": "Pour lire $f(a)$ sur un graphique : suivre la verticale $x=a$ jusqu'à la courbe, puis l'horizontale jusqu'à l'axe des ordonnées.<br><br><strong>Exemple :</strong> si la courbe passe par $(2;5)$, alors $f(2)=5$ et $2$ est un antécédent de $5$.",
   },
   "1ere": {
